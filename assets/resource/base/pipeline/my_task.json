@@ -1,5 +1,7 @@
 {
-    "MyTask1": {},
-    "MyTask2": {},
-    "MyTask3": {}
+    "MyTask1": {
+        "recognition": "OCR",
+        "expected": "WeChat",
+        "action": "Click"
+    }
 }
