@@ -1,7 +1,89 @@
 {
-    "MyTask1": {
+    "打开游戏": {
         "recognition": "OCR",
-        "expected": "WeChat",
+        "expected": "阴阳师",
+        "action": "Click"
+    },
+    "打开加速器": {
+        "recognition": "OCR",
+        "expected": "ClashforAndroid",
+        "action": "Click",
+        "next": [
+            "打开游戏加速",
+            "回到主页"
+        ]
+    },
+    "打开游戏加速": {
+        "recognition": "OCR",
+        "expected": "已停止",
+        "action": "Click",
+        "next": [
+            "回到主页"
+        ]
+    },
+    "回到主页": {
+        "action": "key",
+        "key": 3,
+        "next": [
+            "打开阴阳师"
+        ]
+    },
+    "游戏画面识别": {
+        "recognition": "OCR",
+        "expected": "式神录"
+    },
+    "打开阴阳师": {
+        "action": "StartApp",
+        "package": "com.netease.onmyoji/.tag0"
+    },
+    "打开式神录": {
+        "recognition": "TemplateMatch",
+        "template": "式神录.png",
+        "action": "Click"
+    },    
+    "打开邮箱": {
+        "recognition": "TemplateMatch",
+        "template": "邮箱.png",
+        "action": "Click"
+    },
+    "打开筛选": {
+        "recognition": "TemplateMatch",
+        "template": "地域鬼王_筛选.png",
+        "action": "Click"
+    },
+    "装备地域鬼王预设": {
+        "next": [
+            "点击预设"
+        ]
+    },
+    "点击预设": {
+        "recognition": "OCR",
+        "expected": "预设",
+        "action": "Click",
+        "next": [
+            "选择地域鬼王预设"
+        ]
+
+    },
+    "选择地域鬼王预设": {
+        "recognition": "OCR",
+        "expected": "地鬼",
+        "action": "Click",
+        "next": [
+            "装备预设"
+        ]
+    },
+    "装备预设": {
+        "recognition": "TemplateMatch",
+        "template": "装备御魂.png",
+        "action": "Click",
+        "next": [
+            "返回"
+        ]
+    },
+    "返回": {
+        "recognition": "TemplateMatch",
+        "template": "返回.png",
         "action": "Click"
     }
 }
