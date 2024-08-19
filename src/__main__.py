@@ -16,6 +16,7 @@ import asyncio
 import random
 import traceback
 import sys
+import time
 
 async def main():
     print("Maa框架开始初始化")
@@ -41,20 +42,24 @@ async def main():
 
     maa_inst = Instance()
     maa_inst.bind(resource, controller)
-    
+    maa_inst.register_action("Random_touch", Random_touch)
+    maa_inst.register_action("Random_wait", Random_wait)
+
     if not maa_inst.inited:
         print("MAA框架初始化失败")
         input("按任意键退出")
         sys.exit()
 
     # maa_inst.register_recognizer("MyRec", my_rec)
-    maa_inst.register_action("Random_touch", Random_touch)
     print("MAA框架初始化完成,开始执行任务")
     # await maa_inst.run_recognition("OCR",{"expected":"WeChat"})
-    await maa_inst.run_task("回到主页")
+    await maa_inst.run_task("自动探查")
 
 class Random_touch(CustomAction):
     def run(self, context, task_name, custom_param, box, rec_detail) -> bool:
+        
+        print(custom_param)
+
         # 读取 box 的参数
         x, y, w, h = box.x, box.y, box.w, box.h
         
@@ -79,11 +84,26 @@ class Random_touch(CustomAction):
         return True
     def stop(self) -> None:
         pass
+class Random_wait(CustomAction):
+    def run(self, context, task_name, custom_param, box, rec_detail) -> bool:
+        # 生成一个随机的等待时间，范围可以是 1 到 10 秒
+        
+        wait_time = random.uniform(1, 100)
+        
+        # 打印等待时间
+        print(f"等待 {wait_time:.2f} 秒...")
 
+        # 等待指定的时间
+        time.sleep(wait_time)
+
+        print("等待结束！")
+        return True
+    def stop(self) -> None:
+        pass
 
 # my_rec = MyRecognizer()
 Random_touch = Random_touch()
-
+Random_wait = Random_wait()
 
 if __name__ == "__main__":
     try:

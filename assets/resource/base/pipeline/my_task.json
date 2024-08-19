@@ -1,8 +1,11 @@
 {
     "打开游戏": {
-        "recognition": "OCR",
-        "expected": "阴阳师",
-        "action": "Click"
+        "next": [
+            "打开加速器",
+            "打开游戏加速",
+            "回到主页",
+            "打开阴阳师"
+        ]
     },
     "打开加速器": {
         "recognition": "OCR",
@@ -28,13 +31,30 @@
             "打开阴阳师"
         ]
     },
+    "打开阴阳师": {
+        "action": "StartApp",
+        "package": "com.netease.onmyoji/.tag0",
+        "next": [
+            "进入游戏",
+            "点击一下屏幕"
+        ]
+
+    },
+    "点击一下屏幕": {
+        "is_sub": true,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target":[100, 100, 300, 300],
+        "pre_delay":2000
+    },
+    "进入游戏": {
+        "recognition": "OCR",
+        "expected": "进入游戏",
+        "action": "Click"
+    },
     "游戏画面识别": {
         "recognition": "OCR",
         "expected": "式神录"
-    },
-    "打开阴阳师": {
-        "action": "StartApp",
-        "package": "com.netease.onmyoji/.tag0"
     },
     "打开式神录": {
         "recognition": "TemplateMatch",
