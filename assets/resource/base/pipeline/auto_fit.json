@@ -29,10 +29,5 @@
             "点击探查",
             "点击屏幕继续"
         ]
-    },
-    "随机等会儿":{
-        "recognition":"DirectHit",
-        "action":"Custom",
-        "custom_action":"Random_wait"
     }
 }

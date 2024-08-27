@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
-from typing import Tuple
+from typing import Tuple, List
+
 
 # python -m pip install maafw
 from maa.define import RectType
@@ -7,16 +8,14 @@ from maa.resource import Resource
 from maa.controller import AdbController
 from maa.instance import Instance
 from maa.toolkit import Toolkit
+from annotations import registry
+# from maa.custom_recognizer import CustomRecognizer
 
-from maa.custom_recognizer import CustomRecognizer
-from maa.custom_action import CustomAction
 
-import maa
+
 import asyncio
-import random
 import traceback
 import sys
-import time
 
 async def main():
     print("Maa框架开始初始化")
@@ -42,70 +41,26 @@ async def main():
 
     maa_inst = Instance()
     maa_inst.bind(resource, controller)
-    maa_inst.register_action("Random_touch", Random_touch)
-    maa_inst.register_action("Random_wait", Random_wait)
+    print("开始注册自定义识别器和动作")
+    registry.register_custom_recognizers(maa_inst)
+    registry.register_custom_action(maa_inst)
+    print("注册自定义识别器和动作完成")
 
     if not maa_inst.inited:
         print("MAA框架初始化失败")
         input("按任意键退出")
         sys.exit()
 
-    # maa_inst.register_recognizer("MyRec", my_rec)
+    # print("初始化题库")
+    # file_path = '题库4.3.xlsx'
+    # Find_answer.qa_dict_v2 = load_qa_from_excel_v2(file_path)
+    # # maa_inst.register_recognizer("MyRec", my_rec)
     print("MAA框架初始化完成,开始执行任务")
     # await maa_inst.run_recognition("OCR",{"expected":"WeChat"})
-    await maa_inst.run_task("自动探查")
-
-class Random_touch(CustomAction):
-    def run(self, context, task_name, custom_param, box, rec_detail) -> bool:
-        
-        print(custom_param)
-
-        # 读取 box 的参数
-        x, y, w, h = box.x, box.y, box.w, box.h
-        
-        print(f"box参数: {box}")
-        
-        # 计算中心点的坐标
-        center_x = x + w / 2
-        center_y = y + h / 2
-        
-        # 使用正态分布随机生成点
-        random_x = random.gauss(center_x, w / 6)  # 6 chosen to keep most points within the box
-        random_y = random.gauss(center_y, h / 6)  # Adjusting sigma for distribution width
-        
-        # 限制生成的点在box范围内
-        random_x = min(max(random_x, x), x + w)
-        random_y = min(max(random_y, y), y + h)
-
-        # 点击随机生成的点
-        context.click(round(random_x), round(random_y))
-        print(f"随机生成的点: {random_x, random_y}")
-                
-        return True
-    def stop(self) -> None:
-        pass
-class Random_wait(CustomAction):
-    def run(self, context, task_name, custom_param, box, rec_detail) -> bool:
-        # 生成一个随机的等待时间，范围可以是 1 到 10 秒
-        
-        wait_time = random.uniform(1, 100)
-        
-        # 打印等待时间
-        print(f"等待 {wait_time:.2f} 秒...")
-
-        # 等待指定的时间
-        time.sleep(wait_time)
-
-        print("等待结束！")
-        return True
-    def stop(self) -> None:
-        pass
-
-# my_rec = MyRecognizer()
-Random_touch = Random_touch()
-Random_wait = Random_wait()
+    await maa_inst.run_task("打开加速器")
 
 if __name__ == "__main__":
+
     try:
         asyncio.run(main())
     except Exception as e:
