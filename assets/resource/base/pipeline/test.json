@@ -1,0 +1,10 @@
+{
+    "testAction": {
+        "recognition":"DirectHit",
+        "action": "Custom",
+        "custom_action": "Random_swipe",
+        "custom_action_param": {
+            "hellow": 12312312
+        }
+    }
+}

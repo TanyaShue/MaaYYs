@@ -42,10 +42,11 @@ async def main():
     maa_inst = Instance()
     maa_inst.bind(resource, controller)
     print("开始注册自定义识别器和动作")
-    registry.register_custom_recognizers(maa_inst)
+    # registry.register_custom_recognizers(maa_inst)
     registry.register_custom_action(maa_inst)
     print("注册自定义识别器和动作完成")
-
+    
+    
     if not maa_inst.inited:
         print("MAA框架初始化失败")
         input("按任意键退出")
@@ -57,8 +58,7 @@ async def main():
     # # maa_inst.register_recognizer("MyRec", my_rec)
     print("MAA框架初始化完成,开始执行任务")
     # await maa_inst.run_recognition("OCR",{"expected":"WeChat"})
-    await maa_inst.run_task("打开加速器")
-
+    await maa_inst.run_task("点击探查")
 if __name__ == "__main__":
 
     try:

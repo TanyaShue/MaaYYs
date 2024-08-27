@@ -8,6 +8,8 @@ class Random_touch(CustomAction):
         
         print(custom_param)
 
+        
+        print("开始执行自定义动作：随机点击")
         # 读取 box 的参数
         x, y, w, h = box.x, box.y, box.w, box.h
         

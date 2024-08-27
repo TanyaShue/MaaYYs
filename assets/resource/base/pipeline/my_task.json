@@ -1,111 +1,102 @@
 {
-    "打开游戏": {
-        "next": [
-            "打开加速器",
-            "打开游戏加速",
-            "回到主页",
-            "打开阴阳师"
-        ]
-    },
-    "打开加速器": {
-        "recognition": "OCR",
-        "expected": "ClashforAndroid",
-        "action": "Click",
-        "next": [
-            "打开游戏加速",
-            "回到主页"
-        ]
-    },
-    "打开游戏加速": {
-        "recognition": "OCR",
-        "expected": "已停止",
-        "action": "Click",
-        "next": [
-            "回到主页"
-        ]
-    },
-    "回到主页": {
-        "action": "key",
-        "key": 3,
-        "next": [
-            "打开阴阳师"
-        ]
-    },
-    "打开阴阳师": {
-        "action": "StartApp",
-        "package": "com.netease.onmyoji/.tag0",
-        "next": [
-            "进入游戏",
-            "点击一下屏幕"
-        ]
-
-    },
-    "点击一下屏幕": {
-        "is_sub": true,
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target":[100, 100, 300, 300],
-        "pre_delay":4000
-    },
-    "进入游戏": {
-        "recognition": "OCR",
-        "expected": "进入游戏",
-        "action": "Click"
-    },
-    "游戏画面识别": {
-        "recognition": "OCR",
-        "expected": "式神录",
-        "order_by":"Vertical",
-        "roi": [690,243,432,111]
-    },
-    "打开式神录": {
-        "recognition": "TemplateMatch",
-        "template": "式神录.png",
-        "action": "Click"
-    },    
-    "打开邮箱": {
-        "recognition": "TemplateMatch",
-        "template": "邮箱.png",
-        "action": "Click"
-    },
-    "打开筛选": {
-        "recognition": "TemplateMatch",
-        "template": "地域鬼王_筛选.png",
-        "action": "Click"
-    },
-    "装备地域鬼王预设": {
-        "next": [
-            "点击预设"
-        ]
-    },
-    "点击预设": {
-        "recognition": "OCR",
-        "expected": "预设",
-        "action": "Click",
-        "next": [
-            "选择地域鬼王预设"
-        ]
-
-    },
-    "选择地域鬼王预设": {
-        "recognition": "OCR",
-        "expected": "地鬼",
-        "action": "Click",
-        "next": [
-            "装备预设"
-        ]
-    },
-    "装备预设": {
-        "recognition": "TemplateMatch",
-        "template": "装备御魂.png",
-        "action": "Click",
-        "next": [
-            "返回"
-        ]
-    },
-    "返回": {
-        "recognition": "TemplateMatch",
-        "template": "返回.png",
-        "action": "Click"
-    }
+  "打开游戏": {
+    "next": [
+      "打开加速器",
+      "打开游戏加速",
+      "回到主页",
+      "打开阴阳师"
+    ]
+  },
+  "打开加速器": {
+    "recognition": "OCR",
+    "action": "Click",
+    "next": [
+      "打开游戏加速",
+      "回到主页"
+    ],
+    "expected": "ClashforAndroid"
+  },
+  "打开游戏加速": {
+    "recognition": "OCR",
+    "action": "Click",
+    "next": "回到主页",
+    "expected": "已停止"
+  },
+  "回到主页": {
+    "action": "key",
+    "next": "打开阴阳师",
+    "key": 3
+  },
+  "打开阴阳师": {
+    "action": "StartApp",
+    "next": [
+      "进入游戏",
+      "点击一下屏幕"
+    ],
+    "package": "com.netease.onmyoji/.tag0"
+  },
+  "点击一下屏幕": {
+    "recognition": "DirectHit",
+    "action": "Click",
+    "is_sub": true,
+    "pre_delay": 4000,
+    "target": [
+      100,
+      100,
+      300,
+      300
+    ]
+  },
+  "进入游戏": {
+    "recognition": "OCR",
+    "action": "Click",
+    "next": "打开邮箱",
+    "expected": "进入游戏"
+  },
+  "游戏画面识别": {
+    "recognition": "OCR",
+    "expected": "式神录",
+    "order_by": "Vertical"
+  },
+  "打开式神录": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "式神录.png"
+  },
+  "打开邮箱": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "邮箱.png"
+  },
+  "打开筛选": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "地域鬼王_筛选.png"
+  },
+  "装备地域鬼王预设": {
+    "next": "点击预设"
+  },
+  "点击预设": {
+    "recognition": "OCR",
+    "action": "Click",
+    "next": "选择地域鬼王预设",
+    "expected": "预设"
+  },
+  "选择地域鬼王预设": {
+    "recognition": "OCR",
+    "action": "Click",
+    "next": "装备预设",
+    "expected": "地鬼"
+  },
+  "装备预设": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "next": "返回",
+    "template": "装备御魂.png"
+  },
+  "返回": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "返回.png"
+  }
 }
