@@ -2,7 +2,8 @@
 import asyncio
 import traceback
 import sys
-from custom_decorators.loader import load_custom_actions, action_registry
+from common.common import load_tasks_from_pipeline
+from custom_decorators.loader import load_custom_actions, load_custom_recognizers, action_registry, recognizer_registry
 from maa.define import RectType
 from maa.resource import Resource
 from maa.controller import AdbController
@@ -42,9 +43,28 @@ async def main():
     load_custom_actions("src/custom_actions")
     for action_name, action_instance in action_registry.items():
         maa_inst.register_action(action_name, action_instance)
+        
+    # Load and register custom recognizers
+    load_custom_recognizers("src/custom_recognizer")
+    for recognizer_name, recognizer_instance in recognizer_registry.items():
+        maa_inst.register_recognizer(recognizer_name, recognizer_instance)
 
-    print("MAA框架初始化完成,开始执行任务")
-    await maa_inst.run_task("点击探查")
+    print("加载任务列表")
+    tasks = load_tasks_from_pipeline("assets/resource/base/pipeline")
+    task_names = list(tasks.keys())
+
+    while True:
+        print("可用任务列表：")
+        for i, task_name in enumerate(task_names):
+            print(f"{i + 1}. {task_name}")
+
+        task_index = int(input("请输入要执行的任务编号：")) - 1
+        selected_task_name = task_names[task_index]
+
+        print(f"开始执行任务: {selected_task_name}")
+        await maa_inst.run_task(selected_task_name)
+    
+
 
 if __name__ == "__main__":
     try:
@@ -53,3 +73,4 @@ if __name__ == "__main__":
         print(f"程序执行过程中发生错误: {e}")
         traceback.print_exc()
         input("按回车键退出...")
+

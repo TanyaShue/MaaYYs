@@ -1,12 +1,9 @@
 from typing import Tuple
 from maa.define import RectType
 from maa.custom_recognizer import CustomRecognizer
-from annotations.custom_Annotation import customRecognizer
-from customAction.Find_answer import Find_answer
 from common.common import check_if_rect_is_inside_any
+from custom_actions.find_answer import Find_answer
 
-
-@customRecognizer
 class MyRecognizer(CustomRecognizer):
     print("MyRecognizer loaded")
     def analyze(

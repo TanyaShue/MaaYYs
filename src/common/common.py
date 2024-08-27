@@ -1,6 +1,10 @@
 import pandas as pd
 import difflib
 
+import os
+import json
+
+
 from typing import Tuple, List
 
 def is_inside(big_rect: Tuple[int, int, int, int], small_rect: Tuple[int, int, int, int]) -> bool:
@@ -69,3 +73,14 @@ def find_best_answer(question, qa_dict):
 
     # 返回匹配结果或提示信息
     return qa_dict[best_match[0]] if best_match else "未找到匹配的答案"
+
+
+
+def load_tasks_from_pipeline(directory):
+    tasks = {}
+    for filename in os.listdir(directory):
+        if filename.endswith(".json"):
+            with open(os.path.join(directory, filename), 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                tasks.update(data)
+    return tasks

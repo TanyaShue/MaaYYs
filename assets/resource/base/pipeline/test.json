@@ -4,7 +4,19 @@
         "action": "Custom",
         "custom_action": "Random_swipe",
         "custom_action_param": {
-            "hellow": 12312312
+            "start_roi":[
+                846,
+                205,
+                105,
+                303
+              ],
+            "end_roi":[
+                347,
+                213,
+                133,
+                336
+              ],
+            "delay":200
         }
     }
 }
