@@ -2,7 +2,7 @@ from maa.custom_action import CustomAction
 from common.common import find_best_answer
 import json
 
-class Find_answer(CustomAction):
+class FindAnswer(CustomAction):
     question = ""
     qa_dict_v2 = ""
     answer = []

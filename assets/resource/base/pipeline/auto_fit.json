@@ -3,10 +3,10 @@
         "recognition":"TemplateMatch",
         "template":"探查.png",
         "action":"Custom",
-        "custom_action":"Random_touch",
+        "custom_action":"RandomTouch",
         "post_delay":100,
         "custom_action_param":{
-            "hellow":12312312
+            "hellow":123
         },
         "next":[
             "随机等会儿"

@@ -2,7 +2,7 @@
     "testAction": {
         "recognition":"DirectHit",
         "action": "Custom",
-        "custom_action": "Random_swipe",
+        "custom_action": "RandomSwipe",
         "custom_action_param": {
             "start_roi":[
                 846,
@@ -16,7 +16,7 @@
                 133,
                 336
               ],
-            "delay":200
+            "delay":400
         }
     }
 }

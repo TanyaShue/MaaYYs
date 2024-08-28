@@ -15,7 +15,7 @@
     "随机等会儿":{
         "recognition":"DirectHit",
         "action":"Custom",
-        "custom_action":"Random_wait",
+        "custom_action":"RandomWait",
         "next":[
             "识别题目"
         ]
@@ -26,7 +26,7 @@
         "expected":".*",
         "action":"Custom",
         "inverse":false,
-        "custom_action":"Find_answer",
+        "custom_action":"FindAnswer",
         "order_by":"Vertical",
         "roi": [911,37,306,65],
         "next":[

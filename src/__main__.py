@@ -10,6 +10,7 @@ from maa.controller import AdbController
 from maa.instance import Instance
 from maa.toolkit import Toolkit
 
+
 async def main():
     print("Maa框架开始初始化")
     user_path = "./"
@@ -43,7 +44,7 @@ async def main():
     load_custom_actions("src/custom_actions")
     for action_name, action_instance in action_registry.items():
         maa_inst.register_action(action_name, action_instance)
-        
+
     # Load and register custom recognizers
     load_custom_recognizers("src/custom_recognizer")
     for recognizer_name, recognizer_instance in recognizer_registry.items():
@@ -54,6 +55,7 @@ async def main():
     task_names = list(tasks.keys())
 
     while True:
+
         print("可用任务列表：")
         for i, task_name in enumerate(task_names):
             print(f"{i + 1}. {task_name}")
@@ -63,7 +65,7 @@ async def main():
 
         print(f"开始执行任务: {selected_task_name}")
         await maa_inst.run_task(selected_task_name)
-    
+        await resource.load("./assets/resource/base")
 
 
 if __name__ == "__main__":
@@ -73,4 +75,3 @@ if __name__ == "__main__":
         print(f"程序执行过程中发生错误: {e}")
         traceback.print_exc()
         input("按回车键退出...")
-

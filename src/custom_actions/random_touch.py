@@ -1,7 +1,7 @@
 from maa.custom_action import CustomAction
 import random
 
-class Random_touch(CustomAction):
+class RandomTouch(CustomAction):
     def run(self, context, task_name, custom_param, box, rec_detail) -> bool:
         print(custom_param)
         print("开始执行自定义动作：随机点击")
