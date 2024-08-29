@@ -55,7 +55,7 @@
   },
   "游戏画面识别": {
     "recognition": "OCR",
-    "expected": "式神录",
+    "expected": "单体",
     "order_by": "Vertical"
   },
   "打开式神录": {

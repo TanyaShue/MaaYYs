@@ -27,7 +27,7 @@ class RandomSwipe(CustomAction):
             end_y = random.randint(params["end_roi"][1], params["end_roi"][1] + params["end_roi"][3])
 
             duration = params.get("delay", 200)
-
+        
             context.swipe(start_x, start_y, end_x, end_y, duration)
             print(f"Swiped from ({start_x}, {start_y}) to ({end_x}, {end_y}) with delay {duration}")
             return True

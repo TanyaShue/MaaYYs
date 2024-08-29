@@ -1,22 +1,31 @@
 {
-    "testAction": {
-        "recognition":"DirectHit",
-        "action": "Custom",
-        "custom_action": "RandomSwipe",
-        "custom_action_param": {
-            "start_roi":[
-                846,
-                205,
-                105,
-                303
-              ],
-            "end_roi":[
-                347,
-                213,
-                133,
-                336
-              ],
-            "delay":400
-        }
+  "testAction": {
+    "recognition": "DirectHit",
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi": [
+        846,
+        205,
+        105,
+        303
+      ],
+      "end_roi": [
+        347,
+        213,
+        133,
+        336
+      ],
+      "delay": 400
     }
+  },
+  "testSwitchSoul": {
+    "recognition": "DirectHit",
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name":"斗技jiji",
+      "team_name":"队伍4"
+    }
+  }
 }

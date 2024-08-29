@@ -62,10 +62,12 @@ async def main():
 
         task_index = int(input("请输入要执行的任务编号：")) - 1
         selected_task_name = task_names[task_index]
+        
+        await resource.load("./assets/resource/base")
+        
 
         print(f"开始执行任务: {selected_task_name}")
         await maa_inst.run_task(selected_task_name)
-        await resource.load("./assets/resource/base")
 
 
 if __name__ == "__main__":

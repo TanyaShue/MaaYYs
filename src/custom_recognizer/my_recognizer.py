@@ -2,7 +2,7 @@ from typing import Tuple
 from maa.define import RectType
 from maa.custom_recognizer import CustomRecognizer
 from common.common import check_if_rect_is_inside_any
-from custom_actions.find_answer import Find_answer
+from custom_actions.find_answer import FindAnswer
 
 class MyRecognizer(CustomRecognizer):
     print("MyRecognizer loaded")
@@ -10,7 +10,7 @@ class MyRecognizer(CustomRecognizer):
             self, context, image, task_name, custom_param
         ) -> Tuple[bool,RectType, str]:
         # 假设 Find_answer.answer 是一个包含多个答案的列表
-        possible_answers = Find_answer.answer
+        possible_answers = FindAnswer.answer
         # image = cv2.imread("Screenshot_2024.08.19_17.04.27.366.png")
         print(f"Possible answers: {possible_answers}")
         print("------------------hellow-----------------")
