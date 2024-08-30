@@ -41,10 +41,10 @@
     "is_sub": true,
     "pre_delay": 4000,
     "target": [
-      100,
-      100,
-      300,
-      300
+      165,
+      98,
+      913,
+      430
     ]
   },
   "进入游戏": {
@@ -67,36 +67,5 @@
     "recognition": "TemplateMatch",
     "action": "Click",
     "template": "邮箱.png"
-  },
-  "打开筛选": {
-    "recognition": "TemplateMatch",
-    "action": "Click",
-    "template": "地域鬼王_筛选.png"
-  },
-  "装备地域鬼王预设": {
-    "next": "点击预设"
-  },
-  "点击预设": {
-    "recognition": "OCR",
-    "action": "Click",
-    "next": "选择地域鬼王预设",
-    "expected": "预设"
-  },
-  "选择地域鬼王预设": {
-    "recognition": "OCR",
-    "action": "Click",
-    "next": "装备预设",
-    "expected": "地鬼"
-  },
-  "装备预设": {
-    "recognition": "TemplateMatch",
-    "action": "Click",
-    "next": "返回",
-    "template": "装备御魂.png"
-  },
-  "返回": {
-    "recognition": "TemplateMatch",
-    "action": "Click",
-    "template": "返回.png"
   }
 }

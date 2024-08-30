@@ -1,5 +1,6 @@
 import json
 import random
+import time
 
 from maa.custom_action import CustomAction
 
@@ -17,9 +18,10 @@ class SwitchSoul(CustomAction):
         # 读取 box 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
         json_data = json.loads(custom_param)        
         # 点击预设点
+        time.sleep(1)
         context.click(random.randint(336, 420), random.randint(72, 132))
-        for _ in range(3):
-            context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [1085, 442, 152, 60],"start_roi": [1085, 161, 162, 58],"delay": 400}}})
+        for _ in range(1):
+            context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [1085, 442, 152, 60],"start_roi": [1085, 161, 162, 58],"delay": 200}}})
         
         print("开始执行自定义动作：点击分组")
 
