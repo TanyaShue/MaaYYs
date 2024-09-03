@@ -52,7 +52,7 @@ class ChallengeDungeonBoss(CustomAction):
             context.run_task("识别分享", {"识别分享": {
                              "recognition": "TemplateMatch", "timeout":300000,"template": "地鬼_分享.png", "action": "Click", "target": [165, 98, 913, 430]}})
             time.sleep(5)
-            context.click(random.randint(367, 895), random.randint(185, 487))
+            context.click(random.randint(367, 866), random.randint(185, 638))
             
             context.run_task("点击叉叉", {
                              "点击叉叉": {"recognition": "TemplateMatch", "template": "地鬼_关闭.png", "action": "Click"}})
