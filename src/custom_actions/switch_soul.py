@@ -24,9 +24,6 @@ class SwitchSoul(CustomAction):
         detil=context.run_recognition(image,"识别预设",{"识别预设":{"timeout":100,"recognition": "OCR","expected": "预设","roi": [336, 74, 82, 46]}})
         if detil[0]:
             context.click(random.randint(336, 411), random.randint(74,120 ))
-            
-        
-        
         
         for _ in range(1):
             context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [1085, 442, 152, 60],"start_roi": [1085, 161, 162, 58],"delay": 200}}})

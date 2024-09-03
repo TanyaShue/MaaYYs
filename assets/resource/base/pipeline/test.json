@@ -27,5 +27,20 @@
       "group_name":"超鬼王",
       "team_name":"队伍4"
     }
+  },
+  "testOCR": {
+    "recognition": "OCR",
+    "expected":"\\d+",
+    "roi":[
+      1175,
+      15,
+      98,
+      77
+    ]
+  },
+  "testchallengeBoss": {
+    "recognition": "DirectHit",
+    "action": "Custom",
+    "custom_action": "ChallengeDungeonBoss"
   }
 }

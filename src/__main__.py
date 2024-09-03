@@ -8,7 +8,7 @@ from maa.define import RectType
 from maa.resource import Resource
 from maa.controller import AdbController
 from maa.instance import Instance
-from maa.toolkit import Toolkit
+from maa.toolkit import Toolkit, AdbDevice
 
 
 async def main():
@@ -19,13 +19,17 @@ async def main():
     resource = Resource()
     await resource.load("./assets/resource/base")
 
-    device_list = await Toolkit.adb_devices()
-    if not device_list:
-        print("未找到任何ADB设备")
-        input("按任意键退出")
-        sys.exit()
+    # device_list = await Toolkit.adb_devices()
+    # if not device_list:
+    #     print("未找到任何ADB设备")
+    #     input("按任意键退出")
+    #     sys.exit()
 
-    device = device_list[0]
+    # device = device_list[0]
+    # print(device.name, " - ", device.address, " (", device.adb_path, ")")
+    device=AdbDevice
+    device.address = "127.0.0.1:5575"
+    device.adb_path = "C:\Program Files\BlueStacks_nxt\HD-Adb.exe"
     controller = AdbController(
         adb_path=device.adb_path,
         address=device.address,
