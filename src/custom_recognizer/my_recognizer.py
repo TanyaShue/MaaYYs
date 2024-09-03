@@ -1,7 +1,7 @@
 from typing import Tuple
 from maa.define import RectType
 from maa.custom_recognizer import CustomRecognizer
-from common.common import check_if_rect_is_inside_any
+from until.common import check_if_rect_is_inside_any
 from custom_actions.find_answer import FindAnswer
 
 class MyRecognizer(CustomRecognizer):

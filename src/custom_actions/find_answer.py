@@ -1,5 +1,5 @@
 from maa.custom_action import CustomAction
-from common.common import find_best_answer
+from until.common import find_best_answer
 import json
 
 class FindAnswer(CustomAction):

@@ -2,7 +2,7 @@
 import asyncio
 import traceback
 import sys
-from common.common import load_tasks_from_pipeline
+from until.common import load_tasks_from_pipeline
 from custom_decorators.loader import load_custom_actions, load_custom_recognizers, action_registry, recognizer_registry
 from maa.define import RectType
 from maa.resource import Resource
@@ -55,17 +55,14 @@ async def main():
     task_names = list(tasks.keys())
 
     while True:
-
         print("可用任务列表：")
         for i, task_name in enumerate(task_names):
             print(f"{i + 1}. {task_name}")
-
+            
         task_index = int(input("请输入要执行的任务编号：")) - 1
         selected_task_name = task_names[task_index]
         
-        await resource.load("./assets/resource/base")
-        
-
+        # await resource.load("./assets/resource/base")
         print(f"开始执行任务: {selected_task_name}")
         await maa_inst.run_task(selected_task_name)
 

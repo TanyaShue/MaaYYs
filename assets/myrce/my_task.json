@@ -58,11 +58,6 @@
     "expected": "单体",
     "order_by": "Vertical"
   },
-  "打开式神录": {
-    "recognition": "TemplateMatch",
-    "action": "Click",
-    "template": "式神录.png"
-  },
   "打开邮箱": {
     "recognition": "TemplateMatch",
     "action": "Click",

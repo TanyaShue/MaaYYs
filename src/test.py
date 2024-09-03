@@ -1,5 +1,3 @@
-import os
+from until.task import Task
 
-for filename in os.listdir("src/custom_actions"):
-    if filename.endswith(".py") and filename != "__init__.py":
-        print(filename)
+print(Task(task_name="返回最上页分组", recognition="OCR", action="Click").to_json())

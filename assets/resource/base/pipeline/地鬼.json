@@ -273,5 +273,17 @@
     "recognition": "TemplateMatch",
     "template": "地鬼_关闭.png",
     "action": "Click"
+  },
+  "点击一下屏幕": {
+    "recognition": "DirectHit",
+    "action": "Click",
+    "is_sub": true,
+    "pre_delay": 4000,
+    "target": [
+      165,
+      98,
+      913,
+      430
+    ]
   }
 }
