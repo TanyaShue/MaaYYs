@@ -4,6 +4,11 @@ docs/.vuepress/.temp
 # Prerequisites
 *.d
 
+# test
+
+src/test
+
+
 # Compiled Object files
 build
 build-*

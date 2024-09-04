@@ -18,6 +18,7 @@ def load_custom_actions(directory):
                 if inspect.isclass(obj) and issubclass(obj, CustomAction) and not inspect.isabstract(obj):
                     action_registry[name] = obj()
 
+
 def load_custom_recognizers(directory):
     for filename in os.listdir(directory):
         if filename.endswith(".py") and filename != "__init__.py":

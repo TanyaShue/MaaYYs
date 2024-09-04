@@ -33,10 +33,7 @@ class ChallengeDungeonBoss(CustomAction):
             # 选择挑战等级
             # TODO
             
-            
-            
             print("点击挑战")
-            
             
             # 点击挑战
             te=context.run_task("挑战地鬼", {

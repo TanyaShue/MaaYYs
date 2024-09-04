@@ -58,11 +58,7 @@
   },
   "开始自动挑战鬼王":{
     "action": "Custom",
-    "custom_action": "AutoBattle",
-    "custom_action_param": {
-      "group_name": "地鬼",
-      "team_name": "地域鬼王"
-    },
+    "custom_action": "ChallengeDungeonBoss",
     "post_delay":2000
   }
 }

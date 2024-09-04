@@ -13,7 +13,7 @@ class MyRecognizer(CustomRecognizer):
         possible_answers = FindAnswer.answer
         # image = cv2.imread("Screenshot_2024.08.19_17.04.27.366.png")
         print(f"Possible answers: {possible_answers}")
-        print("------------------hellow-----------------")
+        print("------------------开始匹配答案-----------------")
 
         entry = "OCR"
         
@@ -50,7 +50,7 @@ class MyRecognizer(CustomRecognizer):
                     return rec_
 
                 else:
-                    print(f"Rect {rec_[1]} is not inside any of the rectangles.xxxxxxxxxxxxxxxxxxxxxxxxx")
+                    print(f"Rect {rec_[1]} is not inside any of the rectangles")
                                     
         # 如果没有找到匹配，返回一个默认值
         print("没找到答案--------------------------")
