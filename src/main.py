@@ -1,24 +1,19 @@
+# main.py
 import tkinter as tk
-from ui.ui import create_ui, show_content
-from until.config import load_default_config
-import asyncio
-import threading
-from tasks import main as run_main
+from utils.logger import Logger
+from ui.ui import AppUI
 
-def start_application():
-    # 创建主窗口和界面
-    root = tk.Tk()
-    root.title("MaaYYs")
-    root.geometry("600x400")
+# 创建主窗口
+root = tk.Tk()
 
-    # 创建 UI 组件
-    ui_frame = create_ui(root)
-    
-    # 显示默认标签
-    show_content("开始", ui_frame)
-    
-    # 启动 Tkinter 主循环
-    root.mainloop()
+# 创建日志模块
+logger = Logger()
 
-if __name__ == "__main__":
-    start_application()
+# 初始化 UI，并传入日志模块
+app_ui = AppUI(root, logger)
+
+# 示例：通过日志模块输出日志
+logger.add_log("程序已启动")
+
+# 启动 Tkinter 主循环
+root.mainloop()
