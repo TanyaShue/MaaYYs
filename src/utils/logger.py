@@ -1,20 +1,29 @@
-# logger.py
-import tkinter as tk
+# logger_module.py
 import time
 
-
 class Logger:
-    def __init__(self):
-        self.log_output = None
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(Logger, cls).__new__(cls)
+            cls._instance.log_output = None
+        return cls._instance
 
     def set_log_output(self, log_output):
-        """ 设置日志输出框 """
         self.log_output = log_output
 
     def add_log(self, message):
-        """ 添加日志到日志框 """
         if self.log_output:
-            self.log_output.insert(tk.END, f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}{message}\n")
-            self.log_output.see(tk.END)  # 自动滚动到最新的日志
-        else:
-            print(f"日志框未初始化，日志内容：{message}")
+            self.log_output.config(state='normal')  # 允许编辑
+            self.log_output.insert("end", f"{time.strftime('%H:%M:%S', time.localtime())}: {message}\n")
+            self.log_output.see("end")
+            self.log_output.config(state='disabled')  # 禁止编辑
+            
+    
+    def add_log_thread_safe(self, message):
+        if self.log_output:
+            self.log_output.after(0, self.add_log, message)
+
+            
+

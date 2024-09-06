@@ -42,5 +42,13 @@
     "recognition": "DirectHit",
     "action": "Custom",
     "custom_action": "ChallengeDungeonBoss"
+  }, 
+  "回到主页_key": {
+    "action": "key",
+    "key": 3
+  },
+  "打开阴阳师_key": {
+    "action": "StartApp",
+    "package": "com.netease.onmyoji/.tag0"
   }
 }

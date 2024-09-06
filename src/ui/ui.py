@@ -1,17 +1,18 @@
-# ui_module.py
 import tkinter as tk
 from tkinter import scrolledtext
 from utils.config import load_default_config  # 导入配置模块
-import threading
+from utils.common import load_tasks_from_pipeline
 import asyncio
-from tasks import main
+from tasks import TaskManager, MaaInstanceSingleton
+from utils.logger import Logger  # 导入全局 Logger 单例
+import threading
 
-UI_X, UI_Y = 600, 400
+UI_X, UI_Y = 1000, 400
 
 class AppUI:
-    def __init__(self, root, logger):
+    def __init__(self, root):
         self.root = root
-        self.logger = logger
+        self.logger = Logger()  # 获取全局 Logger 实例
         self.tab_frames = {}
         self.init_ui()
 
@@ -42,39 +43,86 @@ class AppUI:
 
     def create_tab1_layout(self, content_frame):
         frame = tk.Frame(content_frame)
+        frame.grid_rowconfigure(0, weight=1)  # 让行可以扩展
+        frame.grid_columnconfigure(0, weight=1, uniform="column")  # 左侧部分
+        frame.grid_columnconfigure(1, weight=1, uniform="column")  # 中间部分
+        frame.grid_columnconfigure(2, weight=1, uniform="column")  # 右侧部分
 
         # 左侧部分
-        left_part = tk.Frame(frame, width=(UI_X - 100) // 2, bg="white")
-        left_part.pack(side="left", fill="y", expand=True)
+        left_part = tk.Frame(frame, bg="white")
+        left_part.grid(row=0, column=0, sticky="nsew")
 
-        # "adb路径" 标签和文本框
         adb_path_label = tk.Label(left_part, text="adb路径")
-        adb_path_label.pack(pady=10, padx=20)
+        adb_path_label.grid(row=0, column=0, padx=20, pady=5, sticky="w")
         adb_path_entry = tk.Entry(left_part, width=30)
-        adb_path_entry.pack(pady=5, padx=20)
+        adb_path_entry.grid(row=1, column=0, padx=20, pady=5)
 
-        # "adb端口" 标签和文本框
         adb_port_label = tk.Label(left_part, text="adb端口")
-        adb_port_label.pack(pady=10, padx=20)
+        adb_port_label.grid(row=2, column=0, padx=20, pady=5, sticky="w")
         adb_port_entry = tk.Entry(left_part, width=30)
-        adb_port_entry.pack(pady=5, padx=20)
+        adb_port_entry.grid(row=3, column=0, padx=20, pady=5)
 
-        # 加载默认配置并填充文本框
-        config = load_default_config()  # 从配置模块加载配置
+        config = load_default_config()
         adb_path_entry.insert(0, config.get("adb_path", ""))
         adb_port_entry.insert(0, config.get("adb_port", ""))
 
+        connect_button = tk.Button(left_part, text="连接", command=lambda: self.run_async_task(self.connect(adb_path_entry, adb_port_entry, connect_button)))
+        connect_button.grid(row=4, column=0, padx=20, pady=10)
+
+        # 中间部分：任务选择框 (Canvas)
+        middle_part = tk.Frame(frame, bg="lightgray")
+        middle_part.grid(row=0, column=1, sticky="nsew")
+
+        # 确保行、列的权重是动态的
+        middle_part.grid_rowconfigure(0, weight=1)
+        middle_part.grid_columnconfigure(0, weight=1)
+
+        canvas_frame = tk.Frame(middle_part, bg="lightgray")
+        canvas_frame.grid(row=0, column=0, sticky="nsew")
+
+        canvas = tk.Canvas(canvas_frame, bg="white")
+        canvas.pack(side="left", fill="both", expand=True)
+
+        scrollbar = tk.Scrollbar(canvas_frame, orient="vertical", command=canvas.yview)
+        scrollbar.pack(side="right", fill="y")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        checkboxes_frame = tk.Frame(canvas, bg="white")
+        canvas.create_window((0, 0), window=checkboxes_frame, anchor="nw")
+
+        tasks = load_tasks_from_pipeline("assets/resource/base/pipeline")
+        task_names = list(tasks.keys())
+        self.checkbox_vars = {}
+
+        for option in task_names:
+            var = tk.BooleanVar()
+            checkbox = tk.Checkbutton(checkboxes_frame, text=option, variable=var, bg="white")
+            checkbox.pack(anchor="w", padx=10)
+            self.checkbox_vars[option] = var
+
+        checkboxes_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+
+        def on_mouse_wheel(event):
+            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+
+        canvas.bind_all("<MouseWheel>", on_mouse_wheel)
+
+        # 下部分：执行按钮
+        button_frame = tk.Frame(middle_part, bg="lightgray")
+        button_frame.grid(row=1, column=0, sticky="ew", pady=10)
+
+        execute_button = tk.Button(button_frame, text="执行",command=lambda: self.run_async_task(self.execute_selected_options))
+        execute_button.pack(side="bottom", pady=10)
+
         # 右侧部分：日志输出窗口
-        self.log_output = scrolledtext.ScrolledText(frame, width=(UI_X - 100) // 2, height=200, bg="lightblue")
-        self.log_output.pack(side="right", fill="both", expand=True)
+        log_output = scrolledtext.ScrolledText(frame, height=200, bg="lightblue", state='disabled')
+        log_output.grid(row=0, column=2, sticky="nsew")
 
-        # 绑定日志窗口到日志模块
-        self.logger.set_log_output(self.log_output)
+        self.logger.set_log_output(log_output)
 
-        # 连接按钮
-        connect_button = tk.Button(left_part, text="连接", command=lambda: self.connect(adb_path_entry, adb_port_entry, connect_button))
-        connect_button.pack(pady=20, padx=20)
         return frame
+
+
 
     def create_tab2_layout(self, content_frame):
         frame = tk.Frame(content_frame)
@@ -97,8 +145,30 @@ class AppUI:
         self.logger.add_log(f"ADB端口: {adb_port}")
         self.logger.add_log("正在连接...")
 
-        # 启动主要业务的线程
-        threading.Thread(target=lambda: asyncio.run(main(adb_path, adb_port, self.logger.add_log))).start()
+        # 启动异步事件循环
+        loop = asyncio.get_event_loop()
+        loop.run_in_executor(None, lambda: asyncio.run(TaskManager.main(adb_path, adb_port, connect_button)))
 
-        # 禁用按钮
-        connect_button.config(text="已连接", state=tk.DISABLED)
+
+    def run_async_task(self, task):
+        # 使用线程启动事件循环
+        threading.Thread(target=self._asyncio_loop, args=(task,)).start()
+
+    def _asyncio_loop(self, task):
+        # 在新线程中运行事件循环
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(task())
+
+
+    async def execute_selected_options(self):
+  
+        print("开始执行按钮点击动作")
+        task=TaskManager()
+        task.test()
+        maa_inst=await MaaInstanceSingleton.get_instance()
+        print(f"当前实例：{maa_inst}")
+        await maa_inst.run_task("打开阴阳师_key")
+        print("按钮测试执行完成")
+        
+        
