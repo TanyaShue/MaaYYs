@@ -1,9 +1,10 @@
 # logger_module.py
 import time
-from PySide6.QtCore import Qt
 
 class Logger:
+    log_output: object
     _instance = None
+
 
     def __new__(cls):
         if cls._instance is None:

@@ -3,9 +3,7 @@ from maa.controller import AdbController
 from maa.instance import Instance
 from maa.toolkit import Toolkit, AdbDevice
 from custom_decorators.loader import load_custom_actions, load_custom_recognizers, action_registry, recognizer_registry
-from utils.common import load_tasks_from_pipeline
 from utils.logger import Logger  # 导入全局 Logger 单例
-import tkinter as tk
 import asyncio
 
 
@@ -24,15 +22,14 @@ class MaaInstanceSingleton:
 class TaskManager:
    
     @staticmethod
-    async def main(adb_path, adb_port, connect_button: tk.Button):
-        connect_button.config(text="正在连接", state=tk.DISABLED)
+    async def main(adb_path, adb_port):
 
         logger = Logger()  # 获取全局 Logger 实例
         try:
-            logger.add_log("Maa框架开始初始化")
-            Toolkit.init_option("./")
+            logger.add_log_thread_safe("Maa框架开始初始化")
+            Toolkit.init_option("../")
             resource = Resource()
-            await resource.load("./assets/resource/base")
+            await resource.load("../assets/resource/base")
             device = AdbDevice
             device.address = adb_port
             device.adb_path = adb_path
@@ -45,25 +42,23 @@ class TaskManager:
             maa_inst = await MaaInstanceSingleton.get_instance()
             maa_inst.bind(resource, controller)
             if not maa_inst.inited:
-                logger.add_log("MAA框架初始化失败")
+                logger.add_log_thread_safe("MAA框架初始化失败")
                 return
 
-            load_custom_actions("src/custom_actions")
+            load_custom_actions("custom_actions")
             for action_name, action_instance in action_registry.items():
                 maa_inst.register_action(action_name, action_instance)
 
-            load_custom_recognizers("src/custom_recognizer")
+            load_custom_recognizers("custom_recognizer")
             for recognizer_name, recognizer_instance in recognizer_registry.items():
                 maa_inst.register_recognizer(recognizer_name, recognizer_instance)
-            connect_button.config(text="已连接", state=tk.DISABLED)
-            logger.add_log("Maa框架初始化完成")
-            await TaskManager.test()
+            logger.add_log_thread_safe("Maa框架初始化完成")
 
-            await maa_inst.run_task("回到主页_key")
-          
+            logger.add_log_thread_safe("开始执行测试任务")
+            await maa_inst.run_task("打开阴阳师")
+            logger.add_log_thread_safe(" 任务执行完毕")
 
         except Exception as e:
-            connect_button.config(text="连接", state=tk.NORMAL)
             logger.add_log(f"程序执行过程中发生错误: {e}")
     
     

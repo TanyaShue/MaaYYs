@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit,
+from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit,
                                QFrame, QScrollArea, QCheckBox, QLabel, QLineEdit, QSplitter, QTabWidget, QGroupBox)
 from PySide6.QtCore import Qt
 from utils.config import load_default_config  # 导入配置模块
@@ -11,6 +11,8 @@ from tasks import TaskManager
 class AppUI(QWidget):
     def __init__(self):
         super().__init__()
+        self.log_output = None
+        self.checkbox_vars = None
         self.logger = Logger()  # 获取全局 Logger 实例
         self.init_ui()
 
@@ -91,7 +93,7 @@ class AppUI(QWidget):
         scroll_area.setWidgetResizable(True)
         task_widget_layout = QVBoxLayout(task_widget)
 
-        tasks = load_tasks_from_pipeline("assets/resource/base/pipeline")
+        tasks = load_tasks_from_pipeline("../assets/resource/base/pipeline")
         self.checkbox_vars = {}
 
         for task_name in tasks:
@@ -157,12 +159,4 @@ class AppUI(QWidget):
         if not selected_tasks:
             self.logger.add_log("未选择任何任务")
             return
-
         self.logger.add_log(f"执行任务: {selected_tasks}")
-        asyncio.run(TaskManager().test())
-
-if __name__ == "__main__":
-    app = QApplication([])
-    ui = AppUI()
-    ui.show()
-    app.exec()

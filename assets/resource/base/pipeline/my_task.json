@@ -30,7 +30,6 @@
   "打开阴阳师": {
     "action": "StartApp",
     "next": [
-      "进入游戏",
       "点击一下屏幕"
     ],
     "package": "com.netease.onmyoji/.tag0"
@@ -38,7 +37,6 @@
   "点击一下屏幕": {
     "recognition": "DirectHit",
     "action": "Click",
-    "is_sub": true,
     "pre_delay": 4000,
     "target": [
       165,
