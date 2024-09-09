@@ -57,13 +57,9 @@ class TaskManager:
                 maa_inst.register_recognizer(recognizer_name, recognizer_instance)
             connect_button.config(text="已连接", state=tk.DISABLED)
             logger.add_log("Maa框架初始化完成")
-            print("开始执行异步测试")
             await TaskManager.test()
-            print("异步测试完成")
-            print("开始正常测试")
-            print(f"当前实例：{maa_inst}")
+
             await maa_inst.run_task("回到主页_key")
-            print("正常测试完成")
           
 
         except Exception as e:
@@ -71,7 +67,3 @@ class TaskManager:
             logger.add_log(f"程序执行过程中发生错误: {e}")
     
     
-    async def test():
-        maa_inst=await MaaInstanceSingleton.get_instance()
-        print(f"当前实例：{maa_inst}")
-        await maa_inst.run_task("打开阴阳师_key")

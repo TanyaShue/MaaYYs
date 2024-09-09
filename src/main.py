@@ -1,7 +1,7 @@
 # main.py
 import tkinter as tk
 from utils.logger import Logger
-from ui.ui import AppUI
+from ui import AppUI
 
 # 创建主窗口
 root = tk.Tk()

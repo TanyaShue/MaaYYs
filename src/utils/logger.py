@@ -1,5 +1,6 @@
 # logger_module.py
 import time
+from PySide6.QtCore import Qt
 
 class Logger:
     _instance = None
@@ -15,15 +16,12 @@ class Logger:
 
     def add_log(self, message):
         if self.log_output:
-            self.log_output.config(state='normal')  # 允许编辑
-            self.log_output.insert("end", f"{time.strftime('%H:%M:%S', time.localtime())}: {message}\n")
-            self.log_output.see("end")
-            self.log_output.config(state='disabled')  # 禁止编辑
-            
-    
+            timestamp = time.strftime('%H:%M:%S', time.localtime())
+            self.log_output.append(f"{timestamp}: {message}")  # 追加文本
+            self.log_output.verticalScrollBar().setValue(self.log_output.verticalScrollBar().maximum())  # 自动滚动到底部
+
     def add_log_thread_safe(self, message):
         if self.log_output:
-            self.log_output.after(0, self.add_log, message)
-
-            
-
+            # 使用 Qt 的信号槽机制或 `QMetaObject.invokeMethod` 来确保线程安全
+            self.log_output.append(f"{time.strftime('%H:%M:%S', time.localtime())}: {message}")
+            self.log_output.verticalScrollBar().setValue(self.log_output.verticalScrollBar().maximum())
