@@ -1,19 +1,46 @@
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit,
-                               QFrame, QScrollArea, QCheckBox, QLabel, QLineEdit, QSplitter, QTabWidget, QGroupBox)
+                                QFrame, QScrollArea, QCheckBox, QLabel, QLineEdit, QSplitter, QTabWidget, QGroupBox)
 from PySide6.QtCore import Qt
-from qasync import QEventLoop  # 引入 qasync
+from qasync import QEventLoop
+from utils.config import load_default_config, load_config_tasks, get_task_entry  # 导入配置模块
+from utils.logger import Logger  # 导入全局 Logger 单例
+from tasks import TaskManager, MaaInstanceSingleton
+
+  # 引入 qasync
 import asyncio
 import threading
 
-from utils.config import load_default_config  # 导入配置模块
-from utils.common import load_tasks_from_pipeline
-from utils.logger import Logger  # 导入全局 Logger 单例
-from tasks import TaskManager, MaaInstanceSingleton
+from PySide6.QtCore import QThread, Signal
+
+class Worker(QThread):
+    log_signal = Signal(str)  # 用于发出日志消息的信号
+    finished_signal = Signal()  # 用于任务完成的信号
+
+    def __init__(self, task_func, *args, **kwargs):
+        super().__init__()
+        self.task_func = task_func
+        self.args = args
+        self.kwargs = kwargs
+
+    def run(self):
+        loop = asyncio.new_event_loop()  # 创建一个新的事件循环
+        asyncio.set_event_loop(loop)  # 设置事件循环为当前线程的事件循环
+
+        try:
+            result = loop.run_until_complete(self.task_func(*self.args, **self.kwargs))  # 执行协程
+            self.log_signal.emit(result)
+        except Exception as e:
+            self.log_signal.emit(f"任务执行失败: {str(e)}")
+        finally:
+            loop.close()
+            self.finished_signal.emit()
+
 
 
 class AppUI(QWidget):
     def __init__(self):
         super().__init__()
+        self.log_output = None
         self.adb_port_entry = None
         self.adb_path_entry = None
         self.logger = Logger()  # 全局 Logger 实例
@@ -74,7 +101,7 @@ class AppUI(QWidget):
         self.adb_path_entry.setText(config.get("adb_path", ""))
         self.adb_port_entry.setText(config.get("adb_port", ""))
 
-        connect_button = self.create_button("连接", self.connect)
+        connect_button = self.create_button("连接", self.adb_connect)
         adb_layout.addWidget(connect_button, alignment=Qt.AlignCenter)
 
         layout.addWidget(adb_group, alignment=Qt.AlignTop)
@@ -95,7 +122,7 @@ class AppUI(QWidget):
         scroll_area.setWidgetResizable(True)
         task_widget_layout = QVBoxLayout(task_widget)
 
-        tasks = load_tasks_from_pipeline("../assets/resource/base/pipeline")
+        tasks = load_config_tasks()
         for task_name in tasks:
             checkbox = QCheckBox(task_name)
             task_widget_layout.addWidget(checkbox)
@@ -103,10 +130,12 @@ class AppUI(QWidget):
 
         task_layout.addWidget(scroll_area)
         layout.addWidget(task_group)
+        self.task_running = False
 
-        execute_button = self.create_button("执行", lambda: start_async_task(self.execute_selected_options()))
-        layout.addWidget(execute_button, alignment=Qt.AlignCenter)
-
+        # 将 execute_button 赋值给 self.execute_button
+        self.execute_button = self.create_button("执行", self.on_execute_button_clicked)
+        layout.addWidget(self.execute_button, alignment=Qt.AlignCenter)
+        
         frame.setLayout(layout)
         return frame
 
@@ -140,7 +169,7 @@ class AppUI(QWidget):
         button.clicked.connect(callback)
         return button
 
-    def connect(self):
+    def adb_connect(self):
         adb_path = self.adb_path_entry.text()
         adb_port = self.adb_port_entry.text()
 
@@ -148,36 +177,76 @@ class AppUI(QWidget):
         self.logger.add_log(f"ADB端口: {adb_port}")
         self.logger.add_log("正在连接...")
 
-        # 使用线程启动异步任务
-        threading.Thread(target=self.run_async_task, args=(adb_path, adb_port)).start()
+        self.adb_worker = Worker(self.run_adb_task, adb_path, adb_port)
+        self.adb_worker.log_signal.connect(self.logger.add_log)
+        self.adb_worker.finished_signal.connect(self.on_adb_task_finished)
+        self.adb_worker.start()
 
-    def run_async_task(self, adb_path, adb_port):
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        loop.run_until_complete(TaskManager.main(adb_path, adb_port))
+    async def run_adb_task(self, adb_path, adb_port):
+        try:
+            await TaskManager.main(adb_path, adb_port)  # 运行协程
+            return "ADB 连接成功"
+        except Exception as e:
+            return f"ADB 连接失败: {str(e)}"
 
-    async def execute_selected_options(self):
+
+    def on_adb_task_finished(self):
+        self.logger.add_log("ADB 任务结束")
+
+
+    async def run_async_task(self, adb_path, adb_port):
+        try:
+            await TaskManager.main(adb_path, adb_port)
+            self.logger.add_log("ADB 连接成功")
+        except Exception as e:
+            self.logger.add_log(f"ADB 连接失败: {str(e)}")
+
+    def on_execute_button_clicked(self):
+        if not self.task_running:
+            self.task_running = True
+            self.execute_button.setText("停止")
+
+            self.task_worker = Worker(self.run_task_worker)
+            self.task_worker.log_signal.connect(self.logger.add_log)
+            self.task_worker.finished_signal.connect(self.on_task_finished)
+            self.task_worker.start()
+        else:
+            self.task_running = False
+            self.task_worker = Worker(self.stop_task_worker)
+            self.task_worker.log_signal.connect(self.logger.add_log)
+            self.task_worker.finished_signal.connect(self.on_task_finished)
+            self.task_worker.start()
+            self.logger.add_log("任务已停止")
+            self.execute_button.setText("执行")
+
+    async def run_task_worker(self):
         selected_tasks = [task for task, checkbox in self.checkbox_vars.items() if checkbox.isChecked()]
 
         if not selected_tasks:
-            self.logger.add_log("未选择任何任务")
-            return
+            return "未选择任何任务"
+
+        instance = await MaaInstanceSingleton.get_instance(None, None)  # 异步获取实例
 
         for task in selected_tasks:
-            instance = await MaaInstanceSingleton.get_instance(None, None)
-            instance.post_task(task)
-            self.logger.add_log(f"执行任务: {task}")
+            if not self.task_running:
+                break
+            await instance.run_task(get_task_entry(task))  # 异步运行任务
+
+        return "任务执行完成"
+
+    async def stop_task_worker(self):
+        
+        print("stop_task_worker")
+        instance = await MaaInstanceSingleton.get_instance(None, None)  # 异步获取实例
+        await instance.stop()
+
+        return "任务执行完成"
 
 
-def start_async_task(task):
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = QEventLoop()
-        asyncio.set_event_loop(loop)
+    def on_task_finished(self):
+        self.task_running = False
+        self.execute_button.setText("执行")
+        self.logger.add_log("所有任务执行完成")
 
-    if loop.is_running():
-        asyncio.ensure_future(task)
-    else:
-        loop.run_until_complete(task)
 
+    

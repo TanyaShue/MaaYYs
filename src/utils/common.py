@@ -1,11 +1,10 @@
 import pandas as pd
 import difflib
-
 import os
 import json
 
-
 from typing import Tuple, List
+
 
 def is_inside(big_rect: Tuple[int, int, int, int], small_rect: Tuple[int, int, int, int]) -> bool:
     """
@@ -28,6 +27,7 @@ def is_inside(big_rect: Tuple[int, int, int, int], small_rect: Tuple[int, int, i
             small_y >= big_y and 
             small_x2 <= big_x2 and 
             small_y2 <= big_y2)
+
 
 def check_if_rect_is_inside_any(rectangles: List[Tuple[int, int, int, int]], rect_to_check: Tuple[int, int, int, int]) -> Tuple[bool, Tuple[int, int, int, int]]:
     """
@@ -73,7 +73,6 @@ def find_best_answer(question, qa_dict):
 
     # 返回匹配结果或提示信息
     return qa_dict[best_match[0]] if best_match else "未找到匹配的答案"
-
 
 
 def load_tasks_from_pipeline(directory):

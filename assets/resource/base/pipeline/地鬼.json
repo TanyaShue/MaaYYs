@@ -1,5 +1,8 @@
 {
-  "点击探索": {
+  "自动地鬼": {
+    "next": ["地鬼_点击探索"]
+  },
+  "地鬼_点击探索": {
     "recognition": "TemplateMatch",
     "action": "Click",
     "template": "探索.png",

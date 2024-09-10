@@ -3,9 +3,10 @@ import traceback
 from maa.resource import Resource
 from maa.controller import AdbController
 from maa.instance import Instance
-from maa.toolkit import Toolkit, AdbDevice
+from maa.toolkit import Toolkit
 from custom_decorators.loader import load_custom_actions, load_custom_recognizers, action_registry, recognizer_registry
 from utils.logger import Logger  # 导入全局 Logger 单例
+from contextlib import asynccontextmanager
 
 
 class MaaInstanceSingleton:
@@ -31,9 +32,9 @@ class TaskManager:
         logger = Logger()  # 获取全局 Logger 实例
         async with log_task(logger, "Maa框架初始化"):
             try:
-                Toolkit.init_option("../")
+                Toolkit.init_option("assets/config")
                 resource = Resource()
-                await resource.load("../assets/resource/base")
+                await resource.load("assets/resource/base")
 
                 # 初始化设备并连接
                 controller = AdbController(adb_path=adb_path, address=adb_port)
@@ -44,26 +45,27 @@ class TaskManager:
                 MaaInstanceSingleton._resource = resource
 
                 maa_inst = await MaaInstanceSingleton.get_instance(resource, controller)
+                
+                                # 注册自定义 action 和 recognizer
+                load_custom_actions("src/custom_actions")
+                for action_name, action_instance in action_registry.items():
+                    maa_inst.register_action(action_name, action_instance)
+
+                load_custom_recognizers("src/custom_recognizer")
+                for recognizer_name, recognizer_instance in recognizer_registry.items():
+                    maa_inst.register_recognizer(recognizer_name, recognizer_instance)
+                
 
                 if not maa_inst.inited:
                     logger.add_log_thread_safe("MAA框架初始化失败")
                     return
 
-                # 注册自定义 action 和 recognizer
-                load_custom_actions("custom_actions")
-                for action_name, action_instance in action_registry.items():
-                    maa_inst.register_action(action_name, action_instance)
 
-                load_custom_recognizers("custom_recognizer")
-                for recognizer_name, recognizer_instance in recognizer_registry.items():
-                    maa_inst.register_recognizer(recognizer_name, recognizer_instance)
 
             except Exception as e:
                 logger.add_log_thread_safe(e)
                 logger.add_log_thread_safe(f"程序执行过程中发生错误: {traceback.format_exc()}")
 
-
-from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def log_task(logger, task_name):
