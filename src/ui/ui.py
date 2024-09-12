@@ -1,16 +1,12 @@
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit,
                                 QFrame, QScrollArea, QCheckBox, QLabel, QLineEdit, QSplitter, QTabWidget, QGroupBox)
-from PySide6.QtCore import Qt
-from qasync import QEventLoop
+from PySide6.QtCore import Qt,QThread, Signal
 from utils.config import load_default_config, load_config_tasks, get_task_entry  # 导入配置模块
 from utils.logger import Logger  # 导入全局 Logger 单例
 from tasks import TaskManager, MaaInstanceSingleton
 
-  # 引入 qasync
 import asyncio
-import threading
 
-from PySide6.QtCore import QThread, Signal
 
 class Worker(QThread):
     log_signal = Signal(str)  # 用于发出日志消息的信号

@@ -1,0 +1,10 @@
+{
+    "自动御灵":{
+        "next":"御灵_点击探索"
+    },
+    "御灵_点击探索":{
+        "recognition":"TemplateMatch",
+        "action":"Click",
+        "template":"探索.png"
+    }
+}

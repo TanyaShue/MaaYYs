@@ -7,7 +7,8 @@ from maa.toolkit import Toolkit
 from custom_decorators.loader import load_custom_actions, load_custom_recognizers, action_registry, recognizer_registry
 from utils.logger import Logger  # 导入全局 Logger 单例
 from contextlib import asynccontextmanager
-
+import os
+from maa.library import Library
 
 class MaaInstanceSingleton:
     _instance: Instance = None
@@ -32,12 +33,12 @@ class TaskManager:
         logger = Logger()  # 获取全局 Logger 实例
         async with log_task(logger, "Maa框架初始化"):
             try:
-                Toolkit.init_option("assets/config")
+                Toolkit.init_option("assets")
                 resource = Resource()
                 await resource.load("assets/resource/base")
 
                 # 初始化设备并连接
-                controller = AdbController(adb_path=adb_path, address=adb_port)
+                controller = AdbController(adb_path=adb_path, address=adb_port) 
                 await controller.connect()
 
                 # 保存资源和控制器到单例中
@@ -63,6 +64,8 @@ class TaskManager:
 
 
             except Exception as e:
+                print("程序执行过程中发生错误: ", e)
+                print(f"程序执行过程中发生错误: {traceback.format_exc()}")
                 logger.add_log_thread_safe(e)
                 logger.add_log_thread_safe(f"程序执行过程中发生错误: {traceback.format_exc()}")
 

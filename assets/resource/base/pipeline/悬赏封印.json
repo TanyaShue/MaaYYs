@@ -1,0 +1,18 @@
+{
+
+    "自动悬赏封印": {
+        "next": "悬赏封印"
+    },
+    "悬赏封印": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "template": "悬赏封印.png",
+        "roi": [
+            7,
+            264,
+            1134,
+            82
+          ],
+        "post_delay":2000
+    }
+}

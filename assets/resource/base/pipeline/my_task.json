@@ -1,19 +1,16 @@
 {
   "打开游戏": {
     "next": [
-      "打开游戏加速",
-      "回到主页",
       "打开阴阳师"
     ]
   },
   "打开加速器": {
-    "recognition": "OCR",
-    "action": "Click",
+    "action": "StartApp",
     "next": [
       "打开游戏加速",
       "回到主页"
     ],
-    "expected": "ClashforAndroid"
+    "package": "com.github.kr328.clash/.MainActivity"
   },
   "打开游戏加速": {
     "recognition": "OCR",
@@ -23,7 +20,6 @@
   },
   "回到主页": {
     "action": "key",
-    "next": "打开阴阳师",
     "key": 3
   },
   "打开阴阳师": {
