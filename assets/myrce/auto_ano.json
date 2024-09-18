@@ -1,0 +1,41 @@
+{
+    "自动答题":{
+        "next":[
+            "点击匹配"
+        ]
+    },
+    "点击匹配":{
+        "is_sub":true,
+        "action":"Click",
+        "target" : [1131,586,103,75],
+        "next":[
+            "随机等会儿"
+        ]
+    },
+    "随机等会儿":{
+        "recognition":"DirectHit",
+        "action":"Custom",
+        "custom_action":"RandomWait",
+        "next":[
+            "识别题目"
+        ]
+    },
+    "识别题目":{
+        "is_sub":true,
+        "recognition":"OCR",
+        "expected":".*",
+        "action":"Custom",
+        "inverse":false,
+        "custom_action":"FindAnswer",
+        "order_by":"Vertical",
+        "roi": [911,37,306,65],
+        "next":[
+            "答案1"
+        ]
+    },
+    "答案1":{
+        "recognition":"Custom",
+        "custom_recognition":"MyRecognizer",
+        "action":"Click"
+    }
+}

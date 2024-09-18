@@ -1,0 +1,32 @@
+{
+    "点击探查":{
+        "recognition":"TemplateMatch",
+        "template":"探查.png",
+        "action":"Custom",
+        "custom_action":"RandomTouch",
+        "post_delay":100,
+        "custom_action_param":{
+            "hellow":123
+        },
+        "next":[
+            "随机等会儿"
+        ]
+    },
+    "点击屏幕继续":{
+        "is_sub":true,
+        "recognition":"OCR",
+        "expected":"点击屏幕继续",
+        "action": "Click",
+        "target":[0, 0, 1920, 1080],
+        "pre_wait_freezes":100,
+        "next":[
+            "随机等会儿"
+        ]
+    },
+    "自动探查":{
+        "next":[
+            "点击探查",
+            "点击屏幕继续"
+        ]
+    }
+}
