@@ -11,7 +11,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('设备管理')
-        self.setMinimumSize(800, 600)  # 设置窗口最小大小
+        self.setMinimumSize(1000, 720)  # 设置窗口最小大小
 
         # 加载JSON数据
         self.load_json_data()
@@ -36,7 +36,7 @@ class MainWindow(QWidget):
         # 添加保存按钮
         self.save_button = QPushButton("保存更改")
         self.save_button.clicked.connect(self.save_json_data)  # 点击保存 JSON
-        self.main_layout.addWidget(self.save_button)
+        # self.main_layout.addWidget(self.save_button)
 
 
         self.setLayout(self.main_layout)
@@ -65,7 +65,7 @@ class MainWindow(QWidget):
 
     def init_navigation_bar(self):
         """动态创建左侧导航栏按钮"""
-        nav_buttons = ['首页'] + list(self.data['task_projects'].keys())
+        nav_buttons = ['首页'] + list([program['program_name'] for program in self.data['programs']])
         for btn_text in nav_buttons:
             button = QPushButton(btn_text)
             button.setFixedHeight(50)  # 固定按钮高度
@@ -93,7 +93,6 @@ class MainWindow(QWidget):
 
         # 初始化分割器
         self.init_splitter()
-
         self.main_layout.addLayout(self.right_layout)
 
     def load_device_table(self):
@@ -107,10 +106,34 @@ class MainWindow(QWidget):
             self.table.setItem(row, 3, QTableWidgetItem(project['adb_config']['adb_port']))
             self.table.setItem(row, 4, QTableWidgetItem('正在执行'))
 
+
+            # 创建一个 QWidget 容器
+            container_widget = QWidget()
+
+            # 创建水平布局
+            layout = QHBoxLayout()
+            layout.setContentsMargins(0, 0, 0, 0)  # 设置布局的边距为 0，这样按钮会紧贴单元格边界
+
+            # 添加执行按钮
+            button_run = QPushButton('运行')
+            button_run.clicked.connect(lambda _, p=project_key: self.show_device_details(p))  # 绑定事件并传递设备信息
+            layout.addWidget(button_run)
+
             # 添加操作按钮
-            button = QPushButton('查看详情')
-            button.clicked.connect(lambda _, p=project_key: self.show_device_details(p))  # 绑定事件并传递设备信息
-            self.table.setCellWidget(row, 5, button)
+            button_info = QPushButton('查看详情')
+            button_info.clicked.connect(lambda _, p=project_key: self.show_device_details(p))  # 绑定事件并传递设备信息
+            layout.addWidget(button_info)
+
+            save_button = QPushButton("保存更改")
+            save_button.clicked.connect(self.save_json_data)  # 点击保存 JSON
+            layout.addWidget(save_button)
+
+
+            # 将布局设置到容器中
+            container_widget.setLayout(layout)
+
+            # 将容器 widget 设置到表格单元格中
+            self.table.setCellWidget(row, 5, container_widget)
 
     def clear_right_layout(self):
         """清空右侧布局中的内容"""
@@ -145,7 +168,7 @@ class MainWindow(QWidget):
 
         # 设置初始大小比例：任务选择 30%，任务设置 40%，日志输出 30%
         self.splitter.setSizes([300, 400, 300])
-
+        self.splitter.setFixedHeight(400)
         self.right_layout.addWidget(self.splitter)
 
     def show_device_details(self, project_key):
@@ -175,6 +198,7 @@ class MainWindow(QWidget):
             # 添加复选框
             checkbox = QCheckBox(task['task_name'])
             checkbox.setChecked(is_selected)  # 根据 selected_tasks 设置选中状态
+            checkbox.stateChanged.connect(lambda state, t=task: self.task_checkbox_changed(project_key, t, state))
 
             # 这里的 `t=task` 将每个 task 绑定到当前循环的值，避免 lambda 闭包问题
             checkbox.stateChanged.connect(lambda state, t=task: self.update_task_selection(project_key, t, state))
@@ -193,6 +217,14 @@ class MainWindow(QWidget):
         if project['selected_tasks']:
             self.set_task_parameters(project_key, project['selected_tasks'][0])
 
+    def task_checkbox_changed(self, project_key, task, state):
+
+        # print(Qt.CheckState.Checked.value)
+        """处理复选框状态更改"""
+        print(f"任务 '{task['task_name']}' 被 {'选择' if state == Qt.CheckState.Checked.value else '取消选择'}")
+
+        # 更新项目中的任务选择状态
+        self.update_task_selection(project_key, task, state)
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""
         for i in reversed(range(layout.count())):
@@ -214,12 +246,12 @@ class MainWindow(QWidget):
         selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
 
         if selected_task:
-            selected_task['is_selected'] = state == Qt.Checked
+            selected_task['is_selected'] = state == Qt.CheckState.Checked.value
         else:
             # 如果该任务不在 selected_tasks 中，则添加
             new_task = {
                 'task_name': task['task_name'],
-                'is_selected': state == Qt.Checked,
+                'is_selected': state == Qt.CheckState.Checked.value,
                 'task_parameters': task['parameters']
             }
             project['selected_tasks'].append(new_task)

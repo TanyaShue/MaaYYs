@@ -62,7 +62,7 @@
             "selected_tasks": [
                 {
                     "task_name": "自动地鬼",
-                    "is_selected": true,
+                    "is_selected": false,
                     "task_parameters": {
                         "param1": "param1: 参数一",
                         "param2": "hellow"
@@ -77,7 +77,7 @@
                 },
                 {
                     "task_name": "自动999",
-                    "is_selected": false,
+                    "is_selected": true,
                     "task_parameters": {
                         "param1": "自动999---1",
                         "param2": "自动999---2"
@@ -85,10 +85,17 @@
                 },
                 {
                     "task_name": "打开游戏",
-                    "is_selected": false,
+                    "is_selected": true,
                     "task_parameters": {
                         "param1": "value1",
                         "param2": "value2"
+                    }
+                },
+                {
+                    "task_name": "启动加速器",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "value1"
                     }
                 }
             ]
@@ -106,6 +113,14 @@
                     "task_parameters": {
                         "param1": "custom_value1",
                         "param3": "custom_value3"
+                    }
+                },
+                {
+                    "task_name": "自动地鬼",
+                    "is_selected": true,
+                    "task_parameters": {
+                        "param1": "value1",
+                        "param2": "value2"
                     }
                 }
             ]
