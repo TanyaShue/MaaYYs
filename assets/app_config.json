@@ -26,8 +26,8 @@
                 {
                     "task_name": "自动999",
                     "parameters": {
-                        "param1": "value1",
-                        "param2": "value2"
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
                     }
                 }
             ]
@@ -61,8 +61,8 @@
             },
             "selected_tasks": [
                 {
-                    "task_name": "任务1",
-                    "is_selected": false,
+                    "task_name": "自动地鬼",
+                    "is_selected": true,
                     "task_parameters": {
                         "param1": "param1: 参数一",
                         "param2": "hellow"
@@ -74,18 +74,34 @@
                     "task_parameters": {
                         "测试测试": "哈哈哈哈哈"
                     }
+                },
+                {
+                    "task_name": "自动999",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
+                    }
+                },
+                {
+                    "task_name": "打开游戏",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "value1",
+                        "param2": "value2"
+                    }
                 }
             ]
         },
         "阴阳师2": {
-            "program_name": "程序2",
+            "program_name": "阴阳师",
             "adb_config": {
                 "adb_address": "127.0.0.1",
                 "adb_port": "5555"
             },
             "selected_tasks": [
                 {
-                    "task_name": "任务3",
+                    "task_name": "打开游戏",
                     "is_selected": true,
                     "task_parameters": {
                         "param1": "custom_value1",

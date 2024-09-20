@@ -4,12 +4,13 @@ from PySide6.QtWidgets import (
     QPushButton, QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter
 )
 from PySide6.QtCore import Qt
+from PySide6.scripts.pyside_tool import project
 
 
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('MaaGui')
+        self.setWindowTitle('设备管理')
         self.setMinimumSize(800, 600)  # 设置窗口最小大小
 
         # 加载JSON数据
@@ -37,7 +38,19 @@ class MainWindow(QWidget):
         self.save_button.clicked.connect(self.save_json_data)  # 点击保存 JSON
         self.main_layout.addWidget(self.save_button)
 
+
         self.setLayout(self.main_layout)
+
+    # 添加 run_selected_tasks 方法
+    def run_selected_tasks(self):
+        """打印所有选择的任务"""
+        selected_tasks = []
+        for project_key, project in self.data['task_projects'].items():
+            for task in project['selected_tasks']:
+                if task['is_selected']:
+                    selected_tasks.append(task['task_name'])
+
+        print("选中的任务:", selected_tasks)
 
     def load_json_data(self):
         """从文件加载 JSON 数据"""
@@ -72,13 +85,13 @@ class MainWindow(QWidget):
 
         # 创建设备表格
         self.table = QTableWidget(0, 6)  # 初始化为空
-        self.table.setHorizontalHeaderLabels(['名称', '自动化程序名称', 'adb地址', 'adb端口', '运行状态', '操作'])
+        self.table.setHorizontalHeaderLabels(['任务名称', '游戏名称', 'adb地址', 'adb端口', '运行状态', '操作'])
         self.right_layout.addWidget(self.table)
 
         # 动态填充设备表格
         self.load_device_table()
 
-        # 设置详细信息的最小高度
+        # 初始化分割器
         self.init_splitter()
 
         self.main_layout.addLayout(self.right_layout)
@@ -137,54 +150,81 @@ class MainWindow(QWidget):
 
     def show_device_details(self, project_key):
         """展示设备详情"""
+        project = self.data['task_projects'][project_key]
+        # print(project)
+        # 通过 program_name 找到对应的 program
+        program_name = project['program_name']
+        program = next((p for p in self.data['programs'] if p['program_name'] == program_name), None)
 
+        if not program:
+            return
         task_selection_group = self.splitter.widget(0)
         task_selection_layout = task_selection_group.layout()
 
         # 清空之前的任务选择
         self.clear_layout(task_selection_layout)
 
-        """在下方展示设备详情"""
-        project = self.data['task_projects'][project_key]
-
         # 创建新的任务选择部分
-        for task in project['selected_tasks']:
+        for task in program['tasks']:
             task_row = QHBoxLayout()
+
+            # 检查任务是否在 selected_tasks 中
+            selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
+            is_selected = selected_task is not None and selected_task['is_selected']
 
             # 添加复选框
             checkbox = QCheckBox(task['task_name'])
-            checkbox.setChecked(task['is_selected'])  # 根据JSON数据设置选中状态
+            checkbox.setChecked(is_selected)  # 根据 selected_tasks 设置选中状态
 
             # 这里的 `t=task` 将每个 task 绑定到当前循环的值，避免 lambda 闭包问题
-            checkbox.stateChanged.connect(lambda state, t=task: self.update_task_selection(t, state))
+            checkbox.stateChanged.connect(lambda state, t=task: self.update_task_selection(project_key, t, state))
             task_row.addWidget(checkbox)
 
             # 添加设置按钮
             set_button = QPushButton('设置')
 
             # 同样，确保 `t=task` 绑定当前 task
-            set_button.clicked.connect(lambda _, t=task: self.set_task_parameters(t))
+            set_button.clicked.connect(lambda _, t=task: self.set_task_parameters(project_key, t))
             task_row.addWidget(set_button)
 
             task_selection_layout.addLayout(task_row)
 
         # 处理任务设置，显示第一个任务的参数
         if project['selected_tasks']:
-            self.set_task_parameters(project['selected_tasks'][0])
+            self.set_task_parameters(project_key, project['selected_tasks'][0])
 
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""
-        while layout.count():
-            item = layout.takeAt(0)
-            widget = item.widget()
-            if widget is not None:
-                widget.deleteLater()
+        for i in reversed(range(layout.count())):
+            item = layout.itemAt(i)
+            if item is not None:
+                widget = item.widget()
+                if widget is not None:
+                    widget.deleteLater()
+                else:
+                    # 如果是布局项，递归清空其子布局
+                    sub_layout = item.layout()
+                    if sub_layout is not None:
+                        self.clear_layout(sub_layout)  # 递归调用
+        layout.update()  # 更新布局
 
-    def update_task_selection(self, task, state):
+    def update_task_selection(self, project_key, task, state):
         """更新任务选择状态"""
-        task['is_selected'] = state == Qt.Checked
+        project = self.data['task_projects'][project_key]
+        selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
 
-    def set_task_parameters(self, task):
+        if selected_task:
+            selected_task['is_selected'] = state == Qt.Checked
+        else:
+            # 如果该任务不在 selected_tasks 中，则添加
+            new_task = {
+                'task_name': task['task_name'],
+                'is_selected': state == Qt.Checked,
+                'task_parameters': task['parameters']
+            }
+            project['selected_tasks'].append(new_task)
+
+    def set_task_parameters(self, project_key, task):
         """设置任务参数"""
         task_settings_group = self.splitter.widget(1)
         task_settings_layout = task_settings_group.layout()
@@ -192,16 +232,43 @@ class MainWindow(QWidget):
         # 清空任务参数
         self.clear_layout(task_settings_layout)
 
+        project = self.data['task_projects'][project_key]
+        program_name = project['program_name']
+
+        # 获取程序对应的任务
+        program = next((p for p in self.data['programs'] if p['program_name'] == program_name), None)
+
+        if not program:
+            return
+
+        # 查找选中的任务
+        selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
+
+        if selected_task:
+            parameters = selected_task['task_parameters']
+        else:
+            # 如果没有选中的任务，则使用默认参数
+            default_task = next((t for t in program['tasks'] if t['task_name'] == task['task_name']), None)
+            parameters = default_task['parameters'] if default_task else {}
+
         # 动态生成任务参数输入框
-        for param_name, param_value in task['task_parameters'].items():
-            line_edit = QLineEdit(f"{param_name}: {param_value}")
-            line_edit.textChanged.connect(lambda value, t=task, p=param_name: self.update_task_parameter(t, p, value))
-            task_settings_layout.addWidget(line_edit)
+        for param_name, param_value in parameters.items():
+            param_layout = QHBoxLayout()
+            label = QLabel(param_name)
+            line_edit = QLineEdit(str(param_value))
+            line_edit.textChanged.connect(
+                lambda value, p=param_name: self.update_task_param(project_key, task, p, value))
+            param_layout.addWidget(label)
+            param_layout.addWidget(line_edit)
+            task_settings_layout.addLayout(param_layout)
 
-    def update_task_parameter(self, task, param_name, value):
-        """更新 JSON 中的任务参数"""
-        task['task_parameters'][param_name] = value
+    def update_task_param(self, project_key, task, param_name, value):
+        """更新任务参数"""
+        project = self.data['task_projects'][project_key]
+        selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
 
+        if selected_task:
+            selected_task['task_parameters'][param_name] = value
     def handle_nav_click(self):
         """处理左侧导航栏按钮点击事件"""
         button = self.sender()
@@ -212,9 +279,10 @@ class MainWindow(QWidget):
         else:
             self.show_device_details(page_name)
 
-
 if __name__ == '__main__':
     app = QApplication([])
+
     window = MainWindow()
     window.show()
+
     app.exec()
