@@ -1,98 +1,98 @@
 {
-  "programs": [
-    {
-      "program_name": "阴阳师",
-      "tasks": [
+    "programs": [
         {
-          "task_name": "启动加速器",
-          "parameters": {
-            "param1": "value1"
-          }
+            "program_name": "阴阳师",
+            "tasks": [
+                {
+                    "task_name": "启动加速器",
+                    "parameters": {
+                        "param1": "value1"
+                    }
+                },
+                {
+                    "task_name": "打开游戏",
+                    "parameters": {
+                        "param1": "value1",
+                        "param2": "value2"
+                    }
+                },
+                {
+                    "task_name": "自动地鬼",
+                    "parameters": {
+                        "param1": "value1",
+                        "param2": "value2"
+                    }
+                },
+                {
+                    "task_name": "自动999",
+                    "parameters": {
+                        "param1": "value1",
+                        "param2": "value2"
+                    }
+                }
+            ]
         },
         {
-          "task_name": "打开游戏",
-          "parameters": {
-            "param1": "value1",
-            "param2": "value2"
-          }
-        },
-        {
-          "task_name": "自动地鬼",
-          "parameters": {
-            "param1": "value1",
-            "param2": "value2"
-          }
-        },
-        {
-          "task_name": "自动999",
-          "parameters": {
-            "param1": "value1",
-            "param2": "value2"
-          }
+            "program_name": "明日方舟",
+            "tasks": [
+                {
+                    "task_name": "任务1",
+                    "parameters": {
+                        "param1": "value1",
+                        "param2": "value2"
+                    }
+                },
+                {
+                    "task_name": "任务3",
+                    "parameters": {
+                        "param1": "value1",
+                        "param3": "value3"
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "program_name": "明日方舟",
-      "tasks": [
-        {
-          "task_name": "任务1",
-          "parameters": {
-            "param1": "value1",
-            "param2": "value2"
-          }
+    ],
+    "task_projects": {
+        "阴阳师1": {
+            "program_name": "阴阳师",
+            "adb_config": {
+                "adb_address": "127.0.0.1",
+                "adb_port": "5037"
+            },
+            "selected_tasks": [
+                {
+                    "task_name": "任务1",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "param1: 参数一",
+                        "param2": "hellow"
+                    }
+                },
+                {
+                    "task_name": "任务2",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "测试测试": "哈哈哈哈哈"
+                    }
+                }
+            ]
         },
-        {
-          "task_name": "任务3",
-          "parameters": {
-            "param1": "value1",
-            "param3": "value3"
-          }
+        "阴阳师2": {
+            "program_name": "程序2",
+            "adb_config": {
+                "adb_address": "127.0.0.1",
+                "adb_port": "5555"
+            },
+            "selected_tasks": [
+                {
+                    "task_name": "任务3",
+                    "is_selected": true,
+                    "task_parameters": {
+                        "param1": "custom_value1",
+                        "param3": "custom_value3"
+                    }
+                }
+            ]
         }
-      ]
     }
-  ],
-  "task_projects": [
-    {
-      "project_name": "项目1",
-      "program_name": "阴阳师",
-      "adb_config": {
-        "adb_address": "127.0.0.1",
-        "adb_port": "5037"
-      },
-      "selected_tasks": [
-        {
-          "task_name": "任务1",
-          "is_selected": true,
-          "task_parameters": {
-            "param1": "custom_value1",
-            "param2": "custom_value2"
-          }
-        },
-        {
-          "task_name": "任务2",
-          "is_selected": false,
-          "task_parameters": {}
-        }
-      ]
-    },
-    {
-      "project_name": "项目2",
-      "program_name": "程序2",
-      "adb_config": {
-        "adb_address": "192.168.0.101",
-        "adb_port": "5555"
-      },
-      "selected_tasks": [
-        {
-          "task_name": "任务3",
-          "is_selected": true,
-          "task_parameters": {
-            "param1": "custom_value1",
-            "param3": "custom_value3"
-          }
-        }
-      ]
-    }
-  ]
 }
