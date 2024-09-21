@@ -1,20 +1,18 @@
-import ctypes
+from PySide6.QtWidgets import QApplication, QWidget, QGridLayout, QPushButton, QStyle
 
-from maa.library import Library
+class IconWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        layout = QGridLayout()
+        icons = sorted([attr for attr in dir(QStyle) if attr.startswith("SP_")])
+        for i, icon_name in enumerate(icons):
+            button = QPushButton(icon_name)
+            icon = self.style().standardIcon(getattr(QStyle, icon_name))
+            button.setIcon(icon)
+            layout.addWidget(button, i // 4, i % 4)
+        self.setLayout(layout)
 
-
-try:
-    Library.framework_libpath=r"D:\DeveEnvironment\Program\Anaconda\envs\maafwtest\Lib\site-packages\maa\bin\MaaFramework.dll"
-
-    Library.framework = ctypes.WinDLL(str(Library.framework_libpath))
-except OSError:
-    print("导入失败")
-
-from ui.test import MainWindow
-from PySide6.QtWidgets import QApplication
-
-if __name__ == '__main__':
-    app = QApplication([])
-    window = MainWindow()
-    window.show()
-    app.exec()
+app = QApplication([])
+window = IconWindow()
+window.show()
+app.exec()

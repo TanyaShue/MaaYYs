@@ -1,21 +1,40 @@
 import json
+
+
+from maa.library import Library
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGroupBox,
-    QPushButton, QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter
+    QPushButton, QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QStyle
 )
-from PySide6.QtCore import Qt
-from PySide6.scripts.pyside_tool import project
+from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
+
+from concurrent.futures import ThreadPoolExecutor
+
+# 定义任务类，继承QRunnable
+class TaskWorker(QRunnable):
+    def __init__(self, fn, *args, **kwargs):
+        super(TaskWorker, self).__init__()
+        self.fn = fn
+        self.args = args
+        self.kwargs = kwargs
+
+    @Slot()  # 这表示run函数将在线程中运行
+    def run(self):
+        """执行任务"""
+        self.fn(*self.args, **self.kwargs)
 
 
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('设备管理')
+        self.setWindowTitle('MaaYYs')
         self.setMinimumSize(1000, 720)  # 设置窗口最小大小
 
         # 加载JSON数据
         self.load_json_data()
-
+        # 创建线程池
+        self.thread_pool = QThreadPool()
         # 创建主布局
         self.main_layout = QHBoxLayout(self)
 
@@ -71,7 +90,7 @@ class MainWindow(QWidget):
             button.setFixedHeight(50)  # 固定按钮高度
             button.setFixedWidth(100)
             self.left_nav_layout.addWidget(button)
-            button.clicked.connect(self.handle_nav_click)  # 添加点击事件
+            # button.clicked.connect(self.handle_nav_click)  # 添加点击事件
         self.left_nav_layout.addStretch()  # 增加伸缩空间，让按钮靠上排列
 
     def init_home_page(self):
@@ -86,10 +105,16 @@ class MainWindow(QWidget):
         # 创建设备表格
         self.table = QTableWidget(0, 6)  # 初始化为空
         self.table.setHorizontalHeaderLabels(['任务名称', '游戏名称', 'adb地址', 'adb端口', '运行状态', '操作'])
-        self.right_layout.addWidget(self.table)
+
+        # 添加表格到布局，并设置为填充
+        self.right_layout.addWidget(self.table, 1)  # 设置 stretch 为 1
 
         # 动态填充设备表格
         self.load_device_table()
+
+        self.info_title = QLabel('详细信息')
+        self.info_title.setAlignment(Qt.AlignCenter)
+        self.right_layout.addWidget(self.info_title)
 
         # 初始化分割器
         self.init_splitter()
@@ -97,43 +122,63 @@ class MainWindow(QWidget):
 
     def load_device_table(self):
         """动态加载设备表格"""
+
+        # 设置表头样式
+        header = self.table.horizontalHeader()
+        header.setStyleSheet("QHeaderView::section { background-color: #4CAF50; color: white; padding: 4px; }")
+
         for project_key, project in self.data['task_projects'].items():
             row = self.table.rowCount()
             self.table.insertRow(row)
+
             self.table.setItem(row, 0, QTableWidgetItem(project_key))
             self.table.setItem(row, 1, QTableWidgetItem(project['program_name']))
             self.table.setItem(row, 2, QTableWidgetItem(project['adb_config']['adb_address']))
             self.table.setItem(row, 3, QTableWidgetItem(project['adb_config']['adb_port']))
             self.table.setItem(row, 4, QTableWidgetItem('正在执行'))
 
-
             # 创建一个 QWidget 容器
             container_widget = QWidget()
 
             # 创建水平布局
             layout = QHBoxLayout()
-            layout.setContentsMargins(0, 0, 0, 0)  # 设置布局的边距为 0，这样按钮会紧贴单元格边界
+            layout.setContentsMargins(5, 5, 5, 5)  # 设置布局的边距
+            layout.setSpacing(5)  # 设置按钮间距
 
             # 添加执行按钮
             button_run = QPushButton('运行')
-            button_run.clicked.connect(lambda _, p=project_key: self.show_device_details(p))  # 绑定事件并传递设备信息
+            button_run.setStyleSheet("background-color: #4CAF50; color: white; border: none; padding: 5px;")
+            button_run.clicked.connect(lambda _, p=project_key: self.run_task(p))  # 绑定事件并传递设备信息
             layout.addWidget(button_run)
 
             # 添加操作按钮
             button_info = QPushButton('查看详情')
+            button_info.setStyleSheet("background-color: #2196F3; color: white; border: none; padding: 5px;")
             button_info.clicked.connect(lambda _, p=project_key: self.show_device_details(p))  # 绑定事件并传递设备信息
             layout.addWidget(button_info)
 
             save_button = QPushButton("保存更改")
+            save_button.setStyleSheet("background-color: #FFC107; color: black; border: none; padding: 5px;")
             save_button.clicked.connect(self.save_json_data)  # 点击保存 JSON
             layout.addWidget(save_button)
-
 
             # 将布局设置到容器中
             container_widget.setLayout(layout)
 
             # 将容器 widget 设置到表格单元格中
             self.table.setCellWidget(row, 5, container_widget)
+
+            # 设置行高和列宽
+            self.table.setRowHeight(row, 50)
+            self.table.setColumnWidth(0, 150)
+            self.table.setColumnWidth(1, 200)
+            self.table.setColumnWidth(2, 150)
+            self.table.setColumnWidth(3, 100)
+            self.table.setColumnWidth(4, 120)
+            self.table.setColumnWidth(5, 180)
+
+        self.table.resizeColumnsToContents()
+        # self.table.setFont(QFont('Arial', 12))  # 设置统一字体
 
     def clear_right_layout(self):
         """清空右侧布局中的内容"""
@@ -171,7 +216,24 @@ class MainWindow(QWidget):
         self.splitter.setFixedHeight(400)
         self.right_layout.addWidget(self.splitter)
 
+
+    def run_task(self, project_key):
+        """点击按钮后运行任务，任务将被提交到线程池中"""
+        from src.core.core import task_manager_connect
+
+        # 创建一个 TaskWorker，并将任务提交到线程池执行
+        task = TaskWorker(task_manager_connect, project_key)
+        self.thread_pool.start(task)  # 在线程池中运行任务
+        # """点击按钮后运行任务"""
+        # # 创建任务并将任务提交到线程池中
+        # task = TaskWorker(task_manager_connect, "project_key_1")
+        # task.run()
+
+
+
     def show_device_details(self, project_key):
+        self.info_title.setText(f"详细信息:  {project_key}")
+
         """展示设备详情"""
         project = self.data['task_projects'][project_key]
         # print(project)
@@ -206,6 +268,8 @@ class MainWindow(QWidget):
 
             # 添加设置按钮
             set_button = QPushButton('设置')
+            # icon = app.style().standardIcon(QStyle.SP_ComputerIcon)
+            # set_button.setIcon(icon)
 
             # 同样，确保 `t=task` 绑定当前 task
             set_button.clicked.connect(lambda _, t=task: self.set_task_parameters(project_key, t))
