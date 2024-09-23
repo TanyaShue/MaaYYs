@@ -1,100 +1,77 @@
-
 from maa.context import Context
 from maa.resource import Resource
 from maa.controller import AdbController
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
-
-from maa.custom_recognizer import CustomRecognizer
+from maa.custom_recognition import CustomRecognition
 from maa.custom_action import CustomAction
 
+from src.config.config_models import TaskProject
 
-def task_manager_connect(p):
 
-    print(p)
-    user_path = "../assets"
-    Toolkit.init_option(user_path)
 
-    resource = Resource()
-    res_job = resource.post_path("../assets/resource/base")
-    res_job.wait()
+class TaskProjectManager:
+    def __init__(self):
+        # 用于存储 adb_address + adb_port 组合 和 tasker 的映射
+        self.tasker_cache = {}
 
-    adb_devices = Toolkit.find_adb_devices()
-    if not adb_devices:
-        print("No ADB device found.")
-        # exit()
+    def _get_project_key(self, p: TaskProject):
+        """
+        根据 adb_address 和 adb_port 生成唯一的缓存键。
+        """
+        adb_address = p.adb_config.get("adb_address")
+        adb_port = p.adb_config.get("adb_port")
+        project_key = f"{adb_address}:{adb_port}"
+        print(f"Generated project key: {project_key}")  # 增加调试日志
+        return project_key
 
-    # for demo, we just use the first device
-    device = adb_devices[0]
-    controller = AdbController(
-        adb_path=device.adb_path,
-        address=device.address,
-        screencap_methods=device.screencap_methods,
-        input_methods=device.input_methods,
-        config=device.config,
-    )
-    print(device)
-    controller.post_connection().wait()
+    def task_manager_connect(self, p: TaskProject):
+        # 生成唯一的缓存键
+        project_key = self._get_project_key(p)
 
-    tasker = Tasker()
-    tasker.bind(resource, controller)
+        if project_key in self.tasker_cache:
+            # 如果已经有该 adb_address + adb_port 对应的 tasker，直接返回
+            print(f"---- Returning cached Tasker instance for {project_key} ----")
+            return self.tasker_cache[project_key]
 
-    if not tasker.inited:
-        print("Failed to init MAA.")
-        exit()
+        user_path = "../assets"
+        Toolkit.init_option(user_path)
 
-    # resource.register_custom_recognizer("MyRec", MyRecognizer())
-    # resource.register_custom_action("MyAction", MyAction())
-    #
-    # task_detail = tasker.post_pipeline("StartUpAndClickButton").wait().get()
-    # # do something with task_detail
-    #
-    # task_detail = tasker.post_recognition("MySingleMatch").wait().get()
-    # # do something with task_detail
-    #
-    # details = tasker.post_pipeline("test_OCR_1").wait().get()
-    # print(details)
-    #
-    # detail=tasker.post_action("MyAction").wait().get()
-    # print(detail)
-    print(f"---- 初始化成功----{tasker}")
+        print(p.adb_config.get("adb_address"), p.adb_config.get("adb_port"))
+        resource = Resource()
+        res_job = resource.post_path("../assets/resource/base")
+        res_job.wait()
 
-#
-# class MyRecognizer(CustomRecognizer):
-#
-#     def analyze(
-#             self,
-#             context,
-#             argv: CustomRecognizer.AnalyzeArg,
-#     ) -> CustomRecognizer.AnalyzeResult:
-#         reco_detail = context.run_recognition(
-#             "MyCustomOCR",
-#             argv.image,
-#             pipeline_override={"MyCustomOCR": {"roi": [100, 100, 200, 300]}},
-#         )
-#
-#         # context is a reference, will override the pipeline for whole task
-#         context.override_pipeline({"MyCustomOCR": {"roi": [1, 1, 114, 514]}})
-#         # context.run_recognition ...
-#
-#         # make a new context to override the pipeline, only for itself
-#         new_context = context.clone()
-#         new_context.override_pipeline({"MyCustomOCR": {"roi": [100, 200, 300, 400]}})
-#         reco_detail = new_context.run_recognition("MyCustomOCR", argv.image)
-#
-#         click_job = context.tasker.controller.post_click(10, 20)
-#         click_job.wait()
-#
-#         context.override_next(argv.current_task_name, ["TaskA", "TaskB"])
-#
-#         return CustomRecognizer.AnalyzeResult(
-#             box=(0, 0, 100, 100), detail="Hello World!"
-#         )
-#
-#
-# class MyAction(CustomAction):
-#
-#     def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
-#         print("hellow")
-#         return CustomAction.RunResult(True)
+        if not p:
+            print("No ADB device found.")
+
+        controller = AdbController(
+            adb_path=p.adb_config.get("adb_address"),
+            address=p.adb_config.get("adb_port")
+        )
+        controller.post_connection().wait()
+        tasker = Tasker()
+        tasker.bind(resource, controller)
+
+        if not tasker.inited:
+            print("Failed to init MAA.")
+            exit()
+
+        # 缓存 tasker 实例
+        self.tasker_cache[project_key] = tasker
+        print(f"---- Cached new Tasker instance for {project_key} ----")
+
+        return tasker
+
+    def get_tasker(self, p: TaskProject):
+        """
+        通过 project 的 adb_address 和 adb_port 获取对应的 Tasker，
+        如果不存在则返回 None。
+        """
+        project_key = self._get_project_key(p)
+        print(f"Looking for Tasker instance in cache for {project_key}")  # 增加调试日志
+        return self.tasker_cache.get(project_key, None)
+
+
+
 

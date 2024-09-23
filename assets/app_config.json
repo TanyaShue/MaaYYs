@@ -12,6 +12,7 @@
                 },
                 {
                     "task_name": "打开游戏",
+                    "entry": "打开游戏",
                     "parameters": {
                         "param1": "value1",
                         "param2": "value2"
@@ -19,6 +20,7 @@
                 },
                 {
                     "task_name": "自动地鬼",
+                    "entry": null,
                     "parameters": {
                         "param1": "value1",
                         "param2": "value2"
@@ -26,6 +28,7 @@
                 },
                 {
                     "task_name": "自动999",
+                    "entry": null,
                     "parameters": {
                         "param1": "自动999---1",
                         "param2": "自动999---2"
@@ -38,6 +41,7 @@
             "tasks": [
                 {
                     "task_name": "任务1",
+                    "entry": null,
                     "parameters": {
                         "param1": "value1",
                         "param2": "value2"
@@ -45,6 +49,7 @@
                 },
                 {
                     "task_name": "任务3",
+                    "entry": null,
                     "parameters": {
                         "param1": "value1",
                         "param3": "value3"
@@ -57,8 +62,8 @@
         "阴阳师1": {
             "program_name": "阴阳师",
             "adb_config": {
-                "adb_address": "127.0.0.1",
-                "adb_port": "5037"
+                "adb_address": "C:/Program Files/BlueStacks_nxt/HD-Adb.exe",
+                "adb_port": "127.0.0.1:5555"
             },
             "selected_tasks": [
                 {
@@ -86,9 +91,9 @@
                 },
                 {
                     "task_name": "打开游戏",
-                    "is_selected": false,
+                    "is_selected": true,
                     "task_parameters": {
-                        "param1": "value1",
+                        "param1": "hellow",
                         "param2": "value2"
                     }
                 },
@@ -96,7 +101,7 @@
                     "task_name": "启动加速器",
                     "is_selected": true,
                     "task_parameters": {
-                        "param1": "value1"
+                        "param1": "value11111"
                     }
                 }
             ]
@@ -104,8 +109,8 @@
         "阴阳师2": {
             "program_name": "阴阳师",
             "adb_config": {
-                "adb_address": "127.0.0.1",
-                "adb_port": "5555"
+                "adb_address": "C:/Program Files/BlueStacks_nxt/HD-Adb.exe",
+                "adb_port": "127.0.0.1:5555"
             },
             "selected_tasks": [
                 {
@@ -133,7 +138,8 @@
                 },
                 {
                     "task_name": "自动999",
-                    "is_selected": false
+                    "is_selected": false,
+                    "task_parameters": {}
                 }
             ]
         }

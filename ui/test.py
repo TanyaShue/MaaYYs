@@ -1,13 +1,13 @@
-import json
 from maa.library import Library
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
-    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QSizePolicy
+    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QSizePolicy, QHeaderView
 )
 from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
+from src.config.config_models import Config, Task, Program, TaskProject, SelectedTask  # 确保根据你的实际路径引入 Config 类
 
-
+# 定义运行异步方法类
 class TaskWorker(QRunnable):
     def __init__(self, fn, *args, **kwargs):
         super(TaskWorker, self).__init__()
@@ -17,22 +17,26 @@ class TaskWorker(QRunnable):
 
     @Slot()
     def run(self):
+        # 正确的方式：调用 fn，并传递 self.args 和 self.kwargs
         self.fn(*self.args, **self.kwargs)
 
 
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('MaaYYs')
-        self.setMinimumSize(1000, 720)
 
-        self.load_json_data()
-
+        # 加载配置类
+        Config.json_path= '../assets/app_config.json'
+        self.config = Config.from_json()  # 直接加载配置类
         # 加载样式文件
         self.load_styles()
 
         # 创建线程池
         self.thread_pool = QThreadPool()
+
+        # 创建主窗口
+        self.setWindowTitle('MaaYYs')
+        self.setMinimumSize(1000, 720)
 
         # 创建主布局
         self.main_layout = QHBoxLayout(self)
@@ -55,23 +59,16 @@ class MainWindow(QWidget):
 
     def load_styles(self):
         """加载样式文件"""
-        with open('../ui/style.qss', 'r',encoding='utf-8') as f:
+        with open('style.qss', 'r', encoding='utf-8') as f:
             self.setStyleSheet(f.read())
 
-    def load_json_data(self):
-        """从文件加载 JSON 数据"""
-        with open('../assets/app_config.json', 'r', encoding='utf-8') as f:
-            self.data = json.load(f)
-
+    # 保存 Config 实例
     def save_json_data(self):
-        """保存 JSON 数据到文件"""
-        with open('../assets/app_config.json', 'w', encoding='utf-8') as f:
-            json.dump(self.data, f, ensure_ascii=False, indent=4)
-        print("数据已保存到 ../assets/app_config.json 文件")
+        Config.save_to_json(self.config)
 
     def init_navigation_bar(self):
         """动态创建左侧导航栏按钮"""
-        nav_buttons = ['首页'] + list([program['program_name'] for program in self.data['programs']])
+        nav_buttons = ['首页'] + [program.program_name for program in self.config.programs]
         for btn_text in nav_buttons:
             button = QPushButton(btn_text)
             button.setFixedHeight(50)
@@ -95,15 +92,28 @@ class MainWindow(QWidget):
         # 创建设备表格
         self.table = QTableWidget(0, 6)
         self.table.setHorizontalHeaderLabels(['任务名称', '游戏名称', 'adb地址', 'adb端口', '运行状态', '操作'])
-        self.table.horizontalHeader().setStyleSheet("QHeaderView::section { background-color: #34495e; color: white; }")
         self.right_layout.addWidget(self.table, 1)
         self.table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        # 设置列宽度自适应内容
+        header = self.table.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.Interactive)  # 使每列根据内容调整宽度
 
         # 动态填充设备表格
         self.load_device_table()
 
-        # 调整列宽度自适应内容
+        # 自适应内容的列宽
         self.table.resizeColumnsToContents()
+
+        # 设置每列的最小宽度
+        self.table.setColumnWidth(0, 120)  # 任务名称
+        self.table.setColumnWidth(1, 120)  # 游戏名称
+        self.table.setColumnWidth(2, 100)  # adb地址
+        self.table.setColumnWidth(3, 80)  # adb端口
+        self.table.setColumnWidth(4, 100)  # 运行状态
+
+        # 设置最后一列填充剩余空间
+        header.setSectionResizeMode(5, QHeaderView.Stretch)
 
         self.info_title = QLabel('详细信息')
         self.info_title.setAlignment(Qt.AlignCenter)
@@ -113,53 +123,6 @@ class MainWindow(QWidget):
         # 初始化分割器
         self.init_splitter()
         self.main_layout.addLayout(self.right_layout)
-
-    def load_device_table(self):
-        """动态加载设备表格"""
-        for project_key, project in self.data['task_projects'].items():
-            row = self.table.rowCount()
-            self.table.insertRow(row)
-
-            self.table.setItem(row, 0, QTableWidgetItem(project_key))
-            self.table.setItem(row, 1, QTableWidgetItem(project['program_name']))
-            self.table.setItem(row, 2, QTableWidgetItem(project['adb_config']['adb_address']))
-            self.table.setItem(row, 3, QTableWidgetItem(project['adb_config']['adb_port']))
-            self.table.setItem(row, 4, QTableWidgetItem('正在执行'))
-
-            # 创建一个 QWidget 容器
-            container_widget = QWidget()
-            layout = QHBoxLayout()
-            layout.setContentsMargins(0, 0, 0, 0)
-            layout.setSpacing(10)
-
-            button_run = QPushButton('运行')
-            button_run.setObjectName('runButton')
-            button_run.clicked.connect(lambda _, p=project_key: self.run_task(p))
-            layout.addWidget(button_run)
-
-            button_info = QPushButton('查看详情')
-            button_info.setObjectName('infoButton')
-            button_info.clicked.connect(lambda _, p=project_key: self.show_device_details(p))
-            layout.addWidget(button_info)
-
-            save_button = QPushButton("保存更改")
-            save_button.setObjectName('saveButton')
-            save_button.clicked.connect(self.save_json_data)
-            layout.addWidget(save_button)
-
-            container_widget.setLayout(layout)
-            self.table.setCellWidget(row, 5, container_widget)
-
-            self.table.setRowHeight(row, 50)
-
-        self.table.resizeColumnsToContents()
-
-    def clear_right_layout(self):
-        """清空右侧布局中的内容"""
-        for i in reversed(range(self.right_layout.count())):
-            widget = self.right_layout.itemAt(i).widget()
-            if widget:
-                widget.setParent(None)
 
     def init_splitter(self):
         """初始化分割器用于显示详细信息部分"""
@@ -187,79 +150,150 @@ class MainWindow(QWidget):
         self.splitter.setFixedHeight(400)
         self.right_layout.addWidget(self.splitter)
 
-    def run_task(self, project_key):
-        from src.core.core import task_manager_connect
+    def load_device_table(self):
+        """动态加载设备表格"""
+        # 连接表格数据变化的信号到槽函数
+        self.table.itemChanged.connect(self.on_table_item_changed)
 
-        task = TaskWorker(task_manager_connect, project_key)
+        for task_projects_name, project in self.config.task_projects.items():
+            row = self.table.rowCount()
+            self.table.insertRow(row)
+
+            # 任务名称
+            task_name_item = QTableWidgetItem(task_projects_name)
+            task_name_item.setData(Qt.UserRole, project)  # 绑定项目对象到表格单元格
+            self.table.setItem(row, 0, task_name_item)
+
+            # 游戏名称
+            program_name_item = QTableWidgetItem(project.program_name)
+            self.table.setItem(row, 1, program_name_item)
+
+            # ADB 地址
+            adb_address_item = QTableWidgetItem(project.adb_config['adb_address'])
+            adb_address_item.setData(Qt.UserRole, ('adb_address', project))  # 绑定 ADB 地址字段到单元格
+            self.table.setItem(row, 2, adb_address_item)
+
+            # ADB 端口
+            adb_port_item = QTableWidgetItem(project.adb_config['adb_port'])
+            adb_port_item.setData(Qt.UserRole, ('adb_port', project))  # 绑定 ADB 端口字段到单元格
+            self.table.setItem(row, 3, adb_port_item)
+
+            # 运行状态
+            status_item = QTableWidgetItem('正在执行')
+            # status_item.setData(Qt.UserRole, ('status', project))  # 假设你有运行状态字段
+            self.table.setItem(row, 4, status_item)
+
+            # 创建一个 QWidget 容器（用于操作按钮）
+            container_widget = QWidget()
+            layout = QHBoxLayout()
+            layout.setContentsMargins(0, 0, 0, 0)
+            layout.setSpacing(10)
+
+            button_run = QPushButton('运行')
+            button_run.setObjectName('runButton')
+            button_run.clicked.connect(lambda _, p=project: self.run_task(p))
+            layout.addWidget(button_run)
+
+            button_info = QPushButton('查看详情')
+            button_info.setObjectName('infoButton')
+            button_info.clicked.connect(lambda _, p=task_projects_name: self.show_device_details(p))
+            layout.addWidget(button_info)
+
+            save_button = QPushButton("保存更改")
+            save_button.setObjectName('saveButton')
+            save_button.clicked.connect(self.save_json_data)
+            layout.addWidget(save_button)
+
+            container_widget.setLayout(layout)
+            self.table.setCellWidget(row, 5, container_widget)
+
+            self.table.setRowHeight(row, 50)
+
+        self.table.resizeColumnsToContents()
+
+    def on_table_item_changed(self, item):
+        """处理表格内容变化，更新 project 对象"""
+        data = item.data(Qt.UserRole)
+
+        if isinstance(data, tuple) and len(data) == 2:
+            field_name, project = data
+            new_value = item.text()
+
+            # 更新 project 对象中的值
+            if field_name in project.adb_config:
+                project.adb_config[field_name] = new_value
+            elif field_name == 'status':  # 假设你有其他字段
+                project.status = new_value
+        # self.save_json_data()
+        # 你可以选择在这里调用 `save_json_data()`，实时保存变更
+
+    def clear_right_layout(self):
+        """清空右侧布局中的内容"""
+        for i in reversed(range(self.right_layout.count())):
+            widget = self.right_layout.itemAt(i).widget()
+            if widget:
+                widget.setParent(None)
+
+    def run_task(self, project: TaskProject):
+        from src.core.core import TaskProjectManager
+
+        # 创建 TaskProjectManager 实例
+        task_manager = TaskProjectManager()
+
+        # 传递 task_manager 实例和 project 对象
+        task = TaskWorker(task_manager.task_manager_connect, project)
+
+        # 启动线程
         self.thread_pool.start(task)
 
-    def show_device_details(self, project_key):
-        self.info_title.setText(f"详细信息:  {project_key}")
+    def show_device_details(self, task_projects_name):
 
-        project = self.data['task_projects'][project_key]
-        program_name = project['program_name']
-        program = next((p for p in self.data['programs'] if p['program_name'] == program_name), None)
+        self.info_title.setText(f"详细信息:  {task_projects_name}")
+
+        task_projects = self.config.task_projects[task_projects_name]
+
+        program =self.config.get_program_by_name(task_projects.program_name)
 
         if not program:
+            print("程序不存在")
             return
+
+        # 清空之前的布局
         task_selection_group = self.splitter.widget(0)
         task_selection_layout = task_selection_group.layout()
-
         self.clear_layout(task_selection_layout)
 
-        for task in program['tasks']:
+        for task in program.tasks:
+            selected_task = task_projects.get_selected_task_by_name(task.task_name)
             task_row = QHBoxLayout()
-            selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
-            is_selected = selected_task is not None and selected_task['is_selected']
-
-            checkbox = QCheckBox(task['task_name'])
-            checkbox.setChecked(is_selected)
-            checkbox.stateChanged.connect(lambda state, t=task: self.update_task_selection(project_key, t, state))
+            checkbox = QCheckBox(task.task_name)
+            checkbox.setChecked(selected_task.is_selected)
+            checkbox.stateChanged.connect(lambda state, selected_t=selected_task,program_task=task,task_p=task_projects: self.update_task_selection(selected_t, program_task, state,task_p))
             task_row.addWidget(checkbox)
 
             set_button = QPushButton('设置')
-            set_button.clicked.connect(lambda _, t=task: self.set_task_parameters(project_key, t))
+            set_button.clicked.connect(lambda _ ,selected_t=selected_task: self.set_task_parameters(selected_t))
             task_row.addWidget(set_button)
 
             task_selection_layout.addLayout(task_row)
 
-        if project['selected_tasks']:
-            self.set_task_parameters(project_key, project['selected_tasks'][0])
+        if program.tasks:
+            self.set_task_parameters(task_projects.selected_tasks[0])
 
-    def update_task_selection(self, project_key, task, state):
-        project = self.data['task_projects'][project_key]
-        selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
+    def update_task_selection(self, selected_task, program_task:Task, state,task_p:TaskProject):
+
         if selected_task:
-            selected_task['is_selected'] = state == Qt.CheckState.Checked.value
+            selected_task.is_selected=state==Qt.CheckState.Checked.value
         else:
-            project['selected_tasks'].append({'task_name': task['task_name'], 'is_selected': state == Qt.CheckState.Checked.value})
+            new_task=SelectedTask(program_task.task_name,False,program_task.parameters)
+            task_p.selected_tasks.append(new_task)
 
-    def set_task_parameters(self, project_key, task):
-        """设置任务参数"""
+    def set_task_parameters(self, selected_task:SelectedTask):
+        """清空布局"""
         task_settings_group = self.splitter.widget(1)
         task_settings_layout = task_settings_group.layout()
-
-        # 清空任务参数
         self.clear_layout(task_settings_layout)
-
-        project = self.data['task_projects'][project_key]
-        program_name = project['program_name']
-
-        # 获取程序对应的任务
-        program = next((p for p in self.data['programs'] if p['program_name'] == program_name), None)
-
-        if not program:
-            return
-
-        # 查找选中的任务
-        selected_task = next((t for t in project['selected_tasks'] if t['task_name'] == task['task_name']), None)
-
-        if selected_task:
-            parameters = selected_task['task_parameters']
-        else:
-            # 如果没有选中的任务，则使用默认参数
-            default_task = next((t for t in program['tasks'] if t['task_name'] == task['task_name']), None)
-            parameters = default_task['parameters'] if default_task else {}
+        parameters = selected_task.task_parameters
 
         # 动态生成任务参数输入框
         for param_name, param_value in parameters.items():
@@ -267,14 +301,19 @@ class MainWindow(QWidget):
             label = QLabel(param_name)
             line_edit = QLineEdit(str(param_value))
 
-            # 使用默认参数机制确保正确绑定每个参数名和值
+            # 将输入框的内容变化绑定到 selected_task 的参数上
             line_edit.textChanged.connect(
-                lambda value, p=param_name: self.update_task_param(project_key, task, p, value)
-            )
+                lambda text, name=param_name: self.update_task_parameter(selected_task, name, text))
 
             param_layout.addWidget(label)
             param_layout.addWidget(line_edit)
             task_settings_layout.addLayout(param_layout)
+
+    def update_task_parameter(self, selected_task: SelectedTask, param_name: str, new_value: str):
+        """更新任务参数的值"""
+        # 更新 selected_task 的参数值
+        selected_task.task_parameters[param_name] = new_value
+
 
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""
@@ -290,7 +329,6 @@ class MainWindow(QWidget):
                     if sub_layout is not None:
                         self.clear_layout(sub_layout)  # 递归调用
         layout.update()  # 更新布局
-
 
 if __name__ == '__main__':
     app = QApplication([])
