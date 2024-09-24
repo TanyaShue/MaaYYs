@@ -1,3 +1,6 @@
+import logging
+import threading
+
 from maa.library import Library
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
@@ -6,6 +9,8 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
 from src.config.config_models import Config, Task, Program, TaskProject, SelectedTask  # 确保根据你的实际路径引入 Config 类
+from src.core.core import TaskProjectManager,log_thread
+
 
 # 定义运行异步方法类
 class TaskWorker(QRunnable):
@@ -33,7 +38,8 @@ class MainWindow(QWidget):
 
         # 创建线程池
         self.thread_pool = QThreadPool()
-
+        # 启动日志处理线程
+        self.start_log_thread()
         # 创建主窗口
         self.setWindowTitle('MaaYYs')
         self.setMinimumSize(1000, 720)
@@ -61,6 +67,12 @@ class MainWindow(QWidget):
         """加载样式文件"""
         with open('style.qss', 'r', encoding='utf-8') as f:
             self.setStyleSheet(f.read())
+    def start_log_thread(self):
+        """启动日志处理线程"""
+        task_manager = TaskProjectManager()  # 确保实例化任务管理器
+        log_listener = threading.Thread(target=log_thread, args=(task_manager,))
+        log_listener.daemon = True  # 设置为守护线程，主线程结束时自动结束
+        log_listener.start()
 
     # 保存 Config 实例
     def save_json_data(self):
@@ -106,10 +118,10 @@ class MainWindow(QWidget):
         self.table.resizeColumnsToContents()
 
         # 设置每列的最小宽度
-        self.table.setColumnWidth(0, 120)  # 任务名称
-        self.table.setColumnWidth(1, 120)  # 游戏名称
-        self.table.setColumnWidth(2, 100)  # adb地址
-        self.table.setColumnWidth(3, 80)  # adb端口
+        self.table.setColumnWidth(0, 80)  # 任务名称
+        self.table.setColumnWidth(1, 80)  # 游戏名称
+        self.table.setColumnWidth(2, 200)  # adb地址
+        self.table.setColumnWidth(3, 150)  # adb端口
         self.table.setColumnWidth(4, 100)  # 运行状态
 
         # 设置最后一列填充剩余空间
@@ -189,10 +201,10 @@ class MainWindow(QWidget):
             layout.setContentsMargins(0, 0, 0, 0)
             layout.setSpacing(10)
 
-            button_run = QPushButton('运行')
-            button_run.setObjectName('runButton')
-            button_run.clicked.connect(lambda _, p=project: self.run_task(p))
-            layout.addWidget(button_run)
+            button_task_connect = QPushButton('连接')
+            button_task_connect.setObjectName('runButton')
+            button_task_connect.clicked.connect(lambda _, p=project,bu=button_task_connect: self.run_task(p,bu))
+            layout.addWidget(button_task_connect)
 
             button_info = QPushButton('查看详情')
             button_info.setObjectName('infoButton')
@@ -234,17 +246,20 @@ class MainWindow(QWidget):
             if widget:
                 widget.setParent(None)
 
-    def run_task(self, project: TaskProject):
-        from src.core.core import TaskProjectManager
+    def run_task(self, project: TaskProject,button_task_connect):
+
+        button_task_connect.setText("正在连接")
 
         # 创建 TaskProjectManager 实例
         task_manager = TaskProjectManager()
 
         # 传递 task_manager 实例和 project 对象
-        task = TaskWorker(task_manager.task_manager_connect, project)
+        task = TaskWorker(task_manager.create_tasker_process, project)
 
         # 启动线程
         self.thread_pool.start(task)
+
+        button_task_connect.setText("已连接")
 
     def show_device_details(self, task_projects_name):
 
@@ -331,6 +346,15 @@ class MainWindow(QWidget):
         layout.update()  # 更新布局
 
 if __name__ == '__main__':
+    # 配置日志记录
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='[%(asctime)s][%(levelname)s] - %(message)s',
+        handlers=[
+            logging.FileHandler("app.log"),
+            logging.StreamHandler()
+        ]
+    )
     app = QApplication([])
     window = MainWindow()
     window.show()

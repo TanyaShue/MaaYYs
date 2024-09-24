@@ -1,89 +1,118 @@
-from maa.context import Context
+import queue
+import threading
+import multiprocessing
+import logging
+import time
+from typing import Dict, Tuple
 from maa.resource import Resource
 from maa.controller import AdbController
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
-from maa.custom_recognition import CustomRecognition
-from maa.custom_action import CustomAction
-
 from src.config.config_models import TaskProject
-import logging
 
+def singleton(cls):
+    instances = {}
+    def get_instance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return get_instance
 
+@singleton
 class TaskProjectManager:
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super(TaskProjectManager, cls).__new__(cls, *args, **kwargs)
-            cls._instance.tasker_cache = {}  # 初始化 tasker_cache
-        return cls._instance
-
-    # def __init__(self):
-    #     # 用于存储 adb_address + adb_port 组合 和 tasker 的映射
-    #     self.tasker_cache = {}
+    def __init__(self):
+        self.processes: Dict[str, Tuple[multiprocessing.Process, multiprocessing.Queue, multiprocessing.Queue]] = {}
+        self.should_stop_log_thread = False
+        self.lock = threading.Lock()  # 线程锁
 
     def _get_project_key(self, p: TaskProject) -> str:
-        """
-        根据 adb_address 和 adb_port 生成唯一的缓存键。
-        """
-        adb_address = p.adb_config.get("adb_address")
-        adb_port = p.adb_config.get("adb_port")
-        project_key = f"{adb_address}:{adb_port}"
-        print(f"Generated project key: {project_key}")
-        return project_key
+        return f"{p.adb_config['adb_address']}:{p.adb_config['adb_port']}"
 
-    def _initialize_tasker(self, p: TaskProject) -> Tasker:
-        """
-        初始化 Tasker 实例并与资源和控制器绑定。
-        """
-        user_path = "../assets"
-        Toolkit.init_option(user_path)
-
-        resource = Resource()
-        res_job = resource.post_path("../assets/resource/base")
-        res_job.wait()
-
-        controller = AdbController(
-            adb_path=p.adb_config.get("adb_address"),
-            address=p.adb_config.get("adb_port")
-        )
-        controller.post_connection().wait()
-
-        tasker = Tasker()
-        tasker.bind(resource, controller)
-
-        if not tasker.inited:
-            print("Failed to init MAA.")
-            raise RuntimeError("Failed to init MAA.")
-
-        return tasker
-
-    def task_manager_connect(self, p: TaskProject) -> Tasker:
-        """
-        获取与项目对应的 Tasker，如果缓存中没有则创建并缓存。
-        """
+    def create_tasker_process(self, p: TaskProject):
         project_key = self._get_project_key(p)
+        with self.lock:
+            if project_key in self.processes:
+                logging.warning(f"Tasker process for {project_key} already exists.")
+                return
 
-        # 检查缓存
-        if project_key in self.tasker_cache:
-            print(f"Returning cached Tasker instance for {project_key}")
-            return self.tasker_cache[project_key]
+            task_queue = multiprocessing.Queue()
+            log_queue = multiprocessing.Queue()
+            process = multiprocessing.Process(target=tasker_process, args=(task_queue, log_queue, p))
+            process.start()
+            self.processes[project_key] = (process, task_queue, log_queue)
+            logging.info(f"Started new Tasker process for {project_key}")
 
+    def send_task(self, p: TaskProject, task):
+        project_key = self._get_project_key(p)
+        with self.lock:
+            if project_key not in self.processes:
+                logging.error(f"No Tasker process found for {project_key}.")
+                return
+            self.processes[project_key][1].put(task)  # 发送任务
+            logging.info(f"Task {task} sent to Tasker process for {project_key}")
+
+    def terminate_tasker_process(self, p: TaskProject):
+        project_key = self._get_project_key(p)
+        with self.lock:
+            if project_key not in self.processes:
+                logging.error(f"No Tasker process found for {project_key}.")
+                return
+            process, task_queue, _ = self.processes[project_key]
+            task_queue.put("TERMINATE")
+            process.join()
+            del self.processes[project_key]
+            logging.info(f"Terminated Tasker process for {project_key}")
+
+    def terminate_all(self):
+        self.should_stop_log_thread = True
+        logging.info("Terminating all Tasker processes...")
+        with self.lock:
+            for project_key in list(self.processes.keys()):
+                self.terminate_tasker_process(self.processes[project_key])
+        logging.info("Terminated all Tasker processes.")
+
+    def monitor_logs(self):
+        with self.lock:
+            for project_key, (_, _, log_queue) in list(self.processes.items()):
+                while not log_queue.empty():
+                    log_message = log_queue.get()
+                    logging.info(f"[{project_key}] {log_message}")
+
+def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing.Queue, p: TaskProject):
+    def log_to_queue(message: str):
+        log_queue.put(message)
+
+    log_to_queue(f"Initializing Tasker for {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
+    Toolkit.init_option("../assets")
+
+    resource = Resource()
+    resource.post_path("../assets/resource/base").wait()
+
+    controller = AdbController(adb_path=p.adb_config['adb_address'], address=p.adb_config['adb_port'])
+    controller.post_connection().wait()
+
+    tasker = Tasker()
+    tasker.bind(resource, controller)
+
+    if not tasker.inited:
+        log_to_queue("Failed to init MAA in process.")
+        raise RuntimeError("Failed to init MAA in process.")
+
+    log_to_queue(f"成功创建Tasker{tasker}")
+
+    while True:
         try:
-            # 初始化 Tasker 并缓存
-            tasker = self._initialize_tasker(p)
-            self.tasker_cache[project_key] = tasker
-            print(f"Cached new Tasker instance for {project_key}")
-            return tasker
+            task = task_queue.get()
+            if task == "TERMINATE":
+                log_to_queue(f"Terminating Tasker process for {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
+                break
+            log_to_queue(f"Executing task {task} for Tasker {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
+            tasker.execute_task(task)
         except Exception as e:
-            print(f"Error initializing Tasker for {project_key}: {e}")
-            raise
+            log_to_queue(f"Error executing task: {e}")
 
-    def get_tasker(self, p: TaskProject) -> Tasker:
-        """
-        通过 adb_address 和 adb_port 获取对应的 Tasker，若不存在则返回 None。
-        """
-        project_key = self._get_project_key(p)
-        print(f"Looking for Tasker instance in cache for {project_key}")
-        return self.tasker_cache.get(project_key)
+def log_thread(manager: TaskProjectManager):
+    logging.info("日志处理线程启动")
+    while not manager.should_stop_log_thread:
+        manager.monitor_logs()
+        time.sleep(1)  # 适当延时，避免CPU过高使用

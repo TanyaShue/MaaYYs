@@ -1,4 +1,4 @@
-from src.core.core import task_manager_connect
+from PySide6.QtWidgets import QApplication
+from maa.library import Library
 
 
-task_manager_connect(p=None)
