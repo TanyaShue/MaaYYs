@@ -1,0 +1,11 @@
+{
+    "controller": {
+        "name": "桌面端",
+        "type": "Win32"
+    },
+    "resource": "官服",
+    "task": [],
+    "win32": {
+        "hwnd": "0000000000040778"
+    }
+}
