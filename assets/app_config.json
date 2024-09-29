@@ -68,9 +68,9 @@
             "selected_tasks": [
                 {
                     "task_name": "自动地鬼",
-                    "is_selected": false,
+                    "is_selected": true,
                     "task_parameters": {
-                        "param1": "param1: 参数一",
+                        "param1": "参数",
                         "param2": "hellow"
                     }
                 },
@@ -101,7 +101,7 @@
                     "task_name": "启动加速器",
                     "is_selected": true,
                     "task_parameters": {
-                        "param1": "value11111"
+                        "param1": "valu车ui是"
                     }
                 }
             ]

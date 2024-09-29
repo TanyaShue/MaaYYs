@@ -67,6 +67,7 @@ class MainWindow(QWidget):
         """加载样式文件"""
         with open('style.qss', 'r', encoding='utf-8') as f:
             self.setStyleSheet(f.read())
+
     def start_log_thread(self):
         """启动日志处理线程"""
         task_manager = TaskProjectManager()  # 确保实例化任务管理器
@@ -91,49 +92,90 @@ class MainWindow(QWidget):
         self.left_nav_layout.addStretch()
 
     def init_home_page(self):
-        """初始化首页页面"""
+        """初始化首页页面，包含四个垂直排列的部分"""
         self.clear_right_layout()
 
-        # 创建标题
+        # 创建一个用于承载所有组件的垂直容器
+        container_widget = QWidget()
+        container_layout = QVBoxLayout(container_widget)
+        # 设置样式表，添加阴影和圆角效果
+        container_widget.setStyleSheet("""
+            #homeContainer {
+                background-color: white;  /* 背景颜色 */
+                border-radius: 15px;      /* 圆角半径 */
+                padding: 10px;            /* 内边距 */
+            }
+        """)
+
+        # 设置垂直容器中的组件之间的间隔（减少间隔）
+        container_layout.setSpacing(5)
+
+        # 设置主容器的四周内边距（可根据需要调整）
+        container_layout.setContentsMargins(10, 10, 10, 10)
+
+        # 1. 首页标签容器
+        title_container = QWidget()
+        title_layout = QVBoxLayout(title_container)
+        title_layout.setSpacing(0)  # 组件之间无间距
+        title_layout.setContentsMargins(0, 0, 0, 0)  # 设置内边距为0
+
         title = QLabel('首页')
         title.setAlignment(Qt.AlignCenter)
         title.setFont(QFont('Arial', 18, QFont.Bold))
         title.setStyleSheet("color: #2980b9; margin: 10px 0;")
-        self.right_layout.addWidget(title)
+        title_layout.addWidget(title)
 
-        # 创建设备表格
+        # 2. 表格容器
+        table_container = QWidget()
+        table_layout = QVBoxLayout(table_container)
+        table_layout.setSpacing(0)  # 组件之间无间距
+        table_layout.setContentsMargins(0, 0, 0, 0)  # 设置内边距为0
+
         self.table = QTableWidget(0, 6)
         self.table.setHorizontalHeaderLabels(['任务名称', '游戏名称', 'adb地址', 'adb端口', '运行状态', '操作'])
-        self.right_layout.addWidget(self.table, 1)
-        self.table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        table_layout.addWidget(self.table)
+
+        # 将组件依次添加到容器
+        container_layout.addWidget(title_container)  # 首页标签
+        container_layout.addWidget(table_container)  # 表格
 
         # 设置列宽度自适应内容
         header = self.table.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.Interactive)  # 使每列根据内容调整宽度
-
-        # 动态填充设备表格
+        header.setSectionResizeMode(QHeaderView.Interactive)
         self.load_device_table()
-
-        # 自适应内容的列宽
         self.table.resizeColumnsToContents()
-
-        # 设置每列的最小宽度
-        self.table.setColumnWidth(0, 80)  # 任务名称
-        self.table.setColumnWidth(1, 80)  # 游戏名称
-        self.table.setColumnWidth(2, 200)  # adb地址
-        self.table.setColumnWidth(3, 150)  # adb端口
-        self.table.setColumnWidth(4, 100)  # 运行状态
-
-        # 设置最后一列填充剩余空间
+        self.table.setColumnWidth(0, 80)
+        self.table.setColumnWidth(1, 80)
+        self.table.setColumnWidth(2, 280)
+        self.table.setColumnWidth(3, 130)
+        self.table.setColumnWidth(4, 100)
         header.setSectionResizeMode(5, QHeaderView.Stretch)
+
+        # 3. 详细信息标签容器
+        info_title_container = QWidget()
+        info_title_layout = QVBoxLayout(info_title_container)
+        info_title_layout.setSpacing(0)  # 无间距
+        info_title_layout.setContentsMargins(0, 0, 0, 0)  # 设置内边距为0
 
         self.info_title = QLabel('详细信息')
         self.info_title.setAlignment(Qt.AlignCenter)
         self.info_title.setStyleSheet("color: #2980b9; margin-top: 15px;")
-        self.right_layout.addWidget(self.info_title)
+        info_title_layout.addWidget(self.info_title)
 
-        # 初始化分割器
-        self.init_splitter()
+        # 4. 详细信息容器
+        details_container = QWidget()
+        details_layout = QVBoxLayout(details_container)
+        details_layout.setSpacing(0)  # 无间距
+        details_layout.setContentsMargins(0, 0, 0, 0)  # 设置内边距为0
+        self.init_splitter()  # 初始化详细信息分割器
+
+        # 添加组件到布局
+        container_layout.addWidget(info_title_container)  # 详细信息标签
+        container_layout.addWidget(details_container)  # 详细信息
+        details_layout.addWidget(self.splitter)
+
+        # 将主容器布局添加到右侧主布局
+        self.right_layout.addWidget(container_widget)
         self.main_layout.addLayout(self.right_layout)
 
     def init_splitter(self):
@@ -160,7 +202,7 @@ class MainWindow(QWidget):
 
         self.splitter.setSizes([300, 400, 300])
         self.splitter.setFixedHeight(400)
-        self.right_layout.addWidget(self.splitter)
+        # self.right_layout.addWidget(self.splitter)
 
     def load_device_table(self):
         """动态加载设备表格"""
@@ -201,7 +243,7 @@ class MainWindow(QWidget):
             layout.setContentsMargins(0, 0, 0, 0)
             layout.setSpacing(10)
 
-            button_task_connect = QPushButton('连接')
+            button_task_connect = QPushButton('一键启动')
             button_task_connect.setObjectName('runButton')
             button_task_connect.clicked.connect(lambda _, p=project,bu=button_task_connect: self.run_task(p,bu))
             layout.addWidget(button_task_connect)
@@ -211,10 +253,10 @@ class MainWindow(QWidget):
             button_info.clicked.connect(lambda _, p=task_projects_name: self.show_device_details(p))
             layout.addWidget(button_info)
 
-            save_button = QPushButton("保存更改")
-            save_button.setObjectName('saveButton')
-            save_button.clicked.connect(self.save_json_data)
-            layout.addWidget(save_button)
+            # save_button = QPushButton("保存更改")
+            # save_button.setObjectName('saveButton')
+            # save_button.clicked.connect(self.save_json_data)
+            # layout.addWidget(save_button)
 
             container_widget.setLayout(layout)
             self.table.setCellWidget(row, 5, container_widget)
@@ -236,7 +278,7 @@ class MainWindow(QWidget):
                 project.adb_config[field_name] = new_value
             elif field_name == 'status':  # 假设你有其他字段
                 project.status = new_value
-        # self.save_json_data()
+        self.save_json_data()
         # 你可以选择在这里调用 `save_json_data()`，实时保存变更
 
     def clear_right_layout(self):
@@ -246,28 +288,56 @@ class MainWindow(QWidget):
             if widget:
                 widget.setParent(None)
 
-    def run_task(self, project: TaskProject,button_task_connect):
-
+    def run_task(self, project: TaskProject, button_task_connect: QPushButton):
+        """
+        启动任务，更新UI，并确保在异步线程中执行
+        """
+        # 更新UI状态
         button_task_connect.setText("正在连接")
+        button_task_connect.setEnabled(False)
 
         # 创建 TaskProjectManager 实例
         task_manager = TaskProjectManager()
 
-        # 传递 task_manager 实例和 project 对象
-        task = TaskWorker(task_manager.create_tasker_process, project)
+        # 定义实际任务执行逻辑
+        def execute_task():
+            try:
+                # 启动连接任务（可以扩展为实际的连接逻辑）
+                task_manager.create_tasker_process(project)
 
-        # 启动线程
+                # 获取已选中的任务
+                tasks = project.get_selected_tasks()
+                if not tasks:
+                    raise Exception("没有选择任何任务，无法执行")
+
+                # 发送任务到设备
+                task_manager.send_task(project, tasks)
+
+                # 成功连接和发送任务后更新UI
+                self.update_button_state(button_task_connect, "已连接", True)
+
+            except Exception as e:
+                logging.error(f"任务启动失败: {e}")
+                # 如果有错误，重置按钮状态，并弹出错误提示
+                self.update_button_state(button_task_connect, "连接失败", True)
+
+        # 使用线程池执行任务
+        task = TaskWorker(execute_task)
         self.thread_pool.start(task)
 
-        button_task_connect.setText("已连接")
+    def update_button_state(self, button: QPushButton, text: str, enabled: bool):
+        """
+        更新按钮的文本和可用状态
+        """
+        button.setText(text)
+        button.setEnabled(enabled)
 
     def show_device_details(self, task_projects_name):
-
-        self.info_title.setText(f"详细信息:  {task_projects_name}")
+        # 更新详细信息标题
+        self.info_title.setText(f"详细信息: {task_projects_name}")
 
         task_projects = self.config.task_projects[task_projects_name]
-
-        program =self.config.get_program_by_name(task_projects.program_name)
+        program = self.config.get_program_by_name(task_projects.program_name)
 
         if not program:
             print("程序不存在")
@@ -278,22 +348,74 @@ class MainWindow(QWidget):
         task_selection_layout = task_selection_group.layout()
         self.clear_layout(task_selection_layout)
 
+        # 动态添加任务复选框和设置按钮
         for task in program.tasks:
             selected_task = task_projects.get_selected_task_by_name(task.task_name)
             task_row = QHBoxLayout()
+            # 添加任务复选框
             checkbox = QCheckBox(task.task_name)
             checkbox.setChecked(selected_task.is_selected)
-            checkbox.stateChanged.connect(lambda state, selected_t=selected_task,program_task=task,task_p=task_projects: self.update_task_selection(selected_t, program_task, state,task_p))
+            checkbox.stateChanged.connect(lambda state, selected_t=selected_task, program_task=task,
+                                                 task_p=task_projects: self.update_task_selection(selected_t,
+                                                                                                  program_task, state,
+                                                                                                  task_p))
             task_row.addWidget(checkbox)
 
+            # 添加设置按钮
             set_button = QPushButton('设置')
-            set_button.clicked.connect(lambda _ ,selected_t=selected_task: self.set_task_parameters(selected_t))
+            set_button.clicked.connect(lambda _, selected_t=selected_task: self.set_task_parameters(selected_t))
             task_row.addWidget(set_button)
 
             task_selection_layout.addLayout(task_row)
 
-        if program.tasks:
-            self.set_task_parameters(task_projects.selected_tasks[0])
+
+        # 添加“全选”和“开始”按钮
+        button_container = QHBoxLayout()
+
+        # 添加全选按钮
+        select_all_button = QPushButton("全选")
+        select_all_button.setObjectName('runButton')
+
+        select_all_button.clicked.connect(
+            lambda: self.select_all_tasks(task_projects, task_selection_layout, select_all_button,program))
+        button_container.addWidget(select_all_button)
+
+        # 添加开始按钮
+        start_button = QPushButton("开始")
+        start_button.setObjectName('runButton')
+        start_button.clicked.connect(lambda _, p=task_projects,bu=start_button: self.run_task(p,bu))
+        button_container.addWidget(start_button)
+
+        # 将按钮布局添加到主布局
+        task_selection_layout.addLayout(button_container)
+
+    def select_all_tasks(self, task_projects, task_selection_layout, select_all_button,program):
+        """
+        选择或取消选择所有任务，并切换按钮文本
+        """
+        all_checked = all(
+            task_p.is_selected
+            for task in program.tasks
+            for task_p in task_projects.selected_tasks
+            if task.task_name == task_p.task_name
+        )
+
+        new_state = not all_checked  # 切换到相反的状态
+
+        # 更新所有任务的选中状态和复选框
+        for i in range(task_selection_layout.count() - 1):  # 忽略最后的按钮行
+            task_row = task_selection_layout.itemAt(i).layout()
+            checkbox = task_row.itemAt(0).widget()
+            checkbox.setChecked(new_state)  # 切换所有任务复选框的状态
+
+            task_name = checkbox.text()
+            selected_task = task_projects.get_selected_task_by_name(task_name)  # 获取任务（所有任务而不是已选中的）
+            selected_task.is_selected = new_state  # 更新所有任务的选中状态
+
+        # 根据新状态设置按钮文本：如果所有任务都选中，显示“清空”，否则显示“全选”
+        select_all_button.setText("清空" if new_state else "全选")
+
+        self.config.save_to_json()
 
     def update_task_selection(self, selected_task, program_task:Task, state,task_p:TaskProject):
 
@@ -302,6 +424,8 @@ class MainWindow(QWidget):
         else:
             new_task=SelectedTask(program_task.task_name,False,program_task.parameters)
             task_p.selected_tasks.append(new_task)
+
+        self.config.save_to_json()
 
     def set_task_parameters(self, selected_task:SelectedTask):
         """清空布局"""
@@ -328,7 +452,7 @@ class MainWindow(QWidget):
         """更新任务参数的值"""
         # 更新 selected_task 的参数值
         selected_task.task_parameters[param_name] = new_value
-
+        self.config.save_to_json()
 
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""
@@ -346,16 +470,20 @@ class MainWindow(QWidget):
         layout.update()  # 更新布局
 
 if __name__ == '__main__':
-    # 配置日志记录
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format='[%(asctime)s][%(levelname)s] - %(message)s',
-        handlers=[
-            logging.FileHandler("app.log"),
-            logging.StreamHandler()
-        ]
-    )
-    app = QApplication([])
-    window = MainWindow()
-    window.show()
-    app.exec()
+    try:
+        # 配置日志记录
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format='[%(asctime)s][%(levelname)s] - %(message)s',
+            handlers=[
+                logging.FileHandler("app.log"),
+                logging.StreamHandler()
+            ]
+        )
+        app = QApplication([])
+        window = MainWindow()
+        window.show()
+        app.exec()
+    finally:
+        TaskProjectManager().terminate_all()
+

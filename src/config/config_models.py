@@ -18,6 +18,9 @@ class SelectedTask:
         self.is_selected = is_selected
         self.task_parameters = task_parameters
 
+
+
+
 class TaskProject:
     def __init__(self, program_name: str, adb_config: Dict[str, Any], selected_tasks: List[SelectedTask]):
         self.program_name = program_name
@@ -29,6 +32,9 @@ class TaskProject:
             if task.task_name==selected_task_name:
                 return task
         return None
+
+    def get_selected_tasks(self):
+        return [task for task in self.selected_tasks if task.is_selected]
 
 
 class Config:

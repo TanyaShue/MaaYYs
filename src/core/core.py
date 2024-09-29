@@ -1,14 +1,14 @@
-import queue
 import threading
 import multiprocessing
 import logging
 import time
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 from maa.resource import Resource
 from maa.controller import AdbController
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
-from src.config.config_models import TaskProject
+from src.config.config_models import TaskProject, Task, Program
+
 
 def singleton(cls):
     instances = {}
@@ -42,14 +42,14 @@ class TaskProjectManager:
             self.processes[project_key] = (process, task_queue, log_queue)
             logging.info(f"Started new Tasker process for {project_key}")
 
-    def send_task(self, p: TaskProject, task):
+    def send_task(self, p: TaskProject,tasks:list[Task]):
         project_key = self._get_project_key(p)
         with self.lock:
             if project_key not in self.processes:
                 logging.error(f"No Tasker process found for {project_key}.")
                 return
-            self.processes[project_key][1].put(task)  # 发送任务
-            logging.info(f"Task {task} sent to Tasker process for {project_key}")
+            self.processes[project_key][1].put(tasks)  # 发送任务
+            logging.info(f"Task {tasks} sent to Tasker process for {project_key}")
 
     def terminate_tasker_process(self, p: TaskProject):
         project_key = self._get_project_key(p)
@@ -68,7 +68,22 @@ class TaskProjectManager:
         logging.info("Terminating all Tasker processes...")
         with self.lock:
             for project_key in list(self.processes.keys()):
-                self.terminate_tasker_process(self.processes[project_key])
+                process, input_queue, output_queue = self.processes[project_key]
+
+                # 终止进程
+                if process.is_alive():
+                    process.terminate()
+                    process.join()
+
+                # 关闭队列
+                input_queue.close()
+                output_queue.close()
+
+                # 取消队列的阻塞等待 (可选)
+                input_queue.cancel_join_thread()
+                output_queue.cancel_join_thread()
+
+                logging.info(f"已成功终止进程 {process.pid}。")
         logging.info("Terminated all Tasker processes.")
 
     def monitor_logs(self):
@@ -102,12 +117,14 @@ def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing
 
     while True:
         try:
-            task = task_queue.get()
-            if task == "TERMINATE":
+            tasks = task_queue.get()
+            for task in tasks:
+                print(f"{task.task_name}{task.entry}")
+            if tasks == "TERMINATE":
                 log_to_queue(f"Terminating Tasker process for {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
                 break
-            log_to_queue(f"Executing task {task} for Tasker {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
-            tasker.execute_task(task)
+            log_to_queue(f"Executing task {tasks} for Tasker {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
+            tasker.execute_task(tasks)
         except Exception as e:
             log_to_queue(f"Error executing task: {e}")
 
