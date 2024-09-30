@@ -60,5 +60,10 @@
       190,
       153
     ]
+  },
+  "测试":{
+    "action": "Custom",
+    "custom_action": "ChallengeDungeonBoss",
+    "post_delay":2000
   }
 }

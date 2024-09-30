@@ -18,8 +18,9 @@ class SwitchSoul(CustomAction):
         json_data = json.loads(argv.custom_action_param)
         # 点击预设点
         # 识别预设点
-        image=context.tasker.controller.cached_image
+        image=context.tasker.controller.post_screencap().wait().get()
         detail=context.run_recognition("识别预设",image,{"识别预设":{"timeout":100,"recognition": "OCR","expected": "预设","roi": [336, 74, 82, 46]}})
+        context.run_pipeline("")
         if detail[0]:
             context.tasker.controller.post_click(random.randint(336, 411), random.randint(74,120 )).wait()
         
@@ -43,7 +44,7 @@ class SwitchSoul(CustomAction):
         print("开始执行自定义动作：点击队伍")
         # 点击队伍
         for count in range(1, 10):
-            image=context.tasker.controller.cached_image
+            image=context.tasker.controller.post_screencap().wait().get()
             detail = context.run_recognition("点击队伍",image, {"点击队伍": {"timeout":100,"recognition": "OCR","expected": json_data["team_name"],"roi": [567, 138, 288, 356]}})
             if detail[0]:
                 roi=[detail[1].x-30,detail[1].y-30,500,80]

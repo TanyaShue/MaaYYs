@@ -1,15 +1,14 @@
 import logging
 import threading
-from maa.library import Library
 
 from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
+    QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
     QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView
 )
 
-from src.config.config_models import Config, Task, Program, TaskProject, SelectedTask  # 确保根据你的实际路径引入 Config 类
+from src.utils.config_models import Config, Task, Program, TaskProject, SelectedTask  # 确保根据你的实际路径引入 Config 类
 from src.core.core import TaskProjectManager, log_thread
 
 

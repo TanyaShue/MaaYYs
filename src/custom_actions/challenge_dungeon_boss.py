@@ -1,8 +1,9 @@
+import random
+import time
+
 from maa.context import Context
 from maa.custom_action import CustomAction
-import json
-import time
-import random
+
 
 class ChallengeDungeonBoss(CustomAction):
 
@@ -14,11 +15,11 @@ class ChallengeDungeonBoss(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
-        image = context.tasker.controller.cached_image
+        image = context.tasker.controller.post_screencap().wait().get()
         detail = context.run_recognition("识别地鬼分数",image,  {"识别地鬼分数": {
                                         "recognition": "OCR", "expected": r"\d+", "roi": [1175, 15, 98, 77]}})
-        data = json.loads(detail[2])
-        value = int(data['filtered'][0]['text'])
+        print(detail)
+        value = int(detail.filterd_results[0].text)
         count = 3 if value > 10000 else 2 if value > 2000 else 1
         print("挑战地鬼数:", count)
         for _ in range(count):
@@ -33,9 +34,9 @@ class ChallengeDungeonBoss(CustomAction):
 
             # 选择挑战等级
             # TODO
-            
+
             print("点击挑战")
-            
+
             # 点击挑战
             te=context.run_pipeline("挑战地鬼", {
                 "挑战地鬼": {"post_delay": 2000,"action": "Click", "target": [1109, 493, 102, 63]}})
@@ -51,10 +52,10 @@ class ChallengeDungeonBoss(CustomAction):
                              "recognition": "TemplateMatch", "timeout":300000,"template": "地鬼_分享.png", "action": "Click", "target": [165, 98, 913, 430]}})
             time.sleep(5)
             context.tasker.controller.post_click(random.randint(367, 866), random.randint(185, 638)).wait()
-            
+
             context.run_pipeline("点击叉叉", {
                              "点击叉叉": {"recognition": "TemplateMatch", "template": "地鬼_关闭.png", "action": "Click"}})
-        
+
 
         print("自动地鬼挑战完成")
         return True

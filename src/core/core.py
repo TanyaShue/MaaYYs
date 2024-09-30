@@ -9,7 +9,7 @@ from maa.resource import Resource
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
-from src.config.config_models import TaskProject, Task
+from src.utils.config_models import TaskProject, Task
 from src.custom_decorators.loader import load_custom_actions, action_registry, load_custom_recognizers, \
     recognizer_registry
 
@@ -122,7 +122,7 @@ def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing
     load_custom_recognizers("../src/custom_recognition")
     for recognizer_name, recognizer_instance in recognizer_registry.items():
         resource.register_custom_recognition(recognizer_name, recognizer_instance)
-
+    print("自定义任务注册完成")
     if not tasker.inited:
         log_to_queue("Failed to init MAA in process.")
         raise RuntimeError("Failed to init MAA in process.")
@@ -134,6 +134,7 @@ def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing
             tasks = task_queue.get()
             for task in tasks:
                 print(f"接收到任务{task.task_name}:{task.entry}")
+                tasker.post_pipeline(task.entry)
             if tasks == "TERMINATE":
                 log_to_queue(f"Terminating Tasker process for {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
                 break
