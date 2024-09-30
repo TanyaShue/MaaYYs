@@ -1,13 +1,17 @@
-import threading
-import multiprocessing
 import logging
+import multiprocessing
+import threading
 import time
-from typing import Dict, Tuple, List
-from maa.resource import Resource
+from typing import Dict, Tuple
+
 from maa.controller import AdbController
+from maa.resource import Resource
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
-from src.config.config_models import TaskProject, Task, Program
+
+from src.config.config_models import TaskProject, Task
+from src.custom_decorators.loader import load_custom_actions, action_registry, load_custom_recognizers, \
+    recognizer_registry
 
 
 def singleton(cls):
@@ -109,6 +113,16 @@ def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing
     tasker = Tasker()
     tasker.bind(resource, controller)
 
+    print("开始注册自定义任务")
+    # 注册自定义 action 和 recognizer
+    load_custom_actions("../src/custom_actions")
+    for action_name, action_instance in action_registry.items():
+        resource.register_custom_action(action_name, action_instance)
+
+    load_custom_recognizers("../src/custom_recognition")
+    for recognizer_name, recognizer_instance in recognizer_registry.items():
+        resource.register_custom_recognition(recognizer_name, recognizer_instance)
+
     if not tasker.inited:
         log_to_queue("Failed to init MAA in process.")
         raise RuntimeError("Failed to init MAA in process.")
@@ -119,12 +133,13 @@ def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing
         try:
             tasks = task_queue.get()
             for task in tasks:
-                print(f"{task.task_name}{task.entry}")
+                print(f"接收到任务{task.task_name}:{task.entry}")
             if tasks == "TERMINATE":
                 log_to_queue(f"Terminating Tasker process for {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
                 break
             log_to_queue(f"Executing task {tasks} for Tasker {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
-            tasker.execute_task(tasks)
+            # tasker.execute_task(tasks)
+
         except Exception as e:
             log_to_queue(f"Error executing task: {e}")
 

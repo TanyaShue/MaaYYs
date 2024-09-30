@@ -12,6 +12,19 @@ class Program:
         self.program_name = program_name
         self.tasks = tasks
 
+
+    def get_entry_by_selected_task(self, selected_task_name: str):
+        """
+        根据选中的任务名称返回其对应的 entry 值。
+
+        :param selected_task_name: 选中的任务名称
+        :return: 对应任务的 entry 值，若找不到返回 None
+        """
+        for task in self.tasks:
+            if task.task_name == selected_task_name:
+                return task.entry
+        return None
+
 class SelectedTask:
     def __init__(self, task_name: str, is_selected: bool, task_parameters: Dict[str, Any]):
         self.task_name = task_name

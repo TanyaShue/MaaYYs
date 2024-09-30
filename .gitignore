@@ -128,9 +128,7 @@ StyleCopReport.xml
 *_h.h
 *.ilk
 *.meta
-*.obj
 *.iobj
-*.pch
 *.pdb
 *.ipdb
 *.pgc
@@ -449,7 +447,6 @@ enc_temp_folder/*
 
 # Build
 deps
-build
 install
 
 # Tools

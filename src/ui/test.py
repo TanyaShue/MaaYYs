@@ -1,15 +1,16 @@
 import logging
 import threading
-
 from maa.library import Library
+
+from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
-    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QSizePolicy, QHeaderView
+    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView
 )
-from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
+
 from src.config.config_models import Config, Task, Program, TaskProject, SelectedTask  # 确保根据你的实际路径引入 Config 类
-from src.core.core import TaskProjectManager,log_thread
+from src.core.core import TaskProjectManager, log_thread
 
 
 # 定义运行异步方法类
@@ -288,7 +289,7 @@ class MainWindow(QWidget):
             if widget:
                 widget.setParent(None)
 
-    def run_task(self, project: TaskProject, button_task_connect: QPushButton):
+    def run_task(self, task_project: TaskProject, button_task_connect: QPushButton):
         """
         启动任务，更新UI，并确保在异步线程中执行
         """
@@ -303,15 +304,25 @@ class MainWindow(QWidget):
         def execute_task():
             try:
                 # 启动连接任务（可以扩展为实际的连接逻辑）
-                task_manager.create_tasker_process(project)
+                task_manager.create_tasker_process(task_project)
+
+
+                p=self.config.get_program_by_name(task_project.program_name)
 
                 # 获取已选中的任务
-                tasks = project.get_selected_tasks()
+                tasks = task_project.get_selected_tasks()
+
+                t_s=[]
+                # 获取选择任务参数及入口任务
+                for pro_task in tasks:
+                    t=Task(pro_task.task_name,Program.get_entry_by_selected_task(p,pro_task.task_name))
+                    t_s.append(t)
+
                 if not tasks:
                     raise Exception("没有选择任何任务，无法执行")
 
                 # 发送任务到设备
-                task_manager.send_task(project, tasks)
+                task_manager.send_task(task_project, t_s)
 
                 # 成功连接和发送任务后更新UI
                 self.update_button_state(button_task_connect, "已连接", True)
@@ -469,21 +480,4 @@ class MainWindow(QWidget):
                         self.clear_layout(sub_layout)  # 递归调用
         layout.update()  # 更新布局
 
-if __name__ == '__main__':
-    try:
-        # 配置日志记录
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format='[%(asctime)s][%(levelname)s] - %(message)s',
-            handlers=[
-                logging.FileHandler("app.log"),
-                logging.StreamHandler()
-            ]
-        )
-        app = QApplication([])
-        window = MainWindow()
-        window.show()
-        app.exec()
-    finally:
-        TaskProjectManager().terminate_all()
 
