@@ -12,7 +12,7 @@
                 },
                 {
                     "task_name": "打开游戏",
-                    "entry": "打开游戏",
+                    "entry": "打开阴阳师",
                     "parameters": {
                         "param1": "value1",
                         "param2": "value2"
@@ -20,7 +20,7 @@
                 },
                 {
                     "task_name": "自动地鬼",
-                    "entry": null,
+                    "entry": "自动地鬼",
                     "parameters": {
                         "param1": "value1",
                         "param2": "value2"
@@ -68,7 +68,7 @@
             "selected_tasks": [
                 {
                     "task_name": "自动地鬼",
-                    "is_selected": false,
+                    "is_selected": true,
                     "task_parameters": {
                         "param1": "参数",
                         "param2": "hellow"
@@ -99,7 +99,7 @@
                 },
                 {
                     "task_name": "启动加速器",
-                    "is_selected": true,
+                    "is_selected": false,
                     "task_parameters": {
                         "param1": "valu车ui是"
                     }

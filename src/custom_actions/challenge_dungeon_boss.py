@@ -24,12 +24,15 @@ class ChallengeDungeonBoss(CustomAction):
         print("挑战地鬼数:", count)
         for _ in range(count):
             print("开始挑战第", _+1, "只地鬼")
+
+            # 筛选模板容易出现分数不够的情况
+
             context.run_pipeline("点击筛选", {
-                "点击筛选": {"post_delay": 2000, "timeout": 100, "recognition": "TemplateMatch", "template": "地域鬼王_筛选.png", "action": "Click", "target": [1102, 17, 58, 73]}})
+                "点击筛选": {"post_delay": 2000, "timeout": 500, "recognition": "TemplateMatch", "template": "地域鬼王_筛选.png", "action": "Click", "target": [1102, 17, 58, 73]}})
             context.run_pipeline("点击热门", {
-                "点击热门": {"post_delay": 2000, "timeout": 100,  "target": [1185, 220, 50, 120], "action": "Click"}})
+                "点击热门": {"post_delay": 2000, "timeout": 500,  "target": [1185, 220, 50, 120], "action": "Click"}})
             context.run_pipeline("识别挑战位置", {
-                "识别挑战位置": {"post_delay": 2000,"timeout": 100, "index": _, "order_by": "Vertical", "recognition": "TemplateMatch", "template": "地鬼_挑战.png", "action": "Click", "roi": [1035, 192, 135, 504]}})
+                "识别挑战位置": {"post_delay": 2000,"timeout": 500, "index": _, "order_by": "Vertical", "recognition": "TemplateMatch", "template": "地鬼_挑战.png", "action": "Click", "roi": [1035, 192, 135, 504]}})
 
 
             # 选择挑战等级

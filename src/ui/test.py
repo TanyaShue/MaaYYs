@@ -318,8 +318,9 @@ class MainWindow(QWidget):
                     t_s.append(t)
 
                 if not tasks:
-                    raise Exception("没有选择任何任务，无法执行")
 
+                    raise Exception("没有选择任何任务，无法执行")
+                t_s.reverse()
                 # 发送任务到设备
                 task_manager.send_task(task_project, t_s)
 

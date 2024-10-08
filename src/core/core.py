@@ -52,6 +52,9 @@ class TaskProjectManager:
             if project_key not in self.processes:
                 logging.error(f"No Tasker process found for {project_key}.")
                 return
+            for task in tasks:
+
+                print(task.task_name)
             self.processes[project_key][1].put(tasks)  # 发送任务
             logging.info(f"Task {tasks} sent to Tasker process for {project_key}")
 
@@ -109,7 +112,6 @@ def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing
 
     controller = AdbController(adb_path=p.adb_config['adb_address'], address=p.adb_config['adb_port'])
     controller.post_connection().wait()
-
     tasker = Tasker()
     tasker.bind(resource, controller)
 
@@ -134,7 +136,7 @@ def tasker_process(task_queue: multiprocessing.Queue, log_queue: multiprocessing
             tasks = task_queue.get()
             for task in tasks:
                 print(f"接收到任务{task.task_name}:{task.entry}")
-                tasker.post_pipeline(task.entry)
+                tasker.post_pipeline(task.entry).wait()
             if tasks == "TERMINATE":
                 log_to_queue(f"Terminating Tasker process for {p.adb_config['adb_address']}:{p.adb_config['adb_port']}")
                 break

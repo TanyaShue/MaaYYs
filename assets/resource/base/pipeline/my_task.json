@@ -7,16 +7,18 @@
   "打开加速器": {
     "action": "StartApp",
     "next": [
-      "打开游戏加速",
-      "回到主页"
+      "打开游戏加速"
     ],
-    "package": "com.github.kr328.clash/.MainActivity"
+    "interrupt": ["回到主页"],
+    "package": "com.github.kr328.clash/.MainActivity",
+    "post_delay":1000
   },
   "打开游戏加速": {
     "recognition": "OCR",
     "action": "Click",
     "next": "回到主页",
-    "expected": "已停止"
+    "expected": "已停止",
+    "timeout": 100
   },
   "回到主页": {
     "action": "key",
@@ -33,6 +35,8 @@
     "recognition": "DirectHit",
     "action": "Click",
     "pre_delay": 4000,
+    "next":"进入游戏",
+    "interrupt": ["点击一下屏幕"],
     "target": [
       165,
       98,
@@ -43,7 +47,6 @@
   "进入游戏": {
     "recognition": "OCR",
     "action": "Click",
-    "next": "打开邮箱",
     "expected": "进入游戏"
   },
   "游戏画面识别": {
