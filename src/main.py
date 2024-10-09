@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
 )
 
 from src.core.core import TaskProjectManager
-from src.ui.test import MainWindow
+from src.ui.ui import MainWindow
 
 if __name__ == '__main__':
     try:

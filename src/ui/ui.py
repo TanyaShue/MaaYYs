@@ -305,7 +305,6 @@ class MainWindow(QWidget):
                 # 启动连接任务（可以扩展为实际的连接逻辑）
                 task_manager.create_tasker_process(task_project)
 
-
                 p=self.config.get_program_by_name(task_project.program_name)
 
                 # 获取已选中的任务
@@ -375,6 +374,11 @@ class MainWindow(QWidget):
             # 添加设置按钮
             set_button = QPushButton('设置')
             set_button.clicked.connect(lambda _, selected_t=selected_task: self.set_task_parameters(selected_t))
+            task_row.addWidget(set_button)
+
+            # 添加发送任务按钮
+            set_button = QPushButton('执行')
+            set_button.clicked.connect(lambda _, selected_t=selected_task,task_p=task_projects: self.send_task(selected_t,task_p))
             task_row.addWidget(set_button)
 
             task_selection_layout.addLayout(task_row)
@@ -480,4 +484,30 @@ class MainWindow(QWidget):
                         self.clear_layout(sub_layout)  # 递归调用
         layout.update()  # 更新布局
 
+    def send_task(self, selected_t:SelectedTask,task_p:TaskProject):
 
+        # 创建 TaskProjectManager 实例
+        task_manager = TaskProjectManager()
+
+        # 定义实际任务执行逻辑
+        def execute_task():
+            try:
+                # 启动连接任务（可以扩展为实际的连接逻辑）
+                task_manager.create_tasker_process(task_p)
+                p=self.config.get_program_by_name(task_p.program_name)
+                # 获取已选中的任务
+                t_s=[]
+                t = Task(selected_t.task_name, Program.get_entry_by_selected_task(p, selected_t.task_name))
+                # 获取选择任务参数及入口任务
+                t_s.append(t)
+                t_s.reverse()
+                # 发送任务到设备
+                task_manager.send_task(task_p, t_s)
+                print(f"发送任务{selected_t.task_name}")
+            except Exception as e:
+                logging.error(f"任务启动失败: {e}")
+
+
+        # 使用线程池执行任务
+        task = TaskWorker(execute_task)
+        self.thread_pool.start(task)

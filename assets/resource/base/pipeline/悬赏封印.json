@@ -1,76 +1,149 @@
 {
-    "自动悬赏封印": {
-        "next": [
-            "悬赏封印",
-            "左滑一下屏幕"
-        ]
-    },
-    "悬赏封印": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "template": "悬赏封印.png",
-        "roi": [
-            7,
-            264,
-            1134,
-            82
-        ],
-        "post_delay": 2000,
-        "next": ["悬赏封印_点击一键追踪","悬赏封印_点击叉叉"]
-    },
-    "左滑一下屏幕": {
-        "is_sub": true,
-        "action": "Custom",
-        "custom_action": "RandomSwipe",
-        "custom_action_param": {
-            "start_roi": [
-                322,
-                269,
-                107,
-                239
-            ],
-            "end_roi": [
-                1004,
-                296,
-                96,
-                218
-            ],
-            "delay": 400
-        }
-    },
-    "悬赏封印_点击一键追踪": {
-        "recognition": "OCR",
-        "expected": "键",
-        "roi": [
-            1053,
-            535,
-            190,
-            153
-        ],
-        "action": "Click",
-        "next": "悬赏封印_点击叉叉"
-    },
-    "悬赏封印_点击叉叉": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "template": "地鬼_关闭.png",
-        "roi": [
-            1127,
-            74,
-            129,
-            157
-          ],
-        "next": ["悬赏封印_识别妖怪","点击探索"]
-    },
-    "悬赏封印_识别妖怪": {
-        "recognition": "OCR",
-        "expected": "悬赏封印",
-        "action": "Click",
-        "roi": [
-            2,
-            115,
-            143,
-            491
-          ]
+  "自动悬赏封印": {
+    "next": [
+      "悬赏封印",
+      "左滑一下屏幕"
+    ]
+  },
+  "悬赏封印": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "悬赏封印.png",
+    "roi": [
+      7,
+      264,
+      1134,
+      82
+    ],
+    "post_delay": 2000,
+    "next": [
+      "悬赏封印_点击一键追踪",
+      "悬赏封印_点击叉叉"
+    ]
+  },
+  "左滑一下屏幕": {
+    "is_sub": true,
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi": [
+        322,
+        269,
+        107,
+        239
+      ],
+      "end_roi": [
+        1004,
+        296,
+        96,
+        218
+      ],
+      "delay": 400
     }
+  },
+  "悬赏封印_点击一键追踪": {
+    "recognition": "OCR",
+    "expected": "键",
+    "roi": [
+      1053,
+      535,
+      190,
+      153
+    ],
+    "action": "Click",
+    "next": "悬赏封印_点击叉叉"
+  },
+  "悬赏封印_点击叉叉": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "地鬼_关闭.png",
+    "roi": [
+      1127,
+      74,
+      129,
+      157
+    ],
+    "next": [
+      "悬赏封印_识别妖怪"
+    ],
+    "interrupt": [
+      "点击探索"
+    ]
+  },
+  "悬赏封印_识别妖怪": {
+    "recognition": "OCR",
+    "expected": "悬赏封印",
+    "action": "Click",
+    "next": "识别探索目标",
+    "roi": [
+      2,
+      115,
+      143,
+      491
+    ]
+  },
+  "识别探索目标": {
+    "recognition": "OCR",
+    "expected": "探索",
+    "action": "Click",
+    "order_by": "Vertical",
+    "next": "点击开始探索",
+    "roi": [
+      530,
+      220,
+      82,
+      323
+    ],
+    "target_offset": [
+      450,
+      0,
+      0,
+      0
+    ]
+  },
+  "点击开始探索": {
+    "recognition": "OCR",
+    "action": "Click",
+    "roi": [
+      879,
+      508,
+      130,
+      60
+    ],
+    "expected": "探索",
+    "next": "探索_点击式神录"
+  },
+  "探索_点击式神录": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      781,
+      628,
+      66,
+      76
+    ],
+    "template": "探索_式神录.png",
+    "next": "装备日常清杂预设",
+    "post_delay": 1000
+  },
+  "装备日常清杂预设": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "日常",
+      "team_name": "日常清杂"
+    },
+    "next": "探索_悬赏_御魂_返回",
+    "post_delay": 2000
+  },
+    "探索_悬赏_御魂_返回": {
+    "action": "Click",
+    "target": [
+      20,
+      10,
+      50,
+      40
+    ],
+    "post_delay":2000
+  }
 }

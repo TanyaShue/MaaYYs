@@ -1,16 +1,32 @@
 {
-    "点击探索": {
-        "is_sub": true,
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "template": "探索.png",
-        "roi": [
-          239,
-          119,
-          872,
-          89
-        ],
-        "post_delay":2000
-    
-      }
+  "点击探索": {
+    "next": [
+      "探索_望月幽庭",
+      "探索_织梦莲庭"
+    ]
+  },
+  "探索_望月幽庭": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "探索_望月幽庭.png",
+    "roi": [
+      239,
+      119,
+      872,
+      150
+    ],
+    "post_delay": 2000
+  },
+  "探索_织梦莲庭": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "探索_织梦莲庭.png",
+    "roi": [
+      239,
+      119,
+      872,
+      150
+    ],
+    "post_delay": 2000
+  }
 }

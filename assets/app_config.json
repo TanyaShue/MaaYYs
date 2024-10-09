@@ -33,6 +33,22 @@
                         "param1": "自动999---1",
                         "param2": "自动999---2"
                     }
+                },
+                {
+                    "task_name": "自动悬赏",
+                    "entry": "自动悬赏封印",
+                    "parameters": {
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
+                    }
+                },
+                {
+                    "task_name": "自动结界",
+                    "entry": "自动结界",
+                    "parameters": {
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
+                    }
                 }
             ]
         },
@@ -68,17 +84,18 @@
             "selected_tasks": [
                 {
                     "task_name": "自动地鬼",
-                    "is_selected": true,
+                    "is_selected": false,
                     "task_parameters": {
                         "param1": "参数",
                         "param2": "hellow"
                     }
                 },
                 {
-                    "task_name": "任务2",
+                    "task_name": "自动结界",
                     "is_selected": false,
                     "task_parameters": {
-                        "测试测试": "哈哈哈哈哈"
+                        "param1": "参数",
+                        "param2": "hellow"
                     }
                 },
                 {
@@ -90,8 +107,16 @@
                     }
                 },
                 {
-                    "task_name": "打开游戏",
+                    "task_name": "自动悬赏",
                     "is_selected": false,
+                    "task_parameters": {
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
+                    }
+                },
+                {
+                    "task_name": "打开游戏",
+                    "is_selected": true,
                     "task_parameters": {
                         "param1": "hellow",
                         "param2": "value2"
@@ -99,7 +124,7 @@
                 },
                 {
                     "task_name": "启动加速器",
-                    "is_selected": false,
+                    "is_selected": true,
                     "task_parameters": {
                         "param1": "valu车ui是"
                     }

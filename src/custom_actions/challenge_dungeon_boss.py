@@ -28,7 +28,7 @@ class ChallengeDungeonBoss(CustomAction):
             # 筛选模板容易出现分数不够的情况
 
             context.run_pipeline("点击筛选", {
-                "点击筛选": {"post_delay": 2000, "timeout": 500, "recognition": "TemplateMatch", "template": "地域鬼王_筛选.png", "action": "Click", "target": [1102, 17, 58, 73]}})
+                "点击筛选": {"post_delay": 2000, "timeout": 500, "recognition": "TemplateMatch", "template": "地域鬼王_筛选.png", "action": "Click", "target": [1102, 17, 58, 73],"roi":[1077,2,99,121]}})
             context.run_pipeline("点击热门", {
                 "点击热门": {"post_delay": 2000, "timeout": 500,  "target": [1185, 220, 50, 120], "action": "Click"}})
             context.run_pipeline("识别挑战位置", {
