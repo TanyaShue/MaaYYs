@@ -35,8 +35,8 @@ MaaYYs 提供了一系列自动化工具，以简化玩家在游戏中的重复�
 
 ### 环境依赖
 
-- Python 3.8+
-- [MaaFramework](https://github.com/MaaXYZ/MaaFramework) ==1.8.9
+- Python 3.8+(推荐使用3.11+)
+- [MaaFramework](https://github.com/MaaXYZ/MaaFramework) ==2.0.2
 - PySide6
 
 ### 安装步骤
