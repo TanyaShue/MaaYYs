@@ -98,7 +98,25 @@
     "action": "Click"
   },
   "结束突破": {
-    "inverse": true
+    "recognition": "OCR",
+    "roi": [
+      1071,0,208,66
+    ],
+    "expected": "1/30",
+    "next":"关闭结界突破"
+  },
+
+  "关闭结界突破": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      1152,
+      82,
+      115,
+      116
+    ],
+    "template": "结界突破_关闭.png",
+    "next": "返回庭院"
   },
   "开始自动结界": {
     "next":["结束突破"],
@@ -303,6 +321,19 @@
     ]
   },
   "突破_重新挑战四次": {
+    "recognition": "DirectHit",
+    "action": "Custom",
+    "custom_action": "LoopAction",
+    "custom_action_param": {
+      "action_list": ["突破_重新挑战"],
+      "loop_times": 4
+    },
+    "next": [
+      "识别突破界面"
+    ],
+    "interrupt": "突破_结束战斗"
+  },
+  "突破_重新挑战": {
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": "战斗_返回.png",
@@ -333,9 +364,7 @@
     ],
     "template": "突破_再次挑战.png",
     "next": "确认再次挑战"
-
   },
-
   "确认再次挑战": {
     "recognition": "OCR",
     "action": "Click",
@@ -347,5 +376,4 @@
     ],
     "expected": "确定"
   }
-
 }

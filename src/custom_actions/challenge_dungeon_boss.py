@@ -18,7 +18,6 @@ class ChallengeDungeonBoss(CustomAction):
         image = context.tasker.controller.post_screencap().wait().get()
         detail = context.run_recognition("识别地鬼分数",image,  {"识别地鬼分数": {
                                         "recognition": "OCR", "expected": r"\d+", "roi": [1175, 15, 98, 77]}})
-        print(detail)
         value = int(detail.filterd_results[0].text)
         count = 3 if value > 10000 else 2 if value > 2000 else 1
         print("挑战地鬼数:", count)
