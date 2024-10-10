@@ -49,6 +49,14 @@
                         "param1": "自动999---1",
                         "param2": "自动999---2"
                     }
+                },
+                {
+                    "task_name": "自动逢魔",
+                    "entry": "自动逢魔",
+                    "parameters": {
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
+                    }
                 }
             ]
         },
@@ -130,6 +138,13 @@
                     }
                 },
                 {
+                    "task_name": "自动逢魔",
+                    "is_selected": true,
+                    "task_parameters": {
+                        "param1": "valu车ui是"
+                    }
+                },
+                {
                     "task_name": "测试",
                     "is_selected": false,
                     "task_parameters": {}
@@ -144,30 +159,61 @@
             },
             "selected_tasks": [
                 {
-                    "task_name": "打开游戏",
-                    "is_selected": true,
-                    "task_parameters": {
-                        "param1": "custom_value1",
-                        "param3": "custom_value3"
-                    }
-                },
-                {
                     "task_name": "自动地鬼",
                     "is_selected": true,
                     "task_parameters": {
-                        "param1": "value1",
+                        "param1": "参数",
+                        "param2": "hellow"
+                    }
+                },
+                {
+                    "task_name": "自动结界",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "参数",
+                        "param2": "hellow"
+                    }
+                },
+                {
+                    "task_name": "自动999",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
+                    }
+                },
+                {
+                    "task_name": "自动悬赏",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "自动999---1",
+                        "param2": "自动999---2"
+                    }
+                },
+                {
+                    "task_name": "打开游戏",
+                    "is_selected": true,
+                    "task_parameters": {
+                        "param1": "hellow",
                         "param2": "value2"
                     }
                 },
                 {
                     "task_name": "启动加速器",
-                    "is_selected": false,
+                    "is_selected": true,
                     "task_parameters": {
-                        "param1": "value1"
+                        "param1": "valu车ui是"
                     }
                 },
                 {
-                    "task_name": "自动999",
+                    "task_name": "自动逢魔",
+                    "is_selected": false,
+                    "task_parameters": {
+                        "param1": "valu车ui是"
+                    }
+                },
+                {
+                    "task_name": "测试",
                     "is_selected": false,
                     "task_parameters": {}
                 }

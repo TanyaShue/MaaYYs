@@ -1,0 +1,26 @@
+{
+  "自动逢魔": {
+    "next": ["点击逢魔"],
+    "interrupt": ["向右滑一下"]
+  },
+  "点击逢魔": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "庭院_逢魔.png",
+    "post_delay": 2000
+  },
+  "向右滑一下": {
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi": [
+       382,254,102,310
+      ],
+      "end_roi": [
+        797,300,99,309
+      ],
+      "delay": 200
+    },
+    "post_delay": 500
+  }
+}

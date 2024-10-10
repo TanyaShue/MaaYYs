@@ -1,12 +1,11 @@
 # python -m pip install maafw
-from maa.resource import Resource
 from maa.controller import AdbController
+from maa.resource import Resource
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
-from maa.custom_recognition import CustomRecognition
-from maa.custom_action import CustomAction
 from src.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
+
 
 def main():
     user_path = "../assets"
@@ -41,7 +40,6 @@ def main():
 
     resource.register_custom_action("ChallengeDungeonBoss", ChallengeDungeonBoss())
 
-    task_detail = tasker.post_pipeline("测试").wait().get()
     # print(task_detail.raw_detail)
     # do something with task_detail
 

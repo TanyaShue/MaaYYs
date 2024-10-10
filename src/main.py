@@ -1,6 +1,5 @@
 import logging
 
-from maa.library import Library
 from PySide6.QtWidgets import (
     QApplication
 )

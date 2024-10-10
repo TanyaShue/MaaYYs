@@ -1,4 +1,3 @@
-import random
 import time
 
 from maa.context import Context
