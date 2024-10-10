@@ -29,11 +29,11 @@
   "装备突破预设": {
     "action": "Custom",
     "custom_action": "SwitchSoul",
+    "next": "探索_突破_御魂_返回",
     "custom_action_param": {
       "group_name": "斗技",
       "team_name": "突破"
     },
-    "next": "探索_突破_御魂_返回",
     "post_delay": 2000
   },
   "探索_突破_御魂_返回": {
@@ -57,10 +57,32 @@
       597
     ],
     "template": "突破_进攻.png",
+    "post_delay": 10000,
+    "timeout": 200000,
     "next": [
-      "突破_结束战斗"
-    ]
+      "识别突破界面"
+    ],
+    "interrupt": "突破_结束战斗"
   },
+  "识别突破界面": {
+    "recognition": "OCR",
+    "roi": [
+     559,64,158,65
+    ],
+    "expected": "结界突破"
+  },
+
+  "识别突破卷数量": {
+    "recognition": "OCR",
+    "roi": [
+      1105,
+      3,
+      148,
+      65
+    ],
+    "expected": "1/30"
+  },
+
   "突破_结束战斗": {
     "recognition": "OCR",
     "roi": [
@@ -71,15 +93,17 @@
     ],
     "expected": "点击屏幕继续",
     "target": [
-      247,
-      499,
-      1002,
-      120
+219,419,1002,168
     ],
     "action": "Click"
   },
+  "结束突破": {
+    "inverse": true
+  },
   "开始自动结界": {
-    "next": [
+    "next":["结束突破"],
+    "interrupt": [
+      "突破_结束战斗",
       "挑战第一个结界",
       "挑战第二个结界",
       "挑战第三个结界",
@@ -107,7 +131,8 @@
       156,
       276,
       94
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第二个结界": {
     "recognition": "FeatureMatch",
@@ -125,7 +150,8 @@
       156,
       279,
       83
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第三个结界": {
     "recognition": "FeatureMatch",
@@ -143,7 +169,8 @@
       158,
       204,
       94
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第四个结界": {
     "recognition": "FeatureMatch",
@@ -161,7 +188,8 @@
       289,
       292,
       97
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第五个结界": {
     "recognition": "FeatureMatch",
@@ -179,7 +207,8 @@
       290,
       216,
       104
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第六个结界": {
     "recognition": "FeatureMatch",
@@ -197,7 +226,8 @@
       288,
       216,
       103
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第七个结界": {
     "recognition": "FeatureMatch",
@@ -215,7 +245,8 @@
       427,
       217,
       105
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第八个结界": {
     "recognition": "FeatureMatch",
@@ -233,7 +264,8 @@
       429,
       212,
       99
-    ]
+    ],
+    "next": "突破_点击进攻"
   },
   "挑战第九个结界": {
     "recognition": "FeatureMatch",
