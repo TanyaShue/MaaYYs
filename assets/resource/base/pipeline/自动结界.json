@@ -283,6 +283,69 @@
       423,
       218,
       109
+    ],
+    "next": "突破_最后一个进攻"
+  },
+  "突破_最后一个进攻": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "roi": [
+      115,
+      119,
+      1102,
+      597
+    ],
+    "template": "突破_进攻.png",
+    "post_delay": 10000,
+    "timeout": 200000,
+    "next": [
+      "突破_重新挑战四次"
     ]
+  },
+  "突破_重新挑战四次": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "战斗_返回.png",
+    "roi": [0,4,77,75],
+    "next": "退出战斗_确认"
+  },
+
+  "退出战斗_确认": {
+    "recognition": "OCR",
+    "action": "Click",
+    "roi": [
+      643,
+      359,
+      194,
+      113
+    ],
+    "expected": "确认",
+    "next": "突破_再次挑战"
+  },
+  "突破_再次挑战": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      769,
+      415,
+      225,
+      202
+    ],
+    "template": "突破_再次挑战.png",
+    "next": "确认再次挑战"
+
+  },
+
+  "确认再次挑战": {
+    "recognition": "OCR",
+    "action": "Click",
+    "roi": [
+      655,
+      388,
+      192,
+      87
+    ],
+    "expected": "确定"
   }
+
 }
