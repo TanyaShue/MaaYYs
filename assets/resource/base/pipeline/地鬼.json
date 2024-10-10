@@ -1,8 +1,11 @@
 {
   "自动地鬼": {
-    "next": ["点击地域鬼王","点击探索"]
+    "next": ["点击地域鬼王"],
+    "interrupt": "点击探索"
   },
   "点击地域鬼王": {
+    "recognition": "TemplateMatch",
+    "template": "探索_地域鬼王.png",
     "action": "Click",
     "next": "地鬼_点击式神录",
     "target": [
@@ -48,6 +51,7 @@
   "开始自动挑战鬼王":{
     "action": "Custom",
     "custom_action": "ChallengeDungeonBoss",
-    "post_delay":2000
+    "post_delay":2000,
+    "next": "返回庭院"
   }
 }

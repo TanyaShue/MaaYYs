@@ -116,7 +116,7 @@
                 },
                 {
                     "task_name": "打开游戏",
-                    "is_selected": true,
+                    "is_selected": false,
                     "task_parameters": {
                         "param1": "hellow",
                         "param2": "value2"
@@ -124,14 +124,14 @@
                 },
                 {
                     "task_name": "启动加速器",
-                    "is_selected": true,
+                    "is_selected": false,
                     "task_parameters": {
                         "param1": "valu车ui是"
                     }
                 },
                 {
                     "task_name": "测试",
-                    "is_selected": true,
+                    "is_selected": false,
                     "task_parameters": {}
                 }
             ]
