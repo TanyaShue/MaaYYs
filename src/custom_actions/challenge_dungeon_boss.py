@@ -51,14 +51,9 @@ class ChallengeDungeonBoss(CustomAction):
             print("等待20秒后重新开始挑战")
             time.sleep(20)
             print("等待识别分享按钮")
-            context.run_pipeline("识别分享", {"识别分享": {
-                             "recognition": "TemplateMatch", "timeout":300000,"template": "地鬼_分享.png", "action": "Click", "target": [165, 98, 913, 430]}})
-            time.sleep(5)
-            context.tasker.controller.post_click(random.randint(367, 866), random.randint(185, 638)).wait()
 
-            context.run_pipeline("点击叉叉", {
-                             "点击叉叉": {"recognition": "TemplateMatch", "template": "地鬼_关闭.png", "action": "Click"}})
-
+            context.run_pipeline("结束战斗",{"结束战斗": {"next":["点击叉叉"],"interrupt":"点击屏幕继续"},"点击屏幕继续": {
+                             "roi":[481,641,380,78],"recognition": "OCR", "timeout":300000,"expected": "点击屏幕继续", "action": "Click", "target": [275,488,652,112]},"点击叉叉": {"recognition": "TemplateMatch", "template": "地鬼_关闭.png", "action": "Click"}})
 
         print("自动地鬼挑战完成")
         return True

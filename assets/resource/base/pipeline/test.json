@@ -24,8 +24,8 @@
     "action": "Custom",
     "custom_action": "SwitchSoul",
     "custom_action_param": {
-      "group_name":"超鬼王",
-      "team_name":"队伍4"
+      "group_name": "日常",
+      "team_name": "日常清杂"
     }
   },
   "testOCR": {

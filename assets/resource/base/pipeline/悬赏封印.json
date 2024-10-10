@@ -38,7 +38,7 @@
         96,
         218
       ],
-      "delay": 400
+      "delay":2000
     }
   },
   "悬赏封印_点击一键追踪": {
@@ -75,12 +75,33 @@
     "expected": "悬赏封印",
     "action": "Click",
     "next": "识别探索目标",
+    "interrupt": "悬赏_向上滑动一下",
     "roi": [
       2,
       115,
       143,
       491
     ]
+  },
+  "悬赏_向上滑动一下": {
+    "roi": [
+      535,
+      177,
+      119,
+      48
+    ],
+    "expected": "发现地点",
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi": [
+        544,445,407,41
+      ],
+      "end_roi": [
+        540,224,400,47
+      ],
+      "delay": 400
+    }
   },
   "识别探索目标": {
     "recognition": "OCR",

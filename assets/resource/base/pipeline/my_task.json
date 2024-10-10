@@ -58,5 +58,7 @@
     "recognition": "TemplateMatch",
     "action": "Click",
     "template": "邮箱.png"
-  }
+  },"点击分组": {"timeout": 5000, "recognition": "OCR", "action": "Click",
+                                                           "expected": "日常",
+                                                           "roi": [1085, 86, 162, 542]}
 }
