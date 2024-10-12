@@ -6,108 +6,77 @@
         {
           "task_name": "打开游戏",
           "task_entry": "打开阴阳师",
-          "parameters": [
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "value1"
-            },
-            {
-              "name": "param2",
-              "type": "string",
-              "value": "value2"
-            }
+          "option": [
+            "选择区服"
           ]
         },
         {
           "task_name": "自动地鬼",
           "task_entry": "自动地鬼",
-          "parameters": [
-            {
-              "name": "装备地狱鬼王预设",
-              "type": "key_value",
-              "value": {
-                "group_name": "地域鬼王队伍分组",
-                "team_name": "地域鬼王队伍名称"
-              }
-            },
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "value1"
-            },
-            {
-              "name": "param2",
-              "type": "string",
-              "value": "value2"
-            }
+          "option": [
+
           ]
         },
         {
           "task_name": "自动悬赏",
           "task_entry": "自动悬赏封印",
-          "parameters": [
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "自动999---1"
-            },
-            {
-              "name": "param2",
-              "type": "string",
-              "value": "自动999---2"
-            }
+          "option": [
+            "装备悬赏封印预设"
           ]
         },
         {
           "task_name": "自动结界",
           "task_entry": "自动结界",
-          "parameters": [
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "自动999---1"
-            },
-            {
-              "name": "param2",
-              "type": "string",
-              "value": "自动999---2"
-            }
+          "option": [
+            "装备结界队伍预设"
           ]
         },
         {
           "task_name": "自动逢魔",
           "task_entry": "自动逢魔",
-          "parameters": [
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "自动999---1"
-            },
-            {
-              "name": "param2",
-              "type": "string",
-              "value": "自动999---2"
-            }
+          "option": [
+
           ]
         },
         {
           "task_name": "测试",
           "task_entry": "testSwitchSoul",
-          "parameters": [
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "自动999---1"
-            },
-            {
-              "name": "param2",
-              "type": "string",
-              "value": "自动999---2"
-            }
+          "option": [
+
           ]
         }
-      ]
+      ],
+      "option": {
+          "选择区服": {
+            "type": "select",
+            "key": [
+              "区服1",
+              "区服2",
+              "区服3"
+            ],
+            "value": {
+            }
+
+          },
+          "装备悬赏封印预设": {
+            "type": "input",
+            "value": "{value}",
+            "pipeline_override": {
+                        "SetReplaysTimes": {
+                            "expected": "{value}"
+                        }
+                    }
+          },
+          "装备结界队伍预设": {
+            "type": "select",
+            "key": [
+              "结界预设1",
+              "结界预设2",
+              "结界预设3"
+            ]
+          }
+      }
+
     },
     {
       "program_name": "明日方舟",
@@ -115,33 +84,15 @@
         {
           "task_name": "任务1",
           "task_entry": null,
-          "parameters": [
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "value1"
-            },
-            {
-              "name": "param2",
-              "type": "string",
-              "value": "value2"
-            }
+          "option": [
+
           ]
         },
         {
           "task_name": "任务3",
           "task_entry": null,
-          "parameters": [
-            {
-              "name": "param1",
-              "type": "string",
-              "value": "value1"
-            },
-            {
-              "name": "param3",
-              "type": "string",
-              "value": "value3"
-            }
+          "option": [
+
           ]
         }
       ]
