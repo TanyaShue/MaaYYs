@@ -15,6 +15,10 @@
                     "task_name": "自动地鬼",
                     "entry": "自动地鬼",
                     "parameters": {
+                        "装备地狱鬼王预设": {
+                            "group_name": "地域鬼王队伍分组",
+                            "team_name": "地域鬼王队伍名称"
+                        },
                         "param1": "value1",
                         "param2": "value2"
                     }

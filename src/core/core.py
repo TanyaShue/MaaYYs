@@ -10,7 +10,7 @@ from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
 from src.utils.config_models import TaskProject, Task
-from src.custom_decorators.loader import load_custom_actions, action_registry, load_custom_recognizers, \
+from src.core.loader import load_custom_actions, action_registry, load_custom_recognizers, \
     recognizer_registry
 
 

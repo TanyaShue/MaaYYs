@@ -1,0 +1,150 @@
+{
+  "programs": [
+    {
+      "program_name": "阴阳师",
+      "program_tasks": [
+        {
+          "task_name": "打开游戏",
+          "task_entry": "打开阴阳师",
+          "parameters": [
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "type": "string",
+              "value": "value2"
+            }
+          ]
+        },
+        {
+          "task_name": "自动地鬼",
+          "task_entry": "自动地鬼",
+          "parameters": [
+            {
+              "name": "装备地狱鬼王预设",
+              "type": "key_value",
+              "value": {
+                "group_name": "地域鬼王队伍分组",
+                "team_name": "地域鬼王队伍名称"
+              }
+            },
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "type": "string",
+              "value": "value2"
+            }
+          ]
+        },
+        {
+          "task_name": "自动悬赏",
+          "task_entry": "自动悬赏封印",
+          "parameters": [
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "自动999---1"
+            },
+            {
+              "name": "param2",
+              "type": "string",
+              "value": "自动999---2"
+            }
+          ]
+        },
+        {
+          "task_name": "自动结界",
+          "task_entry": "自动结界",
+          "parameters": [
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "自动999---1"
+            },
+            {
+              "name": "param2",
+              "type": "string",
+              "value": "自动999---2"
+            }
+          ]
+        },
+        {
+          "task_name": "自动逢魔",
+          "task_entry": "自动逢魔",
+          "parameters": [
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "自动999---1"
+            },
+            {
+              "name": "param2",
+              "type": "string",
+              "value": "自动999---2"
+            }
+          ]
+        },
+        {
+          "task_name": "测试",
+          "task_entry": "testSwitchSoul",
+          "parameters": [
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "自动999---1"
+            },
+            {
+              "name": "param2",
+              "type": "string",
+              "value": "自动999---2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_name": "明日方舟",
+      "program_tasks": [
+        {
+          "task_name": "任务1",
+          "task_entry": null,
+          "parameters": [
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "type": "string",
+              "value": "value2"
+            }
+          ]
+        },
+        {
+          "task_name": "任务3",
+          "task_entry": null,
+          "parameters": [
+            {
+              "name": "param1",
+              "type": "string",
+              "value": "value1"
+            },
+            {
+              "name": "param3",
+              "type": "string",
+              "value": "value3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -65,7 +65,7 @@ class MainWindow(QWidget):
 
     def load_styles(self):
         """加载样式文件"""
-        with open('style.qss', 'r', encoding='utf-8') as f:
+        with open('./ui/style.qss', 'r', encoding='utf-8') as f:
             self.setStyleSheet(f.read())
 
     def start_log_thread(self):
