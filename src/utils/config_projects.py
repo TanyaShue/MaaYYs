@@ -1,82 +1,90 @@
-@dataclass
+import json
+
 class AdbConfig:
-    adb_path: str
-    adb_address: str
+    def __init__(self, adb_path, adb_address):
+        self.adb_path = adb_path
+        self.adb_address = adb_address
 
-    def to_dict(self):
-        return asdict(self)
+    @staticmethod
+    def from_json(data):
+        return AdbConfig(
+            adb_path=data['adb_path'],
+            adb_address=data['adb_address']
+        )
 
+    def to_json(self):
+        return {
+            "adb_path": self.adb_path,
+            "adb_address": self.adb_address
+        }
 
-@dataclass
-class ProjectParameter:
-    task_name: str
-    name: str
-    type: str
-    value: str
+class ProjectOption:
+    def __init__(self, select=None, input=None):
+        self.select = select or {}
+        self.input = input or {}
 
-    def to_dict(self):
-        return asdict(self)
+    @staticmethod
+    def from_json(data):
+        select = {k: v['select'] for k, v in data.items() if 'select' in v}
+        input = {k: v['input'] for k, v in data.items() if 'input' in v}
+        return ProjectOption(select=select, input=input)
 
+    def to_json(self):
+        options = {}
+        for k, v in self.select.items():
+            options[k] = {"select": v}
+        for k, v in self.input.items():
+            options[k] = {"input": v}
+        return options
 
-@dataclass
 class Project:
-    project_name: str
-    program_name: str
-    adb_config: AdbConfig
-    selected_tasks: List[str]
-    project_parameters: List[ProjectParameter]
+    def __init__(self, project_name, program_name, adb_config, selected_tasks, option=None):
+        self.project_name = project_name
+        self.program_name = program_name
+        self.adb_config = adb_config
+        self.selected_tasks = selected_tasks
+        self.option = option or ProjectOption()
 
-    def to_dict(self):
+    @staticmethod
+    def from_json(data):
+        return Project(
+            project_name=data['project_name'],
+            program_name=data['program_name'],
+            adb_config=AdbConfig.from_json(data['adb_config']),
+            selected_tasks=data['selected_tasks'],
+            option=ProjectOption.from_json(data.get('option', {}))
+        )
+
+    def to_json(self):
         return {
             "project_name": self.project_name,
             "program_name": self.program_name,
-            "adb_config": self.adb_config.to_dict(),
+            "adb_config": self.adb_config.to_json(),
             "selected_tasks": self.selected_tasks,
-            "project_parameters": [param.to_dict() for param in self.project_parameters]
+            "option": self.option.to_json()
         }
 
-
-@dataclass
-class Projects:
-    projects: List[Project]
+class ProjectsJson:
+    def __init__(self, projects=None):
+        self.projects = [Project.from_json(p) for p in projects] if projects else []
 
     @staticmethod
-    def from_json(data: dict) -> 'Projects':
-        projects = [
-            Project(
-                project_name=project['project_name'],
-                program_name=project['program_name'],
-                adb_config=AdbConfig(
-                    adb_path=project['adb_config']['adb_path'],
-                    adb_address=project['adb_config']['adb_address']
-                ),
-                selected_tasks=project['selected_tasks'],
-                project_parameters=[
-                    ProjectParameter(
-                        task_name=param['task_name'],
-                        name=param['name'],
-                        type=param['type'],
-                        value=param['value']
-                    ) for param in project['project_parameters']
-                ]
-            ) for project in data['projects']
-        ]
-        return Projects(projects=projects)
+    def from_json(data):
+        return ProjectsJson(
+            projects=data.get('projects', [])
+        )
 
-    def to_dict(self):
+    def to_json(self):
         return {
-            "projects": [project.to_dict() for project in self.projects]
+            "projects": [project.to_json() for project in self.projects]
         }
 
-    def save_to_json(self, filepath: str):
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(self.to_dict(), f, ensure_ascii=False, indent=4)
+    @staticmethod
+    def load_from_file(filename):
+        with open(filename, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return ProjectsJson.from_json(data)
 
-
-# 示例：从 JSON 文件读取并保存
-# with open('projects.json', 'r', encoding='utf-8') as f:
-#     data = json.load(f)
-#     projects = Projects.from_json(data)
-#
-# # 修改后保存回 projects.json
-# projects.save_to_json('new_projects.json')
+    def save_to_file(self, filename):
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(self.to_json(), f, ensure_ascii=False, indent=4)

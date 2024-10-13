@@ -1,67 +1,47 @@
 {
-  "projects": [
-    {
-      "project_name": "阴阳师1",
-      "program_name": "阴阳师",
-      "adb_config": {
-        "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
-        "adb_address": "127.0.0.1:5555"
-      },
-      "selected_tasks": [
-        "自动地鬼",
-        "自动结界",
-        "自动悬赏",
-        "打开游戏",
-        "自动逢魔"
-      ],
-      "option": [
-
-      ]
-    },
-    {
-      "project_name": "阴阳师2",
-      "program_name": "阴阳师",
-      "adb_config": {
-        "adb_path": "C:/Program Files/BlueStacks_nxt/HD-Adb.exe",
-        "adb_address": "127.0.0.1:5625"
-      },
-      "selected_tasks": [
-        "自动地鬼",
-        "打开游戏",
-        "启动加速器"
-      ],
-      "project_parameters": [
+    "projects": [
         {
-          "task_name": "自动地鬼",
-          "name": "param1",
-          "type": "string",
-          "value": "参数"
+            "project_name": "阴阳师1",
+            "program_name": "阴阳师",
+            "adb_config": {
+                "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
+                "adb_address": "127.0.0.1:5555"
+            },
+            "selected_tasks": [
+                "自动地鬼",
+                "自动结界",
+                "自动悬赏",
+                "打开游戏",
+                "自动逢魔"
+            ],
+            "option": {
+                "选择区服": {
+                    "select": "测试服"
+                },
+                "悬赏封印分组预设": {
+                    "input": "默认分组"
+                },
+                "悬赏封印队伍预设": {
+                    "input": "默认队伍"
+                },
+                "结界突破分组预设": {
+                    "input": "默认队伍"
+                }
+            }
         },
         {
-          "task_name": "自动地鬼",
-          "name": "param2",
-          "type": "string",
-          "value": "hellow"
-        },
-        {
-          "task_name": "打开游戏",
-          "name": "param1",
-          "type": "string",
-          "value": "hellow"
-        },
-        {
-          "task_name": "打开游戏",
-          "name": "param2",
-          "type": "string",
-          "value": "value2"
-        },
-        {
-          "task_name": "启动加速器",
-          "name": "param1",
-          "type": "string",
-          "value": "valu车ui是"
+            "project_name": "阴阳师2",
+            "program_name": "阴阳师",
+            "adb_config": {
+                "adb_path": "C:/Program Files/BlueStacks_nxt/HD-Adb.exe",
+                "adb_address": "127.0.0.1:5625"
+            },
+            "selected_tasks": [
+                "自动地鬼",
+                "打开游戏",
+                "启动加速器"
+            ],
+            "option": {}
         }
-      ]
-    }
-  ]
+    ]
 }

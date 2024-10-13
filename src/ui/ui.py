@@ -8,6 +8,8 @@ from PySide6.QtWidgets import (
     QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView
 )
 
+from src.utils.config_programs import *
+from src.utils.config_projects import *
 from src.utils.config_models import Config, Task, Program, TaskProject, SelectedTask  # 确保根据你的实际路径引入 Config 类
 from src.core.core import TaskProjectManager, log_thread
 
@@ -31,8 +33,12 @@ class MainWindow(QWidget):
         super().__init__()
 
         # 加载配置类
-        Config.json_path= '../assets/app_config.json'
-        self.config = Config.from_json()  # 直接加载配置类
+        self.projects_json_path = '../assets/config/projects.json'
+        self.projects = ProjectsJson.load_from_file(self.projects_json_path)  # 直接加载配置类
+
+        self.programs_json_path = '../assets/config/programs.json'
+        self.programs = ProgramsJson.load_from_file(self.programs_json_path)  # 直接加载配置类
+
         # 加载样式文件
         self.load_styles()
 
@@ -77,11 +83,12 @@ class MainWindow(QWidget):
 
     # 保存 Config 实例
     def save_json_data(self):
-        Config.save_to_json(self.config)
+        self.projects.save_to_file(self.projects_json_path)
+        self.programs.save_to_file(self.programs_json_path)
 
     def init_navigation_bar(self):
         """动态创建左侧导航栏按钮"""
-        nav_buttons = ['首页'] + [program.program_name for program in self.config.programs]
+        nav_buttons = ['首页'] + [program.program_name for program in self.programs.programs]
         for btn_text in nav_buttons:
             button = QPushButton(btn_text)
             button.setFixedHeight(50)
@@ -209,12 +216,12 @@ class MainWindow(QWidget):
         # 连接表格数据变化的信号到槽函数
         self.table.itemChanged.connect(self.on_table_item_changed)
 
-        for task_projects_name, project in self.config.task_projects.items():
+        for project in self.projects.projects:
             row = self.table.rowCount()
             self.table.insertRow(row)
 
             # 任务名称
-            task_name_item = QTableWidgetItem(task_projects_name)
+            task_name_item = QTableWidgetItem(project.project_name)
             task_name_item.setData(Qt.UserRole, project)  # 绑定项目对象到表格单元格
             self.table.setItem(row, 0, task_name_item)
 
@@ -223,13 +230,13 @@ class MainWindow(QWidget):
             self.table.setItem(row, 1, program_name_item)
 
             # ADB 地址
-            adb_address_item = QTableWidgetItem(project.adb_config['adb_address'])
-            adb_address_item.setData(Qt.UserRole, ('adb_address', project))  # 绑定 ADB 地址字段到单元格
+            adb_address_item = QTableWidgetItem(project.adb_config.adb_path)
+            adb_address_item.setData(Qt.UserRole, ('adb_path', project))  # 绑定 ADB 地址字段到单元格
             self.table.setItem(row, 2, adb_address_item)
 
             # ADB 端口
-            adb_port_item = QTableWidgetItem(project.adb_config['adb_port'])
-            adb_port_item.setData(Qt.UserRole, ('adb_port', project))  # 绑定 ADB 端口字段到单元格
+            adb_port_item = QTableWidgetItem(project.adb_config.adb_address)
+            adb_port_item.setData(Qt.UserRole, ('adb_address', project))  # 绑定 ADB 端口字段到单元格
             self.table.setItem(row, 3, adb_port_item)
 
             # 运行状态
@@ -250,7 +257,7 @@ class MainWindow(QWidget):
 
             button_info = QPushButton('查看详情')
             button_info.setObjectName('infoButton')
-            button_info.clicked.connect(lambda _, p=task_projects_name: self.show_device_details(p))
+            button_info.clicked.connect(lambda _, p=project: self.show_device_details(p))
             layout.addWidget(button_info)
 
             # save_button = QPushButton("保存更改")
