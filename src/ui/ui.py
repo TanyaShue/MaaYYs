@@ -276,16 +276,16 @@ class MainWindow(QWidget):
         """处理表格内容变化，更新 project 对象"""
         data = item.data(Qt.UserRole)
 
-        if isinstance(data, tuple) and len(data) == 2:
-            field_name, project = data
-            new_value = item.text()
-
-            # 更新 project 对象中的值
-            if field_name in project.adb_config:
-                project.adb_config[field_name] = new_value
-            elif field_name == 'status':  # 假设你有其他字段
-                project.status = new_value
-        self.save_json_data()
+        # if isinstance(data, tuple) and len(data) == 2:
+        #     field_name, project = data
+        #     new_value = item.text()
+        #
+        #     # 更新 project 对象中的值
+        #     if field_name in project.adb_config:
+        #         project.adb_config[field_name] = new_value
+        #     elif field_name == 'status':  # 假设你有其他字段
+        #         project.status = new_value
+        # self.save_json_data()
         # 你可以选择在这里调用 `save_json_data()`，实时保存变更
 
     def clear_right_layout(self):

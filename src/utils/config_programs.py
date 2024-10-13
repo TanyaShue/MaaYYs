@@ -56,7 +56,7 @@ class TaskOption:
     def to_json(self):
         return {
             "select": [s.to_json() for s in self.select],
-            "input": {i.to_json() for i in self.input},
+            "input":  self.input,
             "boole": self.boole
         }
 
