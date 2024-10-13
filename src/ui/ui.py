@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
-    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView
+    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView, QComboBox
 )
 
 from src.utils.config_programs import *
@@ -231,7 +231,7 @@ class MainWindow(QWidget):
 
             # ADB 地址
             adb_address_item = QTableWidgetItem(project.adb_config.adb_path)
-            adb_address_item.setData(Qt.UserRole, ('adb_path', project))  # 绑定 ADB 地址字段到单元格
+            adb_address_item.setData(Qt.UserRole, ('adb_path', project))  # 绑定 ADB 路径字段到单元格
             self.table.setItem(row, 2, adb_address_item)
 
             # ADB 端口
@@ -349,13 +349,12 @@ class MainWindow(QWidget):
         button.setText(text)
         button.setEnabled(enabled)
 
-    def show_device_details(self, task_projects_name):
+    def show_device_details(self, project):
         # 更新详细信息标题
-        self.info_title.setText(f"详细信息: {task_projects_name}")
+        self.info_title.setText(f"详细信息: {project.project_name}")
 
-        task_projects = self.config.task_projects[task_projects_name]
-        program = self.config.get_program_by_name(task_projects.program_name)
-
+        # 获取对应的 program
+        program = self.programs.get_program_by_name(project.program_name)
         if not program:
             print("程序不存在")
             return
@@ -365,116 +364,169 @@ class MainWindow(QWidget):
         task_selection_layout = task_selection_group.layout()
         self.clear_layout(task_selection_layout)
 
+        # 记录所有复选框
+        self.checkboxes = []
+
         # 动态添加任务复选框和设置按钮
-        for task in program.tasks:
-            selected_task = task_projects.get_selected_task_by_name(task.task_name)
+        for task in program.program_tasks:
             task_row = QHBoxLayout()
+
             # 添加任务复选框
             checkbox = QCheckBox(task.task_name)
-            checkbox.setChecked(selected_task.is_selected)
-            checkbox.stateChanged.connect(lambda state, selected_t=selected_task, program_task=task,
-                                                 task_p=task_projects: self.update_task_selection(selected_t,
-                                                                                                  program_task, state,
-                                                                                                  task_p))
+            checkbox.setChecked(True if task.task_name in project.selected_tasks else False)
+
+            # 记录复选框
+            self.checkboxes.append(checkbox)
+
+            # 定义处理复选框状态变化的函数
+            def on_checkbox_state_changed(state, task_name=task.task_name):
+                if state == Qt.CheckState.Checked.value:  # 勾选状态
+                    if task_name not in project.selected_tasks:
+                        project.selected_tasks.append(task_name)
+                else:  # 未勾选状态
+                    if task_name in project.selected_tasks:
+                        project.selected_tasks.remove(task_name)
+
+                # 保存到文件
+                self.projects.save_to_file(self.projects_json_path)
+
+            # 连接复选框状态变化信号到自定义函数
+            checkbox.stateChanged.connect(on_checkbox_state_changed)
             task_row.addWidget(checkbox)
 
             # 添加设置按钮
             set_button = QPushButton('设置')
-            set_button.clicked.connect(lambda _, selected_t=selected_task: self.set_task_parameters(selected_t))
+            set_button.clicked.connect(lambda _, selected_t=task: self.set_task_parameters(selected_t, program))
             task_row.addWidget(set_button)
+
 
             # 添加发送任务按钮
-            set_button = QPushButton('执行')
-            set_button.clicked.connect(lambda _, selected_t=selected_task,task_p=task_projects: self.send_task(selected_t,task_p))
-            task_row.addWidget(set_button)
+            execute_button = QPushButton('执行')
+            execute_button.clicked.connect(lambda _, selected_t=task, p=project: self.send_task(selected_t, p))
+            task_row.addWidget(execute_button)
 
+            # 将任务行添加到布局
             task_selection_layout.addLayout(task_row)
-
 
         # 添加“全选”和“开始”按钮
         button_container = QHBoxLayout()
 
         # 添加全选按钮
+        self.select_all_state = False  # 初始状态为未全选
         select_all_button = QPushButton("全选")
         select_all_button.setObjectName('runButton')
 
-        select_all_button.clicked.connect(
-            lambda: self.select_all_tasks(task_projects, task_selection_layout, select_all_button,program))
+        # 定义全选/清空按钮的行为
+        def toggle_select_all():
+            if not self.select_all_state:
+                # 全选所有任务
+                for checkbox in self.checkboxes:
+                    checkbox.setChecked(True)
+                select_all_button.setText("清空")
+                self.select_all_state = True
+            else:
+                # 清空所有任务的选择
+                for checkbox in self.checkboxes:
+                    checkbox.setChecked(False)
+                select_all_button.setText("全选")
+                self.select_all_state = False
+
+        # 连接全选按钮的点击事件
+        select_all_button.clicked.connect(toggle_select_all)
         button_container.addWidget(select_all_button)
 
         # 添加开始按钮
         start_button = QPushButton("开始")
         start_button.setObjectName('runButton')
-        start_button.clicked.connect(lambda _, p=task_projects,bu=start_button: self.run_task(p,bu))
+        start_button.clicked.connect(lambda _, p=project, bu=start_button: self.run_task(p, bu))
         button_container.addWidget(start_button)
 
         # 将按钮布局添加到主布局
         task_selection_layout.addLayout(button_container)
 
-    def select_all_tasks(self, task_projects, task_selection_layout, select_all_button,program):
-        """
-        选择或取消选择所有任务，并切换按钮文本
-        """
-        all_checked = all(
-            task_p.is_selected
-            for task in program.tasks
-            for task_p in task_projects.selected_tasks
-            if task.task_name == task_p.task_name
-        )
 
-        new_state = not all_checked  # 切换到相反的状态
-
-        # 更新所有任务的选中状态和复选框
-        for i in range(task_selection_layout.count() - 1):  # 忽略最后的按钮行
-            task_row = task_selection_layout.itemAt(i).layout()
-            checkbox = task_row.itemAt(0).widget()
-            checkbox.setChecked(new_state)  # 切换所有任务复选框的状态
-
-            task_name = checkbox.text()
-            selected_task = task_projects.get_selected_task_by_name(task_name)  # 获取任务（所有任务而不是已选中的）
-            selected_task.is_selected = new_state  # 更新所有任务的选中状态
-
-        # 根据新状态设置按钮文本：如果所有任务都选中，显示“清空”，否则显示“全选”
-        select_all_button.setText("清空" if new_state else "全选")
-
-        self.config.save_to_json()
-
-    def update_task_selection(self, selected_task, program_task:Task, state,task_p:TaskProject):
-
-        if selected_task:
-            selected_task.is_selected=state==Qt.CheckState.Checked.value
-        else:
-            new_task=SelectedTask(program_task.task_name,False,program_task.parameters)
-            task_p.selected_tasks.append(new_task)
-
-        self.config.save_to_json()
-
-    def set_task_parameters(self, selected_task:SelectedTask):
+    def set_task_parameters(self, selected_task, program):
         """清空布局"""
         task_settings_group = self.splitter.widget(1)
         task_settings_layout = task_settings_group.layout()
         self.clear_layout(task_settings_layout)
-        parameters = selected_task.task_parameters
 
-        # 动态生成任务参数输入框
-        for param_name, param_value in parameters.items():
-            param_layout = QHBoxLayout()
-            label = QLabel(param_name)
-            line_edit = QLineEdit(str(param_value))
+        # 获取对应任务的 option
+        options = program.get_task_by_name(selected_task.task_name).option
+        setting = program.option.options
 
-            # 将输入框的内容变化绑定到 selected_task 的参数上
-            line_edit.textChanged.connect(
-                lambda text, name=param_name: self.update_task_parameter(selected_task, name, text))
+        # 动态生成设置参数输入框
+        for option in options:
+            sett = setting.get(option)
 
-            param_layout.addWidget(label)
-            param_layout.addWidget(line_edit)
-            task_settings_layout.addLayout(param_layout)
+            # 如果是 input 类型，生成 QLineEdit
+            if sett.type == 'input' and sett.input:
+                param_layout = QHBoxLayout()
+                label = QLabel(sett.input.name)
+                line_edit = QLineEdit(str(sett.input.default))
+
+                # 将输入框的内容变化绑定到 selected_task 的参数上
+                line_edit.textChanged.connect(
+                    lambda text, name=sett.input.name: self.update_task_parameter(selected_task, name, text)
+                )
+
+                param_layout.addWidget(label)
+                param_layout.addWidget(line_edit)
+                task_settings_layout.addLayout(param_layout)
+                print(f"Input Option: name={sett.input.name}, default={sett.input.default}, "
+                      f"pipeline_override={sett.input.pipeline_override}")
+
+            # 如果是 select 类型，生成 QComboBox
+            elif sett.type == 'select' and sett.select:
+                param_layout = QHBoxLayout()
+                label = QLabel(option)
+                combo_box = QComboBox()
+
+                # 添加下拉选项
+                for select_option in sett.select:
+                    combo_box.addItem(select_option.name)
+
+                # 处理下拉框选择事件
+                combo_box.currentTextChanged.connect(
+                    lambda text, name=option: self.update_task_parameter(selected_task, name, text)
+                )
+
+                param_layout.addWidget(label)
+                param_layout.addWidget(combo_box)
+                task_settings_layout.addLayout(param_layout)
+
+                for select_option in sett.select:
+                    print(f"Select Option: name={select_option.name}, "
+                          f"pipeline_override={select_option.pipeline_override}")
+
+            # 如果是 boole 类型，生成 QCheckBox
+            elif sett.type == 'boole':
+                param_layout = QHBoxLayout()
+                label = QLabel(option)
+                check_box = QCheckBox()
+                check_box.setChecked(sett.boole)
+
+                # 处理复选框状态改变事件
+                check_box.stateChanged.connect(
+                    lambda state, name=option: self.update_task_parameter(selected_task, name, bool(state))
+                )
+
+                param_layout.addWidget(label)
+                param_layout.addWidget(check_box)
+                task_settings_layout.addLayout(param_layout)
+
+                print(f"Boolean Option: {sett.boole}")
+
+            else:
+                print("Unknown option type or missing attributes.")
+
 
     def update_task_parameter(self, selected_task: SelectedTask, param_name: str, new_value: str):
         """更新任务参数的值"""
         # 更新 selected_task 的参数值
-        selected_task.task_parameters[param_name] = new_value
-        self.config.save_to_json()
+        # selected_task.task_parameters[param_name] = new_value
+        # self.config.save_to_json()
+        #TODO
 
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""

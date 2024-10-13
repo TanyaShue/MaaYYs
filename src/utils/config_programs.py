@@ -40,25 +40,49 @@ class SelectOption:
         }
 
 class TaskOption:
-    def __init__(self, select=None, input=None, boole=None):
+    def __init__(self, option_type=None, select=None, input=None, boole=None):
+        self.type = option_type
         self.select = [SelectOption.from_json(s) for s in select] if select else []
-        self.input = InputOption.from_json(input) if input else {}
+        self.input = InputOption.from_json(input) if input else None
         self.boole = boole if boole is not None else False
 
     @staticmethod
     def from_json(data):
-        return TaskOption(
-            select=data.get('select', []),
-            input=data.get('input',{}),
-            boole=data.get('boole')
-        )
+        # 根据 data 中的键来决定类型
+        if 'select' in data:
+            return TaskOption(
+                option_type='select',
+                select=data.get('select', [])
+            )
+        elif 'input' in data:
+            return TaskOption(
+                option_type='input',
+                input=data.get('input')
+            )
+        elif 'boole' in data:
+            return TaskOption(
+                option_type='boole',
+                boole=data.get('boole', False)
+            )
+        return TaskOption()
 
     def to_json(self):
-        return {
-            "select": [s.to_json() for s in self.select],
-            "input":  self.input,
-            "boole": self.boole
-        }
+        if self.type == 'select':
+            return {
+                "select": [s.to_json() for s in self.select],
+                "type": self.type
+            }
+        elif self.type == 'input':
+            return {
+                "input": self.input.to_json() if self.input else None,
+                "type": self.type
+            }
+        elif self.type == 'boole':
+            return {
+                "boole": self.boole,
+                "type": self.type
+            }
+        return {}
 
 class Task:
     def __init__(self, task_name, task_entry=None, option=None):
@@ -115,6 +139,13 @@ class Program:
             "option": self.option.to_json() if self.option else None
         }
 
+    # 通过名字获取任务
+    def get_task_by_name(self, task_name):
+        for task in self.program_tasks:
+            if task.task_name == task_name:
+                return task
+        return None
+
 class ProgramsJson:
     def __init__(self, programs=None):
         self.programs = [Program.from_json(p) for p in programs] if programs else []
@@ -130,6 +161,13 @@ class ProgramsJson:
             "programs": [program.to_json() for program in self.programs]
         }
 
+    # 通过名字获取程序
+    def get_program_by_name(self, program_name):
+        for program in self.programs:
+            if program.program_name == program_name:
+                return program
+        return None
+
     @staticmethod
     def load_from_file(filename):
         with open(filename, 'r', encoding='utf-8') as f:
@@ -139,5 +177,3 @@ class ProgramsJson:
     def save_to_file(self, filename):
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(self.to_json(), f, ensure_ascii=False, indent=4)
-
-

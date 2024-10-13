@@ -1,154 +1,147 @@
 {
-  "programs": [
-    {
-      "program_name": "阴阳师",
-      "program_tasks": [
+    "programs": [
         {
-          "task_name": "打开游戏",
-          "task_entry": "打开阴阳师",
-          "option": [
-            "选择区服"
-          ]
+            "program_name": "阴阳师",
+            "program_tasks": [
+                {
+                    "task_name": "打开游戏",
+                    "task_entry": "打开阴阳师",
+                    "option": [
+                        "选择区服","悬赏封印分组预设"
+                    ]
+                },
+                {
+                    "task_name": "自动地鬼",
+                    "task_entry": "自动地鬼",
+                    "option": []
+                },
+                {
+                    "task_name": "自动悬赏",
+                    "task_entry": "自动悬赏封印",
+                    "option": [
+                        "悬赏封印分组预设",
+                        "悬赏封印队伍预设"
+                    ]
+                },
+                {
+                    "task_name": "自动结界",
+                    "task_entry": "自动结界",
+                    "option": [
+                        "结界突破分组预设",
+                        "结界突破队伍预设"
+                    ]
+                },
+                {
+                    "task_name": "自动逢魔",
+                    "task_entry": "自动逢魔",
+                    "option": [
+                        "打极逢魔"
+                    ]
+                },
+                {
+                    "task_name": "测试",
+                    "task_entry": "testSwitchSoul",
+                    "option": []
+                },
+                {
+                    "task_name": "测试2",
+                    "task_entry": "testSwitchSoul",
+                    "option": []
+                }
+            ],
+            "option": {
+                "选择区服": {
+                    "select": [
+                        {
+                            "name": "官服",
+                            "pipeline_override": {
+                                "打开阴阳师": {
+                                    "package": "com.netease.onmyoji/.tag0"
+                                }
+                            }
+                        },
+                        {
+                            "name": "测试服",
+                            "pipeline_override": {
+                                "打开阴阳师": {
+                                    "package": "com.netease.onmyoji/.tag0"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "悬赏封印分组预设": {
+                    "input": {
+                        "name": "悬赏预设分组",
+                        "default": "默认分组",
+                        "pipeline_override": {
+                            "自动悬赏封印": {
+                                "custom_action_param": {
+                                    "group_name": "{value}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "悬赏封印队伍预设": {
+                    "input": {
+                        "name": "悬赏预设队伍",
+                        "default": "默认队伍",
+                        "pipeline_override": {
+                            "自动悬赏封印": {
+                                "custom_action_param": {
+                                    "team_name": "{value}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "结界突破分组预设": {
+                    "input": {
+                        "name": "结界预设分组",
+                        "default": "默认分组",
+                        "pipeline_override": {
+                            "自动结界": {
+                                "custom_action_param": {
+                                    "group_name": "{value}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "结界突破队伍预设": {
+                    "input": {
+                        "name": "结界预设队伍",
+                        "default": "默认队伍",
+                        "pipeline_override": {
+                            "自动结界": {
+                                "custom_action_param": {
+                                    "team_name": "{value}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "打极逢魔": {
+                    "boole": true
+                }
+            }
         },
         {
-          "task_name": "自动地鬼",
-          "task_entry": "自动地鬼",
-          "option": []
-        },
-        {
-          "task_name": "自动悬赏",
-          "task_entry": "自动悬赏封印",
-          "option": [
-            "悬赏封印分组预设",
-            "悬赏封印队伍预设"
-          ]
-        },
-        {
-          "task_name": "自动结界",
-          "task_entry": "自动结界",
-          "option": [
-            "结界突破分组预设",
-            "结界突破队伍预设"
-          ]
-        },
-        {
-          "task_name": "自动逢魔",
-          "task_entry": "自动逢魔",
-          "option": [
-            "打极逢魔"
-          ]
-        },
-        {
-          "task_name": "测试",
-          "task_entry": "testSwitchSoul",
-          "option": []
+            "program_name": "明日方舟",
+            "program_tasks": [
+                {
+                    "task_name": "任务1",
+                    "task_entry": null,
+                    "option": []
+                },
+                {
+                    "task_name": "任务3",
+                    "task_entry": null,
+                    "option": []
+                }
+            ],
+            "option": {}
         }
-      ],
-      "option": {
-        "选择区服": {
-          "select": [
-            {
-              "name": "官服",
-              "pipeline_override": {
-                "打开阴阳师": {
-                  "package": "com.netease.onmyoji/.tag0"
-                }
-              }
-            },
-            {
-              "name": "测试服",
-              "pipeline_override": {
-                "打开阴阳师": {
-                  "package": "com.netease.onmyoji/.tag0"
-                }
-              }
-            }
-          ],
-          "input": {},
-          "boole": false
-        },
-        "悬赏封印分组预设": {
-          "select": [],
-          "input": {
-            "name": "悬赏预设分组",
-            "default": "默认分组",
-            "pipeline_override": {
-              "自动悬赏封印": {
-                "custom_action_param": {
-                  "group_name": "{value}"
-                }
-              }
-            }
-          },
-          "boole": false
-        },
-        "悬赏封印队伍预设": {
-          "select": [],
-          "input": {
-            "name": "悬赏预设队伍",
-            "default": "默认队伍",
-            "pipeline_override": {
-              "自动悬赏封印": {
-                "custom_action_param": {
-                  "team_name": "{value}"
-                }
-              }
-            }
-          },
-          "boole": false
-        },
-        "结界突破分组预设": {
-          "select": [],
-          "input": {
-            "name": "结界预设分组",
-            "default": "默认分组",
-            "pipeline_override": {
-              "自动结界": {
-                "custom_action_param": {
-                  "group_name": "{value}"
-                }
-              }
-            }
-          },
-          "boole": false
-        },
-        "结界突破队伍预设": {
-          "select": [],
-          "input": {
-            "name": "结界预设队伍",
-            "default": "默认队伍",
-            "pipeline_override": {
-              "自动结界": {
-                "custom_action_param": {
-                  "team_name": "{value}"
-                }
-              }
-            }
-          },
-          "boole": false
-        },
-        "打极逢魔": {
-          "select": [],
-          "input": {},
-          "boole": true
-        }
-      }
-    },
-    {
-      "program_name": "明日方舟",
-      "program_tasks": [
-        {
-          "task_name": "任务1",
-          "task_entry": null,
-          "option": []
-        },
-        {
-          "task_name": "任务3",
-          "task_entry": null,
-          "option": []
-        }
-      ],
-      "option": null
-    }
-  ]
+    ]
 }
