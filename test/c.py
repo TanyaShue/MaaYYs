@@ -69,8 +69,14 @@ def test_projects_json():
         print(f"- Project Name: {project.project_name}, Program Name: {project.program_name}")
         print(f"  ADB Path: {project.adb_config.adb_path}, ADB Address: {project.adb_config.adb_address}")
         print(f"  Selected Tasks: {project.selected_tasks}")
-        if project.option:
-            print(f"  Option: {project.option.to_json()}")
+
+        # 遍历 option 列表
+        if project.option.options:
+            print("  Options:")
+            for option in project.option.options:
+                print(f"    {option.option_name}: {option.option_type} = {option.option_value}")
+
+
 
 
 if __name__ == "__main__":

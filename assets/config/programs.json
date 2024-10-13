@@ -123,7 +123,7 @@
                     }
                 },
                 "打极逢魔": {
-                    "boole": true
+                    "boole": false
                 }
             }
         },

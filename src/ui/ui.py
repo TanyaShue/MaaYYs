@@ -5,7 +5,8 @@ from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
-    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView, QComboBox
+    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView, QComboBox,
+    QFormLayout
 )
 
 from src.utils.config_programs import *
@@ -396,7 +397,7 @@ class MainWindow(QWidget):
 
             # 添加设置按钮
             set_button = QPushButton('设置')
-            set_button.clicked.connect(lambda _, selected_t=task: self.set_task_parameters(selected_t, program))
+            set_button.clicked.connect(lambda _, selected_t=task: self.set_task_parameters(selected_t, program,project))
             task_row.addWidget(set_button)
 
 
@@ -444,9 +445,8 @@ class MainWindow(QWidget):
         # 将按钮布局添加到主布局
         task_selection_layout.addLayout(button_container)
 
-
-    def set_task_parameters(self, selected_task, program):
-        """清空布局"""
+    def set_task_parameters(self, selected_task, program, project):
+        """动态生成任务的参数设置界面"""
         task_settings_group = self.splitter.widget(1)
         task_settings_layout = task_settings_group.layout()
         self.clear_layout(task_settings_layout)
@@ -455,78 +455,103 @@ class MainWindow(QWidget):
         options = program.get_task_by_name(selected_task.task_name).option
         setting = program.option.options
 
-        # 动态生成设置参数输入框
+        # 使用 QFormLayout 来对齐标签和输入框，使得布局更加整齐
+        form_layout = QFormLayout()
+
         for option in options:
             sett = setting.get(option)
 
-            # 如果是 input 类型，生成 QLineEdit
+            # 优先从 project.option 获取参数，如果不存在则使用 sett 的值
+            project_option = next((opt for opt in project.option.options if opt.option_name == option), None)
+
+            # 动态生成 QLineEdit、QComboBox 或 QCheckBox，并绑定其值到 project.option
             if sett.type == 'input' and sett.input:
-                param_layout = QHBoxLayout()
-                label = QLabel(sett.input.name)
-                line_edit = QLineEdit(str(sett.input.default))
+                self.create_input_option(form_layout, project, project_option, sett, option)
 
-                # 将输入框的内容变化绑定到 selected_task 的参数上
-                line_edit.textChanged.connect(
-                    lambda text, name=sett.input.name: self.update_task_parameter(selected_task, name, text)
-                )
-
-                param_layout.addWidget(label)
-                param_layout.addWidget(line_edit)
-                task_settings_layout.addLayout(param_layout)
-                print(f"Input Option: name={sett.input.name}, default={sett.input.default}, "
-                      f"pipeline_override={sett.input.pipeline_override}")
-
-            # 如果是 select 类型，生成 QComboBox
             elif sett.type == 'select' and sett.select:
-                param_layout = QHBoxLayout()
-                label = QLabel(option)
-                combo_box = QComboBox()
+                self.create_select_option(form_layout, project, project_option, sett, option)
 
-                # 添加下拉选项
-                for select_option in sett.select:
-                    combo_box.addItem(select_option.name)
-
-                # 处理下拉框选择事件
-                combo_box.currentTextChanged.connect(
-                    lambda text, name=option: self.update_task_parameter(selected_task, name, text)
-                )
-
-                param_layout.addWidget(label)
-                param_layout.addWidget(combo_box)
-                task_settings_layout.addLayout(param_layout)
-
-                for select_option in sett.select:
-                    print(f"Select Option: name={select_option.name}, "
-                          f"pipeline_override={select_option.pipeline_override}")
-
-            # 如果是 boole 类型，生成 QCheckBox
             elif sett.type == 'boole':
-                param_layout = QHBoxLayout()
-                label = QLabel(option)
-                check_box = QCheckBox()
-                check_box.setChecked(sett.boole)
-
-                # 处理复选框状态改变事件
-                check_box.stateChanged.connect(
-                    lambda state, name=option: self.update_task_parameter(selected_task, name, bool(state))
-                )
-
-                param_layout.addWidget(label)
-                param_layout.addWidget(check_box)
-                task_settings_layout.addLayout(param_layout)
-
-                print(f"Boolean Option: {sett.boole}")
+                self.create_boole_option(form_layout, project, project_option, sett, option)
 
             else:
-                print("Unknown option type or missing attributes.")
+                print(f"Unknown or missing attributes for option: {option}")
 
+        # 将生成的表单布局添加到主布局中
+        task_settings_layout.addLayout(form_layout)
 
-    def update_task_parameter(self, selected_task: SelectedTask, param_name: str, new_value: str):
-        """更新任务参数的值"""
-        # 更新 selected_task 的参数值
-        # selected_task.task_parameters[param_name] = new_value
-        # self.config.save_to_json()
-        #TODO
+    def create_input_option(self, layout, project, project_option, sett, option_name):
+        """创建 input 类型的参数设置控件"""
+        label = QLabel(sett.input.name)
+
+        # 获取默认值，优先从 project.option 获取
+        default_value = project_option.option_value if project_option and project_option.option_type == 'input' else sett.input.default
+        line_edit = QLineEdit(str(default_value))
+
+        # 将输入框的内容变化绑定到 project.option
+        line_edit.textChanged.connect(
+            lambda text, name=option_name: self.update_project_option(project, name, 'input', text)
+        )
+
+        layout.addRow(label, line_edit)
+        print(f"Input Option: name={sett.input.name}, default={default_value}")
+
+    def create_select_option(self, layout, project, project_option, sett, option_name):
+        """创建 select 类型的参数设置控件"""
+        label = QLabel(option_name)
+        combo_box = QComboBox()
+
+        # 获取默认选中值，优先从 project.option 获取
+        selected_value = project_option.option_value if project_option and project_option.option_type == 'select' else \
+        sett.select[0].name
+
+        # 添加下拉选项并设置默认选中项
+        for select_option in sett.select:
+            combo_box.addItem(select_option.name)
+            if select_option.name == selected_value:
+                combo_box.setCurrentText(select_option.name)
+
+        # 处理下拉框选择事件
+        combo_box.currentTextChanged.connect(
+            lambda text, name=option_name: self.update_project_option(project, name, 'select', text)
+        )
+
+        layout.addRow(label, combo_box)
+        print(f"Select Option: name={option_name}, selected={selected_value}")
+
+    def create_boole_option(self, layout, project, project_option, sett, option_name):
+        """创建 boole 类型的参数设置控件"""
+        label = QLabel(option_name)
+        check_box = QCheckBox()
+
+        # 获取默认布尔值，优先从 project.option 获取
+        boole_value = project_option.option_value if project_option and project_option.option_type == 'boole' else sett.boole
+        check_box.setChecked(boole_value)
+
+        # 处理复选框状态改变事件
+        check_box.stateChanged.connect(
+            lambda state, name=option_name: self.update_project_option(project, name, 'boole', bool(state))
+        )
+
+        layout.addRow(label, check_box)
+        print(f"Boolean Option: {option_name}, value={boole_value}")
+
+    # 更新 project.option 的方法
+    def update_project_option(self, project, option_name, option_type, option_value):
+        # 查找或创建 project.option 中的相应选项
+        project_option = next((opt for opt in project.option.options if opt.option_name == option_name), None)
+
+        if project_option:
+            # 更新现有选项
+            project_option.option_value = option_value
+        else:
+            # 如果选项不存在，创建新选项并添加到 project.option 中
+            new_option = Option(option_name=option_name, option_type=option_type, option_value=option_value)
+            project.option.options.append(new_option)
+
+        print(f"Updated Project Option: name={option_name}, type={option_type}, value={option_value}")
+        self.projects.save_to_file(self.projects_json_path)
+
 
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""
