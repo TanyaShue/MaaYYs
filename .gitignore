@@ -9,6 +9,7 @@ docs/.vuepress/.temp
 src/test
 # debug log
 */debug/*.log
+test
 
 # Compiled Object files
 build

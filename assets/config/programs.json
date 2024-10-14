@@ -123,7 +123,14 @@
                     }
                 },
                 "打极逢魔": {
-                    "boole": false
+                    "boole": {
+                        "default": false,
+                        "pipeline_override": {
+                            "自动逢魔": {
+                                "enabled": "{boole}"
+                            }
+                        }
+                    }
                 }
             }
         },

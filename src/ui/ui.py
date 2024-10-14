@@ -11,7 +11,6 @@ from PySide6.QtWidgets import (
 
 from src.utils.config_programs import *
 from src.utils.config_projects import *
-from src.utils.config_models import Config, Task, Program, TaskProject, SelectedTask  # 确保根据你的实际路径引入 Config 类
 from src.core.core import TaskProjectManager, log_thread
 
 
@@ -296,7 +295,7 @@ class MainWindow(QWidget):
             if widget:
                 widget.setParent(None)
 
-    def run_task(self, task_project: TaskProject, button_task_connect: QPushButton):
+    def run_task(self, task_project, button_task_connect: QPushButton):
         """
         启动任务，更新UI，并确保在异步线程中执行
         """
@@ -350,7 +349,7 @@ class MainWindow(QWidget):
         button.setText(text)
         button.setEnabled(enabled)
 
-    def show_device_details(self, project):
+    def show_device_details(self, project: Project):
         # 更新详细信息标题
         self.info_title.setText(f"详细信息: {project.project_name}")
 
@@ -403,7 +402,7 @@ class MainWindow(QWidget):
 
             # 添加发送任务按钮
             execute_button = QPushButton('执行')
-            execute_button.clicked.connect(lambda _, selected_t=task, p=project: self.send_task(selected_t, p))
+            execute_button.clicked.connect(lambda _, selected_t=task: self.send_task(selected_t, project))
             task_row.addWidget(execute_button)
 
             # 将任务行添加到布局
@@ -457,6 +456,11 @@ class MainWindow(QWidget):
 
         # 使用 QFormLayout 来对齐标签和输入框，使得布局更加整齐
         form_layout = QFormLayout()
+        if not options:
+            label = QLabel("该任务无参数设置项")
+            form_layout.addRow(label)
+            task_settings_layout.addLayout(form_layout)
+            return
 
         for option in options:
             sett = setting.get(option)
@@ -524,11 +528,17 @@ class MainWindow(QWidget):
         label = QLabel(option_name)
         check_box = QCheckBox()
 
-        # 获取默认布尔值，优先从 project.option 获取
-        boole_value = project_option.option_value if project_option and project_option.option_type == 'boole' else sett.boole
+        # 获取 BooleOption 对象，优先从 project_option 获取
+        if project_option and project_option.option_type == 'boole':
+            boole_option = project_option.option_value
+        else:
+            boole_option = sett.boole
+
+        # 如果 boole_option 是 BooleOption 类型，则取其 default 属性
+        boole_value = boole_option.default if isinstance(boole_option, BooleOption) else boole_option
         check_box.setChecked(boole_value)
 
-        # 处理复选框状态改变事件
+        # 处理复选框状态改变事件，更新 BooleOption 中的 default 属性
         check_box.stateChanged.connect(
             lambda state, name=option_name: self.update_project_option(project, name, 'boole', bool(state))
         )
@@ -568,7 +578,8 @@ class MainWindow(QWidget):
                         self.clear_layout(sub_layout)  # 递归调用
         layout.update()  # 更新布局
 
-    def send_task(self, selected_t:SelectedTask,task_p:TaskProject):
+    def send_task(self, selected_t,project: Project):
+        """发送任务到设备"""
 
         # 创建 TaskProjectManager 实例
         task_manager = TaskProjectManager()
@@ -577,17 +588,17 @@ class MainWindow(QWidget):
         def execute_task():
             try:
                 # 启动连接任务（可以扩展为实际的连接逻辑）
-                task_manager.create_tasker_process(task_p)
-                p=self.config.get_program_by_name(task_p.program_name)
-                # 获取已选中的任务
-                t_s=[]
-                t = Task(selected_t.task_name, Program.get_entry_by_selected_task(p, selected_t.task_name))
-                # 获取选择任务参数及入口任务
-                t_s.append(t)
-                t_s.reverse()
+                task_manager.create_tasker_process(project)
+                # p=self.config.get_program_by_name(task_p.program_name)
+                # # 获取已选中的任务
+                # t_s=[]
+                # t = Task(selected_t.task_name, Program.get_entry_by_selected_task(p, selected_t.task_name))
+                # # 获取选择任务参数及入口任务
+                # t_s.append(t)
+                # t_s.reverse()
                 # 发送任务到设备
-                task_manager.send_task(task_p, t_s)
-                print(f"发送任务{selected_t.task_name}")
+                # task_manager.send_task(task_p, t_s)
+                print(f"发送任务{selected_t}")
             except Exception as e:
                 logging.error(f"任务启动失败: {e}")
 

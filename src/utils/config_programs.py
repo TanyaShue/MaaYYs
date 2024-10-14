@@ -39,16 +39,36 @@ class SelectOption:
             "pipeline_override": self.pipeline_override
         }
 
+class BooleOption:
+    def __init__(self, default=False, pipeline_override=None):
+        self.default = default
+        self.pipeline_override = pipeline_override or {}
+
+    @staticmethod
+    def from_json(data):
+        return BooleOption(
+            default=data.get('default', False),
+            pipeline_override=data.get('pipeline_override', {})
+        )
+
+    def to_json(self):
+        return {
+            "default": self.default,
+            "pipeline_override": self.pipeline_override
+        }
+
+
+
+
 class TaskOption:
     def __init__(self, option_type=None, select=None, input=None, boole=None):
         self.type = option_type
         self.select = [SelectOption.from_json(s) for s in select] if select else []
         self.input = InputOption.from_json(input) if input else None
-        self.boole = boole if boole is not None else False
+        self.boole = BooleOption.from_json(boole) if boole else None
 
     @staticmethod
     def from_json(data):
-        # 根据 data 中的键来决定类型
         if 'select' in data:
             return TaskOption(
                 option_type='select',
@@ -62,7 +82,7 @@ class TaskOption:
         elif 'boole' in data:
             return TaskOption(
                 option_type='boole',
-                boole=data.get('boole', False)
+                boole=data.get('boole')
             )
         return TaskOption()
 
@@ -79,7 +99,7 @@ class TaskOption:
             }
         elif self.type == 'boole':
             return {
-                "boole": self.boole,
+                "boole": self.boole.to_json() if self.boole else None,
                 "type": self.type
             }
         return {}
@@ -104,6 +124,7 @@ class Task:
             "task_entry": self.task_entry,
             "option": self.option
         }
+
 
 class ProgramOption:
     def __init__(self, options=None):
@@ -160,7 +181,6 @@ class ProgramsJson:
         return {
             "programs": [program.to_json() for program in self.programs]
         }
-
     # 通过名字获取程序
     def get_program_by_name(self, program_name):
         for program in self.programs:
