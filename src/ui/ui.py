@@ -295,7 +295,7 @@ class MainWindow(QWidget):
             if widget:
                 widget.setParent(None)
 
-    def run_task(self, task_project, button_task_connect: QPushButton):
+    def run_task(self, project, button_task_connect: QPushButton):
         """
         启动任务，更新UI，并确保在异步线程中执行
         """
@@ -310,25 +310,25 @@ class MainWindow(QWidget):
         def execute_task():
             try:
                 # 启动连接任务（可以扩展为实际的连接逻辑）
-                task_manager.create_tasker_process(task_project)
+                task_manager.create_tasker_process(project)
 
-                p=self.config.get_program_by_name(task_project.program_name)
+                project_run_data = project.get_project_run_data(self.programs)
 
                 # 获取已选中的任务
-                tasks = task_project.get_selected_tasks()
+                # tasks = task_project.get_selected_tasks()
 
-                t_s=[]
-                # 获取选择任务参数及入口任务
-                for pro_task in tasks:
-                    t=Task(pro_task.task_name,Program.get_entry_by_selected_task(p,pro_task.task_name))
-                    t_s.append(t)
-
-                if not tasks:
-
-                    raise Exception("没有选择任何任务，无法执行")
-                t_s.reverse()
+                # t_s=[]
+                # # 获取选择任务参数及入口任务
+                # for pro_task in tasks:
+                #     t=Task(pro_task.task_name,Program.get_entry_by_selected_task(p,pro_task.task_name))
+                #     t_s.append(t)
+                #
+                # if not tasks:
+                #
+                #     raise Exception("没有选择任何任务，无法执行")
+                # t_s.reverse()
                 # 发送任务到设备
-                task_manager.send_task(task_project, t_s)
+                task_manager.send_task(project, project_run_data)
 
                 # 成功连接和发送任务后更新UI
                 self.update_button_state(button_task_connect, "已连接", True)

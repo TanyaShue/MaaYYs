@@ -1,82 +1,94 @@
 import json
+from dataclasses import dataclass, field, asdict
+from typing import List, Dict, Union
 
+
+@dataclass
 class AdbConfig:
-    def __init__(self, adb_path, adb_address):
-        self.adb_path = adb_path
-        self.adb_address = adb_address
+    adb_path: str
+    adb_address: str
 
     @staticmethod
-    def from_json(data):
+    def from_json(data: Dict):
         return AdbConfig(
-            adb_path=data['adb_path'],
-            adb_address=data['adb_address']
+            adb_path=data.get('adb_path', ''),
+            adb_address=data.get('adb_address', '')
         )
 
     def to_json(self):
-        return {
-            "adb_path": self.adb_path,
-            "adb_address": self.adb_address
-        }
+        return asdict(self)
 
 
+@dataclass
 class Option:
-    def __init__(self, option_name, option_type, option_value):
-        self.option_name = option_name  # 选项名称
-        self.option_type = option_type  # 选项类型 (select, input, boole)
-        self.option_value = option_value  # 选项值
+    option_name: str
+    option_type: str
+    option_value: Union[str, bool, None]
 
     @staticmethod
-    def from_json(option_name, data):
-        # 根据 data 判断 option 的类型并初始化
-        if 'select' in data:
-            return Option(option_name, 'select', data['select'])
-        elif 'input' in data:
-            return Option(option_name, 'input', data['input'])
-        elif 'boole' in data:
-            return Option(option_name, 'boole', data['boole'])
-        else:
-            raise ValueError(f"Unknown option type for {option_name}")
+    def from_json(option_name: str, data: Dict):
+        for key, value in data.items():
+            if key in {'select', 'input', 'boole'}:
+                return Option(option_name, key, value)
+        raise ValueError(f"Unknown option type for {option_name}")
 
     def to_json(self):
         return {self.option_type: self.option_value}
 
 
+@dataclass
 class ProjectOption:
-    def __init__(self, options=None):
-        self.options = options or []  # 选项列表
+    options: List[Option] = field(default_factory=list)
 
     @staticmethod
-    def from_json(data):
-        options = []
-        for option_name, option_data in data.items():
-            option = Option.from_json(option_name, option_data)
-            options.append(option)
-        return ProjectOption(options=options)
+    def from_json(data: Dict):
+        return ProjectOption(
+            options=[Option.from_json(name, opt_data) for name, opt_data in data.items()]
+        )
 
     def to_json(self):
-        result = {}
-        for option in self.options:
-            result[option.option_name] = option.to_json()
-        return result
+        return {opt.option_name: opt.to_json() for opt in self.options}
 
 
+@dataclass
+class ProjectRunTask:
+    task_name: str
+    task_entry: str
+    pipeline_override: Dict = field(default_factory=dict)
+
+
+@dataclass
+class ProjectRunData:
+    project_run_tasks: List[ProjectRunTask]
+
+    def __repr__(self):
+        return f"ProjectRunData(Tasks: {self.project_run_tasks})"
+
+
+@dataclass
 class Project:
+    project_name: str
+    program_name: str
+    adb_config: AdbConfig
+    selected_tasks: List[str]
+    option: ProjectOption = field(default_factory=ProjectOption)
+
     def __init__(self, project_name, program_name, adb_config, selected_tasks, option=None):
-        self.project_run_tasks = None
-        self.project_run_option = None
         self.project_name = project_name
         self.program_name = program_name
         self.adb_config = adb_config
         self.selected_tasks = selected_tasks
         self.option = option or ProjectOption()
+        self.project_run_tasks = None
+        self.project_run_option = None
 
     @staticmethod
-    def from_json(data):
+    def from_json(data: Dict):
         return Project(
             project_name=data['project_name'],
             program_name=data['program_name'],
             adb_config=AdbConfig.from_json(data['adb_config']),
-            selected_tasks=data['selected_tasks'],
+            selected_tasks=data.get('selected_tasks', []),
             option=ProjectOption.from_json(data.get('option', {}))
         )
 
@@ -90,27 +102,20 @@ class Project:
         }
 
     def get_project_run_data(self, programs_json):
-        """
-        根据项目和程序配置，生成项目的运行数据，包括每个任务的 pipeline_override。
-        """
         for program in programs_json.programs:
             if program.program_name == self.program_name:
                 project_run_tasks = []
-                self.project_run_tasks=program.program_tasks
-                self.project_run_option=program.option
+                self.project_run_tasks = program.program_tasks
+                self.project_run_option = program.option
 
-                # 遍历项目中的 selected_tasks
                 for task_name in self.selected_tasks:
-                    # 查找 Program 中对应的任务
                     program_task = next((task for task in program.program_tasks if task.task_name == task_name), None)
                     if not program_task:
                         print(f"Task {task_name} not found in Program {self.program_name}")
                         continue
 
-                    # 处理选项，生成 pipeline_override
                     pipeline_override = self._process_task_option(program_task)
 
-                    # 创建 ProjectRunTask 并添加到列表
                     project_run_task = ProjectRunTask(
                         task_name=program_task.task_name,
                         task_entry=program_task.task_entry,
@@ -118,93 +123,52 @@ class Project:
                     )
                     project_run_tasks.append(project_run_task)
 
-                # 返回包含所有 ProjectRunTask 的 ProjectRunData
                 return ProjectRunData(project_run_tasks=project_run_tasks)
         return None
 
     def _process_task_option(self, program_task):
-        """
-        处理项目选项，覆盖程序中的默认任务设置，生成最终的 pipeline_override。
-        """
-        pipeline_override = {}
-        fin_pipeline_override={}
+        final_pipeline_override = {}
 
-        # 合并字典的辅助函数
         def merge_dicts(dict1, dict2):
             for key, value in dict2.items():
-                if key in dict1 and isinstance(dict1[key], dict) and isinstance(value, dict):
-                    merge_dicts(dict1[key], value)  # 递归合并字典
+                if isinstance(value, dict) and isinstance(dict1.get(key), dict):
+                    merge_dicts(dict1[key], value)
                 else:
                     dict1[key] = value
 
-        # 首先从程序中获取对应的选项
         for option in program_task.option:
-            # 从默认值中获取于option对应的完整选项
-            if self.project_run_option.options[option]:
+            default_option = self.project_run_option.options.get(option)
+            if default_option:
                 for selected_option in self.option.options:
-                    if selected_option.option_name==option:
-                        if selected_option.option_type == 'select':
-                            for a in self.project_run_option.options[option].select:
-                                if a.name==selected_option.option_value:
-                                    # 只有在找到选中值时才合并
-                                    pipeline_override=a.pipeline_override
-                        elif selected_option.option_type == 'input':
-                            # 替换输入值中的占位符
-                            pipeline_override = self._replace_placeholder(
-                                self.project_run_option.options[option].input.pipeline_override,
-                                selected_option.option_value
-                            )
+                    if selected_option.option_name == option:
+                        pipeline_override = self._get_pipeline_override(default_option, selected_option)
+                        merge_dicts(final_pipeline_override, pipeline_override)
 
-                        elif selected_option.option_type == 'boole':
-                            # 处理布尔选项的占位符替换
-                            pipeline_override = self._replace_placeholder(
-                                self.project_run_option.options[option].boole.pipeline_override,
-                                selected_option.option_value
-                            )
-                merge_dicts(fin_pipeline_override,pipeline_override)
-        return fin_pipeline_override
+        return final_pipeline_override
+
+    def _get_pipeline_override(self, default_option, selected_option):
+        if selected_option.option_type == 'select':
+            return next((item.pipeline_override for item in default_option.select if item.name == selected_option.option_value), {})
+        elif selected_option.option_type == 'input':
+            return self._replace_placeholder(default_option.input.pipeline_override, selected_option.option_value)
+        elif selected_option.option_type == 'boole':
+            return self._replace_placeholder(default_option.boole.pipeline_override, selected_option.option_value)
+        return {}
 
     def _replace_placeholder(self, pipeline, value):
-        """
-        递归替换 pipeline 中的占位符 {value} 和 {boole}。
-        """
         if isinstance(pipeline, dict):
-            for key, val in pipeline.items():
-                if isinstance(val, str):
-                    # 确保 value 是字符串
-                    pipeline[key] = val.replace("{value}", str(value)).replace("{boole}", str(value))
-                else:
-                    # 如果值本身是字典，递归处理
-                    pipeline[key] = self._replace_placeholder(val, value)
+            return {k: (v.replace("{value}", str(value)).replace("{boole}", str(value)) if isinstance(v, str) else self._replace_placeholder(v, value)) for k, v in pipeline.items()}
         return pipeline
 
-class ProjectRunTask:
-    def __init__(self, task_name, task_entry, pipeline_override=None):
-        self.task_name = task_name
-        self.task_entry = task_entry
-        self.pipeline_override = pipeline_override or {}
 
-    def __repr__(self):
-        return (f"ProjectRunTask(Name: {self.task_name}, "
-                f"Entry: {self.task_entry}, "
-                f"Pipeline Override: {self.pipeline_override})")
-
-
-class ProjectRunData:
-    def __init__(self, project_run_tasks):
-        self.project_run_tasks = project_run_tasks
-
-    def __repr__(self):
-        return f"ProjectRunData(Tasks: {self.project_run_tasks})"
-
+@dataclass
 class ProjectsJson:
-    def __init__(self, projects=None):
-        self.projects = [Project.from_json(p) for p in projects] if projects else []
+    projects: List[Project]
 
     @staticmethod
-    def from_json(data):
+    def from_json(data: Dict):
         return ProjectsJson(
-            projects=data.get('projects', [])
+            projects=[Project.from_json(p) for p in data.get('projects', [])]
         )
 
     def to_json(self):
@@ -221,4 +185,3 @@ class ProjectsJson:
     def save_to_file(self, filename):
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(self.to_json(), f, ensure_ascii=False, indent=4)
-
