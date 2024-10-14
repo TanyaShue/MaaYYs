@@ -8,6 +8,11 @@ from src.core.core import TaskProjectManager
 from src.ui.ui import MainWindow
 
 if __name__ == '__main__':
+    import atexit
+
+    def cleanup():
+        TaskProjectManager().force_terminate_all()
+
     try:
         # 配置日志记录
         logging.basicConfig(
@@ -19,9 +24,13 @@ if __name__ == '__main__':
             ],
             encoding="UTF-8"
         )
+        # 注册退出时的清理函数，确保即使发生异常也会清理
+        atexit.register(cleanup)
+
         app = QApplication([])
         window = MainWindow()
         window.show()
         app.exec()
     finally:
-        TaskProjectManager().terminate_all()
+        TaskProjectManager().terminate_all()  # 尝试优雅终止所有进程
+

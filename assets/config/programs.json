@@ -5,7 +5,7 @@
             "program_tasks": [
                 {
                     "task_name": "打开游戏",
-                    "task_entry": "打开阴阳师",
+                    "task_entry": "打开游戏",
                     "option": [
                         "选择区服","悬赏封印分组预设"
                     ]
@@ -55,13 +55,10 @@
                         {
                             "name": "官服",
                             "pipeline_override": {
-                                "打开阴阳师": {
-                                    "package": "com.netease.onmyoji/.tag0"
-                                }
                             }
                         },
                         {
-                            "name": "测试服",
+                            "name": "官网下载版",
                             "pipeline_override": {
                                 "打开阴阳师": {
                                     "package": "com.netease.onmyoji/.tag0"

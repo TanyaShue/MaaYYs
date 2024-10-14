@@ -260,11 +260,6 @@ class MainWindow(QWidget):
             button_info.clicked.connect(lambda _, p=project: self.show_device_details(p))
             layout.addWidget(button_info)
 
-            # save_button = QPushButton("保存更改")
-            # save_button.setObjectName('saveButton')
-            # save_button.clicked.connect(self.save_json_data)
-            # layout.addWidget(save_button)
-
             container_widget.setLayout(layout)
             self.table.setCellWidget(row, 5, container_widget)
 
@@ -276,17 +271,27 @@ class MainWindow(QWidget):
         """处理表格内容变化，更新 project 对象"""
         data = item.data(Qt.UserRole)
 
-        # if isinstance(data, tuple) and len(data) == 2:
-        #     field_name, project = data
-        #     new_value = item.text()
-        #
-        #     # 更新 project 对象中的值
-        #     if field_name in project.adb_config:
-        #         project.adb_config[field_name] = new_value
-        #     elif field_name == 'status':  # 假设你有其他字段
-        #         project.status = new_value
-        # self.save_json_data()
-        # 你可以选择在这里调用 `save_json_data()`，实时保存变更
+        if data is None:
+            return
+
+        # 获取项目对象
+        if isinstance(data, tuple):
+            field, project = data
+        else:
+            project = data  # 如果只有项目对象，没有字段信息
+
+        # 根据单元格的列索引更新对应的项目对象属性
+        if item.column() == 2:  # ADB 地址
+            adb_path = item.text()
+            project.adb_config.adb_path = adb_path  # 更新项目的 ADB 路径
+            print(f"Updated ADB path for {project.project_name}: {adb_path}")
+
+        elif item.column() == 3:  # ADB 端口
+            adb_address = item.text()
+            project.adb_config.adb_address = adb_address  # 更新项目的 ADB 端口
+            print(f"Updated ADB address for {project.project_name}: {adb_address}")
+
+        self.projects.save_to_file(self.projects_json_path)
 
     def clear_right_layout(self):
         """清空右侧布局中的内容"""
@@ -314,19 +319,6 @@ class MainWindow(QWidget):
 
                 project_run_data = project.get_project_run_data(self.programs)
 
-                # 获取已选中的任务
-                # tasks = task_project.get_selected_tasks()
-
-                # t_s=[]
-                # # 获取选择任务参数及入口任务
-                # for pro_task in tasks:
-                #     t=Task(pro_task.task_name,Program.get_entry_by_selected_task(p,pro_task.task_name))
-                #     t_s.append(t)
-                #
-                # if not tasks:
-                #
-                #     raise Exception("没有选择任何任务，无法执行")
-                # t_s.reverse()
                 # 发送任务到设备
                 task_manager.send_task(project, project_run_data)
 
