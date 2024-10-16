@@ -74,10 +74,6 @@ class TaskerProcess:
             raise RuntimeError("Failed to init MAA in process.")
 
         log_to_queue(f"Tasker initialized for {self.project_key}")
-
-        # 示例任务执行
-        # tasker.post_pipeline("打开游戏").wait()
-
         # 任务循环
 
         while True:

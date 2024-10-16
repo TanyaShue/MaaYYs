@@ -1,4 +1,5 @@
 import logging
+import multiprocessing
 
 from PySide6.QtWidgets import (
     QApplication
@@ -7,9 +8,9 @@ from PySide6.QtWidgets import (
 from src.core.core import TaskProjectManager
 from src.ui.ui import MainWindow
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import atexit
-
+    multiprocessing.freeze_support()
     def cleanup():
         TaskProjectManager().force_terminate_all()
 

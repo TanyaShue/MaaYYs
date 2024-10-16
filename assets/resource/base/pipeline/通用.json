@@ -34,6 +34,9 @@
     "interrupt": ["识别蓝色返回","识别黄色返回"]
   },
   "识别庭院特征": {
+    "next": ["识别庭院特征_望月幽庭_探索"]
+  },
+  "识别庭院特征_望月幽庭_探索": {
     "recognition": "TemplateMatch",
     "template": "探索_望月幽庭.png",
     "roi": [

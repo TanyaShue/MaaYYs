@@ -7,13 +7,15 @@
                     "task_name": "打开游戏",
                     "task_entry": "打开游戏",
                     "option": [
-                        "选择区服","悬赏封印分组预设"
+                        "选择区服"
                     ]
                 },
                 {
                     "task_name": "自动地鬼",
                     "task_entry": "自动地鬼",
-                    "option": []
+                    "option": [
+                        "地鬼分组预设","地鬼队伍预设"
+                    ]
                 },
                 {
                     "task_name": "自动悬赏",
@@ -112,6 +114,32 @@
                         "default": "默认队伍",
                         "pipeline_override": {
                             "自动结界": {
+                                "custom_action_param": {
+                                    "team_name": "{value}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "地鬼分组预设": {
+                    "input": {
+                        "name": "地鬼预设分组",
+                        "default": "默认分组",
+                        "pipeline_override": {
+                            "装备地狱鬼王预设": {
+                                "custom_action_param": {
+                                    "group_name": "{value}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "地鬼队伍预设": {
+                    "input": {
+                        "name": "地鬼预设队伍",
+                        "default": "默认队伍",
+                        "pipeline_override": {
+                            "装备地狱鬼王预设": {
                                 "custom_action_param": {
                                     "team_name": "{value}"
                                 }

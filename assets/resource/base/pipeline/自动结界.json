@@ -67,11 +67,13 @@
   "识别突破界面": {
     "recognition": "OCR",
     "roi": [
-     559,64,158,65
+      559,
+      64,
+      158,
+      65
     ],
     "expected": "结界突破"
   },
-
   "识别突破卷数量": {
     "recognition": "OCR",
     "roi": [
@@ -82,7 +84,6 @@
     ],
     "expected": "1/30"
   },
-
   "突破_结束战斗": {
     "recognition": "OCR",
     "roi": [
@@ -93,19 +94,41 @@
     ],
     "expected": "点击屏幕继续",
     "target": [
-219,419,1002,168
+      219,
+      419,
+      1002,
+      168
+    ],
+    "action": "Click"
+  },
+  "突破_领取奖励": {
+    "recognition": "OCR",
+    "roi": [
+      514,
+      676,
+      323,
+      38
+    ],
+    "expected": "点击屏幕继续",
+    "target": [
+      219,
+      419,
+      1002,
+      168
     ],
     "action": "Click"
   },
   "结束突破": {
     "recognition": "OCR",
     "roi": [
-      1071,0,208,66
+      1071,
+      0,
+      208,
+      66
     ],
     "expected": "\\b0\\/30\\b",
-    "next":"关闭结界突破"
+    "next": "关闭结界突破"
   },
-
   "关闭结界突破": {
     "recognition": "FeatureMatch",
     "action": "Click",
@@ -119,9 +142,12 @@
     "next": "返回庭院"
   },
   "开始自动结界": {
-    "next":["结束突破"],
+    "next": [
+      "结束突破"
+    ],
     "interrupt": [
       "突破_结束战斗",
+      "突破_领取奖励",
       "挑战第一个结界",
       "挑战第二个结界",
       "挑战第三个结界",
@@ -314,7 +340,7 @@
       597
     ],
     "template": "突破_进攻.png",
-    "post_delay": 10000,
+    "post_delay": 1000,
     "timeout": 200000,
     "next": [
       "突破_重新挑战四次"
@@ -325,7 +351,9 @@
     "action": "Custom",
     "custom_action": "LoopAction",
     "custom_action_param": {
-      "action_list": ["突破_重新挑战"],
+      "action_list": [
+        "突破_重新挑战"
+      ],
       "loop_times": 4
     },
     "next": [
@@ -337,10 +365,14 @@
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": "战斗_返回.png",
-    "roi": [0,4,77,75],
+    "roi": [
+      0,
+      4,
+      77,
+      75
+    ],
     "next": "退出战斗_确认"
   },
-
   "退出战斗_确认": {
     "recognition": "OCR",
     "action": "Click",

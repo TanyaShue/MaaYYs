@@ -108,11 +108,34 @@ class Project:
                 self.project_run_tasks = program.program_tasks
                 self.project_run_option = program.option
 
-                for task_name in self.selected_tasks:
-                    program_task = next((task for task in program.program_tasks if task.task_name == task_name), None)
-                    if not program_task:
-                        print(f"Task {task_name} not found in Program {self.program_name}")
+                # 遍历 program.program_tasks 按顺序处理任务
+                for program_task in program.program_tasks:
+                    task_name = program_task.task_name
+                    if task_name not in self.selected_tasks:
+                        # 如果 task_name 不在 selected_tasks 中，跳过处理
                         continue
+
+                    pipeline_override = self._process_task_option(program_task)
+
+                    project_run_task = ProjectRunTask(
+                        task_name=program_task.task_name,
+                        task_entry=program_task.task_entry,
+                        pipeline_override=pipeline_override
+                    )
+                    project_run_tasks.append(project_run_task)
+
+                return ProjectRunData(project_run_tasks=project_run_tasks)
+        return None
+    def get_project_all_run_data(self, programs_json):
+        for program in programs_json.programs:
+            if program.program_name == self.program_name:
+                project_run_tasks = []
+                self.project_run_tasks = program.program_tasks
+                self.project_run_option = program.option
+
+                # 遍历 program.program_tasks 按顺序处理任务
+                for program_task in program.program_tasks:
+                    task_name = program_task.task_name
 
                     pipeline_override = self._process_task_option(program_task)
 

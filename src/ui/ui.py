@@ -1,7 +1,7 @@
 import logging
 import threading
 
-from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
+from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool, QObject, Signal
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
@@ -32,7 +32,6 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        # 加载配置类
         self.projects_json_path = '../assets/config/projects.json'
         self.projects = ProjectsJson.load_from_file(self.projects_json_path)  # 直接加载配置类
 
@@ -76,9 +75,9 @@ class MainWindow(QWidget):
 
     def start_log_thread(self):
         """启动日志处理线程"""
-        task_manager = TaskProjectManager()  # 确保实例化任务管理器
+        task_manager = TaskProjectManager()
         log_listener = threading.Thread(target=log_thread, args=(task_manager,))
-        log_listener.daemon = True  # 设置为守护线程，主线程结束时自动结束
+        log_listener.daemon = True
         log_listener.start()
 
     # 保存 Config 实例
@@ -200,7 +199,7 @@ class MainWindow(QWidget):
         task_log_layout = QVBoxLayout()
         log_area = QTextEdit()
         log_area.setPlaceholderText("日志输出...")
-        task_log_layout.addWidget(log_area)
+        log_area.setReadOnly(True)
         task_log_group.setLayout(task_log_layout)
 
         self.splitter.addWidget(task_selection_group)
@@ -284,12 +283,10 @@ class MainWindow(QWidget):
         if item.column() == 2:  # ADB 地址
             adb_path = item.text()
             project.adb_config.adb_path = adb_path  # 更新项目的 ADB 路径
-            print(f"Updated ADB path for {project.project_name}: {adb_path}")
 
         elif item.column() == 3:  # ADB 端口
             adb_address = item.text()
             project.adb_config.adb_address = adb_address  # 更新项目的 ADB 端口
-            print(f"Updated ADB address for {project.project_name}: {adb_address}")
 
         self.projects.save_to_file(self.projects_json_path)
 
@@ -348,7 +345,6 @@ class MainWindow(QWidget):
         # 获取对应的 program
         program = self.programs.get_program_by_name(project.program_name)
         if not program:
-            print("程序不存在")
             return
 
         # 清空之前的布局
@@ -391,10 +387,12 @@ class MainWindow(QWidget):
             set_button.clicked.connect(lambda _, selected_t=task: self.set_task_parameters(selected_t, program,project))
             task_row.addWidget(set_button)
 
-
             # 添加发送任务按钮
             execute_button = QPushButton('执行')
-            execute_button.clicked.connect(lambda _, selected_t=task: self.send_task(selected_t, project))
+
+            # 将当前任务传递给点击事件
+            execute_button.clicked.connect(lambda _, selected_t=task: self.send_single_task(selected_t, project))
+
             task_row.addWidget(execute_button)
 
             # 将任务行添加到布局
@@ -513,7 +511,6 @@ class MainWindow(QWidget):
         )
 
         layout.addRow(label, combo_box)
-        print(f"Select Option: name={option_name}, selected={selected_value}")
 
     def create_boole_option(self, layout, project, project_option, sett, option_name):
         """创建 boole 类型的参数设置控件"""
@@ -536,7 +533,6 @@ class MainWindow(QWidget):
         )
 
         layout.addRow(label, check_box)
-        print(f"Boolean Option: {option_name}, value={boole_value}")
 
     # 更新 project.option 的方法
     def update_project_option(self, project, option_name, option_type, option_value):
@@ -551,7 +547,6 @@ class MainWindow(QWidget):
             new_option = Option(option_name=option_name, option_type=option_type, option_value=option_value)
             project.option.options.append(new_option)
 
-        print(f"Updated Project Option: name={option_name}, type={option_type}, value={option_value}")
         self.projects.save_to_file(self.projects_json_path)
 
 
@@ -570,31 +565,32 @@ class MainWindow(QWidget):
                         self.clear_layout(sub_layout)  # 递归调用
         layout.update()  # 更新布局
 
-    def send_task(self, selected_t,project: Project):
-        """发送任务到设备"""
+    def send_single_task(self, selected_task, project):
+        """
+        发送单个任务到设备
+        """
+        try:
+            # 创建 TaskProjectManager 实例
+            task_manager = TaskProjectManager()
+            task_manager.create_tasker_process(project)
 
-        # 创建 TaskProjectManager 实例
-        task_manager = TaskProjectManager()
+            # 获取项目运行数据，但只包含单个任务
+            project_run_data = project.get_project_all_run_data(self.programs)
 
-        # 定义实际任务执行逻辑
-        def execute_task():
-            try:
-                # 启动连接任务（可以扩展为实际的连接逻辑）
-                task_manager.create_tasker_process(project)
-                # p=self.config.get_program_by_name(task_p.program_name)
-                # # 获取已选中的任务
-                # t_s=[]
-                # t = Task(selected_t.task_name, Program.get_entry_by_selected_task(p, selected_t.task_name))
-                # # 获取选择任务参数及入口任务
-                # t_s.append(t)
-                # t_s.reverse()
-                # 发送任务到设备
-                # task_manager.send_task(task_p, t_s)
-                print(f"发送任务{selected_t}")
-            except Exception as e:
-                logging.error(f"任务启动失败: {e}")
+            # 过滤掉非选中的任务，只保留当前点击的任务
+            filtered_tasks = [task for task in project_run_data.project_run_tasks if task.task_name == selected_task.task_name]
 
+            if not filtered_tasks:
+                logging.error(f"任务 {selected_task.task_name} 不在选中任务中")
+                return
 
-        # 使用线程池执行任务
-        task = TaskWorker(execute_task)
-        self.thread_pool.start(task)
+            # 创建仅包含当前任务的 ProjectRunData
+            single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
+
+            # 发送任务到设备
+            task_manager.send_task(project, single_task_run_data)
+
+            logging.info(f"任务 {selected_task.task_name} 已成功发送")
+
+        except Exception as e:
+            logging.error(f"发送任务 {selected_task.task_name} 失败: {e}")

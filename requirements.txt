@@ -1,3 +1,5 @@
 pyside6~=6.7.2
 pandas~=2.2.2
-maafw==2.0.2
+maafw>=2.0.2
+
+pyinstaller~=6.10.0

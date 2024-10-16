@@ -31,9 +31,10 @@ class LoopAction(CustomAction):
             print(f"第 {i + 1} 次循环开始")
 
             for action in action_list:
-                print(f"执行动作: {action}")
+                action_time_name = f"{action}_action_time"
+                print(f"执行动作: {action_time_name}")
 
-                context.run_pipeline(action)
+                context.run_pipeline(action_time_name, {action_time_name:{"next":action}})
 
                 time.sleep(0.5)  # 可根据需求设置不同的延迟
 

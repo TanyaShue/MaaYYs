@@ -32,12 +32,25 @@
   "打开阴阳师": {
     "action": "StartApp",
     "next": [
-      "进入游戏"
+      "识别庭院特征_望月幽庭_探索"
     ],
     "interrupt": [
+      "进入游戏",
+      "关闭公告",
       "打开阴阳师_点击一下屏幕"
     ],
     "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2"
+  },
+  "关闭公告": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      1116,
+      7,
+      163,
+      89
+    ],
+    "template": "踏雪寻踪_公告_关闭.png"
   },
   "打开阴阳师_点击一下屏幕": {
     "recognition": "DirectHit",
@@ -53,7 +66,8 @@
   "进入游戏": {
     "recognition": "OCR",
     "action": "Click",
-    "expected": "进入游戏"
+    "expected": "进入游戏",
+    "timeout": 10000
   },
   "游戏画面识别": {
     "recognition": "OCR",
