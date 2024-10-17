@@ -238,20 +238,23 @@
     ]
   },
   "探索_悬赏_自动挑战": {
-    "recognition": "TemplateMatch",
+    "recognition": "FeatureMatch",
     "action": "Click",
     "template": "探索_自动挑战.png",
     "index": -1,
     "next": "探索_悬赏_识别章节开始界面",
-    "post_delay": 10000,
-    "timeout": 300000
+    "post_delay": 30000,
+
+    "timeout": 300000,
+        "roi": [84,617,1107,96]
   },
   "探索_悬赏_自动轮换": {
-    "recognition": "TemplateMatch",
+    "recognition": "FeatureMatch",
     "action": "Click",
     "template": "探索_自动挑战.png",
-    "enabled": false,
-    "next": "探索_悬赏_自动挑战"
+    "enabled": true,
+    "next": "探索_悬赏_自动挑战",
+    "roi": [84,617,1107,96]
   },
   "探索_悬赏_识别章节开始界面": {
     "recognition": "OCR",

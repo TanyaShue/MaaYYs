@@ -5,13 +5,15 @@
     ],
     "interrupt": [
       "点击探索"
-    ]
+    ],
+    "on_error": "返回庭院"
   },
   "结界突破_点击结界突破": {
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": "探索_结界突破.png",
-    "next": "结界突破_点击式神录"
+    "roi": [0,599,1193,120],
+    "next": ["结束突破","结界突破_点击式神录"]
   },
   "结界突破_点击式神录": {
     "recognition": "FeatureMatch",
@@ -73,16 +75,6 @@
       65
     ],
     "expected": "结界突破"
-  },
-  "识别突破卷数量": {
-    "recognition": "OCR",
-    "roi": [
-      1105,
-      3,
-      148,
-      65
-    ],
-    "expected": "1/30"
   },
   "突破_结束战斗": {
     "recognition": "OCR",

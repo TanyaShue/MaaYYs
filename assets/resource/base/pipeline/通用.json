@@ -30,11 +30,8 @@
     "post_delay": 2000
   },
   "返回庭院": {
-    "next": ["识别庭院特征"],
+    "next": ["识别庭院特征_望月幽庭_探索"],
     "interrupt": ["识别蓝色返回","识别黄色返回"]
-  },
-  "识别庭院特征": {
-    "next": ["识别庭院特征_望月幽庭_探索"]
   },
   "识别庭院特征_望月幽庭_探索": {
     "recognition": "TemplateMatch",
@@ -56,7 +53,8 @@
       138,
       100
     ],
-    "template": "返回_蓝色.png"
+    "template": "返回_蓝色.png",
+    "post_delay": 2000
   },
   "识别黄色返回": {
     "recognition": "FeatureMatch",
@@ -67,6 +65,7 @@
       138,
       100
     ],
-    "template": "返回_黄色.png"
+    "template": "返回_黄色.png",
+    "post_delay": 2000
   }
 }
