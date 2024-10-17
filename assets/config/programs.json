@@ -22,7 +22,8 @@
                     "task_entry": "自动悬赏封印",
                     "option": [
                         "悬赏封印分组预设",
-                        "悬赏封印队伍预设"
+                        "悬赏封印队伍预设",
+                        "是否启动自动轮换"
                     ]
                 },
                 {
@@ -41,9 +42,14 @@
                     ]
                 },
                 {
-                    "task_name": "测试",
-                    "task_entry": "testSwitchSoul",
+                    "task_name": "领取奖励",
+                    "task_entry": "领取奖励",
                     "option": []
+                },
+                {
+                    "task_name": "测试",
+                    "task_entry": "探索_悬赏_御魂_返回",
+                    "option": ["是否启动自动轮换"]
                 },
                 {
                     "task_name": "测试2",
@@ -68,6 +74,16 @@
                             }
                         }
                     ]
+                },
+                "是否启动自动轮换": {
+                    "boole": {
+                        "default": false,
+                        "pipeline_override": {
+                            "探索_悬赏_自动轮换": {
+                                "enabled": "{boole}"
+                            }
+                        }
+                    }
                 },
                 "悬赏封印分组预设": {
                     "input": {

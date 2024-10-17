@@ -8,7 +8,7 @@
   "悬赏封印": {
     "recognition": "FeatureMatch",
     "action": "Click",
-    "template": "悬赏封印.png",
+    "template": ["悬赏封印.png","悬赏封印_完成.png"],
     "roi": [
       7,
       264,
@@ -38,7 +38,7 @@
         96,
         218
       ],
-      "delay":2000
+      "delay": 2000
     }
   },
   "悬赏封印_点击一键追踪": {
@@ -56,7 +56,7 @@
   "悬赏封印_点击叉叉": {
     "recognition": "TemplateMatch",
     "action": "Click",
-    "template": "地鬼_关闭.png",
+    "template": "关闭.png",
     "roi": [
       1127,
       74,
@@ -64,11 +64,57 @@
       157
     ],
     "next": [
-      "悬赏封印_识别妖怪"
+      "探索_悬赏_识别蓝色返回"
     ],
     "interrupt": [
       "点击探索"
+    ],
+    "on_error": "返回庭院"
+  },
+  "探索_悬赏_识别蓝色返回": {
+    "recognition": "FeatureMatch",
+    "roi": [
+      0,
+      4,
+      138,
+      100
+    ],
+    "template": "返回_蓝色.png",
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi": [
+        16,
+        468,
+        100,
+        38
+      ],
+      "end_roi": [
+        23,
+        262,
+        80,
+        27
+      ],
+      "delay": 1000
+    },
+    "post_delay": 3000,
+    "next": [
+      "悬赏封印_识别宝箱",
+      "悬赏封印_识别妖怪"
     ]
+  },
+  "悬赏封印_识别宝箱": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "悬赏_宝箱.png",
+    "next": "悬赏封印_识别妖怪",
+    "roi": [
+      2,
+      115,
+      143,
+      491
+    ],
+    "post_delay": 1000
   },
   "悬赏封印_识别妖怪": {
     "recognition": "OCR",
@@ -81,7 +127,8 @@
       115,
       143,
       491
-    ]
+    ],
+    "post_delay": 1000
   },
   "悬赏_向上滑动一下": {
     "roi": [
@@ -95,12 +142,18 @@
     "custom_action": "RandomSwipe",
     "custom_action_param": {
       "start_roi": [
-        544,445,407,41
+        544,
+        445,
+        407,
+        41
       ],
       "end_roi": [
-        540,224,400,47
+        540,
+        224,
+        400,
+        47
       ],
-      "delay": 400
+      "delay": 1000
     }
   },
   "识别探索目标": {
@@ -157,7 +210,7 @@
     "next": "探索_悬赏_御魂_返回",
     "post_delay": 2000
   },
-    "探索_悬赏_御魂_返回": {
+  "探索_悬赏_御魂_返回": {
     "action": "Click",
     "target": [
       20,
@@ -165,6 +218,49 @@
       50,
       40
     ],
-    "post_delay":2000
+    "post_delay": 2000,
+    "next": [
+      "探索_悬赏_自动轮换",
+      "探索_悬赏_自动挑战"
+    ]
+  },
+  "探索_悬赏_自动挑战": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "探索_自动挑战.png",
+    "index": -1,
+    "next": "探索_悬赏_识别章节开始界面",
+    "post_delay": 60000,
+    "timeout": 300000
+  },
+  "探索_悬赏_自动轮换": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "探索_自动挑战.png",
+    "enabled": false,
+    "next": "探索_悬赏_自动挑战"
+  },
+  "探索_悬赏_识别章节开始界面": {
+    "recognition": "OCR",
+    "expected": "探索",
+    "roi": [
+      1068,
+      236,
+      51,
+      100
+    ],
+    "next": "探索_悬赏_关闭悬赏章节界面"
+  },
+  "探索_悬赏_关闭悬赏章节界面": {
+    "recognition": "TemplateMatch",
+    "template": "关闭.png",
+    "action": "Click",
+    "roi": [
+      997,
+      104,
+      102,
+      97
+    ],
+    "post_delay": 500
   }
 }

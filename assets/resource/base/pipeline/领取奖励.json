@@ -1,0 +1,69 @@
+{
+  "领取奖励_任务列表": {
+    "action": "Custom",
+    "custom_action": "TaskList",
+    "custom_action_param": {
+      "task_list": [
+        "领取奖励_邮件"
+      ]
+    }
+  },
+  "领取奖励_邮件": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": [
+      "邮箱.png",
+      "邮箱_红点.png"
+    ],
+    "roi": [
+      1117,
+      0,
+      75,
+      98
+    ],
+    "next": "邮件_全部领取",
+    "on_error": "邮件_领取奖励_点击关闭"
+  },
+  "邮件_领取奖励_点击关闭": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "关闭.png",
+    "post_delay": 1000
+  },
+  "邮件_全部领取": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "邮件_全部领取.png",
+    "post_delay": 1000,
+    "next": "邮件_确认领取",
+    "timeout": 3000,
+    "roi": [
+      54,
+      579,
+      191,
+      132
+    ]
+  },
+  "邮件_确认领取": {
+    "recognition": "OCR",
+    "expected": "确定",
+    "action": "Click",
+    "roi": [
+      695,
+      543,
+      146,
+      59
+    ],
+    "next": "邮件_领取奖励_点击关闭",
+    "interrupt": "邮件_领取奖励_点击底部关闭奖励界面"
+  },
+  "邮件_领取奖励_点击底部关闭奖励界面": {
+    "action": "Click",
+    "target": [
+      414,
+      517,
+      445,
+      135
+    ]
+  }
+}

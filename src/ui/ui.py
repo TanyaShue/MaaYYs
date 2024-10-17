@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView, QComboBox,
     QFormLayout
 )
+from PySide6.scripts.pyside_tool import project
 
 from src.utils.config_programs import *
 from src.utils.config_projects import *
@@ -87,6 +88,7 @@ class MainWindow(QWidget):
 
     def init_navigation_bar(self):
         """动态创建左侧导航栏按钮"""
+        # 创建导航栏按钮
         nav_buttons = ['首页'] + [program.program_name for program in self.programs.programs]
         for btn_text in nav_buttons:
             button = QPushButton(btn_text)
@@ -95,7 +97,39 @@ class MainWindow(QWidget):
             button.setObjectName('navButton')
 
             self.left_nav_layout.addWidget(button)
+
+        # 添加伸缩空间
         self.left_nav_layout.addStretch()
+
+        # 添加“刷新资源”按钮
+        refresh_button = QPushButton('刷新资源')
+        refresh_button.setFixedHeight(50)
+        refresh_button.setFixedWidth(50)
+        refresh_button.setObjectName('refreshButton')
+
+        # 将按钮点击事件连接到刷新资源的方法
+        refresh_button.clicked.connect(self.refresh_resources)
+
+        # 将“刷新资源”按钮添加到布局的底部
+        self.left_nav_layout.addWidget(refresh_button)
+
+    def refresh_resources(self):
+        _project=self.projects.projects[0]
+        """刷新资源"""
+        try:
+            # 创建 TaskProjectManager 实例
+            task_manager = TaskProjectManager()
+            task_manager.create_tasker_process(_project)
+
+
+            # 发送任务到设备
+            task_manager.send_task(_project, "RELOAD_RESOURCES")
+
+            logging.info(f"任务 RELOAD_RESOURCES 已成功发送")
+
+        except Exception as e:
+            logging.error(f"发送任务 RELOAD_RESOURCES 失败: {e}")
+
 
     def init_home_page(self):
         """初始化首页页面，包含四个垂直排列的部分"""

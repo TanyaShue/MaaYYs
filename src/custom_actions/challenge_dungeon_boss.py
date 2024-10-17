@@ -39,9 +39,8 @@ class ChallengeDungeonBoss(CustomAction):
             print("点击挑战")
 
             # 点击挑战
-            te=context.run_pipeline("挑战地鬼", {
+            context.run_pipeline("挑战地鬼", {
                 "挑战地鬼": {"post_delay": 2000,"action": "Click", "target": [1109, 493, 102, 63]}})
-            print(te)
             time.sleep(5)
             context.run_pipeline("自动挑战", {
                 "自动挑战": {"timeout": 100, "action": "Custom", "custom_action": "AutoBattle"}})
@@ -50,8 +49,8 @@ class ChallengeDungeonBoss(CustomAction):
             time.sleep(20)
             print("等待识别分享按钮")
 
-            context.run_pipeline("结束战斗",{"结束战斗": {"next":["点击叉叉"],"interrupt":"点击屏幕继续"},"点击屏幕继续": {
-                             "roi":[481,641,380,78],"recognition": "OCR", "timeout":300000,"expected": "点击屏幕继续", "action": "Click", "target": [275,488,652,112]},"点击叉叉": {"recognition": "TemplateMatch", "template": "地鬼_关闭.png", "action": "Click"}})
+            context.run_pipeline("结束战斗",{"结束战斗": {"next":["点击叉叉"],"interrupt":"点击屏幕继续","timeout":300000,},"点击屏幕继续": {
+                             "roi":[481,641,380,78],"recognition": "OCR", "expected": "点击屏幕继续", "action": "Click", "target": [275,488,652,112]},"点击叉叉": {"recognition": "TemplateMatch", "template": "地鬼_关闭.png", "action": "Click"}})
 
         print("自动地鬼挑战完成")
         return True

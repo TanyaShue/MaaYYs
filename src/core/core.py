@@ -77,20 +77,37 @@ class TaskerProcess:
         # 任务循环
 
         while True:
-            task: Union[str, ProjectRunData] = self.task_queue.get()
-            if isinstance(task, str) and task == "TERMINATE":
-                log_to_queue(f"Terminating Tasker process for {self.project_key}")
-                break
+            try:
+                task: Union[str, ProjectRunData] = self.task_queue.get()
 
-            if isinstance(task, ProjectRunData):
-                log_to_queue(f"Executing task {task}")
-                for project_run_task in task.project_run_tasks:
-                    log_to_queue(f"Executing task {project_run_task.task_name} for {self.project_key}")
-                    tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
-                    log_to_queue(f"Task {project_run_task.task_name} executed for {self.project_key}")
+                # 检查字符串类型的任务
+                if isinstance(task, str):
+                    if task == "TERMINATE":
+                        log_to_queue(f"Terminating Tasker process for {self.project_key}")
+                        break
+                    elif task == "RELOAD_RESOURCES":
+                        log_to_queue(f"Reloading resource for {self.project_key}")
+                        resource.post_path("../assets/resource/base").wait()
+                        tasker.bind(resource, controller)
+
+                        log_to_queue(f"Resource reloaded for {self.project_key}")
+                    else:
+                        log_to_queue(f"Unexpected string task received: {task}")
+
                 # 执行 ProjectRunData 类型的任务
-            else:
-                log_to_queue(f"Unexpected task type received: {type(task)}")
+                elif isinstance(task, ProjectRunData):
+                    log_to_queue(f"Executing task {task}")
+                    for project_run_task in task.project_run_tasks:
+                        log_to_queue(f"Executing task {project_run_task.task_name} for {self.project_key}")
+                        tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
+                        log_to_queue(f"Task {project_run_task.task_name} executed for {self.project_key}")
+
+                else:
+                    log_to_queue(f"Unexpected task type received: {type(task)}")
+
+            except Exception as e:
+                log_to_queue(f"Exception occurred: {e}")
+
 
     def send_task(self, task):
         self.task_queue.put(task)

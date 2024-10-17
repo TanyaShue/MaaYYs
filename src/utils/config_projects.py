@@ -175,12 +175,31 @@ class Project:
         elif selected_option.option_type == 'input':
             return self._replace_placeholder(default_option.input.pipeline_override, selected_option.option_value)
         elif selected_option.option_type == 'boole':
-            return self._replace_placeholder(default_option.boole.pipeline_override, selected_option.option_value)
+            return self._replace_boole_value(default_option.boole.pipeline_override, selected_option.option_value)
         return {}
 
     def _replace_placeholder(self, pipeline, value):
         if isinstance(pipeline, dict):
             return {k: (v.replace("{value}", str(value)).replace("{boole}", str(value)) if isinstance(v, str) else self._replace_placeholder(v, value)) for k, v in pipeline.items()}
+        return pipeline
+
+    def _replace_boole_value(self, pipeline, value):
+        """
+        递归查找 pipeline 中值为 {boole} 的 key，并将其替换为布尔值 value
+        """
+        if isinstance(pipeline, dict):
+            new_pipeline = {}
+            for k, v in pipeline.items():
+                if v == "{boole}":
+                    # 如果值为 {boole}，将其替换为布尔值 value
+                    new_pipeline[k] = value
+                elif isinstance(v, dict):
+                    # 如果是嵌套的 dict，递归处理
+                    new_pipeline[k] = self._replace_boole_value(v, value)
+                else:
+                    # 保留其他值不变
+                    new_pipeline[k] = v
+            return new_pipeline
         return pipeline
 
 

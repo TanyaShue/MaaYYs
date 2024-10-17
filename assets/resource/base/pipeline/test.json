@@ -28,6 +28,14 @@
       "team_name": "日常清杂"
     }
   },
+"testTaskList":{
+  "recognition": "DirectHit",
+  "action": "Custom",
+  "custom_action": "TaskList",
+  "custom_action_param": {
+    "task_list": ["领取奖励_任务列表"]
+  }
+},
   "testOCR": {
     "recognition": "OCR",
     "expected":"\\d+",
