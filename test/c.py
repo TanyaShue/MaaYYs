@@ -1,83 +1,54 @@
+import socket
 import json
+import threading
+import time
+from src.task_service import run_task_service
 
-from src.utils.config_projects import ProjectsJson
+def start_server():
+    """启动服务器的线程，以便在测试期间进行连接。"""
+    server_thread = threading.Thread(target=run_task_service, args=('localhost', 11234))
+    server_thread.daemon = True  # 使线程在主线程退出时结束
+    server_thread.start()
+    time.sleep(1)  # 等待服务器启动
+    return server_thread
 
+def test_task_service_handler():
+    server_thread = start_server()
+    print("Server started.")
 
-def test_projects_json():
-    # 模拟一个JSON数据作为测试数据
-    json_data = {
-        "projects": [
-            {
-                "project_name": "阴阳师1",
-                "program_name": "阴阳师",
-                "adb_config": {
-                    "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
-                    "adb_address": "127.0.0.1:5555"
-                },
-                "selected_tasks": [
-                    "自动地鬼",
-                    "自动结界",
-                    "自动悬赏",
-                    "打开游戏",
-                    "自动逢魔"
-                ],
-                "option": {
-                    "选择区服": {
-                        "select": "测试服"
-                    },
-                    "悬赏封印分组预设": {
-                        "input": "默认分组"
-                    },
-                    "悬赏封印队伍预设": {
-                        "input": "默认队伍"
-                    },
-                    "结界突破分组预设": {
-                        "input": "默认队伍"
-                    }
-                }
-            },
-            {
-                "project_name": "阴阳师2",
-                "program_name": "阴阳师",
-                "adb_config": {
-                    "adb_path": "C:/Program Files/BlueStacks_nxt/HD-Adb.exe",
-                    "adb_address": "127.0.0.1:5625"
-                },
-                "selected_tasks": [
-                    "自动地鬼",
-                    "打开游戏",
-                    "启动加速器"
-                ],
-                "option": {}
+    # 创建客户端连接
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect(('localhost', 11234))
+
+    # 准备发送的测试消息
+    test_message = {
+        "action": "create_tasker",
+        "project_key": "test_project",
+        "project": {
+            "adb_config": {
+                "adb_path": "path/to/adb",
+                "adb_address": "127.0.0.1:5037"
             }
-        ]
+        }
     }
 
-    # 模拟将该数据写入到一个JSON文件并从中读取
-    json_file = '../assets/config/projects.json'
+    # 发送测试消息
+    client_socket.sendall((json.dumps(test_message) + '\n').encode('utf-8'))
 
-    # with open(json_file, 'w', encoding='utf-8') as f:
-    #     json.dump(json_data, f, ensure_ascii=False, indent=4)
+    # 接收响应
+    response = client_socket.recv(4096).decode('utf-8').strip()
+    response_json = json.loads(response)
 
-    # 测试从文件中加载JSON并解析为对象
-    projects_json = ProjectsJson.load_from_file(json_file)
+    # 断言检查
+    assert response_json['status'] == 'success'
+    assert response_json['message'] == "Tasker test_project created."
 
-    # 1. 获取所有的project
-    projects = projects_json.projects
-    print("所有的Projects:")
-    for project in projects:
-        print(f"- Project Name: {project.project_name}, Program Name: {project.program_name}")
-        print(f"  ADB Path: {project.adb_config.adb_path}, ADB Address: {project.adb_config.adb_address}")
-        print(f"  Selected Tasks: {project.selected_tasks}")
-
-        # 遍历 option 列表
-        if project.option.options:
-            print("  Options:")
-            for option in project.option.options:
-                print(f"    {option.option_name}: {option.option_type} = {option.option_value}")
-
-
-
+    # 关闭客户端连接
+    client_socket.close()
+    print("Test completed successfully.")
 
 if __name__ == "__main__":
-    test_projects_json()
+    try:
+        test_task_service_handler()
+    except Exception as e:
+        print(f"Test failed with error: {e}")

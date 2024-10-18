@@ -59,7 +59,7 @@
     "action": "StartApp",
     "package": "com.netease.onmyoji/.tag0"
   },
-    "test_OCR_1": {
+  "test_OCR_1": {
       "recognition": "OCR",
       "expected":".*",
     "roi":[

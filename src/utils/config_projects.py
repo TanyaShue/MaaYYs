@@ -2,7 +2,6 @@ import json
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Union
 
-
 @dataclass
 class AdbConfig:
     adb_path: str
@@ -17,7 +16,6 @@ class AdbConfig:
 
     def to_json(self):
         return asdict(self)
-
 
 @dataclass
 class Option:
@@ -35,7 +33,6 @@ class Option:
     def to_json(self):
         return {self.option_type: self.option_value}
 
-
 @dataclass
 class ProjectOption:
     options: List[Option] = field(default_factory=list)
@@ -49,21 +46,44 @@ class ProjectOption:
     def to_json(self):
         return {opt.option_name: opt.to_json() for opt in self.options}
 
-
 @dataclass
 class ProjectRunTask:
     task_name: str
     task_entry: str
     pipeline_override: Dict = field(default_factory=dict)
 
+    @staticmethod
+    def from_json(data: Dict):
+        return ProjectRunTask(
+            task_name=data['task_name'],
+            task_entry=data['task_entry'],
+            pipeline_override=data.get('pipeline_override', {})
+        )
+
+    def to_json(self):
+        return {
+            "task_name": self.task_name,
+            "task_entry": self.task_entry,
+            "pipeline_override": self.pipeline_override
+        }
 
 @dataclass
 class ProjectRunData:
     project_run_tasks: List[ProjectRunTask]
 
+    @staticmethod
+    def from_json(data: Dict):
+        return ProjectRunData(
+            project_run_tasks=[ProjectRunTask.from_json(task) for task in data['project_run_tasks']]
+        )
+
+    def to_json(self):
+        return {
+            "project_run_tasks": [task.to_json() for task in self.project_run_tasks]
+        }
+
     def __repr__(self):
         return f"ProjectRunData(Tasks: {self.project_run_tasks})"
-
 
 @dataclass
 class Project:
@@ -101,6 +121,7 @@ class Project:
             "option": self.option.to_json()
         }
 
+    # 省略原有的 get_project_run_data 和 get_project_all_run_data 方法
     def get_project_run_data(self, programs_json):
         for program in programs_json.programs:
             if program.program_name == self.program_name:
@@ -108,11 +129,10 @@ class Project:
                 self.project_run_tasks = program.program_tasks
                 self.project_run_option = program.option
 
-                # 遍历 program.program_tasks 按顺序处理任务
+                # Iterate over program.program_tasks in order
                 for program_task in program.program_tasks:
                     task_name = program_task.task_name
                     if task_name not in self.selected_tasks:
-                        # 如果 task_name 不在 selected_tasks 中，跳过处理
                         continue
 
                     pipeline_override = self._process_task_option(program_task)
@@ -126,6 +146,7 @@ class Project:
 
                 return ProjectRunData(project_run_tasks=project_run_tasks)
         return None
+
     def get_project_all_run_data(self, programs_json):
         for program in programs_json.programs:
             if program.program_name == self.program_name:
@@ -133,7 +154,7 @@ class Project:
                 self.project_run_tasks = program.program_tasks
                 self.project_run_option = program.option
 
-                # 遍历 program.program_tasks 按顺序处理任务
+                # Iterate over program.program_tasks in order
                 for program_task in program.program_tasks:
                     task_name = program_task.task_name
 
@@ -148,7 +169,7 @@ class Project:
 
                 return ProjectRunData(project_run_tasks=project_run_tasks)
         return None
-
+    # 省略原有的 _process_task_option、_get_pipeline_override、_replace_placeholder 和 _replace_boole_value 方法
     def _process_task_option(self, program_task):
         final_pipeline_override = {}
 
@@ -184,25 +205,18 @@ class Project:
         return pipeline
 
     def _replace_boole_value(self, pipeline, value):
-        """
-        递归查找 pipeline 中值为 {boole} 的 key，并将其替换为布尔值 value
-        """
+        """Recursively find keys in pipeline with value {boole} and replace them with boolean value."""
         if isinstance(pipeline, dict):
             new_pipeline = {}
             for k, v in pipeline.items():
                 if v == "{boole}":
-                    # 如果值为 {boole}，将其替换为布尔值 value
                     new_pipeline[k] = value
                 elif isinstance(v, dict):
-                    # 如果是嵌套的 dict，递归处理
                     new_pipeline[k] = self._replace_boole_value(v, value)
                 else:
-                    # 保留其他值不变
                     new_pipeline[k] = v
             return new_pipeline
         return pipeline
-
-
 @dataclass
 class ProjectsJson:
     projects: List[Project]

@@ -12,7 +12,7 @@ from PySide6.scripts.pyside_tool import project
 
 from src.utils.config_programs import *
 from src.utils.config_projects import *
-from src.core.core import TaskProjectManager, log_thread
+from src.core.core import TaskProjectManagerClient
 
 
 # 定义运行异步方法类
@@ -76,10 +76,10 @@ class MainWindow(QWidget):
 
     def start_log_thread(self):
         """启动日志处理线程"""
-        task_manager = TaskProjectManager()
-        log_listener = threading.Thread(target=log_thread, args=(task_manager,))
-        log_listener.daemon = True
-        log_listener.start()
+        # task_manager = TaskProjectManagerClient()
+        # log_listener = threading.Thread(target=log_thread, args=(task_manager,))
+        # log_listener.daemon = True
+        # log_listener.start()
 
     # 保存 Config 实例
     def save_json_data(self):
@@ -118,7 +118,7 @@ class MainWindow(QWidget):
         """刷新资源"""
         try:
             # 创建 TaskProjectManager 实例
-            task_manager = TaskProjectManager()
+            task_manager = TaskProjectManagerClient()
             task_manager.create_tasker_process(_project)
 
 
@@ -340,7 +340,7 @@ class MainWindow(QWidget):
         button_task_connect.setEnabled(False)
 
         # 创建 TaskProjectManager 实例
-        task_manager = TaskProjectManager()
+        task_manager = TaskProjectManagerClient()
 
         # 定义实际任务执行逻辑
         def execute_task():
@@ -605,9 +605,8 @@ class MainWindow(QWidget):
         """
         try:
             # 创建 TaskProjectManager 实例
-            task_manager = TaskProjectManager()
+            task_manager = TaskProjectManagerClient()
             task_manager.create_tasker_process(project)
-
             # 获取项目运行数据，但只包含单个任务
             project_run_data = project.get_project_all_run_data(self.programs)
 

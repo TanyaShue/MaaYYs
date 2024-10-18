@@ -1,51 +1,96 @@
-# python -m pip install maafw
-from maa.controller import AdbController
-from maa.resource import Resource
-from maa.tasker import Tasker
-from maa.toolkit import Toolkit
+import socket
+import json
 
-from src.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
+def send_request(request_data, host='localhost', port=11234):
+    """发送请求到TCP服务器，并接收响应"""
+    try:
+        with socket.create_connection((host, port)) as sock:
+            # 发送请求数据
+            message = json.dumps(request_data) + '\n'
+            sock.sendall(message.encode('utf-8'))
 
+            # 接收响应数据
+            response_data = sock.recv(4096)
+            response = response_data.decode('utf-8')
+            print(f"Response from server: {response}")
 
-def main():
-    user_path = "../assets"
-    Toolkit.init_option(user_path)
+    except Exception as e:
+        print(f"Error communicating with server: {e}")
 
-    resource = Resource()
-    res_job = resource.post_path("../assets/resource/base")
-    res_job.wait()
+# 测试创建 Tasker 的请求
+def test_create_tasker():
+    project_data = {
+        "project_name": "TestProject",
+        "program_name": "TestProgram",
+        "adb_config": {
+            "adb_path": "/path/to/adb",
+            "adb_address": "127.0.0.1:5555"
+        },
+        "selected_tasks": ["task1", "task2"],
+        "option": {
+            "select": {
+                "option_name": "resolution",
+                "option_value": "1080p",
+                "option_type": "select"
+            },
+            "boole": {
+                "option_name": "fullscreen",
+                "option_value": True,
+                "option_type": "boole"
+            }
+        }
+    }
 
-    adb_devices = Toolkit.find_adb_devices()
-    if not adb_devices:
-        print("No ADB device found.")
-        exit()
+    request = {
+        "action": "create_tasker",
+        "project": project_data
+    }
+    send_request(request)
 
-    # for demo, we just use the first device
-    device = adb_devices[0]
-    controller = AdbController(
-        adb_path=device.adb_path,
-        address=device.address,
-        screencap_methods=device.screencap_methods,
-        input_methods=device.input_methods,
-        config=device.config,
-    )
-    controller.post_connection().wait()
+# 测试发送任务的请求
+def test_send_task():
+    project_key = "/path/to/adb:127.0.0.1:5555"
+    task_data = {
+        "project_run_tasks": [
+            {
+                "task_name": "task1",
+                "task_entry": "entry1",
+                "pipeline_override": {}
+            },
+            {
+                "task_name": "task2",
+                "task_entry": "entry2",
+                "pipeline_override": {}
+            }
+        ]
+    }
 
-    tasker = Tasker()
-    tasker.bind(resource, controller)
+    request = {
+        "action": "send_task",
+        "project_key": project_key,
+        "task": task_data
+    }
+    send_request(request)
 
-    if not tasker.inited:
-        print("Failed to init MAA.")
-        exit()
+# 测试终止 Tasker 的请求
+def test_terminate_tasker():
+    project_key = "/path/to/adb:127.0.0.1:5555"
+    request = {
+        "action": "terminate_tasker",
+        "project_key": project_key
+    }
+    send_request(request)
 
-    resource.register_custom_action("ChallengeDungeonBoss", ChallengeDungeonBoss())
-
-    # print(task_detail.raw_detail)
-    # do something with task_detail
-
-
-
-
+# 测试终止所有 Tasker 的请求
+def test_terminate_all():
+    request = {
+        "action": "terminate_all"
+    }
+    send_request(request)
 
 if __name__ == "__main__":
-    main()
+    # 运行不同的测试请求
+    test_create_tasker()   # 测试创建 Tasker
+    test_send_task()       # 测试发送任务
+    test_terminate_tasker()# 测试终止特定 Tasker
+    test_terminate_all()   # 测试终止所有 Tasker

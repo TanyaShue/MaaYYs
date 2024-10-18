@@ -1,39 +1,40 @@
+import socket
 import unittest
-from src.utils.config_programs import *
-from src.utils.config_projects import *
+import threading
+import socketserver
 
+class MyTCPHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+        self.data = self.request.recv(1024).strip()
+        print("{} wrote:".format(self.client_address[0]))
+        print(self.data)
+        self.request.sendall(self.data)
 
-class MyTestCase(unittest.TestCase):
-    def setUp(self):
-        # 加载项目和程序配置
-        self.projects_json_path = '../assets/config/projects.json'
-        self.projects = ProjectsJson.load_from_file(self.projects_json_path)  # 加载项目配置类
+class TestMyTCPHandler(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # 设置服务器线程
+        HOST, PORT = "localhost", 12347
+        cls.server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
+        cls.server_thread = threading.Thread(target=cls.server.serve_forever)
+        cls.server_thread.daemon = True  # 设置为守护线程
+        cls.server_thread.start()
 
-        self.programs_json_path = '../assets/config/programs.json'
-        self.programs = ProgramsJson.load_from_file(self.programs_json_path)  # 加载程序配置类
+    @classmethod
+    def tearDownClass(cls):
+        cls.server.shutdown()
+        cls.server.server_close()
+        cls.server_thread.join()
 
-    def test_project_run_task_and_options(self):
-        # 遍历所有项目，生成项目任务和选项的运行数据
-        for project in self.projects.projects:
-            print(f"\nProject Name: {project.project_name}, Program Name: {project.program_name}")
+    def test_server_response(self):
+        # 模拟客户端发送数据并接收回显
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect(("localhost", 12347))
+            message = b"Hello, Server"
+            sock.sendall(message)
 
-            # 获取生成的 ProjectRunData
-            project_run_data = project.get_project_run_data(self.programs)
+            response = sock.recv(1024)
+            self.assertEqual(response, message)
 
-            if project_run_data:
-                # 打印任务和其对应的 Pipeline Override
-                print("Tasks to Run:")
-                for task in project_run_data.project_run_tasks:
-                    print(f"  Task Name: {task.task_name}, Task Entry: {task.task_entry}")
-
-                    # 检查并打印每个任务的 Pipeline Override
-                    if task.pipeline_override:
-                        print(f"    Pipeline Override for {task.task_name}: {task.pipeline_override}")
-                    # else:
-                        # print(f"    No Pipeline Override for {task.task_name}")
-            else:
-                print(f"No run data generated for {project.project_name}.")
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
