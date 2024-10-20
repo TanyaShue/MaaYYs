@@ -31,25 +31,20 @@ jobs:
           mkdir -p build/assets
           cp -r assets build/assets  # 复制 assets 目录到 build 目录
 
-      - name: Create a zip package
+      - name: List Files
         run: |
-          cd build
-          zip -r ../MAA_YYS_RELEASE.zip *  # 压缩整个 build 目录
+          echo "Listing files in dist/assets/"
+          ls -R dist/assets/
 
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ github.ref }}
-          name: Release ${{ github.ref }}  # 发布的名称
+          tag_name: ${{ github.ref }}
+          name: Release ${{ github.ref }}
           files: |
             dist/MAA_YYS_BACKEND
             dist/MAA_YYS
-            dist/assets/**  # 包含所有资产文件
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: MAA_YYS_RELEASE.zip
-          asset_name: MAA_YYS_RELEASE.zip
-          asset_content_type: application/zip
+            dist/assets/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
