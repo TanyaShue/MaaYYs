@@ -11,6 +11,8 @@ src/test
 */debug/*.log
 test
 
+dist
+
 # Compiled Object files
 build
 build-*
@@ -452,3 +454,4 @@ install
 
 # Tools
 tools/ImageCropper/**/*.png
+/dist/
