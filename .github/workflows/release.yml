@@ -28,8 +28,8 @@ jobs:
 
       - name: Copy assets
         run: |
-          mkdir -p build/assets
-          cp -r assets build/assets  # 复制 assets 目录到 build 目录
+          mkdir -p dist/assets
+          cp -r assets dist/assets  # 复制 assets 目录到 build 目录
 
       - name: Create Release
         id: create_release
