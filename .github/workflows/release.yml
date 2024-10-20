@@ -31,11 +31,6 @@ jobs:
           mkdir -p build/assets
           cp -r assets build/assets  # 复制 assets 目录到 build 目录
 
-      - name: List Files
-        run: |
-          echo "Listing files in dist/assets/"
-          ls -R dist/assets/
-
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
