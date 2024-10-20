@@ -36,6 +36,16 @@ jobs:
           cd build
           zip -r ../MAA_YYS_RELEASE.zip *  # 压缩整个 build 目录
 
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag: ${{ github.ref }}
+          name: Release ${{ github.ref }}  # 发布的名称
+          files: |
+            dist/MAA_YYS_BACKEND
+            dist/MAA_YYS
+            dist/assets/**  # 包含所有资产文件
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         with:
