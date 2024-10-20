@@ -56,7 +56,7 @@ add_data_custom_recognition = f'{custom_recognition_path}{os.pathsep}custom_reco
 PyInstaller.__main__.run([
     'src/task_service.py',
     '--onefile',
-    '--name=MAA_YYS_BACKEND',
+    '--name=MAA_YYS_BACKEND.exe',
     f'--add-data={add_data_param}',
     f'--add-data={add_data_param2}',
     f'--add-data={add_data_custom_actions}',
@@ -67,7 +67,7 @@ PyInstaller.__main__.run([
 PyInstaller.__main__.run([
     'src/main.py',
     '--onefile',
-    '--name=MAA_YYS',
+    '--name=MAA_YYS.exe',
     '--clean',
 ])
 
