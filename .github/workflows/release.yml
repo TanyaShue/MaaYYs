@@ -26,20 +26,13 @@ jobs:
       - name: Run build script
         run: python build.py  # 使用Python运行build.py
 
-      - name: Copy assets
-        run: |
-          mkdir -p dist/assets
-          cp -r assets dist/assets  # 复制 assets 目录到 build 目录
-
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            dist/MAA_YYS_BACKEND
-            dist/MAA_YYS
-            dist/assets/**
+            dist/**
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
