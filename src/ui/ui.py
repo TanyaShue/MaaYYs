@@ -10,9 +10,9 @@ from PySide6.QtWidgets import (
 )
 from PySide6.scripts.pyside_tool import project
 
+from src.core.task_project_manager import TaskProjectManager
 from src.utils.config_programs import *
 from src.utils.config_projects import *
-from src.core.core import TaskProjectManagerClient
 
 
 # 定义运行异步方法类
@@ -71,7 +71,7 @@ class MainWindow(QWidget):
 
     def load_styles(self):
         """加载样式文件"""
-        with open('./ui/style.qss', 'r', encoding='utf-8') as f:
+        with open('../assets/config/style.qss', 'r', encoding='utf-8') as f:
             self.setStyleSheet(f.read())
 
     def start_log_thread(self):
@@ -118,11 +118,14 @@ class MainWindow(QWidget):
         """刷新资源"""
         try:
             # 创建 TaskProjectManager 实例
-            task_manager = TaskProjectManagerClient()
+            print(f"创建 TaskProjectManager")
+            task_manager = TaskProjectManager()
+
             task_manager.create_tasker_process(_project)
 
 
             # 发送任务到设备
+            print(f"发送任务 RELOAD_RESOURCES")
             task_manager.send_task(_project, "RELOAD_RESOURCES")
 
             logging.info(f"任务 RELOAD_RESOURCES 已成功发送")
@@ -340,7 +343,7 @@ class MainWindow(QWidget):
         button_task_connect.setEnabled(False)
 
         # 创建 TaskProjectManager 实例
-        task_manager = TaskProjectManagerClient()
+        task_manager = TaskProjectManager()
 
         # 定义实际任务执行逻辑
         def execute_task():
@@ -604,8 +607,9 @@ class MainWindow(QWidget):
         发送单个任务到设备
         """
         try:
+            print(f"开始发送任务 {selected_task.task_name}")
             # 创建 TaskProjectManager 实例
-            task_manager = TaskProjectManagerClient()
+            task_manager = TaskProjectManager()
             task_manager.create_tasker_process(project)
             # 获取项目运行数据，但只包含单个任务
             project_run_data = project.get_project_all_run_data(self.programs)
@@ -620,6 +624,7 @@ class MainWindow(QWidget):
             # 创建仅包含当前任务的 ProjectRunData
             single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
 
+            print(f"开始发送任务 {selected_task.task_name}")
             # 发送任务到设备
             task_manager.send_task(project, single_task_run_data)
 

@@ -1,14 +1,24 @@
 {
   "点击探索": {
     "next": [
-      "探索_望月幽庭",
-      "探索_织梦莲庭"
+      "庭院_点击探索"
     ]
   },
-  "探索_望月幽庭": {
+  "庭院_点击探索": {
     "recognition": "TemplateMatch",
     "action": "Click",
-    "template": "探索_望月幽庭.png",
+    "template": ["庭院_探索_望月幽庭.png","庭院_探索_织梦莲庭.png"],
+    "roi": [
+      0,
+      0,
+      1193,
+      120
+    ]
+  },
+  "庭院_探索_望月幽庭": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": "庭院_探索_望月幽庭.png",
     "roi": [
       239,
       119,
@@ -17,10 +27,10 @@
     ],
     "post_delay": 2000
   },
-  "探索_织梦莲庭": {
+  "庭院_探索_织梦莲庭": {
     "recognition": "TemplateMatch",
     "action": "Click",
-    "template": "探索_织梦莲庭.png",
+    "template": "庭院_探索_织梦莲庭.png",
     "roi": [
       239,
       119,
@@ -30,12 +40,12 @@
     "post_delay": 2000
   },
   "返回庭院": {
-    "next": ["识别庭院特征_望月幽庭_探索"],
+    "next": ["识别庭院特征"],
     "interrupt": ["识别蓝色返回","识别黄色返回"]
   },
-  "识别庭院特征_望月幽庭_探索": {
+  "识别庭院特征": {
     "recognition": "TemplateMatch",
-    "template": "探索_望月幽庭.png",
+    "template": ["庭院_探索_望月幽庭.png","庭院_探索_织梦莲庭.png"],
     "roi": [
       239,
       119,

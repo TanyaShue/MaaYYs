@@ -246,7 +246,7 @@
     "post_delay": 30000,
 
     "timeout": 300000,
-        "roi": [84,617,1107,96]
+    "roi": [84,617,1107,96]
   },
   "探索_悬赏_自动轮换": {
     "recognition": "FeatureMatch",

@@ -33,23 +33,35 @@ if maa_bin_path2 is None:
 # 构建 --add-data 参数
 add_data_param2 = f'{maa_bin_path2}{os.pathsep}MaaAgentBinary'
 
+# 添加 custom_actions 和 custom_recognition 文件夹
+custom_actions_path = os.path.join(os.getcwd(), './src/custom_actions')
+custom_recognition_path = os.path.join(os.getcwd(), './src/custom_recognition')
 
-# # 运行 PyInstaller
+if not os.path.exists(custom_actions_path):
+    raise FileNotFoundError("未找到 custom_actions 文件夹")
+
+if not os.path.exists(custom_recognition_path):
+    raise FileNotFoundError("未找到 custom_recognition 文件夹")
+
+# 构建 --add-data 参数
+add_data_custom_actions = f'{custom_actions_path}{os.pathsep}custom_actions'
+add_data_custom_recognition = f'{custom_recognition_path}{os.pathsep}custom_recognition'
+
+# 运行 PyInstaller 打包命令
 PyInstaller.__main__.run([
     'src/task_service.py',
     '--onefile',
     '--name=MAA_YYS_BACKEND',
     f'--add-data={add_data_param}',
     f'--add-data={add_data_param2}',
+    f'--add-data={add_data_custom_actions}',
+    f'--add-data={add_data_custom_recognition}',
     '--clean',
 ])
-# PyInstaller.__main__.run([
-#     'src/main.py',
-#     '--name=MAA_YYS'
-# ])
-# PyInstaller.__main__.run([
-#     'test/abc.py',
-#     '--clean',
-#     '--onefile',
-#     '--name=MAA_YYS_TEST'
-# ])
+
+PyInstaller.__main__.run([
+    'src/main.py',
+    '--onefile',
+    '--name=MAA_YYS',
+    '--clean',
+])
