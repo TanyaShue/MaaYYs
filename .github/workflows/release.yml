@@ -23,11 +23,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt  # 如果你有 requirements.txt 文件
 
-      - name: Build with PyInstaller
-        run: |
-          pip install pyinstaller
-          PyInstaller --onefile --name=MAA_YYS_BACKEND src/task_service.py
-          PyInstaller --onefile --name=MAA_YYS src/main.py
+      - name: Run build script
+        run: python build.py  # 使用Python运行build.py
 
       - name: Copy assets
         run: |

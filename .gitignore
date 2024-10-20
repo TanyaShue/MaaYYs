@@ -454,4 +454,3 @@ install
 
 # Tools
 tools/ImageCropper/**/*.png
-/dist/
