@@ -3,7 +3,6 @@ import os
 import site
 import shutil
 import zipfile
-import sys
 
 # 获取当前工作目录
 current_dir = os.getcwd()
