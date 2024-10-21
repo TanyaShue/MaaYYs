@@ -1,4 +1,3 @@
-import pandas as pd
 import difflib
 import os
 import json
@@ -41,28 +40,28 @@ def check_if_rect_is_inside_any(rectangles: List[Tuple[int, int, int, int]], rec
 
 
 
-def load_qa_from_excel_v2(file_path):
-    """
-    优化版本：从Excel文件中加载问题和答案，将其存储在字典中，处理多个答案的情况。
-    """
-    # 读取Excel文件，假设数据在第一列且没有列名，并过滤掉空行
-    df = pd.read_excel(file_path, header=None, usecols=[0]).dropna()
-
-    # 使用 rsplit 以最后一个 '-' 为分割点，生成题目和答案列
-    df[['题目', '答案']] = df[0].str.rsplit('-', n=1, expand=True)
-
-    # 过滤掉题目或答案为空的行
-    df = df.dropna(subset=['题目', '答案'])
-
-    # 创建字典，并处理多答案情况
-    qa_dict = {}
-    for q, a in zip(df['题目'], df['答案']):
-        if pd.notna(q) and pd.notna(a):
-            # 将答案按 '/' 分割，形成一个答案列表
-            answers = [ans.strip() for ans in a.split('/') if ans.strip()]
-            qa_dict[q] = answers
-
-    return qa_dict
+# def load_qa_from_excel_v2(file_path):
+#     """
+#     优化版本：从Excel文件中加载问题和答案，将其存储在字典中，处理多个答案的情况。
+#     """
+#     # 读取Excel文件，假设数据在第一列且没有列名，并过滤掉空行
+#     df = pd.read_excel(file_path, header=None, usecols=[0]).dropna()
+#
+#     # 使用 rsplit 以最后一个 '-' 为分割点，生成题目和答案列
+#     df[['题目', '答案']] = df[0].str.rsplit('-', n=1, expand=True)
+#
+#     # 过滤掉题目或答案为空的行
+#     df = df.dropna(subset=['题目', '答案'])
+#
+#     # 创建字典，并处理多答案情况
+#     qa_dict = {}
+#     for q, a in zip(df['题目'], df['答案']):
+#         if pd.notna(q) and pd.notna(a):
+#             # 将答案按 '/' 分割，形成一个答案列表
+#             answers = [ans.strip() for ans in a.split('/') if ans.strip()]
+#             qa_dict[q] = answers
+#
+#     return qa_dict
 
 def find_best_answer(question, qa_dict):
     """

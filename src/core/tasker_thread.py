@@ -1,3 +1,4 @@
+import os
 import queue
 import threading
 import logging
@@ -17,9 +18,11 @@ class TaskerThread(threading.Thread):
         self.stop_event = threading.Event()
 
     def run(self):
-        Toolkit.init_option("../assets")
+        current_dir = os.getcwd()
+        # 初始化
+        Toolkit.init_option(os.path.join(current_dir, "assets"))
         resource = Resource()
-        resource.post_path("../assets/resource/base").wait()
+        resource.post_path(os.path.join(current_dir, "assets", "resource", "base")).wait()
 
         controller = AdbController(adb_path=self.project.adb_config.adb_path, address=self.project.adb_config.adb_address)
         controller.post_connection().wait()
@@ -28,11 +31,12 @@ class TaskerThread(threading.Thread):
         tasker.bind(resource, controller)
 
         # 注册自定义任务
-        load_custom_actions("../src/custom_actions")
+
+        load_custom_actions(os.path.join(current_dir, "src", "custom_actions"))
         for action_name, action_instance in action_registry.items():
             resource.register_custom_action(action_name, action_instance)
 
-        load_custom_recognizers("../src/custom_recognition")
+        load_custom_recognizers(os.path.join(current_dir, "src", "custom_recognition"))
         for recognizer_name, recognizer_instance in recognizer_registry.items():
             resource.register_custom_recognition(recognizer_name, recognizer_instance)
 
@@ -56,12 +60,14 @@ class TaskerThread(threading.Thread):
                 logging.error(f"Exception occurred: {e}")
 
     def handle_string_task(self, task, resource, tasker, controller):
+
         if task == "TERMINATE":
             logging.info(f"Terminating Tasker thread for {self.project_key}")
             self.stop_event.set()
         elif task == "RELOAD_RESOURCES":
+            current_dir = os.getcwd()
             logging.info(f"Reloading resources for {self.project_key}")
-            resource.post_path("../assets/resource/base").wait()
+            resource.post_path(os.path.join(current_dir, "assets", "resource", "base")).wait()
             tasker.bind(resource, controller)
             logging.info(f"Resource reloaded for {self.project_key}")
         else:

@@ -8,8 +8,8 @@ import inspect
 action_registry = {}
 recognizer_registry = {}
 
-custom_actions_path="custom_actions"
-custom_recognition_path="custom_recognition"
+custom_actions_path="src.custom_actions"
+custom_recognition_path="src.custom_recognition"
 def load_custom_actions(directory):
     load_custom(directory, custom_actions_path,CustomAction)
 

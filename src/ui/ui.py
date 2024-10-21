@@ -1,14 +1,13 @@
 import logging
-import threading
+import os
 
-from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool, QObject, Signal
+from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
     QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox, QSplitter, QHeaderView, QComboBox,
     QFormLayout
 )
-from PySide6.scripts.pyside_tool import project
 
 from src.core.task_project_manager import TaskProjectManager
 from src.utils.config_programs import *
@@ -32,11 +31,16 @@ class TaskWorker(QRunnable):
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
+        # 获取当前工作目录
+        current_dir = os.getcwd()
 
-        self.projects_json_path = '../assets/config/projects.json'
+        # 配置文件路径
+        self.projects_json_path = os.path.join(current_dir, "assets", "config", "projects.json")
+        self.programs_json_path = os.path.join(current_dir, "assets", "config", "programs.json")
+        self.styles_json_path = os.path.join(current_dir, "assets", "config", "style.qss")
+        print(f"配置文件路径: {self.projects_json_path}, {self.programs_json_path}, {self.styles_json_path}")
         self.projects = ProjectsJson.load_from_file(self.projects_json_path)  # 直接加载配置类
 
-        self.programs_json_path = '../assets/config/programs.json'
         self.programs = ProgramsJson.load_from_file(self.programs_json_path)  # 直接加载配置类
 
         # 加载样式文件
@@ -71,7 +75,7 @@ class MainWindow(QWidget):
 
     def load_styles(self):
         """加载样式文件"""
-        with open('../assets/config/style.qss', 'r', encoding='utf-8') as f:
+        with open(self.styles_json_path, 'r', encoding='utf-8') as f:
             self.setStyleSheet(f.read())
 
     def start_log_thread(self):

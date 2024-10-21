@@ -1,5 +1,5 @@
 pyside6~=6.7.2
-maafw>=2.0.2
+maafw==2.0.2
 
 
 requests~=2.32.3
