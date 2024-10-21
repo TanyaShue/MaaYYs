@@ -4,13 +4,13 @@ import site
 import shutil
 import zipfile
 
-# 获取当前工作目录
+# Get the current working directory
 current_dir = os.getcwd()
 
-# 获取 site-packages 目录列表
+# Get the site-packages directory list
 site_packages_paths = site.getsitepackages()
 
-# 查找包含 maa/bin 的路径
+# Search for the path that contains maa/bin
 maa_bin_path = None
 for path in site_packages_paths:
     potential_path = os.path.join(path, 'maa', 'bin')
@@ -19,12 +19,12 @@ for path in site_packages_paths:
         break
 
 if maa_bin_path is None:
-    raise FileNotFoundError("未找到包含 maa/bin 的路径")
+    raise FileNotFoundError("The path containing maa/bin was not found")
 
-# 构建 --add-data 参数
+# Build --add-data parameter
 add_data_param = f'{maa_bin_path}{os.pathsep}maa/bin'
 
-# 查找包含 MaaAgentBinary 的路径
+# Search for the path that contains MaaAgentBinary
 maa_bin_path2 = None
 for path in site_packages_paths:
     potential_path = os.path.join(path, 'MaaAgentBinary')
@@ -33,26 +33,40 @@ for path in site_packages_paths:
         break
 
 if maa_bin_path2 is None:
-    raise FileNotFoundError("未找到包含 MaaAgentBinary 的路径")
+    raise FileNotFoundError("The path containing MaaAgentBinary was not found")
 
-# 构建 --add-data 参数
+# Build --add-data parameter
 add_data_param2 = f'{maa_bin_path2}{os.pathsep}MaaAgentBinary'
 
-# 添加 custom_actions 和 custom_recognition 文件夹
+# Add custom_actions and custom_recognition folders
 custom_actions_path = os.path.join(current_dir, './src/custom_actions')
 custom_recognition_path = os.path.join(current_dir, './src/custom_recognition')
 
 if not os.path.exists(custom_actions_path):
-    raise FileNotFoundError("未找到 custom_actions 文件夹")
+    raise FileNotFoundError("The custom_actions folder was not found")
 
 if not os.path.exists(custom_recognition_path):
-    raise FileNotFoundError("未找到 custom_recognition 文件夹")
+    raise FileNotFoundError("The custom_recognition folder was not found")
 
-# 构建 --add-data 参数
+# Build --add-data parameters
 add_data_custom_actions = f'{custom_actions_path}{os.pathsep}custom_actions'
 add_data_custom_recognition = f'{custom_recognition_path}{os.pathsep}custom_recognition'
 
-# 运行 PyInstaller 打包命令
+# Copy DLL files to the root of the Python environment
+dll_dir = os.path.join(current_dir, 'DLL')
+python_root = os.path.dirname(os.__file__)
+
+if os.path.exists(dll_dir):
+    for dll_file in os.listdir(dll_dir):
+        source_path = os.path.join(dll_dir, dll_file)
+        dest_path = os.path.join(python_root, dll_file)
+
+        if os.path.isfile(source_path):
+            if os.path.exists(dest_path):
+                os.remove(dest_path)  # Remove the old file if it exists
+            shutil.copy(source_path, dest_path)
+
+# Run PyInstaller to package the task_service.py
 PyInstaller.__main__.run([
     'src/task_service.py',
     '--onefile',
@@ -64,6 +78,7 @@ PyInstaller.__main__.run([
     '--clean',
 ])
 
+# Run PyInstaller to package the main.py
 PyInstaller.__main__.run([
     'src/main.py',
     '--onefile',
@@ -71,41 +86,41 @@ PyInstaller.__main__.run([
     '--clean',
 ])
 
-# 复制 assets 文件夹到 dist 目录
+# Copy assets folder to the dist directory
 dist_dir = os.path.join(current_dir, 'dist')
 assets_source_path = os.path.join(current_dir, 'assets')
 assets_dest_path = os.path.join(dist_dir, 'assets')
 
 if not os.path.exists(assets_source_path):
-    raise FileNotFoundError("未找到 assets 文件夹")
+    raise FileNotFoundError("The assets folder was not found")
 
-# 如果目标路径存在，先删除它
+# If the destination path exists, remove it first
 if os.path.exists(assets_dest_path):
     shutil.rmtree(assets_dest_path)
 
-# 使用 shutil 复制整个文件夹
+# Use shutil to copy the entire folder
 shutil.copytree(assets_source_path, assets_dest_path)
 
-# 压缩 dist 文件夹为 zip 文件，并保存在 dist 目录中
+# Compress the dist folder into a zip file and save it in the dist directory
 zip_filename = 'MAA_YYS_RELEASE.zip'
 zip_filepath = os.path.join(dist_dir, zip_filename)
 
 with zipfile.ZipFile(zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipf:
     for root, dirs, files in os.walk(dist_dir):
         for file in files:
-            # 获取文件的绝对路径并相对路径
+            # Get the absolute and relative paths of the file
             file_path = os.path.join(root, file)
-            # 跳过刚生成的压缩包
+            # Skip the generated zip file
             if file == zip_filename:
                 continue
             arcname = os.path.relpath(file_path, dist_dir)
             zipf.write(file_path, arcname)
 
-# 删除 dist 文件夹中的所有文件和文件夹，保留压缩包
+# Delete all files and folders in the dist directory, except the zip file
 for root, dirs, files in os.walk(dist_dir):
     for file in files:
         file_path = os.path.join(root, file)
-        # 不删除生成的压缩包
+        # Do not delete the generated zip file
         if file != zip_filename:
             os.remove(file_path)
     for dir in dirs:
