@@ -1,11 +1,13 @@
 /* 左侧导航栏按钮样式 */
 QPushButton {
-    background-color: #2c3e50;  /* 深灰蓝色 */
+    background-color: #2980b9;  /* 深灰蓝色 */
     color: white;
     font-weight: bold;
-    border-radius: 5px;
-    padding: 12px;
+    border-radius: 3px;  /* 更小的圆角 */
+    padding: 8px;  /* 减小内边距 */
+    font-size: 12px;  /* 设置较小的字体大小 */
 }
+
 
 QPushButton:hover {
     background-color: #34495e;  /* 略浅的灰蓝色 */

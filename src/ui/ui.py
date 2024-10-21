@@ -145,14 +145,6 @@ class MainWindow(QWidget):
         # 创建一个用于承载所有组件的垂直容器
         container_widget = QWidget()
         container_layout = QVBoxLayout(container_widget)
-        # 设置样式表，添加阴影和圆角效果
-        container_widget.setStyleSheet("""
-            #homeContainer {
-                background-color: white;  /* 背景颜色 */
-                border-radius: 15px;      /* 圆角半径 */
-                padding: 10px;            /* 内边距 */
-            }
-        """)
 
         # 设置垂直容器中的组件之间的间隔（减少间隔）
         container_layout.setSpacing(5)

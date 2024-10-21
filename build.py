@@ -54,7 +54,7 @@ add_data_custom_recognition = f'{custom_recognition_path}{os.pathsep}custom_reco
 
 # 运行 PyInstaller 打包命令
 PyInstaller.__main__.run([
-    'src/task_service.py',
+    'src/main_service.py',
     '--onefile',
     '--name=MAA_YYS_BACKEND.exe',
     f'--add-data={add_data_param}',
