@@ -454,3 +454,5 @@ install
 
 # Tools
 tools/ImageCropper/**/*.png
+/MAA_YYS.spec
+/MAA_YYS_BACKEND.spec
