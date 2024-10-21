@@ -111,4 +111,4 @@ for root, dirs, files in os.walk(dist_dir):
     for dir in dirs:
         shutil.rmtree(os.path.join(root, dir), ignore_errors=True)
 
-print(f"打包并压缩完成: {zip_filepath}")
+print(f"Packaging and compression completed: {zip_filepath}")
