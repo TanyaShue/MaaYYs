@@ -3,7 +3,7 @@ import logging
 from threading import Lock
 from typing import Dict
 from src.utils.config_projects import Project, ProjectRunData
-from core.tasker_thread import TaskerThread
+from src.core.tasker_thread import TaskerThread
 
 app = Flask(__name__)
 taskers: Dict[str, TaskerThread] = {}
