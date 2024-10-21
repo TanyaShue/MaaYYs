@@ -23,6 +23,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Copy DLL files to Python root
+        run: |
+          # Check if the DLL folder exists
+          if (Test-Path -Path "${{ github.workspace }}\DLL") {
+            # Get all files in the DLL folder
+            $dllFiles = Get-ChildItem -Path "${{ github.workspace }}\DLL" -File
+            # Copy each DLL file to the Python environment root
+            foreach ($file in $dllFiles) {
+              Copy-Item -Path $file.FullName -Destination "${{ env.pythonLocation }}\$($file.Name)" -Force
+              Write-Host "Copied $($file.Name) to ${{ env.pythonLocation }}"
+            }
+          } else {
+            Write-Host "DLL folder not found."
+          }
+
       - name: Run build script
         run: python build.py  # 在 Windows 环境中运行打包脚本
 

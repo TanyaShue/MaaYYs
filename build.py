@@ -8,32 +8,6 @@ import sys
 # 获取当前工作目录
 current_dir = os.getcwd()
 
-# 获取当前 Python 环境的根目录
-python_root = sys.prefix
-
-# 定义 DLL 文件夹路径
-dll_folder = os.path.join(current_dir, 'DLL')
-
-# 检查 DLL 文件夹是否存在
-if not os.path.exists(dll_folder):
-    raise FileNotFoundError("DLL folder not found")
-
-# 获取 DLL 文件夹中的所有文件
-dll_files = [f for f in os.listdir(dll_folder) if os.path.isfile(os.path.join(dll_folder, f))]
-
-# 复制 DLL 文件夹中的文件到 Python 环境的根目录下，并进行覆盖
-for file in dll_files:
-    source_path = os.path.join(dll_folder, file)
-    dest_path = os.path.join(python_root, file)
-
-    # 如果目标路径下已有同名文件，覆盖原有文件
-    if os.path.exists(dest_path):
-        print(f"{file} already exists, overwriting the file.")
-
-    # 复制并覆盖文件
-    shutil.copy2(source_path, dest_path)
-    print(f"Copied {file} to {python_root}")
-
 # 获取 site-packages 目录列表
 site_packages_paths = site.getsitepackages()
 
