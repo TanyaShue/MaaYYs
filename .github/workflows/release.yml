@@ -13,10 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Wine and Python for Windows
+      - name: Set up Wine and Python for Windows
         run: |
+          sudo dpkg --add-architecture i386
           sudo apt update
-          sudo apt install -y wine64 wget
+          sudo apt install -y wine64 wine32 wget
           wget https://www.python.org/ftp/python/3.11.0/python-3.11.0.exe
           wine python-3.11.0.exe /quiet InstallAllUsers=1 PrependPath=1
 
