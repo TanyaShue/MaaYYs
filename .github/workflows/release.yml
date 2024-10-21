@@ -3,39 +3,28 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*'  # 只在标签以 "v" 开头时触发
+      - 'v*'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # 切换到 Windows 环境
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Wine and Python for Windows
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt update
-          sudo apt install -y wine64 wine32 wget
-          wget https://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.msi
-          wget https://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86_64.msi
-          wine msiexec /i wine-gecko-2.47.2-x86.msi /quiet
-          wine msiexec /i wine-gecko-2.47.2-x86_64.msi /quiet
-          wget https://www.python.org/ftp/python/3.11.0/python-3.11.0.exe
-          DISPLAY= wine python-3.11.0.exe /quiet InstallAllUsers=1 PrependPath=1
-
-      - name: Verify Wine Python installation
-        run: |
-          DISPLAY= wine ~/.wine/drive_c/Python311/python.exe --version
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
-          DISPLAY= wine ~/.wine/drive_c/Python311/python.exe -m pip install --upgrade pip
-          DISPLAY= wine ~/.wine/drive_c/Python311/python.exe -m pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run build script
-        run: DISPLAY= wine ~/.wine/drive_c/Python311/python.exe build.py
+        run: python build.py  # 在 Windows 环境中运行打包脚本
 
       - name: Create Release
         id: create_release
