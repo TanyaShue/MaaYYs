@@ -13,18 +13,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11'  # 你可以指定具体的 Python 版本
+      - name: Install Wine and Python for Windows
+        run: |
+          sudo apt update
+          sudo apt install -y wine64 wget
+          wget https://www.python.org/ftp/python/3.11.0/python-3.11.0.exe
+          wine python-3.11.0.exe /quiet InstallAllUsers=1 PrependPath=1
+
+      - name: Verify Wine Python installation
+        run: |
+          wine ~/.wine/drive_c/Python311/python.exe --version
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt  # 如果你有 requirements.txt 文件
+          wine ~/.wine/drive_c/Python311/python.exe -m pip install --upgrade pip
+          wine ~/.wine/drive_c/Python311/python.exe -m pip install -r requirements.txt
 
       - name: Run build script
-        run: python build.py  # 使用Python运行build.py
+        run: wine ~/.wine/drive_c/Python311/python.exe build.py  # 使用wine运行build.py
 
       - name: Create Release
         id: create_release
