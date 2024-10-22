@@ -346,7 +346,7 @@
       "action_list": [
         "突破_重新挑战"
       ],
-      "loop_times": 8
+      "loop_times": 4
     },
     "next": [
       "识别突破界面"

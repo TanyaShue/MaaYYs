@@ -4,7 +4,8 @@
     "custom_action": "TaskList",
     "custom_action_param": {
       "task_list": [
-        "领取奖励_邮件"
+        "领取奖励_邮件",
+        "领取奖励_日常奖励"
       ]
     }
   },
@@ -22,6 +23,7 @@
       98
     ],
     "next": "邮件_全部领取",
+    "timeout": 3000,
     "on_error": "邮件_领取奖励_点击关闭"
   },
   "邮件_领取奖励_点击关闭": {
@@ -54,8 +56,8 @@
       146,
       59
     ],
-    "next": "邮件_领取奖励_点击关闭",
-    "interrupt": "邮件_领取奖励_点击底部关闭奖励界面"
+    "next": "识别邮箱界面",
+    "interrupt": ["邮件_领取奖励_点击关闭","邮件_领取奖励_点击底部关闭奖励界面"]
   },
   "邮件_领取奖励_点击底部关闭奖励界面": {
     "action": "Click",
@@ -65,5 +67,53 @@
       445,
       135
     ]
+  },
+  "识别邮箱界面": {
+    "recognition": "OCR",
+    "expected": "邮箱",
+    "inverse": true
+  },
+  "领取奖励_日常奖励": {
+  "next": "领取奖励_识别日常奖励",
+    "interrupt": ["领取奖励_签到","领取奖励_每日勾玉","领取奖励_领取签到小垃圾"]
+},
+  "领取奖励_识别日常奖励": {
+    "recognition": "FeatureMatch",
+    "template": ["签到.png","勾玉.png","签到小垃圾.png"],
+    "inverse": true,
+    "roi": [382,487,267,196]
+  },
+  "领取奖励_签到": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "签到.png",
+    "post_delay": 1000,
+    "roi": [
+      382,487,267,196]
+  },
+  "领取奖励_每日勾玉": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "勾玉.png",
+    "post_delay": 1000,
+    "roi": [
+      382,487,267,196],
+    "next": "领取奖励_点击一下屏幕底部"
+  },
+  "领取奖励_领取签到小垃圾": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "签到小垃圾.png",
+    "post_delay": 1000,
+    "roi": [
+      382,487,267,196],
+    "next": "领取奖励_点击一下屏幕底部"
+  },
+  "领取奖励_点击一下屏幕底部": {
+    "action": "Click",
+    "target": [
+493,560,392,114
+    ],
+    "post_delay": 1000
   }
 }

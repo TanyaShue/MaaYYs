@@ -31,12 +31,12 @@ class TaskerThread(threading.Thread):
         tasker.bind(resource, controller)
 
         # 注册自定义任务
-
-        load_custom_actions(os.path.join(current_dir, "src", "custom_actions"))
+        # 加载自定义 actions 和 recognizers
+        load_custom_actions()
         for action_name, action_instance in action_registry.items():
             resource.register_custom_action(action_name, action_instance)
 
-        load_custom_recognizers(os.path.join(current_dir, "src", "custom_recognition"))
+        load_custom_recognizers()
         for recognizer_name, recognizer_instance in recognizer_registry.items():
             resource.register_custom_recognition(recognizer_name, recognizer_instance)
 
@@ -63,6 +63,9 @@ class TaskerThread(threading.Thread):
 
         if task == "TERMINATE":
             logging.info(f"Terminating Tasker thread for {self.project_key}")
+            tasker.__del__()
+            tasker.terminate()
+            tasker.controller.__del__()
             self.stop_event.set()
         elif task == "RELOAD_RESOURCES":
             current_dir = os.getcwd()
@@ -77,7 +80,8 @@ class TaskerThread(threading.Thread):
         logging.info(f"Executing task {task}")
         for project_run_task in task.project_run_tasks:
             logging.info(f"Executing task {project_run_task.task_name} for {self.project_key}")
-            tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
+            tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override)
+            # logging.info(f"Task {project_run_task.task_name} executed for {self.project_key}")
 
     def send_task(self, task):
         self.task_queue.put(task)
