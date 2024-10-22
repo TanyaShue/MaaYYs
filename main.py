@@ -9,13 +9,22 @@ from src.utils.logger import setup_logging
 exe_process = None
 
 
-def start_exe():
-    """启动指定的 exe 文件"""
-    global exe_process
-    current_dirs = os.getcwd()
-    exe_path = os.path.join(current_dirs, "MAA_YYS_BACKEND.exe")  # 你需要替换这个路径
-    exe_process = subprocess.Popen(exe_path)
+DEBUG = True  # 将其设置为 False 以运行 exe
 
+def start_exe_or_script():
+    """根据DEBUG状态启动指定的 exe 或 py 文件"""
+    global exe_process
+    current_dir = os.getcwd()
+
+    if DEBUG:
+        # 调整为你想要运行的 Python 脚本
+        script_path = os.path.join(current_dir, "main_service.py")  # 替换为你的脚本路径
+        exe_process = subprocess.Popen(['python', script_path])  # 使用 python 解释器运行脚本
+        print(f"Started script: {script_path}")
+    else:
+        exe_path = os.path.join(current_dir, "MAA_YYS_BACKEND.exe")  # 替换为你的 exe 路径
+        exe_process = subprocess.Popen(exe_path)
+        print(f"Started exe: {exe_path}")
 
 def stop_exe():
     """关闭 exe 子进程"""
@@ -49,7 +58,7 @@ if __name__ == "__main__":
     atexit.register(stop_exe)
 
     # 启动 exe 文件
-    start_exe()
+    start_exe_or_script()
 
     # 启动主窗口
     app = QApplication([])

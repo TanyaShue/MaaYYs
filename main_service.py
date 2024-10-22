@@ -6,7 +6,6 @@ from threading import Lock, Event
 from typing import Dict
 from src.utils.config_projects import Project, ProjectRunData
 from src.core.tasker_thread import TaskerThread
-import time
 
 app = Flask(__name__)
 taskers: Dict[str, TaskerThread] = {}

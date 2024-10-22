@@ -2,7 +2,16 @@ import os
 import queue
 import threading
 import logging
-from src.core.loader import load_custom_actions, action_registry, load_custom_recognizers, recognizer_registry
+
+from custom_actions.auto_battle import AutoBattle
+from custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
+from custom_actions.human_touch import HumanTouch
+from custom_actions.loop_action import LoopAction
+from custom_actions.random_swipe import RandomSwipe
+from custom_actions.random_touch import RandomTouch
+from custom_actions.switch_soul import SwitchSoul
+from custom_actions.task_list import TaskList
+from custom_recognition.my_recognizer import MyRecognizer
 from src.utils.config_projects import Project, ProjectRunData
 from maa.controller import AdbController
 from maa.resource import Resource
@@ -55,15 +64,20 @@ class TaskerThread(threading.Thread):
 
         logging.info(f"Tasker initialized for {self.project_key}")
 
-    def _register_custom_modules(self):
-        """注册自定义的 action 和 recognizer"""
-        load_custom_actions()
-        for action_name, action_instance in action_registry.items():
-            self.resource.register_custom_action(action_name, action_instance)
 
-        load_custom_recognizers()
-        for recognizer_name, recognizer_instance in recognizer_registry.items():
-            self.resource.register_custom_recognition(recognizer_name, recognizer_instance)
+    def _register_custom_modules(self):
+        # 注册自定义的 action ： AutoBattle, ChallengeDungeonBoss, HumanTouch,LoopAction,RandomSwipe,RandomTouch,SwitchSoul,TaskList
+        self.resource.register_custom_action("AutoBattle", AutoBattle())
+        self.resource.register_custom_action("ChallengeDungeonBoss",ChallengeDungeonBoss())
+        self.resource.register_custom_action("HumanTouch",HumanTouch())
+        self.resource.register_custom_action("LoopAction",LoopAction())
+        self.resource.register_custom_action("RandomSwipe",RandomSwipe())
+        self.resource.register_custom_action("RandomTouch",RandomTouch())
+        self.resource.register_custom_action("SwitchSoul",SwitchSoul())
+        self.resource.register_custom_action("TaskList",TaskList())
+        # 注册自定义的 recognizer:MyRecognizer
+        self.resource.register_custom_recognition("MyRecognizer", MyRecognizer())
+
 
     def _run_task_processing_loop(self):
         """任务处理循环"""
