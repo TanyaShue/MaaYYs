@@ -2,7 +2,9 @@ import os
 import queue
 import threading
 import logging
-from src.core.loader import load_custom_actions, action_registry, load_custom_recognizers, recognizer_registry
+
+from custom_actions import action_registry
+from custom_recognition import recognizer_registry
 from src.utils.config_projects import Project, ProjectRunData
 from maa.controller import AdbController
 from maa.resource import Resource
@@ -57,13 +59,13 @@ class TaskerThread(threading.Thread):
 
     def _register_custom_modules(self):
         """注册自定义的 action 和 recognizer"""
-        load_custom_actions()
         for action_name, action_instance in action_registry.items():
             self.resource.register_custom_action(action_name, action_instance)
+            print(f"Registered custom action: {action_name}")
 
-        load_custom_recognizers()
         for recognizer_name, recognizer_instance in recognizer_registry.items():
             self.resource.register_custom_recognition(recognizer_name, recognizer_instance)
+            print(f"Registered custom recognizer: {recognizer_name}")
 
     def _run_task_processing_loop(self):
         """任务处理循环"""

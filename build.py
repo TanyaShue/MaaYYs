@@ -48,6 +48,21 @@ if not os.path.exists(custom_actions_path):
 if not os.path.exists(custom_recognition_path):
     raise FileNotFoundError("custom_recognition folder not found")
 
+# 自动查找 src.custom_actions 和 src.custom_recognition 中的所有 Python 文件
+hidden_imports = []
+
+def find_python_files(directory, package_name):
+    """在指定目录中查找所有 Python 文件，并返回导入路径列表。"""
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.py') and file != '__init__.py':
+                module_name = f"{package_name}.{file[:-3]}"  # 去掉.py后缀
+                hidden_imports.append(module_name)
+
+# 查找 custom_actions 和 custom_recognition 中的 Python 文件
+find_python_files(custom_actions_path, 'src.custom_actions')
+find_python_files(custom_recognition_path, 'src.custom_recognition')
+
 # 运行 PyInstaller 打包命令
 PyInstaller.__main__.run([
     'main_service.py',
@@ -55,8 +70,9 @@ PyInstaller.__main__.run([
     '--name=MAA_YYS_BACKEND.exe',
     f'--add-data={add_data_param}',
     f'--add-data={add_data_param2}',
-    '--hidden-import=src.custom_actions',  # 使用模块导入路径
-    '--hidden-import=src.custom_recognition',  # 使用模块导入路径
+    # '--hidden-import=src.custom_actions',  # 使用模块导入路径
+    # '--hidden-import=src.custom_recognition',  # 使用模块导入路径
+    # *['--hidden-import=' + imp for imp in hidden_imports],  # 添加动态生成的 hidden-import
     '--clean',
 ])
 
