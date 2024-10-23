@@ -3,6 +3,8 @@ import queue
 import threading
 import logging
 
+import psutil
+
 from custom_actions.auto_battle import AutoBattle
 from custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
 from custom_actions.human_touch import HumanTouch
@@ -18,7 +20,6 @@ from maa.resource import Resource
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
-
 class TaskerThread(threading.Thread):
     def __init__(self, project_key: str, project: Project):
         super().__init__()
@@ -27,8 +28,8 @@ class TaskerThread(threading.Thread):
         self.task_queue = queue.Queue()
         self.stop_event = threading.Event()
         self.tasker = None
-        self.controller : AdbController
-        self.resource : Resource
+        self.controller = None
+        self.resource = None
 
     def run(self):
         try:
@@ -40,13 +41,9 @@ class TaskerThread(threading.Thread):
             self._cleanup()
 
     def _initialize_resources(self):
-        """初始化 Tasker 和相关资源"""
         current_dir = os.getcwd()
-
-        # 初始化工具
         Toolkit.init_option(os.path.join(current_dir, "assets"))
 
-        # 初始化资源和控制器
         self.resource = Resource()
         self.resource.post_path(os.path.join(current_dir, "assets", "resource", "base")).wait()
 
@@ -55,15 +52,12 @@ class TaskerThread(threading.Thread):
 
         self.tasker = Tasker()
         self.tasker.bind(self.resource, self.controller)
-
-        # 注册自定义任务
         self._register_custom_modules()
 
         if not self.tasker.inited:
             raise RuntimeError("Failed to initialize MAA tasker.")
 
         logging.info(f"Tasker initialized for {self.project_key}")
-
 
     def _register_custom_modules(self):
         # 注册自定义的 action ： AutoBattle, ChallengeDungeonBoss, HumanTouch,LoopAction,RandomSwipe,RandomTouch,SwitchSoul,TaskList
@@ -78,77 +72,58 @@ class TaskerThread(threading.Thread):
         # 注册自定义的 recognizer:MyRecognizer
         self.resource.register_custom_recognition("MyRecognizer", MyRecognizer())
 
-
     def _run_task_processing_loop(self):
-        """任务处理循环"""
         while not self.stop_event.is_set():
             try:
                 task = self.task_queue.get(timeout=1)
                 self._process_task(task)
             except queue.Empty:
-                continue  # 继续等待任务
+                continue
             except Exception as e:
                 logging.error(f"Error processing task for {self.project_key}: {e}")
 
     def _process_task(self, task):
-        """处理任务"""
         if isinstance(task, str):
-            self._handle_string_task(task)
+            if task == "TERMINATE":
+                self.terminate()
+            else:
+                logging.warning(f"Unexpected task: {task}")
         elif isinstance(task, ProjectRunData):
-            self._handle_project_run_data_task(task)
-
-    def _handle_string_task(self, task):
-        """处理字符串任务"""
-        if task == "TERMINATE":
-            logging.info(f"Terminating Tasker thread for {self.project_key}")
-            self.terminate()  # 设置终止标志
-        elif task == "RELOAD_RESOURCES":
-            self._reload_resources()
-        else:
-            logging.warning(f"Unexpected string task received: {task}")
-
-    def _handle_project_run_data_task(self, task):
-        """处理 ProjectRunData 任务"""
-        logging.info(f"Executing task {task}")
-        for project_run_task in task.project_run_tasks:
-            logging.info(f"Executing task {project_run_task.task_name} for {self.project_key}")
-            self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override)
-
-    def _reload_resources(self):
-        """重新加载资源"""
-        logging.info(f"Reloading resources for {self.project_key}")
-        current_dir = os.getcwd()
-        self.resource.post_path(os.path.join(current_dir, "assets", "resource", "base")).wait()
-        self.tasker.bind(self.resource, self.controller)
-        logging.info(f"Resources reloaded for {self.project_key}")
+            for project_run_task in task.project_run_tasks:
+                logging.info(f"Executing {project_run_task.task_name} for {self.project_key}")
+                self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
+                logging.info(f"任务执行完毕")
 
     def send_task(self, task):
-        """发送任务到队列"""
+        """将任务添加到队列"""
         self.task_queue.put(task)
 
     def terminate(self):
-        """终止线程和清理资源"""
+        """终止线程和所有子进程"""
+        logging.info(f"Terminating Tasker {self.project_key}...")
         self.stop_event.set()
-
+        self._terminate_all_subprocesses()
+    def _terminate_all_subprocesses(self):
+        """使用 psutil 获取并终止所有子进程"""
+        current_process = psutil.Process()  # 获取当前主进程
+        children = current_process.children(recursive=True)  # 获取所有子进程
+        for child in children:
+            logging.info(f"Terminating subprocess {child.pid} for {self.project_key}")
+            child.terminate()  # 优雅终止子进程
+            try:
+                child.wait(timeout=2)  # 等待进程终止
+            except psutil.TimeoutExpired:
+                logging.warning(f"Subprocess {child.pid} did not terminate, forcing kill.")
+                child.kill()  # 强制终止子进程
     def _cleanup(self):
-        """清理资源"""
-        logging.info(f"Cleaning up Tasker resources for {self.project_key}")
-
-        if self.tasker:
-            try:
+        logging.info(f"Cleaning up resources for {self.project_key}")
+        try:
+            if self.tasker:
                 self.tasker.terminate()
-            except Exception as e:
-                logging.error(f"Error terminating tasker for {self.project_key}: {e}")
-        if self.controller:
-            try:
+            if self.controller:
                 self.controller.__del__()
-            except Exception as e:
-                logging.error(f"Error terminating controller for {self.project_key}: {e}")
-        if self.resource:
-            try:
+            if self.resource:
                 self.resource.__del__()
-            except Exception as e:
-                logging.error(f"Error terminating controller for {self.project_key}: {e}")
-
+        except Exception as e:
+            logging.error(f"Error during cleanup for {self.project_key}: {e}")
         logging.info(f"Tasker thread for {self.project_key} has been terminated.")
-

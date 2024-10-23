@@ -9,7 +9,7 @@ from src.utils.logger import setup_logging
 exe_process = None
 
 
-DEBUG = True  # 将其设置为 False 以运行 exe
+DEBUG = False  # 将其设置为 False 以运行 exe
 
 def start_exe_or_script():
     """根据DEBUG状态启动指定的 exe 或 py 文件"""
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     atexit.register(stop_exe)
 
     # 启动 exe 文件
-    start_exe_or_script()
+    # start_exe_or_script()
 
     # 启动主窗口
     app = QApplication([])
