@@ -22,9 +22,12 @@ def start_exe_or_script():
         exe_process = subprocess.Popen(['python', script_path])  # 使用 python 解释器运行脚本
         print(f"Started script: {script_path}")
     else:
-        exe_path = os.path.join(current_dir, "MAA_YYS_BACKEND.exe")  # 替换为你的 exe 路径
-        exe_process = subprocess.Popen(exe_path)
-        print(f"Started exe: {exe_path}")
+        try:
+            exe_path = os.path.join(current_dir, "MAA_YYS_BACKEND.exe")  # 替换为你的 exe 路径
+            exe_process = subprocess.Popen(exe_path)
+            print(f"Started exe: {exe_path}")
+        except FileNotFoundError:
+            print(f"Failed to start exe: {exe_path}")
 
 def stop_exe():
     """关闭 exe 子进程"""
@@ -58,7 +61,7 @@ if __name__ == "__main__":
     atexit.register(stop_exe)
 
     # 启动 exe 文件
-    # start_exe_or_script()
+    start_exe_or_script()
 
     # 启动主窗口
     app = QApplication([])

@@ -1,10 +1,11 @@
-import signal
 import logging
+
+import psutil
 from flask import Flask, request, jsonify
 from threading import Lock, Event
 from typing import Dict
 from src.utils.config_projects import Project, ProjectRunData
-from src.core.tasker_thread import TaskerThread
+from src.core.tasker_thread import TaskerThread, _terminate_adb_processes
 
 app = Flask(__name__)
 taskers: Dict[str, TaskerThread] = {}
@@ -21,6 +22,7 @@ def create_new_tasker(project_key: str, project: Project) -> TaskerThread:
     tasker.start()
     taskers[project_key] = tasker
     return tasker
+
 
 @app.route('/create_tasker', methods=['POST'])
 def create_tasker():
@@ -40,9 +42,11 @@ def create_tasker():
 
     return jsonify({"status": "success", "message": f"Tasker {project_key} created."}), 200
 
+
 @app.route('/')
 def index():
     return 'Hello, Flask!'
+
 
 @app.route('/send_task', methods=['POST'])
 def send_task():
@@ -63,6 +67,7 @@ def send_task():
 
     return jsonify({"status": "success", "message": "Task sent."}), 200
 
+
 @app.route('/terminate_tasker', methods=['POST'])
 def terminate_tasker():
     data = request.json
@@ -79,6 +84,7 @@ def terminate_tasker():
 
     return jsonify({"status": "success", "message": f"Tasker {project_key} terminated."}), 200
 
+
 @app.route('/tasker_status/<project_key>', methods=['GET'])
 def tasker_status(project_key: str):
     """查询 Tasker 状态"""
@@ -87,6 +93,7 @@ def tasker_status(project_key: str):
         if not tasker:
             return jsonify({"status": "error", "message": "Tasker not found."}), 404
         return jsonify({"status": "success", "message": f"Tasker {project_key} is running."}), 200
+
 
 def terminate_all_taskers():
     """优雅地终止所有 taskers"""
@@ -97,20 +104,15 @@ def terminate_all_taskers():
             tasker.terminate()
     logging.info("Terminated")
 
-def signal_handler(sig, frame):
-    logging.info(f"Signal {sig} received. Initiating shutdown...")
-    terminate_all_taskers()
-    shutdown_event.set()
-    logging.info(f"Signal {sig} received")
 
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
 
     logging.basicConfig(level=logging.INFO)
 
     try:
-        app.run(host='localhost', port=54345, debug=True)
+        _terminate_adb_processes()
+        logging.info("Starting application...")
+        app.run(host='localhost', port=54345, debug=False)
     except KeyboardInterrupt:
         logging.info("Application is shutting down...")
     finally:

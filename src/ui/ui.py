@@ -602,29 +602,32 @@ class MainWindow(QWidget):
         """
         发送单个任务到设备
         """
-        try:
-            print(f"开始发送任务 {selected_task.task_name}")
-            # 创建 TaskProjectManager 实例
-            task_manager = TaskProjectManager()
-            task_manager.create_tasker_process(project)
-            # 获取项目运行数据，但只包含单个任务
-            project_run_data = project.get_project_all_run_data(self.programs)
+        def on_task_sent():
 
-            # 过滤掉非选中的任务，只保留当前点击的任务
-            filtered_tasks = [task for task in project_run_data.project_run_tasks if task.task_name == selected_task.task_name]
+            try:
+                print(f"开始发送任务 {selected_task.task_name}")
+                # 创建 TaskProjectManager 实例
+                task_manager = TaskProjectManager()
+                task_manager.create_tasker_process(project)
+                # 获取项目运行数据，但只包含单个任务
+                project_run_data = project.get_project_all_run_data(self.programs)
 
-            if not filtered_tasks:
-                logging.error(f"任务 {selected_task.task_name} 不在选中任务中")
-                return
+                # 过滤掉非选中的任务，只保留当前点击的任务
+                filtered_tasks = [task for task in project_run_data.project_run_tasks if task.task_name == selected_task.task_name]
 
-            # 创建仅包含当前任务的 ProjectRunData
-            single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
+                if not filtered_tasks:
+                    logging.error(f"任务 {selected_task.task_name} 不在选中任务中")
+                    return
 
-            print(f"开始发送任务 {selected_task.task_name}")
-            # 发送任务到设备
-            task_manager.send_task(project, single_task_run_data)
+                # 创建仅包含当前任务的 ProjectRunData
+                single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
 
-            logging.info(f"任务 {selected_task.task_name} 已成功发送")
+                print(f"开始发送任务 {selected_task.task_name}")
+                # 发送任务到设备
+                task_manager.send_task(project, single_task_run_data)
 
-        except Exception as e:
-            logging.error(f"发送任务 {selected_task.task_name} 失败: {e}")
+                logging.info(f"任务 {selected_task.task_name} 已成功发送")
+
+            except Exception as e:
+                logging.error(f"发送任务 {selected_task.task_name} 失败: {e}")
+        TaskWorker(on_task_sent).run()
