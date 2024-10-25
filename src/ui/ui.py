@@ -630,4 +630,5 @@ class MainWindow(QWidget):
 
             except Exception as e:
                 logging.error(f"发送任务 {selected_task.task_name} 失败: {e}")
-        TaskWorker(on_task_sent).run()
+        ta=TaskWorker(on_task_sent)
+        ta.run()
