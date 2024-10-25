@@ -8,7 +8,10 @@
   "悬赏封印": {
     "recognition": "FeatureMatch",
     "action": "Click",
-    "template": ["悬赏封印.png","悬赏封印_完成.png"],
+    "template": [
+      "悬赏封印.png",
+      "悬赏封印_完成.png"
+    ],
     "roi": [
       7,
       264,
@@ -118,11 +121,13 @@
     "post_delay": 1000
   },
   "悬赏封印_领取宝箱奖励": {
-      "action": "Click",
-      "target": [2,
+    "action": "Click",
+    "target": [
+      2,
       115,
       143,
-      491],
+      491
+    ],
     "post_delay": 1000,
     "next": "悬赏封印_识别妖怪",
     "interrupt": "悬赏_向上滑动一下"
@@ -165,7 +170,6 @@
         47
       ],
       "delay": 1000
-
     },
     "post_delay": 2000
   },
@@ -211,14 +215,15 @@
     ],
     "template": "探索_式神录.png",
     "next": "装备日常清杂预设",
+    "on_error": "探索_悬赏_自动挑战",
     "post_delay": 1000
   },
   "装备日常清杂预设": {
     "action": "Custom",
     "custom_action": "SwitchSoul",
     "custom_action_param": {
-      "group_name": "日常",
-      "team_name": "日常清杂"
+      "group_name": "日常清杂分组",
+      "team_name": "日常清杂队伍"
     },
     "next": "探索_悬赏_御魂_返回",
     "post_delay": 2000
@@ -244,9 +249,13 @@
     "index": -1,
     "next": "探索_悬赏_识别章节开始界面",
     "post_delay": 30000,
-
     "timeout": 300000,
-    "roi": [84,617,1107,96]
+    "roi": [
+      84,
+      617,
+      1107,
+      96
+    ]
   },
   "探索_悬赏_自动轮换": {
     "recognition": "FeatureMatch",
@@ -254,13 +263,21 @@
     "template": "探索_自动挑战.png",
     "enabled": true,
     "next": "探索_悬赏_自动挑战",
-    "roi": [84,617,1107,96]
+    "roi": [
+      84,
+      617,
+      1107,
+      96
+    ]
   },
   "探索_悬赏_识别章节开始界面": {
     "recognition": "OCR",
     "expected": "妖怪发现",
     "roi": [
-      254,299,172,52
+      254,
+      299,
+      172,
+      52
     ],
     "next": "探索_悬赏_关闭悬赏章节界面"
   },

@@ -18,7 +18,8 @@ class SwitchSoul(CustomAction):
         # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
         json_data = json.loads(argv.custom_action_param)
         # 点击预设点
-        print("开始执行自定义动作：点击预设----------")
+
+        print("开始执行自定义动作：装备切换御魂")
 
         context.run_pipeline("识别预设",{"识别预设":{"timeout":2000,"recognition": "OCR","expected": "预设","roi": [336, 74, 82, 46],"action":"Click"}})
 

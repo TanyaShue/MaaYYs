@@ -131,6 +131,7 @@
       116
     ],
     "template": "结界突破_关闭.png",
+    "post_delay": 2000,
     "next": "返回庭院"
   },
   "开始自动结界": {
@@ -356,7 +357,7 @@
   "突破_重新挑战": {
     "recognition": "FeatureMatch",
     "action": "Click",
-    "template": "战斗_返回.png",
+    "template": ["战斗_返回.png","战斗_返回_原版.png"],
     "roi": [
       0,
       4,
@@ -375,7 +376,8 @@
       113
     ],
     "expected": "确认",
-    "next": "突破_再次挑战"
+    "next": "突破_再次挑战",
+    "post_delay": 200
   },
   "突破_再次挑战": {
     "recognition": "FeatureMatch",

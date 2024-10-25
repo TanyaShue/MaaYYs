@@ -48,13 +48,15 @@
             "project_name": "阴阳师2",
             "program_name": "阴阳师",
             "adb_config": {
-                "adb_path": "C:/Program Files/BlueStacks_nxt/HD-Adb.exe",
-                "adb_address": "127.0.0.1:5625"
+                "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
+                "adb_address": "127.0.0.1:5555"
             },
             "selected_tasks": [
                 "打开游戏",
                 "启动加速器",
-                "测试"
+                "测试",
+                "自动悬赏",
+                "自动结界"
             ],
             "option": {
                 "选择区服": {
@@ -64,7 +66,10 @@
                     "input": "99"
                 },
                 "结界突破队伍预设": {
-                    "input": "核力量"
+                    "input": "突破"
+                },
+                "结界突破分组预设": {
+                    "input": "日常"
                 }
             }
         }

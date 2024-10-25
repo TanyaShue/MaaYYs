@@ -7,10 +7,11 @@
   "庭院_点击探索": {
     "recognition": "TemplateMatch",
     "action": "Click",
-    "template": ["庭院_探索_望月幽庭.png","庭院_探索_织梦莲庭.png"],
+    "template": ["庭院_探索_望月幽庭.png","庭院_探索_织梦莲庭.png","庭院_探索_枫色秋庭.png"],
     "roi": [
      241,101,911,160
-    ]
+    ],
+    "post_delay": 2000
   },
   "返回庭院": {
     "next": ["识别庭院特征"],
@@ -18,7 +19,7 @@
   },
   "识别庭院特征": {
     "recognition": "TemplateMatch",
-    "template": ["庭院_探索_望月幽庭.png","庭院_探索_织梦莲庭.png"],
+    "template": ["庭院_探索_望月幽庭.png","庭院_探索_织梦莲庭.png","庭院_探索_枫色秋庭.png"],
     "roi": [
       241,101,911,160
     ],
