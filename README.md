@@ -1,7 +1,7 @@
 
 <!-- markdownlint-disable MD033 MD041 -->
 <p align="center">
-  <img alt="LOGO" src="R.png" width="256" height="256" />
+  <img alt="LOGO" src="doc/doc_img/R.png" width="256" height="256" />
 </p>
 
 <div align="center">
@@ -29,9 +29,17 @@ MaaYYs 提供了一系列自动化工具，以简化玩家在游戏中的重复�
 > **声明**: 本项目仅提供游戏中必要的每日任务自动化操作，不支持全自动战斗。对于副本，当前仅支持樱饼自动挂副本功能。  
 > 由于游戏规则的限制，本项目不接受关于**自动探索副本**和**自动御魂副本**的代码合并请求。
 
----
+---  
+## 使用指南
 
-## 安装与配置
+- 下载对应Release版本,解压并运行MAA_YYS.exe即可  
+- 另一个MAA_YYS_BACKEND.exe用于后台服务,不需要主动启动
+
+![img.png](doc/doc_img/img.png)
+
+---  
+
+## 开发与配置
 
 ### 环境依赖
 
