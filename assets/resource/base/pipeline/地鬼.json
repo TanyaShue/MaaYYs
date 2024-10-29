@@ -1,7 +1,8 @@
 {
   "自动地鬼": {
     "next": ["点击地域鬼王"],
-    "interrupt": "点击探索"
+    "interrupt": "点击探索",
+    "on_error": "返回庭院"
   },
   "点击地域鬼王": {
     "recognition": "TemplateMatch",

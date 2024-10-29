@@ -136,7 +136,7 @@
     "recognition": "OCR",
     "expected": "悬赏封印",
     "action": "Click",
-    "next": "识别探索目标",
+    "next": ["识别未发现妖怪","识别探索目标"],
     "interrupt": "悬赏_向上滑动一下",
     "roi": [
       2,
@@ -144,6 +144,23 @@
       143,
       491
     ],
+    "post_delay": 1000
+  },
+  "识别未发现妖怪": {
+    "recognition": "OCR",
+    "expected": "线索",
+    "action": "Click",
+    "roi": [
+        520,292,124,40
+    ],
+    "next": "悬赏封印_关闭线索界面"
+  },
+  "悬赏封印_关闭线索界面": {
+    "action": "Click",
+    "target": [
+141,564,979,56
+    ],
+    "next": "返回庭院",
     "post_delay": 1000
   },
   "悬赏_向上滑动一下": {
@@ -243,32 +260,34 @@
     ]
   },
   "探索_悬赏_自动挑战": {
-    "recognition": "FeatureMatch",
+    "recognition": "ColorMatch",
     "action": "Click",
     "template": "探索_自动挑战.png",
-    "index": -1,
-    "next": "探索_悬赏_识别章节开始界面",
+    "method": 40,
+  "lower": [[75, 0, 50]] ,
+  "upper": [[125, 100, 150]],
+  "count": 100,
     "post_delay": 30000,
     "timeout": 300000,
     "roi": [
-      84,
-      617,
-      1107,
-      96
-    ]
+      1037,642,64,53
+    ],
+    "next": "探索_悬赏_识别章节开始界面"
   },
   "探索_悬赏_自动轮换": {
-    "recognition": "FeatureMatch",
+    "recognition": "ColorMatch",
     "action": "Click",
     "template": "探索_自动挑战.png",
     "enabled": true,
-    "next": "探索_悬赏_自动挑战",
+    "method": 40,
+  "lower": [[75, 0, 50]] ,
+  "upper": [[125, 100, 150]],
+  "count": 100,
     "roi": [
-      84,
-      617,
-      1107,
-      96
-    ]
+      99,643,59,63
+    ],
+    "next": "探索_悬赏_自动挑战",
+    "post_delay": 1000
   },
   "探索_悬赏_识别章节开始界面": {
     "recognition": "OCR",

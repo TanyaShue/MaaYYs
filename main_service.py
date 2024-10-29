@@ -1,6 +1,5 @@
 import logging
 
-import psutil
 from flask import Flask, request, jsonify
 from threading import Lock, Event
 from typing import Dict

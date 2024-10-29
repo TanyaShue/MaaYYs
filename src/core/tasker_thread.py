@@ -5,15 +5,15 @@ import logging
 
 import psutil
 
-from custom_actions.auto_battle import AutoBattle
-from custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
-from custom_actions.human_touch import HumanTouch
-from custom_actions.loop_action import LoopAction
-from custom_actions.random_swipe import RandomSwipe
-from custom_actions.random_touch import RandomTouch
-from custom_actions.switch_soul import SwitchSoul
-from custom_actions.task_list import TaskList
-from custom_recognition.my_recognizer import MyRecognizer
+from src.custom_actions.auto_battle import AutoBattle
+from src.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
+from src.custom_actions.human_touch import HumanTouch
+from src.custom_actions.loop_action import LoopAction
+from src.custom_actions.random_swipe import RandomSwipe
+from src.custom_actions.random_touch import RandomTouch
+from src.custom_actions.switch_soul import SwitchSoul
+from src.custom_actions.task_list import TaskList
+from src.custom_recognition.my_recognizer import MyRecognizer
 from src.utils.config_projects import Project, ProjectRunData
 from maa.controller import AdbController
 from maa.resource import Resource

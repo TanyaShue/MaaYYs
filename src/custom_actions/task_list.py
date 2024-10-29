@@ -24,6 +24,7 @@ class TaskList(CustomAction):
         for task in task_list:
             print(f"执行任务: {task}")
             context.run_pipeline(task)
+            print(f"任务 {task} 执行完成")
 
         return True
 

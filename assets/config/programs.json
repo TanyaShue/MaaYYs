@@ -90,7 +90,7 @@
                         "name": "悬赏预设分组",
                         "default": "默认分组",
                         "pipeline_override": {
-                            "自动悬赏封印": {
+                            "装备日常清杂预设": {
                                 "custom_action_param": {
                                     "group_name": "{value}"
                                 }
@@ -103,7 +103,7 @@
                         "name": "悬赏预设队伍",
                         "default": "默认队伍",
                         "pipeline_override": {
-                            "自动悬赏封印": {
+                            "装备日常清杂预设": {
                                 "custom_action_param": {
                                     "team_name": "{value}"
                                 }

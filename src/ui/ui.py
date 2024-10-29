@@ -118,7 +118,7 @@ class MainWindow(QWidget):
         self.left_nav_layout.addWidget(refresh_button)
 
     def refresh_resources(self):
-        _project=self.projects.projects[0]
+        _project = self.projects.projects[0]
         """刷新资源"""
         try:
             # 创建 TaskProjectManager 实例
@@ -126,7 +126,6 @@ class MainWindow(QWidget):
             task_manager = TaskProjectManager()
 
             task_manager.create_tasker_process(_project)
-
 
             # 发送任务到设备
             print(f"发送任务 RELOAD_RESOURCES")
@@ -136,7 +135,6 @@ class MainWindow(QWidget):
 
         except Exception as e:
             logging.error(f"发送任务 RELOAD_RESOURCES 失败: {e}")
-
 
     def init_home_page(self):
         """初始化首页页面，包含四个垂直排列的部分"""
@@ -284,7 +282,7 @@ class MainWindow(QWidget):
 
             button_task_connect = QPushButton('一键启动')
             button_task_connect.setObjectName('runButton')
-            button_task_connect.clicked.connect(lambda _, p=project,bu=button_task_connect: self.run_task(p,bu))
+            button_task_connect.clicked.connect(lambda _, p=project, bu=button_task_connect: self.run_task(p, bu))
             layout.addWidget(button_task_connect)
 
             button_info = QPushButton('查看详情')
@@ -417,7 +415,8 @@ class MainWindow(QWidget):
 
             # 添加设置按钮
             set_button = QPushButton('设置')
-            set_button.clicked.connect(lambda _, selected_t=task: self.set_task_parameters(selected_t, program,project))
+            set_button.clicked.connect(
+                lambda _, selected_t=task: self.set_task_parameters(selected_t, program, project))
             task_row.addWidget(set_button)
 
             # 添加发送任务按钮
@@ -530,7 +529,7 @@ class MainWindow(QWidget):
 
         # 获取默认选中值，优先从 project.option 获取
         selected_value = project_option.option_value if project_option and project_option.option_type == 'select' else \
-        sett.select[0].name
+            sett.select[0].name
 
         # 添加下拉选项并设置默认选中项
         for select_option in sett.select:
@@ -582,7 +581,6 @@ class MainWindow(QWidget):
 
         self.projects.save_to_file(self.projects_json_path)
 
-
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""
         for i in reversed(range(layout.count())):
@@ -602,6 +600,7 @@ class MainWindow(QWidget):
         """
         发送单个任务到设备
         """
+
         def on_task_sent():
 
             try:
@@ -613,7 +612,8 @@ class MainWindow(QWidget):
                 project_run_data = project.get_project_all_run_data(self.programs)
 
                 # 过滤掉非选中的任务，只保留当前点击的任务
-                filtered_tasks = [task for task in project_run_data.project_run_tasks if task.task_name == selected_task.task_name]
+                filtered_tasks = [task for task in project_run_data.project_run_tasks if
+                                  task.task_name == selected_task.task_name]
 
                 if not filtered_tasks:
                     logging.error(f"任务 {selected_task.task_name} 不在选中任务中")
@@ -630,5 +630,6 @@ class MainWindow(QWidget):
 
             except Exception as e:
                 logging.error(f"发送任务 {selected_task.task_name} 失败: {e}")
-        ta=TaskWorker(on_task_sent)
+
+        ta = TaskWorker(on_task_sent)
         ta.run()
