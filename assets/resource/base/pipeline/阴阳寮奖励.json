@@ -1,0 +1,81 @@
+{
+  "阴阳寮奖励领取": {
+    "next": "阴阳寮奖励领取_点击阴阳寮",
+    "interrupt": "打开底部菜单"
+  },
+  "阴阳寮奖励领取_点击阴阳寮": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": ["庭院_阴阳寮.png","庭院_阴阳寮_红点.png"],
+    "roi": [
+      494,567,155,141
+    ],
+    "next": ["阴阳寮奖励领取_阴阳寮金币领取","阴阳寮奖励领取_结界奖励"],
+    "post_delay": 1000
+  },
+  "阴阳寮奖励领取_阴阳寮金币领取": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "阴阳寮_金币礼包.png",
+    "post_delay": 1000,
+    "next": "阴阳寮奖励领取_结界奖励"
+  },
+  "阴阳寮奖励领取_结界奖励": {
+    "next": "阴阳寮奖励领取_点击结界"
+  },
+  "阴阳寮奖励领取_点击结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "阴阳寮_结界.png",
+    "post_delay": 1000,
+    "roi": [1041,591,111,119],
+    "next": "阴阳寮奖励领取_结界奖励领取",
+    "interrupt": ["阴阳寮奖励领取_结界奖励领取_领取体力","阴阳寮奖励领取_结界奖励领取_领取经验"]
+  },
+  "阴阳寮奖励领取_结界奖励领取": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "阴阳寮_结界_体力.png",
+      "阴阳寮_结界_经验.png"
+    ],
+    "inverse": true,
+    "post_delay": 1000,
+    "next": "阴阳寮奖励领取_结界奖励领取"
+  },
+  "阴阳寮奖励领取_结界奖励领取_领取体力": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "阴阳寮_结界_体力.png",
+    "post_delay": 1000,
+    "next": "阴阳寮奖励领取_结界奖励领取_领取体力_取出"
+  },
+  "阴阳寮奖励领取_结界奖励领取_领取体力_取出": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "阴阳寮_结界_体力_取出.png",
+    "post_delay": 1000,
+    "next": "阴阳寮奖励领取_结界奖励领取_关闭食盒界面"
+  },
+  "阴阳寮奖励领取_结界奖励领取_领取经验": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "阴阳寮_结界_经验.png",
+    "post_delay": 1000,
+    "next": "阴阳寮奖励领取_结界奖励领取_领取经验_提取"
+  },
+  "阴阳寮奖励领取_结界奖励领取_领取经验_提取": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "阴阳寮_结界_经验_提取.png",
+    "post_delay": 1000,
+    "next": "阴阳寮奖励领取_结界奖励领取_关闭食盒界面"
+  },
+  "阴阳寮奖励领取_结界奖励领取_关闭食盒界面": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "关闭.png",
+    "post_delay": 1000,
+    "roi": [919,106,182,112]
+  }
+}

@@ -48,5 +48,16 @@
     ],
     "template": "返回_黄色.png",
     "post_delay": 2000
+  },  "打开底部菜单": {
+    "recognition": "FeatureMatch",
+    "template": "庭院_卷轴.png",
+    "action": "Click",
+    "post_delay": 1000,
+    "roi": [
+      1063,
+      528,
+      216,
+      191
+    ]
   }
 }

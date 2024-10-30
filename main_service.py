@@ -22,7 +22,6 @@ def create_new_tasker(project_key: str, project: Project) -> TaskerThread:
     taskers[project_key] = tasker
     return tasker
 
-
 @app.route('/create_tasker', methods=['POST'])
 def create_tasker():
     data = request.json
@@ -40,12 +39,6 @@ def create_tasker():
         create_new_tasker(project_key, project)
 
     return jsonify({"status": "success", "message": f"Tasker {project_key} created."}), 200
-
-
-@app.route('/')
-def index():
-    return 'Hello, Flask!'
-
 
 @app.route('/send_task', methods=['POST'])
 def send_task():
@@ -66,7 +59,6 @@ def send_task():
 
     return jsonify({"status": "success", "message": "Task sent."}), 200
 
-
 @app.route('/terminate_tasker', methods=['POST'])
 def terminate_tasker():
     data = request.json
@@ -80,9 +72,9 @@ def terminate_tasker():
         if not tasker:
             return jsonify({"status": "error", "message": "Tasker not found."}), 404
         tasker.terminate()
+        tasker.join()  # 确保线程完全退出
 
     return jsonify({"status": "success", "message": f"Tasker {project_key} terminated."}), 200
-
 
 @app.route('/tasker_status/<project_key>', methods=['GET'])
 def tasker_status(project_key: str):
@@ -93,7 +85,6 @@ def tasker_status(project_key: str):
             return jsonify({"status": "error", "message": "Tasker not found."}), 404
         return jsonify({"status": "success", "message": f"Tasker {project_key} is running."}), 200
 
-
 def terminate_all_taskers():
     """优雅地终止所有 taskers"""
     logging.info("Terminating all taskers...")
@@ -101,8 +92,8 @@ def terminate_all_taskers():
         for project_key, tasker in taskers.items():
             logging.info(f"Terminating tasker {project_key}...")
             tasker.terminate()
-    logging.info("Terminated")
-
+            tasker.join()  # 确保线程完全退出
+    logging.info("All taskers terminated")
 
 if __name__ == "__main__":
 

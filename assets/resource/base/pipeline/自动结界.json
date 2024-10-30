@@ -119,7 +119,8 @@
       66
     ],
     "expected": "\\b0\\/30\\b",
-    "next": "关闭结界突破"
+    "next": "关闭结界突破",
+    "post_delay": 1000
   },
   "关闭结界突破": {
     "recognition": "FeatureMatch",

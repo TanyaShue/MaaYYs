@@ -20,6 +20,7 @@ from maa.resource import Resource
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
+# TaskerThread implementation
 class TaskerThread(threading.Thread):
     def __init__(self, project_key: str, project: Project):
         super().__init__()
@@ -91,8 +92,8 @@ class TaskerThread(threading.Thread):
         elif isinstance(task, ProjectRunData):
             for project_run_task in task.project_run_tasks:
                 logging.info(f"Executing {project_run_task.task_name} for {self.project_key}")
-                self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
-                logging.info(f"任务执行完毕")
+                self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override)
+                logging.info("Task execution completed")
 
     def send_task(self, task):
         """将任务添加到队列"""
@@ -102,20 +103,14 @@ class TaskerThread(threading.Thread):
         """终止线程和所有子进程"""
         logging.info(f"Terminating Tasker {self.project_key}...")
 
-        # 停止 tasker 的自定义逻辑
-        self.tasker.post_stop()
+        self.stop_event.set()  # 停止事件
+        self.task_queue.queue.clear()  # 清空任务队列，防止残留任务导致内存泄漏
 
-        # 强行终止 adb.exe 进程
+        if self.tasker:
+            self.tasker.post_stop()
+
         _terminate_adb_processes()
-
-        # 清理其他资源
         self._cleanup()
-
-        # 触发终止事件
-        self.stop_event.set()
-
-
-
 
     def _cleanup(self):
         logging.info(f"Cleaning up resources for {self.project_key}")
@@ -136,11 +131,11 @@ def _terminate_adb_processes():
             try:
                 logging.info(f"Terminating adb.exe process [PID: {process.info['pid']}]...")
                 process.terminate()
-                process.wait(timeout=5)  # 等待最多5秒终止
+                process.wait(timeout=5)
             except psutil.NoSuchProcess:
                 logging.warning(f"Process [PID: {process.info['pid']}] already terminated.")
             except psutil.TimeoutExpired:
                 logging.warning(f"Process [PID: {process.info['pid']}] did not terminate, killing it...")
-                process.kill()  # 强制杀死进程
+                process.kill()
             except Exception as e:
                 logging.error(f"Failed to terminate process [PID: {process.info['pid']}]: {e}")

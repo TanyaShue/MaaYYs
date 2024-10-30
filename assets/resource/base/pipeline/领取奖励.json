@@ -169,18 +169,6 @@
       "打开底部菜单"
     ]
   },
-  "打开底部菜单": {
-    "recognition": "FeatureMatch",
-    "template": "庭院_卷轴.png",
-    "action": "Click",
-    "post_delay": 1000,
-    "roi": [
-      1063,
-      528,
-      216,
-      191
-    ]
-  },
   "领取奖励_打开商店": {
     "recognition": "FeatureMatch",
     "action": "Click",
