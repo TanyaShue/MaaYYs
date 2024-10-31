@@ -37,7 +37,7 @@ class SwitchSoul(CustomAction):
             detail =context.run_recognition("点击分组", img,{"点击分组": {"timeout": 500, "recognition": "OCR", "action": "Click",
                                                            "expected": json_data["group_name"],
                                                            "roi": [1085, 86, 162, 542]}})
-            time.sleep(0.5)
+            time.sleep(1)
             if detail is not None:
                 context.tasker.controller.post_click(random.randint(detail.box.x,detail.box.x+detail.box.h),random.randint(detail.box.y,detail.box.y+detail.box.w)).wait()
                 break
