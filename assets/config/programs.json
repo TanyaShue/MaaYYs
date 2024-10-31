@@ -49,16 +49,6 @@
                     "task_name": "结界奖励领取",
                     "task_entry": "阴阳寮奖励领取",
                     "option": []
-                },
-                {
-                    "task_name": "测试",
-                    "task_entry": "探索_悬赏_御魂_返回",
-                    "option": ["是否启动自动轮换"]
-                },
-                {
-                    "task_name": "测试2",
-                    "task_entry": "test_OCR_1",
-                    "option": []
                 }
             ],
             "option": {

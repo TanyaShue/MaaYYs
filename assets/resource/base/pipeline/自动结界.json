@@ -390,7 +390,8 @@
       202
     ],
     "template": "突破_再次挑战.png",
-    "next": "确认再次挑战"
+    "next": "确认再次挑战",
+    "post_delay": 500
   },
   "确认再次挑战": {
     "recognition": "OCR",

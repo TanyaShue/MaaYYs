@@ -110,7 +110,7 @@
   "悬赏封印_识别宝箱": {
     "recognition": "FeatureMatch",
     "action": "Click",
-    "template": "悬赏_宝箱.png",
+    "template": ["悬赏_宝箱.png","悬赏_宝箱2.png"],
     "next": "悬赏封印_领取宝箱奖励",
     "roi": [
       2,

@@ -92,7 +92,7 @@ class TaskerThread(threading.Thread):
         elif isinstance(task, ProjectRunData):
             for project_run_task in task.project_run_tasks:
                 logging.info(f"Executing {project_run_task.task_name} for {self.project_key}")
-                self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override)
+                self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
                 logging.info("Task execution completed")
 
     def send_task(self, task):

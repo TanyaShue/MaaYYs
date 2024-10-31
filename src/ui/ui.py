@@ -614,7 +614,7 @@ class MainWindow(QWidget):
                 # 过滤掉非选中的任务，只保留当前点击的任务
                 filtered_tasks = [task for task in project_run_data.project_run_tasks if
                                   task.task_name == selected_task.task_name]
-
+                print(f"过滤后的选中任务: {filtered_tasks}")
                 if not filtered_tasks:
                     logging.error(f"任务 {selected_task.task_name} 不在选中任务中")
                     return
