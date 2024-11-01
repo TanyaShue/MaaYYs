@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          submodules: true  # 启用子模块
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -26,12 +28,13 @@ jobs:
           pip install -r requirements.txt
 
       - name: Copy DLL files to Python root
+        shell: pwsh  # 使用 PowerShell 执行脚本
         run: |
-          # Check if the DLL folder exists
+          # 检查 DLL 文件夹是否存在
           if (Test-Path -Path "${{ github.workspace }}\DLL") {
-            # Get all files in the DLL folder
+            # 获取 DLL 文件夹中的所有文件
             $dllFiles = Get-ChildItem -Path "${{ github.workspace }}\DLL" -File
-            # Copy each DLL file to the Python environment root
+            # 将每个 DLL 文件复制到 Python 环境根目录
             foreach ($file in $dllFiles) {
               Copy-Item -Path $file.FullName -Destination "${{ env.pythonLocation }}\$($file.Name)" -Force
               Write-Host "Copied $($file.Name) to ${{ env.pythonLocation }}"
