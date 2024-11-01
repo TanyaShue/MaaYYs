@@ -136,7 +136,7 @@
   },
   "关闭签到界面": {
     "recognition": "OCR",
-    "expected": "关闭.png",
+    "expected": ["关闭.png"],
     "action": "Click",
     "post_delay": 1000,
     "roi": [831,69,87,79]
@@ -238,7 +238,8 @@
       309,
       67
     ],
-    "next": "返回庭院"
+    "next": "返回庭院",
+    "timeout": 1000
   },
   "领取奖励_花合战奖励": {
     "next": "领取奖励_打开花合战",
