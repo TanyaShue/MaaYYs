@@ -456,3 +456,4 @@ install
 tools/ImageCropper/**/*.png
 /MAA_YYS.spec
 /MAA_YYS_BACKEND.spec
+/assets/debug/
