@@ -3,7 +3,7 @@ import json
 import subprocess
 import atexit
 from PySide6.QtWidgets import QApplication
-from src.ui.ui import MainWindow
+from src.ui.main_window import MainWindow
 from src.utils.logger import setup_logging
 
 # 保存子进程的全局变量

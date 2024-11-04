@@ -2,8 +2,8 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton,
-    QLineEdit, QLabel, QTableWidget, QTableWidgetItem, QTextEdit, QCheckBox,
-    QSplitter, QHeaderView, QComboBox, QFormLayout
+     QLabel, QTableWidget, QTextEdit,
+    QSplitter, QHeaderView
 )
 from .ui_controller import UIController
 
@@ -175,3 +175,5 @@ class MainWindow(QWidget):
             widget = self.right_layout.itemAt(i).widget()
             if widget:
                 widget.setParent(None)
+
+

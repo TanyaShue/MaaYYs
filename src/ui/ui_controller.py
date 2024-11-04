@@ -2,7 +2,7 @@ import os
 import logging
 from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
 from PySide6.QtWidgets import QTableWidgetItem, QWidget, QHBoxLayout, QPushButton, QHeaderView, QCheckBox, QLabel, \
-    QLineEdit, QComboBox, QVBoxLayout, QFormLayout, QSplitter
+    QLineEdit, QComboBox, QFormLayout
 
 from src.core.task_project_manager import TaskProjectManager
 from src.utils.config_programs import *
@@ -117,7 +117,7 @@ class UIController:
         button_task_connect = QPushButton('一键启动')
         button_task_connect.setObjectName('runButton')
         button_task_connect.clicked.connect(
-            lambda _, p=project, b=button_task_connect: self.run_task(p, b))
+            lambda _, p=project, b=button_task_connect: self.sent_task(p, b))
         layout.addWidget(button_task_connect)
 
         # 添加查看详情按钮
@@ -137,7 +137,7 @@ class UIController:
             table.setColumnWidth(i, width)
         table.horizontalHeader().setSectionResizeMode(5, QHeaderView.Stretch)
 
-    def run_task(self, project, button):
+    def sent_task(self, project, button):
         """运行任务"""
         button.setText("正在连接")
         button.setEnabled(False)
@@ -194,6 +194,9 @@ class UIController:
         task_selection_layout = task_selection_group.layout()
         self.clear_layout(task_selection_layout)
 
+        task_selection_group_1 = splitter.widget(1)
+        task_selection_layout_1 = task_selection_group_1.layout()
+        self.clear_layout(task_selection_layout_1)
         # 获取对应的 program
         program = self.programs.get_program_by_name(project.program_name)
         if not program:
@@ -261,8 +264,9 @@ class UIController:
                 self.select_all_state = False
 
         select_all_button.clicked.connect(toggle_select_all)
-        start_button.clicked.connect(lambda _, p=project: self.run_task(p, start_button))
+        start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button))
         task_selection_layout.addLayout(button_container)
+
     def set_task_parameters(self, selected_task, program, project,splitter):
         """动态生成任务的参数设置界面"""
         task_settings_group = splitter.widget(1)
@@ -283,7 +287,7 @@ class UIController:
 
         for option in options:
             sett = setting.get(option)
-
+            print(option)
             # 优先从 project.option 获取参数，如果不存在则使用 sett 的值
             project_option = next((opt for opt in project.option.options if opt.option_name == option), None)
 
@@ -298,7 +302,9 @@ class UIController:
                 self.create_boole_option(form_layout, project, project_option, sett, option)
 
             else:
-                print(f"Unknown or missing attributes for option: {option}")
+                print(f"Unknown or missing attributes for option: {option}")        # 将生成的表单布局添加到主布局中
+        task_settings_layout.addLayout(form_layout)
+
     def create_input_option(self, layout, project, project_option, sett, option_name):
         """创建 input 类型的参数设置控件"""
         label = QLabel(sett.input.name)
@@ -358,6 +364,20 @@ class UIController:
         )
 
         layout.addRow(label, check_box)
+
+    def update_project_option(self, project, option_name, option_type, option_value):
+        # 查找或创建 project.option 中的相应选项
+        project_option = next((opt for opt in project.option.options if opt.option_name == option_name), None)
+
+        if project_option:
+            # 更新现有选项
+            project_option.option_value = option_value
+        else:
+            # 如果选项不存在，创建新选项并添加到 project.option 中
+            new_option = Option(option_name=option_name, option_type=option_type, option_value=option_value)
+            project.option.options.append(new_option)
+
+        self.projects.save_to_file(self.projects_json_path)
 
     def clear_layout(self, layout):
         """清空布局中的所有小部件"""

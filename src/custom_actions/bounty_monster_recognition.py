@@ -31,17 +31,17 @@ class BountyMonsterRecognition(CustomAction):
                     # 判断悬赏妖怪类型是否为未发现
                     img = context.tasker.controller.post_screencap().wait().get()
                     detail_not_found = context.run_recognition("识别未发现妖怪", img)
-                    print(f"{detail_not_found}")
                     if detail_not_found is None:
                         time.sleep(1)
                         context.run_pipeline("悬赏_开始识别探索")
+                        cont=0
                         continue
                     time.sleep(1)
                     context.run_pipeline("悬赏封印_关闭线索界面")
-            context.run_pipeline("识别探索目标_向上滑动")
+            else:
+                context.run_pipeline("识别探索目标_向上滑动")
             cont+=1
-            print("循环次数：", cont)
-            if cont>5:
+            if cont>3:
                 break
 
         return True
