@@ -5,6 +5,7 @@ import logging
 
 import psutil
 
+from custom_actions.bounty_monster_recognition import BountyMonsterRecognition
 from src.custom_actions.auto_battle import AutoBattle
 from src.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
 from src.custom_actions.human_touch import HumanTouch
@@ -61,7 +62,8 @@ class TaskerThread(threading.Thread):
         logging.info(f"Tasker initialized for {self.project_key}")
 
     def _register_custom_modules(self):
-        # 注册自定义的 action ： AutoBattle, ChallengeDungeonBoss, HumanTouch,LoopAction,RandomSwipe,RandomTouch,SwitchSoul,TaskList
+        # 注册自定义的 action ： AutoBattle, ChallengeDungeonBoss,
+        # HumanTouch,LoopAction,RandomSwipe,RandomTouch,SwitchSoul,TaskList,BountyMonsterRecognition
         self.resource.register_custom_action("AutoBattle", AutoBattle())
         self.resource.register_custom_action("ChallengeDungeonBoss",ChallengeDungeonBoss())
         self.resource.register_custom_action("HumanTouch",HumanTouch())
@@ -70,6 +72,7 @@ class TaskerThread(threading.Thread):
         self.resource.register_custom_action("RandomTouch",RandomTouch())
         self.resource.register_custom_action("SwitchSoul",SwitchSoul())
         self.resource.register_custom_action("TaskList",TaskList())
+        self.resource.register_custom_action("BountyMonsterRecognition",BountyMonsterRecognition())
         # 注册自定义的 recognizer:MyRecognizer
         self.resource.register_custom_recognition("MyRecognizer", MyRecognizer())
 

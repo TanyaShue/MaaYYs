@@ -31,7 +31,7 @@ class SwitchSoul(CustomAction):
 
         # 点击分组
         for count in range(1, 21):
-            time.sleep(0.5)
+            time.sleep(1)
             img=context.tasker.controller.post_screencap().wait().get()
 
             detail =context.run_recognition("点击分组", img,{"点击分组": {"timeout": 500, "recognition": "OCR", "action": "Click",
@@ -44,7 +44,7 @@ class SwitchSoul(CustomAction):
             if count >= 5:
                 context.run_pipeline("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [1085, 442, 152, 60],"start_roi": [1085, 161, 162, 58],"delay": 400}}})
             else:
-                context.run_pipeline("下一页",{"下一页": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"start_roi": [1085, 442, 152, 60],"end_roi": [1085, 161, 162, 58],"delay": 400}}})
+                context.run_pipeline("下一页",{"下一页": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"start_roi": [1085, 442, 152, 60],"end_roi": [1085, 161, 162, 58],"delay": 400}}})
         else:
             print("点击分组失败")
 
