@@ -40,8 +40,9 @@ class BountyMonsterRecognition(CustomAction):
                     context.run_pipeline("悬赏封印_关闭线索界面")
             else:
                 context.run_pipeline("识别探索目标_向上滑动")
+            print(cont)
             cont+=1
-            if cont>3:
+            if cont>=3:
                 break
 
         return True
