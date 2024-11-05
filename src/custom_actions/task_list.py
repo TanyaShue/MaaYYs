@@ -11,6 +11,8 @@ class TaskList(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
+        print("开始执行自定义动作：任务列表")
+        print(argv.custom_action_param)
         json_data = json.loads(argv.custom_action_param)
 
         task_list = json_data.get("task_list", [])

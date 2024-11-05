@@ -4,6 +4,12 @@ import json
 
 from typing import Tuple, List
 
+def load_config():
+    """加载 app_config.json 配置文件"""
+    config_path = os.path.join(os.getcwd(), "assets", "config", "app_config.json")
+    with open(config_path, 'r') as config_file:
+        config = json.load(config_file)
+    return config  # 如果配置文件中没有DEBUG字段，则默认True
 
 def is_inside(big_rect: Tuple[int, int, int, int], small_rect: Tuple[int, int, int, int]) -> bool:
     """

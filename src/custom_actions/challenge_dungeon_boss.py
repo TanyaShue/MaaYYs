@@ -14,6 +14,7 @@ class ChallengeDungeonBoss(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
+        print("开始执行自定义动作: 自动挑战地鬼")
         value=1
         image = context.tasker.controller.post_screencap().wait().get()
         detail = context.run_recognition("识别地鬼分数",image,  {"识别地鬼分数": {

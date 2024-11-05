@@ -5,7 +5,7 @@ import logging
 
 import psutil
 
-from custom_actions.bounty_monster_recognition import BountyMonsterRecognition
+from src.custom_actions.bounty_monster_recognition import BountyMonsterRecognition
 from src.custom_actions.auto_battle import AutoBattle
 from src.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
 from src.custom_actions.human_touch import HumanTouch
@@ -73,6 +73,7 @@ class TaskerThread(threading.Thread):
         self.resource.register_custom_action("SwitchSoul",SwitchSoul())
         self.resource.register_custom_action("TaskList",TaskList())
         self.resource.register_custom_action("BountyMonsterRecognition",BountyMonsterRecognition())
+
         # 注册自定义的 recognizer:MyRecognizer
         self.resource.register_custom_recognition("MyRecognizer", MyRecognizer())
 
@@ -127,6 +128,7 @@ class TaskerThread(threading.Thread):
         except Exception as e:
             logging.error(f"Error during cleanup for {self.project_key}: {e}")
         logging.info(f"Tasker thread for {self.project_key} has been terminated.")
+
 def _terminate_adb_processes():
     """查找并终止所有名为 adb.exe 的进程"""
     for process in psutil.process_iter(['pid', 'name']):

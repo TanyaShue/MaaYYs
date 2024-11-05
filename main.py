@@ -1,23 +1,17 @@
 import os
-import json
 import subprocess
 import atexit
 from PySide6.QtWidgets import QApplication
 from src.ui.main_window import MainWindow
 from src.utils.logger import setup_logging
+from utils.common import load_config
 
 # 保存子进程的全局变量
 exe_process = None
 
 # 读取配置文件中的DEBUG状态
-def load_config():
-    """加载 app_config.json 配置文件"""
-    config_path = os.path.join(os.getcwd(), "assets", "config", "app_config.json")
-    with open(config_path, 'r') as config_file:
-        config = json.load(config_file)
-    return config.get("DEBUG", True)  # 如果配置文件中没有DEBUG字段，则默认True
 
-DEBUG = load_config()  # 将DEBUG设置为配置文件中的值
+DEBUG = load_config().get("DEBUG", True)  # 将DEBUG设置为配置文件中的值
 
 def start_exe_or_script():
     """根据DEBUG状态启动指定的 exe 或 py 文件"""

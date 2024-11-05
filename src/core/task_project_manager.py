@@ -5,14 +5,16 @@ import time
 import requests
 from typing import Dict, Union
 from src.utils.config_projects import Project, ProjectRunData
+from utils.common import load_config
+
 
 def _get_project_key(p: Project) -> str:
     """使用 adb_config 来唯一标识一个 project，但它不用于服务器通信"""
     return f"{p.adb_config.adb_path}:{p.adb_config.adb_address}"
 
 class TaskProjectManager:
-    server_host = 'localhost'
-    server_port = 54345
+    server_host = load_config().get("server_host", "localhost")
+    server_port = load_config().get("server_port", 54345)
     """
     管理与多个运行的Tasker进程的通信。
     """
@@ -61,7 +63,6 @@ class TaskProjectManager:
                 return
 
             url = f"http://{self.server_host}:{self.server_port}/send_task"
-            print(url)
 
             if isinstance(task, ProjectRunData):
                 task_data = {

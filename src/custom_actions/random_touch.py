@@ -6,7 +6,6 @@ class RandomTouch(CustomAction):
     def run(self,
             context: Context,
             argv: CustomAction.RunArg, ) -> bool:
-        print(argv.custom_action_param)
         print("开始执行自定义动作：随机点击")
         x, y, w, h = argv.box.x, argv.box.y, argv.box.w, argv.box.h
         center_x = x + w / 2

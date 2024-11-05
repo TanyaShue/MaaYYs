@@ -13,7 +13,9 @@ class RandomSwipe(CustomAction):
         :param argv:
         :param context: 运行上下文，提供 swipe 方法。
         :return: 滑动是否成功。
-        """        
+        """
+        print("开始执行自定义动作: 随机滑动")
+
         try:
             params = json.loads(argv.custom_action_param)
 
@@ -28,7 +30,6 @@ class RandomSwipe(CustomAction):
             duration = params.get("delay", 200)
             
             context.tasker.controller.post_swipe(start_x, start_y, end_x, end_y, duration)
-            print(f"Swiped from ({start_x}, {start_y}) to ({end_x}, {end_y}) with delay {duration}")
             return True
         except (json.JSONDecodeError, KeyError) as e:
             print(f"Swipe action failed: {e}")
