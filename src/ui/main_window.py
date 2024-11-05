@@ -64,6 +64,7 @@ class MainWindow(QWidget):
         """初始化首页"""
         self.clear_right_layout()
 
+        # 创建主容器部件
         container_widget = QWidget()
         container_layout = QVBoxLayout(container_widget)
         container_layout.setSpacing(5)
@@ -71,31 +72,48 @@ class MainWindow(QWidget):
 
         # 添加标题
         title_container = self._create_title_section()
+        container_layout.addWidget(title_container)
 
-        # 添加表格
+        # 中间内容和任务日志分割器
+        main_splitter = QSplitter(Qt.Horizontal)
+
+        # 左侧内容部分
+        left_widget = QWidget()
+        left_layout = QVBoxLayout(left_widget)
+        left_layout.setSpacing(5)
+        left_layout.setContentsMargins(0, 0, 0, 0)
+
+        # 添加表格、信息标题和详细信息
         table_container = self._create_table_section()
-
-        # 添加详细信息标题
         info_title_container = self._create_info_title_section()
-
-        # 添加详细信息容器
         details_container = self._create_details_section()
 
-        # 将所有部分添加到容器中
-        container_layout.addWidget(title_container)
-        container_layout.addWidget(table_container)
-        container_layout.addWidget(info_title_container)
-        container_layout.addWidget(details_container)
+        left_layout.addWidget(table_container)
+        left_layout.addWidget(info_title_container)
+        left_layout.addWidget(details_container)
+
+        main_splitter.addWidget(left_widget)
+
+        # 右侧任务日志部分
+        log_container = self._create_log_section()
+        main_splitter.addWidget(log_container)
+
+        # 设置初始大小比例
+        main_splitter.setSizes([800, 200])
+
+        # 将分割器添加到容器布局中
+        container_layout.addWidget(main_splitter)
 
         self.right_layout.addWidget(container_widget)
         self.main_layout.addLayout(self.right_layout)
 
         # 加载设备表格数据
-        self.controller.load_device_table(self.table,self.splitter,self.info_title)
+        self.controller.load_device_table(self.table, self.splitter, self.info_title)
 
     def _create_title_section(self):
         """创建标题部分"""
         title_container = QWidget()
+        title_container.setFixedHeight(30)
         title_layout = QVBoxLayout(title_container)
         title_layout.setSpacing(0)
         title_layout.setContentsMargins(0, 0, 0, 0)
@@ -103,7 +121,8 @@ class MainWindow(QWidget):
         title = QLabel('首页')
         title.setAlignment(Qt.AlignCenter)
         title.setFont(QFont('Arial', 18, QFont.Bold))
-        title.setStyleSheet("color: #2980b9; margin: 10px 0;")
+        title.setStyleSheet("color: #2980b9;")
+        title.setFixedHeight(25)  # 设置固定高度为 40 像素
         title_layout.addWidget(title)
 
         return title_container
@@ -151,22 +170,39 @@ class MainWindow(QWidget):
 
         return details_container
 
+    def _create_log_section(self):
+        """创建任务日志部分"""
+        log_container = QWidget()
+        log_layout = QVBoxLayout(log_container)
+        log_layout.setSpacing(0)
+        log_layout.setContentsMargins(0, 0, 0, 0)
+
+        log_group = QGroupBox("任务日志")
+        log_group_layout = QVBoxLayout(log_group)
+
+        log_area = QTextEdit()
+        log_area.setPlaceholderText("日志输出...")
+        log_area.setReadOnly(True)
+        log_area.setMinimumWidth(200)  # 设置初始最小宽度
+
+        log_group_layout.addWidget(log_area)
+        log_group.setLayout(log_group_layout)
+
+        log_layout.addWidget(log_group)
+        log_container.setLayout(log_layout)
+
+        return log_container
+
     def init_splitter(self):
         """初始化分割器"""
-        for title in ["任务选择", "任务设置", "任务日志"]:
+        for title in ["任务选择", "任务设置"]:
             group = QGroupBox(title)
             layout = QVBoxLayout()
-
-            if title == "任务日志":
-                log_area = QTextEdit()
-                log_area.setPlaceholderText("日志输出...")
-                log_area.setReadOnly(True)
-                layout.addWidget(log_area)
-
             group.setLayout(layout)
             self.splitter.addWidget(group)
 
-        self.splitter.setSizes([300, 400, 300])
+        # 设置 splitter 的大小比例
+        self.splitter.setSizes([500, 500])
         self.splitter.setFixedHeight(400)
 
     def clear_right_layout(self):

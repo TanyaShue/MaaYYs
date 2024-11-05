@@ -130,12 +130,18 @@ class UIController:
         return container_widget
 
     def _setup_table_columns(self, table):
-        """设置表格列宽"""
-        table.resizeColumnsToContents()
-        column_widths = [80, 80, 280, 130, 100]
-        for i, width in enumerate(column_widths):
-            table.setColumnWidth(i, width)
-        table.horizontalHeader().setSectionResizeMode(5, QHeaderView.Stretch)
+        """设置表格列宽比例自适应"""
+        # 设置列宽为自适应模式
+        header = table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.Stretch)  # 任务名称列
+        header.setSectionResizeMode(1, QHeaderView.Stretch)  # 游戏名称列
+        header.setSectionResizeMode(2, QHeaderView.Stretch)  # ADB地址列
+        header.setSectionResizeMode(3, QHeaderView.Stretch)  # ADB端口列
+        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # 状态列
+        header.setSectionResizeMode(5, QHeaderView.Stretch)  # 操作按钮列
+
+        # 设置每列的宽度比例
+        header.setStretchLastSection(True)  # 确保最后一列填满剩余空间
 
     def sent_task(self, project, button):
         """运行任务"""
@@ -190,13 +196,9 @@ class UIController:
         info_title.setText(f"详细信息: {project.project_name}")
 
         # 清空之前的布局
-        task_selection_group = splitter.widget(0)
-        task_selection_layout = task_selection_group.layout()
-        self.clear_layout(task_selection_layout)
 
-        task_selection_group_1 = splitter.widget(1)
-        task_selection_layout_1 = task_selection_group_1.layout()
-        self.clear_layout(task_selection_layout_1)
+        self.clear_layout(splitter.widget(0).layout())
+        self.clear_layout(splitter.widget(1).layout())
         # 获取对应的 program
         program = self.programs.get_program_by_name(project.program_name)
         if not program:
@@ -241,7 +243,7 @@ class UIController:
                 lambda _, selected_task=task: self.send_single_task(selected_task, project))
             task_row.addWidget(execute_button)
 
-            task_selection_layout.addLayout(task_row)
+            splitter.widget(0).layout().addLayout(task_row)
         self.select_all_state = False
         # 添加“全选”和“开始”按钮
         button_container = QHBoxLayout()
@@ -265,47 +267,46 @@ class UIController:
 
         select_all_button.clicked.connect(toggle_select_all)
         start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button))
-        task_selection_layout.addLayout(button_container)
+        splitter.widget(0).layout().addLayout(button_container)
 
-    def set_task_parameters(self, selected_task, program, project,splitter):
+    def set_task_parameters(self, selected_task, program, project, splitter):
         """动态生成任务的参数设置界面"""
-        task_settings_group = splitter.widget(1)
-        task_settings_layout = task_settings_group.layout()
-        self.clear_layout(task_settings_layout)
+        self.clear_layout(splitter.widget(1).layout())
 
         # 获取对应任务的 option
         options = program.get_task_by_name(selected_task.task_name).option
         setting = program.option.options
 
-        # 使用 QFormLayout 来对齐标签和输入框，使得布局更加整齐
+        # 使用 QFormLayout 来对齐标签和输入框，使布局更加整齐
         form_layout = QFormLayout()
         if not options:
-            label = QLabel("该任务无参数设置项")
-            form_layout.addRow(label)
-            task_settings_layout.addLayout(form_layout)
+            form_layout.addRow(QLabel("该任务无参数设置项"))
+            splitter.widget(1).layout().addLayout(form_layout)
             return
 
+        # 遍历任务参数配置
         for option in options:
             sett = setting.get(option)
-            print(option)
-            # 优先从 project.option 获取参数，如果不存在则使用 sett 的值
             project_option = next((opt for opt in project.option.options if opt.option_name == option), None)
 
-            # 动态生成 QLineEdit、QComboBox 或 QCheckBox，并绑定其值到 project.option
-            if sett.type == 'input' and sett.input:
-                self.create_input_option(form_layout, project, project_option, sett, option)
-
-            elif sett.type == 'select' and sett.select:
-                self.create_select_option(form_layout, project, project_option, sett, option)
-
-            elif sett.type == 'boole':
-                self.create_boole_option(form_layout, project, project_option, sett, option)
-
+            # 动态创建控件
+            if sett:
+                self._add_option_control(form_layout, project, project_option, sett, option)
             else:
-                print(f"Unknown or missing attributes for option: {option}")        # 将生成的表单布局添加到主布局中
-        task_settings_layout.addLayout(form_layout)
+                print(f"Unknown or missing attributes for option: {option}")
 
-    def create_input_option(self, layout, project, project_option, sett, option_name):
+        splitter.widget(1).layout().addLayout(form_layout)
+
+    def _add_option_control(self, layout, project, project_option, sett, option_name):
+        """根据配置动态创建对应的参数设置控件"""
+        if sett.type == 'input' and sett.input:
+            self._create_input_option(layout, project, project_option, sett, option_name)
+        elif sett.type == 'select' and sett.select:
+            self._create_select_option(layout, project, project_option, sett, option_name)
+        elif sett.type == 'boole':
+            self._create_boole_option(layout, project, project_option, sett, option_name)
+
+    def _create_input_option(self, layout, project, project_option, sett, option_name):
         """创建 input 类型的参数设置控件"""
         label = QLabel(sett.input.name)
 
@@ -321,7 +322,7 @@ class UIController:
         layout.addRow(label, line_edit)
         print(f"Input Option: name={sett.input.name}, default={default_value}")
 
-    def create_select_option(self, layout, project, project_option, sett, option_name):
+    def _create_select_option(self, layout, project, project_option, sett, option_name):
         """创建 select 类型的参数设置控件"""
         label = QLabel(option_name)
         combo_box = QComboBox()
@@ -343,7 +344,7 @@ class UIController:
 
         layout.addRow(label, combo_box)
 
-    def create_boole_option(self, layout, project, project_option, sett, option_name):
+    def _create_boole_option(self, layout, project, project_option, sett, option_name):
         """创建 boole 类型的参数设置控件"""
         label = QLabel(option_name)
         check_box = QCheckBox()
