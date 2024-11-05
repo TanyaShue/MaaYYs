@@ -38,3 +38,12 @@ def setup_logging(log_file_path):
     # 检查并压缩日志文件
     if os.path.exists(log_file_path) and os.path.getsize(log_file_path) > 128 * 1024 * 1024:  # 128MB
         compress_log_file(log_file_path)
+
+def app_logging(log_area,message):
+    """添加日志到日志区域"""
+    if log_area:  # 确保日志区域已初始化
+        log_area.append(message)
+    else:
+        print("日志组件未初始化")
+def init_log_area():
+    """初始化日志区域"""

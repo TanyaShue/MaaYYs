@@ -38,15 +38,6 @@ if maa_bin_path2 is None:
 # 构建 --add-data 参数
 add_data_param2 = f'{maa_bin_path2}{os.pathsep}MaaAgentBinary'
 
-# # 检查 custom_actions 和 custom_recognition 文件夹
-# custom_actions_path = "src/custom_actions"
-# custom_recognition_path = "src/custom_recognition"
-#
-# if not os.path.exists(custom_actions_path):
-#     raise FileNotFoundError("custom_actions folder not found")
-#
-# if not os.path.exists(custom_recognition_path):
-#     raise FileNotFoundError("custom_recognition folder not found")
 
 # 运行 PyInstaller 打包命令
 PyInstaller.__main__.run([
@@ -55,8 +46,6 @@ PyInstaller.__main__.run([
     '--name=MAA_YYS_BACKEND.exe',
     f'--add-data={add_data_param}',
     f'--add-data={add_data_param2}',
-    # '--hidden-import=src.custom_actions',  # 使用模块导入路径
-    # '--hidden-import=src.custom_recognition',  # 使用模块导入路径
     '--clean',
 ])
 
@@ -71,6 +60,8 @@ PyInstaller.__main__.run([
 dist_dir = os.path.join(current_dir, 'dist')
 assets_source_path = os.path.join(current_dir, 'assets')
 assets_dest_path = os.path.join(dist_dir, 'assets')
+syc_bat_source_path = os.path.join(current_dir, 'syc.bat')
+syc_bat_dest_path = os.path.join(dist_dir, 'syc.bat')
 
 if not os.path.exists(assets_source_path):
     raise FileNotFoundError("assets folder not found")
@@ -81,6 +72,11 @@ if os.path.exists(assets_dest_path):
 
 # 使用 shutil 复制整个文件夹
 shutil.copytree(assets_source_path, assets_dest_path)
+# 复制 syc.bat 文件
+if os.path.exists(syc_bat_source_path):
+    shutil.copy(syc_bat_source_path, syc_bat_dest_path)
+else:
+    raise FileNotFoundError("syc.bat file not found")
 
 # 压缩 dist 文件夹为 zip 文件，并保存在 dist 目录中
 zip_filename = 'MAA_YYS_RELEASE.zip'
