@@ -41,11 +41,12 @@ class BountyMonsterRecognition(CustomAction):
                         break
             else:
                 # 未识别到妖怪，滑动继续寻找
+                print("未识别到妖怪，滑动继续寻找")
                 context.run_pipeline("识别探索目标_向上滑动")
                 attempts += 1  # 增加重试计数
 
-            print(f"尝试次数: {attempts}")
-
+            print(f"尝试次数 attempts=: {attempts}")
+        print("识别悬赏妖怪结束")
         return True
 
     def stop(self) -> None:

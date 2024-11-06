@@ -91,13 +91,17 @@ class TaskerThread(threading.Thread):
         if isinstance(task, str):
             if task == "TERMINATE":
                 self.terminate()
+            elif task == "STOP":
+                logging.info(f"Stopping Tasker {self.project_key}")
+                self.tasker.post_stop()
+                logging.info(f"Tasker {self.project_key} posted stop")
             else:
                 logging.warning(f"Unexpected task: {task}")
         elif isinstance(task, ProjectRunData):
             for project_run_task in task.project_run_tasks:
                 logging.info(f"Executing {project_run_task.task_name} for {self.project_key}")
-                self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
-                logging.info("Task execution completed")
+                self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override)
+                logging.info(f"Task {project_run_task.task_name} posted for {self.project_key}")
 
     def send_task(self, task):
         """将任务添加到队列"""
@@ -115,6 +119,8 @@ class TaskerThread(threading.Thread):
 
         _terminate_adb_processes()
         self._cleanup()
+
+
 
     def _cleanup(self):
         logging.info(f"Cleaning up resources for {self.project_key}")

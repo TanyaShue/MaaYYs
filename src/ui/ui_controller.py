@@ -34,6 +34,7 @@ class UIController:
         # 加载配置
         self.projects = ProjectsJson.load_from_file(self.projects_json_path)
         self.programs = ProgramsJson.load_from_file(self.programs_json_path)
+        self.is_connected = {}
 
     def load_styles(self, widget):
         """加载样式文件"""
@@ -69,7 +70,7 @@ class UIController:
 
         self.projects.save_to_file(self.projects_json_path)
 
-    def load_device_table(self, table,splitter,info_title):
+    def load_device_table(self, table, splitter, info_title):
         """加载设备表格数据"""
         for project in self.projects.projects:
             row = table.rowCount()
@@ -94,19 +95,19 @@ class UIController:
             adb_port_item.setData(Qt.UserRole, ('adb_address', project))
             table.setItem(row, 3, adb_port_item)
 
-            # 添加运行状态
-            status_item = QTableWidgetItem('正在执行')
+            # 初始化状态为“未连接”
+            status_item = QTableWidgetItem('未连接')
             table.setItem(row, 4, status_item)
 
             # 添加操作按钮
-            container_widget = self._create_operation_buttons(project,splitter,info_title)
+            container_widget = self._create_operation_buttons(project, splitter, info_title, status_item)
             table.setCellWidget(row, 5, container_widget)
 
             table.setRowHeight(row, 50)
 
         self._setup_table_columns(table)
 
-    def _create_operation_buttons(self, project,splitter,info_title):
+    def _create_operation_buttons(self, project, splitter, info_title, status_item):
         """创建操作按钮"""
         container_widget = QWidget()
         layout = QHBoxLayout()
@@ -117,13 +118,13 @@ class UIController:
         button_task_connect = QPushButton('一键启动')
         button_task_connect.setObjectName('runButton')
         button_task_connect.clicked.connect(
-            lambda _, p=project, b=button_task_connect: self.sent_task(p, b))
+            lambda _, p=project, b=button_task_connect, s=status_item: self.sent_task(p, b, s))
         layout.addWidget(button_task_connect)
 
         # 添加查看详情按钮
         button_info = QPushButton('查看详情')
         button_info.setObjectName('infoButton')
-        button_info.clicked.connect(lambda _, p=project: self.show_device_details( p,splitter, info_title))
+        button_info.clicked.connect(lambda _, p=project: self.show_device_details(p, splitter, info_title))
         layout.addWidget(button_info)
 
         container_widget.setLayout(layout)
@@ -131,7 +132,6 @@ class UIController:
 
     def _setup_table_columns(self, table):
         """设置表格列宽比例自适应"""
-        # 设置列宽为自适应模式
         header = table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.Stretch)  # 任务名称列
         header.setSectionResizeMode(1, QHeaderView.Stretch)  # 游戏名称列
@@ -140,30 +140,63 @@ class UIController:
         header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # 状态列
         header.setSectionResizeMode(5, QHeaderView.Stretch)  # 操作按钮列
 
-        # 设置每列的宽度比例
         header.setStretchLastSection(True)  # 确保最后一列填满剩余空间
 
-    def sent_task(self, project, button):
-        """运行任务"""
-        button.setText("正在连接")
-        button.setEnabled(False)
-
+    def sent_task(self, project, button, status_item):
+        """运行任务或停止任务"""
         task_manager = TaskProjectManager()
+        project_key = project.project_name  # 使用项目名称作为键
 
-        def execute_task():
-            try:
-                task_manager.create_tasker_process(project)
-                project_run_data = project.get_project_run_data(self.programs)
-                task_manager.send_task(project, project_run_data)
-                button.setText("已连接")
-                button.setEnabled(True)
-            except Exception as e:
-                logging.error(f"任务启动失败: {e}")
-                button.setText("连接失败")
-                button.setEnabled(True)
+        if not self.is_connected.get(project_key, False):
+            # 当前未连接，尝试连接
+            button.setText("正在连接")
+            button.setEnabled(False)
+            status_item.setText("正在连接")
 
-        task = TaskWorker(execute_task)
-        self.thread_pool.start(task)
+            def execute_task():
+                try:
+                    task_manager.create_tasker_process(project)
+                    project_run_data = project.get_project_run_data(self.programs)
+                    task_manager.send_task(project, project_run_data)
+
+                    # 设置连接状态
+                    self.is_connected[project_key] = True
+                    button.setText("停止运行")
+                    button.setEnabled(True)
+                    status_item.setText("正在运行")
+                except Exception as e:
+                    logging.error(f"任务启动失败: {e}")
+                    button.setText("连接失败")
+                    button.setEnabled(True)
+                    status_item.setText("连接失败")
+
+            task = TaskWorker(execute_task)
+            self.thread_pool.start(task)
+
+        else:
+            # 当前已连接，尝试断开
+            project_run_data = "STOP"
+            status_item.setText("断开中")
+            button.setText("正在断开")
+            button.setEnabled(False)
+
+            def stop_task():
+                try:
+                    task_manager.send_task(project, project_run_data)
+
+                    # 重置连接状态
+                    self.is_connected[project_key] = False
+                    button.setText("一键启动")
+                    button.setEnabled(True)
+                    status_item.setText("已断开")
+                except Exception as e:
+                    logging.error(f"任务停止失败: {e}")
+                    button.setText("断开失败")
+                    button.setEnabled(True)
+                    status_item.setText("断开失败")
+
+            stop_task_worker = TaskWorker(stop_task)
+            self.thread_pool.start(stop_task_worker)
 
     def send_single_task(self, selected_task, project):
         """发送单个任务"""
