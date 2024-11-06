@@ -224,14 +224,14 @@ class UIController:
         task = TaskWorker(execute_task)
         self.thread_pool.start(task)
 
-    def show_device_details(self,  project,splitter, info_title):
+    def show_device_details(self, project, splitter, info_title):
         # 更新详细信息标题
         info_title.setText(f"详细信息: {project.project_name}")
 
         # 清空之前的布局
-
         self.clear_layout(splitter.widget(0).layout())
         self.clear_layout(splitter.widget(1).layout())
+
         # 获取对应的 program
         program = self.programs.get_program_by_name(project.program_name)
         if not program:
@@ -239,6 +239,15 @@ class UIController:
 
         # 记录所有复选框
         self.checkboxes = []
+
+        # 创建一个 status_item 来跟踪连接状态
+        status_item = QTableWidgetItem('未连接')  # 初始状态
+        splitter.widget(1).layout().addWidget(QLabel("状态:"))
+        splitter.widget(1).layout().addWidget(QLabel(status_item.text()))  # 显示状态
+
+        def update_status(text):
+            status_item.setText(text)
+            splitter.widget(1).layout().itemAt(1).widget().setText(text)  # 更新界面上的状态文本
 
         # 动态添加任务复选框和设置按钮
         for task in program.program_tasks:
@@ -267,7 +276,7 @@ class UIController:
             # 添加设置按钮
             set_button = QPushButton('设置')
             set_button.clicked.connect(
-                lambda _, selected_task=task: self.set_task_parameters(selected_task, program, project,splitter))
+                lambda _, selected_task=task: self.set_task_parameters(selected_task, program, project, splitter))
             task_row.addWidget(set_button)
 
             # 添加发送任务按钮
@@ -277,29 +286,34 @@ class UIController:
             task_row.addWidget(execute_button)
 
             splitter.widget(0).layout().addLayout(task_row)
+
         self.select_all_state = False
+
         # 添加“全选”和“开始”按钮
         button_container = QHBoxLayout()
         select_all_button = QPushButton("全选")
         start_button = QPushButton("开始")
         button_container.addWidget(select_all_button)
         button_container.addWidget(start_button)
+
+        # 更新按钮的状态
         def toggle_select_all():
             if not self.select_all_state:
-                # 全选所有任务
                 for checkbox in self.checkboxes:
                     checkbox.setChecked(True)
                 select_all_button.setText("清空")
                 self.select_all_state = True
             else:
-                # 清空所有任务的选择
                 for checkbox in self.checkboxes:
                     checkbox.setChecked(False)
                 select_all_button.setText("全选")
                 self.select_all_state = False
 
         select_all_button.clicked.connect(toggle_select_all)
-        start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button))
+
+        # 将 status_item 传递给 sent_task
+        start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button, status_item))
+
         splitter.widget(0).layout().addLayout(button_container)
 
     def set_task_parameters(self, selected_task, program, project, splitter):
