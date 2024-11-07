@@ -5,7 +5,7 @@ import time
 import requests
 from typing import Dict, Union
 from src.utils.config_projects import Project, ProjectRunData
-from utils.common import load_config
+from src.utils.common import load_config
 
 
 def _get_project_key(p: Project) -> str:
