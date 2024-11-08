@@ -1,6 +1,6 @@
 import os
 import logging
-from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool
+from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool, QEvent, QObject
 from PySide6.QtWidgets import QTableWidgetItem, QWidget, QHBoxLayout, QPushButton, QHeaderView, QCheckBox, QLabel, \
     QLineEdit, QComboBox, QFormLayout
 
@@ -71,6 +71,8 @@ class UIController:
         self.projects.save_to_file(self.projects_json_path)
 
     def load_device_table(self, table, splitter, info_title):
+        table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+
         """加载设备表格数据"""
         for project in self.projects.projects:
             row = table.rowCount()
@@ -131,16 +133,56 @@ class UIController:
         return container_widget
 
     def _setup_table_columns(self, table):
-        """设置表格列宽比例自适应"""
+        """设置表格列宽度"""
         header = table.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.Stretch)  # 任务名称列
-        header.setSectionResizeMode(1, QHeaderView.Stretch)  # 游戏名称列
-        header.setSectionResizeMode(2, QHeaderView.Stretch)  # ADB地址列
-        header.setSectionResizeMode(3, QHeaderView.Stretch)  # ADB端口列
-        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # 状态列
-        header.setSectionResizeMode(5, QHeaderView.Stretch)  # 操作按钮列
 
-        header.setStretchLastSection(True)  # 确保最后一列填满剩余空间
+        # 设置各列的宽度比例
+        column_ratios = [0.20, 0.15, 0.20, 0.15, 0.10, 0.20]
+
+        # 设置表格的拉伸模式
+        table.horizontalHeader().setStretchLastSection(False)
+
+        # 设置每列的拉伸模式
+        for col, ratio in enumerate(column_ratios):
+            # 将每列设置为根据内容调整大小
+            header.setSectionResizeMode(col, QHeaderView.Fixed)
+
+        # 创建一个包装类来处理resize事件
+        class ResizeEventFilter(QObject):
+            def __init__(self, table, ratios, parent=None):
+                super().__init__(parent)
+                self.table = table
+                self.ratios = ratios
+
+            def eventFilter(self, obj, event):
+                if event.type() == QEvent.Resize:
+                    # 获取表格可见区域的宽度
+                    available_width = self.table.parent().width() - 20  # 减去一些边距
+
+                    # 更新每列的宽度
+                    for col, ratio in enumerate(self.ratios):
+                        width = int(available_width * ratio)
+                        self.table.setColumnWidth(col, width)
+                return False
+
+        # 安装事件过滤器
+        event_filter = ResizeEventFilter(table, column_ratios)
+        table.parent().installEventFilter(event_filter)  # 注意这里改为监听父容器的resize事件
+        table.resize_event_filter = event_filter  # 保存引用防止垃圾回收
+
+        # 触发一次初始调整
+        parent_width = table.parent().width() - 20
+        for col, ratio in enumerate(column_ratios):
+            width = int(parent_width * ratio)
+            table.setColumnWidth(col, width)
+
+    def _on_section_resized(self, table, ratios):
+        """当列宽度改变时重新计算其他列的宽度"""
+        available_width = table.parent().width() - 20
+        for col, ratio in enumerate(ratios):
+            width = int(available_width * ratio)
+            table.setColumnWidth(col, width)
+
 
     def sent_task(self, project, button, status_item):
         """运行任务或停止任务"""
