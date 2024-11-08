@@ -16,7 +16,7 @@ class MainWindow(QWidget):
         self.controller = UIController()
 
         self.setWindowTitle('MaaYYs')
-        self.setMinimumSize(1440, 720)
+        self.setMinimumSize(1280, 720)
 
         # 加载样式
         self.controller.load_styles(self)
@@ -209,7 +209,6 @@ class MainWindow(QWidget):
             layout = QVBoxLayout()
             group.setLayout(layout)
             details_container_splitter.addWidget(group)
-
         # 设置大小比例
         details_container_splitter.setSizes([500, 500])
         details_container_splitter.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)

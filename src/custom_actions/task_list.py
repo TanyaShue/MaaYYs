@@ -28,7 +28,7 @@ class TaskList(CustomAction):
             print(f"执行任务: {task}")
             context.run_pipeline(task)
             print(f"任务 {task} 执行完成")
-            context.run_pipeline("返回庭院")
+            # context.run_pipeline("返回庭院")
             time.sleep(2)
         return True
 
