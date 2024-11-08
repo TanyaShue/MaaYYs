@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
 )
 from .ui_controller import UIController
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont
+from PySide6.QtGui import QFont, QIcon
 from .containers import LogContainer, NavigationBar
 
 class MainWindow(QWidget):
@@ -90,9 +90,7 @@ class MainWindow(QWidget):
 
     def toggle_log_container(self):
         """切换日志容器的显示和隐藏"""
-        target_width = 300 if self.log_container.width() == 0 else 0
         self.log_container.toggle_log_container()  # 使用 LogContainer 中的动画效果
-        self.log_container.setFixedWidth(target_width)  # 切换固定宽度
 
     def _create_title_section(self):
         """创建标题部分"""
@@ -112,7 +110,8 @@ class MainWindow(QWidget):
         title.setFixedHeight(25)
 
         # 创建“日志”按钮并设置大小
-        log_button = QPushButton('日志')
+        log_button = QPushButton()
+        log_button.setIcon(QIcon('assets/icons/svg_icons/icon_menu_close.svg'))
         log_button.setFixedWidth(100)
         log_button.setFixedHeight(30)  # 调整为适合的高度
         log_button.setObjectName('infoButton')
@@ -162,55 +161,36 @@ class MainWindow(QWidget):
     def _create_details_section(self):
         """创建详细信息部分"""
         details_container = QWidget()
-        details_layout = QVBoxLayout(details_container)
+        details_layout = QHBoxLayout(details_container)
         details_layout.setSpacing(0)
         details_layout.setContentsMargins(0, 0, 0, 0)
 
         # 初始化并添加分割器
-        self.details_container_splitter = self.init_splitter()
+        self.details_container_splitter = self.init_splitter(details_container.width())
         details_layout.addWidget(self.details_container_splitter)
 
         # 设置容器高度
         details_container.setFixedHeight(400)
+        # 设置背景为蓝色
+        # details_container.setStyleSheet("background-color: #2980b9;")
+
         return details_container
 
-    def _create_log_section(self):
-        """创建任务日志部分"""
-        log_container = QWidget()
-        log_layout = QVBoxLayout(log_container)
-        log_layout.setSpacing(0)
-        log_layout.setContentsMargins(0, 0, 0, 0)
-
-        log_group = QGroupBox("任务日志")
-        log_group_layout = QVBoxLayout(log_group)
-
-        log_area = QTextEdit()
-        log_area.setPlaceholderText("日志输出...")
-        log_area.setReadOnly(True)
-        log_area.setMinimumWidth(180)  # 设置最小宽度
-
-        log_group_layout.addWidget(log_area)
-        log_layout.addWidget(log_group)
-
-        # 设置大小策略
-        log_container.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
-        # 设置固定宽度
-        log_container.setFixedWidth(200)
-
-        return log_container
-
-    def init_splitter(self):
+    def init_splitter(self, container_width):
         """初始化分割器"""
         # 创建 QSplitter 实例
         details_container_splitter = QSplitter(Qt.Horizontal)
+        details_container_splitter.setFixedWidth(container_width)
+        print(container_width)
 
         for title in ["任务选择", "任务设置"]:
             group = QGroupBox(title)
             layout = QVBoxLayout()
             group.setLayout(layout)
+            group.setFixedWidth(400)
             details_container_splitter.addWidget(group)
-        # 设置大小比例
-        details_container_splitter.setSizes([500, 500])
-        details_container_splitter.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
+        # 设置大小比例,使每个 QGroupBox 位于各自分割器的中间
+        details_container_splitter.setSizes([container_width // 2, container_width // 2])
+        details_container_splitter.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         return details_container_splitter

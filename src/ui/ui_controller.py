@@ -118,7 +118,7 @@ class UIController:
 
         # 添加一键启动按钮
         button_task_connect = QPushButton('一键启动')
-        button_task_connect.setObjectName('runButton')
+        button_task_connect.setObjectName('startButton')
         button_task_connect.clicked.connect(
             lambda _, p=project, b=button_task_connect, s=status_item: self.sent_task(p, b, s))
         layout.addWidget(button_task_connect)
@@ -137,7 +137,7 @@ class UIController:
         header = table.horizontalHeader()
 
         # 设置各列的宽度比例
-        column_ratios = [0.20, 0.15, 0.20, 0.15, 0.10, 0.20]
+        column_ratios = [0.10, 0.10, 0.35, 0.15, 0.10, 0.18]
 
         # 设置表格的拉伸模式
         table.horizontalHeader().setStretchLastSection(False)
@@ -265,15 +265,15 @@ class UIController:
         task = TaskWorker(execute_task)
         self.thread_pool.start(task)
 
-    def show_device_details(self,  project,splitter, info_title,status_item):
+    def show_device_details(self, project, splitter, info_title, status_item):
         # 更新详细信息标题
         info_title.setText(f"详细信息: {project.project_name}")
 
         # 清空之前的布局
-
         self.clear_layout(splitter.widget(0).layout())
         self.clear_layout(splitter.widget(1).layout())
-        # 获取对应的 program
+
+        # 获取对应的程序
         program = self.programs.get_program_by_name(project.program_name)
         if not program:
             return
@@ -281,7 +281,7 @@ class UIController:
         # 记录所有复选框
         self.checkboxes = []
 
-        # 动态添加任务复选框和设置按钮
+        # 添加任务复选框和设置按钮
         for task in program.program_tasks:
             task_row = QHBoxLayout()
 
@@ -290,38 +290,30 @@ class UIController:
             checkbox.setChecked(task.task_name in project.selected_tasks)
             self.checkboxes.append(checkbox)
 
-            # 定义复选框状态变化的处理函数
-            def on_checkbox_state_changed(state, task_name=task.task_name):
-                if state == Qt.CheckState.Checked.value:  # 勾选状态
-                    if task_name not in project.selected_tasks:
-                        project.selected_tasks.append(task_name)
-                else:  # 未勾选状态
-                    if task_name in project.selected_tasks:
-                        project.selected_tasks.remove(task_name)
+            # 处理复选框状态变化
+            checkbox.stateChanged.connect(
+                lambda state, task_name=task.task_name: self.handle_checkbox_state_change(state, task_name, project))
 
-                # 保存到文件
-                self.projects.save_to_file(self.projects_json_path)
-
-            checkbox.stateChanged.connect(on_checkbox_state_changed)
             task_row.addWidget(checkbox)
 
             # 添加设置按钮
             set_button = QPushButton('设置')
-            set_button.setObjectName('runButton')
+            set_button.setObjectName('settingButton')
             set_button.clicked.connect(
-                lambda _, selected_task=task: self.set_task_parameters(selected_task, program, project,splitter))
+                lambda _, selected_task=task: self.set_task_parameters(selected_task, program, project, splitter))
             task_row.addWidget(set_button)
 
-            # 添加发送任务按钮
+            # 添加执行任务按钮
             execute_button = QPushButton('执行')
             execute_button.setObjectName('runButton')
-            execute_button.clicked.connect(
-                lambda _, selected_task=task: self.send_single_task(selected_task, project))
+            execute_button.clicked.connect(lambda _, selected_task=task: self.send_single_task(selected_task, project))
             task_row.addWidget(execute_button)
 
             splitter.widget(0).layout().addLayout(task_row)
+
         self.select_all_state = False
-        # 添加“全选”和“开始”按钮
+
+        # 添加"全选"和"开始"按钮
         button_container = QHBoxLayout()
         select_all_button = QPushButton("全选")
         start_button = QPushButton("开始")
@@ -329,23 +321,30 @@ class UIController:
         start_button.setObjectName("infoButton")
         button_container.addWidget(select_all_button)
         button_container.addWidget(start_button)
-        def toggle_select_all():
-            if not self.select_all_state:
-                # 全选所有任务
-                for checkbox in self.checkboxes:
-                    checkbox.setChecked(True)
-                select_all_button.setText("清空")
-                self.select_all_state = True
-            else:
-                # 清空所有任务的选择
-                for checkbox in self.checkboxes:
-                    checkbox.setChecked(False)
-                select_all_button.setText("全选")
-                self.select_all_state = False
 
-        select_all_button.clicked.connect(toggle_select_all)
+        select_all_button.clicked.connect(self.toggle_select_all)
         start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button, status_item))
+
         splitter.widget(0).layout().addLayout(button_container)
+
+    def handle_checkbox_state_change(self, state, task_name, project):
+        if state == Qt.CheckState.Checked.value:
+            if task_name not in project.selected_tasks:
+                project.selected_tasks.append(task_name)
+        else:
+            if task_name in project.selected_tasks:
+                project.selected_tasks.remove(task_name)
+
+        self.projects.save_to_file(self.projects_json_path)
+
+    def toggle_select_all(self):
+        self.select_all_state = not self.select_all_state
+        for checkbox in self.checkboxes:
+            checkbox.setChecked(self.select_all_state)
+        if self.select_all_state:
+            self.select_all_button.setText("清空")
+        else:
+            self.select_all_button.setText("全选")
 
     def set_task_parameters(self, selected_task, program, project, splitter):
         """动态生成任务的参数设置界面"""

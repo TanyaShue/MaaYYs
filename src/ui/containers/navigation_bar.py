@@ -3,10 +3,10 @@ from PySide6.QtCore import Qt, QSize, QPropertyAnimation, QEasingCurve
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QPushButton, QWidget, QVBoxLayout, QFrame, QStyle, QLabel, QScrollArea
 
-
 class NavButton(QPushButton):
     def __init__(self, text, parent=None):
         super().__init__(parent)
+        self.setObjectName("NavButton")
         self._full_text = text
         self.setCheckable(True)
         self.setFixedHeight(40)
@@ -23,6 +23,7 @@ class NavButton(QPushButton):
 class NavigationBar(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setObjectName("NavigationBar")
         self.expanded = False
         self.setFixedWidth(64)
         self.setup_ui()
@@ -44,16 +45,13 @@ class NavigationBar(QWidget):
         self.menu_btn.clicked.connect(self.toggle_navigation)
         title_layout.addWidget(self.menu_btn)
 
-        self.title_label = QLabel("MaaYYs")
-        self.title_label.hide()
-        title_layout.addWidget(self.title_label)
-
         main_layout.addWidget(title_frame)
 
         # 滚动区域
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setFrameShape(QFrame.NoFrame)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # 禁用水平滚动条
 
         nav_container = QWidget()
         self.nav_layout = QVBoxLayout(nav_container)
@@ -99,11 +97,9 @@ class NavigationBar(QWidget):
         self.expanded = not self.expanded
 
         if self.expanded:
-            self.title_label.show()
             for button in self.buttons:
                 button.showFullText(True)
         else:
-            self.title_label.hide()
             for button in self.buttons:
                 button.showFullText(False)
 

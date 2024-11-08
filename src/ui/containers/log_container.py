@@ -2,7 +2,6 @@
 from PySide6.QtCore import QPropertyAnimation, QEasingCurve
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QFrame, QLabel, QTextEdit
 
-
 class LogContainer(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
