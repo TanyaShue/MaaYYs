@@ -124,7 +124,7 @@ class UIController:
         # 添加查看详情按钮
         button_info = QPushButton('查看详情')
         button_info.setObjectName('infoButton')
-        button_info.clicked.connect(lambda _, p=project: self.show_device_details(p, splitter, info_title))
+        button_info.clicked.connect(lambda _, p=project,s=status_item: self.show_device_details(p, splitter, info_title,s))
         layout.addWidget(button_info)
 
         container_widget.setLayout(layout)
@@ -224,7 +224,7 @@ class UIController:
         task = TaskWorker(execute_task)
         self.thread_pool.start(task)
 
-    def show_device_details(self,  project,splitter, info_title):
+    def show_device_details(self,  project,splitter, info_title,status_item):
         # 更新详细信息标题
         info_title.setText(f"详细信息: {project.project_name}")
 
@@ -299,7 +299,7 @@ class UIController:
                 self.select_all_state = False
 
         select_all_button.clicked.connect(toggle_select_all)
-        start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button))
+        start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button, status_item))
         splitter.widget(0).layout().addLayout(button_container)
 
     def set_task_parameters(self, selected_task, program, project, splitter):
