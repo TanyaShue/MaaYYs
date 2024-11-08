@@ -49,16 +49,16 @@ class MainWindow(QWidget):
     def init_center_content(self):
         """初始化中间内容区域，包括首页内容和分割器"""
         center_widget = QWidget()
-        center_layout = QVBoxLayout(center_widget)
-        center_layout.setSpacing(5)
-        center_layout.setContentsMargins(10, 10, 10, 10)
+        self.center_layout = QVBoxLayout(center_widget)
+        self.center_layout.setSpacing(5)
+        self.center_layout.setContentsMargins(10, 10, 10, 10)
 
         # 初始化首页内容
-        self.init_home_page(center_layout)
+        self.init_home_page()
 
         return center_widget
 
-    def init_home_page(self,center_layout):
+    def init_home_page(self):
         """初始化首页"""
         # 创建首页内容部分
         home_widget = QWidget()
@@ -77,13 +77,10 @@ class MainWindow(QWidget):
         home_layout.addWidget(info_title_container)
         home_layout.addWidget(details_container)
 
-        # self.details_container_splitter.addWidget(home_widget)
-        # self.details_container_splitter.setSizes([800, 0])  # 设置默认宽度
-
         # 加载设备表格
         self.controller.load_device_table(self.table, self.details_container_splitter, self.info_title)
 
-        center_layout.addWidget(home_widget)
+        self.center_layout.addWidget(home_widget)
 
     def init_log_container(self):
         """初始化右侧日志容器"""
@@ -96,7 +93,6 @@ class MainWindow(QWidget):
         target_width = 300 if self.log_container.width() == 0 else 0
         self.log_container.toggle_log_container()  # 使用 LogContainer 中的动画效果
         self.log_container.setFixedWidth(target_width)  # 切换固定宽度
-
 
     def _create_title_section(self):
         """创建标题部分"""
@@ -132,99 +128,6 @@ class MainWindow(QWidget):
 
         return title_container
 
-    # def toggle_log_container(self):
-    #     """切换日志容器的显示和隐藏"""
-    #     print("toggle_log_container")  # 用于调试
-    #
-    #     # 确保日志容器已添加到分割器
-    #     if self.log_container not in [self.main_splitter.widget(i) for i in range(self.main_splitter.count())]:
-    #         self.main_splitter.addWidget(self.log_container)
-    #
-    #     # 调用动画函数来控制显示和隐藏
-    #     self.animate_log_container(show=not self.log_container.isVisible())
-
-    # def animate_log_container(self, show=True):
-    #     """使用 QPropertyAnimation 创建从右侧滑动的效果"""
-    #     if self.log_animation:
-    #         self.log_animation.stop()
-    #
-    #     log_container_width = 300
-    #     main_splitter_width = self.main_splitter.width()
-    #
-    #     # 计算目标左侧宽度
-    #     target_left_width = main_splitter_width - log_container_width if show else main_splitter_width
-    #
-    #     # 设置 log_container 的滑动动画
-    #     slide_animation = QPropertyAnimation(self.log_container, b"geometry")
-    #     slide_animation.setDuration(400)
-    #
-    #     # 获取当前位置
-    #     current_geometry = self.log_container.geometry()
-    #
-    #     if show:
-    #         # 从已设置好的起始位置开始动画
-    #         start_rect = current_geometry
-    #         end_rect = QRect(target_left_width, current_geometry.y(),
-    #                          log_container_width, current_geometry.height())
-    #     else:
-    #         start_rect = current_geometry
-    #         end_rect = QRect(main_splitter_width, current_geometry.y(),
-    #                          log_container_width, current_geometry.height())
-    #
-    #     slide_animation.setStartValue(start_rect)
-    #     slide_animation.setEndValue(end_rect)
-    #     slide_animation.setEasingCurve(QEasingCurve.OutCubic)
-    #
-    #     # 设置 splitter 的大小动画
-    #     sizes_animation = QPropertyAnimation(self.main_splitter, b"dummy_property")
-    #     sizes_animation.setDuration(400)
-    #     sizes_animation.setEasingCurve(QEasingCurve.OutCubic)
-    #     sizes_animation.setStartValue(0.0)
-    #     sizes_animation.setEndValue(1.0)
-    #
-    #     current_sizes = self.main_splitter.sizes()
-    #     start_left = current_sizes[0]
-    #
-    #     # 在大小动画的过程中更新 splitter 的大小分布
-    #     def update_splitter_sizes(progress):
-    #         if show:
-    #             # 显示时，左侧宽度逐渐减小
-    #             left_width = int(start_left - (progress * log_container_width))
-    #             right_width = int(progress * log_container_width)
-    #         else:
-    #             # 隐藏时，左侧宽度逐渐增加
-    #             left_width = int(start_left + (progress * log_container_width))
-    #             right_width = int((1 - progress) * log_container_width)
-    #
-    #         # 确保宽度和不超过 splitter 总宽度
-    #         total_width = left_width + right_width
-    #         if total_width > main_splitter_width:
-    #             left_width = int(left_width * main_splitter_width / total_width)
-    #             right_width = int(right_width * main_splitter_width / total_width)
-    #
-    #         self.main_splitter.setSizes([left_width, right_width])
-    #
-    #     sizes_animation.valueChanged.connect(update_splitter_sizes)
-    #
-    #     # 使用动画组
-    #     self.log_animation = QParallelAnimationGroup()
-    #     self.log_animation.addAnimation(slide_animation)
-    #     self.log_animation.addAnimation(sizes_animation)
-    #
-    #     # 动画结束后的处理
-    #     def on_animation_finished():
-    #         if not show:
-    #             self.log_container.setVisible(False)
-    #             # 使用动画的最终状态，避免突变
-    #             self.main_splitter.setSizes([main_splitter_width, 0])
-    #         else:
-    #             # 使用最终计算的值，避免突变
-    #             self.log_container.setVisible(True)
-    #             self.log_container.setGeometry(end_rect)
-    #             self.main_splitter.setSizes([target_left_width, log_container_width])
-    #
-    #     self.log_animation.finished.connect(on_animation_finished)
-    #     self.log_animation.start()
     def _create_table_section(self):
         """创建表格部分"""
         table_container = QWidget()
@@ -271,7 +174,6 @@ class MainWindow(QWidget):
         details_container.setFixedHeight(400)
         return details_container
 
-
     def _create_log_section(self):
         """创建任务日志部分"""
         log_container = QWidget()
@@ -313,10 +215,3 @@ class MainWindow(QWidget):
         details_container_splitter.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         return details_container_splitter
-
-    def clear_right_layout(self):
-        """清空右侧布局"""
-        for i in reversed(range(self.right_layout.count())):
-            widget = self.right_layout.itemAt(i).widget()
-            if widget:
-                widget.setParent(None)

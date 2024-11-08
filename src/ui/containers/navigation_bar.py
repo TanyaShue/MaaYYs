@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from PySide6.QtCore import Qt, QSize, QPropertyAnimation, QEasingCurve
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QPushButton, QWidget, QVBoxLayout, QFrame, QStyle, QLabel, QScrollArea
 
 
@@ -18,7 +19,6 @@ class NavButton(QPushButton):
 
     def showFullText(self, show=True):
         super().setText(self._full_text if show else "")
-
 
 class NavigationBar(QWidget):
     def __init__(self, parent=None):
@@ -39,7 +39,7 @@ class NavigationBar(QWidget):
         title_layout.setSpacing(0)
 
         self.menu_btn = NavButton("菜单")
-        self.menu_btn.setIcon(self.style().standardIcon(QStyle.SP_DialogHelpButton))
+        self.menu_btn.setIcon(QIcon("assets/icons/svg_icons/icon_menu.svg"))
         self.menu_btn.setIconSize(QSize(22, 22))
         self.menu_btn.clicked.connect(self.toggle_navigation)
         title_layout.addWidget(self.menu_btn)
@@ -60,11 +60,12 @@ class NavigationBar(QWidget):
         self.nav_layout.setSpacing(2)
         self.nav_layout.setContentsMargins(0, 10, 0, 10)
 
-        self.add_nav_button("首页", "SP_DialogOkButton")
+        self.add_nav_button("首页", "assets/icons/svg_icons/icon_home.svg")
         for program in ["阴阳师"]:
-            self.add_nav_button(program, "SP_ComputerIcon")
+            self.add_nav_button(program, "assets/icons/svg_icons/icon_home.svg")
         self.nav_layout.addStretch()
-        self.add_nav_button("刷新资源", "SP_BrowserReload")
+        self.add_nav_button("刷新资源")
+        self.add_nav_button("设置", "assets/icons/svg_icons/icon_settings.svg")
 
         scroll.setWidget(nav_container)
         main_layout.addWidget(scroll)
@@ -75,9 +76,13 @@ class NavigationBar(QWidget):
             if isinstance(widget := self.nav_layout.itemAt(i).widget(), NavButton)
         ]
 
-    def add_nav_button(self, text, icon_name):
+    def add_nav_button(self, text, icon_path=None):
         button = NavButton(text)
-        icon = self.style().standardIcon(getattr(QStyle, icon_name))
+        # 如果指定了图标路径，则使用该路径的图标；否则使用默认的样式图标
+        if icon_path:
+            icon = QIcon(icon_path)
+        else:
+            icon = self.style().standardIcon(QStyle.SP_BrowserReload)
         button.setIcon(icon)
         button.setIconSize(QSize(22, 22))
         button.clicked.connect(lambda: button.setChecked(False))

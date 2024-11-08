@@ -183,7 +183,6 @@ class UIController:
             width = int(available_width * ratio)
             table.setColumnWidth(col, width)
 
-
     def sent_task(self, project, button, status_item):
         """运行任务或停止任务"""
         task_manager = TaskProjectManager()
@@ -308,12 +307,14 @@ class UIController:
 
             # 添加设置按钮
             set_button = QPushButton('设置')
+            set_button.setObjectName('runButton')
             set_button.clicked.connect(
                 lambda _, selected_task=task: self.set_task_parameters(selected_task, program, project,splitter))
             task_row.addWidget(set_button)
 
             # 添加发送任务按钮
             execute_button = QPushButton('执行')
+            execute_button.setObjectName('runButton')
             execute_button.clicked.connect(
                 lambda _, selected_task=task: self.send_single_task(selected_task, project))
             task_row.addWidget(execute_button)
@@ -324,6 +325,8 @@ class UIController:
         button_container = QHBoxLayout()
         select_all_button = QPushButton("全选")
         start_button = QPushButton("开始")
+        select_all_button.setObjectName("infoButton")
+        start_button.setObjectName("infoButton")
         button_container.addWidget(select_all_button)
         button_container.addWidget(start_button)
         def toggle_select_all():
