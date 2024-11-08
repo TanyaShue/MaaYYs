@@ -4,7 +4,7 @@ import atexit
 from PySide6.QtWidgets import QApplication
 from src.ui.main_window import MainWindow
 from src.utils.logger import setup_logging
-from utils.common import load_config
+from src.utils.common import load_config
 
 # 保存子进程的全局变量
 exe_process = None

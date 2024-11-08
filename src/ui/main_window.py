@@ -15,7 +15,7 @@ class MainWindow(QWidget):
         self.controller = UIController()
 
         self.setWindowTitle('MaaYYs')
-        self.setMinimumSize(1000, 720)
+        self.setMinimumSize(1440, 720)
 
         # 加载样式
         self.controller.load_styles(self)
@@ -24,9 +24,7 @@ class MainWindow(QWidget):
         self.main_layout = QHBoxLayout(self)
 
         # 左侧导航栏
-        self.left_nav_layout = QVBoxLayout()
-        self.init_navigation_bar()
-        self.main_layout.addLayout(self.left_nav_layout)
+        self.left_nav_widget = self.init_navigation_bar()
 
         # 右侧布局
         self.right_layout = QVBoxLayout()
@@ -41,24 +39,27 @@ class MainWindow(QWidget):
 
     def init_navigation_bar(self):
         """初始化导航栏"""
+        left_nav_widget = QWidget()
+        left_nav_layout = QVBoxLayout(left_nav_widget)
         # 创建导航按钮
         nav_buttons = ['首页'] + [program.program_name for program in self.controller.programs.programs]
         for btn_text in nav_buttons:
             button = QPushButton(btn_text)
             button.setFixedHeight(50)
-            button.setFixedWidth(50)
             button.setObjectName('navButton')
-            self.left_nav_layout.addWidget(button)
+            left_nav_layout.addWidget(button)
 
-        self.left_nav_layout.addStretch()
+        left_nav_layout.addStretch()
 
         # 添加刷新按钮
         refresh_button = QPushButton('刷新资源')
         refresh_button.setFixedHeight(50)
-        refresh_button.setFixedWidth(50)
         refresh_button.setObjectName('refreshButton')
         refresh_button.clicked.connect(self.controller.refresh_resources)
-        self.left_nav_layout.addWidget(refresh_button)
+        left_nav_layout.addWidget(refresh_button)
+
+        self.main_layout.addWidget(left_nav_widget)
+        return left_nav_widget
 
     def init_home_page(self):
         """初始化首页"""
