@@ -13,6 +13,8 @@ from typing import Dict, Union, Optional, List
 from requests.adapters import HTTPAdapter
 from abc import ABC, abstractmethod
 
+from utils.singleton import singleton
+
 # 配置日志
 logging.basicConfig(
     level=logging.INFO,
@@ -118,7 +120,7 @@ class HTTPTaskMonitor(TaskMonitor):
                 logger.error(f"Monitor error: {e}")
                 time.sleep(1)
 
-
+@singleton
 class TaskProjectManager:
     """增强版任务项目管理器"""
 
@@ -165,10 +167,11 @@ class TaskProjectManager:
             TaskCreationError: 创建失败时抛出
         """
         project_key = _get_project_key(project)
-
+        print("------------")
         with self.lock:
+            print(self.processes)
             if project_key in self.processes:
-                logger.warning(f"Tasker process {project_key} already exists.")
+                print(f"Tasker process {project_key} already exists.")
                 return True
 
             try:
@@ -187,6 +190,7 @@ class TaskProjectManager:
                         "project": project
                     }
                     logger.info(f"Successfully created Tasker {project_key}")
+                    print(self.processes)
                     return True
 
                 raise TaskCreationError(f"Failed to create Tasker: {response.text}")

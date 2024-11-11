@@ -101,7 +101,7 @@ class TaskerThread(threading.Thread):
             for project_run_task in task.project_run_tasks:
                 logging.info(f"Executing {project_run_task.task_name} for {self.project_key}")
                 self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
-                logging.info(f"Task {project_run_task.task_name} posted for {self.project_key}")
+                logging.info(f"Task {project_run_task.task_name} Executed for {self.project_key}")
 
     def send_task(self, task):
         """将任务添加到队列"""

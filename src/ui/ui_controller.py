@@ -300,13 +300,14 @@ class UIController:
             try:
                 project_key = project.project_name  # 使用项目名称作为键
 
-                # current_state = self.is_connected.get(project_key, ConnectionState.DISCONNECTED)
                 task_manager = TaskProjectManager()
                 tasker_status = task_manager.create_tasker_process(project)
                 project_run_data = project.get_project_all_run_data(self.programs)
                 filtered_tasks = [task for task in project_run_data.project_run_tasks
                                   if task.task_name == selected_task.task_name]
                 single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
+
+                print(f"tasker_status:  {tasker_status}")
                 # 更新连接状态
                 self.is_connected[
                     project_key] = ConnectionState.CONNECTED if tasker_status else ConnectionState.DISCONNECTED
@@ -317,9 +318,6 @@ class UIController:
                 else:
                     self.update_status_item(status_item, button, ConnectionState.DISCONNECTED)
 
-                if not filtered_tasks:
-                    logging.error(f"任务 {selected_task.task_name} 不在选中任务中")
-                    return
             except Exception as e:
                 logging.error(f"任务 {selected_task.task_name} 发送失败: {e}")
 
