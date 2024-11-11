@@ -181,7 +181,6 @@ class MainWindow(QWidget):
         # 创建 QSplitter 实例
         details_container_splitter = QSplitter(Qt.Horizontal)
         details_container_splitter.setFixedWidth(container_width)
-        print(container_width)
 
         for title in ["任务选择", "任务设置"]:
             group = QGroupBox(title)

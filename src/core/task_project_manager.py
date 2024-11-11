@@ -47,10 +47,13 @@ class TaskProjectManager:
                 response = requests.post(url, json=data)
                 if response.status_code == 200:
                     logging.info(f"Tasker {project_key} created successfully.")
-                else:
+                    return True
+                elif response.status_code == 500:
                     logging.error(f"Failed to create Tasker {project_key}: {response.text}")
+                    return False
             except requests.RequestException as e:
                 logging.error(f"Error in creating Tasker: {e}")
+                return False
 
     def send_task(self, project: Project, task: Union[str, ProjectRunData]):
         """
@@ -82,6 +85,7 @@ class TaskProjectManager:
                 response = requests.post(url, json=data)
                 if response.status_code == 200:
                     logging.info(f"Task sent to {project_key} successfully.")
+                    logging.info(f"Task: {task}")
                 else:
                     logging.error(f"Failed to send task to {project_key}: {response.text}")
             except requests.RequestException as e:

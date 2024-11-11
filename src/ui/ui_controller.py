@@ -1,9 +1,13 @@
 import os
 import logging
+from enum import Enum
+
 from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool, QEvent, QObject
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QTableWidgetItem, QWidget, QHBoxLayout, QPushButton, QHeaderView, QCheckBox, QLabel, \
     QLineEdit, QComboBox, QFormLayout
 
+from main_service import tasker_status
 from src.core.task_project_manager import TaskProjectManager
 from src.utils.config_programs import *
 from src.utils.config_projects import *
@@ -19,6 +23,13 @@ class TaskWorker(QRunnable):
     @Slot()
     def run(self):
         self.fn(*self.args, **self.kwargs)
+
+class ConnectionState(Enum):
+    DISCONNECTED = 0  # 未连接
+    CONNECTING = 1  # 正在连接
+    CONNECTED = 2  # 已连接
+    DISCONNECTING = 3  # 正在断开
+
 
 
 class UIController:
@@ -100,6 +111,8 @@ class UIController:
             # 初始化状态为“未连接”
             status_item = QTableWidgetItem('未连接')
             table.setItem(row, 4, status_item)
+            status_item.setIcon(QIcon("assets/icons/svg_icons/icon_info.svg"))  # 设置图标
+
 
             # 添加操作按钮
             container_widget = self._create_operation_buttons(project, splitter, info_title, status_item)
@@ -188,56 +201,98 @@ class UIController:
         task_manager = TaskProjectManager()
         project_key = project.project_name  # 使用项目名称作为键
 
-        if not self.is_connected.get(project_key, False):
+        current_state = self.is_connected.get(project_key, ConnectionState.DISCONNECTED)
+
+        if current_state == ConnectionState.DISCONNECTED:
             # 当前未连接，尝试连接
-            button.setText("正在连接")
-            button.setEnabled(False)
-            status_item.setText("正在连接")
+            self.update_status_item(status_item, button, ConnectionState.CONNECTING)
+            self.is_connected[project_key] = ConnectionState.CONNECTING
 
             def execute_task():
                 try:
-                    task_manager.create_tasker_process(project)
+                    tasker_status = task_manager.create_tasker_process(project)
                     project_run_data = project.get_project_run_data(self.programs)
-                    task_manager.send_task(project, project_run_data)
 
-                    # 设置连接状态
-                    self.is_connected[project_key] = True
-                    button.setText("停止运行")
-                    button.setEnabled(True)
-                    status_item.setText("正在运行")
+                    # 更新连接状态
+                    self.is_connected[
+                        project_key] = ConnectionState.CONNECTED if tasker_status else ConnectionState.DISCONNECTED
+                    if self.is_connected[project_key] == ConnectionState.CONNECTED:
+                        self.update_status_item(status_item, button, ConnectionState.CONNECTED)
+                        task_manager.send_task(project, project_run_data)
+                        logging.info("任务已成功发送")
+                    else:
+                        self.update_status_item(status_item, button, ConnectionState.DISCONNECTED)
                 except Exception as e:
                     logging.error(f"任务启动失败: {e}")
-                    button.setText("连接失败")
-                    button.setEnabled(True)
-                    status_item.setText("连接失败")
+                    self.is_connected[project_key] = ConnectionState.DISCONNECTED
+                    self.update_status_item(status_item, button, ConnectionState.DISCONNECTED)
 
             task = TaskWorker(execute_task)
             self.thread_pool.start(task)
 
-        else:
+        elif current_state == ConnectionState.CONNECTED:
             # 当前已连接，尝试断开
             project_run_data = "STOP"
-            status_item.setText("断开中")
-            button.setText("正在断开")
-            button.setEnabled(False)
+            self.update_status_item(status_item, button, ConnectionState.DISCONNECTING)
+            self.is_connected[project_key] = ConnectionState.DISCONNECTING
 
             def stop_task():
                 try:
                     task_manager.send_task(project, project_run_data)
 
                     # 重置连接状态
-                    self.is_connected[project_key] = False
+                    self.is_connected[project_key] = ConnectionState.DISCONNECTED
+                    self.update_status_item(status_item, button, ConnectionState.DISCONNECTED)
+                except Exception as e:
+                    logging.error(f"任务停止失败: {e}")
+                    self.is_connected[project_key] = ConnectionState.CONNECTED
+                    self.update_status_item(status_item, button, ConnectionState.CONNECTED)
+
+            stop_task_worker = TaskWorker(stop_task)
+            self.thread_pool.start(stop_task_worker)
+
+        elif current_state == ConnectionState.CONNECTED:
+            # 当前已连接，尝试断开
+            project_run_data = "STOP"
+            status_item.setText("断开中")
+            button.setText("正在断开")
+            button.setEnabled(False)
+            self.is_connected[project_key] = ConnectionState.DISCONNECTING
+
+            def stop_task():
+                try:
+                    task_manager.send_task(project, project_run_data)
+
+                    # 重置连接状态
+                    self.is_connected[project_key] = ConnectionState.DISCONNECTED
                     button.setText("一键启动")
                     button.setEnabled(True)
                     status_item.setText("已断开")
                 except Exception as e:
                     logging.error(f"任务停止失败: {e}")
+                    self.is_connected[project_key] = ConnectionState.CONNECTED
                     button.setText("断开失败")
                     button.setEnabled(True)
                     status_item.setText("断开失败")
 
             stop_task_worker = TaskWorker(stop_task)
             self.thread_pool.start(stop_task_worker)
+
+    def update_status_item(self, status_item, button, state):
+        """根据连接状态更新状态显示和按钮文本，并添加状态图标"""
+        status_map = {
+            ConnectionState.DISCONNECTED: ("已断开", "一键启动", True, "assets/icons/svg_icons/icon_info.svg"),
+            ConnectionState.CONNECTING: ("正在连接", "正在连接", False, "assets/icons/svg_icons/icon_busy.svg"),
+            ConnectionState.CONNECTED: ("正在运行", "一键停止", True, "assets/icons/svg_icons/icon_online.svg"),
+            ConnectionState.DISCONNECTING: ("断开中", "正在断开", False, "assets/icons/svg_icons/icon_info.svg"),
+        }
+        status_text, button_text, enabled, icon_path = status_map.get(state, ("未知状态", "未知", False, ""))
+
+        # 更新状态文本和按钮
+        status_item.setText(status_text)
+        status_item.setIcon(QIcon(icon_path))  # 设置图标
+        button.setText(button_text)
+        button.setEnabled(enabled)
 
     def send_single_task(self, selected_task, project):
         """发送单个任务"""

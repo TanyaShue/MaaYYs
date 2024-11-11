@@ -35,7 +35,7 @@ class TaskerThread(threading.Thread):
 
     def run(self):
         try:
-            self._initialize_resources()
+            # self._initialize_resources()
             self._run_task_processing_loop()
         except Exception as e:
             logging.error(f"Error initializing tasker for {self.project_key}: {e}")
@@ -58,8 +58,8 @@ class TaskerThread(threading.Thread):
 
         if not self.tasker.inited:
             raise RuntimeError("Failed to initialize MAA tasker.")
-
         logging.info(f"Tasker initialized for {self.project_key}")
+        return True
 
     def _register_custom_modules(self):
         # 注册自定义的 action ： AutoBattle, ChallengeDungeonBoss,
@@ -111,26 +111,25 @@ class TaskerThread(threading.Thread):
         """终止线程和所有子进程"""
         logging.info(f"Terminating Tasker {self.project_key}...")
 
+        self._cleanup()
         self.stop_event.set()  # 停止事件
         self.task_queue.queue.clear()  # 清空任务队列，防止残留任务导致内存泄漏
 
         if self.tasker:
             self.tasker.post_stop()
 
-        _terminate_adb_processes()
-        self._cleanup()
-
-
+        # _terminate_adb_processes()
 
     def _cleanup(self):
         logging.info(f"Cleaning up resources for {self.project_key}")
         try:
-            if self.tasker:
-                self.tasker.terminate()
             if self.controller:
                 self.controller.__del__()
             if self.resource:
                 self.resource.__del__()
+            if self.tasker:
+                self.tasker.__del__()
+            self.terminate()
         except Exception as e:
             logging.error(f"Error during cleanup for {self.project_key}: {e}")
         logging.info(f"Tasker thread for {self.project_key} has been terminated.")

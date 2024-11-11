@@ -15,12 +15,19 @@ def get_tasker(project_key: str):
     """查找并返回 tasker，如果不存在则返回 None"""
     return taskers.get(project_key)
 
-def create_new_tasker(project_key: str, project: Project) -> TaskerThread:
+def create_new_tasker(project_key: str, project: Project) -> bool:
     """创建新的 TaskerThread 并启动"""
     tasker = TaskerThread(project_key, project)
+    try:
+        if tasker._initialize_resources():
+            logging.info(f"--------------  Tasker initialized for {project_key}  --------------")
+    except Exception as e:
+        logging.error(f"-----------------  Error initializing resources for {project_key}: {e  }-----------------------------")
+        # tasker.terminate()
+        return False
     tasker.start()
     taskers[project_key] = tasker
-    return tasker
+    return True
 
 @app.route('/create_tasker', methods=['POST'])
 def create_tasker():
@@ -36,9 +43,9 @@ def create_tasker():
     with lock:
         if get_tasker(project_key):
             return jsonify({"status": "error", "message": "Tasker already exists."}), 400
-        create_new_tasker(project_key, project)
-
-    return jsonify({"status": "success", "message": f"Tasker {project_key} created."}), 200
+        if create_new_tasker(project_key, project):
+            return jsonify({"status": "success", "message": f"Tasker {project_key} created."}), 200
+    return jsonify({"status": "error", "message": "Failed to create tasker."}), 500
 
 @app.route('/send_task', methods=['POST'])
 def send_task():
