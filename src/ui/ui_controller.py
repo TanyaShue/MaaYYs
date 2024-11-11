@@ -138,7 +138,7 @@ class UIController:
         # 添加查看详情按钮
         button_info = QPushButton('查看详情')
         button_info.setObjectName('infoButton')
-        button_info.clicked.connect(lambda _, p=project,s=status_item: self.show_device_details(p, splitter, info_title,s))
+        button_info.clicked.connect(lambda _, p=project,s=status_item: self.show_device_details(p, splitter, info_title,s,button_task_connect))
         layout.addWidget(button_info)
 
         container_widget.setLayout(layout)
@@ -293,34 +293,40 @@ class UIController:
         button.setText(button_text)
         button.setEnabled(enabled)
 
-    def send_single_task(self, selected_task, project):
+    def send_single_task(self, selected_task, project,status_item,button):
         """发送单个任务"""
 
         def execute_task():
             try:
+                project_key = project.project_name  # 使用项目名称作为键
+
+                # current_state = self.is_connected.get(project_key, ConnectionState.DISCONNECTED)
                 task_manager = TaskProjectManager()
                 tasker_status = task_manager.create_tasker_process(project)
-                project_run_data = project.get_project_run_data(self.programs)
-
                 project_run_data = project.get_project_all_run_data(self.programs)
                 filtered_tasks = [task for task in project_run_data.project_run_tasks
                                   if task.task_name == selected_task.task_name]
+                single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
+                # 更新连接状态
+                self.is_connected[
+                    project_key] = ConnectionState.CONNECTED if tasker_status else ConnectionState.DISCONNECTED
+                if self.is_connected[project_key] == ConnectionState.CONNECTED:
+                    self.update_status_item(status_item, button, ConnectionState.CONNECTED)
+                    task_manager.send_task(project, single_task_run_data)
+                    logging.info("任务已成功发送")
+                else:
+                    self.update_status_item(status_item, button, ConnectionState.DISCONNECTED)
 
                 if not filtered_tasks:
                     logging.error(f"任务 {selected_task.task_name} 不在选中任务中")
                     return
-
-                single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
-                task_manager.send_task(project, single_task_run_data)
-                logging.info(f"任务 {selected_task.task_name} 已成功发送")
-
             except Exception as e:
                 logging.error(f"任务 {selected_task.task_name} 发送失败: {e}")
 
         task = TaskWorker(execute_task)
         self.thread_pool.start(task)
 
-    def show_device_details(self, project, splitter, info_title, status_item):
+    def show_device_details(self, project, splitter, info_title, status_item,button):
         # 更新详细信息标题
         info_title.setText(f"详细信息: {project.project_name}")
 
@@ -361,7 +367,7 @@ class UIController:
             # 添加执行任务按钮
             execute_button = QPushButton('执行')
             execute_button.setObjectName('runButton')
-            execute_button.clicked.connect(lambda _, selected_task=task: self.send_single_task(selected_task, project))
+            execute_button.clicked.connect(lambda _, selected_task=task: self.send_single_task(selected_task, project,status_item,button))
             task_row.addWidget(execute_button)
 
             splitter.widget(0).layout().addLayout(task_row)
