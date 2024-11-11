@@ -28,15 +28,21 @@ class TaskerThread(threading.Thread):
         self.project_key = project_key
         self.project = project
         self.task_queue = queue.Queue()
+        self.command_queue = queue.Queue()
         self.stop_event = threading.Event()
         self.tasker = None
         self.controller = None
         self.resource = None
+        self.command_thread = None
 
     def run(self):
         try:
+            # 开启控制线程
+            self.command_thread = threading.Thread(target=self._run_task_processing_loop, args=(self.command_queue, ))
+            self.command_thread.start()
             # self._initialize_resources()
-            self._run_task_processing_loop()
+            # 开启主线程任务
+            self._run_task_processing_loop(self.task_queue)
         except Exception as e:
             logging.error(f"Error initializing tasker for {self.project_key}: {e}")
         finally:
@@ -77,10 +83,10 @@ class TaskerThread(threading.Thread):
         # 注册自定义的 recognizer:MyRecognizer
         self.resource.register_custom_recognition("MyRecognizer", MyRecognizer())
 
-    def _run_task_processing_loop(self):
+    def _run_task_processing_loop(self, task_queue):
         while not self.stop_event.is_set():
             try:
-                task = self.task_queue.get(timeout=1)
+                task = task_queue.get(timeout=1)
                 self._process_task(task)
             except queue.Empty:
                 continue
@@ -105,31 +111,35 @@ class TaskerThread(threading.Thread):
 
     def send_task(self, task):
         """将任务添加到队列"""
-        self.task_queue.put(task)
+        if isinstance(task, str):
+            self.command_queue.put(task)
+        else:
+            self.task_queue.put(task)
 
     def terminate(self):
         """终止线程和所有子进程"""
         logging.info(f"Terminating Tasker {self.project_key}...")
 
-        self._cleanup()
         self.stop_event.set()  # 停止事件
         self.task_queue.queue.clear()  # 清空任务队列，防止残留任务导致内存泄漏
 
-        if self.tasker:
-            self.tasker.post_stop()
+        # 清理控制线程
+        self.command_queue.queue.clear()
+        self.command_thread.join()
+        self._cleanup()
 
         # _terminate_adb_processes()
 
     def _cleanup(self):
         logging.info(f"Cleaning up resources for {self.project_key}")
         try:
+            if self.tasker:
+                self.tasker.post_stop()
+                self.tasker.__del__()
             if self.controller:
                 self.controller.__del__()
             if self.resource:
                 self.resource.__del__()
-            if self.tasker:
-                self.tasker.__del__()
-            self.terminate()
         except Exception as e:
             logging.error(f"Error during cleanup for {self.project_key}: {e}")
         logging.info(f"Tasker thread for {self.project_key} has been terminated.")
