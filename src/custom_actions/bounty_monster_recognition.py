@@ -25,8 +25,6 @@ class BountyMonsterRecognition(CustomAction):
                     # 识别该目标的完成度是否已满
                     img = context.tasker.controller.post_screencap().wait().get()
                     detail_recognition = context.run_recognition("悬赏封印_识别完成度", img,{"悬赏封印_识别完成度":{"roi": "悬赏封印_识别妖怪","roi_offset":[-10,-10,30,30]}})
-                    print(detail_recognition.all_results)
-
                     if detail_recognition:
                         print("该目标的完成度已满")
                         attempts += 1  # 增加重试计数
