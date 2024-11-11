@@ -167,11 +167,9 @@ class TaskProjectManager:
             TaskCreationError: 创建失败时抛出
         """
         project_key = _get_project_key(project)
-        print("------------")
         with self.lock:
-            print(self.processes)
             if project_key in self.processes:
-                print(f"Tasker process {project_key} already exists.")
+                logger.warning(f"Tasker process {project_key} already exists.")
                 return True
 
             try:
@@ -190,7 +188,6 @@ class TaskProjectManager:
                         "project": project
                     }
                     logger.info(f"Successfully created Tasker {project_key}")
-                    print(self.processes)
                     return True
 
                 raise TaskCreationError(f"Failed to create Tasker: {response.text}")
