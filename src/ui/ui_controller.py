@@ -307,7 +307,6 @@ class UIController:
                                   if task.task_name == selected_task.task_name]
                 single_task_run_data = ProjectRunData(project_run_tasks=filtered_tasks)
 
-                print(f"tasker_status:  {tasker_status}")
                 # 更新连接状态
                 self.is_connected[
                     project_key] = ConnectionState.CONNECTED if tasker_status else ConnectionState.DISCONNECTED
