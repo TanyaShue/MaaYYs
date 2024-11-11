@@ -22,7 +22,7 @@ class TaskProjectManager:
         self.processes: Dict[str, Dict] = {}
         self.lock = threading.Lock()
 
-    def create_tasker_process(self, project: Project ):
+    def create_tasker_process(self, project: Project) -> bool:
         """
         用于和服务端交互，server_host 和 server_port 是服务器的 HTTP 接口地址，而非 adb_config。
         """
@@ -30,7 +30,7 @@ class TaskProjectManager:
         with self.lock:
             if project_key in self.processes:
                 logging.warning(f"Tasker进程 {project_key} 已经存在。")
-                return
+                return True
 
             # 存储服务器信息
             self.processes[project_key] = {"server_host": self.server_host, "server_port": self.server_port}

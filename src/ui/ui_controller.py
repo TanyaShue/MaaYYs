@@ -29,8 +29,7 @@ class ConnectionState(Enum):
     CONNECTING = 1  # 正在连接
     CONNECTED = 2  # 已连接
     DISCONNECTING = 3  # 正在断开
-
-
+    RUNNING = 4 #正在运行
 
 class UIController:
     def __init__(self):
@@ -300,7 +299,8 @@ class UIController:
         def execute_task():
             try:
                 task_manager = TaskProjectManager()
-                task_manager.create_tasker_process(project)
+                tasker_status = task_manager.create_tasker_process(project)
+                project_run_data = project.get_project_run_data(self.programs)
 
                 project_run_data = project.get_project_all_run_data(self.programs)
                 filtered_tasks = [task for task in project_run_data.project_run_tasks
