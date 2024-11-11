@@ -51,8 +51,7 @@ def create_tasker():
 def send_task():
     data = request.json
     project_key = data.get("project_key")
-    task_data = data.get("task").get("task")
-
+    task_data = data.get("task")
     if not project_key or not task_data:
         return jsonify({"status": "error", "message": "Invalid parameters."}), 400
 
