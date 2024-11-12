@@ -43,15 +43,17 @@ class BountyMonsterRecognition(CustomAction):
                     if detail_not_found:
                         time.sleep(1)
                         context.run_pipeline("悬赏封印_关闭线索界面")
+                        attempts += 1  # 增加重试计数
+                        continue
                     else:
                         context.run_pipeline("悬赏_开始识别探索")
                         attempts = 0  # 重置重试计数，继续下一个识别
                         break
-            else:
-                # 未识别到妖怪，滑动继续寻找
+
                 print("未识别到妖怪，滑动继续寻找")
                 context.run_pipeline("识别探索目标_向上滑动")
-                attempts += 1  # 增加重试计数
+
+            attempts += 1  # 增加重试计数
 
             print(f"尝试次数 attempts=: {attempts}")
         print("识别悬赏妖怪结束")
