@@ -13,7 +13,7 @@ from typing import Dict, Union, Optional, List
 from requests.adapters import HTTPAdapter
 from abc import ABC, abstractmethod
 
-from utils.singleton import singleton
+from src.utils.singleton import singleton
 
 # 配置日志
 logging.basicConfig(
@@ -211,7 +211,7 @@ class TaskProjectManager:
         if project_key not in self.processes:
             raise TaskExecutionError(f"Tasker process {project_key} not found")
 
-        task_data = task.to_json() if isinstance(task, ProjectRunData) else {"task": task}
+        task_data = task.to_json() if isinstance(task, ProjectRunData) else task
 
         try:
             response = self._make_request(
