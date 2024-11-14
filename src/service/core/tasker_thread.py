@@ -53,7 +53,7 @@ class TaskerThread(threading.Thread):
         self.resource = Resource()
         self.resource.post_path(os.path.join(current_dir, "assets", "resource", "base")).wait()
 
-        self.controller = AdbController(adb_path=self.project.adb_config.adb_path, address=self.project.adb_config.adb_address)
+        self.controller = AdbController(adb_path=self.project.adb_config.adb_path, address=self.project.adb_config.address)
         self.controller.post_connection().wait()
 
         self.tasker = Tasker()

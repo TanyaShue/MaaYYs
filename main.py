@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import os
 import subprocess
 import atexit
@@ -11,16 +12,16 @@ exe_process = None
 
 # 读取配置文件中的DEBUG状态
 
-DEBUG = load_config().get("DEBUG", True)  # 将DEBUG设置为配置文件中的值
+start_script = load_config().get("start_script", True)  # 将DEBUG设置为配置文件中的值
 
 def start_exe_or_script():
     """根据DEBUG状态启动指定的 exe 或 py 文件"""
     global exe_process
     current_dir = os.getcwd()
 
-    if DEBUG:
+    if start_script:
         # 调整为你想要运行的 Python 脚本
-        script_path = os.path.join(current_dir, "start_service.py")  # 替换为你的脚本路径
+        script_path = os.path.join(current_dir, "main_service.py")  # 替换为你的脚本路径
         exe_process = subprocess.Popen(['python', script_path])  # 使用 python 解释器运行脚本
         print(f"Started script: {script_path}")
     else:

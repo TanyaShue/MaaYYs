@@ -292,11 +292,8 @@ class TaskProjectManager:
             if response.status_code != 200 :
                 raise Exception("API返回错误状态")
             devices_data = response.json().get("data").get("devices")
-            print("devices_data", devices_data)
-
             if isinstance(devices_data, str):
                 devices_data = json.loads(devices_data)
-
             devices = []
             for device_data in devices_data:
                 # 确保将大整数转换为字符串
@@ -312,7 +309,6 @@ class TaskProjectManager:
                     config=device_data['config']
                 )
                 devices.append(device)
-            print("devices", devices)
             return devices
         except Exception as e:
             print(e)
@@ -364,3 +360,5 @@ class TaskProjectManager:
     def __exit__(self, exc_type, exc_val, exc_tb):
         """上下文管理器出口"""
         self.stop_monitoring()
+
+

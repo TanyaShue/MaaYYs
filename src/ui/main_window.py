@@ -7,7 +7,7 @@ from PySide6.QtWidgets import (
 
 from .containers.add_project_dialog import AddProjectDialog
 from .ui_controller import UIController
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QThreadPool
 from PySide6.QtGui import QFont, QIcon
 from .containers import LogContainer, NavigationBar
 
@@ -15,7 +15,8 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.nav_bar = None
-        self.controller = UIController()
+        self.thread_pool = QThreadPool()
+        self.controller = UIController(self.thread_pool)
 
         self.setWindowTitle('MaaYYs')
         self.setMinimumSize(1280, 720)
@@ -36,7 +37,7 @@ class MainWindow(QWidget):
         self.log_container = self.init_log_container()
 
         # 添加项目对话框
-        self.add_project_dialog = AddProjectDialog(self,"http://localhost:54345/api/v1/get_all_devices")
+        self.add_project_dialog = AddProjectDialog(self.thread_pool,self)
         self.add_project_dialog.projectAdded.connect(self.on_project_added)
 
         # 设置布局
@@ -50,7 +51,9 @@ class MainWindow(QWidget):
         self.add_project_dialog.show_dialog()
 
     def on_project_added(self, name, program, selected):
-        print(f"添加了新项目: {name}, 程序: {program}, 选择: {selected}")
+        print(f"添加了新项目: {name}, 程序: {program}, 选择: {selected.get('name', '')}")
+        self.controller.add_project(name, program, selected)
+        self.controller.load_device_table(self.table, self.details_container_splitter, self.info_title)
 
     def init_navigation_bar(self):
         """初始化导航栏"""
@@ -130,8 +133,8 @@ class MainWindow(QWidget):
         log_button.clicked.connect(self.toggle_log_container)  # 连接点击事件
 
         # 创建“日志”按钮并设置大小
-        add_project_button = QPushButton("添加项目")
-        add_project_button.setIcon(QIcon('assets/icons/svg_icons/icon_add_user.svg.svg'))
+        add_project_button = QPushButton()
+        add_project_button.setIcon(QIcon('assets/icons/svg_icons/icon_add_user.svg'))
         add_project_button.setFixedWidth(100)
         add_project_button.setFixedHeight(30)  # 调整为适合的高度
         add_project_button.setObjectName('infoButton')

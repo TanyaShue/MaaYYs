@@ -54,7 +54,6 @@ def create_tasker():
 @handle_exceptions
 def send_task():
     """发送任务路由"""
-    print(request.json)
     data = request.json
     project_key = data.get("project_key")
     task_data = data.get("task", {})

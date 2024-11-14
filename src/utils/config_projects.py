@@ -5,13 +5,13 @@ from typing import List, Dict, Union
 @dataclass
 class AdbConfig:
     adb_path: str
-    adb_address: str
+    address: str
 
     @staticmethod
     def from_json(data: Dict):
         return AdbConfig(
             adb_path=data.get('adb_path', ''),
-            adb_address=data.get('adb_address', '')
+            address=data.get('address', '')
         )
 
     def to_json(self):

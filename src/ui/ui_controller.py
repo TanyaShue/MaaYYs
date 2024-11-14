@@ -31,8 +31,8 @@ class ConnectionState(Enum):
     RUNNING = 4 #正在运行
 
 class UIController:
-    def __init__(self):
-        self.thread_pool = QThreadPool()
+    def __init__(self, thread_pool):
+        self.thread_pool = thread_pool
         current_dir = os.getcwd()
 
         # 配置文件路径
@@ -40,10 +40,20 @@ class UIController:
         self.programs_json_path = os.path.join(current_dir, "assets", "config", "programs.json")
         self.styles_json_path = os.path.join(current_dir, "assets", "config", "style.qss")
 
+        # 检查并创建空 JSON 文件（如果不存在）
+        self._ensure_file_exists(self.projects_json_path)
+        self._ensure_file_exists(self.programs_json_path)
+
         # 加载配置
         self.projects = ProjectsJson.load_from_file(self.projects_json_path)
         self.programs = ProgramsJson.load_from_file(self.programs_json_path)
         self.is_connected = {}
+
+    def _ensure_file_exists(self, file_path):
+        """检查文件是否存在，不存在则创建一个空 JSON 文件"""
+        if not os.path.exists(file_path):
+            with open(file_path, 'w') as file:
+                json.dump({}, file)  # 写入空 JSON 对象
 
     def load_styles(self, widget):
         """加载样式文件"""
@@ -80,6 +90,8 @@ class UIController:
         self.projects.save_to_file(self.projects_json_path)
 
     def load_device_table(self, table, splitter, info_title):
+        # 清空现有表格数据
+        table.setRowCount(0)
         table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
         """加载设备表格数据"""
@@ -102,8 +114,8 @@ class UIController:
             table.setItem(row, 2, adb_address_item)
 
             # 添加ADB端口
-            adb_port_item = QTableWidgetItem(project.adb_config.adb_address)
-            adb_port_item.setData(Qt.UserRole, ('adb_address', project))
+            adb_port_item = QTableWidgetItem(project.adb_config.address)
+            adb_port_item.setData(Qt.UserRole, ('address', project))
             table.setItem(row, 3, adb_port_item)
 
             # 初始化状态为“未连接”
@@ -528,3 +540,7 @@ class UIController:
                     if sub_layout is not None:
                         self.clear_layout(sub_layout)  # 递归调用
         layout.update()  # 更新布局
+
+    def add_project(self, p, pram_name, selected_device):
+        self.projects.projects.append(Project(project_name=p, program_name=pram_name,adb_config=AdbConfig.from_json(selected_device), selected_tasks=[], option=None))
+        self.projects.save_to_file(self.projects_json_path)
