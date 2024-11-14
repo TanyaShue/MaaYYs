@@ -1,15 +1,19 @@
 # coding=utf-8
+import json
 import logging
 import threading
 import time
+from pathlib import WindowsPath
+
 import requests
+from PySide6.QtWidgets import QMessageBox
 
 from urllib3 import Retry
 from src.utils.config_projects import Project, ProjectRunData
 from src.utils.common import load_config
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, Union, Optional, List
+from typing import Dict, Union, Optional, List, Any
 from requests.adapters import HTTPAdapter
 from abc import ABC, abstractmethod
 
@@ -40,9 +44,26 @@ class TaskConfig:
     """任务配置数据类"""
     retry_attempts: int = 3
     retry_delay: int = 1
-    timeout: int = 30
+    timeout: int = 300
     keep_alive: bool = True
+@dataclass
+class AdbDevice:
+    name: str
+    adb_path: WindowsPath
+    address: str
+    screencap_methods: int
+    input_methods: int
+    config: Dict[str, Any]
 
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'adb_path': str(self.adb_path),
+            'address': self.address,
+            'screencap_methods': str(self.screencap_methods),  # 转换为字符串
+            'input_methods': str(self.input_methods),  # 转换为字符串
+            'config': self.config
+        }
 
 class TaskError(Exception):
     """任务相关异常基类"""
@@ -122,7 +143,7 @@ class HTTPTaskMonitor(TaskMonitor):
 
 @singleton
 class TaskProjectManager:
-    """增强版任务项目管理器"""
+    """任务项目管理器"""
 
     def __init__(self, config: Optional[TaskConfig] = None):
         """
@@ -212,7 +233,7 @@ class TaskProjectManager:
             raise TaskExecutionError(f"Tasker process {project_key} not found")
 
         task_data = task.to_json() if isinstance(task, ProjectRunData) else task
-
+        print("task_data", task_data)
         try:
             response = self._make_request(
                 "send_task",
@@ -221,7 +242,6 @@ class TaskProjectManager:
                     "task": task_data
                 }
             )
-
             if response.status_code != 200:
                 raise TaskExecutionError(f"Failed to send task: {response.text}")
 
@@ -261,9 +281,48 @@ class TaskProjectManager:
         except requests.RequestException as e:
             raise TaskCommunicationError(f"Communication error: {e}")
 
+    def get_adb_devices(self) -> list[AdbDevice]:
+        """从API获取ADB设备数据"""
+        try:
+
+            response = self._make_request(
+                "get_all_devices",
+                {}
+            )
+            if response.status_code != 200 :
+                raise Exception("API返回错误状态")
+            devices_data = response.json().get("data").get("devices")
+            print("devices_data", devices_data)
+
+            if isinstance(devices_data, str):
+                devices_data = json.loads(devices_data)
+
+            devices = []
+            for device_data in devices_data:
+                # 确保将大整数转换为字符串
+                device_data['screencap_methods'] = str(device_data['screencap_methods'])
+                device_data['input_methods'] = str(device_data['input_methods'])
+
+                device = AdbDevice(
+                    name=device_data['name'],
+                    adb_path=WindowsPath(device_data['adb_path']),
+                    address=device_data['address'],
+                    screencap_methods=int(device_data['screencap_methods']),
+                    input_methods=int(device_data['input_methods']),
+                    config=device_data['config']
+                )
+                devices.append(device)
+            print("devices", devices)
+            return devices
+        except Exception as e:
+            print(e)
+        except requests.RequestException as e:
+            raise TaskCommunicationError(f"Communication error: {e}")
+
+
     def _make_request(self, endpoint: str, data: Dict) -> requests.Response:
         """发送HTTP请求的通用方法"""
-        url = f"http://{self.monitor.host}:{self.monitor.port}/{endpoint}"
+        url = f"http://{self.monitor.host}:{self.monitor.port}/api/v1/{endpoint}"
         return self.session.post(
             url,
             json={"action": endpoint, **data},
@@ -286,6 +345,9 @@ class TaskProjectManager:
             }
             for key, info in self.processes.items()
         ]
+
+
+
 
     def start_monitoring(self):
         """启动监控"""

@@ -3,18 +3,16 @@ import queue
 import threading
 import logging
 
-import psutil
-
-from src.custom_actions.bounty_monster_recognition import BountyMonsterRecognition
-from src.custom_actions.auto_battle import AutoBattle
-from src.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
-from src.custom_actions.human_touch import HumanTouch
-from src.custom_actions.loop_action import LoopAction
-from src.custom_actions.random_swipe import RandomSwipe
-from src.custom_actions.random_touch import RandomTouch
-from src.custom_actions.switch_soul import SwitchSoul
-from src.custom_actions.task_list import TaskList
-from src.custom_recognition.my_recognizer import MyRecognizer
+from src.service.custom_actions.bounty_monster_recognition import BountyMonsterRecognition
+from src.service.custom_actions.auto_battle import AutoBattle
+from src.service.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
+from src.service.custom_actions.human_touch import HumanTouch
+from src.service.custom_actions.loop_action import LoopAction
+from src.service.custom_actions.random_swipe import RandomSwipe
+from src.service.custom_actions.random_touch import RandomTouch
+from src.service.custom_actions.switch_soul import SwitchSoul
+from src.service.custom_actions.task_list import TaskList
+from src.service.custom_recognition.my_recognizer import MyRecognizer
 from src.utils.config_projects import Project, ProjectRunData
 from maa.controller import AdbController
 from maa.resource import Resource
@@ -144,18 +142,4 @@ class TaskerThread(threading.Thread):
             logging.error(f"Error during cleanup for {self.project_key}: {e}")
         logging.info(f"Tasker thread for {self.project_key} has been terminated.")
 
-def _terminate_adb_processes():
-    """查找并终止所有名为 adb.exe 的进程"""
-    for process in psutil.process_iter(['pid', 'name']):
-        if process.info['name'] == 'adb.exe':
-            try:
-                logging.info(f"Terminating adb.exe process [PID: {process.info['pid']}]...")
-                process.terminate()
-                process.wait(timeout=5)
-            except psutil.NoSuchProcess:
-                logging.warning(f"Process [PID: {process.info['pid']}] already terminated.")
-            except psutil.TimeoutExpired:
-                logging.warning(f"Process [PID: {process.info['pid']}] did not terminate, killing it...")
-                process.kill()
-            except Exception as e:
-                logging.error(f"Failed to terminate process [PID: {process.info['pid']}]: {e}")
+

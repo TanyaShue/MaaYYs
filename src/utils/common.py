@@ -1,8 +1,12 @@
 import difflib
+import logging
 import os
 import json
 
 from typing import Tuple, List
+
+import psutil
+
 
 def load_config():
     """加载 app_config.json 配置文件"""
@@ -10,6 +14,22 @@ def load_config():
     with open(config_path, 'r') as config_file:
         config = json.load(config_file)
     return config  # 如果配置文件中没有DEBUG字段，则默认True
+
+def _terminate_adb_processes():
+    """查找并终止所有名为 adb.exe 的进程"""
+    for process in psutil.process_iter(['pid', 'name']):
+        if process.info['name'] == 'adb.exe':
+            try:
+                logging.info(f"Terminating adb.exe process [PID: {process.info['pid']}]...")
+                process.terminate()
+                process.wait(timeout=5)
+            except psutil.NoSuchProcess:
+                logging.warning(f"Process [PID: {process.info['pid']}] already terminated.")
+            except psutil.TimeoutExpired:
+                logging.warning(f"Process [PID: {process.info['pid']}] did not terminate, killing it...")
+                process.kill()
+            except Exception as e:
+                logging.error(f"Failed to terminate process [PID: {process.info['pid']}]: {e}")
 
 def is_inside(big_rect: Tuple[int, int, int, int], small_rect: Tuple[int, int, int, int]) -> bool:
     """
@@ -43,31 +63,6 @@ def check_if_rect_is_inside_any(rectangles: List[Tuple[int, int, int, int]], rec
         if is_inside(big_rect, rect_to_check):
             return True, big_rect
     return False, None
-
-
-
-# def load_qa_from_excel_v2(file_path):
-#     """
-#     优化版本：从Excel文件中加载问题和答案，将其存储在字典中，处理多个答案的情况。
-#     """
-#     # 读取Excel文件，假设数据在第一列且没有列名，并过滤掉空行
-#     df = pd.read_excel(file_path, header=None, usecols=[0]).dropna()
-#
-#     # 使用 rsplit 以最后一个 '-' 为分割点，生成题目和答案列
-#     df[['题目', '答案']] = df[0].str.rsplit('-', n=1, expand=True)
-#
-#     # 过滤掉题目或答案为空的行
-#     df = df.dropna(subset=['题目', '答案'])
-#
-#     # 创建字典，并处理多答案情况
-#     qa_dict = {}
-#     for q, a in zip(df['题目'], df['答案']):
-#         if pd.notna(q) and pd.notna(a):
-#             # 将答案按 '/' 分割，形成一个答案列表
-#             answers = [ans.strip() for ans in a.split('/') if ans.strip()]
-#             qa_dict[q] = answers
-#
-#     return qa_dict
 
 def find_best_answer(question, qa_dict):
     """

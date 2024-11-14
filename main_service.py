@@ -4,7 +4,8 @@ from flask import Flask, request, jsonify
 from threading import Lock, Event
 from typing import Dict
 from src.utils.config_projects import Project, ProjectRunData
-from src.core.tasker_thread import TaskerThread, _terminate_adb_processes
+from service.core.tasker_thread import TaskerThread
+from src.utils.common import _terminate_adb_processes
 
 app = Flask(__name__)
 taskers: Dict[str, TaskerThread] = {}

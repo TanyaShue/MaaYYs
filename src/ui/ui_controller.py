@@ -7,8 +7,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QTableWidgetItem, QWidget, QHBoxLayout, QPushButton, QHeaderView, QCheckBox, QLabel, \
     QLineEdit, QComboBox, QFormLayout
 
-from main_service import tasker_status
-from src.core.task_project_manager import TaskProjectManager
+from src.ui.core.task_project_manager import TaskProjectManager
 from src.utils.config_programs import *
 from src.utils.config_projects import *
 
@@ -283,7 +282,7 @@ class UIController:
             ConnectionState.DISCONNECTED: ("已断开", "一键启动", True, "assets/icons/svg_icons/icon_info.svg"),
             ConnectionState.CONNECTING: ("正在连接", "正在连接", False, "assets/icons/svg_icons/icon_busy.svg"),
             ConnectionState.CONNECTED: ("正在运行", "一键停止", True, "assets/icons/svg_icons/icon_online.svg"),
-            ConnectionState.DISCONNECTING: ("断开中", "正在断开", False, "assets/icons/svg_icons/icon_info.svg"),
+            ConnectionState.DISCONNECTING: ("断开中", "正在断开", False, "assets/icons/svg_icons/icon_invisible.svg"),
         }
         status_text, button_text, enabled, icon_path = status_map.get(state, ("未知状态", "未知", False, ""))
 

@@ -4,6 +4,8 @@ from PySide6.QtWidgets import (
     QSplitter, QHeaderView, QWidget, QVBoxLayout, QPushButton, QLabel,
      QSizePolicy
 )
+
+from .containers.add_project_dialog import AddProjectDialog
 from .ui_controller import UIController
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont, QIcon
@@ -33,12 +35,22 @@ class MainWindow(QWidget):
         # 右侧日志容器
         self.log_container = self.init_log_container()
 
+        # 添加项目对话框
+        self.add_project_dialog = AddProjectDialog(self,"http://localhost:54345/api/v1/get_all_devices")
+        self.add_project_dialog.projectAdded.connect(self.on_project_added)
+
         # 设置布局
         self.main_layout.addWidget(self.left_nav_widget)
         self.main_layout.addWidget(self.center_content)
         self.main_layout.addWidget(self.log_container)
 
         self.setLayout(self.main_layout)
+
+    def show_add_project_dialog(self):
+        self.add_project_dialog.show_dialog()
+
+    def on_project_added(self, name, program, selected):
+        print(f"添加了新项目: {name}, 程序: {program}, 选择: {selected}")
 
     def init_navigation_bar(self):
         """初始化导航栏"""
@@ -117,14 +129,23 @@ class MainWindow(QWidget):
         log_button.setObjectName('infoButton')
         log_button.clicked.connect(self.toggle_log_container)  # 连接点击事件
 
+        # 创建“日志”按钮并设置大小
+        add_project_button = QPushButton("添加项目")
+        add_project_button.setIcon(QIcon('assets/icons/svg_icons/icon_add_user.svg.svg'))
+        add_project_button.setFixedWidth(100)
+        add_project_button.setFixedHeight(30)  # 调整为适合的高度
+        add_project_button.setObjectName('infoButton')
+        add_project_button.clicked.connect(self.show_add_project_dialog)  # 连接点击事件
+
+
         # 添加占位符，使标题居中
         title_layout.addStretch()
         title_layout.addWidget(title)
         title_layout.addStretch()
 
         # 将“日志”按钮放在最右侧
+        title_layout.addWidget(add_project_button)
         title_layout.addWidget(log_button)
-
         return title_container
 
     def _create_table_section(self):
