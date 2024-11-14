@@ -1,15 +1,15 @@
 # -*- coding: UTF-8 -*-
+import os
+
 from PySide6.QtCore import Qt, Signal, QObject, QRunnable, Slot
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QLabel,
-    QLineEdit, QComboBox, QPushButton, QWidget,
-    QFrame, QMessageBox
+    QDialog
 )
-import json
 from typing import Optional, Dict, Any
 
-from ui.core.task_project_manager import AdbDevice, TaskProjectManager, TaskCommunicationError
+from ui.core.task_project_manager import AdbDevice, TaskProjectManager
+from utils.config_programs import ProgramsJson
 
 
 class WorkerSignals(QObject):
@@ -38,17 +38,25 @@ class AddProjectDialog(QDialog):
 
     def __init__(self, thread_pool,parent=None,):
         super().__init__(parent)
+        current_dir = os.getcwd()
+
+        self.programs_json_path = os.path.join(current_dir, "assets", "config", "programs.json")
+
+        # 加载配置
+        self.programs = ProgramsJson.load_from_file(self.programs_json_path)
         self.thread_pool = thread_pool
         self.setWindowTitle("添加项目")
         self.setMinimumWidth(400)
+
         self.setup_ui()
 
     def setup_ui(self):
+        # 创建主布局
         main_layout = QVBoxLayout(self)
         main_layout.setSpacing(15)
         main_layout.setContentsMargins(20, 20, 20, 20)
 
-        # 项目名称输入
+        # 项目名称输入布局
         name_layout = QHBoxLayout()
         name_label = QLabel("项目名称:")
         self.name_input = QLineEdit()
@@ -57,30 +65,35 @@ class AddProjectDialog(QDialog):
         name_layout.addWidget(self.name_input)
         main_layout.addLayout(name_layout)
 
-        # 游戏程序输入
+        # 游戏选择布局
         program_layout = QHBoxLayout()
         program_label = QLabel("游戏:")
-        self.program_input = QLineEdit()
-        self.program_input.setPlaceholderText("请输入游戏名称")
+        self.program_box = QComboBox()
+        self.program_box.setMinimumWidth(200)
+        self.program_box.addItems([p.program_name for p in self.programs.programs])
         program_layout.addWidget(program_label)
-        program_layout.addWidget(self.program_input)
+        program_layout.addWidget(self.program_box)
         main_layout.addLayout(program_layout)
 
-        # 下拉框和按钮组
+        # 下拉框和按钮组布局
         combo_layout = QHBoxLayout()
         self.combo_box = QComboBox()
         self.combo_box.setMinimumWidth(200)
         combo_layout.addWidget(self.combo_box)
 
+        # 刷新按钮
         self.refresh_btn = QPushButton()
         self.refresh_btn.setIcon(QIcon('assets/icons/svg_icons/icon_search.svg'))
         self.refresh_btn.setFixedSize(30, 30)
+        self.refresh_btn.setToolTip("刷新项目")
         self.refresh_btn.clicked.connect(self.refresh_items)
         combo_layout.addWidget(self.refresh_btn)
 
+        # 编辑按钮
         self.edit_btn = QPushButton()
         self.edit_btn.setIcon(QIcon('assets/icons/svg_icons/icon_more_options.svg'))
         self.edit_btn.setFixedSize(30, 30)
+        self.edit_btn.setToolTip("编辑项目")
         self.edit_btn.clicked.connect(self.edit_items)
         combo_layout.addWidget(self.edit_btn)
 
@@ -88,6 +101,8 @@ class AddProjectDialog(QDialog):
 
         # 分隔线
         line = QFrame()
+        line.setFrameShape(QFrame.HLine)
+        line.setFrameShadow(QFrame.Sunken)
         main_layout.addWidget(line)
 
         # 添加按钮
@@ -148,6 +163,17 @@ class AddProjectDialog(QDialog):
                 print(f"获取选中设备数据时出错: {str(e)}")
         return None
 
+    def get_selected_program(self):
+        """获取当前选中的项目名称"""
+        current_index = self.program_box.currentIndex()
+        if current_index >= 0:
+            try:
+                program_name = self.program_box.itemText(current_index)
+                return program_name
+            except Exception as e:
+                print(f"获取选中项目名称时出错: {str(e)}")
+        return None
+
     def edit_items(self):
         """显示当前选中设备的详细信息"""
         current_index = self.combo_box.currentIndex()
@@ -167,7 +193,7 @@ class AddProjectDialog(QDialog):
     def add_project(self):
         """添加项目"""
         name = self.name_input.text()
-        program = self.program_input.text()
+        program = self.get_selected_program()
         selected_device = self.get_selected_device()
         if not name or not program:
             QMessageBox.warning(self, "警告", "请填写项目名称和程序路径")
@@ -182,7 +208,7 @@ class AddProjectDialog(QDialog):
     def show_dialog(self):
         """显示对话框"""
         self.name_input.clear()
-        self.program_input.clear()
+        # self.program_input.clear()
         self.show()
 
 from PySide6.QtWidgets import (

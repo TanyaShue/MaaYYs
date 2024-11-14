@@ -29,7 +29,7 @@ class LogContainer(QWidget):
 
         # 日志区域
         self.log_area = QTextEdit()
-        self.log_area.setPlaceholderText("日志输出...")
+        self.log_area.setPlaceholderText("这个人很赖,这个功能还没写....")
         self.log_area.setReadOnly(True)
         main_layout.addWidget(self.log_area)
 
