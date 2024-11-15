@@ -21,6 +21,8 @@ def create_app(config: ServerConfig = None) -> Flask:
         level=getattr(logging, config.log_level),
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)  # 仅显示错误级别的日志
 
     # 注册蓝图
     app.register_blueprint(tasker_bp, url_prefix='/api/v1')

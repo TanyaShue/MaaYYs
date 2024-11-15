@@ -7,8 +7,9 @@ from PySide6.QtWidgets import (
 )
 
 from .containers.add_project_dialog import AddProjectDialog
+from .core.task_project_manager import TaskProjectManager, _get_project_key
 from .ui_controller import UIController
-from PySide6.QtCore import Qt, QThreadPool
+from PySide6.QtCore import Qt, QThreadPool, QTimer
 from PySide6.QtGui import QFont, QIcon
 from .containers import LogContainer, NavigationBar
 
@@ -18,6 +19,7 @@ class MainWindow(QWidget):
         self.nav_bar = None
         self.thread_pool = QThreadPool()
         self.controller = UIController(self.thread_pool)
+        self.task_project_manager = TaskProjectManager()
 
         self.setWindowTitle('MaaYYs')
         self.setMinimumSize(1280, 720)
@@ -36,6 +38,9 @@ class MainWindow(QWidget):
 
         # 右侧日志容器
         self.log_container = self.init_log_container()
+        # 启动日志线程
+        self._start_log_thread()
+        self.task_project_manager.start_monitoring()
 
         # 添加项目对话框
         self.add_project_dialog = AddProjectDialog(self.thread_pool,self)
@@ -47,6 +52,30 @@ class MainWindow(QWidget):
         self.main_layout.addWidget(self.log_container)
 
         self.setLayout(self.main_layout)
+
+    def _start_log_thread(self):
+        """启动日志线程，每秒获取一次日志"""
+        self.log_timer = QTimer(self)  # 使用 QTimer 每秒触发
+        self.log_timer.timeout.connect(self._fetch_and_print_log)
+        self.log_timer.start(1000)  # 每 1000 毫秒触发
+
+    def _fetch_and_print_log(self):
+        """获取并打印日志，同时将已处理的日志条目删除"""
+        try:
+            log_data = self.task_project_manager.get_log()  # 获取日志数据
+            for project_key, logs in list(log_data.items()):  # 使用 list 包装 keys 以支持在迭代时修改原始字典
+                print(f"项目 {project_key} 的日志:")
+                for project in self.controller.projects.projects:
+                    if project_key == _get_project_key(project):  # 匹配项目
+                        print(f"项目名称：{project.project_name}")
+                        for log_entry in logs:
+                            # 添加日志到日志容器
+                            self.log_container.add_log(project.project_name, log_entry)
+
+                        # 删除已处理的日志
+                        del log_data[project_key]
+        except Exception as e:
+            print(f"日志处理出错: {e}")
 
     def show_add_project_dialog(self):
         self.add_project_dialog.show_dialog()
@@ -101,12 +130,12 @@ class MainWindow(QWidget):
     def init_log_container(self):
         """初始化右侧日志容器"""
         self.log_container = LogContainer()
-        self.log_container.setFixedWidth(0)  # 初始化为隐藏状态
         return self.log_container
 
     def toggle_log_container(self):
         """切换日志容器的显示和隐藏"""
-        self.log_container.toggle_log_container()  # 使用 LogContainer 中的动画效果
+        print("切换日志容器的显示和隐藏")
+        self.log_container.toggle_visibility()  # 使用 LogContainer 中的动画效果
 
     def _create_title_section(self):
         """创建标题部分"""

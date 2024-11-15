@@ -3,6 +3,7 @@ import queue
 import threading
 import logging
 
+from src.service.custom_actions.task_log import TaskLog
 from src.service.custom_actions.bounty_monster_recognition import BountyMonsterRecognition
 from src.service.custom_actions.auto_battle import AutoBattle
 from src.service.custom_actions.challenge_dungeon_boss import ChallengeDungeonBoss
@@ -46,7 +47,7 @@ class TaskerThread(threading.Thread):
         finally:
             self._cleanup()
 
-    def _initialize_resources(self):
+    def _initialize_resources(self) ->Tasker:
         current_dir = os.getcwd()
         Toolkit.init_option(os.path.join(current_dir, "assets"))
 
@@ -63,11 +64,11 @@ class TaskerThread(threading.Thread):
         if not self.tasker.inited:
             raise RuntimeError("Failed to initialize MAA tasker.")
         logging.info(f"Tasker initialized for {self.project_key}")
-        return True
+        return self.controller._handle
 
     def _register_custom_modules(self):
         # 注册自定义的 action ： AutoBattle, ChallengeDungeonBoss,
-        # HumanTouch,LoopAction,RandomSwipe,RandomTouch,SwitchSoul,TaskList,BountyMonsterRecognition
+        # HumanTouch,LoopAction,RandomSwipe,RandomTouch,SwitchSoul,TaskList,BountyMonsterRecognition,TaskLog
         self.resource.register_custom_action("AutoBattle", AutoBattle())
         self.resource.register_custom_action("ChallengeDungeonBoss",ChallengeDungeonBoss())
         self.resource.register_custom_action("HumanTouch",HumanTouch())
@@ -77,6 +78,7 @@ class TaskerThread(threading.Thread):
         self.resource.register_custom_action("SwitchSoul",SwitchSoul())
         self.resource.register_custom_action("TaskList",TaskList())
         self.resource.register_custom_action("BountyMonsterRecognition",BountyMonsterRecognition())
+        self.resource.register_custom_action("TaskLog",TaskLog())
 
         # 注册自定义的 recognizer:MyRecognizer
         self.resource.register_custom_recognition("MyRecognizer", MyRecognizer())

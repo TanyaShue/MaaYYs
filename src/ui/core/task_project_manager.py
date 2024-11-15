@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 def _get_project_key(p: Project) -> str:
     """使用 adb_config 来唯一标识一个 project，但它不用于服务器通信"""
-    return f"{p.adb_config.adb_path}:{p.adb_config.adb_address}"
+    return f"{p.adb_config.adb_path}:{p.adb_config.address}"
 
 class TaskStatus(Enum):
     """任务状态枚举"""
@@ -97,10 +97,10 @@ class TaskMonitor(ABC):
         pass
 
     @abstractmethod
-    def get_status(self) -> Dict:
+    def get_log(self) -> Dict:
         pass
 
-
+@singleton
 class HTTPTaskMonitor(TaskMonitor):
     """基于HTTP的任务监控实现"""
 
@@ -109,6 +109,7 @@ class HTTPTaskMonitor(TaskMonitor):
         self.port = port
         self._running = False
         self._thread: Optional[threading.Thread] = None
+        self.log_queue = {}
 
     def start_monitoring(self):
         if not self._running:
@@ -122,8 +123,8 @@ class HTTPTaskMonitor(TaskMonitor):
         if self._thread:
             self._thread.join()
 
-    def get_status(self) -> Dict:
-        url = f"http://{self.host}:{self.port}/status"
+    def get_log(self) -> Dict:
+        url = f"http://{self.host}:{self.port}/api/v1/tasker_all_log"
         try:
             response = requests.get(url)
             return response.json()
@@ -134,12 +135,20 @@ class HTTPTaskMonitor(TaskMonitor):
     def _monitor_loop(self):
         while self._running:
             try:
-                status = self.get_status()
-                logger.info(f"Current status: {status}")
-                time.sleep(5)
+                # 获取新的日志
+                new_log = self.get_log().get("data", {}).get("log", {})
+                if new_log:
+                    for key, value in new_log.items():
+                        if key in self.log_queue:
+                            self.log_queue[key].extend(value)  # 追加日志
+                        else:
+                            self.log_queue[key] = value  # 新增日志
+                # print(f"当前日志队列: {self.log_queue}")
+                time.sleep(1)
             except Exception as e:
                 logger.error(f"Monitor error: {e}")
                 time.sleep(1)
+
 
 @singleton
 class TaskProjectManager:
@@ -356,5 +365,8 @@ class TaskProjectManager:
     def __exit__(self, exc_type, exc_val, exc_tb):
         """上下文管理器出口"""
         self.stop_monitoring()
+
+    def get_log(self):
+        return self.monitor.log_queue
 
 

@@ -5,6 +5,7 @@ from typing import Callable
 import logging
 
 from service.exceptions import TaskerValidationError, TaskerNotFoundError, TaskerError
+from service.tasker import TaskLogger
 from service.tasker_service_manager import TaskerServiceManager
 from utils.config_projects import Project
 
@@ -110,3 +111,28 @@ def get_all_devices():
         }
     })
 
+@tasker_bp.route('/tasker_loger/<project_key>', methods=['GET'])
+@handle_exceptions
+def get_tasker_loger(project_key: str):
+    """获取Tasker日志"""
+    log = tasker_service_manager(project_key)
+    return jsonify({
+        "status_code": 200,
+        "status": "success",
+        "data": {
+            "log": log
+        }
+    })
+@tasker_bp.route('/tasker_all_log', methods=['GET'])
+@handle_exceptions
+def get_tasker_all_loger():
+    """获取Tasker日志"""
+    log=TaskLogger().get_all_logs()
+    TaskLogger().clear_logs()
+    return jsonify({
+        "status_code": 200,
+        "status": "success",
+        "data": {
+            "log": log
+        }
+    })

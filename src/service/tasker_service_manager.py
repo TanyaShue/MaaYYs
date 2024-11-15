@@ -5,8 +5,10 @@ import threading
 from typing import Dict, Any
 from datetime import datetime
 
+from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
+from service.tasker import TaskLogger
 from src.utils.config_projects import Project, ProjectRunData
 from service.core.tasker_thread import TaskerThread
 
@@ -16,56 +18,51 @@ from utils.singleton import singleton
 
 logger = logging.getLogger(__name__)
 
+
 @singleton
 class TaskerServiceManager:
-    """Tasker管理服务"""
-
     def __init__(self):
-        self._taskers: Dict[str, TaskerThread] = {}
+        self._tasker_threads: Dict[str, TaskerThread] = {}
         self._states: Dict[str, TaskerState] = {}
         self._lock = threading.Lock()
+        self._taskers: Dict[str, Tasker] = {}
+        self._logger = TaskLogger()
 
     def create_tasker(self, project_key: str, project: Project) -> bool:
-        """
-        创建并初始化新的Tasker
-
-        Args:
-            project_key: Tasker唯一标识
-            project: 项目配置
-
-        Returns:
-            bool: 是否成功创建
-
-        Raises:
-            TaskerInitializationError: 初始化失败
-            TaskerValidationError: 参数验证失败
-        """
         if not project_key or not project:
             raise TaskerValidationError("Invalid project key or project data")
 
         with self._lock:
-            if project_key in self._taskers:
+            if project_key in self._tasker_threads:
                 raise TaskerError(f"Tasker {project_key} already exists")
 
             try:
-                tasker = TaskerThread(project_key, project)
-                if not tasker._initialize_resources():
+                tasker_thread = TaskerThread(project_key, project)
+                controller_handle = tasker_thread._initialize_resources()
+                if not controller_handle:
                     raise TaskerInitializationError(f"Failed to initialize resources for {project_key}")
 
-                tasker.start()
-                self._taskers[project_key] = tasker
+                # Initialize logger with tasker and project_key mapping
+                self._logger.init_logger(controller_handle, project_key)
+
+                tasker_thread.start()
+                self._tasker_threads[project_key] = tasker_thread
+                self._taskers[project_key] = controller_handle
                 self._states[project_key] = TaskerState(
                     status=TaskerStatus.RUNNING,
                     created_at=datetime.now(),
                     last_active=datetime.now()
                 )
 
-                logger.info(f"Tasker {project_key} created and initialized successfully")
+                self._logger.log(controller_handle, f"Tasker created and initialized successfully", "INFO")
+
                 return True
 
             except Exception as e:
-                logger.error(f"Failed to create tasker {project_key}: {e}")
-                raise TaskerInitializationError(str(e))
+                error_msg = f"Failed to create tasker: {str(e)}"
+                if controller_handle:
+                    self._logger.log(controller_handle, error_msg, "ERROR")
+                raise TaskerInitializationError(error_msg)
 
     def send_task(self, project_key: str, task_data: Any) -> None:
         """发送任务到指定Tasker"""
@@ -97,7 +94,7 @@ class TaskerServiceManager:
                 tasker.terminate()
                 tasker.join()
 
-                del self._taskers[project_key]
+                del self._tasker_threads[project_key]
                 del self._states[project_key]
 
                 logger.info(f"Tasker {project_key} terminated successfully")
@@ -114,7 +111,7 @@ class TaskerServiceManager:
 
     def _get_tasker(self, project_key: str) -> TaskerThread:
         """获取Tasker实例"""
-        tasker = self._taskers.get(project_key)
+        tasker = self._tasker_threads.get(project_key)
         if not tasker:
             raise TaskerNotFoundError(f"Tasker {project_key} not found")
         return tasker
@@ -123,7 +120,7 @@ class TaskerServiceManager:
         """终止所有Tasker"""
         logger.info("Terminating all taskers...")
         with self._lock:
-            for project_key in list(self._taskers.keys()):
+            for project_key in list(self._tasker_threads.keys()):
                 try:
                     self.terminate_tasker(project_key)
                 except Exception as e:
@@ -147,3 +144,7 @@ class TaskerServiceManager:
 
             return json.dumps(devices, indent=4)
 
+    def get_all_logs(self) -> str:
+        with self._lock:
+            logs = self._logger.get_all_logs()
+            return json.dumps(logs, indent=4)
