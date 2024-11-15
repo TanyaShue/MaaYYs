@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from PySide6.QtWidgets import (
     QHBoxLayout, QGroupBox,
      QTableWidget, QTextEdit,

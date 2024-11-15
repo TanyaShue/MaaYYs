@@ -315,7 +315,6 @@ class TaskProjectManager:
         except requests.RequestException as e:
             raise TaskCommunicationError(f"Communication error: {e}")
 
-
     def _make_request(self, endpoint: str, data: Dict) -> requests.Response:
         """发送HTTP请求的通用方法"""
         url = f"http://{self.monitor.host}:{self.monitor.port}/api/v1/{endpoint}"
@@ -341,9 +340,6 @@ class TaskProjectManager:
             }
             for key, info in self.processes.items()
         ]
-
-
-
 
     def start_monitoring(self):
         """启动监控"""
