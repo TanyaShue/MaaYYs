@@ -161,7 +161,7 @@ class UIController:
         header = table.horizontalHeader()
 
         # 设置各列的宽度比例
-        column_ratios = [0.10, 0.10, 0.35, 0.15, 0.10, 0.18]
+        column_ratios = [0.10, 0.10, 0.28, 0.15, 0.12, 0.23]
 
         # 设置表格的拉伸模式
         table.horizontalHeader().setStretchLastSection(False)
