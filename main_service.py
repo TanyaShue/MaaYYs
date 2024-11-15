@@ -6,7 +6,7 @@ import os
 from flask import Flask
 from src.service.api.routes import tasker_bp, tasker_service_manager
 from src.service.sercive_config import ServerConfig
-from utils.common import _terminate_adb_processes
+from src.utils.common import _terminate_adb_processes
 
 
 def create_app(config: ServerConfig = None) -> Flask:
