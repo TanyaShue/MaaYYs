@@ -20,7 +20,6 @@ class TaskLog(CustomAction):
         task_logger = TaskLogger()
         print("开始执行自定义动作：任务日志")
         task_logger.log(context.tasker.controller._handle,f"This is a log message , timestamp: {datetime.now()}.", "INFO")
-        print(task_logger.get_all_logs())
         return True
 
     def stop(self):

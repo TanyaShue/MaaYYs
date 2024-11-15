@@ -4,8 +4,8 @@ import logging
 import os
 
 from flask import Flask
-from service.api.routes import tasker_bp, tasker_service_manager
-from service.sercive_config import ServerConfig
+from src.service.api.routes import tasker_bp, tasker_service_manager
+from src.service.sercive_config import ServerConfig
 from utils.common import _terminate_adb_processes
 
 

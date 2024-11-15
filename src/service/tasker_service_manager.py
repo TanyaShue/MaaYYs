@@ -8,7 +8,7 @@ from datetime import datetime
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
-from service.tasker import TaskLogger
+from src.service.tasker import TaskLogger
 from src.utils.config_projects import Project, ProjectRunData
 from src.service.core.tasker_thread import TaskerThread
 
@@ -44,7 +44,6 @@ class TaskerServiceManager:
 
                 # Initialize logger with tasker and project_key mapping
                 self._logger.init_logger(controller_handle, project_key)
-
                 tasker_thread.start()
                 self._tasker_threads[project_key] = tasker_thread
                 self._taskers[project_key] = controller_handle

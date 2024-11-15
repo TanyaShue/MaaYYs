@@ -1,8 +1,10 @@
 # -*- coding: UTF-8 -*-
+import logging
+from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
-from typing import Optional, Any, Union
+from typing import Optional, Any, Union, List, Dict
 
 from src.utils.log_entry import LogEntry
 from src.utils.singleton import singleton
@@ -27,21 +29,11 @@ class TaskerState:
     current_task: Optional[Any] = None
 
 
-from collections import defaultdict
-from datetime import datetime
-from threading import Lock
-from typing import Dict, List, Optional, Any
-import logging
-
-
-
-
 @singleton
 class TaskLogger:
     def __init__(self):
         self.logs = defaultdict(list)  # project_key -> logs
         self._handle_to_project = {}  # tasker -> project_key mapping
-        self.lock = Lock()
         self._max_logs_per_project = 1000
 
     def init_logger(self, _handle: Any, project_key: str) -> None:
@@ -50,13 +42,10 @@ class TaskLogger:
         self._handle_to_project[_handle] = project_key
         if project_key not in self.logs:
             self.logs[project_key] = []
-        # print(self._handle_to_project)
 
     def log(self, _handle: Any, message: str, level: str = "INFO", task_id: Optional[str] = None) -> None:
         """Add a log entry using tasker object"""
         project_key = self._handle_to_project.get(_handle)
-        # print(self.tasker_to_project)
-        # print(f"Logging for tasker {_handle}, project key: {project_key}")
         if not project_key:
             logging.error(f"No project key found for tasker {_handle}")
             return
