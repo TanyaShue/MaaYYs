@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 from enum import Enum
 from typing import Optional, Any, Union
 
-from utils.log_entry import LogEntry
-from utils.singleton import singleton
+from src.utils.log_entry import LogEntry
+from src.utils.singleton import singleton
 
 
 class TaskerStatus(Enum):

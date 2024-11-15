@@ -2,10 +2,6 @@
 import os
 import json
 from dataclasses import dataclass
-from typing import Optional
-
-from main import start_exe_or_script
-
 
 @dataclass
 class ServerConfig:

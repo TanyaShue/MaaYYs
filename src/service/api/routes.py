@@ -4,10 +4,10 @@ from functools import wraps
 from typing import Callable
 import logging
 
-from service.exceptions import TaskerValidationError, TaskerNotFoundError, TaskerError
-from service.tasker import TaskLogger
-from service.tasker_service_manager import TaskerServiceManager
-from utils.config_projects import Project
+from src.service.exceptions import TaskerValidationError, TaskerNotFoundError, TaskerError
+from src.service.tasker import TaskLogger
+from src.service.tasker_service_manager import TaskerServiceManager
+from src.utils.config_projects import Project
 
 logger = logging.getLogger(__name__)
 tasker_bp = Blueprint('tasker', __name__)

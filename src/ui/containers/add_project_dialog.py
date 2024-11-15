@@ -8,8 +8,8 @@ from PySide6.QtWidgets import (
 )
 from typing import Optional, Dict, Any
 
-from ui.core.task_project_manager import AdbDevice, TaskProjectManager
-from utils.config_programs import ProgramsJson
+from src.ui.core.task_project_manager import AdbDevice, TaskProjectManager
+from src.utils.config_programs import ProgramsJson
 
 
 class WorkerSignals(QObject):

@@ -5,7 +5,7 @@ from maa.context import Context
 
 from maa.custom_action import CustomAction
 
-from service.tasker import TaskLogger
+from src.service.tasker import TaskLogger
 
 
 class TaskLog(CustomAction):

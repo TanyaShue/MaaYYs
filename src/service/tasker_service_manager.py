@@ -10,11 +10,11 @@ from maa.toolkit import Toolkit
 
 from service.tasker import TaskLogger
 from src.utils.config_projects import Project, ProjectRunData
-from service.core.tasker_thread import TaskerThread
+from src.service.core.tasker_thread import TaskerThread
 
 from src.service.exceptions import TaskerNotFoundError, TaskerError, TaskerInitializationError, TaskerValidationError
 from src.service.tasker import TaskerState, TaskerStatus
-from utils.singleton import singleton
+from src.utils.singleton import singleton
 
 logger = logging.getLogger(__name__)
 

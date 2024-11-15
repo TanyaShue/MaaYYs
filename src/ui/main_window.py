@@ -6,12 +6,12 @@ from PySide6.QtWidgets import (
      QSizePolicy
 )
 
-from .containers.add_project_dialog import AddProjectDialog
-from .core.task_project_manager import TaskProjectManager, _get_project_key
-from .ui_controller import UIController
+from src.ui.containers.add_project_dialog import AddProjectDialog
+from src.ui.core.task_project_manager import TaskProjectManager, _get_project_key
+from src.ui.ui_controller import UIController
 from PySide6.QtCore import Qt, QThreadPool, QTimer
 from PySide6.QtGui import QFont, QIcon
-from .containers import LogContainer, NavigationBar
+from src.ui.containers import LogContainer, NavigationBar
 
 class MainWindow(QWidget):
     def __init__(self):
