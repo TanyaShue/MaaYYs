@@ -4,7 +4,7 @@ docs/.vuepress/.temp
 # Prerequisites
 *.d
 *.pyc
-
+.nicegui
 
 # test
 
