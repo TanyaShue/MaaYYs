@@ -64,10 +64,10 @@ class MainWindow(QWidget):
         try:
             log_data = self.task_project_manager.get_log()  # 获取日志数据
             for project_key, logs in list(log_data.items()):  # 使用 list 包装 keys 以支持在迭代时修改原始字典
-                print(f"项目 {project_key} 的日志:")
+                # print(f"项目 {project_key} 的日志:")
                 for project in self.controller.projects.projects:
                     if project_key == _get_project_key(project):  # 匹配项目
-                        print(f"项目名称：{project.project_name}")
+                        # print(f"项目名称：{project.project_name}")
                         for log_entry in logs:
                             # 添加日志到日志容器
                             self.log_container.add_log(project.project_name, log_entry)

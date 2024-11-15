@@ -242,7 +242,7 @@ class TaskProjectManager:
             raise TaskExecutionError(f"Tasker process {project_key} not found")
 
         task_data = task.to_json() if isinstance(task, ProjectRunData) else task
-        print("task_data", task_data)
+        print("send task:", task_data)
         try:
             response = self._make_request(
                 "send_task",
