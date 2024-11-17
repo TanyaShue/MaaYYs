@@ -16,12 +16,14 @@ class BountyMonsterRecognition(CustomAction):
         attempts = 0  # 重试计数
 
         while attempts < 3:
-            context.run_pipeline("悬赏封印_识别宝箱")
             img = context.tasker.controller.post_screencap().wait().get()
             detail = context.run_recognition("悬赏封印_识别妖怪", img)
+            detail_1 = context.run_recognition("悬赏封印_识别挑战次数", img)
 
-            if detail:
+            if detail or detail_1:
                 for result in detail.filterd_results:
+                    context.run_pipeline("悬赏封印_识别宝箱")
+
                     # 识别该目标的完成度是否已满
                     img = context.tasker.controller.post_screencap().wait().get()
                     detail_recognition = context.run_recognition("悬赏封印_识别完成度", img,{"悬赏封印_识别完成度":{"roi": "悬赏封印_识别妖怪","roi_offset":[-10,-10,30,30]}})
