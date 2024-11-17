@@ -1,4 +1,5 @@
 import time
+import json
 
 from maa.context import Context
 from maa.custom_action import CustomAction
@@ -14,6 +15,11 @@ class ChallengeDungeonBoss(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
+
+        # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
+        json_data = json.loads(argv.custom_action_param)
+
+        print(f"haoran: get data {json_data}")
         print("开始执行自定义动作: 自动挑战地鬼")
         value=1
         image = context.tasker.controller.post_screencap().wait().get()
@@ -55,7 +61,7 @@ class ChallengeDungeonBoss(CustomAction):
                 "挑战地鬼": {"post_delay": 2000,"action": "Click", "target": [1109, 493, 102, 63]}})
             time.sleep(5)
             context.run_pipeline("自动挑战", {
-                "自动挑战": {"timeout": 100, "action": "Custom", "custom_action": "AutoBattle"}})
+                "自动挑战": {"timeout": 100, "action": "Custom", "custom_action": "AutoBattle", "custom_action_param": {"group_name" : json_data["group_name"], "team_name" : json_data["team_name"]}}})
 
             print("等待20秒后重新开始挑战")
             time.sleep(20)
