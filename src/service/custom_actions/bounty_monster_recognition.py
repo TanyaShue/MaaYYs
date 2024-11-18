@@ -30,7 +30,8 @@ class BountyMonsterRecognition(CustomAction):
                 if detail_1 and hasattr(detail_1, 'filterd_results'):
                     results.extend(detail_1.filterd_results)
 
-                if results:  # Ensure results are iterable
+                if results:
+                    print("识别到的妖怪数量:", results)
                     for result in results:
                         roi_source = "悬赏封印_识别妖怪" if detail else "悬赏封印_识别挑战次数"
 
@@ -38,12 +39,11 @@ class BountyMonsterRecognition(CustomAction):
                         detail_recognition = context.run_recognition(
                             "悬赏封印_识别完成度",
                             img,
-                            {"悬赏封印_识别完成度": {"roi": roi_source, "roi_offset": [-10, -10, 30, 30]}}
+                            {"悬赏封印_识别完成度": {"roi": result.box, "roi_offset": [-10, -10, 30, 30]}}
                         )
 
                         if detail_recognition:
                             print("该目标的完成度已满")
-                            attempts += 1  # Increment retry count
                             continue
 
                         # 随机点击识别到的妖怪位置
@@ -76,12 +76,13 @@ class BountyMonsterRecognition(CustomAction):
                             context.run_pipeline("悬赏_开始识别探索")
                             attempts = 0  # Reset retry count, continue to next recognition
                             break  # Exit current loop
+                    attempts += 1
 
                 else:
                     print("没有有效的结果进行处理")
-                    context.run_pipeline("识别探索目标_向上滑动")
             else:
                 print("未提供有效的 detail 或 detail_1")
+            context.run_pipeline("识别探索目标_向上滑动")
 
             attempts += 1  # Increment retry count
             print(f"尝试次数 attempts=: {attempts}")

@@ -302,8 +302,9 @@ class UIController:
         # 更新状态文本和按钮
         status_item.setText(status_text)
         status_item.setIcon(QIcon(icon_path))  # 设置图标
-        button.setText(button_text)
-        button.setEnabled(enabled)
+        if button:
+            button.setText(button_text)
+            button.setEnabled(enabled)
 
     def send_single_task(self, selected_task, project,status_item,button):
         """发送单个任务"""
@@ -467,7 +468,7 @@ class UIController:
         )
 
         layout.addRow(label, line_edit)
-        print(f"Input Option: name={sett.input.name}, default={default_value}")
+        # print(f"Input Option: name={sett.input.name}, default={default_value}")
 
     def _create_select_option(self, layout, project, project_option, sett, option_name):
         """创建 select 类型的参数设置控件"""

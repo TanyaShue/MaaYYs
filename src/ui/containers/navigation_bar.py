@@ -88,7 +88,7 @@ class NavigationBar(QWidget):
         return button
 
     def toggle_navigation(self):
-        target_width = 240 if not self.expanded else 64
+        target_width = 200 if not self.expanded else 64
         self.width_anim = QPropertyAnimation(self, b"minimumWidth")
         self.width_anim.setDuration(300)
         self.width_anim.setStartValue(self.width())
