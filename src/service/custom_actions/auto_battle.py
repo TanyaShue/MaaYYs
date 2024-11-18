@@ -24,10 +24,18 @@ class AutoBattle(CustomAction):
             for _ in range(1):
                 context.run_pipeline("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [39, 582, 113, 36],"start_roi": [39, 270, 120, 38],"delay": 200}}})
             
+            time.sleep(1)
             # 点击分组
             for count in range(1, 21):
-                if context.run_pipeline("点击分组", {"点击分组": {"timeout":100,"recognition": "OCR","action": "Click","expected": json_data["group_name"],"roi": [34, 241, 132, 440]}}):
+                img = context.tasker.controller.post_screencap().wait().get()
+                detail = context.run_recognition("点击分组", img, {"点击分组": {"timeout": 500, "recognition": "OCR", "expected" : json_data["group_name"], "roi" : [34, 241, 132, 440]}})
+                time.sleep(0.5)
+
+                if detail is not None:
+                    context.tasker.controller.post_click(random.randint(detail.box.x, detail.box.x + detail.box.h), random.randint(detail.box.y, detail.box.y + detail.box.w)).wait()
+                    print(f"切换到分组 {json_data['group_name']}")
                     break
+
                 if count >= 5:
                     context.run_pipeline("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [39, 582, 113, 36],"start_roi": [39, 270, 120, 38],"delay": 400}}})
                 else:
@@ -36,13 +44,21 @@ class AutoBattle(CustomAction):
                 print("点击分组失败")
             
 
+            time.sleep(0.5)
             print("开始执行自定义动作：点击队伍")
             # 点击队伍
             for count in range(1, 10):
-                if context.run_pipeline("点击队伍", {"点击队伍": {"timeout":100,"recognition": "OCR","action": "Click","expected": json_data["team_name"],"roi": [254, 235, 263, 355]}}):
-                    context.run_pipeline("点击出战", {"点击出战": {"timeout":100,"action": "Click","target": [352, 641, 144, 45]}})
-                    print("点击队伍成功")
+                img = context.tasker.controller.post_screencap().wait().get()
+                detail = context.run_recognition("点击队伍", img, {"点击队伍": {"timeout": 500, "recognition": "OCR", "expected" : json_data["team_name"], "roi" : [254, 235, 263, 355]}})
+                time.sleep(0.5)
+
+                if detail is not None:
+                    print(f"切换到队伍 {json_data['team_name']}")
+                    context.tasker.controller.post_click(random.randint(detail.box.x, detail.box.x + detail.box.h), random.randint(detail.box.y, detail.box.y + detail.box.w)).wait()
+                    time.sleep(0.5)
+                    context.tasker.controller.post_click(random.randint(359, 490), random.randint(647, 682)).wait()
                     break
+
                 if count >= 5:
                     context.run_pipeline("返回最上页分队", {"返回最上页分队": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [328, 484, 253, 103],"start_roi": [334, 235, 300, 90],"delay": 400}}})
                 else:
@@ -52,13 +68,12 @@ class AutoBattle(CustomAction):
                 return False
             
         
-        # 点击准备 开始战斗
-        x,y=random.randint(1125, 1236),random.randint(539, 634)
-        
-        print(f"随机点击准备按钮: {x},{y}")
-
-        context.tasker.controller.post_click(x,y).wait()
-        
+        # 点击准备 开始战斗，这里点击两次，防止队伍上场失败导致准备无效
+        for i in range(2):
+            x,y=random.randint(1125, 1236),random.randint(539, 634)
+            print(f"随机点击准备按钮: {x},{y}")
+            time.sleep(1)
+            context.tasker.controller.post_click(x,y).wait()
         
         return True
 
