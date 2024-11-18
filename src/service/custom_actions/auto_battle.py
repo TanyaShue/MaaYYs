@@ -68,13 +68,12 @@ class AutoBattle(CustomAction):
                 return False
             
         
-        # 点击准备 开始战斗
-        x,y=random.randint(1125, 1236),random.randint(539, 634)
-        
-        print(f"随机点击准备按钮: {x},{y}")
-        time.sleep(1)
-        context.tasker.controller.post_click(x,y).wait()
-        
+        # 点击准备 开始战斗，这里点击两次，防止队伍上场失败导致准备无效
+        for i in range(2):
+            x,y=random.randint(1125, 1236),random.randint(539, 634)
+            print(f"随机点击准备按钮: {x},{y}")
+            time.sleep(1)
+            context.tasker.controller.post_click(x,y).wait()
         
         return True
 
