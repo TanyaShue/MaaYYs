@@ -60,7 +60,7 @@ class MainWindow(QWidget):
         self.log_timer.start(1000)  # 每 1000 毫秒触发
 
     def _fetch_and_print_log(self):
-        """获取并打印日志，同时将已处理的日志条目删除"""
+        """同时将已处理的日志条目删除"""
         try:
             log_data = self.task_project_manager.get_log()  # 获取日志数据
             for project_key, logs in list(log_data.items()):  # 使用 list 包装 keys 以支持在迭代时修改原始字典
@@ -134,7 +134,6 @@ class MainWindow(QWidget):
 
     def toggle_log_container(self):
         """切换日志容器的显示和隐藏"""
-        print("切换日志容器的显示和隐藏")
         self.log_container.toggle_visibility()  # 使用 LogContainer 中的动画效果
 
     def _create_title_section(self):

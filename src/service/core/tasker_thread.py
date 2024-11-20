@@ -3,6 +3,7 @@ import queue
 import threading
 import logging
 
+from src.service.tasker import TaskLogger
 from src.service.custom_actions.task_log import TaskLog
 from src.service.custom_actions.bounty_monster_recognition import BountyMonsterRecognition
 from src.service.custom_actions.auto_battle import AutoBattle
@@ -94,7 +95,9 @@ class TaskerThread(threading.Thread):
                 logging.error(f"Error processing task for {self.project_key}: {e}")
 
     def _process_task(self, task):
+        task_logger = TaskLogger()
         if isinstance(task, str):
+
             if task == "TERMINATE":
                 self.terminate()
             elif task == "STOP":
@@ -106,7 +109,9 @@ class TaskerThread(threading.Thread):
         elif isinstance(task, ProjectRunData):
             for project_run_task in task.project_run_tasks:
                 logging.info(f"Executing {project_run_task.task_name} for {self.project_key}")
+                task_logger.log(self.controller._handle, f"开始执行任务: {project_run_task.task_name}")
                 self.tasker.post_pipeline(project_run_task.task_entry, project_run_task.pipeline_override).wait()
+                task_logger.log(self.controller._handle, f"任务: {project_run_task.task_name} 执行完成")
                 logging.info(f"Task {project_run_task.task_name} Executed for {self.project_key}")
 
     def send_task(self, task):
@@ -128,7 +133,6 @@ class TaskerThread(threading.Thread):
         self.command_thread.join()
         self._cleanup()
 
-        # _terminate_adb_processes()
 
     def _cleanup(self):
         logging.info(f"Cleaning up resources for {self.project_key}")

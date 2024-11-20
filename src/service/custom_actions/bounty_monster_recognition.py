@@ -19,11 +19,13 @@ class BountyMonsterRecognition(CustomAction):
         while attempts < 3:
             context.run_pipeline("悬赏封印_识别宝箱")
 
+            # 识别妖怪 ,以及完成度,避免单独识别文字时失败,导致无法识别
             img = context.tasker.controller.post_screencap().wait().get()
             detail = context.run_recognition("悬赏封印_识别妖怪", img)
             detail_1 = context.run_recognition("悬赏封印_识别挑战次数", img)
 
             if detail or detail_1:
+                # 整合识别结果
                 results = []
                 if detail and hasattr(detail, 'filterd_results'):
                     results.extend(detail.filterd_results)
@@ -31,10 +33,8 @@ class BountyMonsterRecognition(CustomAction):
                     results.extend(detail_1.filterd_results)
 
                 if results:
-                    print("识别到的妖怪数量:", results)
+                    print(f"{results}")
                     for result in results:
-                        roi_source = "悬赏封印_识别妖怪" if detail else "悬赏封印_识别挑战次数"
-
                         img = context.tasker.controller.post_screencap().wait().get()
                         detail_recognition = context.run_recognition(
                             "悬赏封印_识别完成度",
@@ -63,25 +63,23 @@ class BountyMonsterRecognition(CustomAction):
                             context.run_pipeline("悬赏封印_关闭线索界面")
                             continue
 
-                        # Check if no monsters were found
+                        # 识别该妖怪是否为未发现
                         img = context.tasker.controller.post_screencap().wait().get()
                         detail_not_found = context.run_recognition("识别未发现妖怪", img)
 
                         if detail_not_found:
                             time.sleep(1)
                             context.run_pipeline("悬赏封印_关闭线索界面")
-                            attempts += 1  # Increment retry count
                             continue
-                        else:
-                            context.run_pipeline("悬赏_开始识别探索")
-                            attempts = 0  # Reset retry count, continue to next recognition
-                            break  # Exit current loop
-                    attempts += 1
+                        context.run_pipeline("悬赏_开始识别探索")
+                        attempts = 0  #成功开始探索 则 重置尝试次数
+                        break  # 退出循环,进行下一次尝试
+                    # attempts += 1
 
                 else:
                     print("没有有效的结果进行处理")
             else:
-                print("未提供有效的 detail 或 detail_1")
+                print("未识别到妖怪")
             context.run_pipeline("识别探索目标_向上滑动")
 
             attempts += 1  # Increment retry count

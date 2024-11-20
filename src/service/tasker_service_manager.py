@@ -53,12 +53,12 @@ class TaskerServiceManager:
                     last_active=datetime.now()
                 )
 
-                self._logger.log(controller_handle, f"Tasker created and initialized successfully", "INFO")
+                self._logger.log(controller_handle, f"初始化成功", "INFO")
 
                 return True
 
             except Exception as e:
-                error_msg = f"Failed to create tasker: {str(e)}"
+                error_msg = f"初始化失败: {str(e)}"
                 if controller_handle:
                     self._logger.log(controller_handle, error_msg, "ERROR")
                 raise TaskerInitializationError(error_msg)

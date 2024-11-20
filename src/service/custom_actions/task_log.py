@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+import json
 from datetime import datetime
 
 from maa.context import Context
@@ -17,9 +18,13 @@ class TaskLog(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
+        param=json.loads(argv.custom_action_param)
+        message=param.get("message","")
+        level=param.get("level","INFO")
         task_logger = TaskLogger()
-        print("开始执行自定义动作：任务日志")
-        task_logger.log(context.tasker.controller._handle,f"This is a log message , timestamp: {datetime.now()}.", "INFO")
+        time_now = datetime.now().strftime("%H:%M:%S")
+        _handle=context.tasker.controller._handle
+        task_logger.log(_handle, f"{time_now}: {message}", level)
         return True
 
     def stop(self):

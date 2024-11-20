@@ -6,7 +6,6 @@ import time
 from pathlib import WindowsPath
 
 import requests
-from PySide6.QtWidgets import QMessageBox
 
 from urllib3 import Retry
 from src.utils.config_projects import Project, ProjectRunData
