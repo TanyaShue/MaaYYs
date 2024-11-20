@@ -4,6 +4,8 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
+from src.service.tasker import TaskLogger
+
 
 class TaskList(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
@@ -14,6 +16,7 @@ class TaskList(CustomAction):
         """
         print("开始执行自定义动作：任务列表")
         json_data = json.loads(argv.custom_action_param)
+        task_logger = TaskLogger()
 
         task_list = json_data.get("task_list", [])
 
@@ -25,7 +28,9 @@ class TaskList(CustomAction):
 
         for task in task_list:
             print(f"执行任务: {task}")
+            task_logger.log(context.tasker.controller._handle, f"执行任务: {task}", "INFO")
             context.run_pipeline(task)
+            task_logger.log(context.tasker.controller._handle, f"任务: {task} 执行完成", "INFO")
             print(f"任务 {task} 执行完成")
             # context.run_pipeline("返回庭院")
             time.sleep(2)
