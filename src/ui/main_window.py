@@ -75,7 +75,7 @@ class MainWindow(QWidget):
                         # 删除已处理的日志
                         del log_data[project_key]
         except Exception as e:
-            print(f"日志处理出错: {e}")
+            print(e)
 
     def show_add_project_dialog(self):
         self.add_project_dialog.show_dialog()
@@ -87,7 +87,7 @@ class MainWindow(QWidget):
 
     def init_navigation_bar(self):
         """初始化导航栏"""
-        self.nav_bar = NavigationBar()
+        self.nav_bar = NavigationBar(self.controller)
         self.main_layout.addWidget(self.nav_bar)
         return self.nav_bar
 

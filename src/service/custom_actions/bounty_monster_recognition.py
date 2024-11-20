@@ -27,10 +27,10 @@ class BountyMonsterRecognition(CustomAction):
             if detail or detail_1:
                 # 整合识别结果
                 results = []
-                if detail and hasattr(detail, 'filterd_results'):
-                    results.extend(detail.filterd_results)
-                if detail_1 and hasattr(detail_1, 'filterd_results'):
-                    results.extend(detail_1.filterd_results)
+                if detail and hasattr(detail, 'best_result'):
+                    results.append(detail.best_result)
+                if detail_1 and hasattr(detail_1, 'best_result'):
+                    results.append(detail_1.best_result)
 
                 if results:
                     print(f"{results}")

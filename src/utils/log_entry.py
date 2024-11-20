@@ -11,7 +11,7 @@ class LogEntry:
 
     def to_dict(self) -> dict:
         return {
-            "timestamp": self.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+            "time": datetime.now().strftime("%H:%M:%S"),
             "message": self.message,
             "level": self.level,
             "task_id": self.task_id

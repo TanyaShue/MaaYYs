@@ -22,9 +22,8 @@ class TaskLog(CustomAction):
         message=param.get("message","")
         level=param.get("level","INFO")
         task_logger = TaskLogger()
-        time_now = datetime.now().strftime("%H:%M:%S")
         _handle=context.tasker.controller._handle
-        task_logger.log(_handle, f"{time_now}: {message}", level)
+        task_logger.log(_handle, f"{message}", level)
         return True
 
     def stop(self):

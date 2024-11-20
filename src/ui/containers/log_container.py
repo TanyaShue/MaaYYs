@@ -40,13 +40,16 @@ class LogSubContainer(QWidget):
         # 设置固定总高度
         self.setFixedHeight(124)
 
-    def add_log(self, message):
-        formatted_message = message.get("message", "")
-        level = message.get("level", "INFO")
+    def add_log(self, _message):
+        message = _message.get("message", "")
+        level = _message.get("level", "INFO")
+        time = _message.get("time", datetime.now().strftime("%H:%M:%S"))
+        formatted_message = f"[{time}]: [{level}] {message}"  # 修正：直接使用 message
         self.log_text.append(formatted_message)
         self.log_text.verticalScrollBar().setValue(
             self.log_text.verticalScrollBar().maximum()
         )
+
 
 class LogContainer(QWidget):
     # 类级别的常量

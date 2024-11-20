@@ -21,11 +21,12 @@ class NavButton(QPushButton):
         super().setText(self._full_text if show else "")
 
 class NavigationBar(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, controller, parent=None):
         super().__init__(parent)
         self.setObjectName("NavigationBar")
         self.expanded = False
         self.setFixedWidth(64)
+        self.controller = controller
         self.setup_ui()
 
     def setup_ui(self):
@@ -59,8 +60,9 @@ class NavigationBar(QWidget):
         self.nav_layout.setContentsMargins(0, 10, 0, 10)
 
         self.add_nav_button("首页", "assets/icons/svg_icons/icon_home.svg")
-        for program in ["阴阳师"]:
-            self.add_nav_button(program, "assets/icons/svg_icons/icon_home.svg")
+        for program in self.controller.programs.programs:
+            print(program.program_name, program.program_icon)
+            self.add_nav_button(program.program_name, f"assets{program.program_icon}")
         self.nav_layout.addStretch()
         self.add_nav_button("刷新资源")
         self.add_nav_button("设置", "assets/icons/svg_icons/icon_settings.svg")

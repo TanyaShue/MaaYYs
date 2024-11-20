@@ -28,7 +28,7 @@ class AutoBattle(CustomAction):
             # 点击分组
             for count in range(1, 21):
                 img = context.tasker.controller.post_screencap().wait().get()
-                detail = context.run_recognition("点击分组", img, {"点击分组": {"timeout": 500, "recognition": "OCR", "expected" : json_data["group_name"], "roi" : [34, 241, 132, 440]}})
+                detail = context.run_recognition("点击分组", img, {"点击分组": {"timeout": 500, "post_delay": 1000,"recognition": "OCR", "expected" : json_data["group_name"], "roi" : [34, 241, 132, 440]}})
                 time.sleep(0.5)
 
                 if detail is not None:
@@ -37,9 +37,9 @@ class AutoBattle(CustomAction):
                     break
 
                 if count >= 5:
-                    context.run_pipeline("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [39, 582, 113, 36],"start_roi": [39, 270, 120, 38],"delay": 400}}})
+                    context.run_pipeline("返回最上页分组", {"返回最上页分组": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"end_roi": [39, 582, 113, 36],"start_roi": [39, 270, 120, 38],"delay": 400}}})
                 else:
-                    context.run_pipeline("下一页",{"下一页": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"start_roi": [39, 582, 113, 36],"end_roi": [39, 270, 120, 38],"delay": 400}}})
+                    context.run_pipeline("下一页",{"下一页": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"start_roi": [39, 582, 113, 36],"end_roi": [39, 270, 120, 38],"delay": 400}}})
             else:
                 print("点击分组失败")
             
