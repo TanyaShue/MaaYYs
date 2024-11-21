@@ -13,8 +13,8 @@ class AutoBattle(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
-        print("5秒后开始战斗")
-        time.sleep(5)
+        print("2秒后开始战斗")
+        time.sleep(2)
         # 加载自定义参数
         json_data = json.loads(argv.custom_action_param)
         # 点击预设
@@ -24,12 +24,15 @@ class AutoBattle(CustomAction):
             for _ in range(1):
                 context.run_pipeline("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [39, 582, 113, 36],"start_roi": [39, 270, 120, 38],"delay": 200}}})
             
-            time.sleep(1)
+            time.sleep(2)
             # 点击分组
             for count in range(1, 21):
+                time.sleep(2)
                 img = context.tasker.controller.post_screencap().wait().get()
                 detail = context.run_recognition("点击分组", img, {"点击分组": {"timeout": 500, "post_delay": 1000,"recognition": "OCR", "expected" : json_data["group_name"], "roi" : [34, 241, 132, 440]}})
-                time.sleep(0.5)
+                # time.sleep(0.5)
+
+                # context.run_pipeline("点击分组",{"点击分组": {"action": "Click"}})
 
                 if detail is not None:
                     context.tasker.controller.post_click(random.randint(detail.box.x, detail.box.x + detail.box.h), random.randint(detail.box.y, detail.box.y + detail.box.w)).wait()

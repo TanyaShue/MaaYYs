@@ -27,22 +27,24 @@ class BountyMonsterRecognition(CustomAction):
             if detail or detail_1:
                 # 整合识别结果
                 results = []
-                if detail and hasattr(detail, 'best_result'):
-                    results.append(detail.best_result)
-                if detail_1 and hasattr(detail_1, 'best_result'):
-                    results.append(detail_1.best_result)
+                if detail and hasattr(detail, 'filterd_results'):
+                    results.extend(detail.filterd_results)
+                if detail_1 and hasattr(detail_1, 'filterd_results'):
+                    results.extend(detail_1.filterd_results)
 
                 if results:
                     print(f"{results}")
                     for result in results:
+                        print(f"识别到妖怪：{result}")
                         img = context.tasker.controller.post_screencap().wait().get()
                         detail_recognition = context.run_recognition(
                             "悬赏封印_识别完成度",
                             img,
-                            {"悬赏封印_识别完成度": {"roi": result.box, "roi_offset": [-10, -10, 30, 30]}}
+                            {"悬赏封印_识别完成度": {"roi": result.box, "roi_offset": [-10, -10, 50, 50]}}
                         )
 
                         if detail_recognition:
+                            print(f"完成度为：{detail_recognition}")
                             print("该目标的完成度已满")
                             continue
 

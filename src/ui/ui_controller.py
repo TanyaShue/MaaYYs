@@ -303,8 +303,11 @@ class UIController:
         status_item.setText(status_text)
         status_item.setIcon(QIcon(icon_path))  # 设置图标
         if button:
-            button.setText(button_text)
-            button.setEnabled(enabled)
+            try:
+                button.setText(button_text)
+                button.setEnabled(enabled)
+            except Exception as e:
+                logging.error(f"更新按钮状态失败: {e}")
 
     def send_single_task(self, selected_task, project,status_item,button):
         """发送单个任务"""
