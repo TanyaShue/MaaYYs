@@ -16,7 +16,7 @@ class BountyMonsterRecognition(CustomAction):
         print("开始执行自定义动作：识别悬赏妖怪")
         attempts = 0  # Retry counter
 
-        while attempts < 3:
+        while attempts < 5:
             context.run_pipeline("悬赏封印_识别宝箱")
 
             # 识别妖怪 ,以及完成度,避免单独识别文字时失败,导致无法识别
