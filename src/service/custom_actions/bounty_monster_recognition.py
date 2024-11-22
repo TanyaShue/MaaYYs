@@ -19,6 +19,9 @@ class BountyMonsterRecognition(CustomAction):
         while attempts < 5:
             context.run_pipeline("悬赏封印_识别宝箱")
 
+            # 添加容错
+            context.run_pipeline("悬赏封印_关闭章节界面")
+
             # 识别妖怪 ,以及完成度,避免单独识别文字时失败,导致无法识别
             img = context.tasker.controller.post_screencap().wait().get()
             detail = context.run_recognition("悬赏封印_识别妖怪", img)
@@ -65,8 +68,8 @@ class BountyMonsterRecognition(CustomAction):
 
                         if detail_click is None:
                             print("未处于线索界面，尝试重新识别妖怪")
-                            context.run_pipeline("悬赏封印_关闭线索界面")
                             context.run_pipeline("悬赏封印_关闭章节界面")
+                            context.run_pipeline("悬赏封印_关闭线索界面")
                             continue
 
                         # 识别该妖怪是否为未发现
