@@ -63,6 +63,7 @@ class BountyMonsterRecognition(CustomAction):
                         if detail_click is None:
                             print("未处于线索界面，尝试重新识别妖怪")
                             context.run_pipeline("悬赏封印_关闭线索界面")
+                            context.run_pipeline("悬赏封印_关闭章节界面")
                             continue
 
                         # 识别该妖怪是否为未发现
