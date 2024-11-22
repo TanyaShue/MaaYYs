@@ -23,14 +23,17 @@ class BountyMonsterRecognition(CustomAction):
             img = context.tasker.controller.post_screencap().wait().get()
             detail = context.run_recognition("悬赏封印_识别妖怪", img)
             detail_1 = context.run_recognition("悬赏封印_识别挑战次数", img)
+            detail_2= context.run_recognition("悬赏封印_识别妖怪_图片识别", img)
 
-            if detail or detail_1:
+            if detail or detail_1 or detail_2:
                 # 整合识别结果
                 results = []
                 if detail and hasattr(detail, 'filterd_results'):
                     results.extend(detail.filterd_results)
                 if detail_1 and hasattr(detail_1, 'filterd_results'):
                     results.extend(detail_1.filterd_results)
+                if detail_2 and hasattr(detail_2, 'filterd_results'):
+                    results.extend(detail_2.filterd_results)
 
                 if results:
                     print(f"{results}")
