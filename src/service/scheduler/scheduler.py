@@ -21,7 +21,7 @@ class TaskScheduler:
         # 初始化调度器
         self.scheduler.init_app(app)
 
-        # 如果启用了调度器，添加预定义的任务
+        # 如果启用了调度器，添加预定义的任务(scheduler初始化会自动添加任务)
         # if app.config['SCHEDULER_ENABLED']:
         #     self._add_scheduled_jobs(app.config['SCHEDULER_JOBS'])
 

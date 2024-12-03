@@ -89,11 +89,12 @@ class ProjectRunData:
 class Project:
     project_name: str
     program_name: str
+    schedule_enabled:bool
     adb_config: AdbConfig
     selected_tasks: List[str]
     option: ProjectOption = field(default_factory=ProjectOption)
 
-    def __init__(self, project_name, program_name, adb_config, selected_tasks, option=None):
+    def __init__(self, project_name, program_name, adb_config, selected_tasks,schedule_enabled, option=None):
         self.project_name = project_name
         self.program_name = program_name
         self.adb_config = adb_config
@@ -101,6 +102,7 @@ class Project:
         self.option = option or ProjectOption()
         self.project_run_tasks = None
         self.project_run_option = None
+        self.schedule_enabled=schedule_enabled
 
     @staticmethod
     def from_json(data: Dict):
@@ -109,7 +111,9 @@ class Project:
             program_name=data['program_name'],
             adb_config=AdbConfig.from_json(data['adb_config']),
             selected_tasks=data.get('selected_tasks', []),
-            option=ProjectOption.from_json(data.get('option', {}))
+            option=ProjectOption.from_json(data.get('option', {})),
+            schedule_enabled=data.get('schedule_enabled', False)
+
         )
 
     def to_json(self):
@@ -118,7 +122,8 @@ class Project:
             "program_name": self.program_name,
             "adb_config": self.adb_config.to_json(),
             "selected_tasks": self.selected_tasks,
-            "option": self.option.to_json()
+            "option": self.option.to_json(),
+            "schedule_enabled": self.schedule_enabled
         }
 
     # 省略原有的 get_project_run_data 和 get_project_all_run_data 方法

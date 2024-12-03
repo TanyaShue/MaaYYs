@@ -28,8 +28,9 @@ def send_task():
     tasker_service_manager=TaskerServiceManager()
 
     for project in projects.projects:
-        tasker_service_manager.create_tasker(project.project_name, project)
+        if project.schedule_enabled:
+            tasker_service_manager.create_tasker(project.project_name, project)
 
-        project_run_data = project.get_project_run_data(programs)
+            project_run_data = project.get_project_run_data(programs)
 
-        tasker_service_manager.send_task(project.project_name, project_run_data)
+            tasker_service_manager.send_task(project.project_name, project_run_data)

@@ -14,7 +14,7 @@ class TaskLog(CustomAction):
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         """
-        :param argv: 运行参数{"task_list": ["A", "B", "C"]}
+        :param argv: 运行参数
         :param context: 运行上下文
         :return: 是否执行成功。
         """

@@ -547,5 +547,5 @@ class UIController:
         layout.update()  # 更新布局
 
     def add_project(self, p, pram_name, selected_device):
-        self.projects.projects.append(Project(project_name=p, program_name=pram_name,adb_config=AdbConfig.from_json(selected_device), selected_tasks=[], option=None))
+        self.projects.projects.append(Project(project_name=p, program_name=pram_name,adb_config=AdbConfig.from_json(selected_device), selected_tasks=[],schedule_enabled=False, option=None))
         self.projects.save_to_file(self.projects_json_path)
