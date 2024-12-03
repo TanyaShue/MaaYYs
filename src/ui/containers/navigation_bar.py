@@ -41,7 +41,7 @@ class NavigationBar(QWidget):
         title_layout.setSpacing(0)
 
         self.menu_btn = NavButton("菜单")
-        self.menu_btn.setIcon(QIcon("assets/icons/svg_icons/icon_menu.svg"))
+        self.menu_btn.setIcon(QIcon("assets/icons/svg_icons/menu-burger.svg"))
         self.menu_btn.setIconSize(QSize(22, 22))
         self.menu_btn.clicked.connect(self.toggle_navigation)
         title_layout.addWidget(self.menu_btn)
@@ -59,13 +59,13 @@ class NavigationBar(QWidget):
         self.nav_layout.setSpacing(2)
         self.nav_layout.setContentsMargins(0, 10, 0, 10)
 
-        self.add_nav_button("首页", "assets/icons/svg_icons/icon_home.svg")
+        self.add_nav_button("首页", "assets/icons/svg_icons/home.svg")
         for program in self.controller.programs.programs:
             print(program.program_name, program.program_icon)
             self.add_nav_button(program.program_name, f"assets{program.program_icon}")
         self.nav_layout.addStretch()
-        self.add_nav_button("刷新资源")
-        self.add_nav_button("设置", "assets/icons/svg_icons/icon_settings.svg")
+        self.add_nav_button("刷新资源","assets/icons/svg_icons/refresh.svg")
+        self.add_nav_button("设置", "assets/icons/svg_icons/settings-sliders.svg")
 
         scroll.setWidget(nav_container)
         main_layout.addWidget(scroll)

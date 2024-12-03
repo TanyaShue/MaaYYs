@@ -155,18 +155,20 @@ class MainWindow(QWidget):
 
         # 创建“日志”按钮并设置大小
         log_button = QPushButton()
-        log_button.setIcon(QIcon('assets/icons/svg_icons/icon_menu_close.svg'))
+        log_button.setIcon(QIcon('assets/icons/svg_icons/document-signed.svg'))
         log_button.setFixedWidth(100)
         log_button.setFixedHeight(30)  # 调整为适合的高度
         log_button.setObjectName('infoButton')
+        log_button.setToolTip("日志")
         log_button.clicked.connect(self.toggle_log_container)  # 连接点击事件
 
-        # 创建“日志”按钮并设置大小
+        # 创建“添加项目”按钮并设置大小
         add_project_button = QPushButton()
-        add_project_button.setIcon(QIcon('assets/icons/svg_icons/icon_add_user.svg'))
+        add_project_button.setIcon(QIcon('assets/icons/svg_icons/add.svg'))
         add_project_button.setFixedWidth(100)
         add_project_button.setFixedHeight(30)  # 调整为适合的高度
         add_project_button.setObjectName('infoButton')
+        add_project_button.setToolTip("添加项目")
         add_project_button.clicked.connect(self.show_add_project_dialog)  # 连接点击事件
 
 
