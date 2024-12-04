@@ -1,5 +1,7 @@
 import time
 import random
+import re
+
 from maa.context import Context
 from maa.custom_action import CustomAction
 
@@ -41,6 +43,11 @@ class BountyMonsterRecognition(CustomAction):
                 if results:
                     print(f"{results}")
                     for result in results:
+                        # 当结果text符合正则直接跳过
+                        if result and hasattr(result, "text"):
+                            if self.matches_regex(result.text):
+                                continue
+
                         print(f"识别到妖怪：{result}")
                         img = context.tasker.controller.post_screencap().wait().get()
                         detail_recognition = context.run_recognition(
@@ -99,3 +106,8 @@ class BountyMonsterRecognition(CustomAction):
 
     def stop(self) -> None:
         pass
+
+    def matches_regex(self,text):
+        pattern = r"^(\d+)\/(\1)$|^(\d+)7(\3)$"
+        print(text)
+        return bool(re.match(pattern, text))
