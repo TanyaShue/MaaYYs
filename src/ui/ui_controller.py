@@ -33,6 +33,7 @@ class ConnectionState(Enum):
 
 class UIController:
     def __init__(self, thread_pool):
+        self.setting_container = None
         self.thread_pool = thread_pool
         current_dir = os.getcwd()
 
@@ -90,11 +91,11 @@ class UIController:
 
         self.projects.save_to_file(self.projects_json_path)
 
-    def load_device_table(self, table, splitter, info_title):
+    def load_device_table(self, table, splitter, info_title,setting_container):
         # 清空现有表格数据
         table.setRowCount(0)
         table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-
+        self.setting_container=setting_container
         """加载设备表格数据"""
         for project in self.projects.projects:
             row = table.rowCount()
@@ -126,14 +127,14 @@ class UIController:
 
 
             # 添加操作按钮
-            container_widget = self._create_operation_buttons(project, splitter, info_title, status_item)
+            container_widget = self._create_operation_buttons(project, splitter, info_title, status_item,setting_container)
             table.setCellWidget(row, 5, container_widget)
 
             table.setRowHeight(row, 50)
 
         self._setup_table_columns(table)
 
-    def _create_operation_buttons(self, project, splitter, info_title, status_item):
+    def _create_operation_buttons(self, project, splitter, info_title, status_item,setting_container):
         """创建操作按钮"""
         container_widget = QWidget()
         layout = QHBoxLayout()
@@ -153,15 +154,23 @@ class UIController:
         button_info.clicked.connect(lambda _, p=project,s=status_item: self.show_device_details(p, splitter, info_title,s,button_task_connect))
         layout.addWidget(button_info)
 
+        button_setting =QPushButton("高级设置")
+        button_setting.setObjectName('settingButton')
+        button_setting.clicked.connect(self.toggle_setting_container)
+        layout.addWidget(button_setting)
+
         container_widget.setLayout(layout)
         return container_widget
+
+    def toggle_setting_container(self):
+        self.setting_container.toggle_visibility()
 
     def _setup_table_columns(self, table):
         """设置表格列宽度"""
         header = table.horizontalHeader()
 
         # 设置各列的宽度比例
-        column_ratios = [0.10, 0.10, 0.28, 0.15, 0.12, 0.23]
+        column_ratios = [0.07, 0.07, 0.28, 0.15, 0.12, 0.28]
 
         # 设置表格的拉伸模式
         table.horizontalHeader().setStretchLastSection(False)

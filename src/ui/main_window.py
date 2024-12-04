@@ -12,6 +12,8 @@ from src.ui.ui_controller import UIController
 from PySide6.QtCore import Qt, QThreadPool, QTimer
 from PySide6.QtGui import QFont, QIcon
 from src.ui.containers import LogContainer, NavigationBar
+from src.ui.containers.setting_container import SettingsContainer
+
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -33,11 +35,15 @@ class MainWindow(QWidget):
         # 左侧导航栏
         self.left_nav_widget = self.init_navigation_bar()
 
-        # 中间内容区域
-        self.center_content = self.init_center_content()
+        # 右侧高级设置容器
+        self.setting_container= self.init_setting_container()
 
         # 右侧日志容器
         self.log_container = self.init_log_container()
+
+        # 中间内容区域
+        self.center_content = self.init_center_content()
+
         # 启动日志线程
         self._start_log_thread()
         self.task_project_manager.start_monitoring()
@@ -50,6 +56,7 @@ class MainWindow(QWidget):
         self.main_layout.addWidget(self.left_nav_widget)
         self.main_layout.addWidget(self.center_content)
         self.main_layout.addWidget(self.log_container)
+        self.main_layout.addWidget(self.setting_container)
 
         self.setLayout(self.main_layout)
 
@@ -83,7 +90,7 @@ class MainWindow(QWidget):
     def on_project_added(self, name, program, selected):
         print(f"添加了新项目: {name}, 程序: {program}, 选择: {selected.get('name', '')}")
         self.controller.add_project(name, program, selected)
-        self.controller.load_device_table(self.table, self.details_container_splitter, self.info_title)
+        self.controller.load_device_table(self.table, self.details_container_splitter, self.info_title,self.setting_container)
 
     def init_navigation_bar(self):
         """初始化导航栏"""
@@ -102,6 +109,12 @@ class MainWindow(QWidget):
         self.init_home_page()
 
         return center_widget
+
+    def init_setting_container(self):
+        self.setting_container =SettingsContainer()
+        return self.setting_container
+
+
 
     def init_home_page(self):
         """初始化首页"""
@@ -123,7 +136,7 @@ class MainWindow(QWidget):
         home_layout.addWidget(details_container)
 
         # 加载设备表格
-        self.controller.load_device_table(self.table, self.details_container_splitter, self.info_title)
+        self.controller.load_device_table(self.table, self.details_container_splitter, self.info_title,self.setting_container)
 
         self.center_layout.addWidget(home_widget)
 
