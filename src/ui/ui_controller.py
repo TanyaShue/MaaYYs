@@ -33,6 +33,8 @@ class ConnectionState(Enum):
 
 class UIController:
     def __init__(self, thread_pool):
+        self.select_all_button = None
+        self.select_all_state = None
         self.setting_container = None
         self.thread_pool = thread_pool
         current_dir = os.getcwd()
@@ -142,19 +144,25 @@ class UIController:
         layout.setSpacing(10)
 
         # 添加一键启动按钮
-        button_task_connect = QPushButton('一键启动')
+        button_task_connect = QPushButton()
         button_task_connect.setObjectName('startButton')
+        button_task_connect.setToolTip("一键启动")
+        button_task_connect.setIcon(QIcon('assets/icons/svg_icons/rocket-lunch.svg'))
         button_task_connect.clicked.connect(
             lambda _, p=project, b=button_task_connect, s=status_item: self.sent_task(p, b, s))
         layout.addWidget(button_task_connect)
 
         # 添加查看详情按钮
-        button_info = QPushButton('查看详情')
+        button_info = QPushButton()
+        button_info.setToolTip("查看详情")
+        button_info.setIcon(QIcon('assets/icons/svg_icons/list-check.svg'))
         button_info.setObjectName('infoButton')
         button_info.clicked.connect(lambda _, p=project,s=status_item: self.show_device_details(p, splitter, info_title,s,button_task_connect))
         layout.addWidget(button_info)
 
-        button_setting =QPushButton("高级设置")
+        button_setting =QPushButton()
+        button_setting.setToolTip("高级设置")
+        button_setting.setIcon(QIcon("assets/icons/svg_icons/settings.svg"))
         button_setting.setObjectName('settingButton')
         button_setting.clicked.connect(self.toggle_setting_container)
         layout.addWidget(button_setting)
@@ -170,7 +178,7 @@ class UIController:
         header = table.horizontalHeader()
 
         # 设置各列的宽度比例
-        column_ratios = [0.07, 0.07, 0.28, 0.15, 0.12, 0.28]
+        column_ratios = [0.13, 0.13, 0.30, 0.15, 0.12, 0.15]
 
         # 设置表格的拉伸模式
         table.horizontalHeader().setStretchLastSection(False)
@@ -380,14 +388,18 @@ class UIController:
             task_row.addWidget(checkbox)
 
             # 添加设置按钮
-            set_button = QPushButton('设置')
+            set_button = QPushButton()
+            set_button.setIcon(QIcon("assets/icons/svg_icons/settings.svg"))
+            set_button.setToolTip("设置")
             set_button.setObjectName('settingButton')
             set_button.clicked.connect(
                 lambda _, selected_task=task: self.set_task_parameters(selected_task, program, project, splitter))
             task_row.addWidget(set_button)
 
             # 添加执行任务按钮
-            execute_button = QPushButton('执行')
+            execute_button = QPushButton()
+            execute_button.setIcon(QIcon("assets/icons/svg_icons/rocket-lunch.svg"))
+            execute_button.setToolTip('执行')
             execute_button.setObjectName('runButton')
             execute_button.clicked.connect(lambda _, selected_task=task: self.send_single_task(selected_task, project,status_item,button))
             task_row.addWidget(execute_button)
@@ -404,6 +416,7 @@ class UIController:
         start_button.setObjectName("infoButton")
         button_container.addWidget(select_all_button)
         button_container.addWidget(start_button)
+        self.select_all_button=select_all_button
 
         select_all_button.clicked.connect(self.toggle_select_all)
         start_button.clicked.connect(lambda _, p=project: self.sent_task(p, start_button, status_item))

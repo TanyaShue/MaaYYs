@@ -109,5 +109,4 @@ class BountyMonsterRecognition(CustomAction):
 
     def matches_regex(self,text):
         pattern = r"^(\d+)\/(\1)$|^(\d+)7(\3)$"
-        print(text)
         return bool(re.match(pattern, text))

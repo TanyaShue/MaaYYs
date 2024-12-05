@@ -92,9 +92,10 @@ class Project:
     schedule_enabled:bool
     adb_config: AdbConfig
     selected_tasks: List[str]
+    start_command:str
     option: ProjectOption = field(default_factory=ProjectOption)
 
-    def __init__(self, project_name, program_name, adb_config, selected_tasks,schedule_enabled, option=None):
+    def __init__(self, project_name, program_name, adb_config, selected_tasks,schedule_enabled=False,start_command="", option=None):
         self.project_name = project_name
         self.program_name = program_name
         self.adb_config = adb_config
@@ -103,6 +104,7 @@ class Project:
         self.project_run_tasks = None
         self.project_run_option = None
         self.schedule_enabled=schedule_enabled
+        self.start_command = start_command
 
     @staticmethod
     def from_json(data: Dict):
@@ -112,7 +114,8 @@ class Project:
             adb_config=AdbConfig.from_json(data['adb_config']),
             selected_tasks=data.get('selected_tasks', []),
             option=ProjectOption.from_json(data.get('option', {})),
-            schedule_enabled=data.get('schedule_enabled', False)
+            schedule_enabled=data.get('schedule_enabled', False),
+            start_command=data.get('start_command', ''),
 
         )
 
@@ -123,7 +126,8 @@ class Project:
             "adb_config": self.adb_config.to_json(),
             "selected_tasks": self.selected_tasks,
             "option": self.option.to_json(),
-            "schedule_enabled": self.schedule_enabled
+            "schedule_enabled": self.schedule_enabled,
+            "start_command": self.start_command,
         }
 
     # 省略原有的 get_project_run_data 和 get_project_all_run_data 方法

@@ -29,8 +29,13 @@ def send_task():
 
     for project in projects.projects:
         if project.schedule_enabled:
-            tasker_service_manager.create_tasker(project.project_name, project)
+            try:
+                tasker_service_manager.create_tasker(project.project_name, project)
 
-            project_run_data = project.get_project_run_data(programs)
+                project_run_data = project.get_project_run_data(programs)
 
-            tasker_service_manager.send_task(project.project_name, project_run_data)
+                tasker_service_manager.send_task(project.project_name, project_run_data)
+            except Exception as e:
+                logger.error(e)
+            finally:
+                pass

@@ -114,8 +114,6 @@ class MainWindow(QWidget):
         self.setting_container =SettingsContainer()
         return self.setting_container
 
-
-
     def init_home_page(self):
         """初始化首页"""
         # 创建首页内容部分
