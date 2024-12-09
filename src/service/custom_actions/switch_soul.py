@@ -58,7 +58,7 @@ class SwitchSoul(CustomAction):
                 time.sleep(0.5)
                 roi=[detail.box.x-30,detail.box.y-30,500,80]
                 time.sleep(0.5)
-                context.run_pipeline("装备御魂", {"装备御魂": {"action": "Click","timeout":500,"recognition": "TemplateMatch","post_delay": 1000,"template": "通用图标/装备御魂.png","roi": roi,"next": "点击确定"},"点击确定": {"action": "Click","timeout":100,"recognition": "OCR","pre_delay":1000,"expected": "确定","roi": [400,350,475,175]}})
+                context.run_pipeline("装备御魂", {"装备御魂": {"action": "Click","timeout":500,"recognition": "TemplateMatch","post_delay": 1000,"template": ["通用图标/装备御魂.png","通用图标/装备御魂_2.png"],"roi": roi,"next": "点击确定"},"点击确定": {"action": "Click","timeout":100,"recognition": "OCR","pre_delay":1000,"expected": "确定","roi": [400,350,475,175]}})
                 break
             if count >= 5:
                 context.run_pipeline("返回最上页分队", {"返回最上页分队": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [585, 495, 273, 112],"start_roi": [588, 171, 410, 76],"delay": 400}}})
