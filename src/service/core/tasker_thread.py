@@ -55,7 +55,6 @@ class TaskerThread(threading.Thread):
         if resource_path is None:
             resource_path=os.path.join(current_dir, "assets", "resource","yys_base")
         self.resource = Resource()
-        print(os.path.join(current_dir, "assets", resource_path))
         self.resource.post_path(os.path.join(current_dir, "assets", resource_path)).wait()
         self.controller = AdbController(adb_path=self.project.adb_config.adb_path, address=self.project.adb_config.address)
         self.controller.post_connection().wait()
