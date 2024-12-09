@@ -140,9 +140,10 @@ class ProgramOption:
         return {key: value.to_json() for key, value in self.options.items()}
 
 class Program:
-    def __init__(self, program_name, program_icon,program_tasks=None, option=None):
+    def __init__(self, program_name, program_icon,resource_path,program_tasks=None, option=None):
         self.program_name = program_name
         self.program_icon=program_icon
+        self.resource_path=resource_path
         self.program_tasks = [Task.from_json(t) for t in program_tasks] if program_tasks else []
         self.option = ProgramOption.from_json(option) if option else None
 
@@ -151,6 +152,7 @@ class Program:
         return Program(
             program_name=data['program_name'],
             program_icon=data['program_icon'],
+            resource_path=data['resource_path'],
             program_tasks=data.get('program_tasks', []),
             option=data.get('option')
         )
@@ -159,6 +161,7 @@ class Program:
         return {
             "program_name": self.program_name,
             "program_icon": self.program_icon,
+            "resource_path":self.resource_path,
             "program_tasks": [task.to_json() for task in self.program_tasks],
             "option": self.option.to_json() if self.option else None
         }

@@ -41,9 +41,9 @@ def create_tasker():
     data = request.json
     project_key = data.get("project_key")
     project_data = data.get("project")
+    project_resource_path=data.get("resource_path")
     project = Project.from_json(project_data)
-
-    tasker_service_manager.create_tasker(project_key, project)
+    tasker_service_manager.create_tasker(project_key, project,project_resource_path)
     return jsonify({
         "status_code": 200,
         "status": "success",

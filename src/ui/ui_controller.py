@@ -7,6 +7,7 @@ from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool, QEvent, QObject
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QTableWidgetItem, QWidget, QHBoxLayout, QPushButton, QHeaderView, QCheckBox, QLabel, \
     QLineEdit, QComboBox, QFormLayout
+from matplotlib.bezier import NonIntersectingPathException
 
 from src.ui.core.task_project_manager import TaskProjectManager
 from src.utils.config_programs import *
@@ -66,14 +67,18 @@ class UIController:
 
     def refresh_resources(self):
         """刷新资源"""
-        project = self.projects.projects[0]
-        try:
-            task_manager = TaskProjectManager()
-            task_manager.create_tasker_process(project)
-            task_manager.send_task(project, "RELOAD_RESOURCES")
-            logging.info("任务 RELOAD_RESOURCES 已成功发送")
-        except Exception as e:
-            logging.error(f"发送任务 RELOAD_RESOURCES 失败: {e}")
+        resource_path=None
+        for project in self.projects.projects:
+            for program in self.programs.programs:
+                if program.program_name == project.program_name:
+                    resource_path = program.resource_path
+            try:
+                task_manager = TaskProjectManager()
+                task_manager.create_tasker_process(project,resource_path)
+                task_manager.send_task(project, "RELOAD_RESOURCES")
+                logging.info("任务 RELOAD_RESOURCES 已成功发送")
+            except Exception as e:
+                logging.error(f"发送任务 RELOAD_RESOURCES 失败: {e}")
 
     def on_table_item_changed(self, item):
         """处理表格内容变化"""
@@ -238,7 +243,11 @@ class UIController:
 
             def execute_task():
                 try:
-                    tasker_status = task_manager.create_tasker_process(project)
+                    resource_path = None
+                    for program in self.programs.programs:
+                        if program.program_name == project.program_name:
+                            resource_path = program.resource_path
+                    tasker_status = task_manager.create_tasker_process(project,resource_path)
                     project_run_data = project.get_project_run_data(self.programs)
 
                     # 更新连接状态
@@ -328,13 +337,16 @@ class UIController:
 
     def send_single_task(self, selected_task, project,status_item,button):
         """发送单个任务"""
-
         def execute_task():
             try:
+                resource_path = None
                 project_key = project.project_name  # 使用项目名称作为键
+                for program in self.programs.programs:
 
+                    if program.program_name==project.program_name:
+                        resource_path= program.resource_path
                 task_manager = TaskProjectManager()
-                tasker_status = task_manager.create_tasker_process(project)
+                tasker_status = task_manager.create_tasker_process(project,resource_path)
                 project_run_data = project.get_project_all_run_data(self.programs)
                 filtered_tasks = [task for task in project_run_data.project_run_tasks
                                   if task.task_name == selected_task.task_name]

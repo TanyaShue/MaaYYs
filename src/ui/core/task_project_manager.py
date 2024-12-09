@@ -182,7 +182,7 @@ class TaskProjectManager:
         session.mount("https://", adapter)
         return session
 
-    def create_tasker_process(self, project: Project) -> bool:
+    def create_tasker_process(self, project: Project,resource_path:str) -> bool:
         """
         创建新的Tasker进程
 
@@ -194,6 +194,8 @@ class TaskProjectManager:
 
         Raises:
             TaskCreationError: 创建失败时抛出
+            :param project:
+            :param resource_path:
         """
         project_key = _get_project_key(project)
         with self.lock:
@@ -206,7 +208,8 @@ class TaskProjectManager:
                     "create_tasker",
                     {
                         "project_key": project_key,
-                        "project": project.to_json()
+                        "project": project.to_json(),
+                        "resource_path":resource_path
                     }
                 )
 

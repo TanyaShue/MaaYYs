@@ -28,7 +28,7 @@ class TaskerServiceManager:
         self._taskers: Dict[str, Tasker] = {}
         self._logger = TaskLogger()
 
-    def create_tasker(self, project_key: str, project: Project) -> bool:
+    def create_tasker(self, project_key: str, project: Project,resource_path) -> bool:
         if not project_key or not project:
             raise TaskerValidationError("Invalid project key or project data")
 
@@ -38,7 +38,7 @@ class TaskerServiceManager:
 
             try:
                 tasker_thread = TaskerThread(project_key, project)
-                controller_handle = tasker_thread._initialize_resources()
+                controller_handle = tasker_thread._initialize_resources(resource_path=resource_path)
                 if not controller_handle:
                     raise TaskerInitializationError(f"Failed to initialize resources for {project_key}")
 

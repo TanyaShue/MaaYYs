@@ -15,6 +15,7 @@ from src.service.custom_actions.random_touch import RandomTouch
 from src.service.custom_actions.switch_soul import SwitchSoul
 from src.service.custom_actions.task_list import TaskList
 from src.service.custom_recognition.my_recognizer import MyRecognizer
+
 from src.utils.config_projects import Project, ProjectRunData
 from maa.controller import AdbController
 from maa.resource import Resource
@@ -48,13 +49,14 @@ class TaskerThread(threading.Thread):
         finally:
             self._cleanup()
 
-    def _initialize_resources(self) ->Tasker:
+    def _initialize_resources(self,resource_path) ->Tasker:
         current_dir = os.getcwd()
         Toolkit.init_option(os.path.join(current_dir, "assets"))
-
+        if resource_path is None:
+            resource_path=os.path.join(current_dir, "assets", "resource","yys_base")
         self.resource = Resource()
-        self.resource.post_path(os.path.join(current_dir, "assets", "resource", "base")).wait()
-
+        print(os.path.join(current_dir, "assets", resource_path))
+        self.resource.post_path(os.path.join(current_dir, "assets", resource_path)).wait()
         self.controller = AdbController(adb_path=self.project.adb_config.adb_path, address=self.project.adb_config.address)
         self.controller.post_connection().wait()
 
