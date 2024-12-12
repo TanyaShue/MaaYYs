@@ -25,9 +25,10 @@ class ChallengeDungeonBoss(CustomAction):
         image = context.tasker.controller.post_screencap().wait().get()
         detail = context.run_recognition("识别地鬼分数",image,  {"识别地鬼分数": {
                                         "recognition": "OCR", "expected": r"\d+", "roi": [1175, 15, 98, 77]}})
-        text_value = detail.filterd_results[0].text
+
 
         try:
+            text_value = detail.filterd_results[0].text
             # 尝试将字符串转换为浮点数
             value = float(text_value)
             # 如果是整数（如 3.0），可以转成 int
@@ -35,6 +36,7 @@ class ChallengeDungeonBoss(CustomAction):
                 value = int(value)
         except ValueError:
             print("Error: The provided value is not a number.")
+            value=99 #识别错误时默认为99
 
         count = 3 if value > 10000 else 2 if value > 2000 else 1
         print("挑战地鬼数:", count)
