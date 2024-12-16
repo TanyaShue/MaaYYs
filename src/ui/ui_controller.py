@@ -7,7 +7,6 @@ from PySide6.QtCore import Qt, QRunnable, Slot, QThreadPool, QEvent, QObject
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QTableWidgetItem, QWidget, QHBoxLayout, QPushButton, QHeaderView, QCheckBox, QLabel, \
     QLineEdit, QComboBox, QFormLayout
-from matplotlib.bezier import NonIntersectingPathException
 
 from src.ui.core.task_project_manager import TaskProjectManager
 from src.utils.config_programs import *
