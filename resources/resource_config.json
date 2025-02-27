@@ -1,0 +1,251 @@
+{
+  "resource_name": "阴阳师",
+  "resource_version": "1.0.0",
+  "resource_author": "Maa",
+  "resource_description": "阴阳师自动化脚本",
+  "resource_icon": "/icons/apps_icons/R.png",
+  "resource_tasks": [
+    {
+      "task_name": "打开游戏",
+      "task_entry": "打开游戏",
+      "option": [
+        "选择区服"
+      ]
+    },
+    {
+      "task_name": "自动地鬼",
+      "task_entry": "自动地鬼",
+      "option": [
+        "地鬼分组预设",
+        "地鬼队伍预设"
+      ]
+    },
+    {
+      "task_name": "自动悬赏",
+      "task_entry": "自动悬赏封印",
+      "option": [
+        "悬赏封印分组预设",
+        "悬赏封印队伍预设",
+        "是否启动自动轮换"
+      ]
+    },
+    {
+      "task_name": "自动结界",
+      "task_entry": "自动结界",
+      "option": [
+        "结界突破分组预设",
+        "结界突破队伍预设"
+      ]
+    },
+    {
+      "task_name": "自动逢魔",
+      "task_entry": "自动逢魔",
+      "option": [
+        "逢魔首领分组预设",
+        "逢魔首领队伍预设"
+      ]
+    },
+    {
+      "task_name": "日常",
+      "task_entry": "日常_任务列表",
+      "option": [
+        "日常_送友情点",
+        "领取奖励_邮件",
+        "领取奖励_日常庭院奖励",
+        "领取奖励_商店每日奖励",
+        "领取奖励_花合战奖励"
+      ]
+    },
+    {
+      "task_name": "周日常",
+      "task_entry": "",
+      "option": []
+    },
+    {
+      "task_name": "结界奖励领取",
+      "task_entry": "阴阳寮奖励领取",
+      "option": []
+    }
+  ],
+  "options": [
+    {
+      "name": "选择区服",
+      "type": "select",
+      "default": "官服",
+      "choices": [
+        {
+          "name": "官服",
+          "value": "官服"
+        },
+        {
+          "name": "官网下载版",
+          "value": "官网下载版"
+        }
+      ],
+      "pipeline_override": {
+        "官服": {},
+        "官网下载版": {
+          "打开阴阳师": {
+            "package": "com.netease.onmyoji/.tag0"
+          }
+        }
+      }
+    },
+    {
+      "name": "是否启动自动轮换",
+      "type": "boole",
+      "default": false,
+      "pipeline_override": {
+        "探索_悬赏_自动轮换": {
+          "enabled": "{boole}"
+        }
+      }
+    },
+    {
+      "name": "悬赏封印分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "pipeline_override": {
+        "装备日常清杂预设": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "悬赏封印队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "pipeline_override": {
+        "装备日常清杂预设": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "结界突破分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "pipeline_override": {
+        "装备突破预设": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "结界突破队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "pipeline_override": {
+        "装备突破预设": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "地鬼分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "pipeline_override": {
+        "装备地狱鬼王预设": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "地鬼队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "pipeline_override": {
+        "装备地狱鬼王预设": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "逢魔首领分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "pipeline_override": {
+        "现世逢魔_装备式神预设": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "逢魔首领队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "pipeline_override": {
+        "现世逢魔_装备式神预设": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "日常_送友情点",
+      "type": "boole",
+      "default": true,
+      "pipeline_override": {
+        "日常_送友情点": {
+          "enabled": "{boole}"
+        }
+      }
+    },
+    {
+      "name": "领取奖励_邮件",
+      "type": "boole",
+      "default": true,
+      "pipeline_override": {
+        "领取奖励_邮件": {
+          "enabled": "{boole}"
+        }
+      }
+    },
+    {
+      "name": "领取奖励_日常庭院奖励",
+      "type": "boole",
+      "default": true,
+      "pipeline_override": {
+        "领取奖励_日常奖励": {
+          "enabled": "{boole}"
+        }
+      }
+    },
+    {
+      "name": "领取奖励_商店每日奖励",
+      "type": "boole",
+      "default": true,
+      "pipeline_override": {
+        "领取奖励_商店每日奖励": {
+          "enabled": "{boole}"
+        }
+      }
+    },
+    {
+      "name": "领取奖励_花合战奖励",
+      "type": "boole",
+      "default": true,
+      "pipeline_override": {
+        "领取奖励_花合战奖励": {
+          "enabled": "{boole}"
+        }
+      }
+    }
+  ]
+}
