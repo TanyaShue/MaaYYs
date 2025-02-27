@@ -18,7 +18,7 @@ class MainWindow(QMainWindow):
 
         # Initialize theme manager
         self.theme_manager = ThemeManager()
-        self.theme_manager.apply_theme("dark")  # Default theme
+        self.theme_manager.apply_theme("light")  # Default theme
 
         # Create central widget
         central_widget = QWidget()
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
 
         theme_label = QLabel("主题:")
         self.theme_combo = QComboBox()
-        self.theme_combo.addItems(["深色", "浅色"])
+        self.theme_combo.addItems(["明亮", "深色"])
         self.theme_combo.currentIndexChanged.connect(self.change_theme)
 
         theme_layout.addWidget(theme_label)
@@ -117,6 +117,6 @@ class MainWindow(QMainWindow):
 
     def change_theme(self, index):
         if index == 0:
-            self.theme_manager.apply_theme("dark")
-        else:
             self.theme_manager.apply_theme("light")
+        else:
+            self.theme_manager.apply_theme("dark")
