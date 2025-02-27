@@ -1,11 +1,78 @@
-from PySide6.QtWidgets import (QVBoxLayout, QLabel, QTableWidget, QTableWidgetItem,
-                               QHeaderView, QHBoxLayout, QPushButton, QTabWidget, QSplitter,
-                               QTextEdit, QCheckBox, QWidget, QFormLayout, QLineEdit, QComboBox)
+from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QTabWidget,
+                               QSplitter, QTextEdit, QCheckBox, QWidget, QFormLayout,
+                               QLineEdit, QComboBox, QGridLayout, QScrollArea, QFrame)
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont
+from PySide6.QtGui import QFont, QColor
 
 from app.components import CollapsibleBox
 from app.models import Device, Resource
+
+
+class DeviceCard(QFrame):
+    """Custom widget to display device as a card"""
+
+    def __init__(self, device, parent=None):
+        super().__init__(parent)
+        self.device = device
+        self.parent_page = parent
+        self.setObjectName("deviceCard")
+        self.setFrameShape(QFrame.StyledPanel)
+        self.setFrameShadow(QFrame.Raised)
+        self.setMinimumWidth(300)
+        self.setMinimumHeight(180)
+
+        self.init_ui()
+
+    def init_ui(self):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(15, 15, 15, 15)
+
+        # Device name
+        name_label = QLabel(self.device.name)
+        name_label.setFont(QFont("Arial", 14, QFont.Bold))
+        name_label.setObjectName("deviceCardName")
+        layout.addWidget(name_label)
+
+        # Device type
+        type_label = QLabel(self.device.device_type)
+        type_label.setObjectName("deviceCardType")
+        layout.addWidget(type_label)
+
+        # Status with indicator
+        status_widget = QWidget()
+        status_layout = QHBoxLayout(status_widget)
+        status_layout.setContentsMargins(0, 5, 0, 5)
+
+        status_indicator = QLabel()
+        status_indicator.setFixedSize(12, 12)
+
+        status_text = QLabel(self.device.status)
+        status_layout.addWidget(status_indicator)
+        status_layout.addWidget(status_text)
+        status_layout.addStretch()
+
+        layout.addWidget(status_widget)
+
+        # Last start time
+        start_time = QLabel(f"上次启动: {self.device.last_start}")
+        layout.addWidget(start_time)
+
+        # Add spacer
+        layout.addStretch()
+
+        # Action button
+        button_widget = QWidget()
+        button_layout = QHBoxLayout(button_widget)
+        button_layout.setContentsMargins(0, 5, 0, 0)
+
+        view_btn = QPushButton("查看详情")
+        view_btn.setObjectName("viewDetailBtn")
+        view_btn.clicked.connect(lambda: self.parent_page.show_device_detail(self.device.name))
+
+        button_layout.addStretch()
+        button_layout.addWidget(view_btn)
+
+        layout.addWidget(button_widget)
 
 
 class DevicePage(QWidget):
@@ -24,59 +91,47 @@ class DevicePage(QWidget):
         title_label.setObjectName("pageTitle")
         layout.addWidget(title_label)
 
-        # Create a table to show all devices
-        device_table = QTableWidget(len(self.devices), 5)
-        device_table.setHorizontalHeaderLabels(["设备名称", "类型", "状态", "上次启动", "操作"])
-        device_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        device_table.verticalHeader().setVisible(False)
-        device_table.setSelectionBehavior(QTableWidget.SelectRows)
-        device_table.setObjectName("deviceTable")
+        # Create a scroll area for the cards
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setFrameShape(QFrame.NoFrame)
 
-        for row, device in enumerate(self.devices):
-            device_table.setItem(row, 0, QTableWidgetItem(device.name))
-            device_table.setItem(row, 1, QTableWidgetItem(device.device_type))
+        # Container widget for the grid
+        card_container = QWidget()
+        self.card_grid = QGridLayout(card_container)
+        self.card_grid.setContentsMargins(10, 10, 10, 10)
+        self.card_grid.setSpacing(20)
 
-            # Add status with colored indicator
-            status_widget = QWidget()
-            status_layout = QHBoxLayout(status_widget)
-            status_layout.setContentsMargins(5, 2, 5, 2)
+        # Add device cards to the grid
+        self.populate_device_cards()
 
-            status_indicator = QLabel()
-            status_indicator.setFixedSize(10, 10)
-            status_indicator.setObjectName("statusIndicator" + ("Normal" if device.status == "运行正常" else "Error"))
+        # Set the container as the scroll area widget
+        scroll_area.setWidget(card_container)
+        layout.addWidget(scroll_area)
 
-            status_text = QLabel(device.status)
-            status_text.setObjectName("statusText")
-
-            status_layout.addWidget(status_indicator)
-            status_layout.addWidget(status_text)
-            status_layout.addStretch()
-
-            device_table.setCellWidget(row, 2, status_widget)
-
-            # Last start time
-            device_table.setItem(row, 3, QTableWidgetItem(device.last_start))
-
-            # Action buttons
-            action_widget = QWidget()
-            action_layout = QHBoxLayout(action_widget)
-            action_layout.setContentsMargins(5, 2, 5, 2)
-
-            view_btn = QPushButton("查看")
-            view_btn.clicked.connect(lambda checked, name=device.name: self.show_device_detail(name))
-
-            action_layout.addWidget(view_btn)
-            action_layout.addStretch()
-
-            device_table.setCellWidget(row, 4, action_widget)
-
-        layout.addWidget(device_table)
-
-        # Add a device detail section - will be shown when "查看" is clicked
+        # Add a device detail section - will be shown when "查看详情" is clicked
         self.device_detail_widget = QWidget()
         self.device_detail_widget.hide()
 
         layout.addWidget(self.device_detail_widget)
+
+    def populate_device_cards(self):
+        # Clear existing cards if any
+        while self.card_grid.count():
+            item = self.card_grid.takeAt(0)
+            if item.widget():
+                item.widget().deleteLater()
+
+        # Define number of columns (can adjust based on window width if needed)
+        cols = 3
+
+        # Add cards to grid
+        for index, device in enumerate(self.devices):
+            row = index // cols
+            col = index % cols
+
+            card = DeviceCard(device, self)
+            self.card_grid.addWidget(card, row, col)
 
     def show_device_detail(self, device_name):
         # Clear existing content in device detail widget
@@ -86,11 +141,26 @@ class DevicePage(QWidget):
         # Create new layout
         detail_layout = QVBoxLayout(self.device_detail_widget)
 
+        # Header with back button
+        header_widget = QWidget()
+        header_layout = QHBoxLayout(header_widget)
+        header_layout.setContentsMargins(0, 0, 0, 10)
+
+        back_btn = QPushButton("← 返回设备列表")
+        back_btn.setObjectName("backButton")
+        back_btn.clicked.connect(lambda: self.device_detail_widget.hide())
+
         # Device title
         device_title = QLabel(f"设备详情: {device_name}")
         device_title.setFont(QFont("Arial", 14, QFont.Bold))
         device_title.setObjectName("deviceDetailTitle")
-        detail_layout.addWidget(device_title)
+
+        header_layout.addWidget(back_btn)
+        header_layout.addStretch()
+        header_layout.addWidget(device_title)
+        header_layout.addStretch()
+
+        detail_layout.addWidget(header_widget)
 
         # Create tabs
         tab_widget = QTabWidget()
@@ -100,11 +170,13 @@ class DevicePage(QWidget):
         info_tab = QWidget()
         info_layout = QVBoxLayout(info_tab)
 
-        info_table = QTableWidget(5, 2)
-        info_table.setHorizontalHeaderLabels(["属性", "值"])
-        info_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        info_table.verticalHeader().setVisible(False)
-        info_table.setObjectName("infoTable")
+        # Create a simple info card instead of a table
+        info_frame = QFrame()
+        info_frame.setObjectName("infoFrame")
+
+        info_form = QFormLayout(info_frame)
+        info_form.setContentsMargins(20, 20, 20, 20)
+        info_form.setSpacing(15)
 
         info_items = [
             ("设备名称", device_name),
@@ -114,11 +186,14 @@ class DevicePage(QWidget):
             ("启动次数", "42")
         ]
 
-        for row, (key, value) in enumerate(info_items):
-            info_table.setItem(row, 0, QTableWidgetItem(key))
-            info_table.setItem(row, 1, QTableWidgetItem(value))
+        for key, value in info_items:
+            label = QLabel(key + ":")
+            label.setFont(QFont("Arial", 10, QFont.Bold))
+            value_label = QLabel(value)
+            info_form.addRow(label, value_label)
 
-        info_layout.addWidget(info_table)
+        info_layout.addWidget(info_frame)
+        info_layout.addStretch()
 
         # Control tab with splitter
         control_tab = QWidget()
@@ -136,43 +211,50 @@ class DevicePage(QWidget):
         resource_label.setObjectName("resourceLabel")
         resource_layout.addWidget(resource_label)
 
-        # Resource table with checkboxes
-        resource_table = QTableWidget(len(self.resources), 3)
-        resource_table.setHorizontalHeaderLabels(["启用", "资源名称", "操作"])
-        resource_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        resource_table.verticalHeader().setVisible(False)
-        resource_table.setObjectName("resourceTable")
+        # Create cards for resources instead of a table
+        resources_container = QWidget()
+        resources_layout = QVBoxLayout(resources_container)
+        resources_layout.setContentsMargins(0, 0, 0, 0)
+        resources_layout.setSpacing(10)
 
-        for row, resource in enumerate(self.resources):
+        for resource in self.resources:
+            resource_card = QFrame()
+            resource_card.setObjectName("resourceCard")
+            resource_card.setFrameShape(QFrame.StyledPanel)
+            card_layout = QHBoxLayout(resource_card)
+
             # Checkbox
             checkbox = QCheckBox()
             checkbox.setChecked(resource.enabled)
-            checkbox_widget = QWidget()
-            checkbox_layout = QHBoxLayout(checkbox_widget)
-            checkbox_layout.setContentsMargins(5, 2, 5, 2)
-            checkbox_layout.addWidget(checkbox)
-            checkbox_layout.setAlignment(Qt.AlignCenter)
-            resource_table.setCellWidget(row, 0, checkbox_widget)
 
             # Resource name
-            resource_table.setItem(row, 1, QTableWidgetItem(resource.name))
+            name_label = QLabel(resource.name)
+            name_label.setFont(QFont("Arial", 11))
 
             # Buttons
             button_widget = QWidget()
             button_layout = QHBoxLayout(button_widget)
-            button_layout.setContentsMargins(5, 2, 5, 2)
+            button_layout.setContentsMargins(0, 0, 0, 0)
 
             run_btn = QPushButton("运行")
+            run_btn.setFixedWidth(60)
 
             settings_btn = QPushButton("设置")
+            settings_btn.setFixedWidth(60)
             settings_btn.clicked.connect(lambda checked, r=resource: self.show_resource_settings(r))
 
             button_layout.addWidget(run_btn)
             button_layout.addWidget(settings_btn)
 
-            resource_table.setCellWidget(row, 2, button_widget)
+            # Add all elements to card
+            card_layout.addWidget(checkbox)
+            card_layout.addWidget(name_label)
+            card_layout.addStretch()
+            card_layout.addWidget(button_widget)
 
-        resource_layout.addWidget(resource_table)
+            resources_layout.addWidget(resource_card)
+
+        resource_layout.addWidget(resources_container)
 
         one_key_start_btn = QPushButton("一键启动")
         one_key_start_btn.setFixedHeight(40)
@@ -230,7 +312,7 @@ class DevicePage(QWidget):
 
         detail_layout.addWidget(tab_widget)
 
-        # Show the widget
+        # Show the widget and hide the grid
         self.device_detail_widget.show()
 
     def show_resource_settings(self, resource):
@@ -250,26 +332,29 @@ class DevicePage(QWidget):
         # Create collapsible boxes for each setting group
         for group in resource.settings:
             collapsible = CollapsibleBox(group.name)
-
             # Create form for settings
             form_widget = QWidget()
             form_layout = QFormLayout(form_widget)
+            form_layout.setSpacing(15)
 
             for setting in group.settings:
+                label = QLabel(setting.name)
+                label.setFont(QFont("Arial", 10))
+
                 if setting.type == "checkbox":
                     widget = QCheckBox()
                     widget.setChecked(setting.value)
-                    form_layout.addRow(setting.name, widget)
+                    form_layout.addRow(label, widget)
 
                 elif setting.type == "combobox":
                     widget = QComboBox()
                     widget.addItems(setting.options)
                     widget.setCurrentText(setting.value)
-                    form_layout.addRow(setting.name, widget)
+                    form_layout.addRow(label, widget)
 
                 elif setting.type == "input":
                     widget = QLineEdit(setting.value)
-                    form_layout.addRow(setting.name, widget)
+                    form_layout.addRow(label, widget)
 
             collapsible.add_widget(form_widget)
             content_layout.addWidget(collapsible)

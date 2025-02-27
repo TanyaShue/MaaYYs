@@ -19,11 +19,6 @@ class HomePage(QWidget):
         title_label.setObjectName("pageTitle")
         layout.addWidget(title_label)
 
-        # Add devices section label
-        # devices_label = QLabel("设备信息")
-        # devices_label.setFont(QFont("Arial", 14, QFont.Bold))
-        # devices_label.setObjectName("sectionTitle")
-        # layout.addWidget(devices_label)
 
         # Create scroll area for devices
         scroll_area = QScrollArea()
