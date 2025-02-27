@@ -3,24 +3,27 @@ from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QT
                                QLineEdit, QComboBox, QGridLayout, QScrollArea, QFrame)
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont, QColor
+import os
 
 from app.components import CollapsibleBox
-from app.models import Device, Resource
+from app.models.config.global_config import GlobalConfig
+from app.models.config.device_config import DevicesConfig, DeviceConfig
+from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
 
 
 class DeviceCard(QFrame):
     """Custom widget to display device as a card"""
 
-    def __init__(self, device, parent=None):
+    def __init__(self, device_config, parent=None):
         super().__init__(parent)
-        self.device = device
+        self.device_config = device_config
         self.parent_page = parent
         self.setObjectName("deviceCard")
         self.setFrameShape(QFrame.StyledPanel)
         self.setFrameShadow(QFrame.Raised)
         self.setMinimumWidth(300)
         self.setMinimumHeight(180)
-
+        self.setMaximumHeight(200)
         self.init_ui()
 
     def init_ui(self):
@@ -28,13 +31,13 @@ class DeviceCard(QFrame):
         layout.setContentsMargins(15, 15, 15, 15)
 
         # Device name
-        name_label = QLabel(self.device.name)
+        name_label = QLabel(self.device_config.device_name)
         name_label.setFont(QFont("Arial", 14, QFont.Bold))
         name_label.setObjectName("deviceCardName")
         layout.addWidget(name_label)
 
         # Device type
-        type_label = QLabel(self.device.device_type)
+        type_label = QLabel(self.device_config.adb_config.name)
         type_label.setObjectName("deviceCardType")
         layout.addWidget(type_label)
 
@@ -46,16 +49,18 @@ class DeviceCard(QFrame):
         status_indicator = QLabel()
         status_indicator.setFixedSize(12, 12)
 
-        status_text = QLabel(self.device.status)
+        # Determine status based on schedule_enabled
+        status_text = "运行正常" if self.device_config.schedule_enabled else "未启用计划任务"
+        status_label = QLabel(status_text)
         status_layout.addWidget(status_indicator)
-        status_layout.addWidget(status_text)
+        status_layout.addWidget(status_label)
         status_layout.addStretch()
 
         layout.addWidget(status_widget)
 
-        # Last start time
-        start_time = QLabel(f"上次启动: {self.device.last_start}")
-        layout.addWidget(start_time)
+        # ADB address
+        adb_address = QLabel(f"ADB地址: {self.device_config.adb_config.address}")
+        layout.addWidget(adb_address)
 
         # Add spacer
         layout.addStretch()
@@ -67,7 +72,7 @@ class DeviceCard(QFrame):
 
         view_btn = QPushButton("查看详情")
         view_btn.setObjectName("viewDetailBtn")
-        view_btn.clicked.connect(lambda: self.parent_page.show_device_detail(self.device.name))
+        view_btn.clicked.connect(lambda: self.parent_page.show_device_detail(self.device_config.device_name))
 
         button_layout.addStretch()
         button_layout.addWidget(view_btn)
@@ -78,9 +83,10 @@ class DeviceCard(QFrame):
 class DevicePage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.devices = Device.get_sample_devices()
-        self.resources = Resource.get_sample_resources()
+        # Initialize global config
+        self.global_config = GlobalConfig()
         self.init_ui()
+        self.load_sample_data()
 
     def init_ui(self):
         layout = QVBoxLayout(self)
@@ -99,11 +105,9 @@ class DevicePage(QWidget):
         # Container widget for the grid
         card_container = QWidget()
         self.card_grid = QGridLayout(card_container)
+        self.card_grid.setAlignment(Qt.AlignTop)
         self.card_grid.setContentsMargins(10, 10, 10, 10)
         self.card_grid.setSpacing(20)
-
-        # Add device cards to the grid
-        self.populate_device_cards()
 
         # Set the container as the scroll area widget
         scroll_area.setWidget(card_container)
@@ -115,6 +119,178 @@ class DevicePage(QWidget):
 
         layout.addWidget(self.device_detail_widget)
 
+    def load_sample_data(self):
+        # Sample path for devices config
+        try:
+            devices_config_path = "assets/config/devices.json"
+            self.global_config.load_devices_config(devices_config_path)
+
+            # Load all resource configs from assets/resource directory
+            resource_dir = "assets/resource"
+            self.global_config.load_all_resources_from_directory(resource_dir)
+            print("Config files loaded successfully")
+            # Populate device cards after loading configs
+            self.populate_device_cards()
+        except Exception as e:
+            # In case of error, show a message or use dummy data
+            print(f"Error loading config files: {e}")
+            # Create a fallback config with sample data for testing UI
+            # self.create_fallback_configs()
+
+    def create_fallback_configs(self):
+        """Create sample configuration data for testing when files can't be loaded"""
+        import json
+        from app.models.config.device_config import DevicesConfig, DeviceConfig, AdbDevice, Resource
+
+        # Sample device config similar to the example in device_config.py
+        sample_config = {
+            "devices": [
+                {
+                    "device_name": "雷电模拟器-阴阳师1",
+                    "adb_config": {
+                        "name": "LDPlayer",
+                        "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
+                        "address": "127.0.0.1:5555",
+                        "screencap_methods": 18446744073709551559,
+                        "input_methods": 18446744073709551607,
+                        "config": {}
+                    },
+                    "resources": [
+                        {
+                            "resource_name": "阴阳师",
+                            "selected_tasks": [
+                                "领取奖励",
+                                "自动结界"
+                            ],
+                            "options": [
+                                {
+                                    "option_name": "选择区服",
+                                    "value": "官服"
+                                }
+                            ]
+                        }
+                    ],
+                    "schedule_enabled": True,
+                    "start_command": "D:\\leidian\\LDPlayer9\\dnplayer.exe index=0"
+                },
+                {
+                    "device_name": "夜神模拟器-战双",
+                    "adb_config": {
+                        "name": "夜神模拟器",
+                        "adb_path": "C:\\Android\\adb.exe",
+                        "address": "emulator-5554",
+                        "screencap_methods": 18446744073709551559,
+                        "input_methods": 18446744073709551607,
+                        "config": {}
+                    },
+                    "resources": [
+                        {
+                            "resource_name": "战双帕弥什",
+                            "selected_tasks": [
+                                "打开游戏"
+                            ],
+                            "options": [
+                                {
+                                    "option_name": "打开战双",
+                                    "value": "官服"
+                                }
+                            ]
+                        }
+                    ],
+                    "schedule_enabled": False,
+                    "start_command": ""
+                }
+            ]
+        }
+
+        # Create sample resource configs
+        sample_resource_configs = {
+            "阴阳师": {
+                "resource_name": "阴阳师",
+                "resource_version": "1.0.0",
+                "resource_author": "Maa",
+                "resource_description": "阴阳师自动化脚本",
+                "resource_icon": "/icons/apps_icons/R.png",
+                "resource_tasks": [
+                    {
+                        "task_name": "打开游戏",
+                        "task_entry": "打开游戏",
+                        "option": [
+                            "选择区服"
+                        ]
+                    },
+                    {
+                        "task_name": "领取奖励",
+                        "task_entry": "领取奖励",
+                        "option": []
+                    },
+                    {
+                        "task_name": "自动结界",
+                        "task_entry": "自动结界",
+                        "option": []
+                    }
+                ],
+                "options": [
+                    {
+                        "name": "选择区服",
+                        "type": "select",
+                        "default": "官服",
+                        "choices": [
+                            {
+                                "name": "官服",
+                                "value": "官服"
+                            },
+                            {
+                                "name": "官网下载版",
+                                "value": "官网下载版"
+                            }
+                        ],
+                        "pipeline_override": {}
+                    }
+                ]
+            },
+            "战双帕弥什": {
+                "resource_name": "战双帕弥什",
+                "resource_version": "1.0.0",
+                "resource_author": "Maa",
+                "resource_description": "战双帕弥什自动化脚本",
+                "resource_icon": "/icons/apps_icons/R.png",
+                "resource_tasks": [
+                    {
+                        "task_name": "打开游戏",
+                        "task_entry": "打开游戏",
+                        "option": [
+                            "打开战双"
+                        ]
+                    }
+                ],
+                "options": [
+                    {
+                        "name": "打开战双",
+                        "type": "select",
+                        "default": "官服",
+                        "choices": [
+                            {
+                                "name": "官服",
+                                "value": "官服"
+                            }
+                        ],
+                        "pipeline_override": {}
+                    }
+                ]
+            }
+        }
+
+        # Load the device config
+        self.global_config.devices_config = DevicesConfig.from_dict(sample_config)
+
+        # Load the resource configs
+        for name, config in sample_resource_configs.items():
+            self.global_config.resource_configs[name] = ResourceConfig.from_dict(config)
+
+        # Now populate the device cards
+        self.populate_device_cards()
+
     def populate_device_cards(self):
         # Clear existing cards if any
         while self.card_grid.count():
@@ -122,18 +298,41 @@ class DevicePage(QWidget):
             if item.widget():
                 item.widget().deleteLater()
 
-        # Define number of columns (can adjust based on window width if needed)
-        cols = 3
+        try:
+            # Get devices from global config
+            devices = self.global_config.get_devices_config().devices
 
-        # Add cards to grid
-        for index, device in enumerate(self.devices):
-            row = index // cols
-            col = index % cols
+            # Define number of columns
+            cols = 3
 
-            card = DeviceCard(device, self)
-            self.card_grid.addWidget(card, row, col)
+            # Add cards to grid
+            for index, device in enumerate(devices):
+                row = index // cols
+                col = index % cols
+
+                card = DeviceCard(device, self)
+                self.card_grid.addWidget(card, row, col)
+        except Exception as e:
+            # Handle case when devices config is not loaded
+            print(f"Error populating device cards: {e}")
+            # Add a message in the grid
+            error_label = QLabel("无法加载设备配置")
+            error_label.setAlignment(Qt.AlignCenter)
+            self.card_grid.addWidget(error_label, 0, 0)
+
+    def get_device_config(self, device_name):
+        """Get device config by name"""
+        for device in self.global_config.get_devices_config().devices:
+            if device.device_name == device_name:
+                return device
+        return None
 
     def show_device_detail(self, device_name):
+        # Get device config
+        device_config = self.get_device_config(device_name)
+        if not device_config:
+            return
+
         # Clear existing content in device detail widget
         if self.device_detail_widget.layout():
             QWidget().setLayout(self.device_detail_widget.layout())
@@ -170,7 +369,7 @@ class DevicePage(QWidget):
         info_tab = QWidget()
         info_layout = QVBoxLayout(info_tab)
 
-        # Create a simple info card instead of a table
+        # Create a simple info card
         info_frame = QFrame()
         info_frame.setObjectName("infoFrame")
 
@@ -179,11 +378,12 @@ class DevicePage(QWidget):
         info_form.setSpacing(15)
 
         info_items = [
-            ("设备名称", device_name),
-            ("设备类型", "模拟器"),
-            ("状态", "运行正常"),
-            ("上次启动时间", "2025-02-26 11:45:14"),
-            ("启动次数", "42")
+            ("设备名称", device_config.device_name),
+            ("设备类型", device_config.adb_config.name),
+            ("ADB路径", device_config.adb_config.adb_path),
+            ("ADB地址", device_config.adb_config.address),
+            ("计划任务", "已启用" if device_config.schedule_enabled else "未启用"),
+            ("启动命令", device_config.start_command or "无")
         ]
 
         for key, value in info_items:
@@ -211,25 +411,39 @@ class DevicePage(QWidget):
         resource_label.setObjectName("resourceLabel")
         resource_layout.addWidget(resource_label)
 
-        # Create cards for resources instead of a table
+        # Create cards for resources
         resources_container = QWidget()
         resources_layout = QVBoxLayout(resources_container)
         resources_layout.setContentsMargins(0, 0, 0, 0)
         resources_layout.setSpacing(10)
 
-        for resource in self.resources:
+        # Get configured resources for this device
+        configured_resources = device_config.resources
+
+        for resource_config in configured_resources:
+            resource_name = resource_config.resource_name
+
+            # Get complete resource config from global config
+            full_resource_config = self.global_config.get_resource_config(resource_name)
+
+            if not full_resource_config:
+                continue
+
             resource_card = QFrame()
             resource_card.setObjectName("resourceCard")
             resource_card.setFrameShape(QFrame.StyledPanel)
             card_layout = QHBoxLayout(resource_card)
 
-            # Checkbox
+            # Checkbox for enabling/disabling
             checkbox = QCheckBox()
-            checkbox.setChecked(resource.enabled)
+            checkbox.setChecked(True)  # Always checked as it's in the device config
 
             # Resource name
-            name_label = QLabel(resource.name)
+            name_label = QLabel(resource_name)
             name_label.setFont(QFont("Arial", 11))
+
+            # Task count
+            task_count = QLabel(f"已选任务: {len(resource_config.selected_tasks)}")
 
             # Buttons
             button_widget = QWidget()
@@ -241,7 +455,10 @@ class DevicePage(QWidget):
 
             settings_btn = QPushButton("设置")
             settings_btn.setFixedWidth(60)
-            settings_btn.clicked.connect(lambda checked, r=resource: self.show_resource_settings(r))
+            settings_btn.clicked.connect(
+                lambda checked, r=resource_config, full_r=full_resource_config:
+                self.show_resource_settings(r, full_r)
+            )
 
             button_layout.addWidget(run_btn)
             button_layout.addWidget(settings_btn)
@@ -249,6 +466,7 @@ class DevicePage(QWidget):
             # Add all elements to card
             card_layout.addWidget(checkbox)
             card_layout.addWidget(name_label)
+            card_layout.addWidget(task_count)
             card_layout.addStretch()
             card_layout.addWidget(button_widget)
 
@@ -261,7 +479,7 @@ class DevicePage(QWidget):
         one_key_start_btn.setObjectName("oneKeyButton")
         resource_layout.addWidget(one_key_start_btn)
 
-        # Right side - settings panel (initially empty)
+        # Right side - settings panel
         self.settings_widget = QWidget()
         self.settings_layout = QVBoxLayout(self.settings_widget)
 
@@ -290,16 +508,16 @@ class DevicePage(QWidget):
         log_text = QTextEdit()
         log_text.setReadOnly(True)
         log_text.setObjectName("logTextEdit")
-        log_text.setText("""11:45:14
-雷电模拟器-阴阳师1
+        log_text.setText(f"""11:45:14
+{device_name}
 启动成功
 19:19:10
-雷电模拟器-阴阳师1 运行正常, 这是一
+{device_name} 运行正常, 这是一
 长的日志信息, 用于测试SiLogItem组
 动操行和显示效果。查看多行日志是
 确显示和滚动。
 00:00:00
-雷电模拟器-阴阳师1
+{device_name}
 检测到异常
 """)
 
@@ -312,10 +530,10 @@ class DevicePage(QWidget):
 
         detail_layout.addWidget(tab_widget)
 
-        # Show the widget and hide the grid
+        # Show the widget
         self.device_detail_widget.show()
 
-    def show_resource_settings(self, resource):
+    def show_resource_settings(self, resource_config, full_resource_config):
         # Clear existing settings content
         if self.settings_content.layout():
             QWidget().setLayout(self.settings_content.layout())
@@ -324,40 +542,71 @@ class DevicePage(QWidget):
         content_layout = QVBoxLayout(self.settings_content)
 
         # Resource name
-        resource_name = QLabel(f"{resource.name} 设置")
+        resource_name = QLabel(f"{resource_config.resource_name} 设置")
         resource_name.setFont(QFont("Arial", 12, QFont.Bold))
         resource_name.setObjectName("resourceSettingsTitle")
         content_layout.addWidget(resource_name)
 
-        # Create collapsible boxes for each setting group
-        for group in resource.settings:
-            collapsible = CollapsibleBox(group.name)
-            # Create form for settings
-            form_widget = QWidget()
-            form_layout = QFormLayout(form_widget)
-            form_layout.setSpacing(15)
+        # Add task selection section
+        tasks_box = CollapsibleBox("任务选择")
+        tasks_widget = QWidget()
+        tasks_layout = QVBoxLayout(tasks_widget)
 
-            for setting in group.settings:
-                label = QLabel(setting.name)
-                label.setFont(QFont("Arial", 10))
+        for task in full_resource_config.resource_tasks:
+            task_checkbox = QCheckBox(task.task_name)
+            task_checkbox.setChecked(task.task_name in resource_config.selected_tasks)
+            tasks_layout.addWidget(task_checkbox)
 
-                if setting.type == "checkbox":
-                    widget = QCheckBox()
-                    widget.setChecked(setting.value)
-                    form_layout.addRow(label, widget)
+        tasks_box.add_widget(tasks_widget)
+        content_layout.addWidget(tasks_box)
 
-                elif setting.type == "combobox":
-                    widget = QComboBox()
-                    widget.addItems(setting.options)
-                    widget.setCurrentText(setting.value)
-                    form_layout.addRow(label, widget)
+        # Add options section
+        options_box = CollapsibleBox("选项设置")
+        options_widget = QWidget()
+        options_layout = QFormLayout(options_widget)
 
-                elif setting.type == "input":
-                    widget = QLineEdit(setting.value)
-                    form_layout.addRow(label, widget)
+        # Get current option values from resource_config
+        current_options = {opt.option_name: opt.value for opt in resource_config.options}
 
-            collapsible.add_widget(form_widget)
-            content_layout.addWidget(collapsible)
+        for option in full_resource_config.options:
+            label = QLabel(option.name)
+            label.setFont(QFont("Arial", 10))
+
+            if isinstance(option, SelectOption):
+                widget = QComboBox()
+                for choice in option.choices:
+                    widget.addItem(choice.name, choice.value)
+
+                # Set current value if available
+                if option.name in current_options:
+                    index = widget.findData(current_options[option.name])
+                    if index >= 0:
+                        widget.setCurrentIndex(index)
+
+                options_layout.addRow(label, widget)
+
+            elif isinstance(option, BoolOption):
+                widget = QCheckBox()
+                # Set current value if available
+                if option.name in current_options:
+                    widget.setChecked(current_options[option.name])
+                else:
+                    widget.setChecked(option.default)
+
+                options_layout.addRow(label, widget)
+
+            elif isinstance(option, InputOption):
+                widget = QLineEdit()
+                # Set current value if available
+                if option.name in current_options:
+                    widget.setText(str(current_options[option.name]))
+                else:
+                    widget.setText(str(option.default))
+
+                options_layout.addRow(label, widget)
+
+        options_box.add_widget(options_widget)
+        content_layout.addWidget(options_box)
 
         # Add save button
         save_btn = QPushButton("保存设置")

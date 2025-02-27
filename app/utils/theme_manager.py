@@ -5,8 +5,8 @@ from PySide6.QtWidgets import QApplication
 class ThemeManager:
     def __init__(self):
         self.themes = {
-            "dark": "resources/themes/dark.qss",
-            "light": "resources/themes/light.qss"
+            "dark": "assets/themes/dark.qss",
+            "light": "assets/themes/light.qss"
         }
         self.current_theme = None
 

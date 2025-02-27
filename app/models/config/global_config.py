@@ -2,8 +2,8 @@ import threading
 from typing import List, Dict, Optional, Type
 from pathlib import Path
 
-from MAAPH.control.config.device_config import DevicesConfig
-from MAAPH.control.config.resource_config import ResourceConfig
+from app.models.config.device_config import DevicesConfig
+from app.models.config.resource_config import ResourceConfig
 
 
 class GlobalConfig:

@@ -2,25 +2,28 @@ from PySide6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushBut
 from PySide6.QtCore import Qt
 
 class DeviceCard(QFrame):
-    def __init__(self, device_name, device_type, status):
-        super().__init__()
+    def __init__(self, device_name, device_type, status, parent=None):
+        super().__init__(parent)
         self.setObjectName("deviceCard")
         self.setFrameShape(QFrame.StyledPanel)
         self.setFrameShadow(QFrame.Raised)
 
+        # 设置每张卡片的最大高度（例如 150 像素）
+        self.setMaximumHeight(150)
+
         layout = QVBoxLayout(self)
 
-        # Device name label
+        # 设备名称标签
         name_label = QLabel(device_name)
         name_label.setObjectName("deviceCardName")
         layout.addWidget(name_label)
 
-        # Device type label
+        # 设备类型标签
         type_label = QLabel(device_type)
         type_label.setObjectName("deviceCardType")
         layout.addWidget(type_label)
 
-        # Status indicator
+        # 状态指示布局
         status_layout = QHBoxLayout()
         status_indicator = QLabel()
         status_indicator.setFixedSize(10, 10)
@@ -31,10 +34,9 @@ class DeviceCard(QFrame):
         status_layout.addWidget(status_indicator)
         status_layout.addWidget(status_text)
         status_layout.addStretch()
-
         layout.addLayout(status_layout)
 
-        # Buttons
+        # 按钮布局
         button_layout = QHBoxLayout()
         run_btn = QPushButton("运行")
         run_btn.setFixedHeight(28)
@@ -43,5 +45,4 @@ class DeviceCard(QFrame):
 
         button_layout.addWidget(run_btn)
         button_layout.addWidget(settings_btn)
-
         layout.addLayout(button_layout)
