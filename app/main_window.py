@@ -1,4 +1,6 @@
-from PySide6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QComboBox, QLabel
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QComboBox, QLabel, QToolButton, QMenu
 
 from app.components.navigation_button import NavigationButton
 from app.pages.home_page import HomePage
@@ -27,31 +29,19 @@ class MainWindow(QMainWindow):
 
         # Create navigation sidebar
         sidebar = QWidget()
-        sidebar.setFixedWidth(200)
+        sidebar.setFixedWidth(48)  # Fixed width for icon-only sidebar
         sidebar.setObjectName("sidebar")
         sidebar_layout = QVBoxLayout(sidebar)
         sidebar_layout.setSpacing(0)
         sidebar_layout.setContentsMargins(0, 0, 0, 0)
+        sidebar_layout.setAlignment(Qt.AlignTop)  # Align to top
 
-        # Add theme selector at top of sidebar
-        theme_widget = QWidget()
-        theme_widget.setObjectName("themeSelector")
-        theme_layout = QHBoxLayout(theme_widget)
 
-        theme_label = QLabel("主题:")
-        self.theme_combo = QComboBox()
-        self.theme_combo.addItems(["明亮", "深色"])
-        self.theme_combo.currentIndexChanged.connect(self.change_theme)
 
-        theme_layout.addWidget(theme_label)
-        theme_layout.addWidget(self.theme_combo)
-
-        sidebar_layout.addWidget(theme_widget)
-
-        # Add navigation buttons
-        self.home_btn = NavigationButton("首页", "resources/icons/home.png")
-        self.device_btn = NavigationButton("设备信息", "resources/icons/device.png")
-        self.download_btn = NavigationButton("资源下载", "resources/icons/download.png")
+        # Add navigation buttons (icon only)
+        self.home_btn = NavigationButton("首页", "assets/icons/home.svg")
+        self.device_btn = NavigationButton("设备信息", "assets/icons/browser.svg")
+        self.download_btn = NavigationButton("资源下载", "assets/icons/apps-add.svg")
 
         sidebar_layout.addWidget(self.home_btn)
         sidebar_layout.addWidget(self.device_btn)
@@ -59,9 +49,18 @@ class MainWindow(QMainWindow):
         sidebar_layout.addStretch()
 
         # Add bottom info button
-        self.info_btn = NavigationButton("软件信息", "resources/icons/info.png")
+        self.info_btn = NavigationButton("软件信息", "assets/icons/info.svg")
         sidebar_layout.addWidget(self.info_btn)
+        # Theme toggle button instead of dropdown
+        self.theme_btn = QToolButton()
+        self.theme_btn.setIcon(QIcon("assets/icons/theme.svg"))  # You need this icon
+        self.theme_btn.setIconSize(QSize(24, 24))
+        self.theme_btn.setFixedSize(48, 48)
+        self.theme_btn.setToolTip("切换主题")
+        self.theme_btn.clicked.connect(self.toggle_theme)
+        self.current_theme = "light"
 
+        sidebar_layout.addWidget(self.theme_btn)
         main_layout.addWidget(sidebar)
 
         # Create content widget
@@ -86,7 +85,7 @@ class MainWindow(QMainWindow):
         self.download_btn.clicked.connect(lambda: self.show_page("download"))
         self.info_btn.clicked.connect(lambda: self.show_page("info"))
 
-        # Initialize with home pages
+        # Initialize with home page
         self.show_page("home")
 
     def show_page(self, page_name):
@@ -99,7 +98,7 @@ class MainWindow(QMainWindow):
         # Clear existing content
         self.clear_content()
 
-        # Show requested pages
+        # Show requested page
         if page_name in self.pages:
             self.content_layout.addWidget(self.pages[page_name])
             self.pages[page_name].show()
@@ -113,8 +112,12 @@ class MainWindow(QMainWindow):
                 widget.hide()
                 self.content_layout.removeWidget(widget)
 
-    def change_theme(self, index):
-        if index == 0:
-            self.theme_manager.apply_theme("light")
-        else:
+    def toggle_theme(self):
+        if self.current_theme == "light":
             self.theme_manager.apply_theme("dark")
+            self.current_theme = "dark"
+            self.theme_btn.setToolTip("切换到明亮主题")
+        else:
+            self.theme_manager.apply_theme("light")
+            self.current_theme = "light"
+            self.theme_btn.setToolTip("切换到深色主题")
