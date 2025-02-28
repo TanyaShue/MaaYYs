@@ -4,8 +4,7 @@ from PySide6.QtCore import Qt
 
 from app.components import DeviceCard
 from app.models.config.global_config import GlobalConfig
-
-
+from app.pages.add_device_dialog import AddDeviceDialog  # 导入新创建的对话框类
 
 
 class HomePage(QWidget):
@@ -18,11 +17,23 @@ class HomePage(QWidget):
     def init_ui(self):
         main_layout = QVBoxLayout(self)
 
-        # 大标题放在 QFrame 之外
+        # 标题栏布局，包含标题和添加设备按钮
+        title_bar = QHBoxLayout()
+
+        # 大标题
         title_label = QLabel("设备管理系统")
         title_label.setFont(QFont("Arial", 18, QFont.Bold))
         title_label.setObjectName("pageTitle")
-        main_layout.addWidget(title_label)
+        title_bar.addWidget(title_label)
+
+        # 添加设备按钮
+        add_device_btn = QPushButton("添加设备")
+        add_device_btn.setObjectName("addDeviceButton")
+        add_device_btn.setFixedHeight(32)
+        add_device_btn.clicked.connect(self.open_add_device_dialog)
+        title_bar.addWidget(add_device_btn, alignment=Qt.AlignRight)
+
+        main_layout.addLayout(title_bar)
 
         # 创建滚动区域，内部用单个 QFrame 承载卡片布局
         scroll_area = QScrollArea()
@@ -80,4 +91,9 @@ class HomePage(QWidget):
             error_label.setAlignment(Qt.AlignCenter)
             self.grid_layout.addWidget(error_label, 0, 0)
 
-
+    def open_add_device_dialog(self):
+        """打开添加设备对话框"""
+        dialog = AddDeviceDialog(self.global_config, self)
+        if dialog.exec_():
+            # 如果用户点击确定，重新加载设备列表
+            self.populate_device_cards()

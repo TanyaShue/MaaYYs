@@ -1,6 +1,4 @@
-import os
 from PySide6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QComboBox, QLabel
-from PySide6.QtCore import Qt
 
 from app.components.navigation_button import NavigationButton
 from app.pages.home_page import HomePage

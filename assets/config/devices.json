@@ -193,6 +193,7 @@
         }
       ],
       "schedule_enabled": false,
+      "schedule_time":["00:00","04:00"],
       "start_command": ""
     }
   ]

@@ -35,22 +35,22 @@ QLabel {
 }
 
 /* 导航按钮（NavigationButton） */
-NavigationButton {
-    border: none;
-    border-radius: 0;
-    text-align: left;
-    padding-left: 15px;
-    color: #555555;
-    background-color: #f0f0f0;
-}
-NavigationButton:checked {
-    background-color: #e0e0e0;
-    border-left: 4px solid #007acc;
-    color: #000000;
-}
-NavigationButton:hover {
-    background-color: #dcdcdc;
-}
+//NavigationButton {
+//    border: none;
+//    border-radius: 0;
+//    text-align: left;
+//    padding-left: 15px;
+//    color: #555555;
+//    background-color: #f0f0f0;
+//}
+//NavigationButton:checked {
+//    background-color: #e0e0e0;
+//    border-left: 4px solid #007acc;
+//    color: #000000;
+//}
+//NavigationButton:hover {
+//    background-color: #dcdcdc;
+//}
 
 /* 通用按钮 */
 QPushButton {

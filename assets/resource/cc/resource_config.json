@@ -1,0 +1,31 @@
+{
+  "resource_name": "战双帕弥什",
+  "resource_version": "1.0.0",
+  "resource_author": "Maa",
+  "resource_description": "战双帕弥什自动化脚本",
+  "resource_icon": "/icons/apps_icons/OIP-C.jpg",
+  "resource_tasks": [
+    {
+      "task_name": "打开游戏",
+      "task_entry": "打开战双",
+      "option": [
+        "打开战双"
+      ]
+    }
+  ],
+  "options": [
+    {
+      "name": "打开战双",
+      "type": "select",
+      "choices": [
+        {
+          "name": "官服",
+          "value": "官服"
+        }
+      ],
+      "pipeline_override": {
+        "官服": {}
+      }
+    }
+  ]
+}
