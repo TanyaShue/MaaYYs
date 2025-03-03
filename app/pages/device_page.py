@@ -1,10 +1,12 @@
 from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QTabWidget,
                                QSplitter, QTextEdit, QCheckBox, QWidget, QFormLayout,
                                QLineEdit, QComboBox, QTableWidget, QTableWidgetItem,
-                               QHeaderView, QFrame)
-from PySide6.QtCore import Qt
+                               QHeaderView, QFrame, QScrollArea)
+from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QFont
 
+from app.components.collapsible_widget import CollapsibleWidget
+from app.models.config.device_config import OptionConfig
 from app.models.config.global_config import GlobalConfig
 from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
 
@@ -18,8 +20,6 @@ class DevicePage(QWidget):
 
     def init_ui(self):
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(15)
 
         # 页面标题
         title_label = QLabel("设备信息")
@@ -268,7 +268,7 @@ class DevicePage(QWidget):
             resource_table.setCellWidget(row, 0, checkbox_widget)
 
             # 资源名称（包含已选任务数）
-            name_item = QTableWidgetItem(f"{resource_name} (已选任务: {len(resource_config.selected_tasks)})")
+            name_item = QTableWidgetItem(f"{resource_name}")
             resource_table.setItem(row, 1, name_item)
 
             # 操作按钮
@@ -308,11 +308,6 @@ class DevicePage(QWidget):
         self.settings_layout = QVBoxLayout(settings_frame)
         self.settings_layout.setContentsMargins(15, 15, 15, 15)
 
-        settings_label = QLabel("资源设置")
-        settings_label.setFont(QFont("Arial", 12, QFont.Bold))
-        settings_label.setObjectName("sectionTitle")
-        self.settings_layout.addWidget(settings_label)
-
         self.settings_content = QWidget()
         self.settings_content_layout = QVBoxLayout(self.settings_content)
         self.settings_layout.addWidget(self.settings_content)
@@ -323,7 +318,7 @@ class DevicePage(QWidget):
         splitter.addWidget(settings_frame)
 
         # 设置初始大小
-        splitter.setSizes([400, 600])
+        splitter.setSizes([600, 400])
 
         control_layout.addWidget(splitter)
 
@@ -376,78 +371,163 @@ class DevicePage(QWidget):
         if self.settings_content.layout():
             QWidget().setLayout(self.settings_content.layout())
 
-        # 创建新布局
-        content_layout = QVBoxLayout(self.settings_content)
+        # 创建主布局
+        main_layout = QVBoxLayout(self.settings_content)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(10)
 
-        # 资源名称
+        # 资源名称标题
         resource_name = QLabel(f"{resource_config.resource_name} 设置")
         resource_name.setFont(QFont("Arial", 12, QFont.Bold))
         resource_name.setObjectName("resourceSettingsTitle")
-        content_layout.addWidget(resource_name)
+        main_layout.addWidget(resource_name)
 
-        # 为每个设置组创建可折叠框
-        # 任务选择
-        tasks_frame = QFrame()
-        tasks_frame.setFrameShape(QFrame.StyledPanel)
-        tasks_frame.setObjectName("tasksFrame")
-        tasks_layout = QVBoxLayout(tasks_frame)
+        # 创建滚动区域
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setFrameShape(QFrame.NoFrame)
 
-        tasks_title = QLabel("任务选择")
-        tasks_title.setFont(QFont("Arial", 11, QFont.Bold))
-        tasks_layout.addWidget(tasks_title)
+        # 创建滚动区域内的容器控件
+        scroll_content = QWidget()
+        content_layout = QVBoxLayout(scroll_content)
+        content_layout.setSpacing(10)
 
-        tasks_widget = QWidget()
-        tasks_inner_layout = QVBoxLayout(tasks_widget)
+        # 获取当前设备配置中的选定任务和选项
+        current_tasks = resource_config.selected_tasks
+        current_options = {opt.option_name: opt for opt in resource_config.options}
+
+        # 用于存储任务选择状态的字典
+        task_checkboxes = {}
+        # 为每个任务创建可折叠的选项组
+        task_options_map = {}
+
         for task in full_resource_config.resource_tasks:
-            task_checkbox = QCheckBox(task.task_name)
-            task_checkbox.setChecked(task.task_name in resource_config.selected_tasks)
-            tasks_inner_layout.addWidget(task_checkbox)
-        tasks_layout.addWidget(tasks_widget)
-        content_layout.addWidget(tasks_frame)
+            # 创建该任务的可折叠组件
+            options_widget = CollapsibleWidget(f"{task.task_name}")
 
-        # 选项设置
-        options_frame = QFrame()
-        options_frame.setFrameShape(QFrame.StyledPanel)
-        options_frame.setObjectName("optionsFrame")
-        options_layout = QVBoxLayout(options_frame)
+            # 将复选框状态设为任务是否已选择
+            options_widget.checkbox.setChecked(task.task_name in current_tasks)
 
-        options_title = QLabel("选项设置")
-        options_title.setFont(QFont("Arial", 11, QFont.Bold))
-        options_layout.addWidget(options_title)
+            # 保存对复选框的引用
+            task_checkboxes[task.task_name] = options_widget.checkbox
 
-        options_widget = QWidget()
-        options_form_layout = QFormLayout(options_widget)
-        options_form_layout.setVerticalSpacing(10)
+            # 如果有选项，则添加选项控件
+            if task.option:
+                # 从全局配置中收集该任务需要的选项
+                for option_name in task.option:
+                    for option in full_resource_config.options:
+                        if option.name == option_name:
+                            # 创建选项控制区域
+                            option_widget = QWidget()
+                            option_layout = QHBoxLayout(option_widget)
+                            option_layout.setContentsMargins(0, 2, 0, 2)
+                            option_layout.setSpacing(10)
 
-        current_options = {opt.option_name: opt.value for opt in resource_config.options}
-        for option in full_resource_config.options:
-            label = QLabel(option.name)
-            label.setFont(QFont("Arial", 10))
-            if isinstance(option, SelectOption):
-                widget = QComboBox()
-                for choice in option.choices:
-                    widget.addItem(choice.name, choice.value)
-                if option.name in current_options:
-                    index = widget.findData(current_options[option.name])
-                    if index >= 0:
-                        widget.setCurrentIndex(index)
-                options_form_layout.addRow(label, widget)
-            elif isinstance(option, BoolOption):
-                widget = QCheckBox()
-                widget.setChecked(current_options.get(option.name, option.default))
-                options_form_layout.addRow(label, widget)
-            elif isinstance(option, InputOption):
-                widget = QLineEdit()
-                widget.setText(str(current_options.get(option.name, option.default)))
-                options_form_layout.addRow(label, widget)
-        options_layout.addWidget(options_widget)
-        content_layout.addWidget(options_frame)
+                            # 选项标签
+                            option_label = QLabel(option.name)
+                            option_layout.addWidget(option_label)
+                            option_layout.addStretch()
 
-        # 添加保存按钮
-        save_btn = QPushButton("保存设置")
-        save_btn.setObjectName("saveSettingsButton")
-        save_btn.setFixedHeight(40)
-        content_layout.addWidget(save_btn)
+                            # 根据选项类型添加不同的控件
+                            if isinstance(option, SelectOption):
+                                widget = QComboBox()
+                                for choice in option.choices:
+                                    widget.addItem(choice.name, choice.value)
+                                # 设置当前值（如果在设备配置中存在）
+                                if option_name in current_options:
+                                    index = widget.findData(current_options[option_name].value)
+                                    if index >= 0:
+                                        widget.setCurrentIndex(index)
+
+                            elif isinstance(option, BoolOption):
+                                widget = QCheckBox()
+                                if option_name in current_options:
+                                    widget.setChecked(current_options[option_name].value)
+                                else:
+                                    widget.setChecked(option.default)
+
+                            elif isinstance(option, InputOption):
+                                widget = QLineEdit()
+                                if option_name in current_options:
+                                    widget.setText(str(current_options[option_name].value))
+                                else:
+                                    widget.setText(str(option.default))
+
+                            option_layout.addWidget(widget)
+
+                            # 添加到任务选项布局
+                            options_widget.content_layout.addWidget(option_widget)
+
+                            # 将选项与其控件关联，方便后续保存
+                            task_options_map[(task.task_name, option_name)] = widget
+            else:
+                # 如果没有选项，添加提示标签
+                no_options_label = QLabel("该任务没有可配置的选项")
+                no_options_label.setStyleSheet("color: #666666; font-style: italic;")
+                no_options_label.setAlignment(Qt.AlignCenter)
+                options_widget.content_layout.addWidget(no_options_label)
+            # 添加到滚动区域内的布局
+            content_layout.addWidget(options_widget)
 
         # 添加拉伸以将所有内容推到顶部
         content_layout.addStretch()
+
+        # 设置滚动区域的内容
+        scroll_area.setWidget(scroll_content)
+
+        # 将滚动区域添加到主布局
+        main_layout.addWidget(scroll_area)
+
+        # 添加保存按钮 - 在滚动区域外部
+        save_btn = QPushButton("保存设置")
+        save_btn.setObjectName("saveSettingsButton")
+        save_btn.setFixedHeight(40)
+        # 连接保存按钮的点击事件
+        save_btn.clicked.connect(lambda: self.save_resource_settings(
+            resource_config,
+            task_checkboxes,
+            task_options_map
+        ))
+        main_layout.addWidget(save_btn)
+
+
+    # 保存设置的方法保持不变
+    def save_resource_settings(self, resource_config, task_checkboxes, task_options_map):
+        # 收集选中的任务
+        selected_tasks = []
+        for task_name, checkbox in task_checkboxes.items():
+            if checkbox.isChecked():
+                selected_tasks.append(task_name)
+
+        # 收集选项配置
+        options = []
+        for (task_name, option_name), widget in task_options_map.items():
+            # 只保存选中任务的选项
+            if task_name in selected_tasks:
+                # 根据控件类型获取值
+                if isinstance(widget, QComboBox):
+                    value = widget.currentData()
+                elif isinstance(widget, QCheckBox):
+                    value = widget.isChecked()
+                elif isinstance(widget, QLineEdit):
+                    value = widget.text()
+                else:
+                    value = None
+
+                # 创建选项配置
+                if value is not None:
+                    option_config = OptionConfig(
+                        option_name=option_name,
+                        value=value,
+                        task_name=task_name
+                    )
+                    options.append(option_config)
+
+        # 更新资源配置
+        resource_config.selected_tasks = selected_tasks
+        resource_config.options = options
+
+        print(resource_config)
+        # 显示保存成功消息
+        from PySide6.QtWidgets import QMessageBox
+        QMessageBox.information(self, "保存成功", f"{resource_config.resource_name} 的设置已保存")
