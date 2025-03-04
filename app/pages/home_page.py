@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QGridLayout, QFrame, QPushButton, QHBoxLayout
 from PySide6.QtGui import QFont
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 
 from app.components import DeviceCard
 from app.models.config.global_config import GlobalConfig
@@ -8,6 +8,7 @@ from app.pages.add_device_dialog import AddDeviceDialog  # 导入新创建的对
 
 
 class HomePage(QWidget):
+    device_added = Signal()
     def __init__(self, parent=None):
         super().__init__(parent)
         self.global_config = GlobalConfig()
@@ -97,3 +98,6 @@ class HomePage(QWidget):
         if dialog.exec_():
             # 如果用户点击确定，重新加载设备列表
             self.populate_device_cards()
+            # Emit the signal to notify other components
+            self.device_added.emit()
+

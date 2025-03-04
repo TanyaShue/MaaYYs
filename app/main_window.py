@@ -84,7 +84,7 @@ class MainWindow(QMainWindow):
         self.device_btn.clicked.connect(lambda: self.show_page("device"))
         self.download_btn.clicked.connect(lambda: self.show_page("download"))
         self.info_btn.clicked.connect(lambda: self.show_page("info"))
-
+        self.pages["home"].device_added.connect(self.pages["device"].refresh_device_list)
         # Initialize with home page
         self.show_page("home")
 

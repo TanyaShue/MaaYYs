@@ -13,6 +13,7 @@
       "resources": [
         {
           "resource_name": "阴阳师",
+          "enable": true,
           "selected_tasks": [
             "领取奖励",
             "自动结界",
@@ -87,6 +88,7 @@
         },
         {
           "resource_name": "明日方舟",
+          "enable": true,
           "selected_tasks": [
             "启动加速器",
             "领取奖励",

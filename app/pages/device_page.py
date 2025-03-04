@@ -1,12 +1,12 @@
 from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QTabWidget,
                                QSplitter, QTextEdit, QCheckBox, QWidget, QFormLayout,
                                QLineEdit, QComboBox, QTableWidget, QTableWidgetItem,
-                               QHeaderView, QFrame, QScrollArea)
+                               QHeaderView, QFrame, QScrollArea, QMessageBox)
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QFont
 
 from app.components.collapsible_widget import CollapsibleWidget
-from app.models.config.device_config import OptionConfig
+from app.models.config.device_config import OptionConfig, Resource
 from app.models.config.global_config import GlobalConfig
 from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
 
@@ -16,9 +16,10 @@ class DevicePage(QWidget):
         super().__init__(parent)
         self.global_config = GlobalConfig()
         self.init_ui()
-        self.load_sample_data()
+        self.load_config_data()
 
     def init_ui(self):
+        """初始化UI组件"""
         layout = QVBoxLayout(self)
 
         # 页面标题
@@ -27,7 +28,7 @@ class DevicePage(QWidget):
         title_label.setObjectName("pageTitle")
         layout.addWidget(title_label)
 
-        # 设备信息面板（使用框架包装，提升视觉层次）
+        # 设备信息面板
         self.devices_frame = QFrame()
         self.devices_frame.setFrameShape(QFrame.StyledPanel)
         self.devices_frame.setObjectName("devicesFrame")
@@ -54,7 +55,7 @@ class DevicePage(QWidget):
 
         layout.addWidget(self.devices_frame)
 
-        # 设备详情区域（使用框架包装，提升视觉层次）
+        # 设备详情区域
         self.device_detail_frame = QFrame()
         self.device_detail_frame.setFrameShape(QFrame.StyledPanel)
         self.device_detail_frame.setObjectName("deviceDetailFrame")
@@ -65,19 +66,21 @@ class DevicePage(QWidget):
 
         layout.addWidget(self.device_detail_frame)
 
-    def load_sample_data(self):
+    def load_config_data(self):
+        """加载配置数据"""
         try:
             devices_config_path = "assets/config/devices.json"
             self.global_config.load_devices_config(devices_config_path)
-
             resource_dir = "assets/resource"
             self.global_config.load_all_resources_from_directory(resource_dir)
 
             self.populate_device_table()
         except Exception as e:
             print(f"Error loading config files: {e}")
+            QMessageBox.critical(self, "加载失败", f"加载配置文件失败: {e}")
 
     def populate_device_table(self):
+        """填充设备表格"""
         # 清空现有表格内容
         self.device_table.clearContents()
         self.device_table.setRowCount(0)
@@ -141,24 +144,28 @@ class DevicePage(QWidget):
 
         except Exception as e:
             print(f"Error populating device table: {e}")
+            QMessageBox.critical(self, "错误", f"填充设备表格失败: {e}")
 
     def get_device_config(self, device_name):
-        for device in self.global_config.get_devices_config().devices:
+        """根据设备名称获取设备配置"""
+        devices_config = self.global_config.get_devices_config()
+        if not devices_config:
+            return None
+
+        for device in devices_config.devices:
             if device.device_name == device_name:
                 return device
         return None
 
     def show_device_detail(self, device_name):
+        """显示设备详情"""
         device_config = self.get_device_config(device_name)
         if not device_config:
+            QMessageBox.warning(self, "错误", f"设备 '{device_name}' 未找到")
             return
 
         # 清除现有内容
-        if self.device_detail_layout.count() > 0:
-            for i in reversed(range(self.device_detail_layout.count())):
-                item = self.device_detail_layout.itemAt(i)
-                if item.widget():
-                    item.widget().deleteLater()
+        self._clear_layout(self.device_detail_layout)
 
         # 设备标题和返回按钮
         header_widget = QWidget()
@@ -183,7 +190,26 @@ class DevicePage(QWidget):
         tab_widget = QTabWidget()
         tab_widget.setObjectName("detailTabs")
 
-        # 基本信息 Tab
+        # 添加基本信息选项卡
+        info_tab = self._create_info_tab(device_config)
+        tab_widget.addTab(info_tab, "基本信息")
+
+        # 添加操作面板选项卡
+        control_tab = self._create_control_tab(device_config)
+        tab_widget.addTab(control_tab, "操作面板")
+
+        # 添加日志选项卡
+        log_tab = self._create_log_tab(device_config)
+        tab_widget.addTab(log_tab, "日志面板")
+
+        self.device_detail_layout.addWidget(tab_widget)
+
+        # 显示设备详情框架，隐藏设备列表框架
+        self.devices_frame.hide()
+        self.device_detail_frame.show()
+
+    def _create_info_tab(self, device_config):
+        """创建基本信息选项卡"""
         info_tab = QWidget()
         info_layout = QVBoxLayout(info_tab)
         info_layout.setContentsMargins(15, 15, 15, 15)
@@ -221,7 +247,10 @@ class DevicePage(QWidget):
         info_layout.addWidget(info_table)
         info_layout.addStretch()
 
-        # 操作面板 Tab（使用分隔器）
+        return info_tab
+
+    def _create_control_tab(self, device_config):
+        """创建操作面板选项卡"""
         control_tab = QWidget()
         control_layout = QVBoxLayout(control_tab)
         control_layout.setContentsMargins(15, 15, 15, 15)
@@ -231,75 +260,7 @@ class DevicePage(QWidget):
         splitter.setObjectName("controlSplitter")
 
         # 左侧 - 资源选择
-        resource_widget = QWidget()
-        resource_layout = QVBoxLayout(resource_widget)
-        resource_layout.setContentsMargins(0, 0, 10, 0)
-
-        resource_label = QLabel("资源选择")
-        resource_label.setFont(QFont("Arial", 12, QFont.Bold))
-        resource_label.setObjectName("sectionTitle")
-        resource_layout.addWidget(resource_label)
-
-        # 资源表格（带复选框）
-        configured_resources = device_config.resources
-        resource_table = QTableWidget(len(configured_resources), 3)
-        resource_table.setObjectName("resourceTable")
-        resource_table.setHorizontalHeaderLabels(["启用", "资源名称", "操作"])
-        resource_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        resource_table.verticalHeader().setVisible(False)
-        resource_table.setEditTriggers(QTableWidget.NoEditTriggers)
-        resource_table.setAlternatingRowColors(True)
-        resource_table.setFrameShape(QFrame.NoFrame)
-
-        for row, resource_config in enumerate(configured_resources):
-            resource_name = resource_config.resource_name
-            full_resource_config = self.global_config.get_resource_config(resource_name)
-            if not full_resource_config:
-                continue
-
-            # 复选框
-            checkbox = QCheckBox()
-            checkbox.setChecked(True)
-            checkbox_widget = QWidget()
-            checkbox_layout = QHBoxLayout(checkbox_widget)
-            checkbox_layout.setContentsMargins(5, 2, 5, 2)
-            checkbox_layout.addWidget(checkbox)
-            checkbox_layout.setAlignment(Qt.AlignCenter)
-            resource_table.setCellWidget(row, 0, checkbox_widget)
-
-            # 资源名称（包含已选任务数）
-            name_item = QTableWidgetItem(f"{resource_name}")
-            resource_table.setItem(row, 1, name_item)
-
-            # 操作按钮
-            button_widget = QWidget()
-            button_layout = QHBoxLayout(button_widget)
-            button_layout.setContentsMargins(5, 2, 5, 2)
-
-            run_btn = QPushButton("运行")
-            run_btn.setFixedWidth(60)
-            run_btn.setObjectName("runButton")
-
-            settings_btn = QPushButton("设置")
-            settings_btn.setFixedWidth(60)
-            settings_btn.setObjectName("settingsButton")
-            settings_btn.clicked.connect(
-                lambda checked, r=resource_config, full_r=full_resource_config:
-                self.show_resource_settings(r, full_r)
-            )
-
-            button_layout.addWidget(run_btn)
-            button_layout.addWidget(settings_btn)
-
-            resource_table.setCellWidget(row, 2, button_widget)
-            resource_table.setRowHeight(row, 35)
-
-        resource_layout.addWidget(resource_table)
-
-        one_key_start_btn = QPushButton("一键启动")
-        one_key_start_btn.setFixedHeight(40)
-        one_key_start_btn.setObjectName("oneKeyButton")
-        resource_layout.addWidget(one_key_start_btn)
+        resource_widget = self._create_resource_selection_widget(device_config)
 
         # 右侧 - 设置面板（初始为空）
         settings_frame = QFrame()
@@ -322,7 +283,99 @@ class DevicePage(QWidget):
 
         control_layout.addWidget(splitter)
 
-        # 日志 Tab
+        return control_tab
+
+    def _create_resource_selection_widget(self, device_config):
+        """创建资源选择控件"""
+        resource_widget = QWidget()
+        resource_layout = QVBoxLayout(resource_widget)
+        resource_layout.setContentsMargins(0, 0, 10, 0)
+
+        resource_label = QLabel("资源选择")
+        resource_label.setFont(QFont("Arial", 12, QFont.Bold))
+        resource_label.setObjectName("sectionTitle")
+        resource_layout.addWidget(resource_label)
+
+        # 获取所有可用资源
+        all_resources = self.global_config.get_all_resource_configs()
+
+        # 获取资源启用状态的字典
+        resource_enabled_map = {r.resource_name: r.enable for r in device_config.resources}
+
+        # 资源表格（带复选框）
+        resource_table = QTableWidget(len(all_resources), 3)
+        resource_table.setObjectName("resourceTable")
+        resource_table.setHorizontalHeaderLabels(["启用", "资源名称", "操作"])
+        resource_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        resource_table.verticalHeader().setVisible(False)
+        resource_table.setEditTriggers(QTableWidget.NoEditTriggers)
+        resource_table.setAlternatingRowColors(True)
+        resource_table.setFrameShape(QFrame.NoFrame)
+
+        for row, resource_config in enumerate(all_resources):
+            resource_name = resource_config.resource_name
+
+            # 复选框
+            checkbox = QCheckBox()
+            # 检查该资源是否已启用
+            checkbox.setChecked(resource_enabled_map.get(resource_name, False))
+
+            checkbox_widget = QWidget()
+            checkbox_layout = QHBoxLayout(checkbox_widget)
+            checkbox_layout.setContentsMargins(5, 2, 5, 2)
+            checkbox_layout.addWidget(checkbox)
+            checkbox_layout.setAlignment(Qt.AlignCenter)
+            resource_table.setCellWidget(row, 0, checkbox_widget)
+
+            # 资源名称
+            name_item = QTableWidgetItem(f"{resource_name}")
+            resource_table.setItem(row, 1, name_item)
+
+            # 操作按钮
+            button_widget = QWidget()
+            button_layout = QHBoxLayout(button_widget)
+            button_layout.setContentsMargins(5, 2, 5, 2)
+
+            run_btn = QPushButton("运行")
+            run_btn.setFixedWidth(60)
+            run_btn.setObjectName("runButton")
+
+            settings_btn = QPushButton("设置")
+            settings_btn.setFixedWidth(60)
+            settings_btn.setObjectName("settingsButton")
+
+            # 查找对应的设备资源配置
+            device_resource = self._get_device_resource(device_config, resource_name)
+
+            settings_btn.clicked.connect(
+                lambda checked, r_name=resource_name, d_config=device_config:
+                self.show_resource_settings(d_config, r_name)
+            )
+
+            button_layout.addWidget(run_btn)
+            button_layout.addWidget(settings_btn)
+
+            resource_table.setCellWidget(row, 2, button_widget)
+            resource_table.setRowHeight(row, 35)
+
+        resource_layout.addWidget(resource_table)
+
+        # 添加保存资源选择按钮
+        save_selection_btn = QPushButton("保存资源选择")
+        save_selection_btn.setFixedHeight(40)
+        save_selection_btn.setObjectName("saveSelectionButton")
+        save_selection_btn.clicked.connect(lambda: self.save_resource_selection(device_config))
+        resource_layout.addWidget(save_selection_btn)
+
+        one_key_start_btn = QPushButton("一键启动")
+        one_key_start_btn.setFixedHeight(40)
+        one_key_start_btn.setObjectName("oneKeyButton")
+        resource_layout.addWidget(one_key_start_btn)
+
+        return resource_widget
+
+    def _create_log_tab(self, device_config):
+        """创建日志选项卡"""
         log_tab = QWidget()
         log_layout = QVBoxLayout(log_tab)
         log_layout.setContentsMargins(15, 15, 15, 15)
@@ -336,51 +389,120 @@ class DevicePage(QWidget):
         log_text.setReadOnly(True)
         log_text.setObjectName("logTextEdit")
         log_text.setText(f"""11:45:14
-{device_name}
+{device_config.device_name}
 启动成功
 19:19:10
-{device_name} 运行正常, 这是一
+{device_config.device_name} 运行正常, 这是一
 长的日志信息, 用于测试SiLogItem组
 动操行和显示效果。查看多行日志是
 确显示和滚动。
 00:00:00
-{device_name}
+{device_config.device_name}
 检测到异常
 """)
 
         log_layout.addWidget(log_text)
 
-        # 添加选项卡到控件
-        tab_widget.addTab(info_tab, "基本信息")
-        tab_widget.addTab(control_tab, "操作面板")
-        tab_widget.addTab(log_tab, "日志面板")
+        return log_tab
 
-        self.device_detail_layout.addWidget(tab_widget)
+    def save_resource_selection(self, device_config):
+        """保存资源选择状态到设备配置"""
+        # 获取资源表格
+        resource_table = self.findChild(QTableWidget, "resourceTable")
+        if not resource_table:
+            QMessageBox.warning(self, "错误", "找不到资源表格")
+            return
 
-        # 显示设备详情框架，隐藏设备列表框架
-        self.devices_frame.hide()
-        self.device_detail_frame.show()
+        # 获取所有可用资源
+        all_resources = self.global_config.get_all_resource_configs()
+        all_resource_names = [r.resource_name for r in all_resources]
+
+        # 遍历表格中的每一行，更新资源的启用状态
+        for row in range(resource_table.rowCount()):
+            # 获取复选框控件
+            checkbox_widget = resource_table.cellWidget(row, 0)
+            if not checkbox_widget:
+                continue
+
+            # 从控件中获取复选框
+            checkbox = checkbox_widget.findChild(QCheckBox)
+            if not checkbox:
+                continue
+
+            # 获取资源名称
+            resource_name = resource_table.item(row, 1).text()
+            if resource_name not in all_resource_names:
+                continue
+
+            # 查找现有资源配置或创建新配置
+            device_resource = self._get_device_resource(device_config, resource_name)
+
+            # 如果资源配置不存在，则创建一个新的
+            if not device_resource:
+                device_resource = Resource(
+                    resource_name=resource_name,
+                    enable=False,
+                    selected_tasks=[],
+                    options=[]
+                )
+                device_config.resources.append(device_resource)
+
+            # 更新资源的启用状态
+            device_resource.enable = checkbox.isChecked()
+
+        print(device_config)
+        self.global_config.devices_config.to_json_file("assets/config/devices.json")
+        # 显示保存成功消息
+        QMessageBox.information(self, "保存成功", f"{device_config.device_name} 的资源选择已保存")
+
+    def _get_device_resource(self, device_config, resource_name):
+        """从设备配置中获取指定资源"""
+        for resource in device_config.resources:
+            if resource.resource_name == resource_name:
+                return resource
+        return None
 
     def hide_device_detail(self):
-        # 隐藏设备详情，显示设备列表
+        """隐藏设备详情"""
         self.device_detail_frame.hide()
         self.devices_frame.show()
 
-    def show_resource_settings(self, resource_config, full_resource_config):
+    def refresh_device_list(self):
+        """刷新设备列表"""
+        self.populate_device_table()
+
+    def show_resource_settings(self, device_config, resource_name):
+        """显示资源设置"""
+        # 获取全局资源配置
+        full_resource_config = self.global_config.get_resource_config(resource_name)
+        if not full_resource_config:
+            QMessageBox.warning(self, "错误", f"找不到资源 '{resource_name}' 的配置")
+            return
+
+        # 获取或创建设备资源配置
+        device_resource = self._get_device_resource(device_config, resource_name)
+        if not device_resource:
+            device_resource = Resource(
+                resource_name=resource_name,
+                enable=False,
+                selected_tasks=[],
+                options=[]
+            )
+            device_config.resources.append(device_resource)
+
         # 清除现有设置内容
-        if self.settings_content.layout():
-            QWidget().setLayout(self.settings_content.layout())
+        self._clear_layout(self.settings_content_layout)
 
-        # 创建主布局
-        main_layout = QVBoxLayout(self.settings_content)
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(10)
+        # 创建设置UI
+        self._create_resource_settings_ui(device_resource, full_resource_config)
 
+    def _create_resource_settings_ui(self, device_resource, full_resource_config):
+        """创建资源设置UI"""
         # 资源名称标题
-        resource_name = QLabel(f"{resource_config.resource_name} 设置")
+        resource_name = QLabel(f"{device_resource.resource_name} 设置")
         resource_name.setFont(QFont("Arial", 12, QFont.Bold))
         resource_name.setObjectName("resourceSettingsTitle")
-        main_layout.addWidget(resource_name)
+        self.settings_content_layout.addWidget(resource_name)
 
         # 创建滚动区域
         scroll_area = QScrollArea()
@@ -393,8 +515,8 @@ class DevicePage(QWidget):
         content_layout.setSpacing(10)
 
         # 获取当前设备配置中的选定任务和选项
-        current_tasks = resource_config.selected_tasks
-        current_options = {opt.option_name: opt for opt in resource_config.options}
+        current_tasks = device_resource.selected_tasks
+        current_options = {opt.option_name: opt for opt in device_resource.options}
 
         # 用于存储任务选择状态的字典
         task_checkboxes = {}
@@ -417,55 +539,17 @@ class DevicePage(QWidget):
                 for option_name in task.option:
                     for option in full_resource_config.options:
                         if option.name == option_name:
-                            # 创建选项控制区域
-                            option_widget = QWidget()
-                            option_layout = QHBoxLayout(option_widget)
-                            option_layout.setContentsMargins(0, 2, 0, 2)
-                            option_layout.setSpacing(10)
-
-                            # 选项标签
-                            option_label = QLabel(option.name)
-                            option_layout.addWidget(option_label)
-                            option_layout.addStretch()
-
-                            # 根据选项类型添加不同的控件
-                            if isinstance(option, SelectOption):
-                                widget = QComboBox()
-                                for choice in option.choices:
-                                    widget.addItem(choice.name, choice.value)
-                                # 设置当前值（如果在设备配置中存在）
-                                if option_name in current_options:
-                                    index = widget.findData(current_options[option_name].value)
-                                    if index >= 0:
-                                        widget.setCurrentIndex(index)
-
-                            elif isinstance(option, BoolOption):
-                                widget = QCheckBox()
-                                if option_name in current_options:
-                                    widget.setChecked(current_options[option_name].value)
-                                else:
-                                    widget.setChecked(option.default)
-
-                            elif isinstance(option, InputOption):
-                                widget = QLineEdit()
-                                if option_name in current_options:
-                                    widget.setText(str(current_options[option_name].value))
-                                else:
-                                    widget.setText(str(option.default))
-
-                            option_layout.addWidget(widget)
-
-                            # 添加到任务选项布局
+                            option_widget = self._create_option_widget(
+                                option, option_name, current_options, task.task_name, task_options_map
+                            )
                             options_widget.content_layout.addWidget(option_widget)
-
-                            # 将选项与其控件关联，方便后续保存
-                            task_options_map[(task.task_name, option_name)] = widget
             else:
                 # 如果没有选项，添加提示标签
                 no_options_label = QLabel("该任务没有可配置的选项")
                 no_options_label.setStyleSheet("color: #666666; font-style: italic;")
                 no_options_label.setAlignment(Qt.AlignCenter)
                 options_widget.content_layout.addWidget(no_options_label)
+
             # 添加到滚动区域内的布局
             content_layout.addWidget(options_widget)
 
@@ -476,7 +560,7 @@ class DevicePage(QWidget):
         scroll_area.setWidget(scroll_content)
 
         # 将滚动区域添加到主布局
-        main_layout.addWidget(scroll_area)
+        self.settings_content_layout.addWidget(scroll_area)
 
         # 添加保存按钮 - 在滚动区域外部
         save_btn = QPushButton("保存设置")
@@ -484,15 +568,60 @@ class DevicePage(QWidget):
         save_btn.setFixedHeight(40)
         # 连接保存按钮的点击事件
         save_btn.clicked.connect(lambda: self.save_resource_settings(
-            resource_config,
+            device_resource,
             task_checkboxes,
             task_options_map
         ))
-        main_layout.addWidget(save_btn)
+        self.settings_content_layout.addWidget(save_btn)
 
+    def _create_option_widget(self, option, option_name, current_options, task_name, task_options_map):
+        """创建选项控件"""
+        option_widget = QWidget()
+        option_layout = QHBoxLayout(option_widget)
+        option_layout.setContentsMargins(0, 2, 0, 2)
+        option_layout.setSpacing(10)
 
-    # 保存设置的方法保持不变
+        # 选项标签
+        option_label = QLabel(option.name)
+        option_layout.addWidget(option_label)
+        option_layout.addStretch()
+
+        # 根据选项类型添加不同的控件
+        if isinstance(option, SelectOption):
+            widget = QComboBox()
+            for choice in option.choices:
+                widget.addItem(choice.name, choice.value)
+            # 设置当前值（如果在设备配置中存在）
+            if option_name in current_options:
+                index = widget.findData(current_options[option_name].value)
+                if index >= 0:
+                    widget.setCurrentIndex(index)
+
+        elif isinstance(option, BoolOption):
+            widget = QCheckBox()
+            if option_name in current_options:
+                widget.setChecked(current_options[option_name].value)
+            else:
+                widget.setChecked(option.default)
+
+        elif isinstance(option, InputOption):
+            widget = QLineEdit()
+            if option_name in current_options:
+                widget.setText(str(current_options[option_name].value))
+            else:
+                widget.setText(str(option.default))
+        else:
+            widget = QLabel("不支持的选项类型")
+
+        option_layout.addWidget(widget)
+
+        # 将选项与其控件关联，方便后续保存
+        task_options_map[(task_name, option_name)] = widget
+
+        return option_widget
+
     def save_resource_settings(self, resource_config, task_checkboxes, task_options_map):
+        """保存资源设置"""
         # 收集选中的任务
         selected_tasks = []
         for task_name, checkbox in task_checkboxes.items():
@@ -526,8 +655,18 @@ class DevicePage(QWidget):
         # 更新资源配置
         resource_config.selected_tasks = selected_tasks
         resource_config.options = options
-
-        print(resource_config)
         # 显示保存成功消息
-        from PySide6.QtWidgets import QMessageBox
         QMessageBox.information(self, "保存成功", f"{resource_config.resource_name} 的设置已保存")
+
+    def _clear_layout(self, layout):
+        """清除布局中的所有控件"""
+        if layout is None:
+            return
+
+        while layout.count():
+            item = layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+            elif item.layout() is not None:
+                self._clear_layout(item.layout())
