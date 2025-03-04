@@ -94,3 +94,19 @@ class GlobalConfig:
         # 递归查找所有子目录中的 "resource_config.json" 文件并加载
         for file in path.rglob("resource_config.json"):
             self.load_resource_config(str(file))
+
+    def save_all_configs(self) -> None:
+        """
+        保存全局 DevicesConfig 和所有 ResourceConfig 配置到对应的文件中。
+
+        注意：
+            每个配置类的 to_json_file 方法会使用记录的 source_file 保存到原路径，
+            如果某个配置未记录 source_file，则会抛出异常。
+        """
+        if self.devices_config is not None:
+            self.devices_config.to_json_file()
+        else:
+            raise ValueError("DevicesConfig 尚未加载，无法保存。")
+
+        for resource_config in self.resource_configs.values():
+            resource_config.to_json_file()

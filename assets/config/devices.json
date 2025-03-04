@@ -1,202 +1,211 @@
 {
-  "devices": [
-    {
-      "device_name": "雷电模拟器-阴阳师1",
-      "adb_config": {
-        "name": "LDPlayer",
-        "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
-        "address": "127.0.0.1:5555",
-        "screencap_methods": 18446744073709551559,
-        "input_methods": 18446744073709551607,
-        "config": {}
-      },
-      "resources": [
+    "devices": [
         {
-          "resource_name": "阴阳师",
-          "enable": true,
-          "selected_tasks": [
-            "领取奖励",
-            "自动结界",
-            "日常",
-            "自动悬赏",
-            "自动地鬼",
-            "打开游戏",
-            "结界奖励领取"
-          ],
-          "options": [
-            {
-              "option_name": "选择区服",
-              "value": "官服"
+            "device_name": "雷电模拟器-阴阳师1",
+            "adb_config": {
+                "name": "LDPlayer",
+                "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
+                "address": "127.0.0.1:5555",
+                "screencap_methods": 18446744073709551559,
+                "input_methods": 18446744073709551607,
+                "config": {}
             },
-            {
-              "option_name": "悬赏封印分组预设",
-              "value": "日常"
-            },
-            {
-              "option_name": "悬赏封印队伍预设",
-              "value": "日常清杂"
-            },
-            {
-              "option_name": "结界突破分组预设",
-              "value": "斗技"
-            },
-            {
-              "option_name": "结界突破队伍预设",
-              "value": "突破"
-            },
-            {
-              "option_name": "地鬼分组预设",
-              "value": "日常"
-            },
-            {
-              "option_name": "地鬼队伍预设",
-              "value": "日常清杂"
-            },
-            {
-              "option_name": "逢魔首领分组预设",
-              "value": "逢魔"
-            },
-            {
-              "option_name": "逢魔首领队伍预设",
-              "value": "地震鲶"
-            },
-            {
-              "option_name": "是否启动自动轮换",
-              "value": true
-            },
-            {
-              "option_name": "日常_送友情点",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_邮件",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_日常庭院奖励",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_商店每日奖励",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_花合战奖励",
-              "value": true
-            }
-          ]
+            "resources": [
+                {
+                    "resource_name": "阴阳师",
+                    "enable": true,
+                    "selected_tasks": [
+                        "自动地鬼",
+                        "自动悬赏",
+                        "自动结界",
+                        "日常",
+                        "结界奖励领取",
+                        "打开游戏"
+                    ],
+                    "options": [
+                        {
+                            "option_name": "选择区服",
+                            "value": "官服"
+                        },
+                        {
+                            "option_name": "地鬼分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "地鬼队伍预设",
+                            "value": "日常清杂"
+                        },
+                        {
+                            "option_name": "悬赏封印分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "悬赏封印队伍预设",
+                            "value": "日常清杂"
+                        },
+                        {
+                            "option_name": "是否启动自动轮换",
+                            "value": true
+                        },
+                        {
+                            "option_name": "结界突破分组预设",
+                            "value": "斗技"
+                        },
+                        {
+                            "option_name": "结界突破队伍预设",
+                            "value": "突破"
+                        },
+                        {
+                            "option_name": "日常_送友情点",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_邮件",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_日常庭院奖励",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_商店每日奖励",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_花合战奖励",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "resource_name": "明日方舟",
+                    "enable": true,
+                    "selected_tasks": [
+                        "启动加速器",
+                        "领取奖励",
+                        "自动悬赏",
+                        "自动结界",
+                        "日常",
+                        "自动地鬼",
+                        "打开游戏",
+                        "结界奖励领取"
+                    ],
+                    "options": [
+                        {
+                            "option_name": "选择区服",
+                            "value": "官服"
+                        },
+                        {
+                            "option_name": "悬赏封印分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "结界突破队伍预设",
+                            "value": "突破"
+                        },
+                        {
+                            "option_name": "结界突破分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "悬赏封印队伍预设",
+                            "value": "觉醒"
+                        },
+                        {
+                            "option_name": "地鬼分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "地鬼队伍预设",
+                            "value": "觉醒"
+                        },
+                        {
+                            "option_name": "是否启动自动轮换",
+                            "value": true
+                        },
+                        {
+                            "option_name": "逢魔首领分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "逢魔首领队伍预设",
+                            "value": "突破"
+                        },
+                        {
+                            "option_name": "日常_送友情点",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_邮件",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_日常庭院奖励",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_商店每日奖励",
+                            "value": true
+                        },
+                        {
+                            "option_name": "领取奖励_花合战奖励",
+                            "value": true
+                        },
+                        {
+                            "option_name": "日常_送友情点",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "resource_name": "战双帕弥什",
+                    "enable": false,
+                    "selected_tasks": [
+                        "打开游戏"
+                    ],
+                    "options": [
+                        {
+                            "option_name": "打开战双",
+                            "value": "官服"
+                        }
+                    ]
+                }
+            ],
+            "schedule_enabled": true,
+            "schedule_time": [],
+            "start_command": "D:\\leidian\\LDPlayer9\\dnplayer.exe index=0"
         },
         {
-          "resource_name": "明日方舟",
-          "enable": true,
-          "selected_tasks": [
-            "启动加速器",
-            "领取奖励",
-            "自动悬赏",
-            "自动结界",
-            "日常",
-            "自动地鬼",
-            "打开游戏",
-            "结界奖励领取"
-          ],
-          "options": [
-            {
-              "option_name": "选择区服",
-              "value": "官服"
+            "device_name": "夜神模拟器-战双",
+            "adb_config": {
+                "name": "C:/Android/adb.exe",
+                "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
+                "address": "emulator-5554",
+                "screencap_methods": 18446744073709551559,
+                "input_methods": 18446744073709551607,
+                "config": {}
             },
-            {
-              "option_name": "悬赏封印分组预设",
-              "value": "日常"
-            },
-            {
-              "option_name": "结界突破队伍预设",
-              "value": "突破"
-            },
-            {
-              "option_name": "结界突破分组预设",
-              "value": "日常"
-            },
-            {
-              "option_name": "悬赏封印队伍预设",
-              "value": "觉醒"
-            },
-            {
-              "option_name": "地鬼分组预设",
-              "value": "日常"
-            },
-            {
-              "option_name": "地鬼队伍预设",
-              "value": "觉醒"
-            },
-            {
-              "option_name": "是否启动自动轮换",
-              "value": true
-            },
-            {
-              "option_name": "逢魔首领分组预设",
-              "value": "日常"
-            },
-            {
-              "option_name": "逢魔首领队伍预设",
-              "value": "突破"
-            },
-            {
-              "option_name": "日常_送友情点",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_邮件",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_日常庭院奖励",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_商店每日奖励",
-              "value": true
-            },
-            {
-              "option_name": "领取奖励_花合战奖励",
-              "value": true
-            },
-            {
-              "option_name": "日常_送友情点",
-              "value": true
-            }
-          ]
+            "resources": [
+                {
+                    "resource_name": "战双帕弥什",
+                    "enable": false,
+                    "selected_tasks": [
+                        "打开游戏"
+                    ],
+                    "options": [
+                        {
+                            "option_name": "打开战双",
+                            "value": "官服"
+                        }
+                    ]
+                }
+            ],
+            "schedule_enabled": false,
+            "schedule_time": [
+                "00:00",
+                "04:00"
+            ],
+            "start_command": ""
         }
-      ],
-      "schedule_enabled": true,
-      "start_command": "D:\\leidian\\LDPlayer9\\dnplayer.exe index=0"
-    },
-    {
-      "device_name": "夜神模拟器-战双",
-      "adb_config": {
-        "name": "C:/Android/adb.exe",
-        "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
-        "address": "emulator-5554",
-        "screencap_methods": 18446744073709551559,
-        "input_methods": 18446744073709551607,
-        "config": {}
-      },
-      "resources": [
-        {
-          "resource_name": "战双帕弥什",
-          "selected_tasks": [
-            "打开游戏"
-          ],
-          "options": [
-            {
-              "option_name": "打开战双",
-              "value": "官服"
-            }
-          ]
-        }
-      ],
-      "schedule_enabled": false,
-      "schedule_time":["00:00","04:00"],
-      "start_command": ""
-    }
-  ]
+    ]
 }

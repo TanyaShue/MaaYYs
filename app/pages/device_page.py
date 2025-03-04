@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QT
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QFont
 
-from app.components.collapsible_widget import CollapsibleWidget
+from app.components.collapsible_widget import CollapsibleWidget, DraggableContainer
 from app.models.config.device_config import OptionConfig, Resource
 from app.models.config.global_config import GlobalConfig
 from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
@@ -69,11 +69,6 @@ class DevicePage(QWidget):
     def load_config_data(self):
         """加载配置数据"""
         try:
-            devices_config_path = "assets/config/devices.json"
-            self.global_config.load_devices_config(devices_config_path)
-            resource_dir = "assets/resource"
-            self.global_config.load_all_resources_from_directory(resource_dir)
-
             self.populate_device_table()
         except Exception as e:
             print(f"Error loading config files: {e}")
@@ -320,6 +315,12 @@ class DevicePage(QWidget):
             # 检查该资源是否已启用
             checkbox.setChecked(resource_enabled_map.get(resource_name, False))
 
+            # 连接复选框状态变化信号
+            checkbox.stateChanged.connect(
+                lambda state, d_config=device_config, r_name=resource_name, cb=checkbox:
+                self.update_resource_enable_status(d_config, r_name, cb.isChecked())
+            )
+
             checkbox_widget = QWidget()
             checkbox_layout = QHBoxLayout(checkbox_widget)
             checkbox_layout.setContentsMargins(5, 2, 5, 2)
@@ -360,13 +361,7 @@ class DevicePage(QWidget):
 
         resource_layout.addWidget(resource_table)
 
-        # 添加保存资源选择按钮
-        save_selection_btn = QPushButton("保存资源选择")
-        save_selection_btn.setFixedHeight(40)
-        save_selection_btn.setObjectName("saveSelectionButton")
-        save_selection_btn.clicked.connect(lambda: self.save_resource_selection(device_config))
-        resource_layout.addWidget(save_selection_btn)
-
+        # 添加一键启动按钮
         one_key_start_btn = QPushButton("一键启动")
         one_key_start_btn.setFixedHeight(40)
         one_key_start_btn.setObjectName("oneKeyButton")
@@ -405,35 +400,9 @@ class DevicePage(QWidget):
 
         return log_tab
 
-    def save_resource_selection(self, device_config):
-        """保存资源选择状态到设备配置"""
-        # 获取资源表格
-        resource_table = self.findChild(QTableWidget, "resourceTable")
-        if not resource_table:
-            QMessageBox.warning(self, "错误", "找不到资源表格")
-            return
-
-        # 获取所有可用资源
-        all_resources = self.global_config.get_all_resource_configs()
-        all_resource_names = [r.resource_name for r in all_resources]
-
-        # 遍历表格中的每一行，更新资源的启用状态
-        for row in range(resource_table.rowCount()):
-            # 获取复选框控件
-            checkbox_widget = resource_table.cellWidget(row, 0)
-            if not checkbox_widget:
-                continue
-
-            # 从控件中获取复选框
-            checkbox = checkbox_widget.findChild(QCheckBox)
-            if not checkbox:
-                continue
-
-            # 获取资源名称
-            resource_name = resource_table.item(row, 1).text()
-            if resource_name not in all_resource_names:
-                continue
-
+    def update_resource_enable_status(self, device_config, resource_name, is_enabled):
+        """更新资源启用状态并立即保存"""
+        try:
             # 查找现有资源配置或创建新配置
             device_resource = self._get_device_resource(device_config, resource_name)
 
@@ -448,12 +417,13 @@ class DevicePage(QWidget):
                 device_config.resources.append(device_resource)
 
             # 更新资源的启用状态
-            device_resource.enable = checkbox.isChecked()
+            device_resource.enable = is_enabled
 
-        print(device_config)
-        self.global_config.devices_config.to_json_file("assets/config/devices.json")
-        # 显示保存成功消息
-        QMessageBox.information(self, "保存成功", f"{device_config.device_name} 的资源选择已保存")
+            # 立即保存全局配置
+            self.global_config.save_all_configs()
+        except Exception as e:
+            print(f"Error updating resource enable status: {e}")
+            QMessageBox.critical(self, "保存失败", f"更新资源 '{resource_name}' 状态失败: {e}")
 
     def _get_device_resource(self, device_config, resource_name):
         """从设备配置中获取指定资源"""
@@ -494,9 +464,9 @@ class DevicePage(QWidget):
         self._clear_layout(self.settings_content_layout)
 
         # 创建设置UI
-        self._create_resource_settings_ui(device_resource, full_resource_config)
+        self._create_resource_settings_ui(device_resource, full_resource_config, device_config)
 
-    def _create_resource_settings_ui(self, device_resource, full_resource_config):
+    def _create_resource_settings_ui(self, device_resource, full_resource_config, device_config):
         """创建资源设置UI"""
         # 资源名称标题
         resource_name = QLabel(f"{device_resource.resource_name} 设置")
@@ -509,72 +479,47 @@ class DevicePage(QWidget):
         scroll_area.setWidgetResizable(True)
         scroll_area.setFrameShape(QFrame.NoFrame)
 
-        # 创建滚动区域内的容器控件
-        scroll_content = QWidget()
-        content_layout = QVBoxLayout(scroll_content)
-        content_layout.setSpacing(10)
+        # 使用DraggableContainer作为滚动区域内的容器控件
+        scroll_content = DraggableContainer()
 
-        # 获取当前设备配置中的选定任务和选项
-        current_tasks = device_resource.selected_tasks
-        current_options = {opt.option_name: opt for opt in device_resource.options}
-
+        # 接下来对scroll_content.layout添加各个 CollapsibleWidget 实例
         # 用于存储任务选择状态的字典
         task_checkboxes = {}
         # 为每个任务创建可折叠的选项组
         task_options_map = {}
 
         for task in full_resource_config.resource_tasks:
-            # 创建该任务的可折叠组件
             options_widget = CollapsibleWidget(f"{task.task_name}")
-
-            # 将复选框状态设为任务是否已选择
-            options_widget.checkbox.setChecked(task.task_name in current_tasks)
-
-            # 保存对复选框的引用
+            options_widget.checkbox.setChecked(task.task_name in device_resource.selected_tasks)
+            options_widget.checkbox.stateChanged.connect(
+                lambda state, t_name=task.task_name, cb=options_widget.checkbox:
+                self.update_task_selection(device_config, device_resource, t_name, cb.isChecked())
+            )
             task_checkboxes[task.task_name] = options_widget.checkbox
 
-            # 如果有选项，则添加选项控件
             if task.option:
-                # 从全局配置中收集该任务需要的选项
                 for option_name in task.option:
                     for option in full_resource_config.options:
                         if option.name == option_name:
                             option_widget = self._create_option_widget(
-                                option, option_name, current_options, task.task_name, task_options_map
+                                option, option_name, {opt.option_name: opt for opt in device_resource.options},
+                                task.task_name, task_options_map, device_config, device_resource
                             )
                             options_widget.content_layout.addWidget(option_widget)
             else:
-                # 如果没有选项，添加提示标签
                 no_options_label = QLabel("该任务没有可配置的选项")
                 no_options_label.setStyleSheet("color: #666666; font-style: italic;")
                 no_options_label.setAlignment(Qt.AlignCenter)
                 options_widget.content_layout.addWidget(no_options_label)
 
-            # 添加到滚动区域内的布局
-            content_layout.addWidget(options_widget)
+            scroll_content.layout.addWidget(options_widget)
 
-        # 添加拉伸以将所有内容推到顶部
-        content_layout.addStretch()
-
-        # 设置滚动区域的内容
+        scroll_content.layout.addStretch()
         scroll_area.setWidget(scroll_content)
-
-        # 将滚动区域添加到主布局
         self.settings_content_layout.addWidget(scroll_area)
 
-        # 添加保存按钮 - 在滚动区域外部
-        save_btn = QPushButton("保存设置")
-        save_btn.setObjectName("saveSettingsButton")
-        save_btn.setFixedHeight(40)
-        # 连接保存按钮的点击事件
-        save_btn.clicked.connect(lambda: self.save_resource_settings(
-            device_resource,
-            task_checkboxes,
-            task_options_map
-        ))
-        self.settings_content_layout.addWidget(save_btn)
-
-    def _create_option_widget(self, option, option_name, current_options, task_name, task_options_map):
+    def _create_option_widget(self, option, option_name, current_options, task_name,
+                              task_options_map, device_config, device_resource):
         """创建选项控件"""
         option_widget = QWidget()
         option_layout = QHBoxLayout(option_widget)
@@ -597,6 +542,12 @@ class DevicePage(QWidget):
                 if index >= 0:
                     widget.setCurrentIndex(index)
 
+            # 连接选择变化信号
+            widget.currentIndexChanged.connect(
+                lambda index, w=widget, o_name=option_name:
+                self.update_option_value(device_config, device_resource, o_name, w.currentData())
+            )
+
         elif isinstance(option, BoolOption):
             widget = QCheckBox()
             if option_name in current_options:
@@ -604,59 +555,79 @@ class DevicePage(QWidget):
             else:
                 widget.setChecked(option.default)
 
+            # 连接复选框状态变化信号
+            widget.stateChanged.connect(
+                lambda state, o_name=option_name, cb=widget:
+                self.update_option_value(device_config, device_resource, o_name, cb.isChecked())
+            )
+
         elif isinstance(option, InputOption):
             widget = QLineEdit()
             if option_name in current_options:
                 widget.setText(str(current_options[option_name].value))
             else:
                 widget.setText(str(option.default))
+
+            # 连接文本编辑完成信号
+            widget.editingFinished.connect(
+                lambda o_name=option_name, le=widget:
+                self.update_option_value(device_config, device_resource, o_name, le.text())
+            )
         else:
             widget = QLabel("不支持的选项类型")
 
         option_layout.addWidget(widget)
 
-        # 将选项与其控件关联，方便后续保存
+        # 将选项与其控件关联，方便后续引用
         task_options_map[(task_name, option_name)] = widget
 
         return option_widget
 
-    def save_resource_settings(self, resource_config, task_checkboxes, task_options_map):
-        """保存资源设置"""
-        # 收集选中的任务
-        selected_tasks = []
-        for task_name, checkbox in task_checkboxes.items():
-            if checkbox.isChecked():
+    def update_task_selection(self, device_config, resource_config, task_name, is_selected):
+        """更新任务选择状态并立即保存"""
+        try:
+            # 获取当前选定任务列表
+            selected_tasks = resource_config.selected_tasks.copy()
+
+            # 更新任务选择状态
+            if is_selected and task_name not in selected_tasks:
                 selected_tasks.append(task_name)
+            elif not is_selected and task_name in selected_tasks:
+                selected_tasks.remove(task_name)
 
-        # 收集选项配置
-        options = []
-        for (task_name, option_name), widget in task_options_map.items():
-            # 只保存选中任务的选项
-            if task_name in selected_tasks:
-                # 根据控件类型获取值
-                if isinstance(widget, QComboBox):
-                    value = widget.currentData()
-                elif isinstance(widget, QCheckBox):
-                    value = widget.isChecked()
-                elif isinstance(widget, QLineEdit):
-                    value = widget.text()
-                else:
-                    value = None
+            # 更新资源配置
+            resource_config.selected_tasks = selected_tasks
 
-                # 创建选项配置
-                if value is not None:
-                    option_config = OptionConfig(
-                        option_name=option_name,
-                        value=value,
-                        task_name=task_name
-                    )
-                    options.append(option_config)
+            # 立即保存全局配置
+            self.global_config.save_all_configs()
+        except Exception as e:
+            print(f"Error updating task selection: {e}")
+            QMessageBox.critical(self, "保存失败", f"更新任务 '{task_name}' 选择状态失败: {e}")
 
-        # 更新资源配置
-        resource_config.selected_tasks = selected_tasks
-        resource_config.options = options
-        # 显示保存成功消息
-        QMessageBox.information(self, "保存成功", f"{resource_config.resource_name} 的设置已保存")
+    def update_option_value(self, device_config, resource_config, option_name, value):
+        """更新选项值并立即保存"""
+        try:
+            # 查找已有选项配置
+            option_found = False
+            for i, option in enumerate(resource_config.options):
+                if option.option_name == option_name:
+                    resource_config.options[i].value = value
+                    option_found = True
+                    break
+
+            # 如果未找到，添加新选项
+            if not option_found:
+                new_option = OptionConfig(
+                    option_name=option_name,
+                    value=value
+                )
+                resource_config.options.append(new_option)
+
+            # 立即保存全局配置
+            self.global_config.save_all_configs()
+        except Exception as e:
+            print(f"Error updating option value: {e}")
+            QMessageBox.critical(self, "保存失败", f"更新选项 '{option_name}' 值失败: {e}")
 
     def _clear_layout(self, layout):
         """清除布局中的所有控件"""
