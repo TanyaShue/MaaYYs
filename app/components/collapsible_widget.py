@@ -1,18 +1,25 @@
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QCheckBox, QLabel, QPushButton,
-    QScrollArea, QFrame, QSizePolicy, QApplication
+    QScrollArea, QFrame, QSizePolicy, QApplication, QGraphicsOpacityEffect
 )
-from PySide6.QtCore import QPropertyAnimation, QEasingCurve, Qt, QMimeData
-from PySide6.QtGui import QFont, QDrag, QPixmap, QMouseEvent
+from PySide6.QtCore import (
+    QPropertyAnimation, QEasingCurve, Qt, QMimeData,
+    QParallelAnimationGroup, QSequentialAnimationGroup, QPoint, Property, Signal
+)
+from PySide6.QtGui import QFont, QDrag, QPixmap, QMouseEvent, QColor, QCursor
+
 
 class CollapsibleWidget(QWidget):
-    """可折叠组件：优化了展开/收缩动画避免闪烁，同时添加拖动功能"""
+    """可折叠组件：优化了展开/收缩动画，添加了过渡效果和拖动功能"""
 
     def __init__(self, title="折叠组件", parent=None):
         super().__init__(parent)
         self.is_expanded = False
         self.title_text = title
+        # 初始化旋转角度属性
+        self._rotation_angle = 0
         self._init_ui()
+        self._setup_animations()
 
     def _init_ui(self):
         # 主布局：标题栏 + 内容区
@@ -35,20 +42,20 @@ class CollapsibleWidget(QWidget):
         self.title_label = QLabel(self.title_text)
         self.title_label.setFont(QFont("Arial", 10, QFont.Bold))
 
-        # 拖动句柄：使用一个空白的QLabel填充标题栏中除按钮之外的区域
+        # 拖动句柄
         self.drag_handle = QLabel()
         self.drag_handle.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.drag_handle.setStyleSheet("background: transparent;")
-        # 为拖动句柄绑定鼠标事件
+        self.drag_handle.setCursor(QCursor(Qt.OpenHandCursor))  # 设置手型光标
         self.drag_handle.mousePressEvent = self.drag_handle_mouse_press
         self.drag_handle.mouseMoveEvent = self.drag_handle_mouse_move
 
         # 展开/折叠按钮
         self.toggle_button = QPushButton("▼")
         self.toggle_button.setFixedSize(24, 24)
-        self.toggle_button.setStyleSheet("border: none; background: transparent;")
+        self.toggle_button.setObjectName("toggleButton")
 
-        # 布局添加（注意：去掉原来的addStretch，使用拖动句柄代替）
+        # 布局添加
         self.header_layout.addWidget(self.checkbox)
         self.header_layout.addWidget(self.title_label)
         self.header_layout.addWidget(self.drag_handle)
@@ -57,13 +64,17 @@ class CollapsibleWidget(QWidget):
         # ========== 内容区 ==========
         self.content_widget = QWidget()
         self.content_widget.setObjectName("collapsibleContent")
+        # 添加透明度效果
+        self.opacity_effect = QGraphicsOpacityEffect(self.content_widget)
+        self.opacity_effect.setOpacity(0.0)
+        self.content_widget.setGraphicsEffect(self.opacity_effect)
+
         self.content_layout = QVBoxLayout(self.content_widget)
-        self.content_layout.setContentsMargins(25, 5, 10, 5)  # 左边增加缩进
+        self.content_layout.setContentsMargins(25, 5, 10, 5)
         self.content_layout.setSpacing(5)
 
-        # 初始时内容区“收起”：最大高度设为 0（不隐藏，避免闪烁）
+        # 初始时内容区"收起"
         self.content_widget.setMaximumHeight(0)
-        # 注意：不再调用 setVisible(False)
 
         # 将标题栏和内容区加入主布局
         self.main_layout.addWidget(self.header_widget)
@@ -79,6 +90,7 @@ class CollapsibleWidget(QWidget):
                 background-color: #f5f5f5;
                 border: 1px solid #ddd;
                 border-radius: 4px;
+                transition: background-color 0.3s;
             }
             #collapsibleHeader:hover {
                 background-color: #e9e9e9;
@@ -87,33 +99,80 @@ class CollapsibleWidget(QWidget):
                 background-color: #fcfcfc;
                 border-left: 1px solid #ddd;
                 margin-left: 15px;
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+            #toggleButton {
+                border: none;
+                background: transparent;
+                transition: transform 0.3s ease;
             }
         """)
 
+    def _setup_animations(self):
+        # 准备所有动画，但不启动
+        self.height_animation = QPropertyAnimation(self.content_widget, b"maximumHeight")
+        self.height_animation.setEasingCurve(QEasingCurve.OutCubic)  # 更平滑的曲线
+        self.height_animation.setDuration(300)  # 稍微延长动画时间
+
+        self.opacity_animation = QPropertyAnimation(self.opacity_effect, b"opacity")
+        self.opacity_animation.setEasingCurve(QEasingCurve.InOutQuad)
+        self.opacity_animation.setDuration(250)
+
+        self.rotate_animation = QPropertyAnimation(self, b"rotation_angle")
+        self.rotate_animation.setEasingCurve(QEasingCurve.OutBack)  # 带有轻微反弹效果
+        self.rotate_animation.setDuration(300)
+
+        # 创建一个并行动画组
+        self.animation_group = QParallelAnimationGroup()
+        self.animation_group.addAnimation(self.height_animation)
+        self.animation_group.addAnimation(self.opacity_animation)
+        self.animation_group.addAnimation(self.rotate_animation)
+
+    # 属性访问器，用于旋转箭头
+    def _get_rotation_angle(self):
+        return self._rotation_angle
+
+    def _set_rotation_angle(self, angle):
+        self._rotation_angle = angle
+        # 根据角度旋转按钮上的文本
+        self.toggle_button.setStyleSheet(f"""
+            #toggleButton {{
+                border: none;
+                background: transparent;
+                transform: rotate({angle}deg);
+            }}
+        """)
+
+    rotation_angle = Property(float, _get_rotation_angle, _set_rotation_angle)
+
     def toggle_content(self):
-        # 计算内容区展开时应有的高度（考虑边距）
+        # 计算内容区展开时应有的高度
         content_height = self.content_layout.sizeHint().height() + 10
 
-        # 创建动画，目标属性为 maximumHeight
-        self.animation = QPropertyAnimation(self.content_widget, b"maximumHeight")
-        self.animation.setDuration(200)  # 设置动画时长
-
         if self.is_expanded:
-            # 折叠时：从当前高度动画到 0
-            self.animation.setStartValue(self.content_widget.height())
-            self.animation.setEndValue(0)
-            self.toggle_button.setText("▼")
+            # 折叠动画
+            self.height_animation.setStartValue(self.content_widget.height())
+            self.height_animation.setEndValue(0)
+            self.opacity_animation.setStartValue(1.0)
+            self.opacity_animation.setEndValue(0.0)
+            self.rotate_animation.setStartValue(180)
+            self.rotate_animation.setEndValue(0)
         else:
-            # 展开时：确保内容区可见
+            # 展开动画
             self.content_widget.setVisible(True)
-            self.animation.setStartValue(0)
-            self.animation.setEndValue(content_height)
-            self.toggle_button.setText("▲")
+            self.height_animation.setStartValue(0)
+            self.height_animation.setEndValue(content_height)
+            self.opacity_animation.setStartValue(0.0)
+            self.opacity_animation.setEndValue(1.0)
+            self.rotate_animation.setStartValue(0)
+            self.rotate_animation.setEndValue(180)
 
-        self.animation.start()
+        # 启动动画组
+        self.animation_group.start()
         self.is_expanded = not self.is_expanded
 
-    # --- 以下为拖动实现代码 ---
+    # --- 拖动实现代码 ---
     def drag_handle_mouse_press(self, event: QMouseEvent):
         if event.button() == Qt.LeftButton:
             self.drag_start_position = event.pos()
@@ -125,21 +184,28 @@ class CollapsibleWidget(QWidget):
         # 若移动距离未达到拖动的阈值，则不启动拖动
         if (event.pos() - self.drag_start_position).manhattanLength() < QApplication.startDragDistance():
             return
+
         # 启动拖动操作
         drag = QDrag(self)
         mimeData = QMimeData()
-        # 使用 widget 的 id 作为标识（也可以使用其他唯一标识）
         mimeData.setText(str(id(self)))
         drag.setMimeData(mimeData)
-        # 制作一个widget的快照作为拖动时的图片
+
+        # 制作一个带阴影效果的widget快照
         pixmap = QPixmap(self.size())
         self.render(pixmap)
+
+        # 设置拖动图像和热点
         drag.setPixmap(pixmap)
+        drag.setHotSpot(QPoint(pixmap.width() // 2, 10))  # 调整拖动时的手柄位置
+
+        # 执行拖动，使用 QPixmap 代替不支持的 setOpacity
         drag.exec(Qt.MoveAction)
 
 
-
 class DraggableContainer(QWidget):
+    drag=Signal(list)
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.layout = QVBoxLayout(self)
@@ -233,4 +299,23 @@ class DraggableContainer(QWidget):
             # 移除再插入拖动控件
             self.layout.removeWidget(dragged_widget)
             self.layout.insertWidget(insert_index, dragged_widget)
+
         event.acceptProposedAction()
+        # 获取并打印当前子组件的顺序列表 (新增代码)
+        current_order = self.get_widget_order()
+        self.drag.emit([widget.title_text for widget in current_order])
+        # print("当前子组件顺序:", [widget.title_text for widget in current_order]) # 假设 CollapsibleWidget 有 title_text 属性
+
+    # 新增方法：获取当前容器中的子组件顺序
+    def get_widget_order(self):
+        """
+        返回当前容器中子组件的顺序列表。
+        列表中的每个元素是一个 CollapsibleWidget 对象。
+        """
+        widget_list = []
+        for i in range(self.layout.count()):
+            item = self.layout.itemAt(i)
+            if item and item.widget(): # 确保 item 和 widget 存在
+                widget = item.widget()
+                widget_list.append(widget)
+        return widget_list

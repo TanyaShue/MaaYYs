@@ -443,6 +443,9 @@ class DevicePage(QWidget):
 
     def show_resource_settings(self, device_config, resource_name):
         """显示资源设置"""
+        # 设置全局属性，供 eventFilter 使用
+        self.selected_device_name = device_config.device_name
+        self.selected_resource_name = resource_name
         # 获取全局资源配置
         full_resource_config = self.global_config.get_resource_config(resource_name)
         if not full_resource_config:
@@ -455,7 +458,7 @@ class DevicePage(QWidget):
             device_resource = Resource(
                 resource_name=resource_name,
                 enable=False,
-                selected_tasks=[],
+                selected_tasks=[],  # 初始化为空列表
                 options=[]
             )
             device_config.resources.append(device_resource)
@@ -465,6 +468,33 @@ class DevicePage(QWidget):
 
         # 创建设置UI
         self._create_resource_settings_ui(device_resource, full_resource_config, device_config)
+
+    def drag_connect(self, current_order):
+        """事件过滤器，用于捕获拖拽事件并更新任务顺序"""
+        try:
+            device_name = getattr(self, 'selected_device_name', None)
+            resource_name = getattr(self, 'selected_resource_name', None)
+            if not (device_name and resource_name):
+                return
+
+            device_config = self.get_device_config(device_name)
+            if not device_config:
+                return
+
+            resource_config = next(
+                (res for res in device_config.resources if res.resource_name == resource_name),
+                None
+            )
+            if not resource_config:
+                return
+
+            # 更新已选任务顺序（只保留已选择的任务）
+            resource_config.selected_tasks = [
+                task for task in current_order if task in resource_config.selected_tasks
+            ]
+            self.global_config.save_all_configs()
+        except Exception as e:
+            print(f"Error in eventFilter: {e}")
 
     def _create_resource_settings_ui(self, device_resource, full_resource_config, device_config):
         """创建资源设置UI"""
@@ -481,29 +511,55 @@ class DevicePage(QWidget):
 
         # 使用DraggableContainer作为滚动区域内的容器控件
         scroll_content = DraggableContainer()
+        scroll_content.setObjectName('draggableContainer')
+        scroll_content.layout.installEventFilter(self)  # 添加事件过滤器
+        scroll_content.drag.connect(self.drag_connect)
 
-        # 接下来对scroll_content.layout添加各个 CollapsibleWidget 实例
-        # 用于存储任务选择状态的字典
-        task_checkboxes = {}
-        # 为每个任务创建可折叠的选项组
-        task_options_map = {}
+        # 记录原始任务顺序
+        task_order_map = {task.task_name: idx for idx, task in enumerate(full_resource_config.resource_tasks)}
+        # 记录selected_tasks中的顺序（device_resource.selected_tasks可能为空，使用or []处理）
+        selected_order = {task_name: idx for idx, task_name in enumerate(device_resource.selected_tasks or [])}
 
-        for task in full_resource_config.resource_tasks:
-            options_widget = CollapsibleWidget(f"{task.task_name}")
-            options_widget.checkbox.setChecked(task.task_name in device_resource.selected_tasks)
+        # 创建排序后的任务列表：
+        # 1. 如果任务在selected_order中，排序权值为0，并按照selected_order中的顺序排序；
+        # 2. 如果任务不在selected_order中，排序权值为1，并按照原始顺序排序。
+        sorted_tasks = sorted(
+            full_resource_config.resource_tasks,
+            key=lambda task: (
+                0 if task.task_name in selected_order else 1,
+                selected_order.get(task.task_name, task_order_map.get(task.task_name, float('inf')))
+            )
+        )
+
+        for task in sorted_tasks:
+            options_widget = CollapsibleWidget(task.task_name)
+
+            # 根据selected_order判断任务是否选中
+            is_task_selected = task.task_name in selected_order
+            options_widget.checkbox.setChecked(is_task_selected)
+
+            # 使用闭包确保正确传递任务名称
             options_widget.checkbox.stateChanged.connect(
                 lambda state, t_name=task.task_name, cb=options_widget.checkbox:
-                self.update_task_selection(device_config, device_resource, t_name, cb.isChecked())
+                self.update_task_selection(
+                    device_config,
+                    device_resource,
+                    t_name,
+                    cb.isChecked()
+                )
             )
-            task_checkboxes[task.task_name] = options_widget.checkbox
 
             if task.option:
                 for option_name in task.option:
                     for option in full_resource_config.options:
                         if option.name == option_name:
                             option_widget = self._create_option_widget(
-                                option, option_name, {opt.option_name: opt for opt in device_resource.options},
-                                task.task_name, task_options_map, device_config, device_resource
+                                option, option_name,
+                                {opt.option_name: opt for opt in device_resource.options},
+                                task.task_name,
+                                {},
+                                device_config,
+                                device_resource
                             )
                             options_widget.content_layout.addWidget(option_widget)
             else:
@@ -586,20 +642,26 @@ class DevicePage(QWidget):
     def update_task_selection(self, device_config, resource_config, task_name, is_selected):
         """更新任务选择状态并立即保存"""
         try:
-            # 获取当前选定任务列表
-            selected_tasks = resource_config.selected_tasks.copy()
+            # 确保 selected_tasks 是列表
+            selected_tasks = resource_config.selected_tasks or []
 
-            # 更新任务选择状态
-            if is_selected and task_name not in selected_tasks:
-                selected_tasks.append(task_name)
-            elif not is_selected and task_name in selected_tasks:
-                selected_tasks.remove(task_name)
+            # 获取当前界面上的所有任务
+            if is_selected:
+                # 如果任务不在选定列表中，则添加到选定列表
+                if task_name not in selected_tasks:
+                    selected_tasks.append(task_name)
+            else:
+                # 移除任务，如果存在
+                if task_name in selected_tasks:
+                    selected_tasks.remove(task_name)
 
             # 更新资源配置
             resource_config.selected_tasks = selected_tasks
 
             # 立即保存全局配置
             self.global_config.save_all_configs()
+
+            print(f"Updated selected tasks: {selected_tasks}")  # 调试信息
         except Exception as e:
             print(f"Error updating task selection: {e}")
             QMessageBox.critical(self, "保存失败", f"更新任务 '{task_name}' 选择状态失败: {e}")
