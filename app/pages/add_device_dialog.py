@@ -215,8 +215,8 @@ class AddDeviceDialog(QDialog):
                     name=self.name_edit.text(),
                     adb_path=self.adb_path_edit.text(),
                     address=self.adb_address_edit.text(),
-                    screencap_methods=self.screenshot_method_edit.text(),
-                    input_methods=self.input_method_edit.text(),
+                    screencap_methods=int(self.screenshot_method_edit.text()),
+                    input_methods=int(self.input_method_edit.text()),
                     config=self.config_edit.text()
                 ),
                 schedule_enabled=self.schedule_enabled.isChecked(),
