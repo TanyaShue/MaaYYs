@@ -1,0 +1,931 @@
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] ----------------------------- 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] MAA Process Start 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] Windows x64 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][Logger] ----------------------------- 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:34:13.294][INF][Px6444][Tx61501][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:34:13.294][INF][Px6444][Tx61501][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:34:13.294][INF][Px6444][Tx61501][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:34:13.294][INF][Px6444][Tx61501][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:34:13.294][DBG][Px6444][Tx61501][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:34:13.294][TRC][Px6444][Tx61501][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:34:13.295][TRC][Px6444][Tx61501][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 2ms 
+[2025-03-07 12:34:13.295][DBG][Px6444][Tx61501][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:34:13.295][DBG][Px6444][Tx61501][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:34:13.295][INF][Px6444][Tx61501][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] 
+[2025-03-07 12:34:13.295][DBG][Px6444][Tx61501][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:34:13.297][TRC][Px6444][Tx61501][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:34:13.298][TRC][Px6444][Tx61501][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:34:13.298][TRC][Px6444][Tx61501][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 3ms 
+[2025-03-07 12:34:13.298][DBG][Px6444][Tx61501][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:34:13.298][DBG][Px6444][Tx61501][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:34:13.298][DBG][Px6444][Tx9052][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:34:13.298][DBG][Px6444][Tx9052][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:38:55.845][DBG][Px20656][Tx32668][Logger] ----------------------------- 
+[2025-03-07 12:38:55.845][DBG][Px20656][Tx32668][Logger] MAA Process Start 
+[2025-03-07 12:38:55.845][DBG][Px20656][Tx32668][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:38:55.845][DBG][Px20656][Tx32668][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:38:55.845][DBG][Px20656][Tx32668][Logger] Windows x64 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][Logger] ----------------------------- 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:38:55.846][INF][Px20656][Tx32668][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:38:55.846][INF][Px20656][Tx32668][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:38:55.846][INF][Px20656][Tx32668][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:38:55.846][INF][Px20656][Tx32668][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:38:55.846][TRC][Px20656][Tx32668][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:38:55.846][INF][Px20656][Tx32668][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] 
+[2025-03-07 12:38:55.846][DBG][Px20656][Tx32668][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:38:55.849][TRC][Px20656][Tx32668][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 3ms 
+[2025-03-07 12:38:55.849][TRC][Px20656][Tx32668][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:38:55.849][TRC][Px20656][Tx32668][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 3ms 
+[2025-03-07 12:38:55.849][DBG][Px20656][Tx32668][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:38:55.849][DBG][Px20656][Tx32668][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:38:55.849][DBG][Px20656][Tx10886][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:38:55.849][DBG][Px20656][Tx10886][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] ----------------------------- 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] MAA Process Start 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] Windows x64 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][Logger] ----------------------------- 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:40:19.996][INF][Px5760][Tx37352][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:40:19.996][INF][Px5760][Tx37352][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:40:19.996][INF][Px5760][Tx37352][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:40:19.996][INF][Px5760][Tx37352][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:40:19.996][TRC][Px5760][Tx37352][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:40:19.996][INF][Px5760][Tx37352][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] 
+[2025-03-07 12:40:19.996][DBG][Px5760][Tx37352][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:19.999][TRC][Px5760][Tx37352][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 3ms 
+[2025-03-07 12:40:19.999][TRC][Px5760][Tx37352][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:40:19.999][TRC][Px5760][Tx37352][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 3ms 
+[2025-03-07 12:40:19.999][DBG][Px5760][Tx37352][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:40:19.999][DBG][Px5760][Tx37352][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:19.999][DBG][Px5760][Tx4490][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:19.999][DBG][Px5760][Tx4490][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] ----------------------------- 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] MAA Process Start 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] Windows x64 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][Logger] ----------------------------- 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:40:37.800][INF][Px15912][Tx13085][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:40:37.800][INF][Px15912][Tx13085][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:40:37.800][INF][Px15912][Tx13085][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:40:37.800][INF][Px15912][Tx13085][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:40:37.800][TRC][Px15912][Tx13085][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:40:37.800][DBG][Px15912][Tx13085][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:40:37.801][DBG][Px15912][Tx13085][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:40:37.801][INF][Px15912][Tx13085][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] 
+[2025-03-07 12:40:37.801][DBG][Px15912][Tx13085][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:37.804][TRC][Px15912][Tx13085][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:40:37.804][TRC][Px15912][Tx13085][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:40:37.804][TRC][Px15912][Tx13085][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 3ms 
+[2025-03-07 12:40:37.804][DBG][Px15912][Tx13085][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:40:37.804][DBG][Px15912][Tx13085][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:37.804][DBG][Px15912][Tx37425][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:37.804][DBG][Px15912][Tx37425][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] ----------------------------- 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] MAA Process Start 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] Windows x64 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][Logger] ----------------------------- 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:40:57.459][INF][Px17640][Tx15038][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:40:57.459][INF][Px17640][Tx15038][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:40:57.459][INF][Px17640][Tx15038][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:40:57.459][INF][Px17640][Tx15038][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:40:57.459][TRC][Px17640][Tx15038][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:40:57.459][INF][Px17640][Tx15038][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] 
+[2025-03-07 12:40:57.459][DBG][Px17640][Tx15038][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:57.463][TRC][Px17640][Tx15038][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 3ms 
+[2025-03-07 12:40:57.463][TRC][Px17640][Tx15038][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:40:57.463][TRC][Px17640][Tx15038][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 3ms 
+[2025-03-07 12:40:57.463][DBG][Px17640][Tx15038][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:40:57.463][DBG][Px17640][Tx4768][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:57.463][DBG][Px17640][Tx15038][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:40:57.463][DBG][Px17640][Tx4768][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] ----------------------------- 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] MAA Process Start 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] Windows x64 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][Logger] ----------------------------- 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:43:33.228][INF][Px11384][Tx26341][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:43:33.228][INF][Px11384][Tx26341][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:43:33.228][INF][Px11384][Tx26341][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:43:33.228][INF][Px11384][Tx26341][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:43:33.228][TRC][Px11384][Tx26341][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:43:33.228][DBG][Px11384][Tx26341][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=D:\DeveProject\MFWPH\t_agent.py] | enter 
+[2025-03-07 12:43:33.229][INF][Px11384][Tx26341][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] 
+[2025-03-07 12:43:33.229][DBG][Px11384][Tx26341][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx26341][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 3ms 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx26341][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx26341][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 3ms 
+[2025-03-07 12:43:33.232][DBG][Px11384][Tx26341][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:43:33.232][DBG][Px11384][Tx26341][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:43:33.232][DBG][Px11384][Tx64268][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx64268][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] | leave, 0ms 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx26341][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] | leave, 0ms 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx26341][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | leave, 0ms 
+[2025-03-07 12:43:33.232][DBG][Px11384][Tx26341][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:43:33.232][DBG][Px11384][Tx26341][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-D:\DeveProject\MFWPH\t_agent.py.sock] | enter 
+[2025-03-07 12:43:33.232][ERR][Px11384][Tx26341][AgentServer.cpp][L62][MaaNS::AgentNS::ServerNS::AgentServer::join] msg_thread is not joinable 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx26341][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] | leave, 0ms 
+[2025-03-07 12:43:33.232][TRC][Px11384][Tx26341][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | leave, 0ms 
+[2025-03-07 12:43:33.245][DBG][Px11384][Tx26341][Logger] ----------------------------- 
+[2025-03-07 12:43:33.249][DBG][Px11384][Tx26341][Logger] Close log 
+[2025-03-07 12:43:33.249][DBG][Px11384][Tx26341][Logger] ----------------------------- 
+[2025-03-07 12:45:30.660][DBG][Px17076][Tx14952][Logger] ----------------------------- 
+[2025-03-07 12:45:30.660][DBG][Px17076][Tx14952][Logger] MAA Process Start 
+[2025-03-07 12:45:30.660][DBG][Px17076][Tx14952][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:45:30.660][DBG][Px17076][Tx14952][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:45:30.660][DBG][Px17076][Tx14952][Logger] Windows x64 
+[2025-03-07 12:45:30.660][DBG][Px17076][Tx14952][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][Logger] ----------------------------- 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEAA2C3089] [val_size=1] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:45:30.661][INF][Px17076][Tx14952][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEAA2C308A] [val_size=1] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:45:30.661][INF][Px17076][Tx14952][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEAA2C308C] [val_size=4] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:45:30.661][INF][Px17076][Tx14952][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEAA2C3090] [val_size=1] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:45:30.661][INF][Px17076][Tx14952][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx14952][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:45:30.661][TRC][Px17076][Tx14952][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx4960][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx4960][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:45:30.661][INF][Px17076][Tx4960][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:45:30.661][DBG][Px17076][Tx4960][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:45:30.664][TRC][Px17076][Tx4960][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:45:30.664][TRC][Px17076][Tx4960][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:45:30.664][TRC][Px17076][Tx4960][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 3ms 
+[2025-03-07 12:45:30.664][DBG][Px17076][Tx4960][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:45:30.664][DBG][Px17076][Tx4960][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:45:30.664][DBG][Px17076][Tx31171][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:45:30.664][DBG][Px17076][Tx31171][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:45:33.662][DBG][Px17076][Tx32194][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:45:33.662][DBG][Px17076][Tx32194][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] ----------------------------- 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] MAA Process Start 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] Windows x64 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][Logger] ----------------------------- 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:46:39.297][INF][Px16312][Tx61908][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:46:39.297][INF][Px16312][Tx61908][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:46:39.297][INF][Px16312][Tx61908][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:46:39.297][INF][Px16312][Tx61908][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:46:39.297][DBG][Px16312][Tx61908][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:46:39.297][TRC][Px16312][Tx61908][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:46:39.298][DBG][Px16312][Tx53419][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:46:39.300][DBG][Px16312][Tx53419][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:46:39.300][INF][Px16312][Tx53419][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:46:39.300][DBG][Px16312][Tx53419][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:46:39.303][TRC][Px16312][Tx53419][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:46:39.303][TRC][Px16312][Tx53419][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 2ms 
+[2025-03-07 12:46:39.303][TRC][Px16312][Tx53419][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 4ms 
+[2025-03-07 12:46:39.303][DBG][Px16312][Tx53419][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:46:39.303][DBG][Px16312][Tx53419][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:46:39.303][DBG][Px16312][Tx11135][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:46:39.303][DBG][Px16312][Tx11135][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:46:42.298][DBG][Px16312][Tx6652][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:46:42.298][DBG][Px16312][Tx6652][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] ----------------------------- 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] MAA Process Start 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] Windows x64 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][Logger] ----------------------------- 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:47:32.911][INF][Px21456][Tx4265][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:47:32.911][INF][Px21456][Tx4265][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:47:32.911][INF][Px21456][Tx4265][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:47:32.911][INF][Px21456][Tx4265][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:47:32.911][DBG][Px21456][Tx4265][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:47:32.911][TRC][Px21456][Tx4265][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:47:32.912][DBG][Px21456][Tx13012][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:47:32.914][DBG][Px21456][Tx13012][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:47:32.914][INF][Px21456][Tx13012][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:47:32.914][DBG][Px21456][Tx13012][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:47:32.918][TRC][Px21456][Tx13012][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:47:32.918][TRC][Px21456][Tx13012][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:47:32.918][TRC][Px21456][Tx13012][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 4ms 
+[2025-03-07 12:47:32.918][DBG][Px21456][Tx13012][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:47:32.918][DBG][Px21456][Tx13012][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:47:32.918][DBG][Px21456][Tx315][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:47:32.918][DBG][Px21456][Tx315][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:47:35.913][DBG][Px21456][Tx64414][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:47:35.913][DBG][Px21456][Tx64414][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] ----------------------------- 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] MAA Process Start 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] Windows x64 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][Logger] ----------------------------- 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:48:05.966][INF][Px14808][Tx17130][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:48:05.966][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:48:05.966][INF][Px14808][Tx17130][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:48:05.966][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:05.967][DBG][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:48:05.967][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:48:05.967][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:48:05.967][INF][Px14808][Tx17130][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:05.967][DBG][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:48:05.967][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:48:05.967][DBG][Px14808][Tx17130][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:48:05.967][INF][Px14808][Tx17130][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:05.967][DBG][Px14808][Tx17130][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:48:05.967][TRC][Px14808][Tx17130][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:48:05.968][DBG][Px14808][Tx62289][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:48:05.969][DBG][Px14808][Tx62289][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:48:05.969][INF][Px14808][Tx62289][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:48:05.969][DBG][Px14808][Tx62289][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:05.973][TRC][Px14808][Tx62289][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:48:05.973][TRC][Px14808][Tx62289][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:48:05.973][TRC][Px14808][Tx62289][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 4ms 
+[2025-03-07 12:48:05.973][DBG][Px14808][Tx62289][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:48:05.973][DBG][Px14808][Tx62289][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:05.973][DBG][Px14808][Tx23172][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:05.973][DBG][Px14808][Tx23172][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:08.968][DBG][Px14808][Tx2182][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:48:08.968][DBG][Px14808][Tx2182][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] ----------------------------- 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] MAA Process Start 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] Windows x64 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][Logger] ----------------------------- 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:48:20.790][INF][Px1880][Tx9052][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:48:20.790][INF][Px1880][Tx9052][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:48:20.790][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:48:20.790][INF][Px1880][Tx9052][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:48:20.790][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:48:20.791][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:20.791][TRC][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:20.791][DBG][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:48:20.791][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:48:20.791][DBG][Px1880][Tx9052][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:48:20.791][INF][Px1880][Tx9052][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:48:20.791][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:48:20.791][TRC][Px1880][Tx9052][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:48:20.791][TRC][Px1880][Tx9052][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:48:20.791][DBG][Px1880][Tx9052][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:48:20.791][TRC][Px1880][Tx9052][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:48:20.791][TRC][Px1880][Tx9052][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:48:20.794][DBG][Px1880][Tx11025][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:48:20.796][DBG][Px1880][Tx11025][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:48:20.796][INF][Px1880][Tx11025][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:48:20.796][DBG][Px1880][Tx11025][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:20.799][TRC][Px1880][Tx11025][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 3ms 
+[2025-03-07 12:48:20.799][TRC][Px1880][Tx11025][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:48:20.799][TRC][Px1880][Tx11025][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 5ms 
+[2025-03-07 12:48:20.799][DBG][Px1880][Tx11025][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:48:20.799][DBG][Px1880][Tx888][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:20.799][DBG][Px1880][Tx11025][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:20.799][DBG][Px1880][Tx888][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:48:48.949][DBG][Px1880][Tx44083][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:48:48.949][DBG][Px1880][Tx44083][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] ----------------------------- 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] MAA Process Start 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] Windows x64 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][Logger] ----------------------------- 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:49:34.665][INF][Px2768][Tx55303][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:49:34.665][INF][Px2768][Tx55303][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:49:34.665][INF][Px2768][Tx55303][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:49:34.665][INF][Px2768][Tx55303][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:49:34.665][DBG][Px2768][Tx55303][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:49:34.665][TRC][Px2768][Tx55303][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:49:34.667][DBG][Px2768][Tx23950][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:49:34.668][DBG][Px2768][Tx23950][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:49:34.668][INF][Px2768][Tx23950][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:49:34.668][DBG][Px2768][Tx23950][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:49:34.671][TRC][Px2768][Tx23950][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 3ms 
+[2025-03-07 12:49:34.671][TRC][Px2768][Tx23950][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:49:34.671][TRC][Px2768][Tx23950][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 5ms 
+[2025-03-07 12:49:34.671][DBG][Px2768][Tx23950][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:49:34.671][DBG][Px2768][Tx23950][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:49:34.671][DBG][Px2768][Tx48460][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:49:34.671][DBG][Px2768][Tx48460][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:49:37.666][DBG][Px2768][Tx62815][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:49:37.666][DBG][Px2768][Tx62815][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] ----------------------------- 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] MAA Process Start 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] Windows x64 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][Logger] ----------------------------- 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:50:17.640][INF][Px16464][Tx60700][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:50:17.640][INF][Px16464][Tx60700][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:50:17.640][INF][Px16464][Tx60700][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:50:17.640][INF][Px16464][Tx60700][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:17.640][DBG][Px16464][Tx60700][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:50:17.640][TRC][Px16464][Tx60700][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:50:17.641][DBG][Px16464][Tx61203][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:50:17.643][DBG][Px16464][Tx61203][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:50:17.643][INF][Px16464][Tx61203][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:50:17.643][DBG][Px16464][Tx61203][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:17.646][TRC][Px16464][Tx61203][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:50:17.646][TRC][Px16464][Tx61203][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:50:17.646][TRC][Px16464][Tx61203][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 4ms 
+[2025-03-07 12:50:17.646][DBG][Px16464][Tx61203][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:50:17.646][DBG][Px16464][Tx61203][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:17.646][DBG][Px16464][Tx58769][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:17.646][DBG][Px16464][Tx58769][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:20.641][DBG][Px16464][Tx41074][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:50:20.641][DBG][Px16464][Tx41074][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] ----------------------------- 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] MAA Process Start 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] Windows x64 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][Logger] ----------------------------- 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFEE13B3089] [val_size=1] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:50:29.634][INF][Px12036][Tx7956][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFEE13B308A] [val_size=1] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:50:29.634][INF][Px12036][Tx7956][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFEE13B308C] [val_size=4] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:50:29.634][INF][Px12036][Tx7956][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:29.634][TRC][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:50:29.634][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFEE13B3090] [val_size=1] | enter 
+[2025-03-07 12:50:29.635][DBG][Px12036][Tx7956][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:50:29.635][INF][Px12036][Tx7956][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:50:29.635][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:50:29.635][TRC][Px12036][Tx7956][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:50:29.635][TRC][Px12036][Tx7956][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:50:29.635][DBG][Px12036][Tx7956][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:50:29.635][TRC][Px12036][Tx7956][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:50:29.635][TRC][Px12036][Tx7956][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:50:29.636][DBG][Px12036][Tx52234][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:50:29.638][DBG][Px12036][Tx52234][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:50:29.638][INF][Px12036][Tx52234][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:50:29.638][DBG][Px12036][Tx52234][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:29.641][TRC][Px12036][Tx52234][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 3ms 
+[2025-03-07 12:50:29.641][TRC][Px12036][Tx52234][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 12:50:29.641][TRC][Px12036][Tx52234][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 5ms 
+[2025-03-07 12:50:29.641][DBG][Px12036][Tx52234][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:50:29.641][DBG][Px12036][Tx52234][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:29.641][DBG][Px12036][Tx6844][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:29.641][DBG][Px12036][Tx6844][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:50:32.636][DBG][Px12036][Tx62904][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:50:32.636][DBG][Px12036][Tx62904][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] ----------------------------- 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] MAA Process Start 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] Windows x64 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][Logger] ----------------------------- 
+[2025-03-07 12:57:03.764][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:57:03.764][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:57:03.764][TRC][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:57:03.764][INF][Px17660][Tx61060][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:57:03.764][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:57:03.764][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:57:03.764][TRC][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:57:03.764][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:57:03.765][INF][Px17660][Tx61060][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:57:03.765][INF][Px17660][Tx61060][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:57:03.765][INF][Px17660][Tx61060][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:57:03.765][DBG][Px17660][Tx61060][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:57:03.765][TRC][Px17660][Tx61060][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:57:03.766][DBG][Px17660][Tx59607][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:57:03.768][DBG][Px17660][Tx59607][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:57:03.768][INF][Px17660][Tx59607][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:57:03.768][DBG][Px17660][Tx59607][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:57:03.771][TRC][Px17660][Tx59607][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:57:03.771][TRC][Px17660][Tx59607][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 2ms 
+[2025-03-07 12:57:03.771][TRC][Px17660][Tx59607][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 4ms 
+[2025-03-07 12:57:03.771][DBG][Px17660][Tx59607][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:57:03.771][DBG][Px17660][Tx59607][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:57:03.771][DBG][Px17660][Tx56594][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:57:03.771][DBG][Px17660][Tx56594][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:57:06.767][DBG][Px17660][Tx12015][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:57:06.767][DBG][Px17660][Tx12015][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] ----------------------------- 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] MAA Process Start 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] Version v4.0.0-beta.3 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] Windows x64 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] Logging ./debug/maa.log 
+[2025-03-07 12:59:23.781][DBG][Px2148][Tx51645][Logger] ----------------------------- 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 12:59:23.782][INF][Px2148][Tx51645][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 12:59:23.782][INF][Px2148][Tx51645][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 12:59:23.782][INF][Px2148][Tx51645][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 12:59:23.782][INF][Px2148][Tx51645][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 12:59:23.782][DBG][Px2148][Tx51645][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 12:59:23.782][TRC][Px2148][Tx51645][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 12:59:23.783][DBG][Px2148][Tx41875][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 12:59:23.785][DBG][Px2148][Tx41875][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 12:59:23.785][INF][Px2148][Tx41875][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 12:59:23.785][DBG][Px2148][Tx41875][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:59:23.789][TRC][Px2148][Tx41875][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 12:59:23.789][TRC][Px2148][Tx41875][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 2ms 
+[2025-03-07 12:59:23.789][TRC][Px2148][Tx41875][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 4ms 
+[2025-03-07 12:59:23.789][DBG][Px2148][Tx41875][MaaAgentServer.cpp][L23][MaaAgentServerJoin] | enter 
+[2025-03-07 12:59:23.789][DBG][Px2148][Tx41875][AgentServer.cpp][L59][MaaNS::AgentNS::ServerNS::AgentServer::join] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:59:23.789][DBG][Px2148][Tx5688][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:59:23.789][DBG][Px2148][Tx5688][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 12:59:26.783][DBG][Px2148][Tx9145][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 12:59:26.783][DBG][Px2148][Tx9145][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 13:00:04.008][DBG][Px7364][Tx13482][Logger] ----------------------------- 
+[2025-03-07 13:00:04.008][DBG][Px7364][Tx13482][Logger] MAA Process Start 
+[2025-03-07 13:00:04.008][DBG][Px7364][Tx13482][Logger] Version v4.0.0-beta.3 
+[2025-03-07 13:00:04.008][DBG][Px7364][Tx13482][Logger] Built at Mar  6 2025 16:52:27 
+[2025-03-07 13:00:04.008][DBG][Px7364][Tx13482][Logger] Windows x64 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][Logger] Working D:/DeveProject/MFWPH 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][Logger] Logging ./debug/maa.log 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][Logger] ----------------------------- 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L33][MaaNS::GlobalOptionMgr::set_log_dir] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=2] [value=00007FFE8FC13089] [val_size=1] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | enter 
+[2025-03-07 13:00:04.009][INF][Px7364][Tx13482][GlobalOptionMgr.cpp][L56][MaaNS::GlobalOptionMgr::set_save_draw] Set save draw [save_draw_=false] 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L47][MaaNS::GlobalOptionMgr::set_save_draw] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=3] [value=00007FFE8FC1308A] [val_size=1] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | enter 
+[2025-03-07 13:00:04.009][INF][Px7364][Tx13482][GlobalOptionMgr.cpp][L88][MaaNS::GlobalOptionMgr::set_recording] Set recording [recording_=false] 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L79][MaaNS::GlobalOptionMgr::set_recording] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=4] [value=00007FFE8FC1308C] [val_size=4] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | enter 
+[2025-03-07 13:00:04.009][INF][Px7364][Tx13482][GlobalOptionMgr.cpp][L104][MaaNS::GlobalOptionMgr::set_stdout_level] Set log stdout level [level=2] 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L95][MaaNS::GlobalOptionMgr::set_stdout_level] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] [key=5] [value=00007FFE8FC13090] [val_size=1] | enter 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | enter 
+[2025-03-07 13:00:04.009][INF][Px7364][Tx13482][GlobalOptionMgr.cpp][L72][MaaNS::GlobalOptionMgr::set_show_hit_draw] Set show_hit_draw [show_hit_draw_=false] 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L63][MaaNS::GlobalOptionMgr::set_show_hit_draw] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionMgr.cpp][L10][MaaNS::GlobalOptionMgr::set_option] | leave, 0ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][MaaFramework.cpp][L159][MaaSetGlobalOption] | leave, 0ms 
+[2025-03-07 13:00:04.009][DBG][Px7364][Tx13482][GlobalOptionConfig.cpp][L83][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] [bret=true] 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionConfig.cpp][L67][MaaNS::ToolkitNS::GlobalOptionConfig::apply_option] | leave, 1ms 
+[2025-03-07 13:00:04.009][TRC][Px7364][Tx13482][GlobalOptionConfig.cpp][L17][MaaNS::ToolkitNS::GlobalOptionConfig::init] | leave, 1ms 
+[2025-03-07 13:00:04.010][DBG][Px7364][Tx57796][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] [identifier=test_socket] | enter 
+[2025-03-07 13:00:04.012][DBG][Px7364][Tx57796][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [identifier=test_socket] | enter 
+[2025-03-07 13:00:04.012][INF][Px7364][Tx57796][AgentServer.cpp][L25][MaaNS::AgentNS::ServerNS::AgentServer::start_up] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] 
+[2025-03-07 13:00:04.012][DBG][Px7364][Tx57796][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] [ipc_addr=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 13:00:04.015][TRC][Px7364][Tx57796][AgentServer.cpp][L107][MaaNS::AgentNS::ServerNS::AgentServer::create_socket] | leave, 2ms 
+[2025-03-07 13:00:04.015][TRC][Px7364][Tx57796][AgentServer.cpp][L17][MaaNS::AgentNS::ServerNS::AgentServer::start_up] | leave, 3ms 
+[2025-03-07 13:00:04.015][TRC][Px7364][Tx57796][MaaAgentServer.cpp][L9][MaaAgentServerStartUp] | leave, 4ms 
+[2025-03-07 13:00:04.015][DBG][Px7364][Tx37581][AgentServer.cpp][L314][MaaNS::AgentNS::ServerNS::AgentServer::request_msg_loop] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 13:00:04.015][DBG][Px7364][Tx37581][AgentServer.cpp][L132][MaaNS::AgentNS::ServerNS::AgentServer::recv] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
+[2025-03-07 13:00:07.010][DBG][Px7364][Tx41871][MaaAgentServer.cpp][L16][MaaAgentServerShutDown] | enter 
+[2025-03-07 13:00:07.010][DBG][Px7364][Tx41871][AgentServer.cpp][L45][MaaNS::AgentNS::ServerNS::AgentServer::shut_down] [ipc_addr_=ipc://C:/Users/black/AppData/Local/Temp//maafw-agent-test_socket.sock] | enter 
