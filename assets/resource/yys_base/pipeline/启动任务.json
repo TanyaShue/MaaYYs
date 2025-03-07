@@ -1,0 +1,84 @@
+{
+  "打开游戏": {
+    "next": [
+      "打开阴阳师"
+    ],
+    "interrupt": [
+      "回到主页"
+    ]
+  },
+  "打开加速器": {
+    "action": "StartApp",
+    "next": [
+      "打开游戏加速"
+    ],
+    "interrupt": [
+      "回到主页"
+    ],
+    "package": "com.github.kr328.clash/.MainActivity",
+    "post_delay": 1000
+  },
+  "打开游戏加速": {
+    "recognition": "OCR",
+    "action": "Click",
+    "next": "回到主页",
+    "expected": "已停止",
+    "timeout": 100
+  },
+  "回到主页": {
+    "action": "key",
+    "key": 3
+  },
+  "打开阴阳师": {
+    "action": "StartApp",
+    "next": [
+      "识别庭院特征"
+    ],
+    "interrupt": [
+      "进入游戏",
+      "关闭公告",
+      "关闭广告",
+      "打开阴阳师_点击一下屏幕"
+    ],
+    "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2"
+  },
+  "关闭公告": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      1116,
+      7,
+      163,
+      89
+    ],
+    "template": "通用图标/踏雪寻踪_公告_关闭.png"
+  },
+  "关闭广告": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      908,
+      4,
+      371,
+      370
+    ],
+    "template": "通用图标/广告_关闭.png"
+  },
+  "打开阴阳师_点击一下屏幕": {
+    "recognition": "DirectHit",
+    "action": "Click",
+    "pre_delay": 4000,
+    "target": [
+      165,
+      98,
+      913,
+      430
+    ]
+  },
+  "进入游戏": {
+    "recognition": "OCR",
+    "action": "Click",
+    "expected": "进入游戏",
+    "timeout": 10000
+  }
+}

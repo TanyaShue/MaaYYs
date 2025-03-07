@@ -1,8 +1,11 @@
 import unittest
-from typing import Dict, Any
+from unittest.mock import patch, MagicMock, PropertyMock
+
+from core.task_executor import DeviceStatus
+from core.tasker_manager import TaskerManager, TaskPriority
 
 
-class TestGlobalConfig(unittest.TestCase):
+class TestTaskSubmissionAndExecution(unittest.TestCase):
     def setUp(self):
         """
         初始化全局配置，加载设备和资源配置。
@@ -19,177 +22,268 @@ class TestGlobalConfig(unittest.TestCase):
         resource_dir = "assets/resource"
         self.global_config.load_all_resources_from_directory(resource_dir)
 
-    def test_config_loading(self):
-        """
-        测试配置加载。
-        """
-        # 验证设备配置已加载
-        devices_config = self.global_config.get_devices_config()
-        self.assertIsNotNone(devices_config, "设备配置未成功加载，返回 None")
+        # 设置MAA组件的模拟
+        self._setup_maa_mocks()
 
-        # 验证设备配置中是否有设备
-        self.assertTrue(len(devices_config.devices) > 0, "设备配置中没有设备，请检查 devices.json 文件")
+        # 获取TaskerManager实例
+        self.tasker_manager = TaskerManager()
 
-        # 验证资源配置已加载
-        resource_configs = self.global_config.get_all_resource_configs()
-        self.assertTrue(len(resource_configs) > 0, "没有加载任何资源配置，请检查 resource 目录")
+    def _setup_maa_mocks(self):
+        """设置MAA组件的模拟"""
+        # 创建模拟对象
+        self.mock_resource = patch('maa.resource.Resource').start()
+        self.mock_tasker = patch('maa.tasker.Tasker').start()
+        self.mock_controller = patch('maa.controller.AdbController').start()
 
-        # 打印已加载的资源名称
-        print("\n已加载的资源:")
-        for config in resource_configs:
-            print(f"  - {config.resource_name}")
+        # 配置模拟行为
+        resource_instance = MagicMock()
+        resource_instance.post_bundle.return_value.wait.return_value = None
+        self.mock_resource.return_value = resource_instance
 
-    def test_runtime_configs_for_resources(self):
-        """
-        测试获取所有资源的运行时配置。
-        """
-        # 获取所有资源配置
-        resource_configs = self.global_config.get_all_resource_configs()
+        tasker_instance = MagicMock()
+        tasker_instance.post_task.return_value = None
+        tasker_instance.bind.return_value = None
+        self.mock_tasker.return_value = tasker_instance
 
-        # 确保至少有一个资源配置
-        self.assertTrue(len(resource_configs) > 0, "没有加载任何资源配置，无法进行运行时配置测试")
+        controller_instance = MagicMock()
+        self.mock_controller.return_value = controller_instance
 
-        # 遍历每个资源配置
-        for resource_config in resource_configs:
-            # 获取该资源的运行时配置
-            runtime_configs = self.global_config.get_runtime_configs_for_resource(resource_config.resource_name)
+    def tearDown(self):
+        """清理模拟对象"""
+        patch.stopall()
 
-            # 确保生成了运行时配置
-            self.assertTrue(len(runtime_configs.list) > 0,
-                            f"资源 '{resource_config.resource_name}' 未生成任何运行时配置，请检查资源配置")
+    @patch('PySide6.QtCore.QThreadPool.globalInstance')
+    def test_create_executor_and_submit_task(self, mock_thread_pool):
+        """测试创建执行器并提交任务"""
+        # 设置线程池模拟
+        mock_thread_pool_instance = MagicMock()
+        mock_thread_pool.return_value = mock_thread_pool_instance
 
-            # 打印每个资源的运行时配置（用于调试）
-            print(f"\n资源: {resource_config.resource_name}")
-            for rt_config in runtime_configs.list:
-                print(f"  任务: {rt_config.task_name}")
-                print(f"  入口: {rt_config.task_entry}")
-                print(f"  管道覆盖: {rt_config.pipeline_override}")
+        # 获取第一个设备配置
+        device_config = self.global_config.devices_config.devices[0]
+        device_name = device_config.device_name
 
-                # 额外验证
-                self.assertIsNotNone(rt_config.task_name,
-                                     f"资源 '{resource_config.resource_name}' 的任务运行时配置中，任务名称不能为空")
-                self.assertIsNotNone(rt_config.task_entry,
-                                     f"资源 '{resource_config.resource_name}' 的任务运行时配置中，任务入口不能为空")
-                self.assertIsInstance(rt_config.pipeline_override, dict,
-                                      f"资源 '{resource_config.resource_name}' 的任务运行时配置中，管道覆盖必须是字典")
+        # 为这个设备获取第一个资源的运行时配置
+        resource_name = device_config.resources[0].resource_name
+        runtime_configs = self.global_config.get_runtime_configs_for_resource(resource_name)
 
-    def test_runtime_config_for_specific_task(self):
-        """
-        测试获取特定资源中特定任务的运行时配置。
-        """
-        # 获取所有资源配置
-        resource_configs = self.global_config.get_all_resource_configs()
+        # 确保runtime_configs不为空并且有任务
+        self.assertIsNotNone(runtime_configs)
+        self.assertTrue(len(runtime_configs.task_list) > 0)
 
-        # 确保至少有一个资源配置
-        self.assertTrue(len(resource_configs) > 0, "没有加载任何资源配置，无法进行特定任务运行时配置测试")
+        # 确保资源路径正确设置
+        self.assertTrue(runtime_configs.resource_path.exists())
 
-        # 选择第一个资源配置进行测试 (你可以根据需要选择特定的资源)
-        resource_config = resource_configs[0]
-        self.assertTrue(len(resource_config.resource_tasks) > 0,
-                        f"资源 '{resource_config.resource_name}' 没有定义任何任务，无法进行特定任务运行时配置测试")
+        # 使用TaskExecutor._tasker属性的模拟来确保任务执行器使用我们的模拟Tasker
+        with patch('core.task_executor.TaskExecutor._tasker', new_callable=PropertyMock) as mock_tasker_property:
+            mock_tasker_property.return_value = self.mock_tasker.return_value
 
-        # 选择第一个任务进行测试 (你可以根据需要选择特定的任务)
-        task = resource_config.resource_tasks[0]
+            # 创建设备执行器
+            success = self.tasker_manager.create_executor(device_config)
+            self.assertTrue(success)
 
-        # 获取特定任务的运行时配置
-        runtime_config = self.global_config.get_runtime_config_for_task(
-            resource_config.resource_name,
-            task.task_name
-        )
+            # 验证设备是否处于活跃状态
+            self.assertTrue(self.tasker_manager.is_device_active(device_name))
 
-        # 验证返回了运行时配置
-        self.assertIsNotNone(runtime_config,
-                             f"无法获取资源 '{resource_config.resource_name}' 中任务 '{task.task_name}' 的运行时配置")
+            # 获取设备状态并验证
+            device_state = self.tasker_manager.get_executor_state(device_name)
+            self.assertIsNotNone(device_state)
+            self.assertEqual(DeviceStatus.IDLE, device_state.status)
 
-        print(f"\n资源: {resource_config.resource_name}")
-        print(f"  任务: {runtime_config.task_name}")
-        print(f"  入口: {runtime_config.task_entry}")
-        print(f"  管道覆盖: {runtime_config.pipeline_override}")
+            # 提交任务
+            task_id = self.tasker_manager.submit_task(device_name, runtime_configs, TaskPriority.HIGH)
+            self.assertIsNotNone(task_id)
 
-        # 验证运行时配置的基本属性
-        self.assertEqual(runtime_config.task_name, task.task_name, "任务名称不匹配")
-        self.assertEqual(runtime_config.task_entry, task.task_entry, "任务入口不匹配")
-        self.assertIsInstance(runtime_config.pipeline_override, dict, "管道覆盖必须是字典")
+            # 模拟线程执行任务
+            args, kwargs = mock_thread_pool_instance.start.call_args
+            task_runner = args[0]
 
-    def test_option_values_from_device_config(self):
-        """
-        测试从设备配置中获取选项值的功能。
-        确保正确使用设备配置中的选项值而不是默认值。
-        """
+            # 手动执行任务
+            task_runner.run()
+
+            # 验证Tasker.post_task是否被调用
+            self.mock_tasker.return_value.post_task.assert_called()
+
+            # 获取队列信息
+            queue_info = self.tasker_manager.get_device_queue_info()
+            self.assertIn(device_name, queue_info)
+
+    @patch('PySide6.QtCore.QThreadPool.globalInstance')
+    def test_multiple_task_execution(self, mock_thread_pool):
+        """测试多个任务的提交和执行"""
+        # 设置线程池模拟
+        mock_thread_pool_instance = MagicMock()
+        mock_thread_pool.return_value = mock_thread_pool_instance
+
         # 获取设备配置
-        devices_config = self.global_config.get_devices_config()
-        self.assertIsNotNone(devices_config, "设备配置未成功加载，返回 None")
+        device_config = self.global_config.devices_config.devices[0]
+        device_name = device_config.device_name
 
-        # 确保有设备
-        self.assertTrue(len(devices_config.devices) > 0, "设备配置中没有设备，请检查 devices.json 文件")
+        # 获取资源名称
+        resource_name = device_config.resources[0].resource_name
+        runtime_configs = self.global_config.get_runtime_configs_for_resource(resource_name)
 
-        # 找到第一个具有资源配置的设备
-        device = devices_config.devices[0]
-        self.assertTrue(len(device.resources) > 0, f"设备 '{device.device_name}' 没有资源配置")
+        # 模拟TaskExecutor._tasker属性
+        with patch('core.task_executor.TaskExecutor._tasker', new_callable=PropertyMock) as mock_tasker_property:
+            mock_tasker_property.return_value = self.mock_tasker.return_value
 
-        # 获取设备中第一个资源
-        device_resource = device.resources[0]
+            # 创建执行器
+            self.tasker_manager.create_executor(device_config)
 
-        # 获取对应的资源配置
-        resource_config = self.global_config.get_resource_config(device_resource.resource_name)
-        self.assertIsNotNone(resource_config, f"找不到资源 '{device_resource.resource_name}' 的配置")
+            # 提交多个任务
+            task_ids = []
+            for priority in [TaskPriority.HIGH, TaskPriority.NORMAL, TaskPriority.LOW]:
+                task_id = self.tasker_manager.submit_task(device_name, runtime_configs, priority)
+                task_ids.append(task_id)
+                self.assertIsNotNone(task_id)
 
-        # 确保资源有任务
-        self.assertTrue(len(resource_config.resource_tasks) > 0, f"资源 '{resource_config.resource_name}' 没有任务")
+            # 验证任务ID不同
+            self.assertEqual(len(set(task_ids)), 3, "每个任务应该有唯一的ID")
 
-        # 获取第一个任务的运行时配置
-        task = resource_config.resource_tasks[2]
-        runtime_config = self.global_config.get_runtime_config_for_task(
-            resource_config.resource_name,
-            task.task_name
-        )
+            # 获取队列长度
+            queue_info = self.tasker_manager.get_device_queue_info()
+            self.assertGreaterEqual(queue_info[device_name], 2)  # 至少2个任务在队列中(一个正在执行)
 
-        print(f"\n测试设备选项值优先级:")
-        print(f"  设备: {device.device_name}")
-        print(f"  资源: {resource_config.resource_name}")
-        print(f"  任务: {task.task_name}")
+            # 模拟任务执行 - 检查第一个任务是否根据优先级启动
+            args, kwargs = mock_thread_pool_instance.start.call_args
+            task_runner = args[0]
+            self.assertEqual(TaskPriority.HIGH, task_runner.task.priority)
 
-        # 打印设备配置中的选项值
-        print("\n设备中的选项值:")
-        for option in device_resource.options:
-            print(f"  {option.option_name}: {option.value}")
+    @patch('PySide6.QtCore.QThreadPool.globalInstance')
+    def test_task_execution_lifecycle(self, mock_thread_pool):
+        """测试任务执行的生命周期"""
+        # 设置线程池模拟
+        mock_thread_pool_instance = MagicMock()
+        mock_thread_pool.return_value = mock_thread_pool_instance
 
-        # 打印资源配置中的默认选项值
-        print("\n资源中的默认选项值:")
-        for option in resource_config.options:
-            print(f"  {option.name}: {option.default}")
+        # 获取设备配置
+        device_config = self.global_config.devices_config.devices[0]
+        device_name = device_config.device_name
 
-        # 打印生成的管道覆盖
-        print("\n生成的管道覆盖:")
-        print(f"  {runtime_config.pipeline_override}")
+        # 获取资源运行时配置
+        resource_name = device_config.resources[0].resource_name
+        runtime_configs = self.global_config.get_runtime_configs_for_resource(resource_name)
 
-        # 检查管道覆盖是否正确应用了设备配置中的选项值
-        # 这里需要根据你的具体资源配置进行自定义断言
-        # 例如，如果设备配置中设置了选项值，验证管道覆盖中包含正确的值
+        # 连接信号处理器模拟
+        task_started_mock = MagicMock()
+        task_completed_mock = MagicMock()
+        task_failed_mock = MagicMock()
 
-        # 以下是一个示例断言，需要根据具体情况修改
-        if len(device_resource.options) > 0:
-            # 假设第一个选项影响了管道覆盖
-            first_option = device_resource.options[0]
+        with patch('core.task_executor.TaskExecutor._tasker', new_callable=PropertyMock) as mock_tasker_property:
+            mock_tasker_property.return_value = self.mock_tasker.return_value
 
-            # 查找这个选项在资源配置中的定义
-            resource_option = next((opt for opt in resource_config.options if opt.name == first_option.option_name),
-                                   None)
+            # 创建执行器
+            self.tasker_manager.create_executor(device_config)
 
-            if resource_option is not None:
-                # 根据选项类型进行不同的断言
-                if resource_option.type == "select":
-                    print(f"\n验证select类型选项 '{first_option.option_name}' 的值是否正确应用")
-                    # 这里需要根据具体情况检查管道覆盖中是否包含了正确的值
-                elif resource_option.type == "boole":
-                    print(f"\n验证boole类型选项 '{first_option.option_name}' 的值是否正确应用")
-                    # 检查布尔值是否正确应用
-                elif resource_option.type == "input":
-                    print(f"\n验证input类型选项 '{first_option.option_name}' 的值是否正确应用")
-                    # 检查输入值是否正确替换了占位符
+            # 获取执行器并连接信号
+            executor = self.tasker_manager._executors[device_name]
+            executor.task_started.connect(task_started_mock)
+            executor.task_completed.connect(task_completed_mock)
+            executor.task_failed.connect(task_failed_mock)
 
-                self.assertIsNotNone(runtime_config.pipeline_override, "管道覆盖不应为空")
+            # 提交任务
+            task_id = self.tasker_manager.submit_task(device_name, runtime_configs)
+
+            # 获取任务运行器
+            args, kwargs = mock_thread_pool_instance.start.call_args
+            task_runner = args[0]
+
+            # 手动执行任务
+            task_runner.run()
+
+            # 验证信号发射
+            task_started_mock.assert_called_once_with(task_id)
+            task_completed_mock.assert_called_once()
+            task_failed_mock.assert_not_called()
+
+            # 验证MAA组件交互
+            self.mock_resource.return_value.post_bundle.assert_called_once()
+            self.mock_tasker.return_value.bind.assert_called_once()
+
+            # 验证每个任务都被提交给Tasker
+            call_count = 0
+            for task in runtime_configs.task_list:
+                call_count += 1
+                self.mock_tasker.return_value.post_task.assert_any_call(
+                    task.task_entry, task.pipeline_override
+                )
+
+            self.assertEqual(call_count, len(runtime_configs.task_list))
+
+    @patch('PySide6.QtCore.QThreadPool.globalInstance')
+    def test_task_failure_handling(self, mock_thread_pool):
+        """测试任务失败处理"""
+        # 设置线程池模拟
+        mock_thread_pool_instance = MagicMock()
+        mock_thread_pool.return_value = mock_thread_pool_instance
+
+        # 配置Tasker抛出异常
+        self.mock_tasker.return_value.post_task.side_effect = RuntimeError("模拟任务失败")
+
+        # 获取设备配置
+        device_config = self.global_config.devices_config.devices[0]
+        device_name = device_config.device_name
+
+        # 获取资源运行时配置
+        resource_name = device_config.resources[0].resource_name
+        runtime_configs = self.global_config.get_runtime_configs_for_resource(resource_name)
+
+        # 连接信号处理器模拟
+        task_started_mock = MagicMock()
+        task_failed_mock = MagicMock()
+
+        with patch('core.task_executor.TaskExecutor._tasker', new_callable=PropertyMock) as mock_tasker_property:
+            mock_tasker_property.return_value = self.mock_tasker.return_value
+
+            # 创建执行器
+            self.tasker_manager.create_executor(device_config)
+
+            # 获取执行器并连接信号
+            executor = self.tasker_manager._executors[device_name]
+            executor.task_started.connect(task_started_mock)
+            executor.task_failed.connect(task_failed_mock)
+
+            # 提交任务
+            task_id = self.tasker_manager.submit_task(device_name, runtime_configs)
+
+            # 获取任务运行器
+            args, kwargs = mock_thread_pool_instance.start.call_args
+            task_runner = args[0]
+
+            # 手动执行任务
+            task_runner.run()
+
+            # 验证信号发射
+            task_started_mock.assert_called_once_with(task_id)
+            task_failed_mock.assert_called_once()
+
+            # 确认任务失败信息
+            error_task_id, error_message = task_failed_mock.call_args[0]
+            self.assertEqual(task_id, error_task_id)
+            self.assertIn("模拟任务失败", error_message)
+
+    def test_stop_executor(self):
+        """测试停止执行器"""
+        # 获取设备配置
+        device_config = self.global_config.devices_config.devices[0]
+        device_name = device_config.device_name
+
+        with patch('core.task_executor.TaskExecutor._tasker', new_callable=PropertyMock) as mock_tasker_property:
+            mock_tasker_property.return_value = self.mock_tasker.return_value
+
+            # 创建执行器
+            self.tasker_manager.create_executor(device_config)
+
+            # 验证设备处于活跃状态
+            self.assertTrue(self.tasker_manager.is_device_active(device_name))
+
+            # 停止执行器
+            success = self.tasker_manager.stop_executor(device_name)
+            self.assertTrue(success)
+
+            # 验证设备不再活跃
+            self.assertFalse(self.tasker_manager.is_device_active(device_name))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,185 @@
+{
+  "点击探索": {
+    "next": [
+      "庭院_点击探索"
+    ]
+  },
+  "庭院_点击探索": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": [
+      "庭院/庭院_探索_望月幽庭.png",
+      "庭院/庭院_探索_织梦莲庭.png",
+      "庭院/庭院_探索_枫色秋庭.png",
+      "庭院/庭院_探索_初语谧景.png"
+    ],
+    "roi": [
+      23,
+      98,
+      1144,
+      249
+    ],
+    "post_delay": 2000
+  },
+  "返回庭院": {
+    "next": [
+      "识别庭院特征"
+    ],
+    "interrupt": [
+      "识别蓝色返回",
+      "识别黄色返回",
+      "识别蓝色返回_模板识别",
+      "识别黄色返回_模板识别"
+    ]
+  },
+  "识别庭院特征": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "庭院/庭院_探索_望月幽庭.png",
+      "庭院/庭院_探索_织梦莲庭.png",
+      "庭院/庭院_探索_枫色秋庭.png",
+      "庭院/庭院_探索_初语谧景.png"
+    ],
+    "roi": [
+      23,
+      98,
+      1144,
+      249
+    ],
+    "post_delay": 2000
+  },
+  "识别探索特征": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "探索/探索_六道之门.png",
+      "探索/探索_地域鬼王.png",
+      "探索/探索_式神委派.png",
+      "探索/探索_御魂.png"
+    ],
+    "roi": [
+      9,
+      575,
+      1137,
+      144
+    ],
+    "post_delay": 1000
+  },
+  "识别蓝色返回": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "template": [
+      "通用图标/返回_蓝色.png",
+      "通用图标/返回_蓝色_2.png"
+    ],
+    "post_delay": 2000
+  },
+  "识别黄色返回": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "target": [
+      12,
+      5,
+      50,
+      43
+    ],
+    "template": [
+      "通用图标/返回_黄色.png",
+      "通用图标/返回_黄色_2.png"
+    ],
+    "post_delay": 2000
+  },
+  "识别蓝色返回_模板识别": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "template": [
+      "通用图标/返回_蓝色.png",
+      "通用图标/返回_蓝色_2.png"
+    ],
+    "post_delay": 2000
+  },
+  "识别黄色返回_模板识别": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "template": [
+      "通用图标/返回_黄色.png",
+      "通用图标/返回_黄色_2.png"
+    ],
+    "post_delay": 2000
+  },
+  "打开底部菜单": {
+    "next": [
+      "打开底部菜单_匹配",
+      "点击底部菜单位置"
+    ]
+  },
+  "打开底部菜单_匹配": {
+    "recognition": "FeatureMatch",
+    "template": [
+      "庭院_卷轴.png",
+      "庭院/庭院_卷轴_鬼金羊.png",
+      "庭院/庭院_卷轴_不见岳.png"
+    ],
+    "action": "Click",
+    "post_delay": 1000,
+    "roi": [
+      1063,
+      528,
+      216,
+      191
+    ]
+  },
+  "点击底部菜单位置": {
+    "action": "Click",
+    "post_delay": 1000,
+    "target": [
+      1177,
+      578,
+      63,
+      92
+    ]
+  },
+  "左滑一下屏幕": {
+    "is_sub": true,
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi": [
+        322,
+        269,
+        107,
+        239
+      ],
+      "end_roi": [
+        1004,
+        296,
+        96,
+        218
+      ],
+      "delay": 2000
+    }
+  }
+}

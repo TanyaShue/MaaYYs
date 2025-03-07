@@ -1,10 +1,10 @@
 import threading
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Type, Any
 from pathlib import Path
+from typing import List, Dict, Optional, Type, Any
 
 from app.models.config.device_config import DevicesConfig
-from app.models.config.resource_config import ResourceConfig, Option, SelectOption, BoolOption, InputOption, Task
+from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption, Task
 
 
 @dataclass
@@ -16,7 +16,7 @@ class RunTimeConfig:
 
 @dataclass
 class RunTimeConfigs:
-    list: List[RunTimeConfig] = field(default_factory=list)
+    task_list: List[RunTimeConfig] = field(default_factory=list)
     resource_path: Path = field(default_factory=Path)  # 当前资源加载时所在的目录路径
 
 
@@ -100,25 +100,46 @@ class GlobalConfig:
 
     def get_runtime_configs_for_resource(self, resource_name: str) -> RunTimeConfigs:
         """
-        获取指定资源中所有任务的 RunTimeConfigs，并将资源所在目录（由 source_file 计算得出）传递到 resource_path 中。
+        获取指定资源中已在DeviceConfig中选择的任务的RunTimeConfigs，
+        按照DeviceConfig中的任务顺序排列，
+        并将资源所在目录（由 source_file 计算得出）传递到 resource_path 中。
         """
         resource_config = self.get_resource_config(resource_name)
         if resource_config is None:
             raise ValueError(f"Resource '{resource_name}' not found.")
 
+        # 使用有序字典来收集和保存任务，保持DeviceConfig中的顺序
+        from collections import OrderedDict
+        ordered_tasks = OrderedDict()
+
+        # 首先从DeviceConfig中收集所有已选任务，保持其顺序
+        if self.devices_config is not None:
+            for device in self.devices_config.devices:
+                for device_resource in device.resources:
+                    if device_resource.resource_name == resource_name:
+                        # 按照设备资源中的任务顺序添加
+                        for task_name in device_resource.selected_tasks:
+                            if task_name not in ordered_tasks:
+                                ordered_tasks[task_name] = None
+
+        # 为每个已选任务创建RunTimeConfig
         runtime_configs = []
-        for task in resource_config.resource_tasks:
-            pipeline_override = self._process_task_options(resource_config, task)
-            runtime_config = RunTimeConfig(
-                task_name=task.task_name,
-                task_entry=task.task_entry,
-                pipeline_override=pipeline_override
-            )
-            runtime_configs.append(runtime_config)
+
+        # 从ResourceConfig中获取任务详细信息并创建RunTimeConfig
+        for task_name in ordered_tasks:
+            task = next((t for t in resource_config.resource_tasks if t.task_name == task_name), None)
+            if task:
+                pipeline_override = self._process_task_options(resource_config, task)
+                runtime_config = RunTimeConfig(
+                    task_name=task.task_name,
+                    task_entry=task.task_entry,
+                    pipeline_override=pipeline_override
+                )
+                runtime_configs.append(runtime_config)
 
         # 通过 source_file（包含文件名）计算出资源加载目录
         resource_path = Path(resource_config.source_file).parent if resource_config.source_file else Path()
-        return RunTimeConfigs(list=runtime_configs, resource_path=resource_path)
+        return RunTimeConfigs(task_list=runtime_configs, resource_path=resource_path)
 
     def get_runtime_config_for_task(self, resource_name: str, task_name: str) -> Optional[RunTimeConfig]:
         """
@@ -188,7 +209,10 @@ class GlobalConfig:
 
             elif isinstance(option, BoolOption):
                 if option_value and option.pipeline_override:
-                    processed_override = self._replace_placeholder(option.pipeline_override, str(option_value))
+                    # 对于布尔选项，将值转换为实际布尔值
+                    bool_value = self._parse_bool_value(option_value)
+                    processed_override = self._replace_placeholder(option.pipeline_override, str(option_value),
+                                                                   bool_value)
                     merge_dicts(final_pipeline_override, processed_override)
 
             elif isinstance(option, InputOption):
@@ -198,14 +222,65 @@ class GlobalConfig:
 
         return final_pipeline_override
 
-    def _replace_placeholder(self, pipeline: Any, value: str) -> Any:
+    def _parse_bool_value(self, value: Any) -> bool:
+        """
+        将值解析为布尔类型
+        """
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            return value.lower() in ('true', 'yes', 'y', '1', 'on')
+        return bool(value)
+
+    def _replace_placeholder(self, pipeline: Any, value: str, bool_value: bool = None) -> Any:
         """
         替换管道中的占位符。
+
+        参数:
+        pipeline: 要处理的管道配置
+        value: 用于替换{value}的字符串值
+        bool_value: 用于替换{boole}的布尔值，如果未提供则使用value转换
         """
+        if bool_value is None:
+            bool_value = self._parse_bool_value(value)
+
         if isinstance(pipeline, dict):
-            return {
-                k: (v.replace("{value}", str(value)).replace("{boole}", str(value))
-                    if isinstance(v, str) else self._replace_placeholder(v, value))
-                for k, v in pipeline.items()
-            }
+            result = {}
+            for k, v in pipeline.items():
+                if isinstance(v, str):
+                    if v == "{boole}":
+                        # 如果值就是{boole}占位符，直接使用布尔值替换
+                        result[k] = bool_value
+                    elif "{boole}" in v:
+                        # 如果字符串包含{boole}，替换为对应的字符串表示
+                        result[k] = v.replace("{boole}", str(bool_value).lower())
+                    else:
+                        # 仅替换{value}占位符
+                        result[k] = v.replace("{value}", value)
+                elif isinstance(v, dict):
+                    # 递归处理嵌套字典
+                    result[k] = self._replace_placeholder(v, value, bool_value)
+                elif isinstance(v, list):
+                    # 处理列表
+                    result[k] = [
+                        self._replace_placeholder(item, value, bool_value)
+                        if isinstance(item, (dict, list))
+                        else (
+                            bool_value if item == "{boole}"
+                            else (
+                                item.replace("{boole}", str(bool_value).lower()).replace("{value}", value)
+                                if isinstance(item, str)
+                                else item
+                            )
+                        )
+                        for item in v
+                    ]
+                else:
+                    # 其他类型原样保留
+                    result[k] = v
+            return result
+        elif isinstance(pipeline, list):
+            # 处理列表
+            return [self._replace_placeholder(item, value, bool_value) for item in pipeline]
+        # 基本类型直接返回
         return pipeline

@@ -44,7 +44,7 @@ class DeviceConfig:
 
 @dataclass
 class DevicesConfig:
-    """Main devices configuration dataclass, wrapping a list of DeviceConfig."""
+    """Main devices configuration dataclass, wrapping a task_list of DeviceConfig."""
     devices: List[DeviceConfig] = field(default_factory=list)
     source_file: str = ""  # 用于记录加载的文件路径，但不保存到输出 JSON 中
 

@@ -1,0 +1,15 @@
+{
+  "自动秘闻": {
+    "action": "Custom",
+    "custom_action": "TaskList",
+    "custom_action_param": {
+        "task_list": [
+          "点击探索",
+          "开始自动秘闻"
+        ]
+    }
+  },
+  "开始自动秘闻": {
+
+  }
+}

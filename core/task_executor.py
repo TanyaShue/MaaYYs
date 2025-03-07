@@ -1,18 +1,86 @@
 # -*- coding: UTF-8 -*-
 import logging
-import os
 import time
 from datetime import datetime
-from typing import Any, Optional
+from enum import Enum
+from typing import Optional
 
-from PySide6.QtCore import QObject, Signal, Slot, QThreadPool, QRunnable, QMutexLocker, QTimer, QRecursiveMutex, Qt
+from PySide6.QtCore import QObject, Signal, Slot, QThreadPool, QRunnable, QMutexLocker, QRecursiveMutex, Qt
 from maa.controller import AdbController
 from maa.resource import Resource
 from maa.tasker import Tasker
 
 from app.models.config import DeviceConfig
-from core.tasker_manager import Task, TaskStatus, DeviceStatus, TaskPriority, DeviceState
+from app.models.config.global_config import RunTimeConfigs
 
+
+class TaskStatus(Enum):
+    """任务执行状态枚举"""
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    CANCELED = "canceled"
+
+
+class TaskPriority(Enum):
+    """任务优先级枚举"""
+    HIGH = 0
+    NORMAL = 1
+    LOW = 2
+
+
+class Task:
+    """统一任务表示"""
+
+    def __init__(self, task_data: RunTimeConfigs, priority: TaskPriority = TaskPriority.NORMAL):
+        self.id = f"task_{id(self)}"  # 唯一任务ID
+        self.data:RunTimeConfigs = task_data
+        self.priority = priority
+        self.status = TaskStatus.PENDING
+        self.created_at = datetime.now()
+        self.started_at = None
+        self.completed_at = None
+        self.error = None
+        self.cancelable = True
+        self.runner = None  # 引用执行此任务的TaskRunner
+
+
+class DeviceStatus(Enum):
+    """设备状态枚举"""
+    IDLE = "idle"
+    RUNNING = "running"
+    ERROR = "error"
+    STOPPING = "stopping"
+
+
+class DeviceState(QObject):
+    """设备状态类"""
+    status_changed = Signal(str)  # 状态变化信号
+    error_occurred = Signal(str)  # 错误信号
+
+    def __init__(self):
+        super().__init__()
+        self.status = DeviceStatus.IDLE
+        self.created_at = datetime.now()
+        self.last_active = datetime.now()
+        self.current_task = None
+        self.error = None
+        self.task_history = []
+        self.stats = {
+            "tasks_completed": 0,
+            "tasks_failed": 0,
+            "total_runtime": 0
+        }
+
+    def update_status(self, status: DeviceStatus, error=None):
+        """更新设备状态"""
+        self.status = status
+        self.last_active = datetime.now()
+        self.status_changed.emit(status.value)
+        if error:
+            self.error = error
+            self.error_occurred.emit(error)
 
 class TaskExecutor(QObject):
     """任务执行控制器，管理单个设备的任务执行"""
@@ -31,13 +99,13 @@ class TaskExecutor(QObject):
         super().__init__(parent)
         self.device_name = device_config.device_name
         self.device_config = device_config
-        # self.resource_path = resource_path
+        self.resource_path:Optional[str] = None
         adb_config=device_config.adb_config
         self._controller=AdbController(adb_config.adb_path,adb_config.address,adb_config.screencap_methods,
                                        adb_config.input_methods,adb_config.config)
         # 设备状态管理
         self.state = DeviceState()
-        self._tasker:Optional[Tasker] = None  # 实际执行器实现
+        self._tasker:Optional[Tasker] = Tasker()
 
         # 使用全局线程池
         self.thread_pool = QThreadPool.globalInstance()
@@ -52,17 +120,12 @@ class TaskExecutor(QObject):
         self._running_task = None  # 当前正在运行的任务
         self._task_queue = []  # 任务队列
 
-        # 初始化健康检查定时器
-        self._health_timer = QTimer(self)
-        self._health_timer.timeout.connect(self._check_tasks_health)
-
         # 设置日志
         self.logger = logging.getLogger(f"TaskExecutor.{device_config.device_name}")
 
         # 连接信号 - 使用新的处理方式
         self.task_completed.connect(self._handle_task_completed)
         self.task_failed.connect(self._handle_task_failed)
-        # self.task_canceled.connect(self._handle_task_canceled)
 
         # 使用信号连接处理下一个任务，避免递归锁问题
         self.process_next_task_signal.connect(self._process_next_task, Qt.QueuedConnection)
@@ -88,8 +151,9 @@ class TaskExecutor(QObject):
         """初始化资源"""
         try:
             # 特定实现的资源初始化
+            self.resource_path = resource_path
             self.resource = Resource()
-            self.resource.post_bundle(resource_path).wait()            # self._tasker.initialize(...)
+            self.resource.post_bundle(resource_path).wait()
             return True
         except Exception as e:
             self.logger.error(f"资源初始化失败: {e}")
@@ -116,8 +180,11 @@ class TaskExecutor(QObject):
             task = self._task_queue.pop(0)
             self._running_task = task
 
+            if self.resource_path!=task.data.resource_path:
+                self._initialize_resources(task.data.resource_path)
+            if self._controller:
+                self._controller.post_connection().wait()
             self._tasker.bind(resource=self.resource,controller=self._controller)
-
             # 创建任务执行器
             runner = TaskRunner(task, self)
             runner.setAutoDelete(True)
@@ -133,21 +200,21 @@ class TaskExecutor(QObject):
 
     # 使用新的槽函数处理任务完成，避免在信号处理中直接使用锁
     @Slot(str, object)
-    def _handle_task_completed(self, task_id, result):
+    def _handle_task_completed(self, task_id):
         """任务完成处理器 - 安全方式"""
         with QMutexLocker(self._mutex):
             if self._running_task and self._running_task.id == task_id:
-                task = self._running_task
-                self._running_task = None
-                self.state.stats["tasks_completed"] += 1
-                self.state.task_history.append({
-                    "id": task_id,
-                    "status": "completed",
-                    "runtime": (task.completed_at - task.started_at).total_seconds()
-                })
+                # task = self._running_task
+                # self._running_task = None
+                # self.state.stats["tasks_completed"] += 1
+                # self.state.task_history.append({
+                #     "id": task_id,
+                #     "status": "completed",
+                #     "runtime": (task.completed_at - task.started_at).total_seconds()
+                # })
 
                 # 更新总运行时间统计
-                self.state.stats["total_runtime"] += (task.completed_at - task.started_at).total_seconds()
+                # self.state.stats["total_runtime"] += (task.completed_at - task.started_at).total_seconds()
 
                 # 通过信号异步触发下一个任务处理
                 self.process_next_task_signal.emit()
@@ -157,20 +224,20 @@ class TaskExecutor(QObject):
         """任务失败处理器 - 安全方式"""
         with QMutexLocker(self._mutex):
             if self._running_task and self._running_task.id == task_id:
-                task = self._running_task
-                self._running_task = None
-                self.state.stats["tasks_failed"] += 1
-                self.state.task_history.append({
-                    "id": task_id,
-                    "status": "failed",
-                    "error": error
-                })
+                # task = self._running_task
+                # self._running_task = None
+                # self.state.stats["tasks_failed"] += 1
+                # self.state.task_history.append({
+                #     "id": task_id,
+                #     "status": "failed",
+                #     "error": error
+                # })
 
                 # 通过信号异步触发下一个任务处理
                 self.process_next_task_signal.emit()
 
 
-    def submit_task(self, task_data: Any, priority: TaskPriority = TaskPriority.NORMAL) -> str:
+    def submit_task(self, task_data: RunTimeConfigs, priority: TaskPriority = TaskPriority.NORMAL) -> str:
         """提交任务到执行队列"""
         with QMutexLocker(self._mutex):
             if not self._active:
@@ -191,27 +258,6 @@ class TaskExecutor(QObject):
 
             return task.id
 
-    @Slot(str)
-    def cancel_task(self, task_id: str) -> bool:
-        """取消任务"""
-        with QMutexLocker(self._mutex):
-            # 如果是当前正在执行的任务
-            if self._running_task and self._running_task.id == task_id:
-                if self._running_task.runner:
-                    return self._running_task.runner.cancel()
-                return False
-
-            # 如果是队列中的任务
-            for i, task in enumerate(self._task_queue):
-                if task.id == task_id:
-                    task.status = TaskStatus.CANCELED
-                    self._task_queue.pop(i)
-                    self.task_canceled.emit(task_id)
-                    self.logger.info(f"队列中的任务 {task_id} 已取消")
-                    return True
-
-            return False
-
     def stop(self):
         """停止任务执行器"""
         with QMutexLocker(self._mutex):
@@ -222,18 +268,11 @@ class TaskExecutor(QObject):
             self._active = False
             self.state.update_status(DeviceStatus.STOPPING)
 
-            # 取消当前正在运行的任务
-            if self._running_task:
-                self.cancel_task(self._running_task.id)
-
             # 清空任务队列
             for task in self._task_queue:
                 task.status = TaskStatus.CANCELED
                 self.task_canceled.emit(task.id)
             self._task_queue.clear()
-
-            # 停止健康检查定时器
-            self._health_timer.stop()
 
             # 清理资源
             if self._tasker:
@@ -313,20 +352,10 @@ class TaskRunner(QRunnable):
     def execute_task(self, task_data):
         """执行具体任务的方法，需要子类实现"""
         # 实际应用中，这里需要根据不同任务类型实现具体的执行逻辑
-        # 此处仅为演示
-        time.sleep(0.5)  # 模拟任务执行
-
-        self.tasker.post_task()
+        for task in task_data.task_list:
+            self.tasker.post_task(task.task_entry,task.pipeline_override)
         # 可以在这里添加进度更新
         self.executor.progress_updated.emit(self.task.id, 50)
 
         time.sleep(0.5)  # 继续模拟任务执行
         return {"result": "success", "data": task_data}
-
-    def cancel(self):
-        """取消任务执行"""
-        if self.task.cancelable:
-            self.canceled = True
-            self.logger.info(f"任务 {self.task.id} 已标记为取消")
-            return True
-        return False

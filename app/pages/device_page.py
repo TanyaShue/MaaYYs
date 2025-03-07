@@ -9,6 +9,7 @@ from app.components.collapsible_widget import CollapsibleWidget, DraggableContai
 from app.models.config.device_config import OptionConfig, Resource
 from app.models.config.global_config import GlobalConfig
 from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
+from core.tasker_manager import TaskerManager
 
 
 class DevicePage(QWidget):
@@ -17,7 +18,7 @@ class DevicePage(QWidget):
         self.global_config = GlobalConfig()
         self.init_ui()
         self.load_config_data()
-
+        self.manager:TaskerManager=TaskerManager()
     def init_ui(self):
         """初始化UI组件"""
         layout = QVBoxLayout(self)
@@ -340,6 +341,7 @@ class DevicePage(QWidget):
             run_btn = QPushButton("运行")
             run_btn.setFixedWidth(60)
             run_btn.setObjectName("runButton")
+            run_btn.clicked.connect(lambda checked, d_config=device_config,r_name=resource_name: self.run_resource_task(d_config,r_name))
 
             settings_btn = QPushButton("设置")
             settings_btn.setFixedWidth(60)
@@ -368,6 +370,11 @@ class DevicePage(QWidget):
         resource_layout.addWidget(one_key_start_btn)
 
         return resource_widget
+    def run_resource_task(self,d_config,resource_name):
+        run_time_config=self.global_config.get_runtime_configs_for_resource(resource_name)
+        # self.manager.create_executor(run_time_config)
+        self.manager.create_executor(d_config)
+        self.manager.submit_task(d_config.device_name, run_time_config)
 
     def _create_log_tab(self, device_config):
         """创建日志选项卡"""

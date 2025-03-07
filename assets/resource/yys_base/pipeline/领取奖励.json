@@ -1,0 +1,380 @@
+{
+  "领取奖励_邮件": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "template": [
+      "邮箱.png",
+      "邮箱_红点.png"
+    ],
+    "roi": [
+      1117,
+      0,
+      75,
+      98
+    ],
+    "next": "邮件_全部领取",
+    "timeout": 3000,
+    "on_error": "邮件_领取奖励_点击关闭",
+    "post_delay": 2000
+  },
+  "邮件_领取奖励_点击关闭": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "通用图标/关闭.png",
+    "post_delay": 2000
+  },
+  "邮件_全部领取": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "邮件_全部领取.png",
+    "post_delay": 1000,
+    "next": "邮件_确认领取",
+    "timeout": 3000,
+    "roi": [
+      54,
+      579,
+      191,
+      132
+    ]
+  },
+  "邮件_确认领取": {
+    "recognition": "OCR",
+    "expected": "确定",
+    "action": "Click",
+    "roi": [
+      695,
+      543,
+      146,
+      59
+    ],
+    "next": "识别邮箱界面",
+    "interrupt": [
+      "邮件_领取奖励_点击关闭",
+      "邮件_领取奖励_点击底部关闭奖励界面"
+    ],
+    "post_delay": 1000
+  },
+  "邮件_领取奖励_点击底部关闭奖励界面": {
+    "action": "Click",
+    "target": [
+      414,
+      517,
+      445,
+      135
+    ],
+    "post_delay": 1000
+  },
+  "识别邮箱界面": {
+    "recognition": "OCR",
+    "expected": "邮箱",
+    "inverse": true
+  },
+  "领取奖励_日常奖励": {
+    "next": [
+      "领取奖励_识别日常奖励"
+    ],
+    "interrupt": [
+      "领取奖励_签到",
+      "领取奖励_每日勾玉",
+      "领取奖励_领取签到小垃圾",
+      "领取奖励_日常体力",
+      "领取奖励_日常御魂加成"
+    ]
+  },
+  "领取奖励_识别日常奖励": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "签到.png",
+      "签到_2.png",
+      "签到_3.png",
+      "勾玉.png",
+      "勾玉_2.png",
+      "签到小垃圾.png",
+      "签到小垃圾_2.png",
+      "签到小垃圾_3.png",
+      "体力.png",
+      "御魂加成.png"
+    ],
+    "inverse": true,
+    "roi": [
+      22,
+      363,
+      1217,
+      230
+    ]
+  },
+  "领取奖励_签到": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "签到.png",
+      "签到_2.png",
+      "签到_3.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      22,
+      363,
+      1217,
+      230
+    ],
+    "next": "领取奖励_签到_点击签到"
+  },
+  "领取奖励_签到_点击签到": {
+    "action": "Click",
+    "post_delay": 3000,
+    "target": [
+      562,
+      153,
+      143,
+      219
+    ],
+    "next": [
+      "领取奖励_签到_点击屏幕继续",
+      "关闭签到界面"
+    ]
+
+  },
+  "领取奖励_签到_点击屏幕继续": {
+    "recognition": "OCR",
+    "expected": "点击屏幕继续",
+    "action": "Click",
+    "post_delay": 2000,
+    "roi": [
+      504,
+      666,
+      313,
+      53
+    ],
+    "target": [
+      504,
+      666,
+      313,
+      53
+    ],
+    "interrupt": [
+      "关闭签到界面"
+    ],
+    "next": "识别庭院特征"
+  },
+  "关闭签到界面": {
+    "recognition": "FeatureMatch",
+    "template": [
+      "通用图标/关闭.png",
+      "通用图标/关闭_2.png"
+    ],
+    "action": "Click",
+    "post_delay": 1000,
+    "roi": [
+760,24,375,197
+    ],
+    "next": "返回庭院",
+    "timeout": 1000
+  },
+  "领取奖励_每日勾玉": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "勾玉.png",
+      "勾玉_2.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      22,
+      363,
+      1217,
+      230
+    ],
+    "next": "领取奖励_点击一下屏幕底部"
+  },
+  "领取奖励_领取签到小垃圾": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "签到小垃圾.png",
+      "签到小垃圾_2.png",
+      "签到小垃圾_3.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      22,
+      363,
+      1217,
+      230
+    ],
+    "next": "领取奖励_点击一下屏幕底部"
+  },
+  "领取奖励_日常御魂加成": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "御魂加成.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      22,
+      363,
+      1217,
+      230
+    ],
+    "next": "领取奖励_点击一下屏幕底部"
+  },
+  "领取奖励_点击一下屏幕底部": {
+    "action": "Click",
+    "target": [
+      493,
+      560,
+      392,
+      114
+    ],
+    "post_delay": 1000,
+    "next": "返回庭院"
+  },
+  "领取奖励_日常体力": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "体力.png",
+    "post_delay": 1000,
+    "roi": [
+      22,
+      363,
+      1217,
+      230
+    ],
+    "next": "领取奖励_点击一下屏幕底部"
+  },
+  "领取奖励_商店每日奖励": {
+    "next": "领取奖励_打开商店",
+    "interrupt": [
+      "打开底部菜单"
+    ]
+  },
+  "领取奖励_打开商店": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "庭院/庭院_商店.png",
+      "庭院/庭院_商店_红点.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      56,
+      565,
+      1215,
+      141
+    ],
+    "next": "领取奖励_商店每日奖励_点击礼包屋"
+  },
+  "领取奖励_商店每日奖励_点击礼包屋": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "商店_礼包屋.png",
+    "post_delay": 1000,
+    "roi": [
+      1082,
+      577,
+      197,
+      142
+    ],
+    "next": "领取奖励_商店每日奖励_点击推荐",
+    "timeout": 1000,
+    "on_error": "返回庭院"
+  },
+  "领取奖励_商店每日奖励_点击推荐": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "商店_礼包屋_推荐.png",
+      "商店_礼包屋_推荐_2.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      1163,
+      71,
+      95,
+      549
+    ],
+    "next": "领取奖励_商店每日奖励_领取每日免费礼包",
+    "timeout": 1000,
+    "on_error": "领取奖励_商店每日奖励_领取每日免费礼包_返回"
+  },
+  "领取奖励_商店每日奖励_领取每日免费礼包": {
+    "recognition": "OCR",
+    "action": "Click",
+    "expected": "免费",
+    "post_delay": 1000,
+    "roi": [
+      221,
+      285,
+      309,
+      67
+    ],
+    "next": "领取奖励_商店每日奖励_领取每日免费礼包_返回",
+    "timeout": 1000
+  },
+  "领取奖励_商店每日奖励_领取每日免费礼包_返回": {
+    "action": "Click",
+    "target": [
+      16,
+      5,
+      46,
+      45
+    ],
+    "next": "返回庭院"
+  },
+  "领取奖励_花合战奖励": {
+    "next": "领取奖励_打开花合战",
+    "interrupt": [
+      "打开底部菜单"
+    ]
+  },
+  "领取奖励_打开花合战": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "庭院/庭院_花合战.png",
+      "庭院/庭院_花合战_红点.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      310,
+      586,
+      903,
+      101
+    ],
+    "next": "领取奖励_花合战_点击任务"
+  },
+  "领取奖励_花合战_点击任务": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "花合战_任务.png",
+      "花合战_任务_红点.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      1180,
+      292,
+      90,
+      143
+    ],
+    "next": "领取奖励_花合战_全部领取",
+    "timeout": 1000,
+    "on_error": "返回庭院"
+  },
+  "领取奖励_花合战_全部领取": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "花合战_全部领取.png"
+    ],
+    "post_delay": 1000,
+    "roi": [
+      828,
+      494,
+      239,
+      225
+    ],
+    "next": "返回庭院"
+  }
+}
