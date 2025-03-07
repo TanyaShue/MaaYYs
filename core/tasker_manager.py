@@ -1,223 +1,210 @@
 # -*- coding: UTF-8 -*-
-import json
-import threading
-import time
-from typing import Dict, Any, Optional, List
+import logging
 from datetime import datetime
+from enum import Enum
+from typing import Dict, Any, Optional, List
 
-from maa.tasker import Tasker
+from PySide6.QtCore import QObject, Signal, Slot, QMutexLocker, QRecursiveMutex
 
+from app.models.config import DeviceConfig
 from core.singleton import singleton
+from core.task_executor import TaskExecutor
 
 
-class TaskerStatus:
+class TaskStatus(Enum):
+    """任务执行状态枚举"""
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    CANCELED = "canceled"
+
+
+class TaskPriority(Enum):
+    """任务优先级枚举"""
+    HIGH = 0
+    NORMAL = 1
+    LOW = 2
+
+
+class Task:
+    """统一任务表示"""
+
+    def __init__(self, task_data: Any, priority: TaskPriority = TaskPriority.NORMAL):
+        self.id = f"task_{id(self)}"  # 唯一任务ID
+        self.data = task_data
+        self.priority = priority
+        self.status = TaskStatus.PENDING
+        self.created_at = datetime.now()
+        self.started_at = None
+        self.completed_at = None
+        self.error = None
+        self.cancelable = True
+        self.runner = None  # 引用执行此任务的TaskRunner
+
+
+class DeviceStatus(Enum):
+    """设备状态枚举"""
     IDLE = "idle"
     RUNNING = "running"
     ERROR = "error"
     STOPPING = "stopping"
 
-class TaskerThread:
-    """Tasker线程类，负责执行任务"""
 
-    def __init__(self, device_name: str, device_config: Any, resource_path: str):
-        self.status: str = TaskerStatus.IDLE
-        self.device_name = device_name
-        self.device_config = device_config
-        self.resource_path = resource_path
-        self._tasker: Optional[Tasker] = None
-        self._thread = threading.Thread(target=self._run, daemon=True)
-        self._running = False
+class DeviceState(QObject):
+    """设备状态类"""
+    status_changed = Signal(str)  # 状态变化信号
+    error_occurred = Signal(str)  # 错误信号
 
-    def start(self):
-        """启动Tasker线程"""
-        self._running = True
-        self._thread.start()
+    def __init__(self):
+        super().__init__()
+        self.status = DeviceStatus.IDLE
+        self.created_at = datetime.now()
+        self.last_active = datetime.now()
+        self.current_task = None
+        self.error = None
+        self.task_history = []
+        self.stats = {
+            "tasks_completed": 0,
+            "tasks_failed": 0,
+            "total_runtime": 0
+        }
 
-    def _run(self):
-        """线程执行函数"""
-        while self._running:
-            # 简单的主循环，在实际应用中可能需要更复杂的逻辑
-            time.sleep(0.1)
-
-    def _initialize_resources(self) -> Optional[Tasker]:
-        """初始化Tasker资源"""
-        try:
-            # 这里根据实际需求创建和初始化Tasker
-            # 简化示例，实际实现可能更复杂
-            self._tasker = Tasker()
-
-            return self._tasker
-        except Exception as e:
-            print(f"初始化失败: {str(e)}")
-            return None
-
-    def send_task(self, task_data: Any):
-        """发送任务到Tasker"""
-        self._tasker.send_task(task_data)
-
-    def terminate(self):
-        """终止Tasker线程"""
-        if not self._tasker:
-            return
-        self._running = False
-        self._tasker.stop()
-
-    def join(self, timeout=None):
-        """等待线程结束"""
-        if self._thread.is_alive():
-            self._thread.join(timeout)
+    def update_status(self, status: DeviceStatus, error=None):
+        """更新设备状态"""
+        self.status = status
+        self.last_active = datetime.now()
+        self.status_changed.emit(status.value)
+        if error:
+            self.error = error
+            self.error_occurred.emit(error)
 
 
 @singleton
-class TaskerManager:
-    def __init__(self):
-        self._tasker_threads: Dict[str, TaskerThread] = {}
-        self._states: Dict[str, TaskerStatus] = {}
-        self._lock = threading.Lock()
-        self._taskers: Dict[str, Tasker] = {}
+class TaskerManager(QObject):
+    """
+    集中管理所有设备任务执行器的管理器
+    使用单例模式确保整个应用中只有一个实例
+    """
+    # 定义信号
+    device_added = Signal(str)  # 设备添加信号
+    device_removed = Signal(str)  # 设备移除信号
 
-    def create_tasker(self, device_name: str, device_config: Any, resource_path: str) -> bool:
-        """
-        创建并启动一个新的Tasker
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._executors: Dict[str, TaskExecutor] = {}
+        # 使用递归互斥锁代替普通互斥锁
+        self._mutex = QRecursiveMutex()
+        self.logger = logging.getLogger("TaskerManager")
 
-        Args:
-            device_name: 设备名称
-            device_config: 设备配置
-            resource_path: 资源路径
-
-        Returns:
-            bool: 创建是否成功
-        """
-        with self._lock:
-            if device_name in self._tasker_threads:
-                print(f"Tasker for device {device_name} already exists")
+    def create_executor(self,device_config: DeviceConfig) -> bool:
+        """创建并启动设备的任务执行器"""
+        with QMutexLocker(self._mutex):
+            if device_config.device_name in self._executors:
+                self.logger.warning(f"设备 {device_config.device_name} 的任务执行器已存在")
+                return False
 
             try:
-                tasker_thread = TaskerThread(device_name, device_config, resource_path)
-                controller_handle = tasker_thread._initialize_resources()
+                # 创建执行器并设置parent为self，使其随manager销毁而自动清理
+                executor = TaskExecutor(device_config, parent=self)
+                success = executor.start()
 
-                # 初始化logger
-                tasker_thread.start()
-                self._tasker_threads[device_name] = tasker_thread
-                self._taskers[device_name] = controller_handle
-                self._states[device_name] = TaskerState(
-                    status=TaskerStatus.RUNNING,
-                    created_at=datetime.now(),
-                    last_active=datetime.now()
-                )
+                if success:
+                    self._executors[device_config.device_name] = executor
+                    self.device_added.emit(device_config.device_name)
+                    return True
+                return False
 
+            except Exception as e:
+                self.logger.error(f"为设备 {device_config.device_name} 创建任务执行器失败: {e}")
+                return False
+
+    def submit_task(self, device_name: str, task_data: Any,
+                    priority: TaskPriority = TaskPriority.NORMAL) -> Optional[str]:
+        """向特定设备的执行器提交任务"""
+        with QMutexLocker(self._mutex):
+            executor = self._get_executor(device_name)
+            if not executor:
+                return None
+
+            try:
+                task_id = executor.submit_task(task_data, priority)
+                return task_id
+            except Exception as e:
+                self.logger.error(f"向设备 {device_name} 提交任务失败: {e}")
+                return None
+
+    @Slot(str, str)
+    def cancel_task(self, device_name: str, task_id: str) -> bool:
+        """取消特定设备上的任务"""
+        with QMutexLocker(self._mutex):
+            executor = self._get_executor(device_name)
+            if not executor:
+                return False
+            return executor.cancel_task(task_id)
+
+    def stop_executor(self, device_name: str) -> bool:
+        """停止特定设备的执行器"""
+        with QMutexLocker(self._mutex):
+            executor = self._get_executor(device_name)
+            if not executor:
+                return False
+
+            try:
+                executor.stop()
+                # 注意: 不要删除executor，因为它是QObject的子对象，会自动清理
+                # 只需要从字典中移除引用
+                del self._executors[device_name]
+                self.device_removed.emit(device_name)
                 return True
-
             except Exception as e:
-                print(f"初始化失败: {str(e)}")
+                self.logger.error(f"停止设备 {device_name} 的执行器失败: {e}")
+                return False
 
-    def send_task(self, device_name: str, task_data: Any) -> None:
-        """
-        发送任务到指定设备的Tasker
+    def get_executor_state(self, device_name: str) -> Optional[DeviceState]:
+        """获取设备执行器的当前状态"""
+        with QMutexLocker(self._mutex):
+            executor = self._get_executor(device_name)
+            if not executor:
+                return None
+            return executor.get_state()
 
-        Args:
-            device_name: 设备名称
-            task_data: 任务数据
-        """
-        with self._lock:
-            tasker_thread = self._get_tasker_thread(device_name)
-            state = self._states[device_name]
-
-            state.current_task = task_data
-            state.last_active = datetime.now()
-
-            try:
-                # 这里假设有一个ProjectRunData类，根据实际情况调整
-                task = (task_data if not isinstance(task_data, dict)
-                        else task_data)  # 简化处理
-                tasker_thread.send_task(task)
-            except Exception as e:
-                state.status = TaskerStatus.ERROR
-                state.error = str(e)
-                print(f"Failed to send task: {e}")
-
-    def terminate_tasker(self, device_name: str) -> None:
-        """
-        终止指定设备的Tasker
-
-        Args:
-            device_name: 设备名称
-        """
-        with self._lock:
-            tasker_thread = self._get_tasker_thread(device_name)
-            state = self._states[device_name]
-
-            try:
-                state.status = TaskerStatus.STOPPING
-                tasker_thread.terminate()
-                tasker_thread.join()
-
-                del self._tasker_threads[device_name]
-                del self._taskers[device_name]
-                del self._states[device_name]
-
-            except Exception as e:
-                print(f"Failed to terminate tasker: {e}")
-
-    def get_status(self, device_name: str) -> TaskerStatus:
-        """
-        获取指定设备Tasker的状态
-
-        Args:
-            device_name: 设备名称
-
-        Returns:
-            TaskerState: Tasker状态
-        """
-        with self._lock:
-            if device_name not in self._states:
-                print(f"Tasker for device {device_name} not found")
-            return self._states[device_name]
-
-    def _get_tasker_thread(self, device_name: str) -> TaskerThread:
-        """
-        获取指定设备的TaskerThread实例
-
-        Args:
-            device_name: 设备名称
-
-        Returns:
-            TaskerThread: Tasker线程实例
-        """
-        tasker_thread = self._tasker_threads.get(device_name)
-        if not tasker_thread:
-            print(f"Tasker for device {device_name} not found")
-        return tasker_thread
-
-    def terminate_all(self) -> None:
-        """终止所有Tasker"""
-        with self._lock:
-            for device_name in list(self._tasker_threads.keys()):
-                try:
-                    self.terminate_tasker(device_name)
-                except Exception as e:
-                    print(f"Error terminating tasker for {device_name}: {e}")
-
+    def _get_executor(self, device_name: str) -> Optional[TaskExecutor]:
+        """获取特定设备的执行器"""
+        executor = self._executors.get(device_name)
+        if not executor:
+            self.logger.warning(f"设备 {device_name} 的执行器未找到")
+        return executor
 
     def get_active_devices(self) -> List[str]:
-        """
-        获取所有活跃的设备名称
+        """获取所有活跃设备名称的列表"""
+        with QMutexLocker(self._mutex):
+            return list(self._executors.keys())
 
-        Returns:
-            List[str]: 活跃设备名称列表
-        """
-        with self._lock:
-            return list(self._tasker_threads.keys())
+    @Slot()
+    def stop_all(self):
+        """停止所有执行器"""
+        self.logger.info("正在停止所有任务执行器")
+        # 首先获取所有设备名称的列表，避免在遍历过程中修改字典
+        with QMutexLocker(self._mutex):
+            device_names = list(self._executors.keys())
 
-    def is_device_running(self, device_name: str) -> bool:
-        """
-        检查设备是否正在运行
+        # 然后逐个停止执行器
+        for device_name in device_names:
+            try:
+                self.stop_executor(device_name)
+            except Exception as e:
+                self.logger.error(f"停止设备 {device_name} 的执行器时出错: {e}")
 
-        Args:
-            device_name: 设备名称
+    def is_device_active(self, device_name: str) -> bool:
+        """检查设备执行器是否处于活跃状态"""
+        with QMutexLocker(self._mutex):
+            return device_name in self._executors
 
-        Returns:
-            bool: 是否运行中
-        """
-        with self._lock:
-            return device_name in self._tasker_threads
+    def get_device_queue_info(self) -> Dict[str, int]:
+        """获取所有设备的队列状态信息"""
+        with QMutexLocker(self._mutex):
+            queue_info = {}
+            for device_name, executor in self._executors.items():
+                queue_info[device_name] = executor.get_queue_length()
+            return queue_info
