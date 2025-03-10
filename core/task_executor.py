@@ -5,7 +5,7 @@ import os
 import time
 from datetime import datetime
 from enum import Enum
-from typing import Optional, Dict
+from typing import Optional
 
 from PySide6.QtCore import QObject, Signal, Slot, QThreadPool, QRunnable, QMutexLocker, QRecursiveMutex, Qt
 from maa.controller import AdbController
@@ -363,9 +363,6 @@ class TaskRunner(QRunnable):
                 self.task.status = TaskStatus.CANCELED
                 self.executor.task_canceled.emit(self.task.id)
                 return
-
-            print(f"开始执行任务 {self.task.data}")
-
             # 执行任务
             result = self.execute_task(self.task.data)
 

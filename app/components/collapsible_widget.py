@@ -1,12 +1,12 @@
-from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QCheckBox, QLabel, QPushButton,
-    QScrollArea, QFrame, QSizePolicy, QApplication, QGraphicsOpacityEffect
-)
 from PySide6.QtCore import (
     QPropertyAnimation, QEasingCurve, Qt, QMimeData,
-    QParallelAnimationGroup, QSequentialAnimationGroup, QPoint, Property, Signal
+    QParallelAnimationGroup, QPoint, Property, Signal
 )
-from PySide6.QtGui import QFont, QDrag, QPixmap, QMouseEvent, QColor, QCursor
+from PySide6.QtGui import QFont, QDrag, QPixmap, QMouseEvent, QCursor
+from PySide6.QtWidgets import (
+    QWidget, QVBoxLayout, QHBoxLayout, QCheckBox, QLabel, QPushButton,
+    QFrame, QSizePolicy, QApplication, QGraphicsOpacityEffect
+)
 
 
 class CollapsibleWidget(QWidget):

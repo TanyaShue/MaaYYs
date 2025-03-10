@@ -1,11 +1,11 @@
 import os
 
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QGridLayout, QFrame, QPushButton, QHBoxLayout
-from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QFont
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QGridLayout, QFrame, QPushButton, QHBoxLayout
 
 from app.components import DeviceCard
-from app.models.config.global_config import GlobalConfig, global_config
+from app.models.config.global_config import global_config
 from app.pages.add_device_dialog import AddDeviceDialog  # 导入新创建的对话框类
 
 

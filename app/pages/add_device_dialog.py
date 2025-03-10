@@ -1,11 +1,12 @@
+from PySide6.QtCore import Qt, QTime, QThread, Signal
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QFormLayout,
                                QLabel, QLineEdit, QPushButton, QComboBox,
                                QWidget, QCheckBox, QGroupBox, QScrollArea,
                                QTimeEdit)
-from PySide6.QtCore import Qt, QTime, QThread, Signal
-
 from maa.toolkit import Toolkit
-from app.models.config.device_config import DeviceConfig,AdbDevice
+
+from app.models.config.device_config import DeviceConfig, AdbDevice
+
 
 class DeviceSearchThread(QThread):
     """用于后台搜索设备的线程"""

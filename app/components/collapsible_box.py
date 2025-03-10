@@ -1,5 +1,6 @@
-from PySide6.QtWidgets import QWidget, QCheckBox, QVBoxLayout
 from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QCheckBox, QVBoxLayout
+
 
 class CollapsibleBox(QWidget):
     def __init__(self, title, parent=None):

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Dict, Optional, Type, Any
+from typing import List, Dict, Optional, Any
 
 from app.models.config.device_config import DevicesConfig
 from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption, Task

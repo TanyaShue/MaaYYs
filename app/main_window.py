@@ -1,11 +1,11 @@
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QComboBox, QLabel, QToolButton, QMenu
+from PySide6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QToolButton
 
 from app.components.navigation_button import NavigationButton
-from app.pages.home_page import HomePage
-from app.pages.device_page import DevicePage
+from app.pages.device_page import DeviceListPage
 from app.pages.download_page import DownloadPage
+from app.pages.home_page import HomePage
 from app.pages.info_page import InfoPage
 from app.utils.theme_manager import ThemeManager
 
@@ -73,7 +73,7 @@ class MainWindow(QMainWindow):
         # Initialize pages
         self.pages = {
             "home": HomePage(),
-            "device": DevicePage(),
+            "device": DeviceListPage(),
             "download": DownloadPage(),
             "info": InfoPage()
         }

@@ -5,9 +5,9 @@
 
 """
 
+import json
 import os
 import shutil
-import json
 
 # 路径配置
 image_dir = "../../assets/resource/yys_base/image"

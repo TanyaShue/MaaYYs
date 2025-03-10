@@ -1,6 +1,6 @@
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QFrame, QTableWidget, QTableWidgetItem, QPushButton, \
     QHeaderView
-from PySide6.QtGui import QFont
 
 
 class DownloadPage(QWidget):

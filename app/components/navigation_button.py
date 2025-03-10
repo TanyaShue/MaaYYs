@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QPushButton, QToolTip
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QPushButton, QToolTip
 
 
 class NavigationButton(QPushButton):
