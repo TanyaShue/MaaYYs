@@ -1,3 +1,5 @@
+import os
+
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QGridLayout, QFrame, QPushButton, QHBoxLayout
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt, Signal
@@ -52,11 +54,18 @@ class HomePage(QWidget):
     def load_sample_data(self):
         try:
             devices_config_path = "assets/config/devices.json"
+            # 如果文件不存在，先创建该文件并写入 "{}"
+            if not os.path.exists(devices_config_path):
+                # 确保父目录存在
+                os.makedirs(os.path.dirname(devices_config_path), exist_ok=True)
+                with open(devices_config_path, "w", encoding="utf-8") as f:
+                    f.write("{}")
+
             self.global_config.load_devices_config(devices_config_path)
 
-            resource_dir = "assets/resource"
+            resource_dir = "assets/resource/"
             self.global_config.load_all_resources_from_directory(resource_dir)
-
+            # print(self.global_config.resource_configs)
             self.populate_device_cards()
         except Exception as e:
             print(f"Error loading config files: {e}")

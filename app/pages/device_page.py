@@ -9,7 +9,7 @@ from app.components.collapsible_widget import CollapsibleWidget, DraggableContai
 from app.models.config.device_config import OptionConfig, Resource
 from app.models.config.global_config import GlobalConfig
 from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
-from core.tasker_manager import TaskerManager
+from core.tasker_manager import task_manager, TaskerManager
 
 
 class DevicePage(QWidget):
@@ -18,7 +18,7 @@ class DevicePage(QWidget):
         self.global_config = GlobalConfig()
         self.init_ui()
         self.load_config_data()
-        self.manager:TaskerManager=TaskerManager()
+        self.manager:TaskerManager=task_manager
     def init_ui(self):
         """初始化UI组件"""
         layout = QVBoxLayout(self)
@@ -316,7 +316,7 @@ class DevicePage(QWidget):
             # 检查该资源是否已启用
             checkbox.setChecked(resource_enabled_map.get(resource_name, False))
 
-            # 连接复选框状态变化信号
+            # 连接复选框状态变化信号，更新设备配置中对应资源的启用状态
             checkbox.stateChanged.connect(
                 lambda state, d_config=device_config, r_name=resource_name, cb=checkbox:
                 self.update_resource_enable_status(d_config, r_name, cb.isChecked())
@@ -341,15 +341,12 @@ class DevicePage(QWidget):
             run_btn = QPushButton("运行")
             run_btn.setFixedWidth(60)
             run_btn.setObjectName("runButton")
-            run_btn.clicked.connect(lambda checked, d_config=device_config,r_name=resource_name: self.run_resource_task(d_config,r_name))
+            run_btn.clicked.connect(lambda checked, d_config=device_config, r_name=resource_name:
+                                    self.run_resource_task(d_config, r_name))
 
             settings_btn = QPushButton("设置")
             settings_btn.setFixedWidth(60)
             settings_btn.setObjectName("settingsButton")
-
-            # 查找对应的设备资源配置
-            device_resource = self._get_device_resource(device_config, resource_name)
-
             settings_btn.clicked.connect(
                 lambda checked, r_name=resource_name, d_config=device_config:
                 self.show_resource_settings(d_config, r_name)
@@ -357,7 +354,6 @@ class DevicePage(QWidget):
 
             button_layout.addWidget(run_btn)
             button_layout.addWidget(settings_btn)
-
             resource_table.setCellWidget(row, 2, button_widget)
             resource_table.setRowHeight(row, 35)
 
@@ -368,11 +364,30 @@ class DevicePage(QWidget):
         one_key_start_btn.setFixedHeight(40)
         one_key_start_btn.setObjectName("oneKeyButton")
         resource_layout.addWidget(one_key_start_btn)
+        one_key_start_btn.clicked.connect(lambda: self.one_key_start_all(device_config))
 
         return resource_widget
+
+    def one_key_start_all(self, device_config):
+        """
+        一键启动：提交所有已启用资源的任务
+        """
+        runtime_configs = []
+        # 遍历设备配置中的所有资源，收集启用状态为 True 的资源对应的运行时配置
+        for resource in device_config.resources:
+            if resource.enable:
+                runtime_config = self.global_config.get_runtime_configs_for_resource(
+                    resource.resource_name, device_config.device_name)
+                if runtime_config is not None:
+                    runtime_configs.append(runtime_config)
+        if runtime_configs:
+            # 创建执行器并一次性提交所有任务（submit_task 已支持传入列表）
+            self.manager.create_executor(device_config)
+            self.manager.submit_task(device_config.device_name, runtime_configs)
+
     def run_resource_task(self,d_config,resource_name):
-        run_time_config=self.global_config.get_runtime_configs_for_resource(resource_name)
-        # self.manager.create_executor(run_time_config)
+        run_time_config=self.global_config.get_runtime_configs_for_resource(resource_name,d_config.device_name)
+
         self.manager.create_executor(d_config)
         self.manager.submit_task(d_config.device_name, run_time_config)
 

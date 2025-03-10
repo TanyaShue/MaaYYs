@@ -15,12 +15,7 @@
                     "resource_name": "阴阳师",
                     "enable": true,
                     "selected_tasks": [
-                        "打开游戏",
-                        "自动结界",
-                        "自动悬赏",
-                        "自动地鬼",
-                        "自动逢魔",
-                        "日常"
+                        "打开游戏"
                     ],
                     "options": [
                         {
@@ -159,7 +154,7 @@
                 },
                 {
                     "resource_name": "战双帕弥什",
-                    "enable": false,
+                    "enable": true,
                     "selected_tasks": [
                         "打开游戏"
                     ],
@@ -180,7 +175,7 @@
             "adb_config": {
                 "name": "C:/Android/adb.exe",
                 "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
-                "address": "emulator-5554",
+                "address": "127.0.0.1:5557",
                 "screencap_methods": 18446744073709551559,
                 "input_methods": 18446744073709551607,
                 "config": {}
@@ -202,7 +197,9 @@
                 {
                     "resource_name": "阴阳师",
                     "enable": true,
-                    "selected_tasks": [],
+                    "selected_tasks": [
+                        "打开游戏"
+                    ],
                     "options": []
                 }
             ],

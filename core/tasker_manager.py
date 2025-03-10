@@ -1,16 +1,14 @@
 # -*- coding: UTF-8 -*-
 import logging
-from typing import Dict, Optional, List
+from typing import Dict, Optional, List, Union
 
 from PySide6.QtCore import QObject, Signal, Slot, QMutexLocker, QRecursiveMutex
 
 from app.models.config import DeviceConfig
 from app.models.config.global_config import RunTimeConfigs
-from core.singleton import singleton
 from core.task_executor import TaskExecutor, TaskPriority, DeviceState
 
 
-@singleton
 class TaskerManager(QObject):
     """
     集中管理所有设备任务执行器的管理器
@@ -56,18 +54,21 @@ class TaskerManager(QObject):
                 self.logger.error(f"为设备 {device_config.device_name} 创建任务执行器失败: {e}")
                 return False
 
-    def submit_task(self, device_name: str, task_data: RunTimeConfigs,
-                    priority: TaskPriority = TaskPriority.NORMAL) -> Optional[str]:
+    def submit_task(self, device_name: str, task_data: Union[RunTimeConfigs, List[RunTimeConfigs]],
+                    priority: TaskPriority = TaskPriority.NORMAL) -> Optional[Union[str, List[str]]]:
         """
         向特定设备的执行器提交任务
 
         Args:
             device_name: 设备名称
-            task_data: 任务数据
+            task_data: 任务数据，支持单个任务数据或任务数据列表
             priority: 任务优先级
 
         Returns:
-            Optional[str]: 任务ID，失败时返回None
+            Optional[Union[str, List[str]]]:
+                如果传入单个任务数据，则返回任务ID（str）；
+                如果传入任务数据列表，则返回任务ID列表；
+                失败时返回 None
         """
         with QMutexLocker(self._mutex):
             executor = self._get_executor(device_name)
@@ -75,8 +76,9 @@ class TaskerManager(QObject):
                 return None
 
             try:
-                task_id = executor.submit_task(task_data, priority)
-                return task_id
+                # 此处 executor.submit_task 已支持单个或多个任务数据
+                task_ids = executor.submit_task(task_data, priority)
+                return task_ids
             except Exception as e:
                 self.logger.error(f"向设备 {device_name} 提交任务失败: {e}")
                 return None
@@ -188,3 +190,5 @@ class TaskerManager(QObject):
             for device_name, executor in self._executors.items():
                 queue_info[device_name] = executor.get_queue_length()
             return queue_info
+
+task_manager=TaskerManager()

@@ -84,7 +84,7 @@ class TestGlobalConfigAndTaskerManager(unittest.TestCase):
             f.write(devices_config.model_dump_json(indent=2))
 
     def _create_resource_configs(self):
-        """Create sample resource_config.json files for testing"""
+        """Create sample resource_config.json.json files for testing"""
         # Resource 1
         resource1 = ResourceConfig(
             resource_name="resource1",
@@ -131,7 +131,7 @@ class TestGlobalConfigAndTaskerManager(unittest.TestCase):
             ]
         )
 
-        resource1_path = os.path.join(self.resource_dir, "resource1", "resource_config.json")
+        resource1_path = os.path.join(self.resource_dir, "resource1", "resource_config.json.json")
         with open(resource1_path, 'w') as f:
             f.write(resource1.model_dump_json(indent=2))
 
@@ -149,7 +149,7 @@ class TestGlobalConfigAndTaskerManager(unittest.TestCase):
             ]
         )
 
-        resource2_path = os.path.join(self.resource_dir, "resource2", "resource_config.json")
+        resource2_path = os.path.join(self.resource_dir, "resource2", "resource_config.json.json")
         with open(resource2_path, 'w') as f:
             f.write(resource2.model_dump_json(indent=2))
 

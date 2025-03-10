@@ -209,6 +209,16 @@ class AddDeviceDialog(QDialog):
             return
 
         try:
+            import json
+
+            # 尝试解析配置文本为字典，如果解析失败则使用空字典
+            try:
+                config_text = self.config_edit.text()
+                config_dict = json.loads(config_text) if config_text.strip() != "" else {}
+            except json.JSONDecodeError as e:
+                print("配置数据格式错误，无法解析为字典。", e)
+                config_dict = {}
+
             device_config = DeviceConfig(
                 device_name=self.name_edit.text(),
                 adb_config=AdbDevice(
@@ -217,15 +227,16 @@ class AddDeviceDialog(QDialog):
                     address=self.adb_address_edit.text(),
                     screencap_methods=int(self.screenshot_method_edit.text()),
                     input_methods=int(self.input_method_edit.text()),
-                    config=self.config_edit.text()
+                    config=config_dict
                 ),
                 schedule_enabled=self.schedule_enabled.isChecked(),
-                schedule_time=self.schedule_time.time().toString("hh:mm"),
+                schedule_time=[self.schedule_time.time().toString("hh:mm")],
                 start_command=self.pre_command_edit.text(),
             )
+
             # 添加设备到配置中
             self.global_config.devices_config.devices.append(device_config)
-            print(self.global_config.devices_config.devices)
+            self.global_config.save_all_configs()
             # 关闭对话框
             self.accept()
 

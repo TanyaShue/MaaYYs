@@ -17,7 +17,7 @@ class RunTimeConfig:
 @dataclass
 class RunTimeConfigs:
     task_list: List[RunTimeConfig] = field(default_factory=list)
-    resource_path: Path = field(default_factory=Path)  # 当前资源加载时所在的目录路径
+    resource_path: str = field(default_factory=Path)  # 当前资源加载时所在的目录路径
 
 
 class GlobalConfig:
@@ -77,7 +77,7 @@ class GlobalConfig:
 
     def load_all_resources_from_directory(self, directory: str) -> None:
         """
-        从指定目录及其所有子目录中加载名为 "resource_config.json" 的资源配置文件。
+        从指定目录及其所有子目录中加载名为 "resource_config.json.json" 的资源配置文件。
         """
         path: Path = Path(directory)
         if not path.is_dir():
@@ -98,29 +98,49 @@ class GlobalConfig:
         for resource_config in self.resource_configs.values():
             resource_config.to_json_file()
 
-    def get_runtime_configs_for_resource(self, resource_name: str) -> RunTimeConfigs:
+    def get_runtime_configs_for_resource(self, resource_name: str, device_id: str = None) -> RunTimeConfigs|None:
         """
         获取指定资源中已在DeviceConfig中选择的任务的RunTimeConfigs，
         按照DeviceConfig中的任务顺序排列，
         并将资源所在目录（由 source_file 计算得出）传递到 resource_path 中。
+
+        Args:
+            resource_name: 资源名称
+            device_id: 设备ID，如果提供，则只返回该设备下的任务
+
+        Returns:
+            RunTimeConfigs: 包含任务列表和资源路径的配置对象
         """
         resource_config = self.get_resource_config(resource_name)
         if resource_config is None:
-            raise ValueError(f"Resource '{resource_name}' not found.")
+            print(f"Resource '{resource_name}' not found.")
+            return None
 
         # 使用有序字典来收集和保存任务，保持DeviceConfig中的顺序
         from collections import OrderedDict
         ordered_tasks = OrderedDict()
 
-        # 首先从DeviceConfig中收集所有已选任务，保持其顺序
+        # 从DeviceConfig中获取指定资源的选定任务
         if self.devices_config is not None:
             for device in self.devices_config.devices:
+                # 如果提供了device_id，则只处理指定设备
+                if device_id is not None and device.device_name != device_id:
+                    continue
+
                 for device_resource in device.resources:
-                    if device_resource.resource_name == resource_name:
+                    if device_resource.resource_name == resource_name and device_resource.enable:
                         # 按照设备资源中的任务顺序添加
                         for task_name in device_resource.selected_tasks:
                             if task_name not in ordered_tasks:
                                 ordered_tasks[task_name] = None
+
+                        # 如果找到了匹配的资源，并且指定了device_id，则不需要继续查找
+                        if device_id is not None:
+                            break
+
+                # 如果找到了匹配的设备和资源，则不需要继续查找其他设备
+                if device_id is not None and len(ordered_tasks) > 0:
+                    break
 
         # 为每个已选任务创建RunTimeConfig
         runtime_configs = []
@@ -140,7 +160,6 @@ class GlobalConfig:
         # 通过 source_file（包含文件名）计算出资源加载目录
         resource_path = Path(resource_config.source_file).parent if resource_config.source_file else Path()
         return RunTimeConfigs(task_list=runtime_configs, resource_path=resource_path)
-
     def get_runtime_config_for_task(self, resource_name: str, task_name: str) -> Optional[RunTimeConfig]:
         """
         获取特定资源中特定任务的 RunTimeConfig。
