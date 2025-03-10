@@ -16,10 +16,10 @@
                     "enable": true,
                     "selected_tasks": [
                         "打开游戏",
-                        "自动地鬼",
-                        "自动悬赏",
-                        "自动逢魔",
                         "自动结界",
+                        "自动悬赏",
+                        "自动地鬼",
+                        "自动逢魔",
                         "日常"
                     ],
                     "options": [
@@ -198,6 +198,12 @@
                             "value": "官服"
                         }
                     ]
+                },
+                {
+                    "resource_name": "阴阳师",
+                    "enable": true,
+                    "selected_tasks": [],
+                    "options": []
                 }
             ],
             "schedule_enabled": false,
