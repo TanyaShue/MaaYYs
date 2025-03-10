@@ -1,5 +1,8 @@
 from PySide6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushButton
-from PySide6.QtCore import Qt
+
+from app.models.config.global_config import global_config
+from core.tasker_manager import task_manager
+
 
 class DeviceCard(QFrame):
     def __init__(self, device_name, device_type, status, parent=None):
@@ -7,7 +10,6 @@ class DeviceCard(QFrame):
         self.setObjectName("deviceCard")
         self.setFrameShape(QFrame.StyledPanel)
         self.setFrameShadow(QFrame.Raised)
-
         # 设置每张卡片的最大高度（例如 150 像素）
         self.setMaximumHeight(150)
 
@@ -39,6 +41,7 @@ class DeviceCard(QFrame):
         # 按钮布局
         button_layout = QHBoxLayout()
         run_btn = QPushButton("运行")
+        run_btn.clicked.connect(lambda :task_manager.run_device_all_resource_task(global_config.get_device_config(device_name)))
         run_btn.setFixedHeight(28)
         settings_btn = QPushButton("设置")
         settings_btn.setFixedHeight(28)

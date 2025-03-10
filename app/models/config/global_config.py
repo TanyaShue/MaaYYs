@@ -1,4 +1,3 @@
-import threading
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Dict, Optional, Type, Any
@@ -22,22 +21,20 @@ class RunTimeConfigs:
 
 class GlobalConfig:
     """
-    单例类，用于管理全局配置，包括 DevicesConfig 和多个 ResourceConfig。
-    """
+    全局配置管理类，用于管理 DevicesConfig 和多个 ResourceConfig。
 
-    _instance: Optional["GlobalConfig"] = None
-    _lock: threading.Lock = threading.Lock()
+    **注意：此类不再是单例类，全局单例实例通过模块末尾的 `global_config` 变量创建。**
+    """
 
     devices_config: Optional[DevicesConfig]
     resource_configs: Dict[str, ResourceConfig]
 
-    def __new__(cls: Type["GlobalConfig"]) -> "GlobalConfig":
-        with cls._lock:
-            if cls._instance is None:
-                cls._instance = super(GlobalConfig, cls).__new__(cls)
-                cls._instance.devices_config = None  # 全局 DevicesConfig 初始化为 None
-                cls._instance.resource_configs = {}  # 存储多个 ResourceConfig，键为 resource_name
-        return cls._instance
+    def __init__(self):
+        """
+        初始化 GlobalConfig 实例。
+        """
+        self.devices_config = None  # 全局 DevicesConfig 初始化为 None
+        self.resource_configs = {}  # 存储多个 ResourceConfig，键为 resource_name
 
     def load_devices_config(self, file_path: str) -> None:
         """
@@ -62,6 +59,16 @@ class GlobalConfig:
         if self.devices_config is None:
             raise ValueError("DevicesConfig 尚未加载。")
         return self.devices_config
+
+    def get_device_config(self, device_name):
+        """根据设备名称获取设备配置"""
+        if not self.devices_config:
+            return None
+
+        for device in self.devices_config.devices:
+            if device.device_name == device_name:
+                return device
+        return None
 
     def get_resource_config(self, resource_name: str) -> Optional[ResourceConfig]:
         """
@@ -160,6 +167,7 @@ class GlobalConfig:
         # 通过 source_file（包含文件名）计算出资源加载目录
         resource_path = Path(resource_config.source_file).parent if resource_config.source_file else Path()
         return RunTimeConfigs(task_list=runtime_configs, resource_path=resource_path)
+
     def get_runtime_config_for_task(self, resource_name: str, task_name: str) -> Optional[RunTimeConfig]:
         """
         获取特定资源中特定任务的 RunTimeConfig。
@@ -303,3 +311,7 @@ class GlobalConfig:
             return [self._replace_placeholder(item, value, bool_value) for item in pipeline]
         # 基本类型直接返回
         return pipeline
+
+
+# 创建全局单例实例
+global_config = GlobalConfig()

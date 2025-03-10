@@ -2,12 +2,12 @@ from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QT
                                QSplitter, QTextEdit, QCheckBox, QWidget, QFormLayout,
                                QLineEdit, QComboBox, QTableWidget, QTableWidgetItem,
                                QHeaderView, QFrame, QScrollArea, QMessageBox)
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 
 from app.components.collapsible_widget import CollapsibleWidget, DraggableContainer
 from app.models.config.device_config import OptionConfig, Resource
-from app.models.config.global_config import GlobalConfig
+from app.models.config.global_config import GlobalConfig, global_config
 from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
 from core.tasker_manager import task_manager, TaskerManager
 
@@ -15,7 +15,7 @@ from core.tasker_manager import task_manager, TaskerManager
 class DevicePage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.global_config = GlobalConfig()
+        self.global_config = global_config
         self.init_ui()
         self.load_config_data()
         self.manager:TaskerManager=task_manager
@@ -142,20 +142,9 @@ class DevicePage(QWidget):
             print(f"Error populating device table: {e}")
             QMessageBox.critical(self, "错误", f"填充设备表格失败: {e}")
 
-    def get_device_config(self, device_name):
-        """根据设备名称获取设备配置"""
-        devices_config = self.global_config.get_devices_config()
-        if not devices_config:
-            return None
-
-        for device in devices_config.devices:
-            if device.device_name == device_name:
-                return device
-        return None
-
     def show_device_detail(self, device_name):
         """显示设备详情"""
-        device_config = self.get_device_config(device_name)
+        device_config = global_config.get_device_config(device_name)
         if not device_config:
             QMessageBox.warning(self, "错误", f"设备 '{device_name}' 未找到")
             return
@@ -342,7 +331,7 @@ class DevicePage(QWidget):
             run_btn.setFixedWidth(60)
             run_btn.setObjectName("runButton")
             run_btn.clicked.connect(lambda checked, d_config=device_config, r_name=resource_name:
-                                    self.run_resource_task(d_config, r_name))
+                                    self.manager.run_resource_task(d_config, r_name))
 
             settings_btn = QPushButton("设置")
             settings_btn.setFixedWidth(60)
@@ -364,32 +353,9 @@ class DevicePage(QWidget):
         one_key_start_btn.setFixedHeight(40)
         one_key_start_btn.setObjectName("oneKeyButton")
         resource_layout.addWidget(one_key_start_btn)
-        one_key_start_btn.clicked.connect(lambda: self.one_key_start_all(device_config))
+        one_key_start_btn.clicked.connect(lambda: self.manager.run_device_all_resource_task(device_config))
 
         return resource_widget
-
-    def one_key_start_all(self, device_config):
-        """
-        一键启动：提交所有已启用资源的任务
-        """
-        runtime_configs = []
-        # 遍历设备配置中的所有资源，收集启用状态为 True 的资源对应的运行时配置
-        for resource in device_config.resources:
-            if resource.enable:
-                runtime_config = self.global_config.get_runtime_configs_for_resource(
-                    resource.resource_name, device_config.device_name)
-                if runtime_config is not None:
-                    runtime_configs.append(runtime_config)
-        if runtime_configs:
-            # 创建执行器并一次性提交所有任务（submit_task 已支持传入列表）
-            self.manager.create_executor(device_config)
-            self.manager.submit_task(device_config.device_name, runtime_configs)
-
-    def run_resource_task(self,d_config,resource_name):
-        run_time_config=self.global_config.get_runtime_configs_for_resource(resource_name,d_config.device_name)
-
-        self.manager.create_executor(d_config)
-        self.manager.submit_task(d_config.device_name, run_time_config)
 
     def _create_log_tab(self, device_config):
         """创建日志选项卡"""
@@ -499,7 +465,7 @@ class DevicePage(QWidget):
             if not (device_name and resource_name):
                 return
 
-            device_config = self.get_device_config(device_name)
+            device_config = global_config.get_device_config(device_name)
             if not device_config:
                 return
 

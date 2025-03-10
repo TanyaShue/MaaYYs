@@ -5,7 +5,7 @@ from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt, Signal
 
 from app.components import DeviceCard
-from app.models.config.global_config import GlobalConfig
+from app.models.config.global_config import GlobalConfig, global_config
 from app.pages.add_device_dialog import AddDeviceDialog  # 导入新创建的对话框类
 
 
@@ -13,7 +13,7 @@ class HomePage(QWidget):
     device_added = Signal()
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.global_config = GlobalConfig()
+        self.global_config = global_config
         self.init_ui()
         self.load_sample_data()
 

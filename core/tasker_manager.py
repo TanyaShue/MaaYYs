@@ -4,8 +4,8 @@ from typing import Dict, Optional, List, Union
 
 from PySide6.QtCore import QObject, Signal, Slot, QMutexLocker, QRecursiveMutex
 
-from app.models.config import DeviceConfig
-from app.models.config.global_config import RunTimeConfigs
+from app.models.config.device_config import DeviceConfig
+from app.models.config.global_config import RunTimeConfigs, global_config
 from core.task_executor import TaskExecutor, TaskPriority, DeviceState
 
 
@@ -190,5 +190,28 @@ class TaskerManager(QObject):
             for device_name, executor in self._executors.items():
                 queue_info[device_name] = executor.get_queue_length()
             return queue_info
+
+    def run_device_all_resource_task(self, device_config:DeviceConfig ):
+        """
+        一键启动：提交所有已启用资源的任务
+        """
+        runtime_configs = []
+        # 遍历设备配置中的所有资源，收集启用状态为 True 的资源对应的运行时配置
+        for resource in device_config.resources:
+            if resource.enable:
+                runtime_config = global_config.get_runtime_configs_for_resource(
+                    resource.resource_name, device_config.device_name)
+                if runtime_config is not None:
+                    runtime_configs.append(runtime_config)
+        if runtime_configs:
+            # 创建执行器并一次性提交所有任务（submit_task 已支持传入列表）
+            self.create_executor(device_config)
+            self.submit_task(device_config.device_name, runtime_configs)
+
+    def run_resource_task(self,d_config,resource_name):
+        run_time_config=global_config.get_runtime_configs_for_resource(resource_name,d_config.device_name)
+
+        self.create_executor(d_config)
+        self.submit_task(d_config.device_name, run_time_config)
 
 task_manager=TaskerManager()

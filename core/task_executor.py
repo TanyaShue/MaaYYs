@@ -15,7 +15,7 @@ from maa.resource import Resource
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
 
-from app.models.config import DeviceConfig
+from app.models.config.device_config import DeviceConfig
 from app.models.config.global_config import RunTimeConfigs
 
 
