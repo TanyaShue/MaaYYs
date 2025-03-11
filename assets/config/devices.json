@@ -170,13 +170,16 @@
                 }
             ],
             "schedule_enabled": true,
-            "schedule_time": [],
+            "schedule_time": [
+                "08:00",
+                "08:00"
+            ],
             "start_command": "D:\\leidian\\LDPlayer9\\dnplayer.exe index=0"
         },
         {
             "device_name": "夜神模拟器-战双",
             "adb_config": {
-                "name": "C:/Android/adb.exe",
+                "name": "夜神模拟器-战双",
                 "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
                 "address": "127.0.0.1:5557",
                 "screencap_methods": 18446744073709551559,

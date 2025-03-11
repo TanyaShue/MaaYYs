@@ -2,11 +2,13 @@ from PySide6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushBut
 
 from app.models.config.global_config import global_config
 from core.tasker_manager import task_manager
+from app.pages.add_device_dialog import AddDeviceDialog
 
 
 class DeviceCard(QFrame):
     def __init__(self, device_name, device_type, status, parent=None):
         super().__init__(parent)
+        self.device_name = device_name
         self.setObjectName("deviceCard")
         self.setFrameShape(QFrame.StyledPanel)
         self.setFrameShadow(QFrame.Raised)
@@ -41,11 +43,30 @@ class DeviceCard(QFrame):
         # 按钮布局
         button_layout = QHBoxLayout()
         run_btn = QPushButton("运行")
-        run_btn.clicked.connect(lambda :task_manager.run_device_all_resource_task(global_config.get_device_config(device_name)))
+        run_btn.clicked.connect(
+            lambda: task_manager.run_device_all_resource_task(global_config.get_device_config(device_name)))
         run_btn.setFixedHeight(28)
         settings_btn = QPushButton("设置")
         settings_btn.setFixedHeight(28)
+        settings_btn.clicked.connect(self.open_settings_dialog)
 
         button_layout.addWidget(run_btn)
         button_layout.addWidget(settings_btn)
         layout.addLayout(button_layout)
+
+    def open_settings_dialog(self):
+        """打开设备设置对话框"""
+        # 获取当前设备的配置信息
+        device_config = global_config.get_device_config(self.device_name)
+        if device_config:
+            # 创建设置对话框并传入设备配置
+            dialog = AddDeviceDialog(global_config, self, edit_mode=True, device_config=device_config)
+            if dialog.exec_():
+                # 如果用户点击保存，更新设备信息
+                # 这里可能需要刷新卡片显示
+                parent_widget = self.parent()
+                while parent_widget and not hasattr(parent_widget, 'populate_device_cards'):
+                    parent_widget = parent_widget.parent()
+
+                if parent_widget and hasattr(parent_widget, 'populate_device_cards'):
+                    parent_widget.populate_device_cards()
