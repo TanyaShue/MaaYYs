@@ -11,41 +11,35 @@ from core.task_executor import TaskExecutor, TaskPriority, DeviceState
 
 class TaskerManager(QObject):
     """
-    集中管理所有设备任务执行器的管理器
-    使用单例模式确保整个应用中只有一个实例
+    集中管理所有设备任务执行器的管理器，使用单例模式确保整个应用中只有一个实例。
     """
-    # 定义信号
-    device_added = Signal(str)  # 设备添加信号
-    device_removed = Signal(str)  # 设备移除信号
+    device_added = Signal(str)   # 设备添加信号
+    device_removed = Signal(str) # 设备移除信号
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         super().__init__(parent)
-        self._executors: Dict[str, TaskExecutor] = {}  # 设备名称到执行器的映射
-        self._mutex = QRecursiveMutex()  # 使用递归互斥锁保证线程安全
+        self._executors: Dict[str, TaskExecutor] = {}
+        self._mutex = QRecursiveMutex()
         self.logger = logging.getLogger("TaskerManager")
 
     def create_executor(self, device_config: DeviceConfig) -> bool:
         """
-        创建并启动设备的任务执行器
+        创建并启动设备的任务执行器。
 
         Args:
             device_config: 设备配置信息
 
         Returns:
-            bool: 是否成功创建执行器
+            True：成功创建或已存在；False：创建失败
         """
         with QMutexLocker(self._mutex):
-            # 检查执行器是否已存在
             if device_config.device_name in self._executors:
                 self.logger.warning(f"设备 {device_config.device_name} 的任务执行器已存在")
                 return True
 
             try:
-                # 创建执行器并设置parent为self，使其随manager销毁而自动清理
                 executor = TaskExecutor(device_config, parent=self)
-                success = executor.start()
-
-                if success:
+                if executor.start():
                     self._executors[device_config.device_name] = executor
                     self.device_added.emit(device_config.device_name)
                     return True
@@ -54,21 +48,20 @@ class TaskerManager(QObject):
                 self.logger.error(f"为设备 {device_config.device_name} 创建任务执行器失败: {e}")
                 return False
 
-    def submit_task(self, device_name: str, task_data: Union[RunTimeConfigs, List[RunTimeConfigs]],
-                    priority: TaskPriority = TaskPriority.NORMAL) -> Optional[Union[str, List[str]]]:
+    def submit_task(self, device_name: str,
+                    task_data: Union[RunTimeConfigs, List[RunTimeConfigs]],
+                    priority: TaskPriority = TaskPriority.NORMAL
+                    ) -> Optional[Union[str, List[str]]]:
         """
-        向特定设备的执行器提交任务
+        向特定设备的执行器提交任务。
 
         Args:
             device_name: 设备名称
-            task_data: 任务数据，支持单个任务数据或任务数据列表
+            task_data: 单个任务或任务列表
             priority: 任务优先级
 
         Returns:
-            Optional[Union[str, List[str]]]:
-                如果传入单个任务数据，则返回任务ID（str）；
-                如果传入任务数据列表，则返回任务ID列表；
-                失败时返回 None
+            单个任务时返回任务ID；列表时返回任务ID列表；失败返回 None
         """
         with QMutexLocker(self._mutex):
             executor = self._get_executor(device_name)
@@ -76,22 +69,20 @@ class TaskerManager(QObject):
                 return None
 
             try:
-                # 此处 executor.submit_task 已支持单个或多个任务数据
-                task_ids = executor.submit_task(task_data, priority)
-                return task_ids
+                return executor.submit_task(task_data, priority)
             except Exception as e:
                 self.logger.error(f"向设备 {device_name} 提交任务失败: {e}")
                 return None
 
     def stop_executor(self, device_name: str) -> bool:
         """
-        停止特定设备的执行器
+        停止特定设备的执行器。
 
         Args:
             device_name: 设备名称
 
         Returns:
-            bool: 是否成功停止执行器
+            True：成功停止；False：停止失败
         """
         with QMutexLocker(self._mutex):
             executor = self._get_executor(device_name)
@@ -100,7 +91,6 @@ class TaskerManager(QObject):
 
             try:
                 executor.stop()
-                # 从字典中移除引用，Qt对象会自动清理
                 del self._executors[device_name]
                 self.device_removed.emit(device_name)
                 return True
@@ -110,29 +100,27 @@ class TaskerManager(QObject):
 
     def get_executor_state(self, device_name: str) -> Optional[DeviceState]:
         """
-        获取设备执行器的当前状态
+        获取设备执行器的当前状态。
 
         Args:
             device_name: 设备名称
 
         Returns:
-            Optional[DeviceState]: 设备状态对象，未找到时返回None
+            设备状态对象，未找到返回 None
         """
         with QMutexLocker(self._mutex):
             executor = self._get_executor(device_name)
-            if not executor:
-                return None
-            return executor.get_state()
+            return executor.get_state() if executor else None
 
     def _get_executor(self, device_name: str) -> Optional[TaskExecutor]:
         """
-        获取特定设备的执行器（内部辅助方法）
+        内部辅助方法，获取特定设备的执行器。
 
         Args:
             device_name: 设备名称
 
         Returns:
-            Optional[TaskExecutor]: 设备执行器对象，未找到时返回None
+            设备执行器对象，未找到返回 None
         """
         executor = self._executors.get(device_name)
         if not executor:
@@ -141,24 +129,22 @@ class TaskerManager(QObject):
 
     def get_active_devices(self) -> List[str]:
         """
-        获取所有活跃设备名称的列表
+        获取所有活跃设备名称列表。
 
         Returns:
-            List[str]: 活跃设备名称列表
+            活跃设备名称列表
         """
         with QMutexLocker(self._mutex):
             return list(self._executors.keys())
 
     @Slot()
-    def stop_all(self):
-        """停止所有执行器"""
+    def stop_all(self) -> None:
+        """
+        停止所有执行器。
+        """
         self.logger.info("正在停止所有任务执行器")
-
-        # 获取所有设备名称的列表，避免在遍历过程中修改字典
         with QMutexLocker(self._mutex):
             device_names = list(self._executors.keys())
-
-        # 逐个停止执行器
         for device_name in device_names:
             try:
                 self.stop_executor(device_name)
@@ -167,51 +153,47 @@ class TaskerManager(QObject):
 
     def is_device_active(self, device_name: str) -> bool:
         """
-        检查设备执行器是否处于活跃状态
+        检查设备执行器是否处于活跃状态。
 
         Args:
             device_name: 设备名称
 
         Returns:
-            bool: 设备是否活跃
+            True：活跃；False：不活跃
         """
         with QMutexLocker(self._mutex):
             return device_name in self._executors
 
     def get_device_queue_info(self) -> Dict[str, int]:
         """
-        获取所有设备的队列状态信息
+        获取所有设备的队列状态信息。
 
         Returns:
-            Dict[str, int]: 设备名称到队列长度的映射
+            设备名称到队列长度的映射字典
         """
         with QMutexLocker(self._mutex):
-            queue_info = {}
-            for device_name, executor in self._executors.items():
-                queue_info[device_name] = executor.get_queue_length()
-            return queue_info
+            return {name: executor.get_queue_length() for name, executor in self._executors.items()}
 
-    def run_device_all_resource_task(self, device_config:DeviceConfig ):
+    def run_device_all_resource_task(self, device_config: DeviceConfig) -> None:
         """
-        一键启动：提交所有已启用资源的任务
+        一键启动：提交所有已启用资源的任务。
         """
-        runtime_configs = []
-        # 遍历设备配置中的所有资源，收集启用状态为 True 的资源对应的运行时配置
-        for resource in device_config.resources:
-            if resource.enable:
-                runtime_config = global_config.get_runtime_configs_for_resource(
-                    resource.resource_name, device_config.device_name)
-                if runtime_config is not None:
-                    runtime_configs.append(runtime_config)
+        runtime_configs = [
+            global_config.get_runtime_configs_for_resource(resource.resource_name, device_config.device_name)
+            for resource in device_config.resources
+            if resource.enable and global_config.get_runtime_configs_for_resource(resource.resource_name, device_config.device_name)
+        ]
         if runtime_configs:
-            # 创建执行器并一次性提交所有任务（submit_task 已支持传入列表）
             self.create_executor(device_config)
             self.submit_task(device_config.device_name, runtime_configs)
 
-    def run_resource_task(self,d_config,resource_name):
-        run_time_config=global_config.get_runtime_configs_for_resource(resource_name,d_config.device_name)
+    def run_resource_task(self, device_config: DeviceConfig, resource_name: str) -> None:
+        """
+        提交指定资源的任务。
+        """
+        runtime_config = global_config.get_runtime_configs_for_resource(resource_name, device_config.device_name)
+        self.create_executor(device_config)
+        self.submit_task(device_config.device_name, runtime_config)
 
-        self.create_executor(d_config)
-        self.submit_task(d_config.device_name, run_time_config)
 
-task_manager=TaskerManager()
+task_manager = TaskerManager()
