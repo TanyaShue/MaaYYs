@@ -34,12 +34,8 @@ class DownloadPage(QWidget):
         resources_table.verticalHeader().setVisible(False)
 
         resources = [
-            ("雷电模拟器", "9.0.33", "500MB", "下载"),
-            ("夜神模拟器", "7.0.5", "450MB", "下载"),
-            ("MuMu模拟器", "12.0", "600MB", "下载"),
             ("阴阳师", "3.5.0", "2.1GB", "下载"),
-            ("战双", "2.7.0", "3.5GB", "下载"),
-            ("原神", "4.0.0", "15GB", "下载")
+            ("战双", "2.7.0", "3.5GB", "下载")
         ]
         for row, (name, version, size, action) in enumerate(resources):
             resources_table.setItem(row, 0, QTableWidgetItem(name))
