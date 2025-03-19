@@ -46,12 +46,6 @@ class LogDisplay(QFrame):
         self.device_selector.currentIndexChanged.connect(self.on_device_changed)
         header_layout.addWidget(self.device_selector)
 
-        # Close button
-        close_btn = QPushButton("关闭")
-        close_btn.setFixedWidth(60)
-        close_btn.clicked.connect(self.on_close)
-        header_layout.addWidget(close_btn)
-
         main_layout.addLayout(header_layout)
 
         # Log text display area

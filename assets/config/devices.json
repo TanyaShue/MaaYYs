@@ -15,18 +15,18 @@
                     "resource_name": "阴阳师",
                     "enable": true,
                     "selected_tasks": [
-                        "自动结界",
-                        "自动悬赏",
-                        "自动地鬼",
                         "打开游戏",
+                        "自动地鬼",
+                        "自动悬赏",
+                        "周日常",
+                        "自动结界",
                         "自动逢魔",
-                        "日常",
-                        "周日常"
+                        "日常"
                     ],
                     "options": [
                         {
                             "option_name": "选择区服",
-                            "value": "官服"
+                            "value": "官网下载版"
                         },
                         {
                             "option_name": "地鬼分组预设",
@@ -46,7 +46,7 @@
                         },
                         {
                             "option_name": "是否启动自动轮换",
-                            "value": true
+                            "value": false
                         },
                         {
                             "option_name": "结界突破分组预设",
@@ -192,7 +192,7 @@
             "resources": [
                 {
                     "resource_name": "战双帕弥什",
-                    "enable": false,
+                    "enable": true,
                     "selected_tasks": [
                         "打开游戏"
                     ],
@@ -205,7 +205,7 @@
                 },
                 {
                     "resource_name": "阴阳师",
-                    "enable": true,
+                    "enable": false,
                     "selected_tasks": [
                         "打开游戏"
                     ],

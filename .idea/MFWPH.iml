@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/assets/resource" />
       <excludeFolder url="file://$MODULE_DIR$/logs" />
     </content>
-    <orderEntry type="jdk" jdkName="MFWPH" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="MFWPH_TEST" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
