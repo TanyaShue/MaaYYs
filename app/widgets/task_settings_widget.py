@@ -74,9 +74,7 @@ class TaskSettingsWidget(QFrame):
         placeholder_layout.setAlignment(Qt.AlignCenter)
         placeholder_layout.setSpacing(15)
 
-        placeholder_icon = QLabel()
-        placeholder_icon.setPixmap(QIcon("assets/icons/settings-gear.svg").pixmap(48, 48))
-        placeholder_icon.setAlignment(Qt.AlignCenter)
+
 
         initial_message = QLabel("请从左侧资源列表中选择一个资源进行设置")
         initial_message.setAlignment(Qt.AlignCenter)
@@ -86,7 +84,6 @@ class TaskSettingsWidget(QFrame):
         sub_message.setAlignment(Qt.AlignCenter)
         sub_message.setObjectName("subText")
 
-        placeholder_layout.addWidget(placeholder_icon)
         placeholder_layout.addWidget(initial_message)
         placeholder_layout.addWidget(sub_message)
 

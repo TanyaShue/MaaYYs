@@ -22,7 +22,7 @@ class LogDisplay(QFrame):
 
         # Configure colors for different log levels
         self.log_colors = {
-            "INFO": QColor("#2196F3"),  # Blue
+            "INFO": QColor("#888888"),  # Gray instead of blue
             "ERROR": QColor("#F44336"),  # Red
             "WARNING": QColor("#FF9800"),  # Orange
             "DEBUG": QColor("#4CAF50")  # Green
@@ -60,6 +60,15 @@ class LogDisplay(QFrame):
         self.log_text.setFont(QFont("Consolas", 10))
         self.log_text.setMinimumHeight(150)
         self.log_text.setPlaceholderText("暂无日志记录")
+        # Set line spacing and text formatting
+        self.log_text.document().setDocumentMargin(8)
+        # Apply CSS styling for better spacing and wrapping
+        self.log_text.setStyleSheet("""
+            QTextEdit {
+                line-height: 150%;
+                padding: 5px;
+            }
+        """)
 
         main_layout.addWidget(self.log_text)
 
@@ -102,7 +111,7 @@ class LogDisplay(QFrame):
         self.display_logs(logs)
 
     def display_logs(self, logs):
-        """Display logs with syntax highlighting"""
+        """Display logs with optimized formatting - only time and message"""
         # Store current scroll position
         scrollbar = self.log_text.verticalScrollBar()
         was_at_bottom = scrollbar.value() == scrollbar.maximum()
@@ -114,10 +123,10 @@ class LogDisplay(QFrame):
             self.log_text.setPlainText("暂无日志记录")
             return
 
-        # Process and display logs with color coding
+        # Process and display logs with color coding and simplified format
         for log in logs:
-            # Parse log level from the log line
             try:
+                # Determine log level for coloring
                 if " - INFO - " in log:
                     level = "INFO"
                 elif " - ERROR - " in log:
@@ -129,13 +138,40 @@ class LogDisplay(QFrame):
                 else:
                     level = "INFO"  # Default
 
-                # Set text color based on log level
-                self.log_text.setTextColor(self.log_colors.get(level, QColor("#E0E0E0")))
-                self.log_text.append(log.strip())
+                # Extract timestamp and message only
+                # Format is typically: "YYYY-MM-DD HH:MM:SS,SSS - LEVEL - Message"
+                parts = log.split(' - ', 2)  # Split into timestamp, level, message
 
-            except Exception:
+                if len(parts) >= 3:
+                    # Extract only the time portion (HH:MM:SS) from timestamp
+                    timestamp = parts[0].strip()
+                    try:
+                        # Extract time part (assumes format like "YYYY-MM-DD HH:MM:SS")
+                        time_part = timestamp.split(' ')[1].split(',')[0]  # Gets just HH:MM:SS
+                    except IndexError:
+                        time_part = timestamp  # Fallback if timestamp format is unexpected
+
+                    message = parts[2].strip()
+                    # Format log with proper spacing and indentation for wrapped lines
+                    simplified_log = f"{time_part} {message}"
+
+                    # Set color based on log level and display simplified log
+                    self.log_text.setTextColor(self.log_colors.get(level, QColor("#888888")))
+
+                    # Add the log with extra spacing between entries
+                    if self.log_text.document().isEmpty():
+                        self.log_text.append(simplified_log)
+                    else:
+                        # Insert a small height spacer and then the log
+                        self.log_text.append("\n" + simplified_log)
+                else:
+                    # Fallback for unexpected log format
+                    self.log_text.setTextColor(QColor("#888888"))
+                    self.log_text.append(log.strip())
+
+            except Exception as e:
                 # For any parsing error, just show the line in default color
-                self.log_text.setTextColor(QColor("#E0E0E0"))
+                self.log_text.setTextColor(QColor("#888888"))
                 self.log_text.append(log.strip())
 
         # Restore scroll to bottom if it was at bottom

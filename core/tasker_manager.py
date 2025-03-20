@@ -404,7 +404,6 @@ class TaskerManager(QObject):
         从全局配置初始化所有设备的定时任务
         """
         # 假设global_config.devices是所有设备配置的列表
-        print(global_config.get_devices_config())
         scheduled_devices = [d for d in global_config.get_devices_config().devices if d.schedule_enabled]
 
         if not scheduled_devices:

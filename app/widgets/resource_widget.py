@@ -116,8 +116,9 @@ class ResourceWidget(QFrame):
             button_layout.setContentsMargins(5, 2, 5, 2)
             button_layout.setSpacing(8)
 
+            # Modified button dimensions - rectangular with height similar to checkbox
             run_btn = QPushButton()
-            run_btn.setFixedSize(32, 32)
+            run_btn.setFixedSize(60, 26)  # Rectangular shape
             run_btn.setIcon(QIcon("assets/icons/play.svg"))
             run_btn.setIconSize(QSize(16, 16))
             run_btn.setToolTip("运行此资源")
@@ -125,7 +126,7 @@ class ResourceWidget(QFrame):
                                     task_manager.run_resource_task(self.device_config, r_name))
 
             settings_btn = QPushButton()
-            settings_btn.setFixedSize(32, 32)
+            settings_btn.setFixedSize(60, 26)  # Rectangular shape
             settings_btn.setIcon(QIcon("assets/icons/settings.svg"))
             settings_btn.setIconSize(QSize(16, 16))
             settings_btn.setToolTip("配置此资源")
