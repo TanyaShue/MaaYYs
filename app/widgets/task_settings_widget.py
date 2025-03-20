@@ -60,7 +60,7 @@ class TaskSettingsWidget(QFrame):
         content_card.setFrameShape(QFrame.StyledPanel)
 
         card_layout = QVBoxLayout(content_card)
-        card_layout.setContentsMargins(20, 20, 20, 20)
+        card_layout.setContentsMargins(0,0,0,0)
 
         # Content area for resource settings (initially empty)
         self.settings_content = QWidget()

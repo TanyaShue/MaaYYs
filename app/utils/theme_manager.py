@@ -33,3 +33,4 @@ class ThemeManager:
 
     def get_current_theme(self):
         return self.current_theme
+theme_manager = ThemeManager()

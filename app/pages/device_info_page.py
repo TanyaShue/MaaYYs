@@ -41,7 +41,7 @@ class DeviceInfoPage(QWidget):
         # Main horizontal splitter (3 parts)
         self.horizontal_splitter = QSplitter(Qt.Horizontal)
         self.horizontal_splitter.setObjectName("horizontalSplitter")
-        self.horizontal_splitter.setHandleWidth(2)
+        self.horizontal_splitter.setHandleWidth(0)
         self.horizontal_splitter.setChildrenCollapsible(False)
 
         # 1. Left Part (Basic Info & Resource Selection)
@@ -54,7 +54,7 @@ class DeviceInfoPage(QWidget):
         # Vertical splitter for left part
         self.left_splitter = QSplitter(Qt.Vertical)
         self.left_splitter.setObjectName("leftSplitter")
-        self.left_splitter.setHandleWidth(2)
+        self.left_splitter.setHandleWidth(0)
         self.left_splitter.setChildrenCollapsible(False)
 
         # Create widgets

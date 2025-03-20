@@ -11,9 +11,10 @@ from app.pages.download_page import DownloadPage
 from app.pages.home_page import HomePage
 from app.pages.info_page import InfoPage
 from app.pages.device_info_page import DeviceInfoPage
+from app.pages.settings_page import SettingsPage  # New import for settings page
 from app.models.config.global_config import global_config
 from app.widgets.add_device_dialog import AddDeviceDialog
-from app.utils.theme_manager import ThemeManager
+from app.utils.theme_manager import theme_manager
 from core.tasker_manager import task_manager
 
 
@@ -25,7 +26,7 @@ class MainWindow(QMainWindow):
 
         self.load_config()
         # Initialize theme manager
-        self.theme_manager = ThemeManager()
+        self.theme_manager = theme_manager
         self.theme_manager.apply_theme("light")  # Default theme
 
         # Create central widget
@@ -44,14 +45,12 @@ class MainWindow(QMainWindow):
         sidebar_layout.setContentsMargins(0, 0, 0, 0)
         sidebar_layout.setAlignment(Qt.AlignTop)
 
-
         # Add navigation buttons (icon only)
         self.home_btn = NavigationButton("首页", "assets/icons/home.svg")
-        self.device_btn = NavigationButton("设备信息", "assets/icons/browser.svg")
+        # Removed device_btn as requested
         self.download_btn = NavigationButton("资源下载", "assets/icons/apps-add.svg")
 
         sidebar_layout.addWidget(self.home_btn)
-        sidebar_layout.addWidget(self.device_btn)
         sidebar_layout.addWidget(self.download_btn)
 
         # Add separator between system and devices
@@ -60,7 +59,6 @@ class MainWindow(QMainWindow):
         separator.setFrameShadow(QFrame.Sunken)
         separator.setObjectName("sidebarSeparator")
         sidebar_layout.addWidget(separator)
-
 
         # Device buttons container (scrollable)
         self.device_buttons_container = QWidget()
@@ -82,16 +80,17 @@ class MainWindow(QMainWindow):
 
         sidebar_layout.addStretch()
 
-        # Add bottom info button
+        # Add bottom buttons
+        # Add settings button
+        self.settings_btn = NavigationButton("设置", "assets/icons/settings.svg")
+        sidebar_layout.addWidget(self.settings_btn)
+
+        # Add info button
         self.info_btn = NavigationButton("软件信息", "assets/icons/info.svg")
         sidebar_layout.addWidget(self.info_btn)
 
-        # Theme toggle button
-        self.theme_btn = NavigationButton("主题", "assets/icons/theme.svg")
-        self.theme_btn.clicked.connect(self.toggle_theme)
-        self.current_theme = "light"
+        # Theme toggle button is removed as requested
 
-        sidebar_layout.addWidget(self.theme_btn)
         main_layout.addWidget(sidebar)
 
         # Create content widget
@@ -104,9 +103,9 @@ class MainWindow(QMainWindow):
         # Initialize pages
         self.pages = {
             "home": HomePage(),
-            # "device": DeviceListPage(),
             "download": DownloadPage(),
-            "info": InfoPage()
+            "info": InfoPage(),
+            "settings": SettingsPage()  # Add settings page with theme manager
         }
 
         # Device pages will be created dynamically
@@ -115,8 +114,8 @@ class MainWindow(QMainWindow):
         # Connect navigation buttons
         self.home_btn.setChecked(True)
         self.home_btn.clicked.connect(lambda: self.show_page("home"))
-        self.device_btn.clicked.connect(lambda: self.show_page("device"))
         self.download_btn.clicked.connect(lambda: self.show_page("download"))
+        self.settings_btn.clicked.connect(lambda: self.show_page("settings"))
         self.info_btn.clicked.connect(lambda: self.show_page("info"))
 
         # Connect signals
@@ -153,8 +152,8 @@ class MainWindow(QMainWindow):
         """Show the info page for a specific device"""
         # Uncheck all navigation buttons
         self.home_btn.setChecked(False)
-        self.device_btn.setChecked(False)
         self.download_btn.setChecked(False)
+        self.settings_btn.setChecked(False)
         self.info_btn.setChecked(False)
 
         # Uncheck all device buttons except the selected one
@@ -178,8 +177,8 @@ class MainWindow(QMainWindow):
     def show_page(self, page_name):
         # Update navigation button states
         self.home_btn.setChecked(page_name == "home")
-        self.device_btn.setChecked(page_name == "device")
         self.download_btn.setChecked(page_name == "download")
+        self.settings_btn.setChecked(page_name == "settings")
         self.info_btn.setChecked(page_name == "info")
 
         # Uncheck all device buttons
@@ -208,7 +207,6 @@ class MainWindow(QMainWindow):
     def refresh_device_list(self):
         """Refresh the device list in the navigation bar"""
         self.load_devices()
-        self.pages["device"].refresh_device_list()
 
     def clear_content(self):
         # Clear all widgets from content layout
@@ -219,15 +217,7 @@ class MainWindow(QMainWindow):
                 widget.hide()
                 self.content_layout.removeWidget(widget)
 
-    def toggle_theme(self):
-        if self.current_theme == "light":
-            self.theme_manager.apply_theme("dark")
-            self.current_theme = "dark"
-            self.theme_btn.setToolTip("切换到明亮主题")  # 如果NavigationButton支持toolTip
-        else:
-            self.theme_manager.apply_theme("light")
-            self.current_theme = "light"
-            self.theme_btn.setToolTip("切换到深色主题")  # 如果NavigationButton支持toolTip
+    # Toggle theme method is removed as it will be handled in SettingsPage
 
     @staticmethod
     def load_config():
