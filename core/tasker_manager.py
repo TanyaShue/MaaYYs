@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
 import logging
 from typing import Dict, Optional, List, Union
+from datetime import datetime, timedelta
 
-from PySide6.QtCore import QObject, Signal, Slot, QMutexLocker, QRecursiveMutex
+from PySide6.QtCore import QObject, Signal, Slot, QMutexLocker, QRecursiveMutex, QTimer
 
 from app.models.config.device_config import DeviceConfig
 from app.models.config.global_config import RunTimeConfigs, global_config
@@ -24,6 +25,9 @@ class TaskerManager(QObject):
         # 使用应用程序日志记录器
         self.logger = log_manager.get_app_logger()
         self.logger.info("TaskerManager 初始化完成")
+
+        # 初始化定时器存储
+        self._timers = {}
 
     def create_executor(self, device_config: DeviceConfig) -> bool:
         """
@@ -273,5 +277,187 @@ class TaskerManager(QObject):
         else:
             self.logger.error(f"设备 {device_config.device_name} 的资源 {resource_name} 任务提交失败")
 
+    # ===== 以下是新增的定时任务相关方法 =====
 
+    def setup_device_scheduled_tasks(self, device_config: DeviceConfig) -> List[str]:
+        """
+        根据设备配置设置定时任务，自动运行所有已启用资源的任务。
+
+        Args:
+            device_config: 设备配置信息
+
+        Returns:
+            List[str]: 创建的定时器ID列表
+        """
+        if not device_config.schedule_enabled:
+            self.logger.info(f"设备 {device_config.device_name} 未启用定时功能")
+            return []
+
+        if not device_config.schedule_time:
+            self.logger.warning(f"设备 {device_config.device_name} 启用了定时功能但未配置时间")
+            return []
+
+        self.logger.info(f"为设备 {device_config.device_name} 配置 {len(device_config.schedule_time)} 个定时任务")
+
+        device_timers = []
+
+        # 为每个配置的时间创建定时器
+        for time_str in device_config.schedule_time:
+            try:
+                # 创建一个唯一的定时器ID
+                timer_id = f"{device_config.device_name}_{time_str}_{id(time_str)}"
+
+                # 创建QTimer
+                timer = QTimer(self)
+                timer.setSingleShot(False)  # 重复执行
+
+                # 计算下次运行时间
+                hours, minutes = map(int, time_str.split(':'))
+                next_run = self._calculate_next_run_time(hours, minutes)
+
+                # 计算从现在到下次运行的毫秒数
+                now = datetime.now()
+                delay_ms = int((next_run - now).total_seconds() * 1000)
+
+                # 设置定时器启动延迟
+                timer.setInterval(24 * 60 * 60 * 1000)  # 默认24小时间隔
+
+                # 连接任务执行函数 - 使用lambda捕获当前值
+                device_config_copy = device_config  # 创建一个引用副本
+                timer.timeout.connect(
+                    lambda dc=device_config_copy: self.run_device_all_resource_task(dc)
+                )
+
+                # 存储定时器
+                self._timers[timer_id] = {
+                    'timer': timer,
+                    'device_name': device_config.device_name,
+                    'time': time_str,
+                    'next_run': next_run
+                }
+
+                device_timers.append(timer_id)
+
+                # 使用单次定时器触发首次运行
+                QTimer.singleShot(
+                    delay_ms,
+                    lambda t=timer, dc=device_config_copy: self._scheduled_task_first_run(t, dc)
+                )
+
+                self.logger.info(
+                    f"设备 {device_config.device_name} 的定时任务已设置，将在 {next_run.strftime('%Y-%m-%d %H:%M:%S')} "
+                    f"首次运行，之后每天 {time_str} 运行"
+                )
+
+            except Exception as e:
+                self.logger.error(f"设置设备 {device_config.device_name} 的定时任务时出错: {e}", exc_info=True)
+
+        return device_timers
+
+    def _scheduled_task_first_run(self, timer: QTimer, device_config: DeviceConfig) -> None:
+        """首次运行定时任务的处理函数"""
+        self.logger.info(f"首次运行设备 {device_config.device_name} 的定时任务")
+        self.run_device_all_resource_task(device_config)
+        timer.start()  # 启动每日定时器
+
+    def _calculate_next_run_time(self, hours: int, minutes: int) -> datetime:
+        """
+        计算下一次运行时间
+
+        Args:
+            hours: 小时 (24小时制)
+            minutes: 分钟
+
+        Returns:
+            datetime: 下次运行的时间点
+        """
+        now = datetime.now()
+        target_time = now.replace(hour=hours, minute=minutes, second=0, microsecond=0)
+
+        # 如果今天的时间已经过了，设为明天
+        if target_time <= now:
+            target_time += timedelta(days=1)
+
+        return target_time
+
+    def cancel_device_scheduled_tasks(self, device_name: str) -> None:
+        """
+        取消指定设备的所有定时任务
+
+        Args:
+            device_name: 设备名称
+        """
+        # 找出设备的所有定时器
+        device_timer_ids = [tid for tid, info in self._timers.items()
+                            if info['device_name'] == device_name]
+
+        # 停止并移除定时器
+        for timer_id in device_timer_ids:
+            timer_info = self._timers.pop(timer_id, None)
+            if timer_info and 'timer' in timer_info:
+                timer_info['timer'].stop()
+
+        self.logger.info(f"已取消设备 {device_name} 的 {len(device_timer_ids)} 个定时任务")
+
+    def setup_all_device_scheduled_tasks(self) -> None:
+        """
+        从全局配置初始化所有设备的定时任务
+        """
+        # 假设global_config.devices是所有设备配置的列表
+        print(global_config.get_devices_config())
+        scheduled_devices = [d for d in global_config.get_devices_config().devices if d.schedule_enabled]
+
+        if not scheduled_devices:
+            self.logger.info("没有启用定时功能的设备")
+            return
+
+        self.logger.info(f"开始配置 {len(scheduled_devices)} 个设备的定时任务")
+
+        for device in scheduled_devices:
+            self.setup_device_scheduled_tasks(device)
+
+    def stop_all_scheduled_tasks(self) -> None:
+        """停止所有定时任务"""
+        for timer_info in self._timers.values():
+            if 'timer' in timer_info:
+                timer_info['timer'].stop()
+
+        timer_count = len(self._timers)
+        self._timers.clear()
+        self.logger.info(f"已停止所有 {timer_count} 个定时任务")
+
+    def get_scheduled_tasks_info(self) -> List[Dict]:
+        """
+        获取所有定时任务的信息
+
+        Returns:
+            List[Dict]: 包含定时任务信息的字典列表
+        """
+        tasks_info = []
+        for timer_id, info in self._timers.items():
+            tasks_info.append({
+                'id': timer_id,
+                'device_name': info['device_name'],
+                'time': info['time'],
+                'next_run': info['next_run'].strftime('%Y-%m-%d %H:%M:%S') if 'next_run' in info else 'Unknown'
+            })
+        return tasks_info
+
+    def update_device_scheduled_tasks(self, device_config: DeviceConfig) -> None:
+        """
+        更新设备定时任务 - 先取消原有任务，再重新设置
+
+        Args:
+            device_config: 设备配置
+        """
+        self.logger.info(f"更新设备 {device_config.device_name} 的定时任务")
+        self.cancel_device_scheduled_tasks(device_config.device_name)
+
+        if device_config.schedule_enabled:
+            self.setup_device_scheduled_tasks(device_config)
+        else:
+            self.logger.info(f"设备 {device_config.device_name} 定时功能已禁用，不再重新设置定时任务")
+
+
+# 单例模式
 task_manager = TaskerManager()

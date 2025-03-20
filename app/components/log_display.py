@@ -1,9 +1,8 @@
-from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QFont, QColor
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QTextEdit,
-    QLabel, QPushButton, QComboBox, QFrame
+    QVBoxLayout, QHBoxLayout, QTextEdit,
+    QLabel, QComboBox, QFrame
 )
-from PySide6.QtGui import QFont
 
 from app.models.logging.log_manager import log_manager
 
@@ -13,9 +12,6 @@ class LogDisplay(QFrame):
     Component to display application and device logs with real-time updates
     """
 
-    # Signal to request log updates
-    log_update_requested = Signal(str)
-
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("logDisplay")
@@ -24,15 +20,24 @@ class LogDisplay(QFrame):
         # Current display mode: "all" or device name
         self.current_device = "all"
 
+        # Configure colors for different log levels
+        self.log_colors = {
+            "INFO": QColor("#2196F3"),  # Blue
+            "ERROR": QColor("#F44336"),  # Red
+            "WARNING": QColor("#FF9800"),  # Orange
+            "DEBUG": QColor("#4CAF50")  # Green
+        }
+
         self.init_ui()
 
-        # Connect the update signal
-        self.log_update_requested.connect(self.update_logs)
+        # Connect to log manager signals
+        log_manager.app_log_updated.connect(self.on_app_log_updated)
+        log_manager.device_log_updated.connect(self.on_device_log_updated)
 
     def init_ui(self):
         main_layout = QVBoxLayout(self)
 
-        # Header with title and controls
+        # Header with title and device selector
         header_layout = QHBoxLayout()
 
         # Log display title
@@ -44,6 +49,7 @@ class LogDisplay(QFrame):
         self.device_selector = QComboBox()
         self.device_selector.addItem("全部日志", "all")
         self.device_selector.currentIndexChanged.connect(self.on_device_changed)
+        header_layout.addStretch()
         header_layout.addWidget(self.device_selector)
 
         main_layout.addLayout(header_layout)
@@ -54,6 +60,7 @@ class LogDisplay(QFrame):
         self.log_text.setFont(QFont("Consolas", 10))
         self.log_text.setMinimumHeight(150)
         self.log_text.setPlaceholderText("暂无日志记录")
+
         main_layout.addWidget(self.log_text)
 
     def update_device_list(self, devices):
@@ -87,27 +94,53 @@ class LogDisplay(QFrame):
 
     def request_logs_update(self):
         """Request a log update for the current device"""
-        self.log_update_requested.emit(self.current_device)
-
-    def update_logs(self, device_name=None):
-        """Update logs in response to a signal"""
-        device_to_update = device_name if device_name else self.current_device
-
-        self.log_text.clear()
-
-        if device_to_update == "all":
+        if self.current_device == "all":
             logs = log_manager.get_all_logs()
         else:
-            logs = log_manager.get_device_logs(device_to_update)
+            logs = log_manager.get_device_logs(self.current_device)
 
-        if logs:
-            self.log_text.setPlainText("".join(logs))
-            # Scroll to bottom to show latest logs
-            self.log_text.verticalScrollBar().setValue(
-                self.log_text.verticalScrollBar().maximum()
-            )
-        else:
+        self.display_logs(logs)
+
+    def display_logs(self, logs):
+        """Display logs with syntax highlighting"""
+        # Store current scroll position
+        scrollbar = self.log_text.verticalScrollBar()
+        was_at_bottom = scrollbar.value() == scrollbar.maximum()
+
+        # Clear text
+        self.log_text.clear()
+
+        if not logs:
             self.log_text.setPlainText("暂无日志记录")
+            return
+
+        # Process and display logs with color coding
+        for log in logs:
+            # Parse log level from the log line
+            try:
+                if " - INFO - " in log:
+                    level = "INFO"
+                elif " - ERROR - " in log:
+                    level = "ERROR"
+                elif " - WARNING - " in log:
+                    level = "WARNING"
+                elif " - DEBUG - " in log:
+                    level = "DEBUG"
+                else:
+                    level = "INFO"  # Default
+
+                # Set text color based on log level
+                self.log_text.setTextColor(self.log_colors.get(level, QColor("#E0E0E0")))
+                self.log_text.append(log.strip())
+
+            except Exception:
+                # For any parsing error, just show the line in default color
+                self.log_text.setTextColor(QColor("#E0E0E0"))
+                self.log_text.append(log.strip())
+
+        # Restore scroll to bottom if it was at bottom
+        if was_at_bottom:
+            scrollbar.setValue(scrollbar.maximum())
 
     def show_device_logs(self, device_name):
         """Show logs for a specific device"""
@@ -119,6 +152,16 @@ class LogDisplay(QFrame):
             # If device not found, add it
             self.device_selector.addItem(device_name, device_name)
             self.device_selector.setCurrentIndex(self.device_selector.count() - 1)
+
+    def on_app_log_updated(self):
+        """Handle app log update signal"""
+        if self.current_device == "all":
+            self.request_logs_update()
+
+    def on_device_log_updated(self, device_name):
+        """Handle device log update signal"""
+        if self.current_device == device_name or self.current_device == "all":
+            self.request_logs_update()
 
     def on_close(self):
         """关闭日志显示区域"""

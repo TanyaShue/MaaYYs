@@ -1,8 +1,34 @@
 /**
  * Modern Light Theme
  * A clean, modern stylesheet for Qt applications
+ * Optimized and well-organized
  */
-/* ==================== NAVIGATION SIDEBAR ==================== */
+
+/* ==================== 1. GLOBAL SETTINGS ==================== */
+
+* {
+    font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    color: #333333;
+}
+
+/* Main window */
+QMainWindow {
+    background-color: #f5f5f5;
+}
+
+/* Content area */
+QWidget#content_widget {
+    background-color: #ffffff;
+}
+
+/* Title container */
+#titleContainer {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* ==================== 2. NAVIGATION SIDEBAR ==================== */
 
 /* Sidebar container */
 #sidebar {
@@ -10,12 +36,12 @@
     border-right: 1px solid #e0e0e0;
     min-width: 60px;
     max-width: 60px;
-    transition: min-width 0.3s, max-width 0.3s;
+    transition: all 0.3s ease;
 }
 
 #sidebar.expanded {
-    min-width: 180px;
-    max-width: 180px;
+    min-width: 200px;
+    max-width: 200px;
 }
 
 /* Sidebar section labels */
@@ -27,7 +53,7 @@
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 /* Sidebar separator */
@@ -42,11 +68,11 @@
     background-color: transparent;
     border: none;
     border-radius: 8px;
-    padding: 0;
+    padding: 8px;
     margin: 4px 8px;
-    text-align: center;
+    text-align: left;
     outline: none;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
     position: relative;
 }
 
@@ -70,10 +96,9 @@
 /* Navigation button label */
 #navButtonLabel {
     color: #5f6368;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
-    margin-top: 4px;
-    opacity: 0.85;
+    opacity: 0.9;
     transition: color 0.2s;
 }
 
@@ -82,14 +107,27 @@
     opacity: 1;
 }
 
-/* Navigation button tooltip */
-QToolTip {
-    background-color: rgba(40, 40, 40, 0.9);
+/* Navigation button icon */
+#navButtonIcon {
+    color: #5f6368;
+    transition: color 0.2s;
+}
+
+#navButton:checked #navButtonIcon {
+    color: #1a73e8;
+}
+
+/* Navigation button badge */
+#navButtonBadge {
+    background-color: #ea4335;
     color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 6px 10px;
-    font-size: 12px;
+    border-radius: 8px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 4px;
+    right: 4px;
 }
 
 /* Device buttons scrollable container */
@@ -163,76 +201,8 @@ QScrollArea#deviceScrollArea QScrollBar::handle:vertical:hover {
     background-color: #d4e7fd;
     opacity: 1;
 }
-/* ==================== CORE ELEMENTS ==================== */
 
-/* Base font and color settings */
-* {
-    font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-    font-size: 13px;
-    color: #333333;
-}
-
-/* Main window */
-QMainWindow {
-    background-color: #f5f5f5;
-}
-
-/* Content area */
-QWidget#content_widget {
-    background-color: #ffffff;
-}
-
-/* Title container */
-#titleContainer {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-/* ==================== NAVIGATION ==================== */
-
-/* Sidebar */
-#sidebar {
-    background-color: #ffffff;
-    border-right: 1px solid #e0e0e0;
-}
-
-#sidebarLabel {
-    color: #555555;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 12px 0 5px 10px;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-#sidebarSeparator {
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 8px 12px;
-}
-
-/* Navigation buttons */
-#navButton {
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 8px;
-    margin: 2px 6px;
-    text-align: center;
-}
-
-#navButton:hover {
-    background-color: #f0f0f0;
-}
-
-#navButton:checked {
-    background-color: #e8f0fe;
-    color: #1a73e8;
-    border-radius: 6px;
-}
-
-/* ==================== FRAMES & CONTAINERS ==================== */
+/* ==================== 3. FRAMES & CONTAINERS ==================== */
 
 /* General frame styling */
 QFrame {
@@ -292,7 +262,107 @@ QSplitter::handle:vertical {
     margin: 5px 0;
 }
 
-/* ==================== LABELS & TEXT ==================== */
+/* Task item */
+#taskItem {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+#taskItem:hover {
+    border-color: #dadce0;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+}
+
+#taskItem QLabel {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Option widget */
+#optionWidget {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 2px;
+    margin: 4px 0;
+}
+
+#optionLabel {
+    font-weight: 500;
+}
+
+/* Content card */
+#contentCard {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#contentCard:hover {
+    border-color: #dadce0;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.2);
+}
+
+/* Draggable container */
+#draggableContainer {
+    background-color: transparent;
+}
+
+/* Device card styling */
+#deviceCard {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    transition: all 0.2s ease;
+}
+
+#deviceCard:hover {
+    border-color: #dadce0;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+}
+
+#deviceCardName {
+    font-weight: 500;
+    font-size: 16px;
+    color: #202124;
+    margin-bottom: 4px;
+}
+
+#deviceCardType {
+    font-size: 13px;
+    color: #5f6368;
+    margin-bottom: 8px;
+}
+
+/* Summary frame */
+#summaryFrame {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 20px 50px;
+}
+
+/* Group boxes */
+QGroupBox {
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    margin-top: 1.5ex;
+    padding-top: 1ex;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 3px;
+    color: #5f6368;
+}
+
+/* ==================== 4. LABELS & TEXT ==================== */
 
 /* Page title */
 #pageTitle {
@@ -392,37 +462,18 @@ QSplitter::handle:vertical {
     font-size: 12px;
 }
 
-/* Device card styling */
-#deviceCard {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 8px;
-    transition: all 0.2s ease;
+/* No options label */
+#noOptionsLabel {
+    color: #80868b;
+    font-style: italic;
+    padding: 10px;
+    qproperty-alignment: AlignCenter;
+    min-height: 40px;
 }
 
-#deviceCard:hover {
-    border-color: #dadce0;
-    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
-}
+/* ==================== 5. BUTTONS ==================== */
 
-#deviceCardName {
-    font-weight: 500;
-    font-size: 16px;
-    color: #202124;
-    margin-bottom: 4px;
-}
-
-#deviceCardType {
-    font-size: 13px;
-    color: #5f6368;
-    margin-bottom: 8px;
-}
-
-/* ==================== CONTROLS ==================== */
-
-/* Buttons */
+/* Standard buttons */
 QPushButton {
     background-color: #f8f9fa;
     color: #202124;
@@ -431,6 +482,7 @@ QPushButton {
     padding: 8px 16px;
     font-weight: 500;
     outline: none;
+    transition: all 0.2s ease;
 }
 
 QPushButton:hover {
@@ -442,25 +494,30 @@ QPushButton:pressed {
     background-color: #e8eaed;
 }
 
+QPushButton:disabled {
+    background-color: #f1f3f4;
+    color: #9aa0a6;
+    border-color: #e0e0e0;
+}
+
 /* Primary buttons */
-#primaryButton,
-#addDeviceButton,
-#viewLogsButton {
+#primaryButton {
     background-color: #1a73e8;
     color: white;
     border: none;
 }
 
-#primaryButton:hover,
-#addDeviceButton:hover,
-#viewLogsButton:hover {
+#primaryButton:hover {
     background-color: #1967d2;
 }
 
-#primaryButton:pressed,
-#addDeviceButton:pressed,
-#viewLogsButton:pressed {
+#primaryButton:pressed {
     background-color: #185abc;
+}
+
+#primaryButton:disabled {
+    background-color: #a8c7fa;
+    color: #f8f9fa;
 }
 
 /* Secondary buttons */
@@ -475,6 +532,11 @@ QPushButton:pressed {
     border-color: #1a73e8;
 }
 
+#secondaryButton:disabled {
+    color: #a8c7fa;
+    border-color: #e0e0e0;
+}
+
 /* Icon buttons */
 #iconButton {
     background-color: transparent;
@@ -484,6 +546,7 @@ QPushButton:pressed {
     min-height: 32px;
     max-width: 32px;
     max-height: 32px;
+    padding: 0;
 }
 
 #iconButton:hover {
@@ -555,6 +618,8 @@ QToolButton:pressed {
     background-color: #e8eaed;
 }
 
+/* ==================== 6. FORM CONTROLS ==================== */
+
 /* Combo boxes */
 QComboBox {
     background-color: #ffffff;
@@ -562,6 +627,15 @@ QComboBox {
     border-radius: 4px;
     padding: 8px;
     min-width: 6em;
+    transition: border-color 0.2s;
+}
+
+QComboBox:hover {
+    border-color: #d2d5d9;
+}
+
+QComboBox:focus {
+    border-color: #1a73e8;
 }
 
 QComboBox::drop-down {
@@ -580,6 +654,7 @@ QComboBox::down-arrow {
 QComboBox QAbstractItemView {
     border: 1px solid #dadce0;
     selection-background-color: #e8f0fe;
+    selection-color: #1a73e8;
 }
 
 #optionComboBox {
@@ -610,6 +685,12 @@ QLineEdit {
     border-radius: 4px;
     padding: 8px;
     selection-background-color: #e8f0fe;
+    selection-color: #1a73e8;
+    transition: border-color 0.2s;
+}
+
+QLineEdit:hover {
+    border-color: #d2d5d9;
 }
 
 QLineEdit:focus {
@@ -631,14 +712,21 @@ QLineEdit:focus {
 
 /* Check boxes */
 QCheckBox {
-    spacing: 8px;
+    spacing: 10px;
+    outline: none;
 }
 
 QCheckBox::indicator {
     width: 18px;
     height: 18px;
     border: 1px solid #5f6368;
-    border-radius: 2px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+QCheckBox::indicator:hover {
+    border-color: #1a73e8;
 }
 
 QCheckBox::indicator:checked {
@@ -647,7 +735,26 @@ QCheckBox::indicator:checked {
     image: url(assets/icons/check.svg);
 }
 
-/* ==================== TABLES & DATA VIEWS ==================== */
+QCheckBox::indicator:checked:hover {
+    background-color: #1967d2;
+    border-color: #1967d2;
+}
+
+QCheckBox:disabled {
+    color: #9aa0a6;
+}
+
+QCheckBox::indicator:disabled {
+    border-color: #dadce0;
+    background-color: #f1f3f4;
+}
+
+QCheckBox::indicator:checked:disabled {
+    background-color: #a8c7fa;
+    border-color: #a8c7fa;
+}
+
+/* ==================== 7. TABLES & DATA VIEWS ==================== */
 
 /* Tables */
 QTableWidget {
@@ -659,6 +766,7 @@ QTableWidget {
 
 QTableWidget::item {
     padding: 8px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 QTableWidget::item:selected {
@@ -697,59 +805,7 @@ QHeaderView::section {
     alternate-background-color: transparent;
 }
 
-/* ==================== CONTAINERS ==================== */
-
-/* Task item */
-#taskItem {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-}
-
-#taskItem:hover {
-    border-color: #dadce0;
-    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
-}
-
-#taskItem QLabel {
-    font-size: 13px;
-    font-weight: 500;
-}
-
-/* Option widget */
-#optionWidget {
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    padding: 2px;
-    margin: 4px 0;
-}
-
-#optionLabel {
-    font-weight: 500;
-}
-
-/* Content card */
-#contentCard {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-}
-
-/* Draggable container */
-#draggableContainer {
-    background-color: transparent;
-}
-
-/* No options label */
-#noOptionsLabel {
-    color: #80868b;
-    font-style: italic;
-    padding: 10px;
-    qproperty-alignment: AlignCenter;
-    min-height: 40px;
-}
-
-/* ==================== TEXT DISPLAYS ==================== */
+/* ==================== 8. TEXT DISPLAYS ==================== */
 
 /* Text edits */
 QTextEdit {
@@ -759,6 +815,10 @@ QTextEdit {
     padding: 8px;
     selection-background-color: #e8f0fe;
     selection-color: #1a73e8;
+}
+
+QTextEdit:focus {
+    border-color: #1a73e8;
 }
 
 /* Log display */
@@ -784,7 +844,7 @@ QTextEdit {
     border-radius: 8px;
 }
 
-/* ==================== TABS ==================== */
+/* ==================== 9. TABS ==================== */
 
 /* Tab widget */
 QTabWidget::pane {
@@ -806,39 +866,18 @@ QTabBar::tab {
     margin-right: 2px;
 }
 
+QTabBar::tab:hover {
+    background-color: #f1f3f4;
+}
+
 QTabBar::tab:selected {
     background-color: #ffffff;
     color: #1a73e8;
     border-bottom: 2px solid #1a73e8;
 }
 
-/* ==================== MISC ==================== */
+/* ==================== 10. SCROLL BARS ==================== */
 
-/* Group boxes */
-QGroupBox {
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    margin-top: 1.5ex;
-    padding-top: 1ex;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-    padding: 0 3px;
-    color: #5f6368;
-}
-
-/* Tooltips */
-QToolTip {
-    background-color: #ffffff;
-    color: #202124;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    padding: 5px;
-}
-
-/* Scroll areas */
 QScrollArea {
     border: none;
     background-color: transparent;
@@ -849,6 +888,7 @@ QScrollBar:vertical {
     background: #f1f3f4;
     width: 8px;
     border-radius: 4px;
+    margin: 0px;
 }
 
 QScrollBar::handle:vertical {
@@ -857,16 +897,55 @@ QScrollBar::handle:vertical {
     border-radius: 4px;
 }
 
+QScrollBar::handle:vertical:hover {
+    background: #c0c0c0;
+}
+
 QScrollBar::add-line:vertical,
 QScrollBar::sub-line:vertical {
     height: 0px;
 }
 
-/* Summary frame */
-#summaryFrame {
-    background-color: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 24px;
-    margin: 20px 50px;
+QScrollBar:horizontal {
+    border: none;
+    background: #f1f3f4;
+    height: 8px;
+    border-radius: 4px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #dadce0;
+    min-width: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #c0c0c0;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0px;
+}
+
+/* ==================== 11. TOOLTIPS ==================== */
+
+QToolTip {
+    background-color: #ffffff;
+    color: #202124;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+}
+
+/* For dropdown tooltips */
+QToolTip#navButton {
+    background-color: rgba(40, 40, 40, 0.9);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 12px;
 }

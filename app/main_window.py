@@ -8,7 +8,6 @@ from PySide6.QtWidgets import (
 )
 
 from app.components.navigation_button import NavigationButton
-from app.pages.device_page import DeviceListPage
 from app.pages.download_page import DownloadPage
 from app.pages.home_page import HomePage
 from app.pages.info_page import InfoPage
@@ -16,6 +15,7 @@ from app.pages.device_info_page import DeviceInfoPage
 from app.models.config.global_config import global_config
 from app.pages.add_device_dialog import AddDeviceDialog
 from app.utils.theme_manager import ThemeManager
+from core.tasker_manager import task_manager
 
 
 class MainWindow(QMainWindow):
@@ -23,19 +23,8 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("设备管理系统")
         self.setMinimumSize(1200, 800)
-        devices_config_path = "assets/config/devices.json"
-        # 如果文件不存在，先创建该文件并写入 "{}"
-        if not os.path.exists(devices_config_path):
-            # 确保父目录存在
-            os.makedirs(os.path.dirname(devices_config_path), exist_ok=True)
-            with open(devices_config_path, "w", encoding="utf-8") as f:
-                f.write("{}")
 
-        global_config.load_devices_config(devices_config_path)
-
-        resource_dir = "assets/resource/"
-        global_config.load_all_resources_from_directory(resource_dir)
-
+        self.load_config()
         # Initialize theme manager
         self.theme_manager = ThemeManager()
         self.theme_manager.apply_theme("light")  # Default theme
@@ -244,3 +233,20 @@ class MainWindow(QMainWindow):
             self.theme_manager.apply_theme("light")
             self.current_theme = "light"
             self.theme_btn.setToolTip("切换到深色主题")
+
+    @staticmethod
+    def load_config():
+        devices_config_path = "assets/config/devices.json"
+        # 如果文件不存在，先创建该文件并写入 "{}"
+        if not os.path.exists(devices_config_path):
+            # 确保父目录存在
+            os.makedirs(os.path.dirname(devices_config_path), exist_ok=True)
+            with open(devices_config_path, "w", encoding="utf-8") as f:
+                f.write("{}")
+
+        global_config.load_devices_config(devices_config_path)
+
+        resource_dir = "assets/resource/"
+        global_config.load_all_resources_from_directory(resource_dir)
+
+        task_manager.setup_all_device_scheduled_tasks()

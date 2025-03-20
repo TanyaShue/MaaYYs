@@ -30,36 +30,38 @@ class CollapsibleWidget(QWidget):
         # ========== 标题栏 ==========
         self.header_widget = QWidget()
         self.header_widget.setObjectName("collapsibleHeader")
+        self.header_widget.setFixedHeight(40)  # 设置固定高度
         self.header_layout = QHBoxLayout(self.header_widget)
-        self.header_layout.setContentsMargins(5, 8, 5, 8)
-        self.header_layout.setSpacing(10)
+        self.header_layout.setContentsMargins(5, 0, 5, 0)  # 减小垂直边距
+        self.header_layout.setSpacing(5)  # 减小间距
 
         # 复选框
         self.checkbox = QCheckBox()
         self.checkbox.setChecked(False)
 
-        # 标题标签
+        # 标题标签 - 让它靠近复选框
         self.title_label = QLabel(self.title_text)
         self.title_label.setFont(QFont("Arial", 10, QFont.Bold))
 
-        # 拖动句柄
-        self.drag_handle = QLabel()
+        # 拖动句柄 - 设置为占据所有剩余空间
+        self.drag_handle = QLabel("≡")  # 使用 ≡ 作为拖动图标
         self.drag_handle.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.drag_handle.setStyleSheet("background: transparent;")
-        self.drag_handle.setCursor(QCursor(Qt.OpenHandCursor))  # 设置手型光标
+        self.drag_handle.setStyleSheet("background: transparent; color: #80868b; font-size: 16px; padding-left: 5px;")
+        self.drag_handle.setCursor(QCursor(Qt.OpenHandCursor))
+        self.drag_handle.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)  # 左对齐并垂直居中
         self.drag_handle.mousePressEvent = self.drag_handle_mouse_press
         self.drag_handle.mouseMoveEvent = self.drag_handle_mouse_move
 
-        # 展开/折叠按钮
+        # 展开/折叠按钮 - 靠近右侧
         self.toggle_button = QPushButton("▼")
         self.toggle_button.setFixedSize(24, 24)
         self.toggle_button.setObjectName("toggleButton")
 
-        # 布局添加
+        # 布局添加 - 确保标题靠近复选框，按钮靠近右侧
         self.header_layout.addWidget(self.checkbox)
-        self.header_layout.addWidget(self.title_label)
-        self.header_layout.addWidget(self.drag_handle)
-        self.header_layout.addWidget(self.toggle_button)
+        self.header_layout.addWidget(self.title_label, 0, Qt.AlignLeft)  # 左对齐
+        self.header_layout.addWidget(self.drag_handle)  # 这将占据所有剩余空间
+        self.header_layout.addWidget(self.toggle_button, 0, Qt.AlignRight)  # 右对齐
 
         # ========== 内容区 ==========
         self.content_widget = QWidget()
@@ -99,6 +101,7 @@ class CollapsibleWidget(QWidget):
                 background-color: #fcfcfc;
                 border-left: 1px solid #ddd;
                 margin-left: 15px;
+                margin-right: 15px;  /* Add right margin to make content narrower */
                 border-bottom-left-radius: 4px;
                 border-bottom-right-radius: 4px;
             }
@@ -108,7 +111,6 @@ class CollapsibleWidget(QWidget):
                 transition: transform 0.3s ease;
             }
         """)
-
     def _setup_animations(self):
         # 准备所有动画，但不启动
         self.height_animation = QPropertyAnimation(self.content_widget, b"maximumHeight")
@@ -301,12 +303,11 @@ class DraggableContainer(QWidget):
             self.layout.insertWidget(insert_index, dragged_widget)
 
         event.acceptProposedAction()
-        # 获取并打印当前子组件的顺序列表 (新增代码)
+        # 获取并发送当前子组件的顺序列表
         current_order = self.get_widget_order()
         self.drag.emit([widget.title_text for widget in current_order])
-        # print("当前子组件顺序:", [widget.title_text for widget in current_order]) # 假设 CollapsibleWidget 有 title_text 属性
 
-    # 新增方法：获取当前容器中的子组件顺序
+    # 获取当前容器中的子组件顺序
     def get_widget_order(self):
         """
         返回当前容器中子组件的顺序列表。

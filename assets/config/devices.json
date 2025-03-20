@@ -3,7 +3,7 @@
         {
             "device_name": "雷电模拟器-阴阳师1",
             "adb_config": {
-                "name": "LDPlayer",
+                "name": "雷电模拟器-阴阳师1",
                 "adb_path": "D:\\leidian\\LDPlayer9\\adb.exe",
                 "address": "127.0.0.1:5555",
                 "screencap_methods": 18446744073709551559,
@@ -15,18 +15,12 @@
                     "resource_name": "阴阳师",
                     "enable": true,
                     "selected_tasks": [
-                        "打开游戏",
-                        "自动地鬼",
-                        "自动悬赏",
-                        "周日常",
-                        "自动结界",
-                        "自动逢魔",
-                        "日常"
+                        "结界奖励领取"
                     ],
                     "options": [
                         {
                             "option_name": "选择区服",
-                            "value": "官网下载版"
+                            "value": "官服"
                         },
                         {
                             "option_name": "地鬼分组预设",
@@ -160,10 +154,8 @@
                 },
                 {
                     "resource_name": "战双帕弥什",
-                    "enable": false,
-                    "selected_tasks": [
-                        "打开游戏"
-                    ],
+                    "enable": true,
+                    "selected_tasks": [],
                     "options": [
                         {
                             "option_name": "打开战双",
@@ -174,8 +166,7 @@
             ],
             "schedule_enabled": true,
             "schedule_time": [
-                "08:00",
-                "08:00"
+                "11:45"
             ],
             "start_command": "D:\\leidian\\LDPlayer9\\dnplayer.exe index=0"
         },
@@ -194,7 +185,19 @@
                     "resource_name": "战双帕弥什",
                     "enable": true,
                     "selected_tasks": [
-                        "打开游戏"
+                        "打开游戏",
+                        "进入游戏",
+                        "指挥局",
+                        "刷A级碎片",
+                        "领取体力",
+                        "领取邮件",
+                        "购买碎片",
+                        "宿舍委托",
+                        "宿舍任务",
+                        "拟战场域",
+                        "领取任务",
+                        "战令",
+                        "结束游戏"
                     ],
                     "options": [
                         {
@@ -207,7 +210,12 @@
                     "resource_name": "阴阳师",
                     "enable": false,
                     "selected_tasks": [
-                        "打开游戏"
+                        "打开游戏",
+                        "自动地鬼",
+                        "自动悬赏",
+                        "自动结界",
+                        "自动逢魔",
+                        "日常"
                     ],
                     "options": []
                 }
