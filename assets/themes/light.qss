@@ -711,6 +711,7 @@ QLineEdit:focus {
 }
 
 /* Check boxes */
+/* Check boxes */
 QCheckBox {
     spacing: 10px;
     outline: none;
@@ -722,7 +723,7 @@ QCheckBox::indicator {
     border: 1px solid #5f6368;
     border-radius: 3px;
     background-color: #ffffff;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: border-color 0.2s;
 }
 
 QCheckBox::indicator:hover {
@@ -730,13 +731,12 @@ QCheckBox::indicator:hover {
 }
 
 QCheckBox::indicator:checked {
-    background-color: #1a73e8;
-    border-color: #1a73e8;
-    image: url(assets/icons/check.svg);
+    background-color: #ffffff;  /* 保持白色背景 */
+    border-color: #1a73e8;      /* 保持蓝色边框 */
+    image: url(assets/icons/check.svg);  /* 使用勾选图标 */
 }
 
 QCheckBox::indicator:checked:hover {
-    background-color: #1967d2;
     border-color: #1967d2;
 }
 
@@ -750,8 +750,9 @@ QCheckBox::indicator:disabled {
 }
 
 QCheckBox::indicator:checked:disabled {
-    background-color: #a8c7fa;
-    border-color: #a8c7fa;
+    background-color: #f1f3f4;  /* 浅灰色背景 */
+    border-color: #dadce0;
+    opacity: 0.7;
 }
 
 /* ==================== 7. TABLES & DATA VIEWS ==================== */

@@ -13,7 +13,7 @@
             "resources": [
                 {
                     "resource_name": "阴阳师",
-                    "enable": true,
+                    "enable": false,
                     "selected_tasks": [
                         "结界奖励领取"
                     ],
@@ -220,7 +220,7 @@
                     "options": []
                 }
             ],
-            "schedule_enabled": false,
+            "schedule_enabled": true,
             "schedule_time": [
                 "00:00",
                 "04:00"

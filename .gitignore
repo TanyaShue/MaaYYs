@@ -2,3 +2,6 @@
 /logs/
 /assets/config/
 /assets/debug/
+/debug/
+/config/
+/.nicegui/

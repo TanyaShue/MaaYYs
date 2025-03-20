@@ -1,4 +1,4 @@
-from PySide6.QtCore import Qt, QSize, QMutexLocker
+from PySide6.QtCore import QMutexLocker
 from PySide6.QtGui import QFont, QIcon
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
@@ -8,7 +8,7 @@ from datetime import datetime
 
 from app.models.logging.log_manager import log_manager
 from core.tasker_manager import task_manager
-from app.pages.add_device_dialog import AddDeviceDialog
+from app.widgets.add_device_dialog import AddDeviceDialog
 from app.models.config.global_config import global_config
 
 

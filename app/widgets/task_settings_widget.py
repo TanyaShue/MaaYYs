@@ -19,6 +19,9 @@ class TaskSettingsWidget(QFrame):
         self.device_config = device_config
         self.selected_resource_name = None
         self.task_option_widgets = {}
+        self.status_indicator = None
+        self.status_dot = None
+        self.status_text = None
 
         self.setObjectName("taskSettingsFrame")
         self.setFrameShape(QFrame.StyledPanel)
@@ -163,26 +166,26 @@ class TaskSettingsWidget(QFrame):
         resource_name_label.setObjectName("resourceSettingsTitle")
 
         # Add resource status indicator
-        status_indicator = QWidget()
-        status_layout = QHBoxLayout(status_indicator)
+        self.status_indicator = QWidget()
+        status_layout = QHBoxLayout(self.status_indicator)
         status_layout.setContentsMargins(0, 0, 0, 0)
         status_layout.setSpacing(5)
 
-        status_dot = QLabel()
-        status_dot.setFixedSize(8, 8)
-        status_dot.setStyleSheet(
+        self.status_dot = QLabel()
+        self.status_dot.setFixedSize(8, 8)
+        self.status_dot.setStyleSheet(
             f"background-color: {'#34a853' if device_resource.enable else '#ea4335'}; border-radius: 4px;")
 
-        status_text = QLabel(f"{'已启用' if device_resource.enable else '已禁用'}")
-        status_text.setObjectName("statusText")
-        status_text.setStyleSheet(f"color: {'#34a853' if device_resource.enable else '#ea4335'}; font-size: 12px;")
+        self.status_text = QLabel(f"{'已启用' if device_resource.enable else '已禁用'}")
+        self.status_text.setObjectName("statusText")
+        self.status_text.setStyleSheet(f"color: {'#34a853' if device_resource.enable else '#ea4335'}; font-size: 12px;")
 
-        status_layout.addWidget(status_dot)
-        status_layout.addWidget(status_text)
+        status_layout.addWidget(self.status_dot)
+        status_layout.addWidget(self.status_text)
 
         header_layout.addWidget(resource_name_label)
         header_layout.addStretch()
-        header_layout.addWidget(status_indicator)
+        header_layout.addWidget(self.status_indicator)
 
         self.settings_content_layout.addWidget(header_widget)
 
@@ -288,6 +291,24 @@ class TaskSettingsWidget(QFrame):
         scroll_area.setWidget(scroll_content)
         self.settings_content_layout.addWidget(scroll_area)
 
+    def update_resource_status(self, resource_name, enabled):
+        """Update the resource status in the UI when it changes in ResourceWidget"""
+        # Only update if this is the currently selected resource
+        if self.selected_resource_name == resource_name and self.status_dot and self.status_text:
+            # Update status dot color
+            self.status_dot.setStyleSheet(
+                f"background-color: {'#34a853' if enabled else '#ea4335'}; border-radius: 4px;")
+
+            # Update status text
+            self.status_text.setText(f"{'已启用' if enabled else '已禁用'}")
+            self.status_text.setStyleSheet(f"color: {'#34a853' if enabled else '#ea4335'}; font-size: 12px;")
+
+            # Log the update
+            log_manager.log_device_info(
+                self.device_config.device_name if hasattr(self.device_config, 'device_name') else "未知设备",
+                f"资源 {resource_name} 状态已在任务设置中更新"
+            )
+
     def _create_option_widget(self, option, option_name, current_options, task_name, task_options_map, resource_config):
         """Create a widget for an option based on its type with enhanced styling"""
         option_widget = QWidget()
@@ -380,6 +401,7 @@ class TaskSettingsWidget(QFrame):
         task_options_map[(task_name, option_name)] = widget
 
         return option_widget
+
     def update_task_selection(self, resource_config, task_name, is_selected):
         """Update task selection status with improved UI feedback"""
         if not resource_config:

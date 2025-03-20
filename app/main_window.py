@@ -1,10 +1,9 @@
 import os
 
-from PySide6.QtCore import Qt, QSize
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QHBoxLayout, QVBoxLayout,
-    QToolButton, QLabel, QFrame, QScrollArea
+    QFrame, QScrollArea
 )
 
 from app.components.navigation_button import NavigationButton
@@ -13,7 +12,7 @@ from app.pages.home_page import HomePage
 from app.pages.info_page import InfoPage
 from app.pages.device_info_page import DeviceInfoPage
 from app.models.config.global_config import global_config
-from app.pages.add_device_dialog import AddDeviceDialog
+from app.widgets.add_device_dialog import AddDeviceDialog
 from app.utils.theme_manager import ThemeManager
 from core.tasker_manager import task_manager
 
@@ -88,11 +87,7 @@ class MainWindow(QMainWindow):
         sidebar_layout.addWidget(self.info_btn)
 
         # Theme toggle button
-        self.theme_btn = QToolButton()
-        self.theme_btn.setIcon(QIcon("assets/icons/theme.svg"))
-        self.theme_btn.setIconSize(QSize(24, 24))
-        self.theme_btn.setFixedSize(48, 48)
-        self.theme_btn.setToolTip("切换主题")
+        self.theme_btn = NavigationButton("主题", "assets/icons/theme.svg")
         self.theme_btn.clicked.connect(self.toggle_theme)
         self.current_theme = "light"
 
@@ -228,11 +223,11 @@ class MainWindow(QMainWindow):
         if self.current_theme == "light":
             self.theme_manager.apply_theme("dark")
             self.current_theme = "dark"
-            self.theme_btn.setToolTip("切换到明亮主题")
+            self.theme_btn.setToolTip("切换到明亮主题")  # 如果NavigationButton支持toolTip
         else:
             self.theme_manager.apply_theme("light")
             self.current_theme = "light"
-            self.theme_btn.setToolTip("切换到深色主题")
+            self.theme_btn.setToolTip("切换到深色主题")  # 如果NavigationButton支持toolTip
 
     @staticmethod
     def load_config():

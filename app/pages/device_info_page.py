@@ -35,7 +35,7 @@ class DeviceInfoPage(QWidget):
         # Title
         title_label = QLabel(f"设备: {self.device_name}")
         title_label.setFont(QFont("Arial", 18, QFont.Bold))
-        title_label.setFixedHeight(10)  # Set fixed height for the title
+        title_label.setFixedHeight(40)  # Set fixed height for the title
         main_layout.addWidget(title_label)
 
         # Main horizontal splitter (3 parts)
@@ -66,6 +66,9 @@ class DeviceInfoPage(QWidget):
         # Connect signals
         self.resource_widget.resource_selected.connect(self.task_settings_widget.show_resource_settings)
 
+        # Connect the new resource status changed signal
+        self.resource_widget.resource_status_changed.connect(self.task_settings_widget.update_resource_status)
+
         # Add widgets to splitters
         self.left_splitter.addWidget(self.basic_info_widget)
         self.left_splitter.addWidget(self.resource_widget)
@@ -80,7 +83,8 @@ class DeviceInfoPage(QWidget):
         self.horizontal_splitter.addWidget(self.task_settings_widget)
         self.horizontal_splitter.addWidget(self.log_widget)
 
-        self.horizontal_splitter.setSizes([400, 400, 300])  # 使用更大的数字但保持相同比例
+        # Set initial sizes for horizontal splitter (1:1:1 ratio)
+        self.horizontal_splitter.setSizes([400, 400, 300])
 
         main_layout.addWidget(self.horizontal_splitter)
 

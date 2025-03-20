@@ -5,6 +5,8 @@
       <excludeFolder url="file://$MODULE_DIR$/assets/debug" />
       <excludeFolder url="file://$MODULE_DIR$/assets/resource" />
       <excludeFolder url="file://$MODULE_DIR$/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/config" />
+      <excludeFolder url="file://$MODULE_DIR$/debug" />
     </content>
     <orderEntry type="jdk" jdkName="MFWPH_TEST" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

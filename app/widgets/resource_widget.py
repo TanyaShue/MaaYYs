@@ -17,6 +17,9 @@ class ResourceWidget(QFrame):
     # Signal to notify when a resource is selected for configuration
     resource_selected = Signal(str)
 
+    # New signal to notify when a resource's enable status changes
+    resource_status_changed = Signal(str, bool)
+
     def __init__(self, device_name, device_config, parent=None):
         super().__init__(parent)
         self.device_name = device_name
@@ -158,6 +161,9 @@ class ResourceWidget(QFrame):
         # Log the change
         status_text = "启用" if enabled else "禁用"
         log_manager.log_device_info(self.device_name, f"资源 {resource_name} 已{status_text}")
+
+        # Emit signal with resource name and new status
+        self.resource_status_changed.emit(resource_name, enabled)
 
     def show_resource_settings(self, resource_name):
         """Emit signal to show settings for the selected resource"""

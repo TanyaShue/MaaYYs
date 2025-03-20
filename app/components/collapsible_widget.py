@@ -2,7 +2,7 @@ from PySide6.QtCore import (
     QPropertyAnimation, QEasingCurve, Qt, QMimeData,
     QParallelAnimationGroup, QPoint, Property, Signal
 )
-from PySide6.QtGui import QFont, QDrag, QPixmap, QMouseEvent, QCursor
+from PySide6.QtGui import QFont, QDrag, QPixmap, QMouseEvent, QCursor, QIcon
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QCheckBox, QLabel, QPushButton,
     QFrame, QSizePolicy, QApplication, QGraphicsOpacityEffect
@@ -53,7 +53,8 @@ class CollapsibleWidget(QWidget):
         self.drag_handle.mouseMoveEvent = self.drag_handle_mouse_move
 
         # 展开/折叠按钮 - 靠近右侧
-        self.toggle_button = QPushButton("▼")
+        self.toggle_button = QPushButton()
+        self.toggle_button.setIcon(QIcon("assets/icons/dropdown.svg"))
         self.toggle_button.setFixedSize(24, 24)
         self.toggle_button.setObjectName("toggleButton")
 

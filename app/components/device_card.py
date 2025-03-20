@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushBut
 
 from app.models.config.global_config import global_config
 from app.models.logging.log_manager import log_manager
-from app.pages.add_device_dialog import AddDeviceDialog
+from app.widgets.add_device_dialog import AddDeviceDialog
 from core.tasker_manager import task_manager
 
 

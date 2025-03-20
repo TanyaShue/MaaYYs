@@ -1,4 +1,5 @@
 from PySide6.QtCore import Qt, QTime, QThread, Signal
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QFormLayout,
                                QLabel, QLineEdit, QPushButton, QComboBox,
                                QWidget, QCheckBox, QGroupBox, QScrollArea,
@@ -63,6 +64,7 @@ class AddDeviceDialog(QDialog):
         search_layout = QVBoxLayout()
         search_btn_layout = QHBoxLayout()
         self.search_btn = QPushButton("搜索设备")
+        self.search_btn.setIcon(QIcon("assets/icons/search.svg"))
         self.search_btn.clicked.connect(self.search_devices)
         self.search_status = QLabel("未搜索")
         search_btn_layout.addWidget(self.search_btn)
@@ -107,7 +109,8 @@ class AddDeviceDialog(QDialog):
         self.schedule_enabled = QCheckBox("启用定时启动")
         self.schedule_enabled.toggled.connect(self.toggle_schedule_widgets)
         schedule_header.addWidget(self.schedule_enabled)
-        self.add_time_btn = QPushButton("+")
+        self.add_time_btn = QPushButton()
+        self.add_time_btn.setIcon(QIcon("assets/icons/add-time.svg"))
         self.add_time_btn.setFixedSize(24, 24)
         self.add_time_btn.clicked.connect(self.add_time_selection_widget)
         self.add_time_btn.setToolTip("添加启动时间")
@@ -184,7 +187,8 @@ class AddDeviceDialog(QDialog):
         time_layout.setSpacing(2)
         time_edit = QTimeEdit()
         time_edit.setTime(QTime(8, 0))
-        del_btn = QPushButton("-")
+        del_btn = QPushButton()
+        del_btn.setIcon(QIcon("assets/icons/delete.svg"))
         del_btn.setFixedSize(20, 20)
         del_btn.clicked.connect(lambda: self.remove_time_widget(time_widget))
         del_btn.setToolTip("删除此启动时间")
