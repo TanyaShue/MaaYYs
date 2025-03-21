@@ -1,11 +1,11 @@
-from PySide6.QtCore import Qt, Signal, QTimer
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-    QListWidget, QListWidgetItem, QStackedWidget,
-    QScrollArea, QFrame, QComboBox, QCheckBox,
-    QTimeEdit, QLineEdit, QPushButton, QSpinBox
+    QListWidget, QListWidgetItem, QScrollArea, QFrame, QComboBox, QCheckBox,
+    QLineEdit, QPushButton, QSpinBox
 )
-from PySide6.QtGui import QFont
+
 from app.utils.theme_manager import theme_manager
 
 
@@ -34,9 +34,10 @@ class SettingsPage(QWidget):
 
         # Add categories
         categories = [
-            "切换配置", "定时执行", "性能设置", "运行设置",
-            "连接设置", "启动设置", "远程控制", "界面设置",
-            "外部通知", "热键设置", "更新设置"
+            # "切换配置", "定时执行", "性能设置", "运行设置",
+            # "连接设置", "启动设置", "远程控制", "界面设置",
+            # "外部通知", "热键设置",
+            "界面设置","更新设置"
         ]
 
         for category in categories:
@@ -65,16 +66,16 @@ class SettingsPage(QWidget):
         self.sections = {}
 
         # Create sections
-        self.create_config_switch_section()
-        self.create_scheduled_tasks_section()
-        self.create_performance_section()
-        self.create_operation_section()
-        self.create_connection_section()
-        self.create_startup_section()
-        self.create_remote_control_section()
+        # self.create_config_switch_section()
+        # self.create_scheduled_tasks_section()
+        # self.create_performance_section()
+        # self.create_operation_section()
+        # self.create_connection_section()
+        # self.create_startup_section()
+        # self.create_remote_control_section()
         self.create_interface_section()
-        self.create_notifications_section()
-        self.create_hotkey_section()
+        # self.create_notifications_section()
+        # self.create_hotkey_section()
         self.create_update_section()
 
         # Add a spacer at the end
@@ -95,7 +96,7 @@ class SettingsPage(QWidget):
         section = QWidget()
         section.setObjectName(f"section_{title}")
         section_layout = QVBoxLayout(section)
-        section_layout.setContentsMargins(0, 0, 0, 20)
+        section_layout.setContentsMargins(0, 0, 0, 0)
 
         # Title
         title_label = QLabel(title)
@@ -105,14 +106,8 @@ class SettingsPage(QWidget):
         title_font.setBold(True)
         title_label.setFont(title_font)
 
-        # Separator line
-        separator = QFrame()
-        separator.setObjectName("separator")
-        separator.setFrameShape(QFrame.HLine)
-        separator.setFrameShadow(QFrame.Sunken)
 
         section_layout.addWidget(title_label)
-        section_layout.addWidget(separator)
 
         # Content widget
         content = QWidget()
@@ -403,7 +398,7 @@ class SettingsPage(QWidget):
         lang_label.setObjectName("infoLabel")
         lang_combo = QComboBox()
         lang_combo.addItem("简体中文")
-        lang_combo.addItem("English")
+        # lang_combo.addItem("English")
 
         lang_row.addWidget(lang_label)
         lang_row.addWidget(lang_combo)

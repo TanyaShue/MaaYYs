@@ -5,10 +5,10 @@ from PySide6.QtWidgets import (
     QScrollArea, QCheckBox, QComboBox, QLineEdit, QToolButton, QPushButton, QSizePolicy
 )
 
-from app.models.config.global_config import global_config
-from app.models.logging.log_manager import log_manager
 from app.components.collapsible_widget import CollapsibleWidget, DraggableContainer
+from app.models.config.global_config import global_config
 from app.models.config.resource_config import SelectOption, BoolOption, InputOption
+from app.models.logging.log_manager import log_manager
 
 
 class TaskSettingsWidget(QFrame):
@@ -194,21 +194,11 @@ class TaskSettingsWidget(QFrame):
             description_label.setContentsMargins(0, 0, 0, 10)
             self.settings_content_layout.addWidget(description_label)
 
-        # Separator
-        separator = QFrame()
-        separator.setFrameShape(QFrame.HLine)
-        separator.setFrameShadow(QFrame.Sunken)
-        separator.setMaximumHeight(1)
-        separator.setObjectName("separator")
-        self.settings_content_layout.addWidget(separator)
-        self.settings_content_layout.addSpacing(10)
-
         # Instructions for drag & drop
         instructions = QLabel("拖放任务可调整执行顺序")
         instructions.setObjectName("instructionText")
         instructions.setAlignment(Qt.AlignCenter)
         self.settings_content_layout.addWidget(instructions)
-        self.settings_content_layout.addSpacing(10)
 
         # Create scroll area for tasks
         scroll_area = QScrollArea()
@@ -223,8 +213,7 @@ class TaskSettingsWidget(QFrame):
         # 减小最小宽度
         scroll_content.setMinimumWidth(200)  # 设置较小的最小宽度
 
-        scroll_content.layout.setContentsMargins(5, 5, 5, 5)
-        scroll_content.layout.setSpacing(10)
+        scroll_content.layout.setContentsMargins(0,0,0,0)
         scroll_content.layout.installEventFilter(self)
         scroll_content.drag.connect(self.on_drag_tasks)
 
@@ -255,8 +244,6 @@ class TaskSettingsWidget(QFrame):
 
             is_task_selected = task.task_name in selected_order
             options_widget.checkbox.setChecked(is_task_selected)
-
-            # 也不需要手动修改拖动区域宽度，因为已经在CollapsibleWidget中设置好了
 
             options_widget.checkbox.stateChanged.connect(
                 lambda state, t_name=task.task_name, cb=options_widget.checkbox:
@@ -341,7 +328,7 @@ class TaskSettingsWidget(QFrame):
             widget = QComboBox()
             widget.setObjectName("optionComboBox")
             # 设置下拉框适应可用空间的最小宽度
-            widget.setMinimumWidth(80)
+            widget.setMinimumWidth(40)
 
             for choice in option.choices:
                 widget.addItem(choice.name, choice.value)

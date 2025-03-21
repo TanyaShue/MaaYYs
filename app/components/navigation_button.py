@@ -40,6 +40,9 @@ class NavigationButton(QPushButton):
         # Track indicator state
         self._show_indicator = False
 
+        # Set highlight color property
+        self.setProperty("highlightColor", "#1a73e8")  # Ensure consistent highlight color
+
     def enterEvent(self, event):
         # Handle mouse enter with animation
         if not self.isChecked():

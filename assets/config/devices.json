@@ -13,9 +13,14 @@
             "resources": [
                 {
                     "resource_name": "阴阳师",
-                    "enable": false,
+                    "enable": true,
                     "selected_tasks": [
-                        "结界奖励领取"
+                        "打开游戏",
+                        "结界奖励领取",
+                        "自动地鬼",
+                        "自动悬赏",
+                        "自动结界",
+                        "日常"
                     ],
                     "options": [
                         {
@@ -155,7 +160,19 @@
                 {
                     "resource_name": "战双帕弥什",
                     "enable": true,
-                    "selected_tasks": [],
+                    "selected_tasks": [
+                        "进入游戏",
+                        "指挥局",
+                        "刷A级碎片",
+                        "领取体力",
+                        "领取邮件",
+                        "购买碎片",
+                        "宿舍委托",
+                        "宿舍任务",
+                        "拟战场域",
+                        "领取任务",
+                        "战令"
+                    ],
                     "options": [
                         {
                             "option_name": "打开战双",
@@ -166,7 +183,7 @@
             ],
             "schedule_enabled": true,
             "schedule_time": [
-                "11:45"
+                "10:05"
             ],
             "start_command": "D:\\leidian\\LDPlayer9\\dnplayer.exe index=0"
         },
@@ -185,7 +202,6 @@
                     "resource_name": "战双帕弥什",
                     "enable": true,
                     "selected_tasks": [
-                        "打开游戏",
                         "进入游戏",
                         "指挥局",
                         "刷A级碎片",
@@ -222,8 +238,7 @@
             ],
             "schedule_enabled": true,
             "schedule_time": [
-                "00:00",
-                "04:00"
+                "00:00"
             ],
             "start_command": ""
         }

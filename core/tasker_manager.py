@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
-import logging
-from typing import Dict, Optional, List, Union
 from datetime import datetime, timedelta
+from typing import Dict, Optional, List, Union
 
 from PySide6.QtCore import QObject, Signal, Slot, QMutexLocker, QRecursiveMutex, QTimer
 

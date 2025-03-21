@@ -1,8 +1,7 @@
-import sys
-
+from debug.custom_actions import *
 from maa.agent.agent_server import AgentServer
 from maa.toolkit import Toolkit
-from debug.custom_actions import *
+
 
 def main():
     Toolkit.init_option("./")

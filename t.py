@@ -1,14 +1,14 @@
-from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QTabWidget,
-                               QSplitter, QTextEdit, QCheckBox, QWidget, QFormLayout,
-                               QLineEdit, QComboBox, QTableWidget, QTableWidgetItem,
-                               QHeaderView, QFrame, QScrollArea, QMessageBox)
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
+from PySide6.QtWidgets import (QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QTabWidget,
+                               QSplitter, QTextEdit, QCheckBox, QWidget, QLineEdit, QComboBox, QTableWidget,
+                               QTableWidgetItem,
+                               QHeaderView, QFrame, QScrollArea, QMessageBox)
 
 from app.components.collapsible_widget import CollapsibleWidget, DraggableContainer
 from app.models.config.device_config import OptionConfig, Resource
-from app.models.config.global_config import GlobalConfig, global_config
-from app.models.config.resource_config import ResourceConfig, SelectOption, BoolOption, InputOption
+from app.models.config.global_config import global_config
+from app.models.config.resource_config import SelectOption, BoolOption, InputOption
 from core.tasker_manager import task_manager, TaskerManager
 
 

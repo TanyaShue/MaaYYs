@@ -1,15 +1,16 @@
+from datetime import datetime
+
 from PySide6.QtCore import QMutexLocker
 from PySide6.QtGui import QFont, QIcon
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QFrame
 )
-from datetime import datetime
 
-from app.models.logging.log_manager import log_manager
-from core.tasker_manager import task_manager
-from app.widgets.add_device_dialog import AddDeviceDialog
 from app.models.config.global_config import global_config
+from app.models.logging.log_manager import log_manager
+from app.widgets.add_device_dialog import AddDeviceDialog
+from core.tasker_manager import task_manager
 
 
 class BasicInfoWidget(QFrame):
@@ -119,13 +120,6 @@ class BasicInfoWidget(QFrame):
 
         layout.addWidget(content_widget)
 
-        # Separator
-        separator = QFrame()
-        separator.setFrameShape(QFrame.HLine)
-        separator.setFrameShadow(QFrame.Sunken)
-        separator.setObjectName("separator")
-        separator.setMaximumHeight(1)
-        layout.addWidget(separator)
 
         # Action buttons
         button_layout = QHBoxLayout()
@@ -294,17 +288,22 @@ class BasicInfoWidget(QFrame):
     def open_settings_dialog(self):
         """Open device settings dialog"""
         if self.device_config:
-            dialog = AddDeviceDialog(global_config, self, edit_mode=True, device_config=self.device_config)
-            if dialog.exec_():
-                # Log configuration change
-                log_manager.log_device_info(self.device_name, "设备配置已更新")
+            # Store the device name before potentially deleting it
+            original_device_name = self.device_name
 
-                # 获取更新后的设备配置（假设global_config中有更新后的设备配置）
-                updated_device_config = global_config.get_device_config(self.device_name)
+            dialog = AddDeviceDialog(global_config, self, edit_mode=True, device_config=self.device_config)
+            result = dialog.exec_()
+
+            # After dialog closes, check if the device still exists in global config
+            updated_device_config = global_config.get_device_config(original_device_name)
+
+            if updated_device_config:
+                # Device was updated, not deleted
+                log_manager.log_device_info(original_device_name, "设备配置已更新")
 
                 # 更新定时任务设置
                 task_manager.update_device_scheduled_tasks(updated_device_config)
-                log_manager.log_device_info(self.device_name, "设备定时任务已更新")
+                log_manager.log_device_info(original_device_name, "设备定时任务已更新")
 
                 # 更新本地设备配置引用
                 self.device_config = updated_device_config
@@ -315,6 +314,15 @@ class BasicInfoWidget(QFrame):
                 # Refresh UI
                 if hasattr(self.parent_widget, 'refresh_ui'):
                     self.parent_widget.refresh_ui()
+            else:
+                # Device was deleted - we'll skip logging here to avoid filename issues
+                # Find the main window to navigate to another page
+                main_window = self.window()
+                if main_window:
+                    # Check if it has the navigation method
+                    if hasattr(main_window, 'show_previous_device_or_home'):
+                        main_window.show_previous_device_or_home(original_device_name)
+
 
     def refresh_ui(self, device_config=None):
         """Refresh widget with updated device config"""

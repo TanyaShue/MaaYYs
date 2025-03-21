@@ -1,4 +1,3 @@
-import os
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
@@ -7,9 +6,9 @@ from PySide6.QtWidgets import (
 
 from app.models.config.global_config import global_config
 from app.widgets.basic_info_widget import BasicInfoWidget
+from app.widgets.device_log_widget import DeviceLogWidget
 from app.widgets.resource_widget import ResourceWidget
 from app.widgets.task_settings_widget import TaskSettingsWidget
-from app.widgets.device_log_widget import DeviceLogWidget
 
 
 class DeviceInfoPage(QWidget):

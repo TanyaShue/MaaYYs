@@ -3,7 +3,7 @@ from PySide6.QtGui import QFont, QPixmap, QIcon
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QFrame,
     QTextBrowser, QScrollArea, QSizePolicy, QPushButton,
-    QSpacerItem, QTabWidget, QGridLayout
+    QTabWidget, QGridLayout
 )
 
 

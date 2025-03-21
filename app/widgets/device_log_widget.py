@@ -1,11 +1,9 @@
-from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QFrame, QLabel
+    QVBoxLayout, QHBoxLayout, QFrame, QLabel
 )
 
 from app.components.log_display import LogDisplay
-from app.models.logging.log_manager import log_manager
 
 
 class DeviceLogWidget(QFrame):
