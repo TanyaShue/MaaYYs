@@ -17,7 +17,7 @@ from src.service.custom_actions.task_list import TaskList
 from src.service.custom_recognition.my_recognizer import MyRecognizer
 
 from src.utils.config_projects import Project, ProjectRunData
-from maa.controller import AdbController
+from maa.controller import AdbController, Win32Controller
 from maa.resource import Resource
 from maa.tasker import Tasker
 from maa.toolkit import Toolkit
