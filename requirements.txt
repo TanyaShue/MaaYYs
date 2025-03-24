@@ -1,0 +1,2 @@
+maafw
+pyside6

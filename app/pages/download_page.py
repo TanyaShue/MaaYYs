@@ -8,11 +8,11 @@ import tempfile
 from pathlib import Path
 from datetime import datetime
 from PySide6.QtGui import QFont, QIcon
-from PySide6.QtCore import Qt, QThread, Signal, QSize
+from PySide6.QtCore import Qt, QThread, Signal
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QLabel, QFrame, QTableWidget,
                                QTableWidgetItem, QPushButton, QHeaderView, QHBoxLayout,
                                QProgressBar, QMessageBox, QSizePolicy, QDialog, QFormLayout,
-                               QLineEdit, QTextEdit, QComboBox, QDialogButtonBox)
+                               QLineEdit, QTextEdit, QDialogButtonBox)
 
 # Import GlobalConfig from the app
 from app.models.config.global_config import global_config
