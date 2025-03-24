@@ -47,7 +47,15 @@ jobs:
         id: build
         run: |
           python build.py
-          if (-not (Test-Path -Path "./dist/MAA_YYS_RELEASE.zip")) {
+          # Get the actual zip file name
+          $zipFile = Get-ChildItem -Path "./dist" -Filter "MAA_YYS_*.zip" | Select-Object -First 1
+          if ($zipFile) {
+            # Copy to the expected name
+            Copy-Item -Path $zipFile.FullName -Destination "./dist/MAA_YYS_RELEASE.zip" -Force
+            Write-Host "Copied $($zipFile.Name) to MAA_YYS_RELEASE.zip"
+            # Set output for later steps
+            echo "ORIGINAL_ZIP_NAME=$($zipFile.Name)" >> $env:GITHUB_ENV
+          } else {
             Write-Host "::error::Build failed - zip file was not created"
             exit 1
           }
@@ -63,22 +71,13 @@ jobs:
       - name: Create GitHub Release
         id: create_release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/dist/MAA_YYS_RELEASE.zip
-          asset_name: MAA_YYS_RELEASE.zip
-          asset_content_type: application/zip
+          artifacts: ${{ github.workspace }}/dist/MAA_YYS_RELEASE.zip
+          artifactContentType: application/zip
+          artifactErrorsFailBuild: true
