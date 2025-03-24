@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.components.collapsible_widget import CollapsibleWidget, DraggableContainer
+from app.models.config.device_config import Resource
 from app.models.config.global_config import global_config
 from app.models.config.resource_config import SelectOption, BoolOption, InputOption
 from app.models.logging.log_manager import log_manager
@@ -127,31 +128,62 @@ class TaskSettingsWidget(QFrame):
         if self.device_config:
             device_resource = next((r for r in self.device_config.resources if r.resource_name == resource_name), None)
 
-        if not device_resource:
-            # Show message if device has no configuration for this resource
-            no_config_widget = QWidget()
-            no_config_layout = QVBoxLayout(no_config_widget)
-            no_config_layout.setAlignment(Qt.AlignCenter)
+        # Create a new resource configuration if one doesn't exist
+        if not device_resource and self.device_config:
+            try:
+                # Import the necessary class
 
-            warning_icon = QLabel()
-            warning_icon.setPixmap(QIcon("assets/icons/warning.svg").pixmap(48, 48))
-            warning_icon.setAlignment(Qt.AlignCenter)
+                # Create a new resource configuration
+                device_resource = Resource(
+                    resource_name=resource_name,
+                    enable=True,
+                    selected_tasks=[],
+                    options=[]
+                )
 
-            no_config_label = QLabel(f"设备未配置资源 {resource_name}")
-            no_config_label.setAlignment(Qt.AlignCenter)
-            no_config_label.setObjectName("warningText")
+                # Add the new resource to the device's resources
+                if not hasattr(self.device_config, 'resources'):
+                    self.device_config.resources = []
+                self.device_config.resources.append(device_resource)
 
-            action_btn = QPushButton("添加资源配置")
-            action_btn.setObjectName("primaryButton")
-            action_btn.setFixedWidth(150)
+                # Save the updated configuration
+                global_config.save_all_configs()
 
-            no_config_layout.addWidget(warning_icon)
-            no_config_layout.addWidget(no_config_label)
-            no_config_layout.addSpacing(15)
-            no_config_layout.addWidget(action_btn, 0, Qt.AlignCenter)
+                # Log the creation of the new resource
+                device_name = self.device_config.device_name if hasattr(self.device_config, 'device_name') else "未知设备"
+                log_manager.log_device_info(device_name, f"为设备自动创建了资源 {resource_name} 的配置")
+            except Exception as e:
+                # If there's an error creating the resource, log it and show the original message
+                log_manager.log_device_error(
+                    self.device_config.device_name if hasattr(self.device_config, 'device_name') else "未知设备",
+                    f"自动创建资源配置失败: {str(e)}"
+                )
 
-            self.settings_content_layout.addWidget(no_config_widget)
-            return
+                # Show the original warning message as a fallback
+                no_config_widget = QWidget()
+                no_config_layout = QVBoxLayout(no_config_widget)
+                no_config_layout.setAlignment(Qt.AlignCenter)
+
+                warning_icon = QLabel()
+                warning_icon.setPixmap(QIcon("assets/icons/warning.svg").pixmap(48, 48))
+                warning_icon.setAlignment(Qt.AlignCenter)
+
+                no_config_label = QLabel(f"设备未配置资源 {resource_name}")
+                no_config_label.setAlignment(Qt.AlignCenter)
+                no_config_label.setObjectName("warningText")
+
+                action_btn = QPushButton("添加资源配置")
+                action_btn.setObjectName("primaryButton")
+                action_btn.setFixedWidth(150)
+                action_btn.clicked.connect(lambda: self._create_resource_configuration(resource_name))
+
+                no_config_layout.addWidget(warning_icon)
+                no_config_layout.addWidget(no_config_label)
+                no_config_layout.addSpacing(15)
+                no_config_layout.addWidget(action_btn, 0, Qt.AlignCenter)
+
+                self.settings_content_layout.addWidget(no_config_widget)
+                return
 
         # Create resource settings UI with header
         header_widget = QWidget()
@@ -186,6 +218,7 @@ class TaskSettingsWidget(QFrame):
 
         self.settings_content_layout.addWidget(header_widget)
 
+        # Continue with the rest of the method as before...
         # Add description if available
         if hasattr(full_resource_config, 'description') and full_resource_config.description:
             description_label = QLabel(full_resource_config.description)
@@ -213,7 +246,7 @@ class TaskSettingsWidget(QFrame):
         # 减小最小宽度
         scroll_content.setMinimumWidth(200)  # 设置较小的最小宽度
 
-        scroll_content.layout.setContentsMargins(0,0,0,0)
+        scroll_content.layout.setContentsMargins(0, 0, 0, 0)
         scroll_content.layout.installEventFilter(self)
         scroll_content.drag.connect(self.on_drag_tasks)
 
@@ -275,6 +308,39 @@ class TaskSettingsWidget(QFrame):
         scroll_area.setWidget(scroll_content)
         self.settings_content_layout.addWidget(scroll_area)
 
+    def _create_resource_configuration(self, resource_name):
+        """Helper method to create a new resource configuration from the button click"""
+        try:
+            # Import the necessary class
+
+            # Create a new resource configuration
+            device_resource = Resource(
+                resource_name=resource_name,
+                enable=True,
+                selected_tasks=[],
+                options=[]
+            )
+
+            # Add the new resource to the device's resources
+            if not hasattr(self.device_config, 'resources'):
+                self.device_config.resources = []
+            self.device_config.resources.append(device_resource)
+
+            # Save the updated configuration
+            global_config.save_all_configs()
+
+            # Log the creation of the new resource
+            device_name = self.device_config.device_name if hasattr(self.device_config, 'device_name') else "未知设备"
+            log_manager.log_device_info(device_name, f"已创建资源 {resource_name} 的配置")
+
+            # Refresh the settings display with the new resource
+            self.show_resource_settings(resource_name)
+        except Exception as e:
+            # Log any errors
+            log_manager.log_device_error(
+                self.device_config.device_name if hasattr(self.device_config, 'device_name') else "未知设备",
+                f"创建资源配置失败: {str(e)}"
+            )
     def update_resource_status(self, resource_name, enabled):
         """Update the resource status in the UI when it changes in ResourceWidget"""
         # Only update if this is the currently selected resource
