@@ -64,11 +64,11 @@ if os.path.exists(assets_dest_path):
 
 # 使用 shutil 复制整个文件夹
 shutil.copytree(assets_source_path, assets_dest_path)
-# 复制 syc.bat 文件
-if os.path.exists(syc_bat_source_path):
-    shutil.copy(syc_bat_source_path, syc_bat_dest_path)
-else:
-    raise FileNotFoundError("syc.bat file not found")
+# # 复制 syc.bat 文件
+# if os.path.exists(syc_bat_source_path):
+#     shutil.copy(syc_bat_source_path, syc_bat_dest_path)
+# else:
+#     raise FileNotFoundError("syc.bat file not found")
 
 # 压缩 dist 文件夹为 zip 文件，并保存在 dist 目录中
 zip_filename = 'MAA_YYS_RELEASE.zip'
