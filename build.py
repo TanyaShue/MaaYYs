@@ -68,18 +68,25 @@ def extract_version():
 
 
 def update_devices_json(version, build_time):
-    """Update version information in devices.json at top level"""
+    """Update version information in devices.json at top level, creating the file if it doesn't exist"""
     current_dir = os.getcwd()
-    devices_json_path = os.path.join(current_dir, 'assets', 'config', 'devices.json')
-
-    if not os.path.exists(devices_json_path):
-        print(f"devices.json not found at: {devices_json_path}")
-        return False
+    config_dir = os.path.join(current_dir, 'assets', 'config')
+    devices_json_path = os.path.join(config_dir, 'devices.json')
 
     try:
-        print(f"Updating JSON at: {devices_json_path}")
-        with open(devices_json_path, 'r', encoding='utf-8') as f:
-            config = json.load(f)
+        # Create directory structure if it doesn't exist
+        if not os.path.exists(config_dir):
+            os.makedirs(config_dir)
+            print(f"Created directory: {config_dir}")
+
+        # Initialize config
+        if os.path.exists(devices_json_path):
+            print(f"Reading existing JSON at: {devices_json_path}")
+            with open(devices_json_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+        else:
+            print(f"devices.json not found. Creating new file at: {devices_json_path}")
+            config = {}  # Initialize empty config if file doesn't exist
 
         # Add version info at top level
         config["version"] = version
@@ -94,7 +101,6 @@ def update_devices_json(version, build_time):
     except Exception as e:
         print(f"Error updating devices.json: {str(e)}")
         return False
-
 
 def main():
     parser = argparse.ArgumentParser(description='Build script for MAA_YYS')
