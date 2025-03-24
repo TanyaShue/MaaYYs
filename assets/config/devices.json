@@ -16,11 +16,12 @@
                     "enable": true,
                     "selected_tasks": [
                         "打开游戏",
-                        "结界奖励领取",
+                        "自动逢魔",
                         "自动地鬼",
                         "自动悬赏",
                         "自动结界",
-                        "日常"
+                        "日常",
+                        "周日常"
                     ],
                     "options": [
                         {
@@ -74,6 +75,14 @@
                         {
                             "option_name": "领取奖励_花合战奖励",
                             "value": true
+                        },
+                        {
+                            "option_name": "逢魔首领分组预设",
+                            "value": "地鬼"
+                        },
+                        {
+                            "option_name": "逢魔首领队伍预设",
+                            "value": "地域鬼王"
                         }
                     ]
                 },
@@ -200,7 +209,7 @@
             "resources": [
                 {
                     "resource_name": "战双帕弥什",
-                    "enable": true,
+                    "enable": false,
                     "selected_tasks": [
                         "进入游戏",
                         "指挥局",
@@ -224,7 +233,7 @@
                 },
                 {
                     "resource_name": "阴阳师",
-                    "enable": false,
+                    "enable": true,
                     "selected_tasks": [
                         "打开游戏",
                         "自动地鬼",
@@ -233,7 +242,40 @@
                         "自动逢魔",
                         "日常"
                     ],
-                    "options": []
+                    "options": [
+                        {
+                            "option_name": "悬赏封印分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "悬赏封印队伍预设",
+                            "value": "突破"
+                        },
+                        {
+                            "option_name": "地鬼分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "地鬼队伍预设",
+                            "value": "觉醒"
+                        },
+                        {
+                            "option_name": "结界突破分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "结界突破队伍预设",
+                            "value": "突破"
+                        },
+                        {
+                            "option_name": "逢魔首领分组预设",
+                            "value": "日常"
+                        },
+                        {
+                            "option_name": "逢魔首领队伍预设",
+                            "value": "突破"
+                        }
+                    ]
                 }
             ],
             "schedule_enabled": true,

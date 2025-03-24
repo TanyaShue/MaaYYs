@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
         sidebar_layout.addWidget(self.add_device_btn)
 
         # Add resource download button after the add device button (moved from above)
-        self.download_btn = NavigationButton("资源下载", "assets/icons/apps-add.svg")
+        self.download_btn = NavigationButton("资源下载", "assets/icons/updata_res.svg")
         sidebar_layout.addWidget(self.download_btn)
 
         # Add separator before bottom buttons

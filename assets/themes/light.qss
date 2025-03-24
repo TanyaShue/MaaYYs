@@ -16,11 +16,12 @@ QWidget#content_widget { background-color: #ffffff; }
     border-bottom: 1px solid #e0e0e0;
 }
 QFrame { border-radius: 6px; }
-
 #sidebarSeparator {
-    background-color: #e0e0e0;
-    height: 1px;
-    margin: 8px 12px;
+    background-color: #f0f0f0;
+    height: 0.5px;
+    margin: 8px 16px;
+    opacity: 0.7;
+    border: none;
 }
 #draggableContainer { background-color: transparent; }
 

@@ -243,6 +243,7 @@ class TaskerManager(QObject):
         ]
 
         if runtime_configs:
+            print(runtime_configs)
             self.logger.info(f"设备 {device_config.device_name} 准备提交 {len(runtime_configs)} 个资源任务")
             self.create_executor(device_config)
             result = self.submit_task(device_config.device_name, runtime_configs)
@@ -263,7 +264,7 @@ class TaskerManager(QObject):
         if not runtime_config:
             self.logger.error(f"找不到设备 {device_config.device_name} 资源 {resource_name} 的运行时配置")
             return
-
+        self.create_executor(device_config)
         self.logger.info(f"找到设备 {device_config.device_name} 资源 {resource_name} 的运行时配置")
         success = self.create_executor(device_config)
         if not success:

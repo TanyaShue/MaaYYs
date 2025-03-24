@@ -105,7 +105,7 @@ class GlobalConfig:
         for resource_config in self.resource_configs.values():
             resource_config.to_json_file()
 
-    def get_runtime_configs_for_resource(self, resource_name: str, device_id: str = None) -> RunTimeConfigs|None:
+    def get_runtime_configs_for_resource(self, resource_name: str, device_id: str = None) -> RunTimeConfigs | None:
         """
         获取指定资源中已在DeviceConfig中选择的任务的RunTimeConfigs，
         按照DeviceConfig中的任务顺序排列，
@@ -134,19 +134,17 @@ class GlobalConfig:
                 if device_id is not None and device.device_name != device_id:
                     continue
 
+                device_has_matching_resource = False
                 for device_resource in device.resources:
                     if device_resource.resource_name == resource_name and device_resource.enable:
+                        device_has_matching_resource = True
                         # 按照设备资源中的任务顺序添加
                         for task_name in device_resource.selected_tasks:
                             if task_name not in ordered_tasks:
                                 ordered_tasks[task_name] = None
 
-                        # 如果找到了匹配的资源，并且指定了device_id，则不需要继续查找
-                        if device_id is not None:
-                            break
-
-                # 如果找到了匹配的设备和资源，则不需要继续查找其他设备
-                if device_id is not None and len(ordered_tasks) > 0:
+                # 如果指定了device_id，且找到了匹配的设备和资源，不需要查找其他设备
+                if device_id is not None and device_has_matching_resource:
                     break
 
         # 为每个已选任务创建RunTimeConfig
@@ -156,7 +154,7 @@ class GlobalConfig:
         for task_name in ordered_tasks:
             task = next((t for t in resource_config.resource_tasks if t.task_name == task_name), None)
             if task:
-                pipeline_override = self._process_task_options(resource_config, task)
+                pipeline_override = self._process_task_options(resource_config, task, device_id)  # 传入device_id
                 runtime_config = RunTimeConfig(
                     task_name=task.task_name,
                     task_entry=task.task_entry,
@@ -168,9 +166,15 @@ class GlobalConfig:
         resource_path = Path(resource_config.source_file).parent if resource_config.source_file else Path()
         return RunTimeConfigs(task_list=runtime_configs, resource_path=resource_path)
 
-    def get_runtime_config_for_task(self, resource_name: str, task_name: str) -> Optional[RunTimeConfig]:
+    def get_runtime_config_for_task(self, resource_name: str, task_name: str, device_id: str = None) -> Optional[
+        RunTimeConfig]:
         """
         获取特定资源中特定任务的 RunTimeConfig。
+
+        Args:
+            resource_name: 资源名称
+            task_name: 任务名称
+            device_id: 设备ID，如果提供，则只使用该设备的选项值
         """
         resource_config = self.get_resource_config(resource_name)
         if resource_config is None:
@@ -180,16 +184,22 @@ class GlobalConfig:
         if task is None:
             return None
 
-        pipeline_override = self._process_task_options(resource_config, task)
+        pipeline_override = self._process_task_options(resource_config, task, device_id)  # 传入device_id
         return RunTimeConfig(
             task_name=task.task_name,
             task_entry=task.task_entry,
             pipeline_override=pipeline_override
         )
 
-    def _process_task_options(self, resource_config: ResourceConfig, task: Task) -> Dict[str, Any]:
+    def _process_task_options(self, resource_config: ResourceConfig, task: Task, device_id: str = None) -> Dict[
+        str, Any]:
         """
         处理任务的选项，生成 pipeline_override。
+
+        Args:
+            resource_config: 资源配置
+            task: 任务配置
+            device_id: 设备ID，如果提供，则只使用该设备的选项值
         """
         final_pipeline_override = {}
 
@@ -206,10 +216,15 @@ class GlobalConfig:
 
         if self.devices_config is not None:
             for device in self.devices_config.devices:
+                # 如果提供了device_id，则只处理指定设备
+                if device_id is not None and device.device_name != device_id:
+                    continue
+
                 for resource in device.resources:
                     if resource.resource_name == resource_name:
                         device_resources.append(resource)
 
+        # 后续代码保持不变
         for option_name in task.option:
             option = next((opt for opt in resource_config.options if opt.name == option_name), None)
             if option is None:

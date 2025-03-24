@@ -425,33 +425,39 @@ class TaskSettingsWidget(QFrame):
         if not hasattr(resource_config, 'options') or resource_config.options is None:
             resource_config.options = []
 
+        # 获取实际资源名称
+        resource_name = resource_config.resource_name
+
+        # 获取原始完整资源配置，用于确定选项类型
+        full_resource_config = global_config.get_resource_config(resource_name)
+        original_option = None
+        if full_resource_config and hasattr(full_resource_config, 'options'):
+            original_option = next((opt for opt in full_resource_config.options if opt.name == option_name), None)
+
         # Find existing option or create a new one
         option = next((opt for opt in resource_config.options if opt.option_name == option_name), None)
 
-        if option:
-            # Convert value to appropriate type if needed
-            if isinstance(option.value, bool) and not isinstance(value, bool):
-                if str(value).lower() in ['true', '1', 'yes', 'y']:
-                    value = True
-                else:
-                    value = False
-            elif isinstance(option.value, int) and not isinstance(value, int):
-                try:
-                    value = int(value)
-                except (ValueError, TypeError):
-                    # Log error if conversion fails
-                    device_name = resource_config.device_name if hasattr(resource_config, 'device_name') else "未知设备"
-                    log_manager.log_device_error(device_name, f"选项 {option_name} 的值 '{value}' 无法转换为整数")
-                    return
-            elif isinstance(option.value, float) and not isinstance(value, float):
-                try:
-                    value = float(value)
-                except (ValueError, TypeError):
-                    # Log error if conversion fails
-                    device_name = resource_config.device_name if hasattr(resource_config, 'device_name') else "未知设备"
-                    log_manager.log_device_error(device_name, f"选项 {option_name} 的值 '{value}' 无法转换为浮点数")
-                    return
+        # 根据原始选项类型处理值
+        if original_option:
+            if isinstance(original_option, BoolOption):
+                # 转换为布尔值
+                if not isinstance(value, bool):
+                    value = str(value).lower() in ['true', '1', 'yes', 'y']
+            elif hasattr(original_option, 'option_type'):
+                if original_option.option_type == 'number':
+                    try:
+                        if '.' in str(value):
+                            value = float(value)
+                        else:
+                            value = int(value)
+                    except (ValueError, TypeError):
+                        # 转换失败时记录错误并返回
+                        device_name = self.device_config.device_name if hasattr(self.device_config,
+                                                                                'device_name') else "未知设备"
+                        log_manager.log_device_error(device_name, f"选项 {option_name} 的值 '{value}' 无法转换为数字")
+                        return
 
+        if option:
             # Save the previous value for comparison
             prev_value = option.value
             option.value = value
@@ -466,17 +472,36 @@ class TaskSettingsWidget(QFrame):
                 value_str = str(value)
 
             # Log the change with more details
-            device_name = resource_config.device_name if hasattr(resource_config, 'device_name') else "未知设备"
-            resource_name = resource_config.resource_name if hasattr(resource_config, 'resource_name') else "未知资源"
+            device_name = self.device_config.device_name if hasattr(self.device_config, 'device_name') else "未知设备"
             log_manager.log_device_info(
                 device_name,
                 f"资源 [{resource_name}] 的选项 [{option_name}] 已更新: {prev_value} → {value_str}"
             )
         else:
-            # Log error if option doesn't exist
-            device_name = resource_config.device_name if hasattr(resource_config, 'device_name') else "未知设备"
-            log_manager.log_device_error(device_name, f"选项 {option_name} 不存在，无法更新")
-            return
+            # 创建新的选项配置
+            from app.models.config.device_config import OptionConfig  # 正确导入OptionConfig类
+
+            # 创建新的选项配置
+            new_option = OptionConfig(option_name=option_name, value=value)
+
+            # 添加到资源配置中
+            resource_config.options.append(new_option)
+
+            # 保存配置
+            global_config.save_all_configs()
+
+            # 创建一个可读的字符串表示用于日志记录
+            if isinstance(value, bool):
+                value_str = "启用" if value else "禁用"
+            else:
+                value_str = str(value)
+
+            # 记录日志 - 修复资源名称获取
+            device_name = self.device_config.device_name if hasattr(self.device_config, 'device_name') else "未知设备"
+            log_manager.log_device_info(
+                device_name,
+                f"资源 [{resource_name}] 添加了新选项 [{option_name}]，值为: {value_str}"
+            )
 
     def on_drag_tasks(self, current_order):
         """Handle task drag-and-drop reordering"""

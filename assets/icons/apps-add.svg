@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <rect x="3" y="3" width="6" height="6" rx="1"></rect>
-  <rect x="15" y="3" width="6" height="6" rx="1"></rect>
-  <rect x="3" y="15" width="6" height="6" rx="1"></rect>
-  <path d="M18 15v6"></path>
-  <path d="M15 18h6"></path>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <!-- Simplified Mobile Phone -->
+  <rect x="8" y="3" width="8" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+
+  <!-- Simple Plus Sign -->
+  <circle cx="18" cy="6" r="3" fill="#4CAF50"/>
+  <line x1="18" y1="4.5" x2="18" y2="7.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="16.5" y1="6" x2="19.5" y2="6" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
 </svg>

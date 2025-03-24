@@ -7,6 +7,9 @@
       <excludeFolder url="file://$MODULE_DIR$/logs" />
       <excludeFolder url="file://$MODULE_DIR$/config" />
       <excludeFolder url="file://$MODULE_DIR$/debug" />
+      <excludeFolder url="file://$MODULE_DIR$/.nicegui" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/history" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/temp" />
     </content>
     <orderEntry type="jdk" jdkName="MFWPH_TEST" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
