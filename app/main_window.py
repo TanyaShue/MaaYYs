@@ -358,6 +358,10 @@ class MainWindow(QMainWindow):
         global_config.load_devices_config(devices_config_path)
 
         resource_dir = "assets/resource/"
+        # 如果目录不存在，则创建
+        if not os.path.exists(resource_dir):
+            os.makedirs(resource_dir)
+
         global_config.load_all_resources_from_directory(resource_dir)
 
         task_manager.setup_all_device_scheduled_tasks()
