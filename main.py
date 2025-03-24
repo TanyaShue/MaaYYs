@@ -1,5 +1,6 @@
 import sys
 import os
+import psutil
 from PySide6.QtWidgets import QApplication
 
 from app.models.logging.log_manager import log_manager
@@ -47,6 +48,19 @@ def setup_sys_redirection():
     app_logger.info(f"System platform: {sys.platform}")
 
 
+# 定义退出时杀死 adb.exe 进程的函数
+def kill_adb_processes():
+    app_logger = log_manager.get_app_logger()
+    for proc in psutil.process_iter(['name']):
+        proc_name = proc.info.get('name', '')
+        if proc_name.lower() == "adb.exe":
+            try:
+                proc.kill()
+                app_logger.info(f"Killed adb.exe process with pid {proc.pid}")
+            except Exception as e:
+                app_logger.error(f"Failed to kill adb.exe process with pid {proc.pid}: {e}")
+
+
 from app.main_window import MainWindow
 
 if __name__ == "__main__":
@@ -55,6 +69,9 @@ if __name__ == "__main__":
 
     # Create and start the application
     app = QApplication(sys.argv)
+    # 连接 aboutToQuit 信号，在程序退出前执行清理函数
+    app.aboutToQuit.connect(kill_adb_processes)
+
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

@@ -97,9 +97,12 @@ class LogManager(QObject):
         for handler in logger.handlers[:]:
             logger.removeHandler(handler)
 
+        # Sanitize the log filename to ensure it's valid
+        sanitized_log_file = self.sanitize_filename(log_file)
+
         # Create file handler
         file_handler = logging.FileHandler(
-            os.path.join(self.log_dir, log_file),
+            os.path.join(self.log_dir, sanitized_log_file),
             encoding='utf-8',
             mode='a'  # Use append mode
         )
@@ -125,6 +128,25 @@ class LogManager(QObject):
         self.loggers[name] = logger
         return logger
 
+    def sanitize_filename(self, filename: str) -> str:
+        """
+        Sanitize a filename to ensure it's valid for the file system.
+        Replace invalid characters with underscores.
+        """
+        # Replace common invalid characters
+        invalid_chars = ['<', '>', ':', '"', '/', '\\', '|', '?', '*', '\r', '\n']
+        sanitized = filename
+        for char in invalid_chars:
+            sanitized = sanitized.replace(char, '_')
+
+        # Remove leading/trailing whitespace and periods
+        sanitized = sanitized.strip().strip('.')
+
+        # If the filename became empty after sanitizing, use a default name
+        if not sanitized:
+            sanitized = "unnamed_device.log"
+
+        return sanitized
     def get_device_logger(self, device_name: str) -> logging.Logger:
         """Get or create a logger for a specific device"""
         logger_name = f"device_{device_name}"
