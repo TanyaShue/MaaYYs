@@ -284,5 +284,7 @@
             ],
             "start_command": ""
         }
-    ]
+    ],
+    "version": "0.6.1b5",
+    "build_time": "20250324_134218"
 }

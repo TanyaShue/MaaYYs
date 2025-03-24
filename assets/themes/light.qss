@@ -1,5 +1,6 @@
 /**
  * Modern Light Theme - Optimized QSS
+ * 移除了不支持的CSS属性并合并了相似样式
  */
 
 /* Base Elements */
@@ -20,7 +21,6 @@ QFrame { border-radius: 6px; }
     background-color: #f0f0f0;
     height: 0.5px;
     margin: 8px 16px;
-    opacity: 0.7;
     border: none;
 }
 #draggableContainer { background-color: transparent; }
@@ -31,7 +31,6 @@ QFrame { border-radius: 6px; }
     border-right: 1px solid #e0e0e0;
     min-width: 60px;
     max-width: 60px;
-    transition: all 0.3s ease;
 }
 #sidebar.expanded {
     min-width: 200px;
@@ -45,7 +44,6 @@ QFrame { border-radius: 6px; }
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    opacity: 0.8;
 }
 #navButton {
     background-color: transparent;
@@ -55,7 +53,6 @@ QFrame { border-radius: 6px; }
     margin: 4px 8px;
     text-align: left;
     outline: none;
-    transition: all 0.2s ease;
     position: relative;
 }
 #navButton:hover { background-color: #f0f0f0; }
@@ -69,17 +66,11 @@ QFrame { border-radius: 6px; }
     color: #5f6368;
     font-size: 12px;
     font-weight: 500;
-    opacity: 0.9;
-    transition: color 0.2s;
 }
 #navButton:checked #navButtonLabel {
     color: #1a73e8;
-    opacity: 1;
 }
-#navButtonIcon {
-    color: #5f6368;
-    transition: color 0.2s;
-}
+#navButtonIcon { color: #5f6368; }
 #navButton:checked #navButtonIcon { color: #1a73e8; }
 #navButtonBadge {
     background-color: #ea4335;
@@ -120,12 +111,8 @@ QFrame { border-radius: 6px; }
     border: 1px dashed #1a73e8;
     border-radius: 8px;
     margin: 8px 12px;
-    opacity: 0.9;
 }
-#addDeviceButton:hover {
-    background-color: #d4e7fd;
-    opacity: 1;
-}
+#addDeviceButton:hover { background-color: #d4e7fd; }
 
 /* Frames & Containers */
 #infoFrame, #resourceFrame, #taskSettingsFrame, #logFrame {
@@ -133,27 +120,15 @@ QFrame { border-radius: 6px; }
     border: 1px solid #e0e0e0;
     padding: 12px;
 }
-#contentCard {
+#contentCard, #deviceCard {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    transition: all 0.2s ease;
 }
-#contentCard:hover {
-    border-color: #dadce0;
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.2);
-}
+#contentCard:hover, #deviceCard:hover { border-color: #dadce0; }
 #deviceCard {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
     padding: 16px;
     margin: 8px;
-    transition: all 0.2s ease;
-}
-#deviceCard:hover {
-    border-color: #dadce0;
-    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
 }
 #deviceCardName {
     font-weight: 500;
@@ -177,12 +152,8 @@ QFrame { border-radius: 6px; }
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
-    transition: all 0.2s ease;
 }
-#taskItem:hover {
-    border-color: #dadce0;
-    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
-}
+#taskItem:hover { border-color: #dadce0; }
 #taskItem QLabel {
     font-size: 13px;
     font-weight: 500;
@@ -312,7 +283,6 @@ QPushButton {
     padding: 8px 16px;
     font-weight: 500;
     outline: none;
-    transition: all 0.2s ease;
 }
 QPushButton:hover {
     background-color: #f1f3f4;
@@ -324,6 +294,8 @@ QPushButton:disabled {
     color: #9aa0a6;
     border-color: #e0e0e0;
 }
+
+/* 特殊按钮样式 */
 #primaryButton {
     background-color: #1a73e8;
     color: white;
@@ -332,7 +304,6 @@ QPushButton:disabled {
     padding: 8px 16px;
     font-weight: 500;
     outline: none;
-    transition: all 0.2s ease;
 }
 #primaryButton:hover { background-color: #1967d2; }
 #primaryButton:pressed { background-color: #185abc; }
@@ -348,7 +319,6 @@ QPushButton:disabled {
     padding: 8px 16px;
     font-weight: 500;
     outline: none;
-    transition: all 0.2s ease;
 }
 #secondaryButton:hover {
     background-color: #f1f3f4;
@@ -369,7 +339,6 @@ QPushButton:disabled {
     max-height: 32px;
     padding: 0;
     outline: none;
-    transition: all 0.2s ease;
 }
 #iconButton:hover {
     background-color: #f1f3f4;
@@ -385,10 +354,11 @@ QPushButton:disabled {
     font-weight: bold;
     min-height: 40px;
     outline: none;
-    transition: all 0.2s ease;
 }
 #oneKeyButton:hover { background-color: #1967d2; }
 #oneKeyButton:pressed { background-color: #185abc; }
+
+/* 工具按钮 */
 QToolButton {
     background-color: transparent;
     border: none;
@@ -427,7 +397,6 @@ QComboBox {
     border-radius: 4px;
     padding: 8px;
     min-width: 6em;
-    transition: border-color 0.2s;
 }
 QComboBox:hover { border-color: #d2d5d9; }
 QComboBox:focus { border-color: #1a73e8; }
@@ -448,6 +417,7 @@ QComboBox QAbstractItemView {
     selection-color: #1a73e8;
 }
 
+/* 特殊下拉框 */
 #optionComboBox {
     border: 1px solid #dadce0;
     border-radius: 4px;
@@ -467,6 +437,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #e8f0fe;
 }
 
+/* 文本输入框 */
 QLineEdit {
     background-color: #ffffff;
     border: 1px solid #dadce0;
@@ -474,7 +445,6 @@ QLineEdit {
     padding: 8px;
     selection-background-color: #e8f0fe;
     selection-color: #1a73e8;
-    transition: border-color 0.2s;
 }
 QLineEdit:hover { border-color: #d2d5d9; }
 QLineEdit:focus { border-color: #1a73e8; }
@@ -493,6 +463,7 @@ QLineEdit:focus { border-color: #1a73e8; }
 QCheckBox {
     spacing: 10px;
     outline: none;
+    min-height: 24px;
 }
 QCheckBox::indicator {
     width: 18px;
@@ -500,7 +471,6 @@ QCheckBox::indicator {
     border: 1px solid #5f6368;
     border-radius: 3px;
     background-color: #ffffff;
-    transition: border-color 0.2s;
 }
 QCheckBox::indicator:hover { border-color: #1a73e8; }
 QCheckBox::indicator:checked {
@@ -517,7 +487,6 @@ QCheckBox::indicator:disabled {
 QCheckBox::indicator:checked:disabled {
     background-color: #f1f3f4;
     border-color: #dadce0;
-    opacity: 0.7;
 }
 
 /* Tables */
@@ -662,7 +631,7 @@ QSplitter::handle:vertical {
     margin: 5px 0;
 }
 
-/* Scroll Bars */
+/* Scroll Bars - 合并了多个滚动条样式 */
 QScrollArea {
     border: none;
     background-color: transparent;
@@ -699,21 +668,32 @@ QScrollBar::handle:horizontal:hover { background: #c0c0c0; }
 QScrollBar::add-line:horizontal,
 QScrollBar::sub-line:horizontal { width: 0px; }
 
-QScrollArea#deviceScrollArea {
+/* 特殊滚动区域样式 */
+QScrollArea#deviceScrollArea,
+QScrollArea#settingsScrollArea {
     border: none;
     background-color: transparent;
 }
-QScrollArea#deviceScrollArea QScrollBar:vertical {
+QScrollArea#deviceScrollArea QScrollBar:vertical,
+QScrollArea#settingsScrollArea QScrollBar:vertical {
     width: 6px;
     background: transparent;
     margin: 0px;
 }
-QScrollArea#deviceScrollArea QScrollBar::handle:vertical {
+QScrollArea#deviceScrollArea QScrollBar::handle:vertical,
+QScrollArea#settingsScrollArea QScrollBar::handle:vertical {
     background: #dadce0;
     border-radius: 3px;
     min-height: 30px;
 }
-QScrollArea#deviceScrollArea QScrollBar::handle:vertical:hover { background: #c0c0c0; }
+QScrollArea#deviceScrollArea QScrollBar::handle:vertical:hover,
+QScrollArea#settingsScrollArea QScrollBar::handle:vertical:hover {
+    background: #c0c0c0;
+}
+QScrollArea#settingsScrollArea QScrollBar::add-line:vertical,
+QScrollArea#settingsScrollArea QScrollBar::sub-line:vertical {
+    height: 0px;
+}
 
 /* Tooltips */
 QToolTip {
@@ -722,7 +702,6 @@ QToolTip {
     border: 1px solid #dadce0;
     border-radius: 4px;
     padding: 5px;
-    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
 }
 QToolTip#navButton {
     background-color: rgba(40, 40, 40, 0.9);
@@ -756,36 +735,15 @@ QListWidget#settingsCategories::item:selected {
 }
 QListWidget#settingsCategories::item:hover:selected { background-color: #f1f3f4; }
 
-QScrollArea#settingsScrollArea {
-    background-color: #f5f5f5;
-    border: none;
-}
-QScrollArea#settingsScrollArea QScrollBar:vertical {
-    width: 8px;
-    background: transparent;
-    margin: 0px;
-}
-QScrollArea#settingsScrollArea QScrollBar::handle:vertical {
-    background: #dadce0;
-    border-radius: 4px;
-    min-height: 30px;
-}
-QScrollArea#settingsScrollArea QScrollBar::handle:vertical:hover { background: #c0c0c0; }
-QScrollArea#settingsScrollArea QScrollBar::add-line:vertical,
-QScrollArea#settingsScrollArea QScrollBar::sub-line:vertical { height: 0px; }
-
 QWidget#contentCard {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 15px;
-    transition: all 0.2s ease;
 }
-QWidget#contentCard:hover {
-    border-color: #dadce0;
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.1);
-}
+QWidget#contentCard:hover { border-color: #dadce0; }
+
 QWidget#optionWidget {
     background-color: #f8f9fa;
     border-radius: 4px;
@@ -831,52 +789,10 @@ QFrame#featureItem {
     border: 1px solid #e0e0e0;
 }
 
-/* Settings Checkbox */
-QCheckBox {
-    spacing: 10px;
-    min-height: 24px;
-}
+/* Navigation sidebar style fixes for consistency */
+#deviceButtonsContainer { background-color: transparent; }
 
-/**
- * Navigation sidebar style fixes for consistency
- * Add these to your existing style sheet
- */
-
-/* Style the device button container to match the sidebar */
-#deviceButtonsContainer {
-    background-color: transparent;
-}
-
-/* Make the scroll area completely transparent and borderless */
-#deviceScrollArea {
-    background-color: transparent;
-    border: none;
-}
-
-/* Ensure scroll bars aren't affecting layout */
-#deviceScrollArea QScrollBar:vertical {
-    width: 6px;
-    background: transparent;
-    margin: 0px;
-}
-
-#deviceScrollArea QScrollBar::handle:vertical {
-    background: #dadce0;
-    border-radius: 3px;
-    min-height: 30px;
-}
-
-#deviceScrollArea QScrollBar::handle:vertical:hover {
-    background: #c0c0c0;
-}
-
-/* Remove scroll bar add/sub lines */
-#deviceScrollArea QScrollBar::add-line:vertical,
-#deviceScrollArea QScrollBar::sub-line:vertical {
-    height: 0px;
-}
-
-/* Apply consistent styling to all navigation buttons */
+/* 设备按钮样式与其他导航按钮保持一致 */
 #navButton {
     background-color: transparent;
     border: none;
@@ -885,35 +801,17 @@ QCheckBox {
     margin: 4px 8px;
     text-align: left;
     outline: none;
-    transition: all 0.2s ease;
 }
-
-#navButton:hover {
-    background-color: #f0f0f0;
-}
-
-#navButton:pressed {
-    background-color: #e8e8e8;
-}
-
+#navButton:hover { background-color: #f0f0f0; }
+#navButton:pressed { background-color: #e8e8e8; }
 #navButton:checked {
     background-color: #e8f0fe;
     color: #1a73e8;
 }
-
-#navButton:checked:hover {
-    background-color: #d4e7fd;
-}
-
+#navButton:checked:hover { background-color: #d4e7fd; }
 #navButtonLabel {
     color: #5f6368;
     font-size: 12px;
     font-weight: 500;
-    opacity: 0.9;
-    transition: color 0.2s;
 }
-
-#navButton:checked #navButtonLabel {
-    color: #1a73e8;
-    opacity: 1;
-}
+#navButton:checked #navButtonLabel { color: #1a73e8; }

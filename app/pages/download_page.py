@@ -82,7 +82,6 @@ class AddResourceDialog(QDialog):
         return {
             "url": self.url_edit.text().strip(),
             "name": self.name_edit.text().strip(),
-            "type": self.type_combo.currentText(),
             "description": self.desc_edit.toPlainText().strip()
         }
 
@@ -402,7 +401,6 @@ class DownloadPage(QWidget):
                     resource_config = {
                         "resource_name": data["name"] or resource_name,
                         "resource_version": data.get("version", "1.0.0"),
-                        "resource_type": data["type"],
                         "resource_author": data.get("author", "未知"),
                         "resource_description": data["description"] or "从外部源添加的资源",
                         "resource_update_service": data["url"] if "github.com" in data["url"] else ""

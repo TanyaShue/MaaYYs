@@ -1,6 +1,8 @@
 import json
 from dataclasses import dataclass, field
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
+from datetime import datetime
+import sys
 
 
 @dataclass
@@ -18,7 +20,7 @@ class AdbDevice:
 class Resource:
     """Resource configuration within a device."""
     resource_name: str
-    enable: bool = False  # 添加默认值，防止 JSON 中缺失时出错
+    enable: bool = False
     selected_tasks: List[str] = field(default_factory=list)
     options: List['OptionConfig'] = field(default_factory=list)  # 使用前向引用
 
@@ -28,7 +30,6 @@ class OptionConfig:
     """Option configuration for a task or resource."""
     option_name: str
     value: Any
-    # task_name: str = None  # 任务名，可选，用于任务特定的选项
 
 
 @dataclass
@@ -44,8 +45,10 @@ class DeviceConfig:
 
 @dataclass
 class DevicesConfig:
-    """Main devices configuration dataclass, wrapping a task_list of DeviceConfig."""
+    """Main devices configuration dataclass, with top-level version and devices list."""
     devices: List[DeviceConfig] = field(default_factory=list)
+    version: str = ""
+    build_time: str = ""
     source_file: str = ""  # 用于记录加载的文件路径，但不保存到输出 JSON 中
 
     @classmethod
@@ -75,6 +78,7 @@ class DevicesConfig:
         """从字典创建 DevicesConfig 对象。"""
         devices_data = data.get('devices', [])
         device_configs = []
+
         for device_data in devices_data:
             adb_config_data = device_data.get('adb_config', {})
             adb_config = AdbDevice(**adb_config_data)  # 创建 AdbDevice 对象
@@ -84,20 +88,40 @@ class DevicesConfig:
             for resource_data in resources_data:
                 options_data = resource_data.get('options', [])
                 options = [OptionConfig(**option_data) for option_data in options_data]  # 创建 OptionConfig 对象列表
-                # 传入除 options 以外的键，若 JSON 中没有 enable 键则使用默认值 False
                 resources.append(Resource(**{k: v for k, v in resource_data.items() if k != 'options'},
                                           options=options))
             device_configs.append(
                 DeviceConfig(**{k: v for k, v in device_data.items() if k not in ('adb_config', 'resources')},
                              adb_config=adb_config, resources=resources)
             )
-        return DevicesConfig(devices=device_configs)
+
+        # 创建 DevicesConfig
+        config = DevicesConfig(devices=device_configs)
+
+        # 添加版本信息
+        config.version = data.get('version', '')
+        config.build_time = data.get('build_time', '')
+
+        return config
 
     def to_dict(self) -> Dict[str, Any]:
         """将 DevicesConfig 对象转换为字典，不包含 source_file 属性。"""
-        return {
+        result = {
             "devices": [device_config_to_dict(device) for device in self.devices],
         }
+
+        # 添加版本信息（如果存在）
+        if self.version:
+            result["version"] = self.version
+        if self.build_time:
+            result["build_time"] = self.build_time
+
+        return result
+
+    def update_version(self, version: str):
+        """更新顶层版本信息。"""
+        self.version = version
+        self.build_time = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 
 def device_config_to_dict(device: DeviceConfig) -> Dict[str, Any]:
