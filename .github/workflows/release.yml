@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          submodules: true  # 启用子模块
+          submodules: true
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -31,13 +31,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Copy DLL files to Python root
-        shell: pwsh  # 使用 PowerShell 执行脚本
+        shell: pwsh
         run: |
-          # 检查 DLL 文件夹是否存在
           if (Test-Path -Path "${{ github.workspace }}\DLL") {
-            # 获取 DLL 文件夹中的所有文件
             $dllFiles = Get-ChildItem -Path "${{ github.workspace }}\DLL" -File
-            # 将每个 DLL 文件复制到 Python 环境根目录
             foreach ($file in $dllFiles) {
               Copy-Item -Path $file.FullName -Destination "${{ env.pythonLocation }}\$($file.Name)" -Force
               Write-Host "Copied $($file.Name) to ${{ env.pythonLocation }}"
@@ -47,11 +44,22 @@ jobs:
           }
 
       - name: Run build script
-        run: python build.py  # 在 Windows 环境中运行打包脚本
+        id: build
+        run: |
+          python build.py
+          if (-not (Test-Path -Path "./dist/MAA_YYS_RELEASE.zip")) {
+            Write-Host "::error::Build failed - zip file was not created"
+            exit 1
+          }
+          Write-Host "Zip file successfully created"
 
-      # No need to create a zip file since the build script already creates one
+      - name: List files in dist directory
+        run: |
+          Write-Host "Contents of dist directory:"
+          Get-ChildItem -Path ./dist -Recurse | Select-Object FullName
+          Write-Host "Zip file details:"
+          Get-Item -Path ./dist/MAA_YYS_RELEASE.zip | Select-Object FullName, Length, LastWriteTime
 
-      # 使用第二个工作流中的发布方法
       - name: Create GitHub Release
         id: create_release
         if: startsWith(github.ref, 'refs/tags/')
@@ -71,6 +79,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/MAA_YYS_RELEASE.zip
+          asset_path: ${{ github.workspace }}/dist/MAA_YYS_RELEASE.zip
           asset_name: MAA_YYS_RELEASE.zip
           asset_content_type: application/zip
