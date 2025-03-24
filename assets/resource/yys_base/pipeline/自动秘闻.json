@@ -1,0 +1,83 @@
+{
+  "自动秘闻": {
+    "action": "Custom",
+    "custom_action": "TaskList",
+    "custom_action_param": {
+      "task_list": [
+        "点击探索",
+        "自动秘闻_step_1"
+      ]
+    }
+  },
+  "自动秘闻_step_1": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "target": [
+      555,
+      632,
+      53,
+      66
+    ],
+    "template": [
+      "template\\screenshot_20250313_160102.png"
+    ],
+    "next": [
+      "自动秘闻_step_2"
+    ]
+  },
+  "自动秘闻_step_2": {
+    "recognition": "OCR",
+    "expected": "难度",
+    "next": [
+      "自动秘闻_step_3"
+    ],
+    "interrupt": [
+      "自动秘闻_点击进入"
+    ]
+  },
+  "自动秘闻_step_3": {
+    "recognition": "FeatureMatch",
+    "action": "DoNothing",
+    "roi": [
+      132,
+      147,
+      353,
+      117
+    ],
+    "template": [
+      "template\\screenshot_20250313_160349.png"
+    ],
+    "next": [
+      "返回庭院"
+    ]
+  },
+  "自动秘闻_点击进入": {
+    "recognition": "FeatureMatch",
+    "roi": [1118,574,158,145],
+    "action": "Click",
+    "template": [
+      "自动秘闻_进入__1138_590_113_100__1088_540_192_180.png"
+    ],
+    "next": [
+      "自动秘闻_点击式神录"
+    ]
+  },
+  "自动秘闻_点击式神录": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi":[1156,433,121,97],
+    "template": "探索/探索_式神录.png",
+    "next": ["自动秘闻_装备式神预设"],
+    "post_delay": 1000
+  },
+  "自动秘闻_装备式神预设": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "next": "探索_突破_御魂_返回",
+    "custom_action_param": {
+      "group_name": "斗技",
+      "team_name": "突破"
+    },
+    "post_delay": 2000
+  }
+}

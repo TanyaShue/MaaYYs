@@ -1,0 +1,451 @@
+{
+  "自动结界": {
+    "next": [
+      "结界突破_点击结界突破"
+    ],
+    "interrupt": [
+      "点击探索"
+    ],
+    "on_error": "返回庭院"
+  },
+  "结界突破_点击结界突破": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "探索/探索_结界突破.png",
+    "roi": [
+      0,
+      599,
+      1193,
+      120
+    ],
+    "next": [
+      "结束突破",
+      "结界突破_点击式神录"
+    ]
+  },
+  "结界突破_点击式神录": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      1184,
+      580,
+      90,
+      114
+    ],
+    "template": "探索/探索_式神录.png",
+    "next": "装备突破预设",
+    "post_delay": 1000
+  },
+  "装备突破预设": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "next": "探索_突破_御魂_返回",
+    "custom_action_param": {
+      "group_name": "斗技",
+      "team_name": "突破"
+    },
+    "post_delay": 2000
+  },
+  "探索_突破_御魂_返回": {
+    "action": "Click",
+    "target": [
+      20,
+      10,
+      50,
+      40
+    ],
+    "post_delay": 2000,
+    "next": "开始自动结界"
+  },
+  "突破_点击进攻": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "roi": [
+      93,
+      79,
+      1092,
+      640
+    ],
+    "template": "突破_进攻.png",
+    "post_delay": 10000,
+    "timeout": 200000,
+    "next": [
+      "识别突破界面"
+    ],
+    "interrupt": "突破_结束战斗",
+    "rate_limit": 2000
+  },
+  "识别突破界面": {
+    "recognition": "OCR",
+    "roi": [
+      559,
+      64,
+      158,
+      65
+    ],
+    "expected": "结界突破",
+    "post_delay": 1000
+  },
+  "突破_结束战斗": {
+    "recognition": "OCR",
+    "roi": [
+      514,
+      676,
+      323,
+      38
+    ],
+    "expected": "点击屏幕继续",
+    "target": [
+      219,
+      419,
+      1002,
+      168
+    ],
+    "action": "Click",
+    "post_delay": 1000
+  },
+  "突破_领取奖励": {
+    "recognition": "OCR",
+    "roi": [
+      514,
+      676,
+      323,
+      38
+    ],
+    "expected": "点击屏幕继续",
+    "target": [
+      219,
+      419,
+      1002,
+      168
+    ],
+    "action": "Click"
+  },
+  "结束突破": {
+    "recognition": "OCR",
+    "roi": [
+      1071,
+      0,
+      208,
+      66
+    ],
+    "expected": "\\b0\\/30\\b",
+    "next": "突破_识别探索特征",
+    "interrupt": "关闭结界突破",
+    "post_delay": 2000
+  },
+  "突破_识别探索特征": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "探索/探索_六道之门.png",
+      "探索/探索_地域鬼王.png",
+      "探索/探索_式神委派.png",
+      "探索/探索_御魂.png"
+    ],
+    "roi": [
+      9,
+      575,
+      1137,
+      144
+    ],
+    "post_delay": 1000,
+    "next": "返回庭院"
+  },
+  "关闭结界突破": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      1152,
+      82,
+      115,
+      116
+    ],
+    "template": "通用图标/结界突破_关闭.png",
+    "post_delay": 2000
+  },
+  "开始自动结界": {
+    "next": [
+      "结束突破"
+    ],
+    "interrupt": [
+      "突破_结束战斗",
+      "突破_领取奖励",
+      "挑战第一个结界",
+      "挑战第二个结界",
+      "挑战第三个结界",
+      "挑战第四个结界",
+      "挑战第五个结界",
+      "挑战第六个结界",
+      "挑战第七个结界",
+      "挑战第八个结界",
+      "挑战第九个结界"
+    ],
+    "post_delay": 1000
+  },
+  "挑战第一个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      253,
+      122,
+      215,
+      149
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      165,
+      156,
+      276,
+      94
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第二个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      479,
+      121,
+      333,
+      145
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      495,
+      156,
+      279,
+      83
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第三个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      811,
+      118,
+      347,
+      160
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      904,
+      158,
+      204,
+      94
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第四个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      142,
+      263,
+      336,
+      147
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      156,
+      289,
+      292,
+      97
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第五个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      472,
+      266,
+      335,
+      140
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      575,
+      290,
+      216,
+      104
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第六个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      807,
+      270,
+      329,
+      137
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      906,
+      288,
+      216,
+      103
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第七个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      137,
+      401,
+      344,
+      141
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      241,
+      427,
+      217,
+      105
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第八个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      471,
+      406,
+      333,
+      136
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      578,
+      429,
+      212,
+      99
+    ],
+    "next": "突破_点击进攻",
+    "timeout": 2000
+  },
+  "挑战第九个结界": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "inverse": true,
+    "roi": [
+      798,
+      399,
+      351,
+      145
+    ],
+    "template": "突破_击破.png",
+    "target": [
+      901,
+      423,
+      218,
+      109
+    ],
+    "next": "突破_最后一个进攻",
+    "timeout": 2000
+  },
+  "突破_最后一个进攻": {
+    "recognition": "TemplateMatch",
+    "action": "Click",
+    "roi": [
+      115,
+      119,
+      1102,
+      597
+    ],
+    "template": "突破_进攻.png",
+    "post_delay": 1000,
+    "timeout": 200000,
+    "next": [
+      "突破_重新挑战四次"
+    ]
+  },
+  "突破_重新挑战四次": {
+    "recognition": "DirectHit",
+    "action": "Custom",
+    "custom_action": "LoopAction",
+    "custom_action_param": {
+      "action_list": [
+        "突破_重新挑战"
+      ],
+      "loop_times": 4
+    },
+    "next": [
+      "识别突破界面"
+    ],
+    "interrupt": "突破_结束战斗"
+  },
+  "突破_重新挑战": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": [
+      "通用图标/战斗_返回.png",
+      "通用图标/战斗_返回_原版.png"
+    ],
+    "roi": [
+      0,
+      4,
+      77,
+      75
+    ],
+    "next": "退出战斗_确认",
+    "post_delay": 500
+  },
+  "退出战斗_确认": {
+    "recognition": "OCR",
+    "action": "Click",
+    "roi": [
+      643,
+      359,
+      194,
+      113
+    ],
+    "expected": "确认",
+    "next": "突破_再次挑战",
+    "post_delay": 500
+  },
+  "突破_再次挑战": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "roi": [
+      769,
+      415,
+      225,
+      202
+    ],
+    "template": "突破_再次挑战.png",
+    "next": "确认再次挑战",
+    "post_delay": 500,
+    "timeout": 1000
+  },
+  "确认再次挑战": {
+    "recognition": "OCR",
+    "action": "Click",
+    "roi": [
+      655,
+      388,
+      192,
+      87
+    ],
+    "expected": "确定",
+    "post_delay": 500
+  }
+}

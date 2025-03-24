@@ -1,0 +1,100 @@
+{
+  "日常_任务列表": {
+    "action": "Custom",
+    "custom_action": "TaskList",
+    "custom_action_param": {
+      "task_list": [
+        "日常_送友情点",
+        "领取奖励_邮件",
+        "领取奖励_日常奖励",
+        "领取奖励_商店每日奖励",
+        "领取奖励_花合战奖励"
+      ]
+    },
+    "on_error": "返回庭院"
+  },
+  "日常_送友情点": {
+    "next": "日常_点击好友",
+    "enable": true,
+    "interrupt": [
+      "打开底部菜单"
+    ]
+  },
+  "日常_点击好友": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "庭院/庭院_好友.png",
+    "post_delay": 1000,
+    "next": "日常_点击好友选项卡"
+  },
+  "日常_点击好友选项卡": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "庭院/庭院_好友选项卡.png",
+    "post_delay": 1000,
+    "next": "识别是否位于友情点界面",
+    "interrupt": [
+      "日常_好友_点击友情点"
+    ],
+    "timeout": 1000
+  },
+  "识别是否位于友情点界面": {
+    "recognition": "FeatureMatch",
+    "roi": [401,180,115,511] ,
+    "template": ["庭院/好友_送友情点_1.png", "庭院/好友_送友情点_2.png"],
+    "post_delay":1000,
+    "next": "日常_好友_点击一键收取",
+    "timeout": 1000,
+    "on_error": "日常_关闭好友界面"
+  },
+  "日常_好友_点击一键收取": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "庭院/好友_一键收取.png",
+    "roi": [
+      8,
+      555,
+      307,
+      150
+    ],
+    "post_delay": 1000,
+    "next": "日常_点击一下屏幕底部"
+  },
+  "日常_好友_点击友情点": {
+    "action": "Click",
+    "target": [
+      81,
+      630,
+      88,
+      68
+    ],
+    "post_delay": 1000
+  },
+  "日常_关闭好友界面": {
+    "recognition": "FeatureMatch",
+    "template": [
+      "通用图标/关闭.png",
+      "通用图标/关闭_2.png"
+    ],
+    "action": "Click",
+    "roi": [
+      1085,
+      43,
+      184,
+      134
+    ],
+    "post_delay": 1000,
+    "next": "返回庭院"
+  },
+  "日常_点击一下屏幕底部": {
+    "action": "Click",
+    "target": [
+      493,
+      560,
+      392,
+      114
+    ],
+    "post_delay": 1000,
+    "next": "日常_关闭好友界面"
+  }
+}

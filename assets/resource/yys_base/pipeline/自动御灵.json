@@ -1,0 +1,52 @@
+{
+  "自动御灵": {
+    "next": [
+      "御灵_点击挑战",
+      "御灵_点击屏幕继续"
+    ]
+  },
+  "御灵_点击挑战": {
+    "recognition": "OCR",
+    "action": "Click",
+    "expected": "挑战",
+    "next": "御灵_获取奖励",
+    "post_delay": 12000,
+    "is_sub": true,
+    "roi": [
+      1062,
+      550,
+      186,
+      161
+    ],
+    "target": [
+      1115,
+      605,
+      73,
+      72
+    ]
+  },
+  "御灵_获取奖励": {
+    "recognition": "OCR",
+    "expected": "本次通关时间",
+    "roi": [
+      83,
+      549,
+      143,
+      37
+    ],
+    "action": "Custom",
+    "custom_action": "HumanTouch"
+  },
+  "御灵_点击屏幕继续": {
+    "is_sub": true,
+    "recognition": "OCR",
+    "expected": "点击屏幕继续",
+    "action": "Click",
+    "target": [
+      429,
+      502,
+      521,
+      177
+    ]
+  }
+}
