@@ -1,3 +1,4 @@
 maafw
 pyside6
 pyinstaller
+requests
