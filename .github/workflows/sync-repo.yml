@@ -2,7 +2,7 @@ name: 同步仓库（不含子模块）
 
 on:
   push:
-    branches: [ main ]  # 根据你的默认分支修改
+    branches: [ master ]  # 根据你的默认分支修改
 
 jobs:
   sync:
@@ -46,8 +46,8 @@ jobs:
         # 添加目标仓库作为远程仓库
         git remote add target https://${{ secrets.SYNC_TOKEN }}@github.com/TanyaShue/MFWPH.git
         
-        # 强制推送到目标仓库的main分支
-        git push target HEAD:main --force
+        # 强制推送到目标仓库的master分支
+        git push target HEAD:master --force
         
         # 只推送当前提交引用的标签（如果有）
         if [[ -n "$(git tag --points-at HEAD)" ]]; then
