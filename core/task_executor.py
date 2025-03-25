@@ -81,9 +81,6 @@ class DeviceState(QObject):
             self.error_occurred.emit(error)
 
 
-# First, import the log_manager from the module where it's defined
-
-
 class TaskExecutor(QObject):
     # 核心信号定义
     task_started = Signal(str)  # 任务开始信号
@@ -383,13 +380,6 @@ class TaskRunner(QRunnable):
 
             # Execute the task
             result = self.execute_task(self.task.data)
-
-            # Check again if canceled
-            if self.canceled:
-                self.task.status = TaskStatus.CANCELED
-                log_manager.log_device_info(self.device_name, f"任务 {self.task.id} 已取消")
-                self.executor.task_canceled.emit(self.task.id)
-                return
 
             # Task completed successfully
             self.task.status = TaskStatus.COMPLETED

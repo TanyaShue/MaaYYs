@@ -1,14 +1,15 @@
-import os
 import json
-import time
+import os
 import shutil
-import requests
-import zipfile
 import tempfile
-from pathlib import Path
+import time
+import zipfile
 from datetime import datetime
+from pathlib import Path
+
+import requests
+from PySide6.QtCore import QThread, Signal, QTimer
 from PySide6.QtGui import QFont, QIcon
-from PySide6.QtCore import Qt, QThread, Signal, QTimer
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QLabel, QFrame, QTableWidget,
                                QTableWidgetItem, QPushButton, QHeaderView, QHBoxLayout,
                                QProgressBar, QMessageBox, QSizePolicy, QDialog, QFormLayout,
@@ -172,6 +173,14 @@ class UpdateCheckThread(QThread):
 
                 # Get latest version info
                 response = requests.get(api_url)
+
+                # 新增对403错误的处理
+                if response.status_code == 403:
+                    error_message = "请求被拒绝 (403)：可能是超出了 API 请求速率限制或缺少认证信息。"
+                    if self.single_mode:
+                        self.check_failed.emit(resource.resource_name, error_message)
+                    continue
+
                 if response.status_code != 200:
                     if self.single_mode:
                         self.check_failed.emit(resource.resource_name, f"API返回错误 ({response.status_code})")

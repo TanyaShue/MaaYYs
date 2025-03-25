@@ -1,13 +1,13 @@
-import PyInstaller.__main__
-import os
-import site
-import shutil
-import zipfile
-import sys
 import argparse
 import datetime
 import json
-import importlib.util
+import os
+import shutil
+import site
+import sys
+import zipfile
+
+import PyInstaller.__main__
 
 # Default version
 VERSION = "1.0.0"

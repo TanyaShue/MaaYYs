@@ -131,9 +131,7 @@ class TaskSettingsWidget(QFrame):
         # Create a new resource configuration if one doesn't exist
         if not device_resource and self.device_config:
             try:
-                # Import the necessary class
 
-                # Create a new resource configuration
                 device_resource = Resource(
                     resource_name=resource_name,
                     enable=True,
