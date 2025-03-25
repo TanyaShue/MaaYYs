@@ -43,9 +43,17 @@ jobs:
 
     - name: 推送到目标仓库
       run: |
-        # 为确保令牌正确传递，将其设置为环境变量
+        # 显式设置Git凭据
+        git config --global credential.helper store
+        echo "https://${PERSONAL_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
+        
+        # 设置Git用户信息（以确保身份正确）
+        git config --global user.name "GitHub Action Bot"
+        git config --global user.email "action@github.com"
+        
+        # 添加目标仓库并推送（不在URL中包含令牌）
         echo "设置远程仓库地址..."
-        git remote add target "https://${GITHUB_TOKEN}@github.com/TanyaShue/MFWPH.git"
+        git remote add target "https://github.com/TanyaShue/MFWPH.git"
         
         # 强制推送到目标仓库的master分支
         echo "推送到主分支..."
@@ -57,4 +65,4 @@ jobs:
           git push target $(git tag --points-at HEAD) --force
         fi
       env:
-        GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        PERSONAL_TOKEN: ${{ secrets.SYNC_TOKEN }}
