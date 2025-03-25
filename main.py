@@ -65,7 +65,6 @@ def kill_adb_processes():
 from app.main_window import MainWindow
 
 if __name__ == "__main__":
-    # Set up system output redirection to log manager
     setup_sys_redirection()
 
     # Create and start the application
