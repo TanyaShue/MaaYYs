@@ -12,6 +12,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0  # 获取完整历史
+        token: ${{ secrets.SYNC_TOKEN }}
 
     - name: 配置Git
       run: |
@@ -30,39 +31,47 @@ jobs:
         git config --local --unset-all submodule.assets/resource.url || true
         git config --local --unset-all submodule.assets/resource.active || true
 
-    - name: 准备提交到目标仓库
+    - name: 移除同步工作流
       run: |
-        # 移除同步工作流文件，避免无限循环提交
+        # 移除同步工作流文件，避免无限循环
         rm -f .github/workflows/sync-repo.yml
         
-        # 添加所有更改
+        # 提交变更
         git add -A
-        
-        # 创建提交
         git commit -m "从 TanyaShue/MaaYYs 同步 - ${GITHUB_SHA}"
 
     - name: 推送到目标仓库
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.SYNC_TOKEN }}
+        repository: TanyaShue/MFWPH
+        branch: master
+        force: true
+
+    - name: 推送当前标签（如果有）
+      if: success()  # 仅当之前的步骤成功时执行
       run: |
-        # 显式设置Git凭据
-        git config --global credential.helper store
-        echo "https://${PERSONAL_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
-        
-        # 设置Git用户信息（以确保身份正确）
-        git config --global user.name "GitHub Action Bot"
-        git config --global user.email "action@github.com"
-        
-        # 添加目标仓库并推送（不在URL中包含令牌）
-        echo "设置远程仓库地址..."
-        git remote add target "https://github.com/TanyaShue/MFWPH.git"
-        
-        # 强制推送到目标仓库的master分支
-        echo "推送到主分支..."
-        git push target HEAD:master --force
-        
-        # 只推送当前提交引用的标签（如果有）
-        echo "检查并推送标签..."
-        if [[ -n "$(git tag --points-at HEAD)" ]]; then
-          git push target $(git tag --points-at HEAD) --force
+        # 检查当前提交是否有标签
+        CURRENT_TAGS=$(git tag --points-at HEAD)
+        if [ -n "$CURRENT_TAGS" ]; then
+          # 创建一个临时目录
+          mkdir -p ~/temp_repo && cd ~/temp_repo
+          
+          # 克隆目标仓库（浅克隆以提高速度）
+          git clone --depth 1 https://${{ secrets.SYNC_TOKEN }}@github.com/TanyaShue/MFWPH.git .
+          
+          # 配置Git
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          
+          # 为每个标签创建一个新的标签指向目标仓库的HEAD
+          for tag in $CURRENT_TAGS; do
+            echo "创建标签: $tag"
+            git tag -f "$tag" HEAD
+          done
+          
+          # 推送标签
+          git push --tags --force
+        else
+          echo "当前提交没有标签，跳过标签推送"
         fi
-      env:
-        PERSONAL_TOKEN: ${{ secrets.SYNC_TOKEN }}
