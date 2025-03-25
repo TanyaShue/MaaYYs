@@ -43,13 +43,18 @@ jobs:
 
     - name: 推送到目标仓库
       run: |
-        # 添加目标仓库作为远程仓库
-        git remote add target https://${{ secrets.SYNC_TOKEN }}@github.com/TanyaShue/MFWPH.git
+        # 为确保令牌正确传递，将其设置为环境变量
+        echo "设置远程仓库地址..."
+        git remote add target "https://${GITHUB_TOKEN}@github.com/TanyaShue/MFWPH.git"
         
         # 强制推送到目标仓库的master分支
+        echo "推送到主分支..."
         git push target HEAD:master --force
         
         # 只推送当前提交引用的标签（如果有）
+        echo "检查并推送标签..."
         if [[ -n "$(git tag --points-at HEAD)" ]]; then
           git push target $(git tag --points-at HEAD) --force
         fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
