@@ -2,7 +2,8 @@ name: 同步仓库（不含子模块）
 
 on:
   push:
-    branches: [ master ]  # 根据你的默认分支修改
+    branches: [ master ]
+    tags: [ '*' ]  # 添加标签触发器来捕获标签推送
 
 jobs:
   sync:
@@ -48,30 +49,25 @@ jobs:
         branch: master
         force: true
 
-    - name: 推送当前标签（如果有）
-      if: success()  # 仅当之前的步骤成功时执行
+    - name: 推送触发事件中的标签
+      if: startsWith(github.ref, 'refs/tags/')  # 只在标签推送时执行
       run: |
-        # 检查当前提交是否有标签
-        CURRENT_TAGS=$(git tag --points-at HEAD)
-        if [ -n "$CURRENT_TAGS" ]; then
-          # 创建一个临时目录
-          mkdir -p ~/temp_repo && cd ~/temp_repo
-          
-          # 克隆目标仓库（浅克隆以提高速度）
-          git clone --depth 1 https://${{ secrets.SYNC_TOKEN }}@github.com/TanyaShue/MFWPH.git .
-          
-          # 配置Git
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          
-          # 为每个标签创建一个新的标签指向目标仓库的HEAD
-          for tag in $CURRENT_TAGS; do
-            echo "创建标签: $tag"
-            git tag -f "$tag" HEAD
-          done
-          
-          # 推送标签
-          git push --tags --force
-        else
-          echo "当前提交没有标签，跳过标签推送"
-        fi
+        # 从github.ref获取推送的标签名
+        TAG_NAME=${GITHUB_REF#refs/tags/}
+        echo "推送的标签: $TAG_NAME"
+        
+        # 创建一个临时目录
+        mkdir -p ~/temp_repo && cd ~/temp_repo
+        
+        # 克隆目标仓库（浅克隆以提高速度）
+        git clone --depth 1 https://${{ secrets.SYNC_TOKEN }}@github.com/TanyaShue/MFWPH.git .
+        
+        # 配置Git
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        
+        # 创建标签指向目标仓库的HEAD
+        git tag -f "$TAG_NAME" HEAD
+        
+        # 推送这个特定标签
+        git push origin "$TAG_NAME" --force
