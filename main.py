@@ -67,7 +67,6 @@ from app.main_window import MainWindow
 if __name__ == "__main__":
     setup_sys_redirection()
 
-    # Create and start the application
     app = QApplication(sys.argv)
     # 连接 aboutToQuit 信号，在程序退出前执行清理函数
     app.aboutToQuit.connect(kill_adb_processes)
