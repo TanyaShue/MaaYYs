@@ -1,0 +1,55 @@
+name: 同步仓库（不含子模块）
+
+on:
+  push:
+    branches: [ main ]  # 根据你的默认分支修改
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 检出源仓库
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # 获取完整历史
+
+    - name: 配置Git
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+
+    - name: 移除子模块
+      run: |
+        # 移除子模块目录
+        rm -rf assets/resource
+        
+        # 移除.gitmodules文件
+        rm -f .gitmodules
+        
+        # 如果.git/config中有子模块配置，也移除它
+        git config --local --unset-all submodule.assets/resource.url || true
+        git config --local --unset-all submodule.assets/resource.active || true
+
+    - name: 准备提交到目标仓库
+      run: |
+        # 移除同步工作流文件，避免无限循环提交
+        rm -f .github/workflows/sync-repo.yml
+        
+        # 添加所有更改
+        git add -A
+        
+        # 创建提交
+        git commit -m "从 TanyaShue/MaaYYs 同步 - ${GITHUB_SHA}"
+
+    - name: 推送到目标仓库
+      run: |
+        # 添加目标仓库作为远程仓库
+        git remote add target https://${{ secrets.SYNC_TOKEN }}@github.com/TanyaShue/MFWPH.git
+        
+        # 强制推送到目标仓库的main分支
+        git push target HEAD:main --force
+        
+        # 只推送当前提交引用的标签（如果有）
+        if [[ -n "$(git tag --points-at HEAD)" ]]; then
+          git push target $(git tag --points-at HEAD) --force
+        fi
