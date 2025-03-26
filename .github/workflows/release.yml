@@ -22,22 +22,21 @@ jobs:
       - name: Checkout target resource repository
         uses: actions/checkout@v4
         with:
+          repository: TanyaShue/MaaYYs
           path: target-resource
 
       - name: Prepare resource directory
         shell: pwsh
         run: |
-          # 确保目录存在
-          New-Item -Path "MFWPH\assets\resource" -ItemType Directory -Force
-          
-          # 清空目录
-          Get-ChildItem -Path "MFWPH\assets\resource" | Remove-Item -Recurse -Force
+          # 确保目录存在，并清空
+          New-Item -Path "MFWPH\assets\resource\MaaYYs" -ItemType Directory -Force
+          Get-ChildItem -Path "MFWPH\assets\resource\MaaYYs" | Remove-Item -Recurse -Force
 
       - name: Copy resources to MFWPH repository
         shell: pwsh
         run: |
-          # 复制目标资源仓库的内容到 resource 目录
-          Copy-Item -Path "target-resource\*" -Destination "MFWPH\assets\resource" -Recurse -Force
+          # 复制目标资源仓库的内容到 resource/MaaYYs 目录
+          Copy-Item -Path "target-resource\*" -Destination "MFWPH\assets\resource\MaaYYs" -Recurse -Force
 
       - name: Set up Python
         uses: actions/setup-python@v4
