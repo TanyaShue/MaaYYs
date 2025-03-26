@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout MFWPH repository
@@ -25,19 +25,19 @@ jobs:
           path: target-resource
 
       - name: Prepare resource directory
+        shell: pwsh
         run: |
-          # 确保 MFWPH/assets/resource 目录存在
-          mkdir -p MFWPH/assets/resource
+          # 确保目录存在
+          New-Item -Path "MFWPH\assets\resource" -ItemType Directory -Force
           
-          # 如果目录非空，则清空目录
-          rm -rf MFWPH/assets/resource/*
+          # 清空目录
+          Get-ChildItem -Path "MFWPH\assets\resource" | Remove-Item -Recurse -Force
 
       - name: Copy resources to MFWPH repository
+        shell: pwsh
         run: |
-          # 这里你可以根据实际需求修改拷贝逻辑
-          # 例如：从另一个仓库或特定位置拷贝资源文件
-          # 目前仅作为示例展示目录创建和拷贝
-          cp -r target-resource/* MFWPH/assets/resource/
+          # 复制目标资源仓库的内容到 resource 目录
+          Copy-Item -Path "target-resource\*" -Destination "MFWPH\assets\resource" -Recurse -Force
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -51,13 +51,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Copy DLL files to Python root
-        working-directory: MFWPH
         shell: pwsh
         run: |
-          if (Test-Path -Path "${{ github.workspace }}/MFWPH/DLL") {
-            $dllFiles = Get-ChildItem -Path "${{ github.workspace }}/MFWPH/DLL" -File
+          if (Test-Path -Path "${{ github.workspace }}\MFWPH\DLL") {
+            $dllFiles = Get-ChildItem -Path "${{ github.workspace }}\MFWPH\DLL" -File
             foreach ($file in $dllFiles) {
-              Copy-Item -Path $file.FullName -Destination "${{ env.pythonLocation }}/$($file.Name)" -Force
+              Copy-Item -Path $file.FullName -Destination "${{ env.pythonLocation }}\$($file.Name)" -Force
               Write-Host "Copied $($file.Name) to ${{ env.pythonLocation }}"
             }
           } else {
@@ -66,22 +65,21 @@ jobs:
 
       - name: Run build script
         working-directory: MFWPH
-        id: build
+        shell: pwsh
         run: |
           python build.py
           $zipFile = Get-ChildItem -Path "./dist" -Filter "MAA_YYS_*.zip" | Select-Object -First 1
           if ($zipFile) {
             Copy-Item -Path $zipFile.FullName -Destination "./dist/MAA_YYS_RELEASE.zip" -Force
             Write-Host "Copied $($zipFile.Name) to MAA_YYS_RELEASE.zip"
-            echo "ORIGINAL_ZIP_NAME=$($zipFile.Name)" >> $env:GITHUB_ENV
           } else {
             Write-Host "::error::Build failed - zip file was not created"
             exit 1
           }
-          Write-Host "Zip file successfully created"
 
       - name: List files in dist directory
         working-directory: MFWPH
+        shell: pwsh
         run: |
           Write-Host "Contents of dist directory:"
           Get-ChildItem -Path ./dist -Recurse | Select-Object FullName
@@ -98,6 +96,6 @@ jobs:
           name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
-          artifacts: ${{ github.workspace }}/MFWPH/dist/MAA_YYS_RELEASE.zip
+          artifacts: ${{ github.workspace }}\MFWPH\dist\MAA_YYS_RELEASE.zip
           artifactContentType: application/zip
           artifactErrorsFailBuild: true
