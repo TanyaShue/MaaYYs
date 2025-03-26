@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/assets/resource" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/assets/resource/MAA_Punish_Res" vcs="Git" />
   </component>
 </project>

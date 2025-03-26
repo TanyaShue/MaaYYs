@@ -65,6 +65,7 @@ def kill_adb_processes():
 from app.main_window import MainWindow
 
 if __name__ == "__main__":
+    print("aaa")
     setup_sys_redirection()
 
     app = QApplication(sys.argv)
@@ -72,4 +73,6 @@ if __name__ == "__main__":
 
     window = MainWindow()
     window.show()
+    print("bbb")
+
     sys.exit(app.exec())
