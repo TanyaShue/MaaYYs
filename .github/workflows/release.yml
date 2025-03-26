@@ -24,13 +24,20 @@ jobs:
         with:
           path: target-resource
 
-      - name: Create assets/resource directory
+      - name: Prepare resource directory
         run: |
-          mkdir -p target-resource/MFWPH/assets/resource
+          # 确保 MFWPH/assets/resource 目录存在
+          mkdir -p MFWPH/assets/resource
+          
+          # 如果目录非空，则清空目录
+          rm -rf MFWPH/assets/resource/*
 
       - name: Copy resources to MFWPH repository
         run: |
-          cp -r target-resource/* target-resource/MFWPH/assets/resource/
+          # 这里你可以根据实际需求修改拷贝逻辑
+          # 例如：从另一个仓库或特定位置拷贝资源文件
+          # 目前仅作为示例展示目录创建和拷贝
+          cp -r target-resource/* MFWPH/assets/resource/
 
       - name: Set up Python
         uses: actions/setup-python@v4
