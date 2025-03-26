@@ -1,0 +1,46 @@
+{
+  "自动999": {
+    "next": [
+      "999",
+      "999_点击屏幕继续"
+    ]
+  },
+  "999": {
+    "is_sub": true,
+    "recognition": "FeatureMatch",
+    "template": "999_战斗.png",
+    "action": "Click",
+    "target": [
+      1124,
+      574,
+      114,
+      99
+    ],
+    "post_delay": 8000,
+    "next": "999_奖励_点击一下"
+  },
+  "999_奖励_点击一下": {
+    "recognition": "OCR",
+    "expected": "获得奖励",
+    "roi": [
+      470,
+      163,
+      343,
+      123
+    ],
+    "action": "Custom",
+    "custom_action": "HumanTouch"
+  },
+  "999_点击屏幕继续": {
+    "is_sub": true,
+    "recognition": "OCR",
+    "expected": "点击屏幕继续",
+    "action": "Click",
+    "target": [
+      429,
+      502,
+      521,
+      177
+    ]
+  }
+}
