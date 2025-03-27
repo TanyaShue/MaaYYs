@@ -268,12 +268,12 @@
             "pipeline_override": {
                 "自动秘闻_装备式神预设": {
                     "custom_action_param": {
-                        "team_name": "{value}"
+                        "group_name": "{value}"
                     }
                 },
                 "自动秘闻_出战预设队伍": {
                     "custom_action_param": {
-                        "team_name": "{value}"
+                        "group_name": "{value}"
                     }
                 }
             }
