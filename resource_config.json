@@ -68,10 +68,41 @@
         {
             "task_name": "结界奖励领取",
             "task_entry": "阴阳寮奖励领取",
-            "option": []
+            "option": ["寄养设置"]
         }
     ],
     "options": [
+        
+        {
+            "name": "寄养设置",
+            "type": "select",
+            "default": "勾玉优先",
+            "pipeline_override": {
+                "体力优先": {
+                                        "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+                    "custom_action_param": {
+                      "FosterTarget": 2
+                    }
+                  }},
+                "勾玉优先":{
+                    "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+                        "custom_action_param": {
+                          "FosterTarget": 1
+                        }
+                      }
+                }
+            },
+            "choices": [
+                {
+                    "name": "体力优先",
+                    "value": "体力优先"
+                },
+                {
+                    "name": "勾玉优先",
+                    "value": "勾玉优先"
+                }
+            ]
+        },
         {
             "name": "选择区服",
             "type": "select",
