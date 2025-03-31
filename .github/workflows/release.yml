@@ -62,19 +62,34 @@ jobs:
             Write-Host "DLL folder not found."
           }
 
-      - name: Run build script
+      - name: Run build script for complete package
         working-directory: MFWPH
         shell: pwsh
         run: |
           python build.py
           $zipFile = Get-ChildItem -Path "./dist" -Filter "MAA_YYS_*.zip" | Select-Object -First 1
           if ($zipFile) {
-            Copy-Item -Path $zipFile.FullName -Destination "./dist/MAA_YYS_RELEASE.zip" -Force
-            Write-Host "Copied $($zipFile.Name) to MAA_YYS_RELEASE.zip"
+            Copy-Item -Path $zipFile.FullName -Destination "./dist/MAA_YYS_FULL.zip" -Force
+            Write-Host "Copied $($zipFile.Name) to MAA_YYS_FULL.zip"
           } else {
             Write-Host "::error::Build failed - zip file was not created"
             exit 1
           }
+
+      - name: Create resources-only package
+        shell: pwsh
+        run: |
+          # 创建临时目录
+          New-Item -Path "${{ github.workspace }}\resources-only" -ItemType Directory -Force
+          
+          # 复制资源仓库内容到临时目录
+          Copy-Item -Path "target-resource\*" -Destination "${{ github.workspace }}\resources-only" -Recurse -Force
+          
+          # 创建仅包含资源的ZIP文件
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          [System.IO.Compression.ZipFile]::CreateFromDirectory("${{ github.workspace }}\resources-only", "${{ github.workspace }}\MFWPH\dist\MAA_YYS_RESOURCES_ONLY.zip")
+          
+          Write-Host "Created resources-only package: MAA_YYS_RESOURCES_ONLY.zip"
 
       - name: List files in dist directory
         working-directory: MFWPH
@@ -83,7 +98,8 @@ jobs:
           Write-Host "Contents of dist directory:"
           Get-ChildItem -Path ./dist -Recurse | Select-Object FullName
           Write-Host "Zip file details:"
-          Get-Item -Path ./dist/MAA_YYS_RELEASE.zip | Select-Object FullName, Length, LastWriteTime
+          Get-Item -Path ./dist/MAA_YYS_FULL.zip | Select-Object FullName, Length, LastWriteTime
+          Get-Item -Path ./dist/MAA_YYS_RESOURCES_ONLY.zip | Select-Object FullName, Length, LastWriteTime
 
       - name: Create GitHub Release
         id: create_release
@@ -95,6 +111,8 @@ jobs:
           name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
-          artifacts: ${{ github.workspace }}\MFWPH\dist\MAA_YYS_RELEASE.zip
+          artifacts: |
+            ${{ github.workspace }}\MFWPH\dist\MAA_YYS_FULL.zip
+            ${{ github.workspace }}\MFWPH\dist\MAA_YYS_RESOURCES_ONLY.zip
           artifactContentType: application/zip
           artifactErrorsFailBuild: true
