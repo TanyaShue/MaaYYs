@@ -31,6 +31,7 @@
   },
   "打开阴阳师": {
     "action": "StartApp",
+    "post_delay": 2000,
     "next": [
       "识别庭院特征"
     ],
