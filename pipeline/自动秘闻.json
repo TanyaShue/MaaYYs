@@ -174,7 +174,7 @@
     "recognition": "OCR",
     "action": "Click",
     "roi":[785,395,245,112],
-    "expected": ".*本次通关时间.*",
+    "expected": ".*(本次通关时间.*|通关式神.*)",
     "target":[949,188,316,216],
     "post_delay": 2000,
     "next": [
