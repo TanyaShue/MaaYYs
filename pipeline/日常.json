@@ -16,7 +16,7 @@
   },
   "日常_送友情点": {
     "next": "日常_点击好友",
-    "enable": true,
+    "enable": false,
     "interrupt": [
       "打开底部菜单"
     ]
