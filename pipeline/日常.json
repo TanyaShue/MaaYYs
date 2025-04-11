@@ -8,7 +8,8 @@
         "领取奖励_邮件",
         "领取奖励_日常奖励",
         "领取奖励_商店每日奖励",
-        "领取奖励_花合战奖励"
+        "领取奖励_花合战奖励",
+        "日常_每日免费一抽"
       ]
     },
     "on_error": "返回庭院"
@@ -61,6 +62,9 @@
     "next": "日常_点击一下屏幕底部"
   },
   "日常_好友_点击友情点": {
+    "recognition": "OCR",
+    "expected": "好友",
+    "roi":[1182,150,83,118],
     "action": "Click",
     "target": [
       81,
@@ -68,7 +72,8 @@
       88,
       68
     ],
-    "post_delay": 1000
+    "post_delay": 1000,
+    "on_error":"返回庭院"
   },
   "日常_关闭好友界面": {
     "recognition": "FeatureMatch",
@@ -96,5 +101,84 @@
     ],
     "post_delay": 1000,
     "next": "日常_关闭好友界面"
+  },
+  "日常_每日免费一抽": {
+    "next": "日常_每日免费一抽_开始_点击灯笼",
+    "enable": false,
+    "interrupt": ["日常_每日免费一抽_向左滑一下"]
+  },
+  "日常_每日免费一抽_开始_点击灯笼":{
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": ["庭院_召唤灯笼_1__1077_171_53_72__1027_121_153_172.png", 
+                "庭院_召唤灯笼_2__1072_170_60_80__1022_120_160_180.png",
+              "庭院_召唤灯笼_3__1070_167_65_76__1020_117_165_176.png"],
+    "post_delay": 1000,
+    "next": "日常_每日免费一抽_点击免费一抽",
+    "timeout":5000,
+    "on_error":"返回庭院"
+  },
+  "日常_每日免费一抽_向左滑一下": {
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi":[
+        797,
+        300,
+        99,
+        309
+      ], 
+      "end_roi": [
+        382,
+        254,
+        102,
+        310
+      ],
+      "delay": 200
+    },
+    "post_delay": 500
+  },
+  "日常_每日免费一抽_点击免费一抽":{
+    "recognition": "OCR",
+    "expected": "免费",
+    "action": "Click",
+    "target": [593,595,63,70],
+    "roi":[569,680,64,34],
+    "post_delay": 1000,
+    "next":"日常_每日免费一抽_点击单抽",
+    "timeout":5000,
+    "on_error":"返回庭院"
+  },
+  "日常_每日免费一抽_点击单抽":{
+    "recognition": "OCR",
+    "expected": "免费",
+    "action": "Click",
+    "target": [399,589,59,92],
+    "roi":[544,629,107,64],
+    "post_delay": 1000,
+    "next":"日常_每免费一抽_画符",
+    "timeout":5000,
+    "on_error":"返回庭院"
+  },
+  "日常_每免费一抽_画符":{
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "start_roi":[407,160,37,295], 
+      "end_roi": [813,229,46,286],
+      "delay": 200
+    },
+    "post_delay": 2000,
+    "next":"日常_每免费一抽_完成抽卡_点击确定",
+    "timeout":5000,
+    "on_error":"返回庭院"
+  },
+  "日常_每免费一抽_完成抽卡_点击确定":{
+    "recognition": "OCR",
+    "action": "Click",
+    "expected": "确定",
+    "roi":[383,589,225,99],
+    "post_delay": 1000,
+    "next":"返回庭院"
   }
 }
