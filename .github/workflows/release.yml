@@ -67,7 +67,7 @@ jobs:
         working-directory: MFWPH
         shell: pwsh
         run: |
-          python build.py
+          python build.py --zip-name MAA_YYS_FULL
           $zipFile = Get-ChildItem -Path "./dist" -Filter "MAA_YYS_*.zip" | Select-Object -First 1
           if ($zipFile) {
             Copy-Item -Path $zipFile.FullName -Destination "./dist/MAA_YYS_FULL.zip" -Force
