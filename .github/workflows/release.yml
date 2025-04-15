@@ -18,6 +18,38 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: MaaYYs
+          fetch-depth: 0  # 获取完整历史以便生成变更日志
+
+      - name: Generate Changelog
+        id: changelog
+        shell: pwsh
+        working-directory: MaaYYs
+        run: |
+          # 获取当前标签
+          $currentTag = "${{ github.ref_name }}"
+          Write-Host "Current tag: $currentTag"
+          
+          # 获取上一个标签
+          $previousTag = git describe --tags --abbrev=0 HEAD^ 2>$null
+          if (-not $previousTag) {
+            Write-Host "No previous tag found, using first commit"
+            $previousTag = git rev-list --max-parents=0 HEAD
+          }
+          Write-Host "Previous tag/commit: $previousTag"
+          
+          # 生成变更日志
+          $changelog = git log --pretty=format:"* %s (%h)" "$previousTag..$currentTag"
+          if (-not $changelog) {
+            $changelog = "* 首次发布"
+          }
+          
+          # 设置变更日志为GitHub Actions输出变量
+          $changelog = $changelog -replace "`n", "%0A"
+          echo "CHANGELOG<<EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          echo $changelog | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          echo "EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          
+          Write-Host "Generated changelog for release"
 
       - name: Fetch latest MFWPH release
         shell: pwsh
@@ -95,6 +127,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
+          body: |
+            ## 版本 ${{ github.ref_name }} 更新日志
+            
+            ${{ steps.changelog.outputs.CHANGELOG }}
+            
+            ## 下载
+            - **完整包**: 包含 MFWPH 和 MaaYYs 资源，可直接运行
+            - **仅资源包**: 仅包含 MaaYYs 资源，适用于已有 MFWPH 的用户
           draft: false
           prerelease: false
           artifacts: |
