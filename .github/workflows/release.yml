@@ -77,6 +77,9 @@ jobs:
       - name: Prepare resource directory
         shell: pwsh
         run: |
+          # 定义要包含的文件和文件夹列表
+          $includeList = @('app', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md', 'resource_config.json')
+          
           # 确保资源目录存在
           New-Item -Path "mfwph-extracted/assets/resource/MaaYYs" -ItemType Directory -Force
           
@@ -85,8 +88,23 @@ jobs:
             Get-ChildItem -Path "mfwph-extracted/assets/resource/MaaYYs" | Remove-Item -Recurse -Force
           }
           
-          # 复制当前仓库内容到资源目录
-          Copy-Item -Path "MaaYYs/*" -Destination "mfwph-extracted/assets/resource/MaaYYs" -Recurse -Force
+          # 仅复制包含列表中的文件和文件夹
+          foreach ($item in $includeList) {
+            $sourcePath = "MaaYYs/$item"
+            if (Test-Path -Path $sourcePath) {
+              if (Test-Path -Path $sourcePath -PathType Container) {
+                # 如果是目录，则递归复制
+                New-Item -Path "mfwph-extracted/assets/resource/MaaYYs/$item" -ItemType Directory -Force
+                Copy-Item -Path "$sourcePath/*" -Destination "mfwph-extracted/assets/resource/MaaYYs/$item" -Recurse -Force
+              } else {
+                # 如果是文件，则直接复制
+                Copy-Item -Path $sourcePath -Destination "mfwph-extracted/assets/resource/MaaYYs/$item" -Force
+              }
+              Write-Host "Copied $item to resource directory"
+            } else {
+              Write-Host "Warning: $item not found in source repository"
+            }
+          }
           Write-Host "Resources copied successfully to MFWPH package"
 
       - name: Create full package
@@ -104,9 +122,33 @@ jobs:
       - name: Create resources-only package
         shell: pwsh
         run: |
+          # 定义要包含的文件和文件夹列表
+          $includeList = @('app', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md', 'resource_config.json')
+          
+          # 创建临时目录用于资源包
+          New-Item -Path "resources-temp" -ItemType Directory -Force
+          
+          # 仅复制包含列表中的文件和文件夹到临时目录
+          foreach ($item in $includeList) {
+            $sourcePath = "MaaYYs/$item"
+            if (Test-Path -Path $sourcePath) {
+              if (Test-Path -Path $sourcePath -PathType Container) {
+                # 如果是目录，则递归复制
+                New-Item -Path "resources-temp/$item" -ItemType Directory -Force
+                Copy-Item -Path "$sourcePath/*" -Destination "resources-temp/$item" -Recurse -Force
+              } else {
+                # 如果是文件，则直接复制
+                Copy-Item -Path $sourcePath -Destination "resources-temp/$item" -Force
+              }
+              Write-Host "Copied $item to resources-only package"
+            } else {
+              Write-Host "Warning: $item not found in source repository for resources-only package"
+            }
+          }
+          
           # 创建仅包含资源的ZIP文件
           Add-Type -AssemblyName System.IO.Compression.FileSystem
-          [System.IO.Compression.ZipFile]::CreateFromDirectory("MaaYYs", "${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip")
+          [System.IO.Compression.ZipFile]::CreateFromDirectory("resources-temp", "${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip")
           
           Write-Host "Created resources-only package: MAA_YYS_RESOURCES_ONLY.zip"
 
