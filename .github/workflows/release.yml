@@ -1,4 +1,4 @@
-name: MFWPH Resource Build and Release
+name: MaaYYs Resource Build and Release
 
 on:
   push:
@@ -14,84 +14,71 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout MFWPH repository
+      - name: Checkout MaaYYs repository
         uses: actions/checkout@v4
         with:
-          repository: TanyaShue/MFWPH
-          path: MFWPH
+          path: MaaYYs
 
-      - name: Checkout target resource repository
-        uses: actions/checkout@v4
-        with:
-          repository: TanyaShue/MaaYYs
-          path: target-resource
+      - name: Fetch latest MFWPH release
+        shell: pwsh
+        run: |
+          # 创建下载目录
+          New-Item -Path "mfwph-download" -ItemType Directory -Force
+
+          # 获取最新的MFWPH发布版本
+          $releasesUri = "https://api.github.com/repos/TanyaShue/MFWPH/releases/latest"
+          $release = Invoke-RestMethod -Uri $releasesUri
+          $downloadUrl = ($release.assets | Where-Object { $_.name -eq "MFWPH_RELEASE.zip" }).browser_download_url
+          
+          if (-not $downloadUrl) {
+            Write-Host "::error::Could not find MFWPH_RELEASE.zip in the latest release"
+            exit 1
+          }
+          
+          Write-Host "Downloading MFWPH from: $downloadUrl"
+          Invoke-WebRequest -Uri $downloadUrl -OutFile "mfwph-download/MFWPH_RELEASE.zip"
+          
+          # 解压MFWPH
+          Expand-Archive -Path "mfwph-download/MFWPH_RELEASE.zip" -DestinationPath "mfwph-extracted" -Force
+          Write-Host "MFWPH package extracted successfully"
 
       - name: Prepare resource directory
         shell: pwsh
         run: |
-          # 确保目录存在，并清空
-          New-Item -Path "MFWPH\assets\resource\MaaYYs" -ItemType Directory -Force
-          Get-ChildItem -Path "MFWPH\assets\resource\MaaYYs" | Remove-Item -Recurse -Force
-
-      - name: Copy resources to MFWPH repository
-        shell: pwsh
-        run: |
-          # 复制目标资源仓库的内容到 resource/MaaYYs 目录
-          Copy-Item -Path "target-resource\*" -Destination "MFWPH\assets\resource\MaaYYs" -Recurse -Force
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        working-directory: MFWPH
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Copy DLL files to Python root
-        shell: pwsh
-        run: |
-          if (Test-Path -Path "${{ github.workspace }}\MFWPH\DLL") {
-            $dllFiles = Get-ChildItem -Path "${{ github.workspace }}\MFWPH\DLL" -File
-            foreach ($file in $dllFiles) {
-              Copy-Item -Path $file.FullName -Destination "${{ env.pythonLocation }}\$($file.Name)" -Force
-              Write-Host "Copied $($file.Name) to ${{ env.pythonLocation }}"
-            }
-          } else {
-            Write-Host "DLL folder not found."
+          # 确保资源目录存在
+          New-Item -Path "mfwph-extracted/assets/resource/MaaYYs" -ItemType Directory -Force
+          
+          # 清空目标资源目录（如果存在）
+          if (Test-Path -Path "mfwph-extracted/assets/resource/MaaYYs") {
+            Get-ChildItem -Path "mfwph-extracted/assets/resource/MaaYYs" | Remove-Item -Recurse -Force
           }
+          
+          # 复制当前仓库内容到资源目录
+          Copy-Item -Path "MaaYYs/*" -Destination "mfwph-extracted/assets/resource/MaaYYs" -Recurse -Force
+          Write-Host "Resources copied successfully to MFWPH package"
 
-      - name: Run build script for complete package
-        working-directory: MFWPH
+      - name: Create full package
         shell: pwsh
         run: |
-          python build.py --zip-name MAA_YYS_FULL
-          $zipFile = Get-ChildItem -Path "./dist" -Filter "MAA_YYS_*.zip" | Select-Object -First 1
-          if (-not $zipFile) {
-            Write-Host "::error::Build failed - zip file was not created"
-            exit 1
-          }
-          Write-Host "Successfully created zip file: $($zipFile.Name)"
+          # 创建输出目录
+          New-Item -Path "dist" -ItemType Directory -Force
+          
+          # 创建完整的ZIP包
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          [System.IO.Compression.ZipFile]::CreateFromDirectory("mfwph-extracted", "${{ github.workspace }}/dist/MAA_YYS_FULL.zip")
+          
+          Write-Host "Created full package: MAA_YYS_FULL.zip"
 
       - name: Create resources-only package
         shell: pwsh
         run: |
-          # 创建临时目录
-          New-Item -Path "${{ github.workspace }}\resources-only" -ItemType Directory -Force
-          
-          # 复制资源仓库内容到临时目录
-          Copy-Item -Path "target-resource\*" -Destination "${{ github.workspace }}\resources-only" -Recurse -Force
-          
           # 创建仅包含资源的ZIP文件
           Add-Type -AssemblyName System.IO.Compression.FileSystem
-          [System.IO.Compression.ZipFile]::CreateFromDirectory("${{ github.workspace }}\resources-only", "${{ github.workspace }}\MFWPH\dist\MAA_YYS_RESOURCES_ONLY.zip")
+          [System.IO.Compression.ZipFile]::CreateFromDirectory("MaaYYs", "${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip")
           
           Write-Host "Created resources-only package: MAA_YYS_RESOURCES_ONLY.zip"
 
       - name: List files in dist directory
-        working-directory: MFWPH
         shell: pwsh
         run: |
           Write-Host "Contents of dist directory:"
@@ -111,8 +98,8 @@ jobs:
           draft: false
           prerelease: false
           artifacts: |
-            ${{ github.workspace }}\MFWPH\dist\MAA_YYS_FULL.zip
-            ${{ github.workspace }}\MFWPH\dist\MAA_YYS_RESOURCES_ONLY.zip
+            ${{ github.workspace }}/dist/MAA_YYS_FULL.zip
+            ${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip
           artifactContentType: application/zip
           artifactErrorsFailBuild: true
 
