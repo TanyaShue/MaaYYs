@@ -1,0 +1,19 @@
+name: mirrorchyan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mirrorchyan:
+    runs-on: macos-latest
+    steps:
+      - uses: MirrorChyan/uploading-action@v1
+        with:
+          filetype: latest-release
+          filename: "*FULL.zip"
+          mirrorchyan_rid: MaaYYs
+
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          upload_token: ${{ secrets.MirrorChyanUploadToken }}
