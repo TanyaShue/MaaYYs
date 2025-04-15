@@ -69,13 +69,11 @@ jobs:
         run: |
           python build.py --zip-name MAA_YYS_FULL
           $zipFile = Get-ChildItem -Path "./dist" -Filter "MAA_YYS_*.zip" | Select-Object -First 1
-          if ($zipFile) {
-            Copy-Item -Path $zipFile.FullName -Destination "./dist/MAA_YYS_FULL.zip" -Force
-            Write-Host "Copied $($zipFile.Name) to MAA_YYS_FULL.zip"
-          } else {
+          if (-not $zipFile) {
             Write-Host "::error::Build failed - zip file was not created"
             exit 1
           }
+          Write-Host "Successfully created zip file: $($zipFile.Name)"
 
       - name: Create resources-only package
         shell: pwsh
