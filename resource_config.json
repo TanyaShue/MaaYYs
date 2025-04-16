@@ -251,8 +251,12 @@
             "type": "boole",
             "default": true,
             "pipeline_override": {
-                "日常_送友情点": {
-                    "enabled": "{boole}"
+                "日常_任务列表": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "日常_送友情点": "{boole}"
+                        }
+                    }
                 }
             }
         },
@@ -261,8 +265,12 @@
             "type": "boole",
             "default": true,
             "pipeline_override": {
-                "领取奖励_邮件": {
-                    "enabled": "{boole}"
+                "日常_任务列表": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "领取奖励_邮件": "{boole}"
+                        }
+                    }
                 }
             }
         },
@@ -271,8 +279,12 @@
             "type": "boole",
             "default": true,
             "pipeline_override": {
-                "领取奖励_日常奖励": {
-                    "enabled": "{boole}"
+                "日常_任务列表": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "领取奖励_日常庭院奖励": "{boole}"
+                        }
+                    }
                 }
             }
         },
@@ -281,8 +293,12 @@
             "type": "boole",
             "default": true,
             "pipeline_override": {
-                "日常_每日免费一抽": {
-                    "enabled": "{boole}"
+                "日常_任务列表": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "领取奖励_每日免费一抽": "{boole}"
+                        }
+                    }
                 }
             }
         },
@@ -291,8 +307,12 @@
             "type": "boole",
             "default": true,
             "pipeline_override": {
-                "领取奖励_商店每日奖励": {
-                    "enabled": "{boole}"
+                "日常_任务列表": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "领取奖励_商店每日奖励": "{boole}"
+                        }
+                    }
                 }
             }
         },
@@ -301,8 +321,12 @@
             "type": "boole",
             "default": true,
             "pipeline_override": {
-                "领取奖励_花合战奖励": {
-                    "enabled": "{boole}"
+                "日常_任务列表": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "领取奖励_花合战奖励": "{boole}"
+                        }
+                    }
                 }
             }
         },

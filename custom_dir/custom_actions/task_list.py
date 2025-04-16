@@ -11,7 +11,7 @@ from app.models.logging.log_manager import log_manager
 class TaskList(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         """
-        :param argv: 运行参数{"task_list": ["A", "B", "C"]}
+        :param argv: 运行参数{"task_list": {"A": True, "B": False, "C": True}}
         :param context: 运行上下文
         :return: 是否执行成功。
         """
@@ -19,23 +19,24 @@ class TaskList(CustomAction):
         logger.debug("开始执行自定义动作：任务列表")
         json_data = json.loads(argv.custom_action_param)
         # task_logger = TaskLogger()
+        task_dict = json_data.get("task_list", {})
 
-        task_list = json_data.get("task_list", [])
-
-        if not task_list:
-            logger.debug("无效的task_list")
+        if not task_dict:
+            logger.debug("无效的 task_list")
             return False
 
-        logger.debug(f"开始执行任务列表 {task_list}")
+        logger.debug(f"开始执行任务列表 {task_dict}")
 
-        for task in task_list:
-            logger.debug(f"执行任务: {task}")
-            # task_logger.log(context.tasker.controller._handle, f"执行任务: {task}", "INFO")
-            context.run_task(task)
-            # task_logger.log(context.tasker.controller._handle, f"任务: {task} 执行完成", "INFO")
-            logger.debug(f"任务 {task} 执行完成")
-            # context.run_task("返回庭院")
-            time.sleep(2)
+        for task, should_run in task_dict.items():
+            if should_run:
+                logger.debug(f"执行任务: {task}")
+                # task_logger.log(context.tasker.controller._handle, f"执行任务: {task}", "INFO")
+                context.run_task(task)
+                # task_logger.log(context.tasker.controller._handle, f"任务: {task} 执行完成", "INFO")
+                logger.debug(f"任务 {task} 执行完成")
+                time.sleep(2)
+            else:
+                logger.debug(f"跳过任务: {task}（标记为不执行）")
         return True
 
     def stop(self):
