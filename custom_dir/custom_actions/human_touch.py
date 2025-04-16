@@ -4,7 +4,12 @@ from maa.custom_action import CustomAction
 import random
 from time import sleep
 
-from app.models.logging.log_manager import log_manager
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 
 class HumanTouch(CustomAction):
@@ -12,7 +17,11 @@ class HumanTouch(CustomAction):
     def run(self,
         context: Context,
         argv: CustomAction.RunArg,) -> bool:
-        logger = log_manager.get_context_logger(context)
+        if use_default_logging:
+            logger = logging.getLogger("HumanTouch")
+        else:
+            logger = log_manager.get_context_logger(context)
+
         logger.debugger(f"开始执行第{HumanTouch.count + 1}次自定义动作：随机点击")
 
         # 随机等待

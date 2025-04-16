@@ -6,7 +6,12 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-from app.models.logging.log_manager import log_manager
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 
 class SwitchSoul(CustomAction):
@@ -21,7 +26,10 @@ class SwitchSoul(CustomAction):
         # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
         json_data = json.loads(argv.custom_action_param)
         # 点击预设点
-        logger = log_manager.get_context_logger(context)
+        if use_default_logging:
+            logger = logging.getLogger("SwitchSoul")
+        else:
+            logger = log_manager.get_context_logger(context)
         logger.debug("开始执行自定义动作：装备切换御魂")
         logger.debug(f"开始执行自定义动作:装备切换御魂   分组名称为：{json_data['group_name']},队伍名称为：{json_data['team_name']}")
         context.run_task("识别预设",{"识别预设":{"timeout":2000,"recognition": "OCR","expected": "预设","roi": [336, 74, 82, 46],"action":"Click"}})

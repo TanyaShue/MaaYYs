@@ -5,8 +5,12 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-from app.models.logging.log_manager import log_manager
-
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 class TaskList(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
@@ -15,7 +19,10 @@ class TaskList(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
-        logger = log_manager.get_context_logger(context)
+        if use_default_logging:
+            logger = logging.getLogger("TaskList")
+        else:
+            logger = log_manager.get_context_logger(context)
         logger.debug("开始执行自定义动作：任务列表")
         json_data = json.loads(argv.custom_action_param)
         # task_logger = TaskLogger()
