@@ -4,6 +4,10 @@ from maa.custom_action import CustomAction
 import json
 import random
 import time
+
+from app.models.logging.log_manager import log_manager
+
+
 class AutoBattle(CustomAction):
     def run(self,
             context: Context,
@@ -13,7 +17,9 @@ class AutoBattle(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
-        print("2秒后开始战斗")
+        logger = log_manager.get_context_logger(context)
+
+        logger.debug("2秒后开始战斗")
         time.sleep(2)
         # 加载自定义参数
         json_data = json.loads(argv.custom_action_param)
@@ -36,7 +42,7 @@ class AutoBattle(CustomAction):
 
                 if detail is not None:
                     context.tasker.controller.post_click(random.randint(detail.box.x, detail.box.x + detail.box.h), random.randint(detail.box.y, detail.box.y + detail.box.w)).wait()
-                    print(f"切换到分组 {json_data['group_name']}")
+                    logger.debug(f"切换到分组 {json_data['group_name']}")
                     break
 
                 if count >= 5:
@@ -44,11 +50,11 @@ class AutoBattle(CustomAction):
                 else:
                     context.run_task("下一页",{"下一页": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"start_roi": [39, 582, 113, 36],"end_roi": [39, 270, 120, 38],"delay": 400}}})
             else:
-                print("点击分组失败")
+                logger.debug("点击分组失败")
             
 
             time.sleep(0.5)
-            print("开始执行自定义动作：点击队伍")
+            logger.debug("开始执行自定义动作：点击队伍")
             # 点击队伍
             for count in range(1, 10):
                 img = context.tasker.controller.post_screencap().wait().get()
@@ -56,7 +62,7 @@ class AutoBattle(CustomAction):
                 time.sleep(0.5)
 
                 if detail is not None:
-                    print(f"切换到队伍 {json_data['team_name']}")
+                    logger.debug(f"切换到队伍 {json_data['team_name']}")
                     context.tasker.controller.post_click(random.randint(detail.box.x, detail.box.x + detail.box.h), random.randint(detail.box.y, detail.box.y + detail.box.w)).wait()
                     time.sleep(0.5)
                     context.tasker.controller.post_click(random.randint(359, 490), random.randint(647, 682)).wait()
@@ -67,7 +73,7 @@ class AutoBattle(CustomAction):
                 else:
                     context.run_task("下一页",{"下一页": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"start_roi": [328, 484, 253, 103],"end_roi": [334, 235, 300, 90],"delay": 400}}})
             else:
-                print("队伍不存在")
+                logger.debug("队伍不存在")
                 return False
         
         # 出战队伍
@@ -76,7 +82,7 @@ class AutoBattle(CustomAction):
         # 点击准备 开始战斗，这里点击两次，防止队伍上场失败导致准备无效
         for i in range(2):
             x,y=random.randint(1125, 1236),random.randint(539, 634)
-            print(f"随机点击准备按钮: {x},{y}")
+            logger.debug(f"随机点击准备按钮: {x},{y}")
             time.sleep(1)
             context.tasker.controller.post_click(x,y).wait()
         
