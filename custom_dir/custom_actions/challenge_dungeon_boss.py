@@ -4,6 +4,10 @@ import json
 
 from maa.context import Context
 from maa.custom_action import CustomAction
+
+from app.models.logging.log_manager import log_manager
+
+
 class ChallengeDungeonBoss(CustomAction):
 
     def run(self,
@@ -14,12 +18,13 @@ class ChallengeDungeonBoss(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
+        logger = log_manager.get_context_logger(context)
 
         # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
         json_data = json.loads(argv.custom_action_param)
 
-        print(f"haoran: get data {json_data}")
-        print("开始执行自定义动作: 自动挑战地鬼")
+        logger.debug(f"haoran: get data {json_data}")
+        logger.debug("开始执行自定义动作: 自动挑战地鬼")
         value=1
         image = context.tasker.controller.post_screencap().wait().get()
         detail = context.run_recognition("识别地鬼分数",image,  {"识别地鬼分数": {
@@ -34,13 +39,13 @@ class ChallengeDungeonBoss(CustomAction):
             if value.is_integer():
                 value = int(value)
         except ValueError:
-            print("Error: The provided value is not a number.")
+            logger.debug("Error: The provided value is not a number.")
             value=99 #识别错误时默认为99
 
         count = 3 if value > 10000 else 2 if value > 2000 else 1
-        print("挑战地鬼数:", count)
+        logger.debug("挑战地鬼数:", count)
         for _ in range(count):
-            print("开始挑战第", _+1, "只地鬼")
+            logger.debug("开始挑战第", _+1, "只地鬼")
 
             # 筛选模板容易出现分数不够的情况
 
@@ -55,7 +60,7 @@ class ChallengeDungeonBoss(CustomAction):
             # 选择挑战等级
             # TODO
 
-            print("点击挑战")
+            logger.debug("点击挑战")
 
             # 点击挑战
             context.run_task("挑战地鬼", {
@@ -64,14 +69,14 @@ class ChallengeDungeonBoss(CustomAction):
             context.run_task("自动挑战", {
                 "自动挑战": {"timeout": 100, "action": "Custom", "custom_action": "AutoBattle", "custom_action_param": {"group_name" : json_data["group_name"], "team_name" : json_data["team_name"]}}})
 
-            print("等待20秒后重新开始挑战")
+            logger.debug("等待20秒后重新开始挑战")
             time.sleep(20)
-            print("等待识别分享按钮")
+            logger.debug("等待识别分享按钮")
 
             context.run_task("结束战斗",{"结束战斗": {"next":["点击叉叉"],"interrupt":"点击屏幕继续","timeout":300000,},"点击屏幕继续": {
                              "roi":[481,641,380,78],"recognition": "OCR", "expected": "点击屏幕继续", "action": "Click", "target": [275,488,652,112]},"点击叉叉": {"recognition": "TemplateMatch", "template": "通用图标/地鬼_关闭.png", "action": "Click"}})
 
-        print("自动地鬼挑战完成")
+        logger.debug("自动地鬼挑战完成")
         return True
 
     def stop(self) -> None:

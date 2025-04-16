@@ -6,6 +6,9 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
+from app.models.logging.log_manager import log_manager
+
+
 class SwitchSoul(CustomAction):
     def run(self,
             context: Context,
@@ -18,15 +21,15 @@ class SwitchSoul(CustomAction):
         # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
         json_data = json.loads(argv.custom_action_param)
         # 点击预设点
-
-        print("开始执行自定义动作：装备切换御魂")
-        print(f"开始执行自定义动作:装备切换御魂   分组名称为：{json_data['group_name']},队伍名称为：{json_data['team_name']}")
+        logger = log_manager.get_context_logger(context)
+        logger.debug("开始执行自定义动作：装备切换御魂")
+        logger.debug(f"开始执行自定义动作:装备切换御魂   分组名称为：{json_data['group_name']},队伍名称为：{json_data['team_name']}")
         context.run_task("识别预设",{"识别预设":{"timeout":2000,"recognition": "OCR","expected": "预设","roi": [336, 74, 82, 46],"action":"Click"}})
 
         for _ in range(1):
             context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [1085, 442, 152, 60],"start_roi": [1085, 161, 162, 58],"delay": 200}}})
 
-        print("开始执行自定义动作：点击分组")
+        logger.debug("开始执行自定义动作：点击分组")
         time.sleep(0.5)
 
         # 点击分组
@@ -46,9 +49,9 @@ class SwitchSoul(CustomAction):
             else:
                 context.run_task("下一页",{"下一页": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"start_roi": [1085, 442, 152, 60],"end_roi": [1085, 161, 162, 58],"delay": 400}}})
         else:
-            print("点击分组失败")
+            logger.debug("点击分组失败")
 
-        print("开始执行自定义动作：点击队伍")
+        logger.debug("开始执行自定义动作：点击队伍")
         # 点击队伍
         for count in range(1, 10):
             time.sleep(0.5)
@@ -65,7 +68,7 @@ class SwitchSoul(CustomAction):
             else:
                 context.run_task("下一页",{"下一页": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"start_roi": [585, 495, 273, 112],"end_roi": [588, 171, 410, 76],"delay": 400}}})
         else:
-            print("队伍不存在")
+            logger.debug("队伍不存在")
             return False
         return True
 
