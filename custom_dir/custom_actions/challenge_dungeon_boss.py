@@ -5,7 +5,12 @@ import json
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-from app.models.logging.log_manager import log_manager
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 
 class ChallengeDungeonBoss(CustomAction):
@@ -18,7 +23,10 @@ class ChallengeDungeonBoss(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
-        logger = log_manager.get_context_logger(context)
+        if use_default_logging:
+            logger = logging.getLogger("ChallengeDungeonBoss")
+        else:
+            logger = log_manager.get_context_logger(context)
 
         # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
         json_data = json.loads(argv.custom_action_param)

@@ -2,15 +2,22 @@
 from maa.context import Context
 from maa.custom_action import CustomAction
 import random
-
-from app.models.logging.log_manager import log_manager
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 
 class RandomTouch(CustomAction):
     def run(self,
             context: Context,
             argv: CustomAction.RunArg, ) -> bool:
-        logger = log_manager.get_context_logger(context)
+        if use_default_logging:
+            logger = logging.getLogger("RandomTouch")
+        else:
+            logger = log_manager.get_context_logger(context)
         logger.debug("开始执行自定义动作：随机点击")
         x, y, w, h = argv.box.x, argv.box.y, argv.box.w, argv.box.h
         center_x = x + w / 2

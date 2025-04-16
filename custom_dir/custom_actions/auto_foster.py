@@ -6,8 +6,12 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-from app.models.logging.log_manager import log_manager
-
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 # from maa.common_api import Status # 简化后不再严格检查状态
 
@@ -202,7 +206,10 @@ class AutoFoster(CustomAction):
         """
         主执行函数：先收集所有奖励，找到最佳，再回去查找并选择。
         """
-        self.logger=log_manager.get_context_logger(context)
+        if use_default_logging:
+            self.logger = logging.getLogger("AutoFoster")
+        else:
+            self.logger = log_manager.get_context_logger(context)
         self.logger.debug("开始执行自动寄养脚本。")
         try:
             param = json.loads(argv.custom_action_param)

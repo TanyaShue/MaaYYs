@@ -5,7 +5,12 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-from app.models.logging.log_manager import log_manager
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 
 class LoopAction(CustomAction):
@@ -17,7 +22,10 @@ class LoopAction(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功
         """
-        logger = log_manager.get_context_logger(context)
+        if use_default_logging:
+            logger = logging.getLogger("LoopAction")
+        else:
+            logger = log_manager.get_context_logger(context)
         # 读取 custom_param 的参数：{"action_list": ["A", "B", "C"], "loop_times": x}
         json_data = json.loads(argv.custom_action_param)
 

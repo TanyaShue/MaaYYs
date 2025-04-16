@@ -6,8 +6,12 @@ import re
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-from app.models.logging.log_manager import log_manager
-
+try:
+    from app.models.logging.log_manager import log_manager
+    use_default_logging = False
+except ImportError:
+    import logging
+    use_default_logging = True
 
 class BountyMonsterRecognition(CustomAction):
 
@@ -18,7 +22,11 @@ class BountyMonsterRecognition(CustomAction):
         :param context: Running context
         :return: True if executed successfully, otherwise False.
         """
-        logger = log_manager.get_context_logger(context)
+        if use_default_logging:
+            logger = logging.getLogger("BountyMonsterRecognition")
+        else:
+            logger = log_manager.get_context_logger(context)
+
         logger.debug("开始执行自定义动作：识别悬赏妖怪")
         attempts = 0  # Retry counter
 
