@@ -3,14 +3,14 @@
     "action": "Custom",
     "custom_action": "TaskList",
     "custom_action_param": {
-      "task_list": [
-        "日常_送友情点",
-        "领取奖励_邮件",
-        "领取奖励_日常奖励",
-        "领取奖励_商店每日奖励",
-        "领取奖励_花合战奖励",
-        "日常_每日免费一抽"
-      ]
+      "task_list": {
+        "日常_送友情点":true,
+        "领取奖励_邮件": true,
+        "领取奖励_日常奖励": true,
+        "领取奖励_商店每日奖励": true,
+        "领取奖励_花合战奖励": true,
+        "日常_每日免费一抽": true
+      }
     },
     "on_error": "返回庭院"
   },
