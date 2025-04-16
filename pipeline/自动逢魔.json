@@ -47,28 +47,41 @@
     ],
     "template": "石像_日常.png",
     "next": [
-      "点击逢魔_参加"
+      "点击逢魔_识别逢魔"
     ],
     "post_delay": 2000
   },
-  "点击逢魔_参加": {
+  "点击逢魔_识别逢魔": {
     "recognition": "FeatureMatch",
-    "action": "Click",
     "template": "石像_逢魔.png",
-    "target_offset": [
-      270,
-      0,
-      0,
-      0
-    ],
     "roi":[237,140,827,343],
     "next": [
-      "开始现世逢魔"
+      "现世逢魔_点击参加"
     ],
     "on_error": [
       "返回庭院"
     ],
     "post_delay": 2000
+  },
+  "现世逢魔_点击参加": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "现世逢魔_参加__530_162_86_83__480_112_186_183.png",
+    "roi":"点击逢魔_识别逢魔",
+    "roi_offset":[
+      270,
+      0,
+      0,
+      0
+    ],
+    "next": [
+      "开始现世逢魔"
+    ],
+    "post_delay": 2000,
+    "on_error":[
+      "关闭石像日常界面",
+      "返回庭院"
+    ]
   },
   "开始现世逢魔": {
     "next": [
@@ -76,6 +89,14 @@
     ],
     "interrupt": [
       "现世逢魔"
+    ]
+  },
+  "关闭石像日常界面": {
+    "recognition": "FeatureMatch",
+    "action": "Click",
+    "template": "石像_日常_关闭__1119_72_45_44__1069_22_145_144.png",
+    "next": [
+      "返回庭院"
     ]
   },
   "识别是否用完现世逢魔次数": {
