@@ -54,15 +54,15 @@ class SwitchSoul(CustomAction):
             return False
         result = context.run_task("识别是否位于预设界面", {
             "识别是否位于预设界面":{
-                "timeout": 2000,
+                "timeout": 1000,
                 "recognition": "OCR",
                 "expected": "管理分组",
                 "roi": [1128,637,116,52],
             }
         })
-
+        print(result)
         # 检查点击结果
-        if not result:
+        if not result.nodes:
             self._logger.debug("不处于预设选中状态")
 
             # 步骤1：点击预设按钮
@@ -104,7 +104,7 @@ class SwitchSoul(CustomAction):
         })
 
         # 检查点击结果
-        if not result:
+        if not result.nodes:
             self._logger.debug("预设按钮点击失败")
             return False
 
