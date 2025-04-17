@@ -8,79 +8,292 @@ from maa.custom_action import CustomAction
 
 try:
     from app.models.logging.log_manager import log_manager
+
     use_default_logging = False
 except ImportError:
     import logging
+
     use_default_logging = True
 
 
 class SwitchSoul(CustomAction):
+    def __init__(self):
+        super().__init__()
+        self._logger = None
+        self._running = True
+
     def run(self,
             context: Context,
             argv: CustomAction.RunArg, ) -> bool:
         """
-        :param argv: 运行参数
+        执行御魂切换操作
+
         :param context: 运行上下文
-        :return: 是否执行成功。
+        :param argv: 运行参数，需包含 {"group_name": "分组名称", "team_name": "队伍名称"}
+        :return: 是否执行成功
         """
-        # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
-        json_data = json.loads(argv.custom_action_param)
-        # 点击预设点
+        # 初始化日志器
         if use_default_logging:
-            logger = logging.getLogger("SwitchSoul")
+            self._logger = logging.getLogger("SwitchSoul")
         else:
-            logger = log_manager.get_context_logger(context)
-        logger.debug("开始执行自定义动作：装备切换御魂")
-        logger.debug(f"开始执行自定义动作:装备切换御魂   分组名称为：{json_data['group_name']},队伍名称为：{json_data['team_name']}")
-        context.run_task("识别预设",{"识别预设":{"timeout":2000,"recognition": "OCR","expected": "预设","roi": [336, 74, 82, 46],"action":"Click"}})
+            self._logger = log_manager.get_context_logger(context)
 
-        for _ in range(1):
-            context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [1085, 442, 152, 60],"start_roi": [1085, 161, 162, 58],"delay": 200}}})
+        # 解析参数
+        try:
+            json_data = json.loads(argv.custom_action_param)
+            group_name = json_data.get('group_name')
+            team_name = json_data.get('team_name')
 
-        logger.debug("开始执行自定义动作：点击分组")
-        time.sleep(0.5)
+            if not group_name or not team_name:
+                self._logger.error("参数错误：分组名称和队伍名称不能为空")
+                return False
 
-        # 点击分组
-        for count in range(1, 21):
-            time.sleep(1)
-            img=context.tasker.controller.post_screencap().wait().get()
-
-            detail =context.run_recognition("点击分组", img,{"点击分组": {"timeout": 500, "recognition": "OCR", "action": "Click",
-                                                           "expected": json_data["group_name"],
-                                                           "roi": [1085, 86, 162, 542]}})
-            time.sleep(1)
-            if detail is not None:
-                context.tasker.controller.post_click(random.randint(detail.box.x,detail.box.x+detail.box.h),random.randint(detail.box.y,detail.box.y+detail.box.w)).wait()
-                break
-            if count >= 5:
-                context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [1085, 442, 152, 60],"start_roi": [1085, 161, 162, 58],"delay": 400}}})
-            else:
-                context.run_task("下一页",{"下一页": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"start_roi": [1085, 442, 152, 60],"end_roi": [1085, 161, 162, 58],"delay": 400}}})
-        else:
-            logger.debug("点击分组失败")
-
-        logger.debug("开始执行自定义动作：点击队伍")
-        # 点击队伍
-        for count in range(1, 10):
-            time.sleep(0.5)
-            img = context.tasker.controller.post_screencap().wait().get()
-            detail = context.run_recognition("点击队伍", img,{"点击队伍": {"timeout":500,"recognition": "OCR","expected": json_data["team_name"],"roi": [567, 138, 288, 356]}})
-            if detail is not None:
-                time.sleep(0.5)
-                roi=[detail.box.x-30,detail.box.y-30,500,80]
-                time.sleep(0.5)
-                context.run_task("装备御魂", {"装备御魂": {"action": "Click","timeout":500,"recognition": "TemplateMatch","post_delay": 1000,"template": ["通用图标/装备御魂.png","通用图标/装备御魂_2.png"],"roi": roi,"next": "点击确定"},"点击确定": {"action": "Click","timeout":100,"recognition": "OCR","pre_delay":1000,"expected": "确定","roi": [400,350,475,175]}})
-                break
-            if count >= 5:
-                context.run_task("返回最上页分队", {"返回最上页分队": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [585, 495, 273, 112],"start_roi": [588, 171, 410, 76],"delay": 400}}})
-            else:
-                context.run_task("下一页",{"下一页": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"start_roi": [585, 495, 273, 112],"end_roi": [588, 171, 410, 76],"delay": 400}}})
-        else:
-            logger.debug("队伍不存在")
+            self._logger.info(f"开始执行自定义动作：装备切换御魂 - 分组：{group_name}，队伍：{team_name}")
+        except (json.JSONDecodeError, KeyError) as e:
+            self._logger.error(f"参数解析错误: {str(e)}")
             return False
+        result = context.run_task("识别是否位于预设界面", {
+            "识别是否位于预设界面":{
+                "timeout": 2000,
+                "recognition": "OCR",
+                "expected": "管理分组",
+                "roi": [1128,637,116,52],
+            }
+        })
+
+        # 检查点击结果
+        if not result:
+            self._logger.debug("不处于预设选中状态")
+
+            # 步骤1：点击预设按钮
+            if not self._click_preset(context):
+                self._logger.error("点击预设按钮失败")
+                return False
+
+        # 步骤2：查找并点击指定分组
+        if not self._find_and_click_group(context, group_name):
+            self._logger.error(f"找不到指定分组: {group_name}")
+            return False
+
+        # 步骤3：查找并装备指定队伍的御魂
+        if not self._find_and_equip_team(context, team_name):
+            self._logger.error(f"找不到指定队伍或装备失败: {team_name}")
+            return False
+
+        self._logger.info("御魂切换完成")
         return True
 
+    def _click_preset(self, context: Context) -> bool:
+        """点击预设按钮"""
+        self._logger.debug("尝试点击预设按钮")
+        result = context.run_task("识别预设", {
+            "识别预设": {
+                "timeout": 2000,
+                "recognition": "OCR",
+                "expected": "预设",
+                "roi": [334,69,93,50],
+                "action": "Click",
+                "next":"识别是否位于预设界面"
+            },
+            "识别是否位于预设界面":{
+                "timeout": 2000,
+                "recognition": "OCR",
+                "expected": "管理分组",
+                "roi": [1128,637,116,52],
+            }
+        })
+
+        # 检查点击结果
+        if not result:
+            self._logger.debug("预设按钮点击失败")
+            return False
+
+        time.sleep(0.5)  # 等待界面响应
+        return True
+
+    def _find_and_click_group(self, context: Context, group_name: str) -> bool:
+        """
+        查找并点击指定分组
+
+        :param context: 运行上下文
+        :param group_name: 分组名称
+        :return: 是否成功点击
+        """
+        self._logger.debug(f"开始查找分组: {group_name}")
+
+        # 先返回最上方以确保从头开始查找
+        context.run_task("返回最上页分组", {
+            "返回最上页分组": {
+                "action": "Custom",
+                "custom_action": "RandomSwipe",
+                "custom_action_param": {
+                    "end_roi": [1085, 442, 152, 60],
+                    "start_roi": [1085, 161, 162, 58],
+                    "delay": 400
+                }
+            }
+        })
+        time.sleep(0.5)
+
+        # 开始查找分组
+        max_attempts = 10  # 最大尝试次数
+        for attempt in range(1, max_attempts + 1):
+            if not self._running:
+                return False
+
+            self._logger.debug(f"查找分组 - 第{attempt}次尝试")
+
+            # 截图并识别
+            img = context.tasker.controller.post_screencap().wait().get()
+            detail = context.run_recognition("点击分组", img, {
+                "点击分组": {
+                    "timeout": 2000,
+                    "recognition": "OCR",
+                    "action": "Click",
+                    "expected": group_name,
+                    "roi": [1085, 86, 162, 542]
+                }
+            })
+
+            # 找到分组
+            if detail is not None:
+                # 精确点击位置
+                click_x = random.randint(detail.box.x, detail.box.x + detail.box.w)
+                click_y = random.randint(detail.box.y, detail.box.y + detail.box.h)
+                context.tasker.controller.post_click(click_x, click_y).wait()
+                self._logger.debug(f"成功找到并点击分组: {group_name}")
+                return True
+
+            # 未找到分组，尝试滑动到下一页
+            if attempt % 3 == 0:  # 每3次尝试，返回顶部重新开始
+                self._logger.debug("返回顶部重新查找")
+                context.run_task("返回最上页分组", {
+                    "返回最上页分组": {
+                        "action": "Custom",
+                        "custom_action": "RandomSwipe",
+                        "custom_action_param": {
+                            "end_roi": [1085, 442, 152, 60],
+                            "start_roi": [1085, 161, 162, 58],
+                            "delay": 400
+                        }
+                    }
+                })
+            else:
+                # 向下滑动
+                self._logger.debug("向下滑动继续查找")
+                context.run_task("下一页", {
+                    "下一页": {
+                        "action": "Custom",
+                        "post_delay": 1000,  # 减少延迟时间
+                        "custom_action": "RandomSwipe",
+                        "custom_action_param": {
+                            "start_roi": [1085, 442, 152, 60],
+                            "end_roi": [1085, 161, 162, 58],
+                            "delay": 400
+                        }
+                    }
+                })
+
+            time.sleep(0.3)  # 降低等待时间，提高效率
+
+        self._logger.error(f"经过{max_attempts}次尝试，未找到分组: {group_name}")
+        return False
+
+    def _find_and_equip_team(self, context: Context, team_name: str) -> bool:
+        """
+        查找并装备指定队伍的御魂
+
+        :param context: 运行上下文
+        :param team_name: 队伍名称
+        :return: 是否成功装备
+        """
+        self._logger.debug(f"开始查找队伍: {team_name}")
+
+        max_attempts = 8  # 最大尝试次数
+        for attempt in range(1, max_attempts + 1):
+            if not self._running:
+                return False
+
+            self._logger.debug(f"查找队伍 - 第{attempt}次尝试")
+
+            time.sleep(0.5)  # 等待界面稳定
+            img = context.tasker.controller.post_screencap().wait().get()
+            detail = context.run_recognition("点击队伍", img, {
+                "点击队伍": {
+                    "timeout": 2000,
+                    "recognition": "OCR",
+                    "expected": team_name,
+                    "roi": [573,128,255,436]
+                }
+            })
+            time.sleep(0.5)  # 等待界面稳定
+            # 找到队伍
+            if detail is not None:
+                roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
+                self._logger.debug(f"找到队伍: {team_name}，尝试装备御魂")
+                # 点击"装备御魂"按钮，然后点击确定
+                equip_result = context.run_task("装备御魂", {
+                    "装备御魂": {
+                        "action": "Click",
+                        "timeout": 2000,  # 增加超时时间
+                        "recognition": "TemplateMatch",
+                        "post_delay": 100,  # 减少延迟
+                        "template": ["通用图标/装备御魂.png", "通用图标/装备御魂_2.png"],
+                        "roi": roi,
+                        "next": "点击确定"
+                    },
+                    "点击确定": {
+                        "action": "Click",
+                        "timeout": 2000,
+                        "recognition": "OCR",
+                        "pre_delay": 1000,
+                        "expected": "确定",
+                        "roi": [400, 350, 475, 175]
+                    }
+                })
+
+                if equip_result:
+                    self._logger.debug(f"成功装备队伍 {team_name} 的御魂")
+                    return True
+                else:
+                    self._logger.warning(f"找到队伍 {team_name} 但装备御魂失败")
+                    return False
+
+            # 未找到队伍，尝试滑动
+            if attempt % 3 == 0:  # 每3次尝试，返回顶部重新开始
+                self._logger.debug("返回顶部重新查找队伍")
+                context.run_task("返回最上页分队", {
+                    "返回最上页分队": {
+                        "action": "Custom",
+                        "custom_action": "RandomSwipe",
+                        "custom_action_param": {
+                            "end_roi": [585, 495, 273, 112],
+                            "start_roi": [588, 171, 410, 76],
+                            "delay": 500
+                        }
+                    }
+                })
+            else:
+                # 向下滑动
+                self._logger.debug("向下滑动继续查找队伍")
+                context.run_task("下一页", {
+                    "下一页": {
+                        "action": "Custom",
+                        "custom_action": "RandomSwipe",
+                        "custom_action_param": {
+                            "start_roi": [585, 495, 273, 112],
+                            "end_roi": [588, 171, 410, 76],
+                            "delay": 400
+                        }
+                    }
+                })
+
+            time.sleep(0.3)  # 降低等待时间，提高效率
+
+        self._logger.error(f"经过{max_attempts}次尝试，未找到队伍: {team_name}")
+        return False
+
     def stop(self) -> None:
-        pass
-
-
+        """停止执行"""
+        self._logger.debug("停止执行自定义动作")
+        self._running = False
