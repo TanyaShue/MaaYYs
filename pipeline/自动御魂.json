@@ -1,0 +1,64 @@
+{
+    "自动御魂":{
+        "next": [
+            "自动御魂_点击御魂"
+          ],
+          "interrupt": [
+            "点击探索"
+          ],
+          "on_error": "返回庭院"
+        },
+    "自动御魂_点击御魂":{
+        "recognition":"FeatureMatch",
+        "action":"Click",
+        "template":"探索/探索_御魂.png",
+        "roi":[121,575,119,145],
+        "post_delay":1000,
+        "next":"自动御魂_点击大蛇副本"
+    },
+    "自动御魂_点击大蛇副本":{
+        "recognition":"FeatureMatch",
+        "action":"Click",
+        "roi":[8,81,388,623],
+        "template":"御魂副本_八岐大蛇__53_116_198_228__3_66_298_328.png",
+        "post_delay":1000,
+        "next":"自动御魂_点击八岐大蛇"
+    },
+    "自动御魂_点击八岐大蛇":{
+        "recognition":"OCR",
+        "action":"Click",
+        "roi":[39,98,80,514],
+        "expected":"八岐大蛇",
+        "post_delay":1000,
+        "next":"自动御魂_点击目标层数"
+    },
+    "自动御魂_点击目标层数":{
+        "recognition":"OCR",
+        "action":"Click",
+        "expected":"悲鸣",
+        "roi":[163,129,316,507],
+        "post_delay":1000,
+        "next":"自动御魂_点击式神录"
+    },
+    "自动御魂_点击式神录":{
+        "recognition":"FeatureMatch",
+        "action":"Click",
+        "template":"通用_式神录__816_637_55_68__766_587_155_133.png",
+        "post_delay":1000,
+        "roi":[788,616,98,91],
+        "next":"自动御魂_装备挑战御魂副本御魂"
+    },
+    "自动御魂_装备挑战御魂副本御魂":{
+        "action":"Custom",
+        "custom_action":"SwitchSoul",
+        "custom_action_param":{
+            "group_name":"御魂",
+            "team_name":"魂土"
+        },
+        "next":"自动御魂_返回副本界面",
+        "post_delay":2000
+    },
+    "自动御魂_返回副本界面":{
+        
+    }
+}

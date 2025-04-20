@@ -2,9 +2,8 @@
   "testAction": {
     "recognition": "DirectHit",
     "action": "Custom",
-    "custom_action": "BountyMonsterRecognition",
-    "custom_action_param": {
-    }
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {"group_name": "逢魔", "team_name": "逢魔通用"}
   },
 "testTaskList":{
   "recognition": "DirectHit",

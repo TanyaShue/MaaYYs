@@ -23,6 +23,11 @@
             ]
         },
         {
+            "task_name": "测试",
+            "task_entry": "testAction",
+            "option": []
+        },
+        {
             "task_name": "自动悬赏",
             "task_entry": "自动悬赏封印",
             "option": [
