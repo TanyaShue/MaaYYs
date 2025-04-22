@@ -133,7 +133,7 @@ class SwitchSoul(CustomAction):
                 }
             }
         })
-        time.sleep(0.5)
+        time.sleep(1)
 
         # 开始查找分组
         max_attempts = 10  # 最大尝试次数
@@ -194,7 +194,7 @@ class SwitchSoul(CustomAction):
                     }
                 })
 
-            time.sleep(0.3)  # 降低等待时间，提高效率
+            time.sleep(1)  # 降低等待时间，提高效率
 
         self._logger.error(f"经过{max_attempts}次尝试，未找到分组: {group_name}")
         return False
@@ -288,7 +288,7 @@ class SwitchSoul(CustomAction):
                     }
                 })
 
-            time.sleep(0.3)  # 降低等待时间，提高效率
+            time.sleep(1)  # 降低等待时间，提高效率
 
         self._logger.error(f"经过{max_attempts}次尝试，未找到队伍: {team_name}")
         return False
