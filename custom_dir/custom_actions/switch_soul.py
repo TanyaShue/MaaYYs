@@ -6,14 +6,6 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-try:
-    from app.models.logging.log_manager import log_manager
-
-    use_default_logging = False
-except ImportError:
-    import logging
-
-    use_default_logging = True
 
 
 class SwitchSoul(CustomAction):
@@ -32,11 +24,6 @@ class SwitchSoul(CustomAction):
         :param argv: 运行参数，需包含 {"group_name": "分组名称", "team_name": "队伍名称"}
         :return: 是否执行成功
         """
-        # 初始化日志器
-        if use_default_logging:
-            self._logger = logging.getLogger("SwitchSoul")
-        else:
-            self._logger = log_manager.get_context_logger(context)
 
         # 解析参数
         try:
@@ -45,12 +32,12 @@ class SwitchSoul(CustomAction):
             team_name = json_data.get('team_name')
 
             if not group_name or not team_name:
-                self._logger.error("参数错误：分组名称和队伍名称不能为空")
+                print("参数错误：分组名称和队伍名称不能为空")
                 return False
 
-            self._logger.info(f"开始执行自定义动作：装备切换御魂 - 分组：{group_name}，队伍：{team_name}")
+            print(f"开始执行自定义动作：装备切换御魂 - 分组：{group_name}，队伍：{team_name}")
         except (json.JSONDecodeError, KeyError) as e:
-            self._logger.error(f"参数解析错误: {str(e)}")
+            print(f"参数解析错误: {str(e)}")
             return False
         result = context.run_task("识别是否位于预设界面", {
             "识别是否位于预设界面":{
@@ -63,29 +50,29 @@ class SwitchSoul(CustomAction):
         print(result)
         # 检查点击结果
         if not result.nodes:
-            self._logger.debug("不处于预设选中状态")
+            print("不处于预设选中状态")
 
             # 步骤1：点击预设按钮
             if not self._click_preset(context):
-                self._logger.error("点击预设按钮失败")
+                print("点击预设按钮失败")
                 return False
 
         # 步骤2：查找并点击指定分组
         if not self._find_and_click_group(context, group_name):
-            self._logger.error(f"找不到指定分组: {group_name}")
+            print(f"找不到指定分组: {group_name}")
             return False
 
         # 步骤3：查找并装备指定队伍的御魂
         if not self._find_and_equip_team(context, team_name):
-            self._logger.error(f"找不到指定队伍或装备失败: {team_name}")
+            print(f"找不到指定队伍或装备失败: {team_name}")
             return False
 
-        self._logger.info("御魂切换完成")
+        print("御魂切换完成")
         return True
 
     def _click_preset(self, context: Context) -> bool:
         """点击预设按钮"""
-        self._logger.debug("尝试点击预设按钮")
+        print("尝试点击预设按钮")
         result = context.run_task("识别预设", {
             "识别预设": {
                 "timeout": 2000,
@@ -105,7 +92,7 @@ class SwitchSoul(CustomAction):
 
         # 检查点击结果
         if not result.nodes:
-            self._logger.debug("预设按钮点击失败")
+            print("预设按钮点击失败")
             return False
 
         time.sleep(0.5)  # 等待界面响应
@@ -119,7 +106,7 @@ class SwitchSoul(CustomAction):
         :param group_name: 分组名称
         :return: 是否成功点击
         """
-        self._logger.debug(f"开始查找分组: {group_name}")
+        print(f"开始查找分组: {group_name}")
 
         # 先返回最上方以确保从头开始查找
         context.run_task("返回最上页分组", {
@@ -141,7 +128,7 @@ class SwitchSoul(CustomAction):
             if not self._running:
                 return False
 
-            self._logger.debug(f"查找分组 - 第{attempt}次尝试")
+            print(f"查找分组 - 第{attempt}次尝试")
 
             # 截图并识别
             img = context.tasker.controller.post_screencap().wait().get()
@@ -161,12 +148,12 @@ class SwitchSoul(CustomAction):
                 click_x = random.randint(detail.box.x, detail.box.x + detail.box.w)
                 click_y = random.randint(detail.box.y, detail.box.y + detail.box.h)
                 context.tasker.controller.post_click(click_x, click_y).wait()
-                self._logger.debug(f"成功找到并点击分组: {group_name}")
+                print(f"成功找到并点击分组: {group_name}")
                 return True
 
             # 未找到分组，尝试滑动到下一页
             if attempt % 3 == 0:  # 每3次尝试，返回顶部重新开始
-                self._logger.debug("返回顶部重新查找")
+                print("返回顶部重新查找")
                 context.run_task("返回最上页分组", {
                     "返回最上页分组": {
                         "action": "Custom",
@@ -180,7 +167,7 @@ class SwitchSoul(CustomAction):
                 })
             else:
                 # 向下滑动
-                self._logger.debug("向下滑动继续查找")
+                print("向下滑动继续查找")
                 context.run_task("下一页", {
                     "下一页": {
                         "action": "Custom",
@@ -196,7 +183,7 @@ class SwitchSoul(CustomAction):
 
             time.sleep(1)  # 降低等待时间，提高效率
 
-        self._logger.error(f"经过{max_attempts}次尝试，未找到分组: {group_name}")
+        print(f"经过{max_attempts}次尝试，未找到分组: {group_name}")
         return False
 
     def _find_and_equip_team(self, context: Context, team_name: str) -> bool:
@@ -207,14 +194,14 @@ class SwitchSoul(CustomAction):
         :param team_name: 队伍名称
         :return: 是否成功装备
         """
-        self._logger.debug(f"开始查找队伍: {team_name}")
+        print(f"开始查找队伍: {team_name}")
 
         max_attempts = 8  # 最大尝试次数
         for attempt in range(1, max_attempts + 1):
             if not self._running:
                 return False
 
-            self._logger.debug(f"查找队伍 - 第{attempt}次尝试")
+            print(f"查找队伍 - 第{attempt}次尝试")
 
             time.sleep(0.5)  # 等待界面稳定
             img = context.tasker.controller.post_screencap().wait().get()
@@ -230,7 +217,7 @@ class SwitchSoul(CustomAction):
             # 找到队伍
             if detail is not None:
                 roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
-                self._logger.debug(f"找到队伍: {team_name}，尝试装备御魂")
+                print(f"找到队伍: {team_name}，尝试装备御魂")
                 # 点击"装备御魂"按钮，然后点击确定
                 equip_result = context.run_task("装备御魂", {
                     "装备御魂": {
@@ -253,15 +240,15 @@ class SwitchSoul(CustomAction):
                 })
 
                 if equip_result:
-                    self._logger.debug(f"成功装备队伍 {team_name} 的御魂")
+                    print(f"成功装备队伍 {team_name} 的御魂")
                     return True
                 else:
-                    self._logger.warning(f"找到队伍 {team_name} 但装备御魂失败")
+                    print(f"找到队伍 {team_name} 但装备御魂失败")
                     return False
 
             # 未找到队伍，尝试滑动
             if attempt % 3 == 0:  # 每3次尝试，返回顶部重新开始
-                self._logger.debug("返回顶部重新查找队伍")
+                print("返回顶部重新查找队伍")
                 context.run_task("返回最上页分队", {
                     "返回最上页分队": {
                         "action": "Custom",
@@ -275,7 +262,7 @@ class SwitchSoul(CustomAction):
                 })
             else:
                 # 向下滑动
-                self._logger.debug("向下滑动继续查找队伍")
+                print("向下滑动继续查找队伍")
                 context.run_task("下一页", {
                     "下一页": {
                         "action": "Custom",
@@ -290,10 +277,10 @@ class SwitchSoul(CustomAction):
 
             time.sleep(1)  # 降低等待时间，提高效率
 
-        self._logger.error(f"经过{max_attempts}次尝试，未找到队伍: {team_name}")
+        print(f"经过{max_attempts}次尝试，未找到队伍: {team_name}")
         return False
 
     def stop(self) -> None:
         """停止执行"""
-        self._logger.debug("停止执行自定义动作")
+        print("停止执行自定义动作")
         self._running = False
