@@ -4,13 +4,6 @@ from maa.custom_action import CustomAction
 import random
 import json
 
-try:
-    from app.models.logging.log_manager import log_manager
-    use_default_logging = False
-except ImportError:
-    import logging
-    use_default_logging = True
-
 class RandomSwipe(CustomAction):
     def run(self,
             context: Context,
@@ -22,11 +15,8 @@ class RandomSwipe(CustomAction):
         :param context: 运行上下文，提供 swipe 方法。
         :return: 滑动是否成功。
         """
-        if use_default_logging:
-            logger = logging.getLogger("RandomSwipe")
-        else:
-            logger = log_manager.get_context_logger(context)
-        logger.debug("开始执行自定义动作: 随机滑动")
+
+        print("开始执行自定义动作: 随机滑动")
 
         try:
             params = json.loads(argv.custom_action_param)
@@ -44,7 +34,7 @@ class RandomSwipe(CustomAction):
             context.tasker.controller.post_swipe(start_x, start_y, end_x, end_y, duration)
             return True
         except (json.JSONDecodeError, KeyError) as e:
-            logger.debug(f"Swipe action failed: {e}")
+            print(f"Swipe action failed: {e}")
             return False
         
     

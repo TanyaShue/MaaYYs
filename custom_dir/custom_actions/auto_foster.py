@@ -6,14 +6,6 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-try:
-    from app.models.logging.log_manager import log_manager
-    use_default_logging = False
-except ImportError:
-    import logging
-    use_default_logging = True
-
-# from maa.common_api import Status # 简化后不再严格检查状态
 
 class AutoFoster(CustomAction):
     """
@@ -35,11 +27,6 @@ class AutoFoster(CustomAction):
 
     # --- 辅助方法 ---
 
-    def __init__(self):
-        super().__init__()
-        self.logger = None
-
-
     def _parse_reward_text(self, text: str | None) -> tuple[str | None, int]:
         """解析奖励文本，例如 '勾玉+10'"""
         if not text:
@@ -51,15 +38,15 @@ class AutoFoster(CustomAction):
                     reward_type = parts[0].strip()
                     reward_value = int(parts[1].strip())
                     return reward_type, reward_value
-            # self.logger.debug(f"无法解析奖励文本: '{text}'") # 按需取消注释
+            # print(f"无法解析奖励文本: '{text}'") # 按需取消注释
             return None, 0
         except Exception as e:
-            self.logger.debug(f"解析奖励文本 '{text}' 时出错: {e}")
+            print(f"解析奖励文本 '{text}' 时出错: {e}")
             return None, 0
 
     def _click_target_and_get_reward(self, context: Context, target_result) -> tuple[str | None, int]:
         """点击目标，等待，识别并解析奖励"""
-        # self.logger.debug(f"点击目标: {target_result.box}") # 按需取消注释
+        # print(f"点击目标: {target_result.box}") # 按需取消注释
         # 点击目标中心
         x = target_result.box[0] + target_result.box[2] / 2
         y = target_result.box[1] + target_result.box[3] / 2
@@ -79,10 +66,10 @@ class AutoFoster(CustomAction):
             if not reward_text and isinstance(earnings_recog.best_result, str):
                  reward_text = earnings_recog.best_result
 
-            # self.logger.debug(f"识别到的奖励文本: '{reward_text}'") # 按需取消注释
+            # print(f"识别到的奖励文本: '{reward_text}'") # 按需取消注释
             reward_type, reward_value = self._parse_reward_text(reward_text)
         else:
-            self.logger.debug("未能识别奖励或没有找到最佳结果。")
+            print("未能识别奖励或没有找到最佳结果。")
 
         return reward_type, reward_value
 
@@ -94,7 +81,7 @@ class AutoFoster(CustomAction):
 
         # 简化处理：假设识别成功且 filterd_results 存在
         if targets_recog and getattr(targets_recog, "filterd_results", None):
-            self.logger.debug(f"当前页找到 {len(targets_recog.filterd_results)} 个目标。")
+            print(f"当前页找到 {len(targets_recog.filterd_results)} 个目标。")
             for target in targets_recog.filterd_results:
                 reward_type, reward_value = self._click_target_and_get_reward(context, target)
                 if reward_type is not None and reward_value > 0:
@@ -104,7 +91,7 @@ class AutoFoster(CustomAction):
                         "yield_value": reward_value
                     })
         else:
-            self.logger.debug("当前页未找到目标。")
+            print("当前页未找到目标。")
         return page_results
 
     def _collect_all_rewards_from_tab(self, context: Context) -> list[dict]:
@@ -113,12 +100,12 @@ class AutoFoster(CustomAction):
         page_count = 0
         while True:
             page_count += 1
-            self.logger.debug(f"扫描当前标签页的第 {page_count} 页...")
+            print(f"扫描当前标签页的第 {page_count} 页...")
             page_rewards = self._collect_rewards_from_current_page(context)
 
             # 简化判断：如果某页（非第一页）没收到奖励，就认为结束了
             if not page_rewards and page_count > 1:
-                 self.logger.debug("此页未找到奖励，假设是当前标签页末尾。")
+                 print("此页未找到奖励，假设是当前标签页末尾。")
                  break
 
             all_tab_rewards.extend(page_rewards)
@@ -129,7 +116,7 @@ class AutoFoster(CustomAction):
 
             # 添加一个基础的页数限制防止意外死循环 (可选)
             if page_count > 5: # 设定一个较大的上限
-                self.logger.debug("警告：已扫描超过5页，可能存在问题，停止扫描此标签页。")
+                print("警告：已扫描超过5页，可能存在问题，停止扫描此标签页。")
                 break
 
         return all_tab_rewards
@@ -147,16 +134,16 @@ class AutoFoster(CustomAction):
             # 在优先类型中找最大值
             best_value = max(r["yield_value"] for r in priority_rewards)
             best_reward = next((r for r in priority_rewards if r["yield_value"] == best_value), None)
-            self.logger.debug(f"最佳优先奖励 ({prioritized_type}): 价值 {best_value}")
+            print(f"最佳优先奖励 ({prioritized_type}): 价值 {best_value}")
         else:
             # 如果没有优先类型的奖励，则在所有奖励中找最大值
             if all_rewards: # 确保列表不为空
                 best_value = max(r["yield_value"] for r in all_rewards)
                 best_reward = next((r for r in all_rewards if r["yield_value"] == best_value), None)
                 if best_reward:
-                    self.logger.debug(f"未找到优先类型奖励。最佳全局奖励 ({best_reward['yield_type']}): 价值 {best_value}")
+                    print(f"未找到优先类型奖励。最佳全局奖励 ({best_reward['yield_type']}): 价值 {best_value}")
             else:
-                 self.logger.debug("奖励列表为空，无法确定最佳奖励。")
+                 print("奖励列表为空，无法确定最佳奖励。")
 
 
         return best_reward
@@ -166,26 +153,26 @@ class AutoFoster(CustomAction):
         page_count = 0
         while True:
             page_count += 1
-            self.logger.debug(f"在当前标签页第 {page_count} 页搜索最佳奖励...")
+            print(f"在当前标签页第 {page_count} 页搜索最佳奖励...")
             img = context.tasker.controller.post_screencap().wait().get()
             targets_recog = context.run_recognition(self.TASK_RECOG_TARGET, img)
 
             targets_found = False
             if targets_recog and getattr(targets_recog, "filterd_results", None):
                 targets_found = True
-                self.logger.debug(f"找到 {len(targets_recog.filterd_results)} 个目标，检查是否匹配...")
+                print(f"找到 {len(targets_recog.filterd_results)} 个目标，检查是否匹配...")
                 for target in targets_recog.filterd_results:
                     # 再次点击并检查奖励
                     reward_type, reward_value = self._click_target_and_get_reward(context, target)
 
                     if reward_type == best_reward["yield_type"] and reward_value == best_reward["yield_value"]:
-                        self.logger.debug(f"找到并选择了最佳奖励: {reward_type} +{reward_value}")
+                        print(f"找到并选择了最佳奖励: {reward_type} +{reward_value}")
 
                         return True # 成功找到并选择
 
             # 如果当前页（非第一页）没找到目标，认为结束
             if not targets_found and page_count > 1:
-                 self.logger.debug("当前页未找到目标，假设搜索结束。")
+                 print("当前页未找到目标，假设搜索结束。")
                  break
 
             # 尝试翻页
@@ -194,10 +181,10 @@ class AutoFoster(CustomAction):
 
             # 添加一个基础的页数限制 (可选)
             if page_count > 50:
-                self.logger.debug("警告：搜索时已扫描超过50页，停止搜索此标签页。")
+                print("警告：搜索时已扫描超过50页，停止搜索此标签页。")
                 break
 
-        self.logger.debug("在此标签页未找到最佳奖励。")
+        print("在此标签页未找到最佳奖励。")
         return False # 在此标签页未找到
 
     # --- 主执行逻辑 ---
@@ -206,76 +193,72 @@ class AutoFoster(CustomAction):
         """
         主执行函数：先收集所有奖励，找到最佳，再回去查找并选择。
         """
-        if use_default_logging:
-            self.logger = logging.getLogger("AutoFoster")
-        else:
-            self.logger = log_manager.get_context_logger(context)
-        self.logger.debug("开始执行自动寄养脚本。")
+        print("开始执行自动寄养脚本。")
         try:
             param = json.loads(argv.custom_action_param)
             foster_target_pref = param.get("FosterTarget", 1) # 1: 勾玉, 2: 体力
         except Exception as e:
-            self.logger.debug(f"解析参数失败: {argv.custom_action_param}。错误: {e}")
-            self.logger.debug("默认使用勾玉优先 (1)。")
+            print(f"解析参数失败: {argv.custom_action_param}。错误: {e}")
+            print("默认使用勾玉优先 (1)。")
             foster_target_pref = 1
 
         prioritized_type = "勾玉" if foster_target_pref == 1 else "体力"
-        self.logger.debug(f"设置优先级为: {prioritized_type}")
+        print(f"设置优先级为: {prioritized_type}")
 
         all_rewards = []
 
         # --- 阶段 1: 收集所有奖励信息 ---
         # 收集好友标签页
-        self.logger.debug("切换到好友标签页...")
+        print("切换到好友标签页...")
         context.run_task(self.TASK_CLICK_FRIEND_TAB)
         time.sleep(self.WAIT_SHORT)
         friend_rewards = self._collect_all_rewards_from_tab(context)
         all_rewards.extend(friend_rewards)
-        self.logger.debug(f"从好友标签页收集到 {len(friend_rewards)} 个奖励信息。")
+        print(f"从好友标签页收集到 {len(friend_rewards)} 个奖励信息。")
 
         # 收集跨区好友标签页
-        self.logger.debug("切换到跨区好友标签页...")
+        print("切换到跨区好友标签页...")
         context.run_task(self.TASK_CLICK_CROSS_TAB)
         time.sleep(self.WAIT_SHORT)
         cross_rewards = self._collect_all_rewards_from_tab(context)
         all_rewards.extend(cross_rewards)
-        self.logger.debug(f"从跨区好友标签页收集到 {len(cross_rewards)} 个奖励信息。")
+        print(f"从跨区好友标签页收集到 {len(cross_rewards)} 个奖励信息。")
 
-        self.logger.debug(f"总共收集到 {len(all_rewards)} 个奖励信息。")
-        # self.logger.debug(f"所有收集到的奖励: {all_rewards}") # 按需取消注释
+        print(f"总共收集到 {len(all_rewards)} 个奖励信息。")
+        # print(f"所有收集到的奖励: {all_rewards}") # 按需取消注释
 
         if not all_rewards:
-            self.logger.debug("未在任何标签页找到可寄养的奖励。脚本结束。")
+            print("未在任何标签页找到可寄养的奖励。脚本结束。")
             return False # 返回 False 表示未执行选择操作
 
         # 找出最佳奖励
         best_reward = self._find_best_reward(all_rewards, prioritized_type)
 
         if not best_reward:
-             self.logger.debug("虽然收集到了奖励信息，但未能确定最佳奖励。脚本结束。")
+             print("虽然收集到了奖励信息，但未能确定最佳奖励。脚本结束。")
              return False
 
-        self.logger.debug(f"计算出的最佳奖励为: {best_reward['yield_type']} +{best_reward['yield_value']}")
+        print(f"计算出的最佳奖励为: {best_reward['yield_type']} +{best_reward['yield_value']}")
 
         # --- 阶段 2: 查找并选择最佳奖励 ---
         # 首先在好友标签页查找
-        self.logger.debug("切换回好友标签页进行查找和选择...")
+        print("切换回好友标签页进行查找和选择...")
         context.run_task(self.TASK_CLICK_FRIEND_TAB)
         time.sleep(self.WAIT_SHORT)
         if self._find_and_select_best_on_tab(context, best_reward):
-            self.logger.debug("已成功在好友标签页找到并选择最佳奖励。")
+            print("已成功在好友标签页找到并选择最佳奖励。")
             return True # 成功找到并选择
 
         # 如果好友页没找到，则去跨区好友页查找
-        self.logger.debug("切换到跨区好友标签页进行查找和选择...")
+        print("切换到跨区好友标签页进行查找和选择...")
         context.run_task(self.TASK_CLICK_CROSS_TAB)
         time.sleep(self.WAIT_SHORT)
         if self._find_and_select_best_on_tab(context, best_reward):
-            self.logger.debug("已成功在跨区好友标签页找到并选择最佳奖励。")
+            print("已成功在跨区好友标签页找到并选择最佳奖励。")
             return True # 成功找到并选择
 
         # 如果两个标签页都没找到（可能因为列表刷新等原因）
-        self.logger.debug("警告：在第二阶段未能重新找到之前计算出的最佳奖励。")
+        print("警告：在第二阶段未能重新找到之前计算出的最佳奖励。")
         return False # 返回 False 表示找到了最佳值但未能成功点击
 
     def stop(self):

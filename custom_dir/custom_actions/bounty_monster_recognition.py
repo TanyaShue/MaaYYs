@@ -6,12 +6,6 @@ import re
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-try:
-    from app.models.logging.log_manager import log_manager
-    use_default_logging = False
-except ImportError:
-    import logging
-    use_default_logging = True
 
 class BountyMonsterRecognition(CustomAction):
 
@@ -22,12 +16,8 @@ class BountyMonsterRecognition(CustomAction):
         :param context: Running context
         :return: True if executed successfully, otherwise False.
         """
-        if use_default_logging:
-            logger = logging.getLogger("BountyMonsterRecognition")
-        else:
-            logger = log_manager.get_context_logger(context)
 
-        logger.debug("开始执行自定义动作：识别悬赏妖怪")
+        print("开始执行自定义动作：识别悬赏妖怪")
         attempts = 0  # Retry counter
 
         while attempts < 5:
@@ -53,14 +43,14 @@ class BountyMonsterRecognition(CustomAction):
                     results.extend(detail_2.filterd_results)
 
                 if results:
-                    logger.debug(f"{results}")
+                    print(f"{results}")
                     for result in results:
                         # 当结果text符合正则直接跳过
                         if result and hasattr(result, "text"):
                             if self.matches_regex(result.text):
                                 continue
 
-                        logger.debug(f"识别到妖怪：{result}")
+                        print(f"识别到妖怪：{result}")
                         img = context.tasker.controller.post_screencap().wait().get()
                         detail_recognition = context.run_recognition(
                             "悬赏封印_识别完成度",
@@ -69,8 +59,8 @@ class BountyMonsterRecognition(CustomAction):
                         )
 
                         if detail_recognition:
-                            logger.debug(f"完成度为：{detail_recognition}")
-                            logger.debug("该目标的完成度已满")
+                            print(f"完成度为：{detail_recognition}")
+                            print("该目标的完成度已满")
                             continue
 
                         # 随机点击识别到的妖怪位置
@@ -86,7 +76,7 @@ class BountyMonsterRecognition(CustomAction):
                         )
 
                         if detail_click is None:
-                            logger.debug("未处于线索界面，尝试重新识别妖怪")
+                            print("未处于线索界面，尝试重新识别妖怪")
                             context.run_task("悬赏封印_关闭章节界面")
                             context.run_task("悬赏封印_关闭线索界面")
                             continue
@@ -105,15 +95,15 @@ class BountyMonsterRecognition(CustomAction):
                     # attempts += 1
 
                 else:
-                    logger.debug("没有有效的结果进行处理")
+                    print("没有有效的结果进行处理")
             else:
-                logger.debug("未识别到妖怪")
+                print("未识别到妖怪")
             context.run_task("识别探索目标_向上滑动")
 
             attempts += 1  # Increment retry count
-            logger.debug(f"尝试次数 attempts=: {attempts}")
+            print(f"尝试次数 attempts=: {attempts}")
 
-        logger.debug("识别悬赏妖怪结束")
+        print("识别悬赏妖怪结束")
         return True
 
     def stop(self) -> None:

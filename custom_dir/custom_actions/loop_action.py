@@ -5,12 +5,6 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
-try:
-    from app.models.logging.log_manager import log_manager
-    use_default_logging = False
-except ImportError:
-    import logging
-    use_default_logging = True
 
 
 class LoopAction(CustomAction):
@@ -22,10 +16,7 @@ class LoopAction(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功
         """
-        if use_default_logging:
-            logger = logging.getLogger("LoopAction")
-        else:
-            logger = log_manager.get_context_logger(context)
+
         # 读取 custom_param 的参数：{"action_list": ["A", "B", "C"], "loop_times": x}
         json_data = json.loads(argv.custom_action_param)
 
@@ -34,23 +25,23 @@ class LoopAction(CustomAction):
         loop_times = json_data.get("loop_times", 1)
 
         if not action_list or loop_times < 1:
-            logger.debug("无效的action_list或loop_times")
+            print("无效的action_list或loop_times")
             return False
 
-        logger.debug(f"开始执行动作列表 {action_list}，循环 {loop_times} 次")
+        print(f"开始执行动作列表 {action_list}，循环 {loop_times} 次")
 
         for i in range(loop_times):
-            logger.debug(f"第 {i + 1} 次循环开始")
+            print(f"第 {i + 1} 次循环开始")
 
             for action in action_list:
                 action_time_name = f"{action}_action_time"
-                logger.debug(f"执行动作: {action_time_name}")
+                print(f"执行动作: {action_time_name}")
 
                 context.run_task(action_time_name, {action_time_name:{"next":action}})
 
                 time.sleep(0.5)  # 可根据需求设置不同的延迟
 
-            logger.debug(f"第 {i + 1} 次循环结束")
+            print(f"第 {i + 1} 次循环结束")
 
         return True
 
