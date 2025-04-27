@@ -1,11 +1,14 @@
-<p align="center">
-  <img alt="MaaYYs LOGO" src="app/logo.png" width="256" height="256" />
-</p>
-
 <div align="center">
+  <img src="app/logo.png" alt="MaaYYs Logo" width="256" height="256" />
   <h1>MaaYYs</h1>
-  <p>基于 MaaFramework 的痒痒鼠自动化应用，帮助玩家完成日常任务</p>
-</div>
+  <p>基于 <a href="https://github.com/MaaXYZ/MaaFramework" target="_blank">MaaFramework</a> 的痒痒鼠自动化应用，助力玩家高效完成日常任务</p>
+  <p>
+    <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" alt="Python" />
+    <a href="https://mirrorchyan.com/zh/projects" target="_blank">
+      <img src="https://img.shields.io/badge/Mirror%E9%85%B1-%239af3f6?logo=countingworkspro&logoColor=4f46e5" alt="Mirror酱" />
+    </a>
+  </p>
+</div>  
 
 ---
 
