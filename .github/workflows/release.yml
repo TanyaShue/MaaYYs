@@ -99,32 +99,36 @@ jobs:
       - name: Prepare resource directory
         shell: pwsh
         run: |
-          # 定义要包含的文件和文件夹列表
-          $includeList = @('app', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md', 'resource_config.json')
-          
+          # 定义要排除的文件和文件夹列表
+          $excludeList = @('.git', '.github', '.idea','.gitignore', '.gitattributes','debug', 'dist', 'mfwph-download', 'mfwph-extracted', 'resources-temp')
+
           # 确保资源目录存在
           New-Item -Path "mfwph-extracted/assets/resource/MaaYYs" -ItemType Directory -Force
-          
+
           # 清空目标资源目录（如果存在）
           if (Test-Path -Path "mfwph-extracted/assets/resource/MaaYYs") {
             Get-ChildItem -Path "mfwph-extracted/assets/resource/MaaYYs" | Remove-Item -Recurse -Force
           }
-          
-          # 仅复制包含列表中的文件和文件夹
-          foreach ($item in $includeList) {
-            $sourcePath = "MaaYYs/$item"
-            if (Test-Path -Path $sourcePath) {
-              if (Test-Path -Path $sourcePath -PathType Container) {
+
+          # 获取源目录中的所有文件和文件夹
+          $allItems = Get-ChildItem -Path "MaaYYs" -Force
+
+          # 复制不在排除列表中的所有文件和文件夹
+          foreach ($item in $allItems) {
+            $itemName = $item.Name
+            if ($excludeList -notcontains $itemName) {
+              if (Test-Path -Path $item.FullName -PathType Container) {
                 # 如果是目录，则递归复制
-                New-Item -Path "mfwph-extracted/assets/resource/MaaYYs/$item" -ItemType Directory -Force
-                Copy-Item -Path "$sourcePath/*" -Destination "mfwph-extracted/assets/resource/MaaYYs/$item" -Recurse -Force
+                New-Item -Path "mfwph-extracted/assets/resource/MaaYYs/$itemName" -ItemType Directory -Force
+                Copy-Item -Path "$($item.FullName)/*" -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Recurse -Force
+                Write-Host "Copied directory $itemName to resource directory"
               } else {
                 # 如果是文件，则直接复制
-                Copy-Item -Path $sourcePath -Destination "mfwph-extracted/assets/resource/MaaYYs/$item" -Force
+                Copy-Item -Path $item.FullName -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Force
+                Write-Host "Copied file $itemName to resource directory"
               }
-              Write-Host "Copied $item to resource directory"
             } else {
-              Write-Host "Warning: $item not found in source repository"
+              Write-Host "Excluded $itemName from resource directory"
             }
           }
           Write-Host "Resources copied successfully to MFWPH package"
