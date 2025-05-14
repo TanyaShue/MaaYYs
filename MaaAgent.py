@@ -87,6 +87,7 @@ def main():
     print(f"使用自定义路径: {custom_objects_path}")
     print(f"使用Socket ID: {socket_id}")
 
+
     load_custom_objects(AgentServer, custom_objects_path)
     print("当前socket_id:", socket_id)
     AgentServer.start_up(socket_id)
