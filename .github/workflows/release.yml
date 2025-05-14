@@ -20,6 +20,28 @@ jobs:
           path: MaaYYs
           fetch-depth: 0  # 获取完整历史以便生成变更日志
 
+      - name: Update resource_version in config file
+        shell: pwsh
+        working-directory: MaaYYs
+        run: |
+          # Get the current tag
+          $currentTag = "${{ github.ref_name }}"
+          Write-Host "Updating resource_config.json with version: $currentTag"
+
+          # Read the existing resource_config.json
+          $configPath = "resource_config.json"
+          $configContent = Get-Content -Path $configPath -Raw | ConvertFrom-Json
+
+          # Update the resource_version property
+          $configContent.resource_version = $currentTag
+
+          # Write the updated content back to the file
+          $configContent | ConvertTo-Json -Depth 10 | Set-Content -Path $configPath
+
+          Write-Host "resource_config.json updated successfully"
+          Get-Content -Path $configPath
+          
+
       - name: Generate Changelog
         id: changelog
         shell: pwsh
