@@ -8,6 +8,7 @@
     "resource_icon": "/icons/apps_icons/R.png",
     "custom_path": "./MaaAgent.py",
     "custom_prams": "-path ./custom_dir",
+    "custom_dir": "./custom_dir",
     "resource_tasks": [
         {
             "task_name": "打开游戏",
