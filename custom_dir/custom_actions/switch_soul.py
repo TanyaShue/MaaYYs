@@ -116,11 +116,11 @@ class SwitchSoul(CustomAction):
                 "custom_action_param": {
                     "end_roi": [1085, 442, 152, 60],
                     "start_roi": [1085, 161, 162, 58],
-                    "delay": 400
+                    "delay": 1000
                 }
             }
         })
-        time.sleep(1)
+        time.sleep(2)
 
         # 开始查找分组
         max_attempts = 10  # 最大尝试次数
@@ -161,7 +161,7 @@ class SwitchSoul(CustomAction):
                         "custom_action_param": {
                             "end_roi": [1085, 442, 152, 60],
                             "start_roi": [1085, 161, 162, 58],
-                            "delay": 400
+                            "delay": 1000
                         }
                     }
                 })
@@ -176,12 +176,12 @@ class SwitchSoul(CustomAction):
                         "custom_action_param": {
                             "start_roi": [1085, 442, 152, 60],
                             "end_roi": [1085, 161, 162, 58],
-                            "delay": 400
+                            "delay": 1000
                         }
                     }
                 })
 
-            time.sleep(1)  # 降低等待时间，提高效率
+            time.sleep(2)  # 降低等待时间，提高效率
 
         print(f"经过{max_attempts}次尝试，未找到分组: {group_name}")
         return False
