@@ -307,7 +307,9 @@
     "点击开始探索": {
         "recognition": "OCR",
         "action": "Click",
+        "timeout": 3000,
         "next": [
+            "悬赏封印1",
             "探索_悬赏_自动轮换",
             "探索_悬赏_自动挑战"
         ],
@@ -436,5 +438,17 @@
             97
         ],
         "template": "通用图标/关闭.png"
+    },
+    "悬赏封印1": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "timeout": 5000,
+        "next": [
+            "探索_悬赏_自动轮换",
+            "探索_悬赏_自动挑战"
+        ],
+        "template": [
+            "悬赏封印\\悬赏封印1.png"
+        ]
     }
 }
