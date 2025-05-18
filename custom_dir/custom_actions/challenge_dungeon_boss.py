@@ -28,10 +28,9 @@ class ChallengeDungeonBoss(CustomAction):
         detail = context.run_recognition("识别地鬼分数", image, {"识别地鬼分数": {
             "recognition": "OCR", "expected": r"\d+", "roi": [1175, 15, 98, 77]}})
 
-        try:
-            if detail is None:
-                raise AttributeError("detail is None")
-
+        if detail is None:
+            value=100
+        else:
             results = getattr(detail, "filtered_results", None)
             if not results or len(results) == 0:
                 raise IndexError("filtered_results is empty or missing")
@@ -42,9 +41,7 @@ class ChallengeDungeonBoss(CustomAction):
             if value.is_integer():
                 value = int(value)
 
-        except (ValueError, IndexError, AttributeError) as e:
-            print(f"Error parsing value from detail: {e}")
-            value = 99
+
 
         count = 3 if value > 10000 else 2 if value > 2000 else 1
         print(f"挑战地鬼数: {count}")  # 修复：使用f-string
