@@ -29,15 +29,22 @@ class ChallengeDungeonBoss(CustomAction):
             "recognition": "OCR", "expected": r"\d+", "roi": [1175, 15, 98, 77]}})
 
         try:
-            text_value = detail.filterd_results[0].text
-            # 尝试将字符串转换为浮点数
+            if detail is None:
+                raise AttributeError("detail is None")
+
+            results = getattr(detail, "filtered_results", None)
+            if not results or len(results) == 0:
+                raise IndexError("filtered_results is empty or missing")
+
+            text_value = results[0].text
             value = float(text_value)
-            # 如果是整数（如 3.0），可以转成 int
+
             if value.is_integer():
                 value = int(value)
-        except ValueError:
-            print("Error: The provided value is not a number.")
-            value = 99  # 识别错误时默认为99
+
+        except (ValueError, IndexError, AttributeError) as e:
+            print(f"Error parsing value from detail: {e}")
+            value = 99
 
         count = 3 if value > 10000 else 2 if value > 2000 else 1
         print(f"挑战地鬼数: {count}")  # 修复：使用f-string
