@@ -31,17 +31,23 @@ class ChallengeDungeonBoss(CustomAction):
         if detail is None:
             value=100
         else:
-            results = getattr(detail, "filtered_results", None)
-            if not results or len(results) == 0:
-                raise IndexError("filtered_results is empty or missing")
+            results = getattr(detail, "best_result", None)
+            print(detail)
+            if not results:
+                value=100
+            else:
+                try:
+                    text_value = results.text.strip()
 
-            text_value = results[0].text
-            value = float(text_value)
+                    # 检查是否为合法数字（可含小数点）
+                    float(text_value)  # 只是验证一下能转 float
 
-            if value.is_integer():
-                value = int(value)
+                    # 移除小数点后转为整数
+                    value = int(text_value.replace('.', ''))
 
-
+                except (ValueError, AttributeError) as e:
+                    print(f"Error parsing value: {e}")
+                    value = 99
 
         count = 3 if value > 10000 else 2 if value > 2000 else 1
         print(f"挑战地鬼数: {count}")  # 修复：使用f-string
