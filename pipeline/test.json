@@ -41,7 +41,10 @@
   },
   "测试":{
     "action": "Custom",
-    "custom_action": "ChallengeDungeonBoss",
-    "post_delay":2000
+    "custom_action": "TeamBuilder",
+    "custom_action_param": {
+    "id": 1111,
+      "port": 20405
+  }
   }
 }

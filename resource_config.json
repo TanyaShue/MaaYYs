@@ -26,9 +26,15 @@
             ]
         },
         {
-            "task_name": "测试",
-            "task_entry": "testAction",
-            "option": []
+            "task_name": "组队寮30(特别不稳定)",
+            "task_entry": "寮30",
+            "option": [
+                "寮30目标副本",
+                "寮30是否为队长",
+                "寮30是否启用加成",
+                "寮30分组预设",
+                "寮30分队预设"
+            ]
         },
         {
             "task_name": "自动悬赏",
@@ -368,6 +374,95 @@
                 "自动秘闻_出战预设队伍": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "寮30目标副本",
+            "type": "select",
+            "default": "御魂副本",
+            "pipeline_override": {
+                "御魂副本": {
+                    "寮3021": {
+                        "expected": "御魂"
+                    },
+                    "寮3022": {
+                        "expected": "悲鸣"
+                    }
+                }
+            },
+            "choices": [
+                {
+                    "name": "御魂副本",
+                    "value": "御魂副本"
+                }
+            ]
+        },
+        {
+            "name": "寮30是否为队长",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "寮3017": {
+                    "enabled": "{boole}"
+                }
+            }
+        },
+        {
+            "name": "寮30是否启用加成",
+            "type": "boole",
+            "default": true,
+            "pipeline_override": {
+                "寮3026": {
+                    "enable": "{boole}"
+                }
+            }
+        },
+        {
+            "name": "寮30分组预设",
+            "type": "input",
+            "default": "默认分组",
+            "pipeline_override": {
+                "寮306": {
+                    "custom_action_param": {
+                        "group_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "寮30分队预设",
+            "type": "input",
+            "default": "默认队伍",
+            "pipeline_override": {
+                "寮306": {
+                    "custom_action_param": {
+                        "team_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "测试ID",
+            "type": "input",
+            "default": "9999",
+            "pipeline_override": {
+                "测试": {
+                    "custom_action_param": {
+                        "id": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "测试端口",
+            "type": "input",
+            "default": "23456",
+            "pipeline_override": {
+                "测试": {
+                    "custom_action_param": {
+                        "port": "{value}"
                     }
                 }
             }
