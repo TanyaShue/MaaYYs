@@ -3,8 +3,8 @@
     "recognition": "TemplateMatch",
     "action": "Click",
     "template": [
-      "邮箱.png",
-      "邮箱_红点.png"
+      "庭院/邮箱.png",
+      "庭院/邮箱_红点.png"
     ],
     "roi": [
       1117,
@@ -26,7 +26,7 @@
   "邮件_全部领取": {
     "recognition": "FeatureMatch",
     "action": "Click",
-    "template": "邮件_全部领取.png",
+    "template": "庭院/邮件_全部领取.png",
     "post_delay": 1000,
     "next": "邮件_确认领取",
     "timeout": 3000,
@@ -84,17 +84,17 @@
   "领取奖励_识别日常奖励": {
     "recognition": "TemplateMatch",
     "template": [
-      "日常_签到__497_512_23_32__447_462_123_132.png",
-      "日常_签到小垃圾__491_521_34_28__441_471_134_128.png",
-      "签到.png",
-      "签到_2.png",
-      "签到_3.png",
-      "勾玉.png",
-      "勾玉_2.png",
-      "签到小垃圾.png",
-      "签到小垃圾_2.png",
-      "签到小垃圾_3.png",
-      "体力.png",
+      "庭院/日常_签到__497_512_23_32__447_462_123_132.png",
+      "庭院/日常_签到小垃圾__491_521_34_28__441_471_134_128.png",
+      "庭院/签到.png",
+      "庭院/签到_2.png",
+      "庭院/签到_3.png",
+      "通用图标/勾玉.png",
+      "通用图标/勾玉_2.png",
+      "庭院/签到小垃圾.png",
+      "庭院/签到小垃圾_2.png",
+      "庭院/签到小垃圾_3.png",
+      "通用图标/体力.png",
       "御魂加成.png"
     ],
     "inverse": true,
@@ -109,9 +109,9 @@
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": [
-      "签到.png",
-      "签到_2.png",
-      "签到_3.png"
+      "庭院/签到.png",
+      "庭院/签到_2.png",
+      "庭院/签到_3.png"
     ],
     "post_delay": 1000,
     "roi": [
@@ -135,7 +135,6 @@
       "领取奖励_签到_点击屏幕继续",
       "关闭签到界面"
     ]
-
   },
   "领取奖励_签到_点击屏幕继续": {
     "recognition": "OCR",
@@ -168,7 +167,10 @@
     "action": "Click",
     "post_delay": 1000,
     "roi": [
-760,24,375,197
+      760,
+      24,
+      375,
+      197
     ],
     "next": "返回庭院",
     "timeout": 1000
@@ -177,8 +179,8 @@
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": [
-      "勾玉.png",
-      "勾玉_2.png"
+      "通用图标/勾玉.png",
+      "通用图标/勾玉_2.png"
     ],
     "post_delay": 1000,
     "roi": [
@@ -193,9 +195,9 @@
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": [
-      "签到小垃圾.png",
-      "签到小垃圾_2.png",
-      "签到小垃圾_3.png"
+      "庭院/签到小垃圾.png",
+      "庭院/签到小垃圾_2.png",
+      "庭院/签到小垃圾_3.png"
     ],
     "post_delay": 1000,
     "roi": [
@@ -235,7 +237,7 @@
   "领取奖励_日常体力": {
     "recognition": "FeatureMatch",
     "action": "Click",
-    "template": "体力.png",
+    "template": "通用图标/体力.png",
     "post_delay": 1000,
     "roi": [
       22,
@@ -270,7 +272,7 @@
   "领取奖励_商店每日奖励_点击礼包屋": {
     "recognition": "FeatureMatch",
     "action": "Click",
-    "template": "商店_礼包屋.png",
+    "template": "庭院/商店_礼包屋.png",
     "post_delay": 1000,
     "roi": [
       1082,
@@ -286,8 +288,8 @@
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": [
-      "商店_礼包屋_推荐.png",
-      "商店_礼包屋_推荐_2.png"
+      "庭院/商店_礼包屋_推荐.png",
+      "庭院/商店_礼包屋_推荐_2.png"
     ],
     "post_delay": 1000,
     "roi": [
@@ -350,8 +352,8 @@
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": [
-      "花合战_任务.png",
-      "花合战_任务_红点.png"
+      "庭院/花合战_任务.png",
+      "庭院/花合战_任务_红点.png"
     ],
     "post_delay": 1000,
     "roi": [
@@ -368,7 +370,7 @@
     "recognition": "FeatureMatch",
     "action": "Click",
     "template": [
-      "花合战_全部领取.png"
+      "庭院/花合战_全部领取.png"
     ],
     "post_delay": 1000,
     "roi": [
