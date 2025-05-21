@@ -8,7 +8,7 @@
   "999": {
     "is_sub": true,
     "recognition": "FeatureMatch",
-    "template": "999_战斗.png",
+    "template": "通用图标/999_战斗.png",
     "action": "Click",
     "target": [
       1124,
