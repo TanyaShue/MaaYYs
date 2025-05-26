@@ -151,8 +151,8 @@
             "default": "探索",
             "pipeline_override": {
                 "探索": {
-                    "识别探索目标": {
-                        "enable": true
+                    "悬赏封印2": {
+                        "enable": false
                     }
                 },
                 "挑战": {
