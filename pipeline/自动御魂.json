@@ -190,7 +190,7 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "rate_limit": 3000,
-        "timeout": 200000,
+        "timeout": 2000000,
         "next": [
             "自动御魂6"
         ],
@@ -283,7 +283,7 @@
     "自动御魂6": {
         "recognition": "OCR",
         "rate_limit": 3000,
-        "timeout": 200000,
+        "timeout": 2000000,
         "next": [
             "自动御魂7"
         ],
