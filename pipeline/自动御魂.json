@@ -242,6 +242,7 @@
         "next": [
             "寮3027_copy1"
         ],
+        "enabled": false,
         "roi": [
             269,
             0,
@@ -309,9 +310,6 @@
             56
         ],
         "expected": "取消"
-    },
-    "自动御魂8": {
-        "recognition": "TemplateMatch"
     },
     "自动御魂2_copy1": {
         "recognition": "FeatureMatch",

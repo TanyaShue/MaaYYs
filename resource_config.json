@@ -26,6 +26,16 @@
             ]
         },
         {
+            "task_name": "自动御魂",
+            "task_entry": "自动御魂",
+            "option": [
+                "御魂分组预设",
+                "御魂队伍预设",
+                "是否使用御魂加成",
+                "自动挑战次数"
+            ]
+        },
+        {
             "task_name": "组队寮30(特别不稳定)",
             "task_entry": "寮30",
             "option": [
@@ -260,6 +270,52 @@
                 "开始自动挑战鬼王": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "御魂分组预设",
+            "type": "input",
+            "default": "默认分组",
+            "pipeline_override": {
+                "自动御魂_装备挑战御魂副本御魂": {
+                    "custom_action_param": {
+                        "group_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "御魂队伍预设",
+            "type": "input",
+            "default": "默认队伍",
+            "pipeline_override": {
+                "自动御魂_装备挑战御魂副本御魂": {
+                    "custom_action_param": {
+                        "team_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "是否使用御魂加成",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "寮3026_copy1": {
+                    "enabled": "{boole}"
+                }
+            }
+        },
+        {
+            "name": "自动挑战次数",
+            "type": "input",
+            "default": "10",
+            "pipeline_override": {
+                "自动御魂3": {
+                    "custom_action_param": {
+                        "expected_number": "{value}"
                     }
                 }
             }
