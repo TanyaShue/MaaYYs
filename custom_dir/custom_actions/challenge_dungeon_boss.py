@@ -6,7 +6,6 @@ from maa.context import Context
 from maa.custom_action import CustomAction
 
 
-
 class ChallengeDungeonBoss(CustomAction):
 
     def run(self,
@@ -18,44 +17,20 @@ class ChallengeDungeonBoss(CustomAction):
         :return: 是否执行成功。
         """
 
-        # 读取 custom_param 的参数{"group_name","group_name"}(group_name:分组名称,team_name:队伍名称)
+        # 读取 custom_param 的参数{"group_name":"xxx", "team_name":"xxx", "count":3}
+        # group_name: 分组名称, team_name: 队伍名称, count: 挑战次数
         json_data = json.loads(argv.custom_action_param)
 
-        print(f"haoran: get data {json_data}")
         print("开始执行自定义动作: 自动挑战地鬼")
-        value = 1
-        image = context.tasker.controller.post_screencap().wait().get()
-        detail = context.run_recognition("识别地鬼分数", image, {"识别地鬼分数": {
-            "recognition": "OCR", "expected": r"\d+", "roi": [1173, 52, 100, 46]}})
 
-        if detail is None:
-            value=100
-        else:
-            results = getattr(detail, "best_result", None)
-            print(detail)
-            if not results:
-                value=100
-            else:
-                try:
-                    text_value = results.text.strip()
+        # 从参数中获取挑战次数，默认为1
+        count = json_data.get("count", 1)
+        print(f"挑战地鬼数: {count}")
 
-                    # 检查是否为合法数字（可含小数点）
-                    float(text_value)  # 只是验证一下能转 float
-
-                    # 移除小数点后转为整数
-                    value = int(text_value.replace('.', ''))
-
-                except (ValueError, AttributeError) as e:
-                    print(f"Error parsing value: {e}")
-                    value = 99
-
-        count = 3 if value > 10000 else 2 if value > 2000 else 1
-        print(f"挑战地鬼数: {count}")  # 修复：使用f-string
         for i in range(count):
-            print(f"开始挑战第 {i + 1} 只地鬼")  # 修复：使用f-string并更换变量名
+            print(f"开始挑战第 {i + 1} 只地鬼")
 
             # 筛选模板容易出现分数不够的情况
-
             context.run_task("点击筛选", {
                 "点击筛选": {"post_delay": 2000, "timeout": 500, "recognition": "TemplateMatch",
                              "template": "地域鬼王/地域鬼王_筛选.png", "action": "Click", "target": [1102, 17, 58, 73],
@@ -81,7 +56,7 @@ class ChallengeDungeonBoss(CustomAction):
                              "custom_action_param": {"group_name": json_data["group_name"],
                                                      "team_name": json_data["team_name"]}}})
 
-            print("等待20秒后重新开始挑战")
+            print("等待20秒后重新开始识别")
             time.sleep(20)
             print("等待识别分享按钮")
 
