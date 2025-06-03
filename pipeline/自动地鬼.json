@@ -69,5 +69,24 @@
             "team_name": "地域鬼王",
             "count": 1
         }
+    },
+    "自动地鬼1": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            1125,
+            461,
+            154,
+            133
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼1.png"
+        ],
+        "target": [
+            1114,
+            38,
+            28,
+            21
+        ]
     }
 }
