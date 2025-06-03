@@ -487,7 +487,7 @@
     "custom_action": "CountAction",
     "custom_action_param": {
       "next_task": "寮3034",
-      "count_target": 30,
+      "count_target": 2,
       "interval": 5,
       "task_to_count": "寮3031"
     }

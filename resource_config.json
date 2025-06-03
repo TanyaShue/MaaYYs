@@ -1,6 +1,6 @@
 {
     "resource_name": "阴阳师",
-    "resource_version": "v1.1.5",
+    "resource_version": "v1.1.6-beta.2",
     "resource_author": "TanyaShue",
     "resource_update_service_id": "MaaYYs",
     "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
@@ -21,7 +21,6 @@
             "task_name": "自动地鬼",
             "task_entry": "自动地鬼",
             "option": [
-                "地鬼挑战次数",
                 "地鬼分组预设",
                 "地鬼队伍预设"
             ]
@@ -153,48 +152,6 @@
                 {
                     "name": "官网下载版",
                     "value": "官网下载版"
-                }
-            ]
-        },
-        {
-            "name": "地鬼挑战次数",
-            "type": "select",
-            "default": "1个",
-            "pipeline_override": {
-                "1": {
-                    "开始自动挑战鬼王": {
-                        "custom_action_param": {
-                            "count": 1
-                        }
-                    }
-                },
-                "2": {
-                    "开始自动挑战鬼王": {
-                        "custom_action_param": {
-                            "count": 2
-                        }
-                    }
-                },
-                "3": {
-                    "开始自动挑战鬼王": {
-                        "custom_action_param": {
-                            "count": 3
-                        }
-                    }
-                }
-            },
-            "choices": [
-                {
-                    "name": "1个",
-                    "value": "1"
-                },
-                {
-                    "name": "2个",
-                    "value": "2"
-                },
-                {
-                    "name": "3个",
-                    "value": "3"
                 }
             ]
         },
