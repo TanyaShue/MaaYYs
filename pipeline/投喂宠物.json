@@ -1,0 +1,109 @@
+{
+    "投喂宠物": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物1"
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物.png"
+        ]
+    },
+    "投喂宠物1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物2"
+        ],
+        "roi": [
+            1103,
+            580,
+            176,
+            139
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物1.png"
+        ],
+        "target": [
+            1178,
+            644,
+            40,
+            36
+        ]
+    },
+    "投喂宠物2": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物3"
+        ],
+        "roi": [
+            692,
+            574,
+            152,
+            139
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物2.png"
+        ],
+        "target": [
+            762,
+            635,
+            38,
+            42
+        ]
+    },
+    "投喂宠物3": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物4"
+        ],
+        "roi": [
+            784,
+            475,
+            156,
+            158
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物3.png"
+        ],
+        "target": [
+            843,
+            521,
+            27,
+            36
+        ]
+    },
+    "投喂宠物4": {
+        "action": "Click",
+        "next": [
+            "投喂宠物5"
+        ],
+        "target": [
+            968,
+            329,
+            58,
+            145
+        ]
+    },
+    "投喂宠物5": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            0,
+            539,
+            156,
+            165
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物5.png"
+        ],
+        "target": [
+            42,
+            639,
+            27,
+            31
+        ]
+    }
+}
