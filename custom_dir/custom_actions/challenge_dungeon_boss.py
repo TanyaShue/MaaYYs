@@ -32,7 +32,7 @@ class ChallengeDungeonBoss(CustomAction):
 
             # 筛选模板容易出现分数不够的情况
             context.run_task("点击筛选", {
-                "点击筛选": {"post_delay": 2000, "timeout": 500, "recognition": "TemplateMatch",
+                "点击筛选": {"next":["点击筛选_1","自动地鬼1"]},"点击筛选_1":{"post_delay": 2000, "timeout": 500, "recognition": "TemplateMatch",
                              "template": "地域鬼王/地域鬼王_筛选.png", "action": "Click", "target": [1102, 17, 58, 73],
                              "roi": [1077, 2, 99, 121]}})
             context.run_task("点击热门", {
