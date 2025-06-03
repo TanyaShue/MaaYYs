@@ -47,6 +47,7 @@ class SwitchSoul(CustomAction):
                 "roi": [1128,637,116,52],
             }
         })
+        print(result)
         # 检查点击结果
         if not result.nodes:
             print("不处于预设选中状态")
