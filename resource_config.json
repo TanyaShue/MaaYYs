@@ -171,7 +171,9 @@
                 "2": {
                     "开始自动挑战鬼王": {
                         "custom_action_param": {
-                            "count": 2
+                            "count": 2,
+                            "group_name": "地鬼",
+                            "team_name": "地域鬼王"
                         }
                     }
                 },

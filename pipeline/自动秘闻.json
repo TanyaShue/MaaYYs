@@ -1,267 +1,267 @@
 {
-  "自动秘闻": {
-    "action": "Custom",
-    "custom_action": "TaskList",
-    "custom_action_param": {
-      "task_list": [
-        "点击探索",
-        "自动秘闻_step_1"
-      ]
+    "自动秘闻": {
+        "action": "Custom",
+        "custom_action": "TaskList",
+        "custom_action_param": {
+            "task_list": [
+                "点击探索",
+                "自动秘闻_step_1"
+            ]
+        }
+    },
+    "自动秘闻_step_1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "interrupt": [
+            "点击底部菜单位置"
+        ],
+        "next": [
+            "自动秘闻_step_2"
+        ],
+        "post_delay": 1000,
+        "template": [
+            "template/screenshot_20250313_160102.png"
+        ],
+        "target": [
+            555,
+            632,
+            53,
+            66
+        ]
+    },
+    "自动秘闻_step_2": {
+        "recognition": "OCR",
+        "interrupt": [
+            "自动秘闻_点击进入"
+        ],
+        "next": [
+            "自动秘闻_step_3"
+        ],
+        "expected": "难度"
+    },
+    "自动秘闻_step_3": {
+        "recognition": "FeatureMatch",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            132,
+            147,
+            353,
+            117
+        ],
+        "template": [
+            "template/screenshot_20250313_160349.png",
+            "自动秘闻/自动秘闻_step_3.png"
+        ]
+    },
+    "自动秘闻_点击进入": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "自动秘闻_点击式神录"
+        ],
+        "roi": [
+            1118,
+            574,
+            158,
+            145
+        ],
+        "template": [
+            "自动秘闻/自动秘闻_进入__1138_590_113_100__1088_540_192_180.png"
+        ]
+    },
+    "自动秘闻_点击式神录": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "on_error": "返回庭院",
+        "next": [
+            "自动秘闻_装备式神预设"
+        ],
+        "post_delay": 1000,
+        "roi": [
+            1156,
+            433,
+            121,
+            97
+        ],
+        "template": "探索/探索_式神录.png"
+    },
+    "自动秘闻_装备式神预设": {
+        "action": "Custom",
+        "on_error": [
+            "返回庭院"
+        ],
+        "next": [
+            "自动秘闻_御魂_返回"
+        ],
+        "post_delay": 2000,
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "默认秘闻分组",
+            "team_name": "默认秘闻队伍"
+        }
+    },
+    "自动秘闻_御魂_返回": {
+        "action": "Click",
+        "interrupt": [
+            "自动秘闻_识别是否为未解锁",
+            "自动秘闻_向上滑动一下"
+        ],
+        "next": [
+            "自动秘闻1",
+            "自动秘闻_点击目标关卡"
+        ],
+        "post_delay": 2000,
+        "target": [
+            20,
+            10,
+            50,
+            40
+        ]
+    },
+    "自动秘闻_识别是否为未解锁": {
+        "recognition": "OCR",
+        "next": [
+            "自动秘闻_向下滑动一下"
+        ],
+        "roi": [
+            425,
+            151,
+            133,
+            103
+        ],
+        "expected": "未解锁"
+    },
+    "自动秘闻_向下滑动一下": {
+        "action": "Custom",
+        "next": [
+            "自动秘闻_点击目标关卡"
+        ],
+        "custom_action": "RandomSwipe",
+        "custom_action_param": {
+            "start_roi": [
+                212,
+                158,
+                340,
+                84
+            ],
+            "end_roi": [
+                201,
+                559,
+                353,
+                65
+            ],
+            "delay": 400
+        }
+    },
+    "自动秘闻_向上滑动一下": {
+        "action": "Custom",
+        "custom_action": "RandomSwipe",
+        "custom_action_param": {
+            "start_roi": [
+                201,
+                559,
+                353,
+                65
+            ],
+            "end_roi": [
+                212,
+                158,
+                340,
+                84
+            ],
+            "delay": 400
+        }
+    },
+    "自动秘闻_点击目标关卡": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "自动秘闻_点击挑战"
+        ],
+        "roi": [
+            428,
+            155,
+            116,
+            469
+        ],
+        "expected": "未通关"
+    },
+    "自动秘闻_点击挑战": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "自动秘闻_出战预设队伍"
+        ],
+        "post_delay": 1000,
+        "roi": [
+            1060,
+            513,
+            214,
+            177
+        ],
+        "template": "自动秘闻/自动秘闻_挑战__1114_558_88_91__1064_508_188_191.png"
+    },
+    "自动秘闻_出战预设队伍": {
+        "action": "Custom",
+        "timeout": 1000000,
+        "next": [
+            "自动秘闻_识别战斗结束"
+        ],
+        "post_delay": 2000,
+        "custom_action": "AutoBattle",
+        "custom_action_param": {
+            "group_name": "秘闻",
+            "team_name": "队伍2"
+        }
+    },
+    "自动秘闻_识别战斗结束": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "自动秘闻_识别是否已通关",
+            "自动秘闻_点击目标关卡"
+        ],
+        "post_delay": 2000,
+        "roi": [
+            785,
+            395,
+            245,
+            112
+        ],
+        "expected": ".*(本次通关时间.*|通关式神.*)",
+        "target": [
+            949,
+            188,
+            316,
+            216
+        ]
+    },
+    "自动秘闻_识别是否已通关": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            354,
+            644,
+            190,
+            44
+        ],
+        "expected": "^(?!尚未通关$).+$"
+    },
+    "自动秘闻1": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            358,
+            655,
+            119,
+            33
+        ],
+        "expected": "\\b([0-9]|[1-5][0-9]):[0-5][0-9]\\b"
     }
-  },
-  "自动秘闻_step_1": {
-    "recognition": "FeatureMatch",
-    "action": "Click",
-    "interrupt": [
-      "点击底部菜单位置"
-    ],
-    "next": [
-      "自动秘闻_step_2"
-    ],
-    "post_delay": 1000,
-    "template": [
-      "template/screenshot_20250313_160102.png"
-    ],
-    "target": [
-      555,
-      632,
-      53,
-      66
-    ]
-  },
-  "自动秘闻_step_2": {
-    "recognition": "OCR",
-    "interrupt": [
-      "自动秘闻_点击进入"
-    ],
-    "next": [
-      "自动秘闻_step_3"
-    ],
-    "expected": "难度"
-  },
-  "自动秘闻_step_3": {
-    "recognition": "FeatureMatch",
-    "next": [
-      "返回庭院"
-    ],
-    "roi": [
-      132,
-      147,
-      353,
-      117
-    ],
-    "template": [
-      "template/screenshot_20250313_160349.png",
-      "自动秘闻/自动秘闻_step_3.png"
-    ]
-  },
-  "自动秘闻_点击进入": {
-    "recognition": "FeatureMatch",
-    "action": "Click",
-    "next": [
-      "自动秘闻_点击式神录"
-    ],
-    "roi": [
-      1118,
-      574,
-      158,
-      145
-    ],
-    "template": [
-      "自动秘闻/自动秘闻_进入__1138_590_113_100__1088_540_192_180.png"
-    ]
-  },
-  "自动秘闻_点击式神录": {
-    "recognition": "FeatureMatch",
-    "action": "Click",
-    "on_error": "返回庭院",
-    "next": [
-      "自动秘闻_装备式神预设"
-    ],
-    "post_delay": 1000,
-    "roi": [
-      1156,
-      433,
-      121,
-      97
-    ],
-    "template": "探索/探索_式神录.png"
-  },
-  "自动秘闻_装备式神预设": {
-    "action": "Custom",
-    "on_error": [
-      "返回庭院"
-    ],
-    "next": [
-      "自动秘闻_御魂_返回"
-    ],
-    "post_delay": 2000,
-    "custom_action": "SwitchSoul",
-    "custom_action_param": {
-      "group_name": "秘闻",
-      "team_name": "队伍2"
-    }
-  },
-  "自动秘闻_御魂_返回": {
-    "action": "Click",
-    "interrupt": [
-      "自动秘闻_识别是否为未解锁",
-      "自动秘闻_向上滑动一下"
-    ],
-    "next": [
-      "自动秘闻1",
-      "自动秘闻_点击目标关卡"
-    ],
-    "post_delay": 2000,
-    "target": [
-      20,
-      10,
-      50,
-      40
-    ]
-  },
-  "自动秘闻_识别是否为未解锁": {
-    "recognition": "OCR",
-    "next": [
-      "自动秘闻_向下滑动一下"
-    ],
-    "roi": [
-      425,
-      151,
-      133,
-      103
-    ],
-    "expected": "未解锁"
-  },
-  "自动秘闻_向下滑动一下": {
-    "action": "Custom",
-    "next": [
-      "自动秘闻_点击目标关卡"
-    ],
-    "custom_action": "RandomSwipe",
-    "custom_action_param": {
-      "start_roi": [
-        212,
-        158,
-        340,
-        84
-      ],
-      "end_roi": [
-        201,
-        559,
-        353,
-        65
-      ],
-      "delay": 400
-    }
-  },
-  "自动秘闻_向上滑动一下": {
-    "action": "Custom",
-    "custom_action": "RandomSwipe",
-    "custom_action_param": {
-      "start_roi": [
-        201,
-        559,
-        353,
-        65
-      ],
-      "end_roi": [
-        212,
-        158,
-        340,
-        84
-      ],
-      "delay": 400
-    }
-  },
-  "自动秘闻_点击目标关卡": {
-    "recognition": "OCR",
-    "action": "Click",
-    "next": [
-      "自动秘闻_点击挑战"
-    ],
-    "roi": [
-      428,
-      155,
-      116,
-      469
-    ],
-    "expected": "未通关"
-  },
-  "自动秘闻_点击挑战": {
-    "recognition": "FeatureMatch",
-    "action": "Click",
-    "next": [
-      "自动秘闻_出战预设队伍"
-    ],
-    "post_delay": 1000,
-    "roi": [
-      1060,
-      513,
-      214,
-      177
-    ],
-    "template": "自动秘闻/自动秘闻_挑战__1114_558_88_91__1064_508_188_191.png"
-  },
-  "自动秘闻_出战预设队伍": {
-    "action": "Custom",
-    "timeout": 1000000,
-    "next": [
-      "自动秘闻_识别战斗结束"
-    ],
-    "post_delay": 2000,
-    "custom_action": "AutoBattle",
-    "custom_action_param": {
-      "group_name": "默认秘闻分组",
-      "team_name": "默认秘闻分队"
-    }
-  },
-  "自动秘闻_识别战斗结束": {
-    "recognition": "OCR",
-    "action": "Click",
-    "next": [
-      "自动秘闻_识别是否已通关",
-      "自动秘闻_点击目标关卡"
-    ],
-    "post_delay": 2000,
-    "roi": [
-      785,
-      395,
-      245,
-      112
-    ],
-    "expected": ".*(本次通关时间.*|通关式神.*)",
-    "target": [
-      949,
-      188,
-      316,
-      216
-    ]
-  },
-  "自动秘闻_识别是否已通关": {
-    "recognition": "OCR",
-    "next": [
-      "返回庭院"
-    ],
-    "roi": [
-      354,
-      644,
-      190,
-      44
-    ],
-    "expected": "^(?!尚未通关$).+$"
-  },
-  "自动秘闻1": {
-    "recognition": "OCR",
-    "next": [
-      "返回庭院"
-    ],
-    "roi": [
-      273,
-      647,
-      105,
-      51
-    ],
-    "expected": "总耗时"
-  }
 }
