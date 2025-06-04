@@ -18,7 +18,6 @@ class TaskList(CustomAction):
 
         print("开始执行自定义动作：任务列表")
         json_data = json.loads(argv.custom_action_param)
-        # task_logger = TaskLogger()
         task_list = json_data.get("task_list", {})
 
         if not task_list:

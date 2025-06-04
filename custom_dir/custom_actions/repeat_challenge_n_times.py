@@ -35,7 +35,7 @@ class RepeatChallengeNTimes(CustomAction):
         else:
             context.run_task("通用_取消设置挑战次数")
             print("关闭自动挑战")
-            return False
+            return True
 
 
 

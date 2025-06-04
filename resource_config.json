@@ -99,6 +99,10 @@
             "option": [
                 "寄养设置"
             ]
+        },
+        {
+            "task_name": "投喂宠物",
+            "task_entry": "投喂宠物"
         }
     ],
     "options": [
@@ -427,7 +431,7 @@
                 "日常_任务列表": {
                     "custom_action_param": {
                         "task_list": {
-                            "领取奖励_日常庭院奖励": "{boole}"
+                            "领取奖励_日常奖励": "{boole}"
                         }
                     }
                 }
