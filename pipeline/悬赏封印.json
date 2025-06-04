@@ -495,9 +495,14 @@
     "悬赏封印4": {
         "recognition": "OCR",
         "action": "Click",
-        "next": [
+        "interrupt": [
             "悬赏封印5"
         ],
+        "next": [
+            "探索_悬赏_识别章节开始界面"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             879,
             504,
@@ -509,9 +514,7 @@
     "悬赏封印5": {
         "recognition": "OCR",
         "action": "Click",
-        "next": [
-            "探索_悬赏_识别章节开始界面"
-        ],
+        "next": [],
         "pre_delay": 1000,
         "post_delay": 1000,
         "expected": "点击屏幕继续"
