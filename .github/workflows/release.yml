@@ -203,6 +203,7 @@ jobs:
             ## 下载
             - **完整包**: 包含 MFWPH 和 MaaYYs 资源，可直接运行
             - **仅资源包**: 仅包含 MaaYYs 资源，适用于已有 MFWPH 的用户
+            [已有 Mirror酱 CDK？点击前往高速下载](https://mirrorchyan.com/zh/projects?rid=M9A)
           draft: false
           prerelease: false
           artifacts: |
