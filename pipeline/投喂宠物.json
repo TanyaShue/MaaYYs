@@ -57,6 +57,7 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "next": [
+            "投喂宠物15_copy1",
             "投喂宠物4"
         ],
         "roi": [
@@ -78,6 +79,7 @@
     "投喂宠物4": {
         "action": "Click",
         "next": [
+            "投喂宠物12",
             "投喂宠物5"
         ],
         "target": [
@@ -90,6 +92,10 @@
     "投喂宠物5": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "interrupt": [],
+        "next": [
+            "投喂宠物11"
+        ],
         "roi": [
             0,
             539,
@@ -105,5 +111,172 @@
             27,
             31
         ]
+    },
+    "投喂宠物6": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物8"
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物6.png",
+            "投喂宠物\\投喂宠物6_1.png",
+            "投喂宠物\\投喂宠物6_2.png",
+            "投喂宠物\\投喂宠物6_3.png",
+            "投喂宠物\\投喂宠物6_4.png",
+            "投喂宠物\\投喂宠物6_5.png"
+        ]
+    },
+    "投喂宠物7": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物9"
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物7.png"
+        ]
+    },
+    "投喂宠物8": {
+        "action": "Click",
+        "target": [
+            349,
+            532,
+            510,
+            165
+        ]
+    },
+    "投喂宠物9": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "投喂宠物10"
+        ],
+        "expected": "排骨|鲜鱼",
+        "target": [
+            209,
+            99,
+            250,
+            86
+        ]
+    },
+    "投喂宠物10": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            716,
+            243,
+            360,
+            49
+        ],
+        "expected": "排骨|鲜鱼",
+        "target": [
+            784,
+            567,
+            160,
+            49
+        ]
+    },
+    "投喂宠物7_copy1": {
+        "recognition": "TemplateMatch",
+        "next": [
+            "投喂宠物13"
+        ],
+        "inverse": true,
+        "template": [
+            "投喂宠物\\投喂宠物7.png",
+            "投喂宠物\\投喂宠物6.png",
+            "投喂宠物\\投喂宠物6_1.png",
+            "投喂宠物\\投喂宠物6_2.png",
+            "投喂宠物\\投喂宠物6_3.png",
+            "投喂宠物\\投喂宠物6_4.png",
+            "投喂宠物\\投喂宠物6_5.png"
+        ]
+    },
+    "投喂宠物11": {
+        "recognition": "OCR",
+        "interrupt": [
+            "投喂宠物7",
+            "投喂宠物6"
+        ],
+        "next": [
+            "投喂宠物7_copy1"
+        ],
+        "roi": [
+            581,
+            29,
+            117,
+            38
+        ],
+        "expected": "宠物后院"
+    },
+    "投喂宠物13": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "template": [
+            "投喂宠物\\投喂宠物13.png"
+        ]
+    },
+    "投喂宠物12": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物14"
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物12.png"
+        ]
+    },
+    "投喂宠物14": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "投喂宠物15",
+            "投喂宠物4_copy1"
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物12_1.png"
+        ]
+    },
+    "投喂宠物4_copy1": {
+        "action": "Click",
+        "next": [
+            "投喂宠物5"
+        ],
+        "target": [
+            968,
+            329,
+            58,
+            145
+        ]
+    },
+    "投喂宠物15": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "投喂宠物4_copy1"
+        ],
+        "roi": [
+            1079,
+            88,
+            136,
+            47
+        ],
+        "expected": "跳过"
+    },
+    "投喂宠物15_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "投喂宠物12",
+            "投喂宠物5"
+        ],
+        "roi": [
+            1079,
+            88,
+            136,
+            47
+        ],
+        "expected": "跳过"
     }
 }
