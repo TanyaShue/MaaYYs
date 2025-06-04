@@ -44,9 +44,9 @@ class AutoBattle(CustomAction):
                     break
 
                 if count >= 5:
-                    context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"end_roi": [39, 582, 113, 36],"start_roi": [39, 270, 120, 38],"delay": 400}}})
+                    context.run_task("返回最上页分组", {"返回最上页分组": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"end_roi": [39, 582, 113, 36],"start_roi": [39, 270, 120, 38],"delay": 1000}}})
                 else:
-                    context.run_task("下一页",{"下一页": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"start_roi": [39, 582, 113, 36],"end_roi": [39, 270, 120, 38],"delay": 400}}})
+                    context.run_task("下一页",{"下一页": {"action": "Custom","post_delay": 1000,"custom_action": "RandomSwipe","custom_action_param": {"start_roi": [39, 582, 113, 36],"end_roi": [39, 270, 120, 38],"delay": 1000}}})
             else:
                 print("点击分组失败")
             
@@ -67,9 +67,9 @@ class AutoBattle(CustomAction):
                     break
 
                 if count >= 5:
-                    context.run_task("返回最上页分队", {"返回最上页分队": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [328, 484, 253, 103],"start_roi": [334, 235, 300, 90],"delay": 400}}})
+                    context.run_task("返回最上页分队", {"返回最上页分队": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"end_roi": [328, 484, 253, 103],"start_roi": [334, 235, 300, 90],"delay": 1000}}})
                 else:
-                    context.run_task("下一页",{"下一页": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"start_roi": [328, 484, 253, 103],"end_roi": [334, 235, 300, 90],"delay": 400}}})
+                    context.run_task("下一页",{"下一页": {"action": "Custom","custom_action": "RandomSwipe","custom_action_param": {"start_roi": [328, 484, 253, 103],"end_roi": [334, 235, 300, 90],"delay": 1000}}})
             else:
                 print("队伍不存在")
                 return False
