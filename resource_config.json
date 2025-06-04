@@ -102,7 +102,8 @@
         },
         {
             "task_name": "投喂宠物",
-            "task_entry": "投喂宠物"
+            "task_entry": "投喂宠物",
+            "option": []
         }
     ],
     "options": [
