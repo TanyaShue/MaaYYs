@@ -177,8 +177,8 @@
                     "开始自动挑战鬼王": {
                         "custom_action_param": {
                             "count": 2,
-                            "group_name": "地鬼",
-                            "team_name": "地域鬼王"
+                            "group_name": "秘闻",
+                            "team_name": "队伍1"
                         }
                     }
                 },
