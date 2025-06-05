@@ -162,7 +162,7 @@
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": true,
-            "expected_number": 2
+            "expected_number": 10
         }
     },
     "自动御魂4": {
