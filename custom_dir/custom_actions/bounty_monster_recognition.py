@@ -59,7 +59,6 @@ class BountyMonsterRecognition(CustomAction):
                         )
 
                         if detail_recognition:
-                            print(f"完成度为：{detail_recognition}")
                             print("该目标的完成度已满")
                             continue
 
