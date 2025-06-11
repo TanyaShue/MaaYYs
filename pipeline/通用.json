@@ -299,5 +299,69 @@
             49
         ],
         "expected": "确定"
+    },
+    "通用_关闭加成": {
+        "recognition": "ColorMatch",
+        "action": "Click",
+        "timeout": 2000,
+        "roi": "通用_识别加成",
+        "roi_offset": [
+            334,
+            0,
+            -198,
+            2
+        ],
+        "count": 4,
+        "lower": [
+            222,
+            130,
+            0
+        ],
+        "upper": [
+            230,
+            163,
+            0
+        ]
+    },
+    "通用_打开加成": {
+        "recognition": "ColorMatch",
+        "action": "Click",
+        "timeout": 2000,
+        "roi": "通用_识别加成",
+        "roi_offset": [
+            334,
+            0,
+            -198,
+            2
+        ],
+        "count": 4,
+        "lower": [
+            175,
+            10,
+            31
+        ],
+        "upper": [
+            187,
+            13,
+            48
+        ]
+    },
+    "通用_识别加成": {
+        "recognition": "OCR",
+        "roi": [
+            426,
+            128,
+            334,
+            325
+        ],
+        "expected": "识别加成"
+    },
+    "通用": {
+        "action": "Custom",
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "bonus_type": "exp_100%",
+            "enable": false
+        }
     }
 }
