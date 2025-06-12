@@ -104,6 +104,11 @@
             "task_name": "投喂宠物",
             "task_entry": "投喂宠物",
             "option": []
+        },
+        {
+            "task_name": "组队副本",
+            "task_entry": "组队副本14",
+            "option": ["自动组队经验副本","启用100%经验加成","启用50%经验加成","自动组队金币副本","启用100%金币加成","启用50%金币加成"]
         }
     ],
     "options": [
@@ -241,6 +246,82 @@
             "pipeline_override": {
                 "探索_悬赏_自动轮换": {
                     "enabled": "{boole}"
+                }
+            }
+        },
+        {
+            "name": "自动组队经验副本",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "组队副本14": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "组队副本_经验副本": "{boole}"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "启用100%经验加成",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "组队副本4_copy2": {
+                    "custom_action_param": {
+                        "exp_100%": "{boole}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "启用50%经验加成",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "组队副本4_copy2": {
+                    "custom_action_param": {
+                        "exp_50%": "{boole}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "自动组队金币副本",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "组队副本14": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "组队副本_经验副本": "{boole}"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "启用100%金币加成",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "组队副本4": {
+                    "custom_action_param": {
+                        "gold_100%": "{boole}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "启用50%金币加成",
+            "type": "boole",
+            "default": false,
+            "pipeline_override": {
+                "组队副本4": {
+                    "custom_action_param": {
+                        "gold_150%": "{boole}"
+                    }
                 }
             }
         },
