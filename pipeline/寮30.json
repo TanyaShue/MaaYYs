@@ -639,10 +639,9 @@
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": true,
-            "expected_number": 1
+            "expected_number": 30
         }
     },
-    "寮3040": {},
     "寮3039_copy1": {
         "recognition": "OCR",
         "action": "Click",
@@ -665,7 +664,7 @@
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": true,
-            "expected_number": 1
+            "expected_number": 30
         }
     },
     "寮3041": {
@@ -719,7 +718,7 @@
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": false,
-            "expected_number": 1
+            "expected_number": 30
         }
     },
     "寮3038_copy1": {
@@ -760,7 +759,7 @@
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": false,
-            "expected_number": 1
+            "expected_number":30
         }
     },
     "寮3039_copy1_copy1": {
@@ -785,7 +784,7 @@
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": true,
-            "expected_number": 1
+            "expected_number": 30
         }
     },
     "寮3043": {
