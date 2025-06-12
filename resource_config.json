@@ -37,12 +37,12 @@
             ]
         },
         {
-            "task_name": "组队寮30(特别不稳定)",
+            "task_name": "组队寮30(自动同心队拉队友)",
             "task_entry": "寮30",
             "option": [
                 "寮30目标副本",
                 "寮30是否为队长",
-                "寮30是否启用加成",
+                "寮30是否启用御魂加成",
                 "寮30分组预设",
                 "寮30分队预设"
             ]
@@ -108,7 +108,18 @@
         {
             "task_name": "组队副本",
             "task_entry": "组队副本14",
-            "option": ["自动组队经验副本","启用100%经验加成","启用50%经验加成","自动组队金币副本","启用100%金币加成","启用50%金币加成"]
+            "option": [
+                "自动组队经验副本",
+                "经验副本分组预设",
+                "经验副本队伍预设",
+                "启用100%经验加成",
+                "启用50%经验加成",
+                "自动组队金币副本",
+                "金币副本分组预设",
+                "金币副本队伍预设",
+                "启用100%金币加成",
+                "启用50%金币加成"
+            ]
         }
     ],
     "options": [
@@ -367,6 +378,54 @@
             "default": "默认队伍",
             "pipeline_override": {
                 "装备突破预设": {
+                    "custom_action_param": {
+                        "team_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "经验副本分组预设",
+            "type": "input",
+            "default": "默认分组",
+            "pipeline_override": {
+                "组队副本8_copy1": {
+                    "custom_action_param": {
+                        "group_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "经验副本队伍预设",
+            "type": "input",
+            "default": "默认队伍",
+            "pipeline_override": {
+                "组队副本8_copy1": {
+                    "custom_action_param": {
+                        "team_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "金币副本分组预设",
+            "type": "input",
+            "default": "默认分组",
+            "pipeline_override": {
+                "组队副本8": {
+                    "custom_action_param": {
+                        "group_name": "{value}"
+                    }
+                }
+            }
+        },
+        {
+            "name": "金币副本队伍预设",
+            "type": "input",
+            "default": "默认队伍",
+            "pipeline_override": {
+                "组队副本8": {
                     "custom_action_param": {
                         "team_name": "{value}"
                     }
