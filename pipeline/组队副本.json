@@ -1,0 +1,561 @@
+{
+    "组队副本": {
+        "action": "Custom",
+        "next": [
+            "组队副本3_copy1"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "custom_action": "LoopAction",
+        "custom_action_param": {
+            "action_list": [
+                "组队副本1"
+            ],
+            "loop_times": 2
+        }
+    },
+    "组队副本1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "interrupt": [
+            "组队副本10"
+        ],
+        "next": [
+            "组队副本2"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "template": [
+            "组队副本\\组队副本1.png"
+        ],
+        "target": [
+            454,
+            627,
+            21,
+            38
+        ]
+    },
+    "组队副本_金币副本": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "组队副本4"
+        ],
+        "roi": [
+            267,
+            0,
+            263,
+            137
+        ],
+        "template": [
+            "组队副本\\组队副本3.png"
+        ],
+        "target": [
+            377,
+            45,
+            10,
+            23
+        ]
+    },
+    "组队副本4": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "next": [
+            "组队副本5"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            424,
+            135,
+            330,
+            39
+        ],
+        "expected": "觉醒副本掉落额外的觉醒材料",
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "gold_100%": true,
+            "gold_50%": true
+        }
+    },
+    "组队副本5": {
+        "action": "Click",
+        "interrupt": [
+            "组队副本7"
+        ],
+        "next": [
+            "组队副本6"
+        ],
+        "target": [
+            117,
+            216,
+            90,
+            263
+        ]
+    },
+    "组队副本6": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "组队副本8"
+        ],
+        "template": [
+            "组队副本\\组队副本6.png"
+        ]
+    },
+    "组队副本7": {
+        "action": "Click",
+        "target": [
+            1204,
+            638,
+            25,
+            35
+        ]
+    },
+    "组队副本8": {
+        "action": "Custom",
+        "next": [
+            "组队副本9"
+        ],
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "组队",
+            "team_name": "金币副本"
+        }
+    },
+    "组队副本9": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "组队副本"
+        ],
+        "roi": [
+            0,
+            0,
+            113,
+            73
+        ],
+        "template": [
+            "组队副本\\组队副本9.png"
+        ],
+        "target": [
+            36,
+            18,
+            13,
+            22
+        ]
+    },
+    "组队副本2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 10000,
+        "next": [
+            "组队副本11"
+        ],
+        "roi": [
+            122,
+            115,
+            265,
+            542
+        ],
+        "expected": "金币妖怪"
+    },
+    "组队副本10": {
+        "action": "Swipe",
+        "begin": [
+            143,
+            595,
+            216,
+            44
+        ],
+        "end": [
+            155,
+            143,
+            206,
+            58
+        ],
+        "duration": 2000
+    },
+    "组队副本11": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 60000,
+        "next": [
+            "组队副本12"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            670,
+            576,
+            248,
+            107
+        ],
+        "expected": "自动匹配"
+    },
+    "组队副本12": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 120000,
+        "next": [
+            "组队副本13"
+        ],
+        "roi": [
+            1099,
+            527,
+            169,
+            141
+        ],
+        "expected": "准备"
+    },
+    "组队副本13": {
+        "recognition": "OCR",
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 2000,
+        "roi": [
+            441,
+            668,
+            366,
+            51
+        ],
+        "expected": "点击空白区域继续"
+    },
+    "组队副本3_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "组队副本4_copy1"
+        ],
+        "roi": [
+            267,
+            0,
+            263,
+            137
+        ],
+        "template": [
+            "组队副本\\组队副本3.png"
+        ],
+        "target": [
+            377,
+            45,
+            10,
+            23
+        ]
+    },
+    "组队副本4_copy1": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "next": [
+            "组队副本5_copy1"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            424,
+            135,
+            330,
+            39
+        ],
+        "expected": "觉醒副本掉落额外的觉醒材料",
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "gold_100%": false,
+            "gold_50%": false
+        }
+    },
+    "组队副本5_copy1": {
+        "action": "Click",
+        "target": [
+            117,
+            216,
+            90,
+            263
+        ]
+    },
+    "组队副本6_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "组队副本8_copy1"
+        ],
+        "template": [
+            "组队副本\\组队副本6.png"
+        ]
+    },
+    "组队副本_经验副本": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "组队副本4_copy2"
+        ],
+        "roi": [
+            267,
+            0,
+            263,
+            137
+        ],
+        "template": [
+            "组队副本\\组队副本3.png"
+        ],
+        "target": [
+            377,
+            45,
+            10,
+            23
+        ]
+    },
+    "组队副本5_copy2": {
+        "action": "Click",
+        "interrupt": [
+            "组队副本7_copy1"
+        ],
+        "next": [
+            "组队副本6_copy1"
+        ],
+        "target": [
+            117,
+            216,
+            90,
+            263
+        ]
+    },
+    "组队副本1_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "interrupt": [
+            "组队副本10_copy1"
+        ],
+        "next": [
+            "组队副本2_copy1"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "template": [
+            "组队副本\\组队副本1.png"
+        ],
+        "target": [
+            454,
+            627,
+            21,
+            38
+        ]
+    },
+    "组队副本2_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 10000,
+        "next": [
+            "组队副本11_copy1"
+        ],
+        "roi": [
+            122,
+            115,
+            265,
+            542
+        ],
+        "expected": "经验妖怪"
+    },
+    "组队副本4_copy1_copy1": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "next": [
+            "组队副本5_copy1_copy1"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            424,
+            135,
+            330,
+            39
+        ],
+        "expected": "觉醒副本掉落额外的觉醒材料",
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "exp_100%": false,
+            "exp_50%": false
+        }
+    },
+    "组队副本12_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [],
+        "timeout": 120000,
+        "next": [
+            "组队副本13_copy1"
+        ],
+        "roi": [
+            1099,
+            527,
+            169,
+            141
+        ],
+        "expected": "准备"
+    },
+    "组队副本10_copy1": {
+        "action": "Swipe",
+        "begin": [
+            143,
+            595,
+            216,
+            44
+        ],
+        "end": [
+            155,
+            143,
+            206,
+            58
+        ],
+        "duration": 2000
+    },
+    "组队副本4_copy2": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "next": [
+            "组队副本5_copy2"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            424,
+            135,
+            330,
+            39
+        ],
+        "expected": "觉醒副本掉落额外的觉醒材料",
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "exp_100%": true,
+            "exp_50%": true
+        }
+    },
+    "组队副本3_copy1_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "组队副本4_copy1_copy1"
+        ],
+        "roi": [
+            267,
+            0,
+            263,
+            137
+        ],
+        "template": [
+            "组队副本\\组队副本3.png"
+        ],
+        "target": [
+            377,
+            45,
+            10,
+            23
+        ]
+    },
+    "组队副本9_copy1": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "组队副本_copy1"
+        ],
+        "roi": [
+            0,
+            0,
+            113,
+            73
+        ],
+        "template": [
+            "组队副本\\组队副本9.png"
+        ],
+        "target": [
+            36,
+            18,
+            13,
+            22
+        ]
+    },
+    "组队副本_copy1": {
+        "action": "Custom",
+        "next": [
+            "组队副本3_copy1_copy1"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "custom_action": "LoopAction",
+        "custom_action_param": {
+            "action_list": [
+                "组队副本1_copy1"
+            ],
+            "loop_times": 2
+        }
+    },
+    "组队副本7_copy1": {
+        "action": "Click",
+        "target": [
+            1204,
+            638,
+            25,
+            35
+        ]
+    },
+    "组队副本13_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 2000,
+        "roi": [
+            441,
+            668,
+            366,
+            51
+        ],
+        "expected": "点击空白区域继续"
+    },
+    "组队副本11_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 60000,
+        "next": [
+            "组队副本12_copy1"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            670,
+            576,
+            248,
+            107
+        ],
+        "expected": "自动匹配"
+    },
+    "组队副本8_copy1": {
+        "action": "Custom",
+        "next": [
+            "组队副本9_copy1"
+        ],
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "组队",
+            "team_name": "经验副本"
+        }
+    },
+    "组队副本5_copy1_copy1": {
+        "action": "Click",
+        "target": [
+            117,
+            216,
+            90,
+            263
+        ]
+    },
+    "组队副本14": {
+        "action": "Custom",
+        "custom_action": "TaskList",
+        "custom_action_param": {
+            "task_list": {
+                "组队副本_金币副本": true,
+                "组队副本_经验副本": true
+            }
+        }
+    }
+}
