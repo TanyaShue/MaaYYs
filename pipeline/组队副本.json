@@ -195,7 +195,9 @@
     },
     "组队副本12": {
         "recognition": "OCR",
-        "action": "Click",
+        "action": "Click",        "pre_delay": 1000,
+
+
         "timeout": 120000,
         "next": [
             "组队副本13"
@@ -380,7 +382,7 @@
     "组队副本12_copy1": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [],
+        "pre_delay": 1000,
         "timeout": 120000,
         "next": [
             "组队副本13_copy1"
