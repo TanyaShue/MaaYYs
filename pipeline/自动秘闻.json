@@ -59,7 +59,8 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "next": [
-            "自动秘闻_点击式神录"
+            "自动秘闻_点击式神录",
+            "自动秘闻_点击进入_copy1"
         ],
         "roi": [
             1118,
@@ -299,5 +300,24 @@
             78
         ],
         "expected": "秘闻副本"
+    },
+    "自动秘闻3": {},
+    "自动秘闻_点击进入_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "自动秘闻_点击式神录"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            1118,
+            574,
+            158,
+            145
+        ],
+        "template": [
+            "自动秘闻/自动秘闻_进入__1138_590_113_100__1088_540_192_180.png"
+        ]
     }
 }
