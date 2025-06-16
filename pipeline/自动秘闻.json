@@ -31,12 +31,12 @@
     },
     "自动秘闻_step_2": {
         "recognition": "OCR",
-        "interrupt": [
+        "next": [
+            "自动秘闻_step_3",
             "自动秘闻_点击进入"
         ],
-        "next": [
-            "自动秘闻_step_3"
-        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "expected": "难度"
     },
     "自动秘闻_step_3": {
