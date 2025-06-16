@@ -128,7 +128,7 @@
             "阴阳寮奖励领取_结界_识别退出寄养界面"
         ],
         "next": [
-            "阴阳寮奖励领取_结界奖励领取_识别寄养栏位"
+            "阴阳寮奖励"
         ],
         "post_delay": 1000,
         "roi": [
@@ -467,6 +467,48 @@
             116,
             54,
             33
+        ]
+    },
+    "阴阳寮奖励": {
+        "action": "Custom",
+        "on_error": [],
+        "next": [
+            "阴阳寮奖励领取_结界奖励领取_识别寄养栏位"
+        ],
+        "custom_action": "LoopAction",
+        "custom_action_param": {
+            "action_list": [
+                "阴阳寮奖励2"
+            ],
+            "loop_times": 6
+        }
+    },
+    "阴阳寮奖励1": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            953,
+            485,
+            172,
+            197
+        ],
+        "template": [
+            "阴阳寮奖励\\阴阳寮奖励1.png"
+        ]
+    },
+    "阴阳寮奖励2": {
+        "next": [
+            "阴阳寮奖励1",
+            "阴阳寮奖励3"
+        ]
+    },
+    "阴阳寮奖励3": {
+        "action": "Click",
+        "target": [
+            1009,
+            569,
+            34,
+            53
         ]
     }
 }
