@@ -219,23 +219,9 @@ class SwitchSoul(CustomAction):
                 roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
                 print(f"找到队伍: {team_name}，尝试装备御魂")
                 # 点击"装备御魂"按钮，然后点击确定
-                equip_result = context.run_task("装备御魂", {
-                    "装备御魂": {
-                        "action": "Click",
-                        "timeout": 2000,  # 增加超时时间
-                        "recognition": "TemplateMatch",
-                        "post_delay": 100,  # 减少延迟
-                        "template": ["通用图标/装备御魂.png", "通用图标/装备御魂_2.png"],
-                        "roi": roi,
-                        "next": "点击确定"
-                    },
-                    "点击确定": {
-                        "action": "Click",
-                        "timeout": 2000,
-                        "recognition": "OCR",
-                        "pre_delay": 1000,
-                        "expected": "确定",
-                        "roi": [400, 350, 475, 175]
+                equip_result = context.run_task("通用_装备御魂", {
+                    "通用_装备御魂": {
+                        "roi": roi
                     }
                 })
 

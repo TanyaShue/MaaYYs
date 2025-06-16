@@ -413,5 +413,33 @@
             111
         ],
         "expected": "觉醒材料|御魂|结界突破|御灵"
+    },
+    "通用_装备御魂": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "timeout": 2000,
+        "next": [
+            "通用_装备御魂_点击确定"
+        ],
+        "post_delay": 100,
+        "template": [
+            "通用图标/装备御魂.png",
+            "通用图标/装备御魂_2.png",
+            "通用\\装备御魂.png",
+            "通用\\装备御魂_1.png"
+        ]
+    },
+    "通用_装备御魂_点击确定": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 2000,
+        "pre_delay": 1000,
+        "roi": [
+            400,
+            350,
+            475,
+            175
+        ],
+        "expected": "确定"
     }
 }
