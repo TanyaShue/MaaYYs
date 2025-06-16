@@ -20,7 +20,7 @@ class BountyMonsterRecognition(CustomAction):
         print("开始执行自定义动作：识别悬赏妖怪")
         attempts = 0  # Retry counter
 
-        while attempts < 5:
+        while attempts < 3:
             context.run_task("悬赏封印_识别宝箱")
             
             # 添加容错
