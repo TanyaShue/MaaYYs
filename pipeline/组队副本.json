@@ -181,7 +181,8 @@
         "action": "Click",
         "timeout": 60000,
         "next": [
-            "组队副本12"
+            "组队副本12",
+            "组队副本3"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -195,13 +196,12 @@
     },
     "组队副本12": {
         "recognition": "OCR",
-        "action": "Click",        "pre_delay": 1000,
-
-
+        "action": "Click",
         "timeout": 120000,
         "next": [
             "组队副本13"
         ],
+        "pre_delay": 1000,
         "roi": [
             1099,
             527,
@@ -382,11 +382,11 @@
     "组队副本12_copy1": {
         "recognition": "OCR",
         "action": "Click",
-        "pre_delay": 1000,
         "timeout": 120000,
         "next": [
             "组队副本13_copy1"
         ],
+        "pre_delay": 1000,
         "roi": [
             1099,
             527,
@@ -518,7 +518,8 @@
         "action": "Click",
         "timeout": 60000,
         "next": [
-            "组队副本12_copy1"
+            "组队副本12_copy1",
+            "组队副本3"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -559,5 +560,18 @@
                 "组队副本_经验副本": true
             }
         }
+    },
+    "组队副本3": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            397,
+            222,
+            472,
+            39
+        ],
+        "expected": "你还需要(?:(\\d+)小时)?(?:(\\d+)分钟)?才可以再次进入"
     }
 }

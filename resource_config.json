@@ -331,7 +331,7 @@
             "pipeline_override": {
                 "组队副本4": {
                     "custom_action_param": {
-                        "gold_150%": "{boole}"
+                        "gold_50%": "{boole}"
                     }
                 }
             }
