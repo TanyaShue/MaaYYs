@@ -3,10 +3,13 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "next": [
+            "投喂宠物2",
             "投喂宠物1"
         ],
         "template": [
-            "投喂宠物\\投喂宠物.png"
+            "投喂宠物\\投喂宠物.png",
+            "投喂宠物\\投喂宠物_1.png",
+            "投喂宠物\\投喂宠物_2.png"
         ]
     },
     "投喂宠物1": {
@@ -228,6 +231,9 @@
     "投喂宠物12": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "interrupt": [
+            "投喂宠物12_copy1"
+        ],
         "next": [
             "投喂宠物14"
         ],
@@ -279,6 +285,8 @@
             "投喂宠物12",
             "投喂宠物5"
         ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             1079,
             88,
@@ -286,5 +294,13 @@
             47
         ],
         "expected": "跳过"
+    },
+    "投喂宠物16": {},
+    "投喂宠物12_copy1": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "template": [
+            "投喂宠物\\投喂宠物12.png"
+        ]
     }
 }
