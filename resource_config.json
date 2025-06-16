@@ -164,6 +164,11 @@
                     "打开阴阳师": {
                         "package": "com.netease.onmyoji/.tag0"
                     }
+                },
+                "MUMU官网下载版": {
+                    "打开阴阳师": {
+                        "package": "com.netease.onmyoji.wyzymnqsd_cps"
+                    }
                 }
             },
             "choices": [
@@ -174,6 +179,10 @@
                 {
                     "name": "官网下载版",
                     "value": "官网下载版"
+                },
+                {
+                    "name": "MUMU官网下载版",
+                    "value": "MUMU官网下载版"
                 }
             ]
         },
