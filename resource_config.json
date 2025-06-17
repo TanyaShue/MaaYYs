@@ -5,7 +5,7 @@
     "resource_update_service_id": "MaaYYs",
     "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
     "resource_description": "阴阳师自动化脚本",
-    "resource_icon": "/icons/apps_icons/R.png",
+    "resource_icon": "/app/logo.png",
     "custom_path": "./MaaAgent.py",
     "custom_prams": "-path ./custom_dir",
     "custom_dir": "./custom_dir",
@@ -250,11 +250,11 @@
             },
             "choices": [
                 {
-                    "name": "探索",
+                    "name": "只打探索",
                     "value": "探索"
                 },
                 {
-                    "name": "挑战",
+                    "name": "挑战优先",
                     "value": "挑战"
                 }
             ]
