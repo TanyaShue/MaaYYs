@@ -42,7 +42,7 @@
             "option": [
                 "寮30目标副本",
                 "寮30是否为队长",
-                "寮30是否启用御魂加成",
+                "寮30是否启用加成",
                 "寮30分组预设",
                 "寮30分队预设"
             ]
@@ -77,12 +77,7 @@
             "task_name": "日常奖励领取",
             "task_entry": "日常_任务列表",
             "option": [
-                "日常_送友情点",
-                "领取奖励_邮件",
-                "领取奖励_日常庭院奖励",
-                "领取奖励_商店每日奖励",
-                "领取奖励_花合战奖励",
-                "日常_每日免费一抽"
+                "日常奖励设置"
             ]
         },
         {
@@ -109,16 +104,8 @@
             "task_name": "组队副本",
             "task_entry": "组队副本14",
             "option": [
-                "自动组队经验副本",
-                "经验副本分组预设",
-                "经验副本队伍预设",
-                "启用100%经验加成",
-                "启用50%经验加成",
-                "自动组队金币副本",
-                "金币副本分组预设",
-                "金币副本队伍预设",
-                "启用100%金币加成",
-                "启用50%金币加成"
+                "经验副本设置",
+                "金币副本设置"
             ]
         }
     ],
@@ -211,8 +198,8 @@
                     "开始自动挑战鬼王": {
                         "custom_action_param": {
                             "count": 3,
-                            "group_name": "秘闻",
-                            "team_name": "队伍1"
+                            "group_name": "日常",
+                            "team_name": "日常清杂"
                         }
                     }
                 }
@@ -270,82 +257,6 @@
             }
         },
         {
-            "name": "自动组队经验副本",
-            "type": "boole",
-            "default": false,
-            "pipeline_override": {
-                "组队副本14": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "组队副本_经验副本": "{boole}"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "启用100%经验加成",
-            "type": "boole",
-            "default": false,
-            "pipeline_override": {
-                "组队副本4_copy2": {
-                    "custom_action_param": {
-                        "exp_100%": "{boole}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "启用50%经验加成",
-            "type": "boole",
-            "default": false,
-            "pipeline_override": {
-                "组队副本4_copy2": {
-                    "custom_action_param": {
-                        "exp_50%": "{boole}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "自动组队金币副本",
-            "type": "boole",
-            "default": false,
-            "pipeline_override": {
-                "组队副本14": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "组队副本_金币副本": "{boole}"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "启用100%金币加成",
-            "type": "boole",
-            "default": false,
-            "pipeline_override": {
-                "组队副本4": {
-                    "custom_action_param": {
-                        "gold_100%": "{boole}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "启用50%金币加成",
-            "type": "boole",
-            "default": false,
-            "pipeline_override": {
-                "组队副本4": {
-                    "custom_action_param": {
-                        "gold_50%": "{boole}"
-                    }
-                }
-            }
-        },
-        {
             "name": "悬赏封印分组预设",
             "type": "input",
             "default": "默认分组",
@@ -387,54 +298,6 @@
             "default": "默认队伍",
             "pipeline_override": {
                 "装备突破预设": {
-                    "custom_action_param": {
-                        "team_name": "{value}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "经验副本分组预设",
-            "type": "input",
-            "default": "默认分组",
-            "pipeline_override": {
-                "组队副本8_copy1": {
-                    "custom_action_param": {
-                        "group_name": "{value}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "经验副本队伍预设",
-            "type": "input",
-            "default": "默认队伍",
-            "pipeline_override": {
-                "组队副本8_copy1": {
-                    "custom_action_param": {
-                        "team_name": "{value}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "金币副本分组预设",
-            "type": "input",
-            "default": "默认分组",
-            "pipeline_override": {
-                "组队副本8": {
-                    "custom_action_param": {
-                        "group_name": "{value}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "金币副本队伍预设",
-            "type": "input",
-            "default": "默认队伍",
-            "pipeline_override": {
-                "组队副本8": {
                     "custom_action_param": {
                         "team_name": "{value}"
                     }
@@ -541,90 +404,6 @@
                 "现世逢魔_装备式神预设": {
                     "custom_action_param": {
                         "team_name": "{value}"
-                    }
-                }
-            }
-        },
-        {
-            "name": "日常_送友情点",
-            "type": "boole",
-            "default": true,
-            "pipeline_override": {
-                "日常_任务列表": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "日常_送友情点": "{boole}"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "领取奖励_邮件",
-            "type": "boole",
-            "default": true,
-            "pipeline_override": {
-                "日常_任务列表": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "领取奖励_邮件": "{boole}"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "领取奖励_日常庭院奖励",
-            "type": "boole",
-            "default": true,
-            "pipeline_override": {
-                "日常_任务列表": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "领取奖励_日常奖励": "{boole}"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "日常_每日免费一抽",
-            "type": "boole",
-            "default": true,
-            "pipeline_override": {
-                "日常_任务列表": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "日常_每日免费一抽": "{boole}"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "领取奖励_商店每日奖励",
-            "type": "boole",
-            "default": true,
-            "pipeline_override": {
-                "日常_任务列表": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "领取奖励_商店每日奖励": "{boole}"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "领取奖励_花合战奖励",
-            "type": "boole",
-            "default": true,
-            "pipeline_override": {
-                "日常_任务列表": {
-                    "custom_action_param": {
-                        "task_list": {
-                            "领取奖励_花合战奖励": "{boole}"
-                        }
                     }
                 }
             }
@@ -751,6 +530,230 @@
                     }
                 }
             }
+        },
+        {
+            "name": "日常奖励设置",
+            "type": "settings_group",
+            "default": true,
+            "pipeline_override": {},
+            "description": "日常奖励领取设置",
+            "settings": [
+                {
+                    "name": "日常_送友情点",
+                    "type": "boole",
+                    "default": true,
+                    "pipeline_override": {
+                        "日常_任务列表": {
+                            "custom_action_param": {
+                                "task_list": {
+                                    "日常_送友情点": "{boole}"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "领取奖励_邮件",
+                    "type": "boole",
+                    "default": true,
+                    "pipeline_override": {
+                        "日常_任务列表": {
+                            "custom_action_param": {
+                                "task_list": {
+                                    "领取奖励_邮件": "{boole}"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "领取奖励_日常庭院奖励",
+                    "type": "boole",
+                    "default": true,
+                    "pipeline_override": {
+                        "日常_任务列表": {
+                            "custom_action_param": {
+                                "task_list": {
+                                    "领取奖励_日常奖励": "{boole}"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "日常_每日免费一抽",
+                    "type": "boole",
+                    "default": true,
+                    "pipeline_override": {
+                        "日常_任务列表": {
+                            "custom_action_param": {
+                                "task_list": {
+                                    "日常_每日免费一抽": "{boole}"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "领取奖励_商店每日奖励",
+                    "type": "boole",
+                    "default": true,
+                    "pipeline_override": {
+                        "日常_任务列表": {
+                            "custom_action_param": {
+                                "task_list": {
+                                    "领取奖励_商店每日奖励": "{boole}"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "领取奖励_花合战奖励",
+                    "type": "boole",
+                    "default": true,
+                    "pipeline_override": {
+                        "日常_任务列表": {
+                            "custom_action_param": {
+                                "task_list": {
+                                    "领取奖励_花合战奖励": "{boole}"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "经验副本设置",
+            "type": "settings_group",
+            "default": true,
+            "pipeline_override": {
+                "组队副本14": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "组队副本_经验副本": "{boole}",
+                            "组队副本_金币副本": "{boole}"
+                        }
+                    }
+                }
+            },
+            "description": "经验副本相关设置",
+            "settings": [
+                {
+                    "name": "经验副本分组预设",
+                    "type": "input",
+                    "default": "默认分组",
+                    "pipeline_override": {
+                        "组队副本8_copy1": {
+                            "custom_action_param": {
+                                "group_name": "{value}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "经验副本队伍预设",
+                    "type": "input",
+                    "default": "默认队伍",
+                    "pipeline_override": {
+                        "组队副本8_copy1": {
+                            "custom_action_param": {
+                                "team_name": "{value}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "启用100%经验加成",
+                    "type": "boole",
+                    "default": false,
+                    "pipeline_override": {
+                        "组队副本4_copy2": {
+                            "custom_action_param": {
+                                "exp_100%": "{boole}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "启用50%经验加成",
+                    "type": "boole",
+                    "default": false,
+                    "pipeline_override": {
+                        "组队副本4_copy2": {
+                            "custom_action_param": {
+                                "exp_50%": "{boole}"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "金币副本设置",
+            "type": "settings_group",
+            "default": true,
+            "pipeline_override": {
+                "组队副本14": {
+                    "custom_action_param": {
+                        "task_list": {
+                            "组队副本_金币副本": "{boole}"
+                        }
+                    }
+                }
+            },
+            "description": "金币副本相关设置",
+            "settings": [
+                {
+                    "name": "金币副本分组预设",
+                    "type": "input",
+                    "default": "默认分组",
+                    "pipeline_override": {
+                        "组队副本8": {
+                            "custom_action_param": {
+                                "group_name": "{value}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "金币副本队伍预设",
+                    "type": "input",
+                    "default": "默认队伍",
+                    "pipeline_override": {
+                        "组队副本8": {
+                            "custom_action_param": {
+                                "team_name": "{value}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "启用100%金币加成",
+                    "type": "boole",
+                    "default": false,
+                    "pipeline_override": {
+                        "组队副本4": {
+                            "custom_action_param": {
+                                "gold_100%": "{boole}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "启用50%金币加成",
+                    "type": "boole",
+                    "default": false,
+                    "pipeline_override": {
+                        "组队副本4": {
+                            "custom_action_param": {
+                                "gold_50%": "{boole}"
+                            }
+                        }
+                    }
+                }
+            ]
         }
     ]
 }
