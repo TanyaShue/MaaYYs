@@ -5,8 +5,9 @@ import time
 # 假设 maa 相关模块已正确导入
 from maa.context import Context
 from maa.custom_action import CustomAction
+from maa.agent.agent_server import AgentServer
 
-
+@AgentServer.custom_action("AutoFoster")
 class AutoFoster(CustomAction):
     """
     自动寄养脚本：

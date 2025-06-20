@@ -5,7 +5,9 @@ import random
 from time import sleep
 
 
+from maa.agent.agent_server import AgentServer
 
+@AgentServer.custom_action("HumanTouch")
 class HumanTouch(CustomAction):
     count = 0
     def run(self,

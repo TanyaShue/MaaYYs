@@ -3,7 +3,9 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 
+from maa.agent.agent_server import AgentServer
 
+@AgentServer.custom_action("BonusToggleAction")
 class BonusToggleAction(CustomAction):
     BonusType = {
         "exp_100%": "战斗胜利获得的经验增加100%",
