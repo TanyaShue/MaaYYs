@@ -1,11 +1,14 @@
 {
-    "自动逢魔": {
-        "interrupt": [
-            "向右滑一下"
+    "自动逢魔_识别答案_1": {
+        "recognition": "OCR",
+        "roi": [
+            431,
+            262,
+            443,
+            71
         ],
-        "next": [
-            "点击逢魔"
-        ]
+        "order_by": "Vertical",
+        "expected": ".*"
     },
     "点击逢魔": {
         "recognition": "FeatureMatch",
@@ -115,8 +118,7 @@
             "现世逢魔"
         ],
         "next": [
-            "现世逢魔_领取奖励",
-            "现世逢魔_点击首领"
+            "现世逢魔_领取奖励"
         ],
         "post_delay": 1000,
         "roi": [
@@ -372,6 +374,7 @@
     },
     "自动逢魔2": {
         "recognition": "OCR",
+        "action": "Custom",
         "next": [
             "现世逢魔_点击首领"
         ],
@@ -381,7 +384,8 @@
             342,
             68
         ],
-        "expected": "逢魔密信"
+        "expected": "逢魔密信",
+        "custom_action": "QuestionMatcher"
     },
     "自动逢魔3": {
         "recognition": "TemplateMatch",
@@ -448,6 +452,55 @@
     "自动逢魔5": {
         "next": [
             "现世逢魔_点击首领"
+        ]
+    },
+    "自动逢魔_识别答案_2": {
+        "recognition": "OCR",
+        "roi": [
+            435,
+            354,
+            436,
+            66
+        ],
+        "order_by": "Vertical",
+        "expected": ".*"
+    },
+    "自动逢魔_识别题目": {
+        "recognition": "OCR",
+        "roi": [
+            427,
+            162,
+            448,
+            88
+        ]
+    },
+    "自动逢魔_识别答案_3": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            437,
+            443,
+            69
+        ],
+        "order_by": "Vertical",
+        "expected": ".*"
+    },
+    "自动逢魔_识别正确答案": {
+        "recognition": "FeatureMatch",
+        "roi": [
+            762,
+            264,
+            117,
+            256
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔.png"
+        ]
+    },
+    "自动逢魔": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "自动逢魔\\自动逢魔_1.png"
         ]
     }
 }
