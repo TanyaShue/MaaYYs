@@ -28,6 +28,8 @@ jobs:
       - name: Package Python Runtime
         shell: pwsh
         working-directory: MaaYYs
+        env:
+          PYTHONIOENCODING: utf-8  # 设置Python输出编码为UTF-8
         run: |
           Write-Host "开始打包Python运行时..."
           python package_python.py
