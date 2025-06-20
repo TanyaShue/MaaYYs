@@ -37,7 +37,7 @@ class LoopAction(CustomAction):
                 action_time_name = f"第{i + 1}次{action}任务"
                 print(f"执行动作: {action_time_name}")
 
-                context.run_task(action_time_name, {action_time_name:{"next":action}})
+                context.run_task(action_time_name, {action_time_name:{"next":action,"timeout":1000}})
 
                 time.sleep(0.5)  # 可根据需求设置不同的延迟
 
