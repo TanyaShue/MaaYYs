@@ -17,9 +17,6 @@
     "自动秘闻_step_1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "点击底部菜单位置"
-        ],
         "next": [
             "自动秘闻_step_2",
             "自动秘闻5"
