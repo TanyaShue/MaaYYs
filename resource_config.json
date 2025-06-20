@@ -69,6 +69,7 @@
             "task_name": "自动逢魔",
             "task_entry": "自动逢魔",
             "option": [
+                "逢魔答题同步题目",
                 "逢魔首领分组预设",
                 "逢魔首领队伍预设"
             ]
@@ -253,6 +254,19 @@
             "pipeline_override": {
                 "探索_悬赏_自动轮换": {
                     "enabled": "{boole}"
+                }
+            }
+        },
+        {
+            "name": "逢魔答题同步题目",
+            "type": "boole",
+            "default": true,
+            "pipeline_override": {
+                "自动逢魔2": {
+                    "custom_action_param": {
+                        "upload": "{boole}",
+                        "sync": "{boole}"
+                    }
                 }
             }
         },

@@ -374,7 +374,6 @@
     "自动逢魔2": {
         "recognition": "OCR",
         "action": "Custom",
-        "next": [],
         "roi": [
             419,
             67,
@@ -382,7 +381,11 @@
             68
         ],
         "expected": "逢魔密信",
-        "custom_action": "QuestionMatcher"
+        "custom_action": "QuestionMatcher",
+        "custom_action_param": {
+            "upload": true,
+            "sync": true
+        }
     },
     "自动逢魔3": {
         "recognition": "TemplateMatch",
