@@ -5,7 +5,9 @@ import json
 from maa.context import Context
 from maa.custom_action import CustomAction
 
+from maa.agent.agent_server import AgentServer
 
+@AgentServer.custom_action("ChallengeDungeonBoss")
 class ChallengeDungeonBoss(CustomAction):
 
     def run(self,

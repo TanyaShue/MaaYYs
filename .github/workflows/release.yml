@@ -20,6 +20,23 @@ jobs:
           path: MaaYYs
           fetch-depth: 0  # 获取完整历史以便生成变更日志
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Package Python Runtime
+        shell: pwsh
+        working-directory: MaaYYs
+        run: |
+          Write-Host "开始打包Python运行时..."
+          python package_python.py
+          
+          # 验证Python运行时
+          Write-Host "`n验证Python运行时..."
+          & "runtime/python/python.bat" --version
+          & "runtime/python/pip.bat" --version
+
       - name: Update resource_version in config file
         shell: pwsh
         working-directory: MaaYYs
@@ -148,8 +165,8 @@ jobs:
       - name: Create resources-only package
         shell: pwsh
         run: |
-          # 定义要包含的文件和文件夹列表
-          $includeList = @('app', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md', 'resource_config.json')
+          # 定义要包含的文件和文件夹列表（包含runtime目录）
+          $includeList = @('app', 'custom_dir', 'image', 'model', 'pipeline', 'runtime', 'LICENSE', 'README.md', 'resource_config.json')
           
           # 创建临时目录用于资源包
           New-Item -Path "resources-temp" -ItemType Directory -Force
@@ -201,8 +218,13 @@ jobs:
             ${{ steps.changelog.outputs.CHANGELOG }}
             
             ## 下载
-            - **完整包**: 包含 MFWPH 和 MaaYYs 资源，可直接运行
-            - **仅资源包**: 仅包含 MaaYYs 资源，适用于已有 MFWPH 的用户
+            - **完整包**: 包含 MFWPH、MaaYYs 资源和Python运行时，可直接运行
+            - **仅资源包**: 包含 MaaYYs 资源和Python运行时，适用于已有 MFWPH 的用户
+            
+            ## Python运行时使用说明
+            - 运行Python脚本: `runtime\python\python.bat your_script.py`
+            - 安装Python包: `runtime\python\pip.bat install package_name`
+            
             [已有 Mirror酱 CDK？点击前往高速下载](https://mirrorchyan.com/zh/projects?rid=MaaYYs)
           draft: false
           prerelease: false

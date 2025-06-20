@@ -12,7 +12,9 @@ from datetime import datetime
 from maa.context import Context
 from maa.custom_action import CustomAction
 
+from maa.agent.agent_server import AgentServer
 
+@AgentServer.custom_action("QuestionMatcher")
 class QuestionMatcher(CustomAction):
     def __init__(self):
         super().__init__()

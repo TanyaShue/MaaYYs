@@ -1,67 +1,31 @@
 import argparse
 import os
 import sys
+
+# 添加当前脚本目录到 Python 路径
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, current_dir)
+
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.custom_recognition import CustomRecognition
 from maa.toolkit import Toolkit
-
-
-def load_custom_objects(agent, custom_dir):
-    if not os.path.exists(custom_dir):
-        print(f"自定义文件夹 {custom_dir} 不存在")
-        return
-
-    if not os.listdir(custom_dir):
-        print(f"自定义文件夹 {custom_dir} 为空")
-        return
-
-    # Save original path
-    original_path = sys.path.copy()
-
-    # Process module types
-    for module_type, base_class in [("custom_actions", CustomAction),
-                                    ("custom_recognition", CustomRecognition)]:
-        module_type_dir = os.path.join(custom_dir, module_type)
-
-        if not os.path.exists(module_type_dir):
-            print(f"{module_type} 文件夹不存在于 {custom_dir}")
-            continue
-
-        print(f"开始加载 {module_type} 模块")
-
-        # Add module directory to path to enable imports
-        sys.path.insert(0, module_type_dir)
-
-        for file in os.listdir(module_type_dir):
-            file_path = os.path.join(module_type_dir, file)
-
-            if os.path.isfile(file_path) and file.endswith('.py'):
-                try:
-                    module_name = os.path.splitext(file)[0]
-
-                    # Import the module
-                    module = __import__(module_name)
-
-                    # Find all classes in module that are subclasses of the base class
-                    for attr_name in dir(module):
-                        attr = getattr(module, attr_name)
-
-                        if isinstance(attr, type) and issubclass(attr, base_class) and attr != base_class:
-                            class_name = attr.__name__
-                            instance = attr()
-
-                            if module_type == "custom_actions":
-                                if agent.register_custom_action(class_name, instance):
-                                    print(f"加载自定义动作 {class_name} 成功")
-                            elif module_type == "custom_recognition":
-                                if agent.register_custom_recognition(class_name, instance):
-                                    print(f"加载自定义识别器 {class_name} 成功")
-                except Exception as e:
-                    print(f"Error loading {file}: {e}")
-
-        # Restore path
-        sys.path = original_path
+from custom_dir.custom_actions import auto_battle
+from custom_dir.custom_actions import auto_foster
+from custom_dir.custom_actions import bonus_toggle
+from custom_dir.custom_actions import bounty_monster_recognition
+from custom_dir.custom_actions import challenge_dungeon_boss
+from custom_dir.custom_actions import count_action
+from custom_dir.custom_actions import human_touch
+from custom_dir.custom_actions import loop_action
+from custom_dir.custom_actions import question_matcher
+from custom_dir.custom_actions import random_swipe
+from custom_dir.custom_actions import random_touch
+from custom_dir.custom_actions import repeat_challenge_n_times
+from custom_dir.custom_actions import switch_soul
+from custom_dir.custom_actions import task_list
+from custom_dir.custom_actions import team_builder
+from custom_dir.custom_recognition import my_recognizer
 
 
 def main():
@@ -86,9 +50,9 @@ def main():
 
     print(f"使用自定义路径: {custom_objects_path}")
     print(f"使用Socket ID: {socket_id}")
+    print(f"当前工作目录: {os.getcwd()}")
+    print(f"脚本目录: {current_dir}")
 
-
-    load_custom_objects(AgentServer, custom_objects_path)
     print("当前socket_id:", socket_id)
     AgentServer.start_up(socket_id)
     AgentServer.join()

@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from maa.agent.agent_server import AgentServer
 from maa.context import Context
 from maa.custom_action import CustomAction
 import json
@@ -6,7 +7,7 @@ import random
 import time
 
 
-
+@AgentServer.custom_action("AutoBattle")
 class AutoBattle(CustomAction):
     def run(self,
             context: Context,
