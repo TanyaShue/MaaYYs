@@ -87,7 +87,7 @@ class QuestionMatcher(CustomAction):
             self.click_correct_answer(context, answers, correct_answer)
 
             # 等待结果显示
-            time.sleep(0.8)
+            time.sleep(1)
 
             # 即使点击了"正确答案"，也要验证实际的正确答案
             print("验证答案正确性...")

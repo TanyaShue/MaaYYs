@@ -21,7 +21,7 @@ class LoopAction(CustomAction):
 
         # 读取 custom_param 的参数：{"action_list": ["A", "B", "C"], "loop_times": x}
         json_data = json.loads(argv.custom_action_param)
-
+        print(json_data)
         # 获取动作列表和循环次数
         action_list = json_data.get("action_list", [])
         loop_times = json_data.get("loop_times", 1)
