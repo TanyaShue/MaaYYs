@@ -34,7 +34,7 @@ class LoopAction(CustomAction):
             print(f"第 {i + 1} 次循环开始")
 
             for action in action_list:
-                action_time_name = f"{action}_action_time"
+                action_time_name = f"第{i + 1}次{action}任务"
                 print(f"执行动作: {action_time_name}")
 
                 context.run_task(action_time_name, {action_time_name:{"next":action}})

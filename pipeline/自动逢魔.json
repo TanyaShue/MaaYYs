@@ -118,7 +118,7 @@
             "现世逢魔"
         ],
         "next": [
-            "现世逢魔_领取奖励"
+            "自动逢魔_领取逢魔奖励"
         ],
         "post_delay": 1000,
         "roi": [
@@ -150,6 +150,7 @@
     "现世逢魔_领取奖励": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "timeout": 1000,
         "next": [
             "现世逢魔_点击一下屏幕下方"
         ],
@@ -164,10 +165,7 @@
     },
     "现世逢魔_点击一下屏幕下方": {
         "action": "Click",
-        "next": [
-            "自动逢魔3",
-            "现世逢魔_点击首领"
-        ],
+        "next": [],
         "post_delay": 1000,
         "target": [
             2,
@@ -358,6 +356,7 @@
     "自动逢魔1": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "timeout": 1000,
         "next": [
             "自动逢魔2"
         ],
@@ -375,9 +374,7 @@
     "自动逢魔2": {
         "recognition": "OCR",
         "action": "Custom",
-        "next": [
-            "现世逢魔_点击首领"
-        ],
+        "next": [],
         "roi": [
             419,
             67,
@@ -390,6 +387,7 @@
     "自动逢魔3": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "timeout": 1000,
         "next": [
             "自动逢魔4",
             "自动逢魔4_copy1"
@@ -450,8 +448,12 @@
         ]
     },
     "自动逢魔5": {
-        "next": [
-            "现世逢魔_点击首领"
+        "action": "Click",
+        "target": [
+            907,
+            364,
+            88,
+            121
         ]
     },
     "自动逢魔_识别答案_2": {
@@ -497,10 +499,12 @@
             "自动逢魔\\自动逢魔.png"
         ]
     },
-    "自动逢魔": {
-        "recognition": "TemplateMatch",
-        "template": [
-            "自动逢魔\\自动逢魔_1.png"
-        ]
+    "自动逢魔_领取逢魔奖励": {
+        "action": "Custom",
+        "next": [
+            "现世逢魔_点击首领"
+        ],
+        "custom_action": "LoopAction",
+        "custom_action_param": "{\n  \"action_list\": [\n    \"自动逢魔1\",\n    \"现世逢魔_领取奖励\",\n    \"自动逢魔3\n  ],\n  \"loop_times\": 4\n}"
     }
 }
