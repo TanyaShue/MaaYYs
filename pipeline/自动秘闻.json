@@ -1,6 +1,11 @@
 {
     "自动秘闻": {
-        "action": "Custom",
+        "interrupt": [
+            "点击探索"
+        ],
+        "next": [
+            "自动秘闻_step_1"
+        ],
         "custom_action": "TaskList",
         "custom_action_param": {
             "task_list": [
@@ -16,7 +21,8 @@
             "点击底部菜单位置"
         ],
         "next": [
-            "自动秘闻_step_2"
+            "自动秘闻_step_2",
+            "自动秘闻5"
         ],
         "post_delay": 1000,
         "template": [
@@ -33,6 +39,7 @@
         "recognition": "OCR",
         "next": [
             "自动秘闻_step_3",
+            "自动秘闻6",
             "自动秘闻_点击进入"
         ],
         "pre_delay": 1000,
@@ -318,6 +325,35 @@
         ],
         "template": [
             "自动秘闻/自动秘闻_进入__1138_590_113_100__1088_540_192_180.png"
+        ]
+    },
+    "自动秘闻5": {
+        "recognition": "OCR",
+        "next": [
+            "自动秘闻_step_3",
+            "自动秘闻6",
+            "自动秘闻_点击进入"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            83,
+            7,
+            168,
+            89
+        ],
+        "expected": "秘闻副本"
+    },
+    "自动秘闻6": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            295,
+            202,
+            127,
+            37
         ]
     }
 }
