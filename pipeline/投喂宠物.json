@@ -295,7 +295,6 @@
         ],
         "expected": "跳过"
     },
-    "投喂宠物16": {},
     "投喂宠物12_copy1": {
         "recognition": "TemplateMatch",
         "action": "Click",
