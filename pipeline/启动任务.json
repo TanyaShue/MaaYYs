@@ -7,26 +7,6 @@
             "打开阴阳师"
         ]
     },
-    "打开加速器": {
-        "action": "StartApp",
-        "interrupt": [
-            "回到主页"
-        ],
-        "next": [
-            "打开游戏加速"
-        ],
-        "post_delay": 1000,
-        "package": "com.github.kr328.clash/.MainActivity"
-    },
-    "打开游戏加速": {
-        "recognition": "OCR",
-        "action": "Click",
-        "timeout": 100,
-        "next": [
-            "回到主页"
-        ],
-        "expected": "已停止"
-    },
     "回到主页": {
         "action": "key",
         "key": 3
@@ -36,7 +16,8 @@
         "interrupt": [
             "关闭公告",
             "关闭广告",
-            "打开阴阳师_点击一下屏幕"
+            "打开阴阳师_点击一下屏幕",
+            "启动任务1"
         ],
         "next": [
             "识别庭院特征",
@@ -68,9 +49,14 @@
         "template": "通用图标/广告_关闭.png"
     },
     "打开阴阳师_点击一下屏幕": {
-        "recognition": "DirectHit",
+        "recognition": "TemplateMatch",
         "action": "Click",
+        "inverse": true,
         "pre_delay": 4000,
+        "template": [
+            "启动任务\\打开阴阳师_点击一下屏幕.png",
+            "启动任务\\打开阴阳师_点击一下屏幕_1.png"
+        ],
         "target": [
             165,
             98,
@@ -84,10 +70,37 @@
         "interrupt": [
             "关闭广告",
             "关闭公告",
-            "返回庭院"
+            "返回庭院",
+            "启动任务1"
         ],
         "timeout": 10000,
+        "next": [
+            "识别庭院特征"
+        ],
         "expected": "进入游戏"
     },
-    "启动任务": {}
+    "启动任务1": {
+        "recognition": "OCR",
+        "next": [
+            "启动任务2"
+        ],
+        "roi": [
+            343,
+            183,
+            590,
+            110
+        ],
+        "expected": "下载插画"
+    },
+    "启动任务2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            689,
+            436,
+            218,
+            86
+        ],
+        "expected": "下载"
+    }
 }

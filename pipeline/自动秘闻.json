@@ -4,7 +4,8 @@
             "点击探索"
         ],
         "next": [
-            "自动秘闻_step_1"
+            "自动秘闻_step_1",
+            "自动秘闻4"
         ],
         "custom_action": "TaskList",
         "custom_action_param": {
@@ -18,8 +19,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "next": [
-            "自动秘闻_step_2",
-            "自动秘闻5"
+            "自动秘闻3"
         ],
         "post_delay": 1000,
         "template": [
@@ -305,7 +305,19 @@
         ],
         "expected": "秘闻副本"
     },
-    "自动秘闻3": {},
+    "自动秘闻3": {
+        "action": "Click",
+        "next": [
+            "自动秘闻_step_2",
+            "自动秘闻5"
+        ],
+        "target": [
+            874,
+            293,
+            124,
+            118
+        ]
+    },
     "自动秘闻_点击进入_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
@@ -353,5 +365,12 @@
             37
         ],
         "expected": "制霸"
+    },
+    "自动秘闻4": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "自动秘闻3"
+        ]
     }
 }
