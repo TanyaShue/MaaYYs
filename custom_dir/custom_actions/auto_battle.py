@@ -52,18 +52,18 @@ class AutoBattle(CustomAction):
                 print("点击分组失败")
             
 
-            time.sleep(0.5)
+            time.sleep(1)
             print("开始执行自定义动作：点击队伍")
             # 点击队伍
             for count in range(1, 10):
                 img = context.tasker.controller.post_screencap().wait().get()
                 detail = context.run_recognition("点击队伍", img, {"点击队伍": {"timeout": 500, "recognition": "OCR", "expected" : json_data["team_name"], "roi" : [254, 235, 263, 355]}})
-                time.sleep(0.5)
+                time.sleep(1)
 
                 if detail is not None:
                     print(f"切换到队伍 {json_data['team_name']}")
                     context.tasker.controller.post_click(random.randint(detail.box.x, detail.box.x + detail.box.h), random.randint(detail.box.y, detail.box.y + detail.box.w)).wait()
-                    time.sleep(0.5)
+                    time.sleep(1)
                     context.tasker.controller.post_click(random.randint(359, 490), random.randint(647, 682)).wait()
                     break
 

@@ -1,12 +1,16 @@
 {
-    "寮30": {
-        "action": "Click",
-        "interrupt": [
-            "寮3012"
-        ],
+    "寮30_提交材料": {
+        "recognition": "OCR",
         "next": [
-            "寮305"
-        ]
+            "寮30"
+        ],
+        "roi": [
+            162,
+            183,
+            283,
+            124
+        ],
+        "expected": "提交中级觉醒材料"
     },
     "寮301": {
         "recognition": "FeatureMatch",
@@ -70,6 +74,9 @@
     "寮304": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "next": [
+            "寮3040"
+        ],
         "post_delay": 1000,
         "roi": [
             140,
@@ -759,7 +766,7 @@
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": false,
-            "expected_number":30
+            "expected_number": 30
         }
     },
     "寮3039_copy1_copy1": {
@@ -865,5 +872,30 @@
             98
         ],
         "expected": "确定"
-    }
+    },
+    "寮3040": {
+        "recognition": "OCR",
+        "next": [
+            "寮30_提交材料"
+        ],
+        "roi": [
+            526,
+            22,
+            173,
+            79
+        ],
+        "expected": "集体任务"
+    },
+    "寮30": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            228,
+            467,
+            142,
+            53
+        ],
+        "expected": "提交"
+    },
+    "寮3047": {}
 }
