@@ -27,11 +27,20 @@
         ]
     },
     "地鬼_点击式神录": {
+        "recognition": "OCR",
         "action": "Click",
         "next": [
             "装备地狱鬼王预设"
         ],
+        "pre_delay": 1000,
         "post_delay": 3000,
+        "roi": [
+            1137,
+            471,
+            136,
+            158
+        ],
+        "expected": "式神录",
         "target": [
             1165,
             495,
