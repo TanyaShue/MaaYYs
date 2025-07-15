@@ -462,3 +462,5 @@ tools/ImageCropper/**/*.png
 /MaaYYs/.idea/
 /.idea/
 /runtime/
+/pipeline/kun28.json
+/custom_dir/custom_actions/kun28.py
