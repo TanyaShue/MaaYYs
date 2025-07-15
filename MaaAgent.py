@@ -24,7 +24,6 @@ from custom_dir.custom_actions import random_touch
 from custom_dir.custom_actions import repeat_challenge_n_times
 from custom_dir.custom_actions import switch_soul
 from custom_dir.custom_actions import task_list
-from custom_dir.custom_actions import kun28
 from custom_dir.custom_actions import team_builder
 from custom_dir.custom_recognition import my_recognizer
 
