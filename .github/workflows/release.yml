@@ -223,10 +223,6 @@ jobs:
             - **完整包**: 包含 MFWPH、MaaYYs 资源和Python运行时，可直接运行
             - **仅资源包**: 包含 MaaYYs 资源和Python运行时，适用于已有 MFWPH 的用户
             
-            ## Python运行时使用说明
-            - 运行Python脚本: `runtime\python\python.bat your_script.py`
-            - 安装Python包: `runtime\python\pip.bat install package_name`
-            
             [已有 Mirror酱 CDK？点击前往高速下载](https://mirrorchyan.com/zh/projects?rid=MaaYYs)
           draft: false
           prerelease: false
