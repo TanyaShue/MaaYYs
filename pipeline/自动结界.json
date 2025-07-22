@@ -73,7 +73,8 @@
         "rate_limit": 2000,
         "timeout": 200000,
         "next": [
-            "识别突破界面"
+            "识别突破界面",
+            "突破_再次挑战_copy1"
         ],
         "post_delay": 10000,
         "roi": [
@@ -423,7 +424,7 @@
             "action_list": [
                 "突破_重新挑战"
             ],
-            "loop_times": 4
+            "loop_times": 6
         }
     },
     "突破_重新挑战": {
@@ -502,5 +503,73 @@
         "template": [
             "自动结界/自动结界1_1.png"
         ]
+    },
+    "突破_再次挑战_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 1000,
+        "next": [
+            "确认再次挑战_copy1"
+        ],
+        "post_delay": 500,
+        "roi": [
+            769,
+            415,
+            225,
+            202
+        ],
+        "template": "自动结界/突破_再次挑战.png"
+    },
+    "确认再次挑战_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "识别突破界面",
+            "突破_再次挑战_copy1_copy1"
+        ],
+        "post_delay": 500,
+        "roi": [
+            655,
+            388,
+            192,
+            87
+        ],
+        "expected": "确定"
+    },
+    "突破_再次挑战_copy1_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 1000,
+        "next": [
+            "自动结界4"
+        ],
+        "post_delay": 500,
+        "roi": [
+            769,
+            415,
+            225,
+            202
+        ],
+        "template": "自动结界/突破_再次挑战.png",
+        "target": [
+            378,
+            609,
+            372,
+            65
+        ]
+    },
+    "自动结界4": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "识别突破界面"
+        ],
+        "roi": [
+            961,
+            561,
+            177,
+            63
+        ],
+        "expected": "刷新"
     }
 }
