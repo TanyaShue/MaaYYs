@@ -325,10 +325,10 @@
         "action": "Click",
         "post_delay": 1000,
         "target": [
-            860,
-            428,
-            306,
-            111
+            965,
+            279,
+            252,
+            235
         ]
     },
     "kun2820": {
@@ -340,8 +340,9 @@
         "action": "Swipe",
         "timeout": 1000,
         "next": [
-            "kun2821_copy1",
-            "kun28_copy1"
+            "kun28_copy1",
+            "kun2818",
+            "kun2821_copy1"
         ],
         "pre_delay": 2000,
         "post_delay": 2000,
@@ -399,9 +400,12 @@
         "action": "Swipe",
         "timeout": 1000,
         "next": [
-            "kun2821_copy2",
-            "kun28_copy1"
+            "kun28_copy1",
+            "kun2818",
+            "kun2821_copy2"
         ],
+        "pre_delay": 2000,
+        "post_delay": 2000,
         "roi": [
             153,
             650,
@@ -428,9 +432,12 @@
         "action": "Swipe",
         "timeout": 1000,
         "next": [
-            "kun2821_copy3",
-            "kun28_copy1"
+            "kun28_copy1",
+            "kun2818",
+            "kun2821_copy3"
         ],
+        "pre_delay": 2000,
+        "post_delay": 2000,
         "roi": [
             153,
             650,
@@ -457,6 +464,8 @@
         "action": "Swipe",
         "timeout": 1000,
         "next": [],
+        "pre_delay": 2000,
+        "post_delay": 2000,
         "roi": [
             153,
             650,
@@ -484,6 +493,12 @@
         "timeout": 10000,
         "pre_delay": 0,
         "post_delay": 0,
+        "roi": [
+            5,
+            110,
+            1274,
+            530
+        ],
         "template": [
             "kun28\\kun28.png",
             "kun28\\kun28_1.png",

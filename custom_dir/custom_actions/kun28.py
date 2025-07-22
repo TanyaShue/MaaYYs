@@ -31,14 +31,14 @@ class Kun28(CustomAction):
             context.run_task("kun2812")
             self.num_tupo = self.recognition_tupo_number(context)
 
-        for _ in range(100):
+        for _ in range(200):
             if self.num_tupo >= 20:
                 for task in ["返回庭院", "自动结界","返回庭院", "kun2812"]:
                     context.run_task(task)
-                    if random.random() < 0.8:
-                        number = random.randint(1, 100)  # 80% 概率
+                    if random.random() < 0.9:
+                        number = random.randint(1, 100)  # 90% 概率
                     else:
-                        number = random.randint(1, 1000)  # 20% 概率
+                        number = random.randint(1, 600)  # 10% 概率
 
                     print(f"随机休息: {number} 秒")
                     time.sleep(number)
