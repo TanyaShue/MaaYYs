@@ -298,9 +298,11 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 1000,
-        "on_error": "返回庭院",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
-            "领取奖励_商店每日奖励_点击推荐"
+            "领取奖励_商店每日奖励_点击推荐_OCR"
         ],
         "post_delay": 1000,
         "roi": [
@@ -311,27 +313,22 @@
         ],
         "template": "庭院/商店_礼包屋.png"
     },
-    "领取奖励_商店每日奖励_点击推荐": {
-        "recognition": "FeatureMatch",
+    "领取奖励_商店每日奖励_点击推荐_OCR": {
+        "recognition": "OCR",
         "action": "Click",
-        "timeout": 1000,
         "on_error": [
             "领取奖励_商店每日奖励_领取每日免费礼包_返回"
         ],
         "next": [
             "领取奖励_商店每日奖励_领取每日免费礼包"
         ],
-        "post_delay": 1000,
         "roi": [
             1163,
             71,
             95,
             549
         ],
-        "template": [
-            "庭院/商店_礼包屋_推荐.png",
-            "庭院/商店_礼包屋_推荐_2.png"
-        ]
+        "expected": "日常"
     },
     "领取奖励_商店每日奖励_领取每日免费礼包": {
         "recognition": "OCR",
