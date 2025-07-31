@@ -10,21 +10,8 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.custom_recognition import CustomRecognition
 from maa.toolkit import Toolkit
-from custom_dir.custom_actions import auto_battle
-from custom_dir.custom_actions import auto_foster
-from custom_dir.custom_actions import bonus_toggle
-from custom_dir.custom_actions import bounty_monster_recognition
-from custom_dir.custom_actions import challenge_dungeon_boss
-from custom_dir.custom_actions import count_action
-from custom_dir.custom_actions import human_touch
-from custom_dir.custom_actions import loop_action
-from custom_dir.custom_actions import question_matcher
-from custom_dir.custom_actions import random_swipe
-from custom_dir.custom_actions import random_touch
-from custom_dir.custom_actions import repeat_challenge_n_times
-from custom_dir.custom_actions import switch_soul
-from custom_dir.custom_actions import task_list
-from custom_dir.custom_actions import team_builder
+from custom_dir.custom_actions import *
+
 from custom_dir.custom_recognition import my_recognizer
 
 
@@ -55,6 +42,7 @@ def main():
 
     print("当前socket_id:", socket_id)
     AgentServer.start_up(socket_id)
+
     AgentServer.join()
     AgentServer.shut_down()
 
