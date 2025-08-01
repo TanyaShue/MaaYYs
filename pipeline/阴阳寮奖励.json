@@ -76,14 +76,17 @@
         ]
     },
     "阴阳寮奖励领取_阴阳寮体力领取": {
-        "recognition": "FeatureMatch",
+        "recognition": "TemplateMatch",
         "action": "Click",
         "timeout": 1000,
         "next": [
             "阴阳寮奖励领取_体力领取_点击一下屏幕"
         ],
         "post_delay": 1000,
-        "template": "阴阳寮/阴阳寮_体力.png"
+        "template": [
+            "阴阳寮/阴阳寮_体力.png",
+            "阴阳寮奖励\\阴阳寮奖励领取_阴阳寮体力领取.png"
+        ]
     },
     "阴阳寮奖励领取_体力领取_点击一下屏幕": {
         "action": "Click",
