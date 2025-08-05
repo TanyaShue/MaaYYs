@@ -6,9 +6,15 @@
     "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
     "resource_description": "阴阳师自动化脚本",
     "resource_icon": "/app/logo.png",
-    "agent_path": "./MaaAgent.py",
-    "custom_prams": "-path ./custom_dir",
-    "custom_dir": "./custom_dir",
+    "agent": {
+        "type": "python",
+        "version": "3.12",
+        "agent_path": "./MaaAgent.py",
+        "agent_params": "-path ./custom_dir",
+        "requirements_path": "./requirements.txt",
+        "use_venv": true,
+        "pip_index_url": "https://mirrors.aliyun.com/pypi/simple/"
+    },
     "resource_tasks": [
         {
             "task_name": "打开游戏",
@@ -212,8 +218,8 @@
                     "开始自动挑战鬼王": {
                         "custom_action_param": {
                             "count": 3,
-                            "group_name": "秘闻",
-                            "team_name": "队伍1"
+                            "group_name": "日常",
+                            "team_name": "日常清杂"
                         }
                     }
                 }
