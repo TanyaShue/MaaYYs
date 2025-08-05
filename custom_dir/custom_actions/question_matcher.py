@@ -351,7 +351,7 @@ class QuestionMatcher(CustomAction):
 
                 # 执行点击
                 context.tasker.controller.post_click(center_x, center_y).wait()
-                print(f"已点击答案: {correct_answer}")
+                print(f"已点击答案: {correct_answer},x:{center_x},y:{center_y}")
                 break
         else:
             print(f"警告：未找到正确答案 '{correct_answer}' 的位置")
