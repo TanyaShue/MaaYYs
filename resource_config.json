@@ -8,7 +8,7 @@
     "resource_icon": "/app/logo.png",
     "agent": {
         "type": "python",
-        "version": "3.12",
+        "version": "3.11",
         "agent_path": "./MaaAgent.py",
         "agent_params": "-path ./custom_dir",
         "requirements_path": "./requirements.txt",
