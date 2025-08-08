@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="app/logo.png" alt="MaaYYs Logo" width="256" height="256" />
+  <img src="assets/logo/logo.png" alt="MaaYYs Logo" width="256" height="256" />
   <h1>MaaYYs</h1>
   <p>基于 <a href="https://github.com/MaaXYZ/MaaFramework" target="_blank">MaaFramework</a> 的痒痒鼠自动化应用，助力玩家高效完成日常任务</p>
   <p>
