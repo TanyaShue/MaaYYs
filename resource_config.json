@@ -12,8 +12,7 @@
         "agent_path": "./MaaAgent.py",
         "agent_params": "-path ./custom_dir",
         "requirements_path": "./requirements.txt",
-        "use_venv": true,
-        "pip_index_url": "https://mirrors.aliyun.com/pypi/simple/"
+        "use_venv": true
     },
     "resource_tasks": [
         {
