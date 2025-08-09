@@ -5,7 +5,7 @@
     "resource_update_service_id": "MaaYYs",
     "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
     "resource_description": "阴阳师自动化脚本",
-    "resource_icon": "/app/logo.png",
+    "resource_icon": "/assets/logo/logo.png",
     "agent": {
         "type": "python",
         "version": "3.11",
