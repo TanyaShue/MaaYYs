@@ -49,6 +49,12 @@ jobs:
           path: MaaYYs
           fetch-depth: 0  # 获取完整历史以便生成变更日志
 
+      - name: Set up Python (Unix)
+        if: runner.os != 'Windows'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
       - name: Update resource_version in config file (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
@@ -182,15 +188,35 @@ jobs:
           
           if [ -z "$DOWNLOAD_URL" ]; then
             echo "::error::Could not find ${{ matrix.mfwph_pattern }} in the latest release"
+            echo "Available assets:"
+            echo "$RELEASE_JSON" | python3 -c "import sys, json; data = json.load(sys.stdin); [print(asset['name']) for asset in data.get('assets', [])]"
             exit 1
           fi
           
           echo "Downloading MFWPH from: $DOWNLOAD_URL"
           curl -L -o "mfwph-download/${{ matrix.mfwph_pattern }}" "$DOWNLOAD_URL"
           
-          # 解压MFWPH
-          tar -xzf "mfwph-download/${{ matrix.mfwph_pattern }}" -C .
-          mv MFWPH mfwph-extracted
+          # 创建解压目录
+          mkdir -p mfwph-extracted
+          
+          # 解压MFWPH到指定目录
+          echo "Extracting MFWPH package..."
+          tar -xzf "mfwph-download/${{ matrix.mfwph_pattern }}" -C mfwph-extracted
+          
+          # 检查解压后的内容
+          echo "Extracted contents:"
+          ls -la mfwph-extracted/
+          
+          # 如果解压后有一个MFWPH子目录，将其内容移到上一级
+          if [ -d "mfwph-extracted/MFWPH" ]; then
+            echo "Moving MFWPH contents up one level..."
+            mv mfwph-extracted/MFWPH/* mfwph-extracted/ 2>/dev/null || true
+            mv mfwph-extracted/MFWPH/.* mfwph-extracted/ 2>/dev/null || true
+            rmdir mfwph-extracted/MFWPH 2>/dev/null || true
+          fi
+          
+          echo "Final structure:"
+          ls -la mfwph-extracted/
           echo "MFWPH package extracted successfully"
 
       - name: Prepare resource directory (Windows)
@@ -238,11 +264,20 @@ jobs:
           # 定义要排除的文件和文件夹列表
           EXCLUDE_LIST=".git .github .idea .gitignore .gitattributes debug dist mfwph-download mfwph-extracted resources-temp"
           
+          # 确保mfwph-extracted是目录
+          if [ ! -d "mfwph-extracted" ]; then
+            echo "Error: mfwph-extracted is not a directory"
+            ls -la
+            exit 1
+          fi
+          
           # 确保资源目录存在
           mkdir -p "mfwph-extracted/assets/resource/MaaYYs"
           
-          # 清空目标资源目录（如果存在）
-          rm -rf "mfwph-extracted/assets/resource/MaaYYs"/*
+          # 清空目标资源目录（如果存在内容）
+          if [ -d "mfwph-extracted/assets/resource/MaaYYs" ]; then
+            rm -rf "mfwph-extracted/assets/resource/MaaYYs"/*
+          fi
           
           # 复制资源文件（排除不需要的）
           for item in MaaYYs/*; do
@@ -263,6 +298,7 @@ jobs:
           done
           
           # 复制隐藏文件（如果需要）
+          shopt -s dotglob 2>/dev/null || true
           for item in MaaYYs/.*; do
             basename_item=$(basename "$item")
             if [ "$basename_item" != "." ] && [ "$basename_item" != ".." ]; then
@@ -275,7 +311,7 @@ jobs:
               done
               
               if [ "$skip" = false ]; then
-                cp -r "$item" "mfwph-extracted/assets/resource/MaaYYs/"
+                cp -r "$item" "mfwph-extracted/assets/resource/MaaYYs/" 2>/dev/null || true
               fi
             fi
           done
@@ -302,10 +338,19 @@ jobs:
           # 创建输出目录
           mkdir -p dist
           
+          # 检查mfwph-extracted目录
+          if [ ! -d "mfwph-extracted" ]; then
+            echo "Error: mfwph-extracted directory not found"
+            ls -la
+            exit 1
+          fi
+          
           # 创建tar.gz包
-          tar -czf "dist/MAA_YYS_FULL_${{ matrix.os }}.tar.gz" -C . mfwph-extracted
+          echo "Creating archive from mfwph-extracted directory..."
+          tar -czf "dist/MAA_YYS_FULL_${{ matrix.os }}.tar.gz" mfwph-extracted
           
           echo "Created full package: MAA_YYS_FULL_${{ matrix.os }}.tar.gz"
+          ls -lh dist/
 
       - name: Create resources-only package (Windows only)
         if: runner.os == 'Windows'
@@ -431,14 +476,16 @@ jobs:
             ### macOS:
             1. 下载对应版本（Intel 或 Apple Silicon）
             2. 解压：`tar -xzf MAA_YYS_FULL_macos-*.tar.gz`
-            3. 添加执行权限：`chmod +x mfwph-extracted/MFWPH`
-            4. 运行：`./mfwph-extracted/MFWPH`
-            5. 首次运行可能需要在系统偏好设置中允许
+            3. 进入目录：`cd mfwph-extracted`
+            4. 添加执行权限：`chmod +x MFWPH`
+            5. 运行：`./MFWPH`
+            6. 首次运行可能需要在系统偏好设置中允许
             
             ### Linux:
             1. 下载并解压：`tar -xzf MAA_YYS_FULL_linux-x64.tar.gz`
-            2. 添加执行权限：`chmod +x mfwph-extracted/MFWPH`
-            3. 运行：`./mfwph-extracted/MFWPH`
+            2. 进入目录：`cd mfwph-extracted`
+            3. 添加执行权限：`chmod +x MFWPH`
+            4. 运行：`./MFWPH`
             
             ### 更新资源（已有 MFWPH）:
             1. 下载 `MAA_YYS_RESOURCES_ONLY.zip`
