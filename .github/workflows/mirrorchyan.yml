@@ -10,7 +10,7 @@ jobs:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: "*FULL_windows-x64.zip"
+          filename: "*FULL_windows.zip"
           mirrorchyan_rid: MaaYYs
 
           github_token: ${{ secrets.GITHUB_TOKEN }}

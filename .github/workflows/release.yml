@@ -49,7 +49,25 @@ jobs:
           path: MaaYYs
           fetch-depth: 0  # 获取完整历史以便生成变更日志
 
-      - name: Update resource_version in config file
+      - name: Update resource_version in config file (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        working-directory: MaaYYs
+        run: |
+          # Get the current tag
+          $currentTag = "${{ github.ref_name }}"
+          Write-Host "Updating resource_config.json with version: $currentTag"
+          
+          # Read and update JSON
+          $config = Get-Content -Path "resource_config.json" -Raw | ConvertFrom-Json
+          $config.resource_version = $currentTag
+          $config | ConvertTo-Json -Depth 10 | Set-Content -Path "resource_config.json"
+          
+          Write-Host "resource_config.json updated successfully"
+          Get-Content -Path "resource_config.json"
+
+      - name: Update resource_version in config file (Unix)
+        if: runner.os != 'Windows'
         shell: bash
         working-directory: MaaYYs
         run: |
@@ -57,20 +75,14 @@ jobs:
           currentTag="${{ github.ref_name }}"
           echo "Updating resource_config.json with version: $currentTag"
           
-          # Use Python for cross-platform JSON manipulation
-          python3 -c "
-import json
-with open('resource_config.json', 'r') as f:
-    config = json.load(f)
-config['resource_version'] = '$currentTag'
-with open('resource_config.json', 'w') as f:
-    json.dump(config, f, indent=2, ensure_ascii=False)
-"
+          # Use Python for JSON manipulation
+          python3 -c "import json; config = json.load(open('resource_config.json')); config['resource_version'] = '$currentTag'; json.dump(config, open('resource_config.json', 'w'), indent=2, ensure_ascii=False)"
+          
           echo "resource_config.json updated successfully"
           cat resource_config.json
 
       - name: Generate Changelog (Windows)
-        if: matrix.os == 'windows-x64'
+        if: runner.os == 'Windows'
         id: changelog_windows
         shell: pwsh
         working-directory: MaaYYs
@@ -102,7 +114,7 @@ with open('resource_config.json', 'w') as f:
           Write-Host "Generated changelog for release"
 
       - name: Generate Changelog (Unix)
-        if: matrix.os != 'windows-x64'
+        if: runner.os != 'Windows'
         id: changelog_unix
         shell: bash
         working-directory: MaaYYs
@@ -128,7 +140,34 @@ with open('resource_config.json', 'w') as f:
             echo 'EOF'
           } >> $GITHUB_OUTPUT
 
-      - name: Fetch latest MFWPH release
+      - name: Fetch latest MFWPH release (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # 创建下载目录
+          New-Item -Path "mfwph-download" -ItemType Directory -Force
+          
+          # 获取最新的MFWPH发布版本
+          Write-Host "Fetching latest MFWPH release..."
+          $release = Invoke-RestMethod -Uri "https://api.github.com/repos/TanyaShue/MFWPH/releases/latest"
+          
+          # 查找对应平台的下载URL
+          $downloadUrl = ($release.assets | Where-Object { $_.name -eq "${{ matrix.mfwph_pattern }}" }).browser_download_url
+          
+          if (-not $downloadUrl) {
+            Write-Host "::error::Could not find ${{ matrix.mfwph_pattern }} in the latest release"
+            exit 1
+          }
+          
+          Write-Host "Downloading MFWPH from: $downloadUrl"
+          Invoke-WebRequest -Uri $downloadUrl -OutFile "mfwph-download/${{ matrix.mfwph_pattern }}"
+          
+          # 解压MFWPH
+          Expand-Archive -Path "mfwph-download/${{ matrix.mfwph_pattern }}" -DestinationPath "mfwph-extracted" -Force
+          Write-Host "MFWPH package extracted successfully"
+
+      - name: Fetch latest MFWPH release (Unix)
+        if: runner.os != 'Windows'
         shell: bash
         run: |
           # 创建下载目录
@@ -139,36 +178,61 @@ with open('resource_config.json', 'w') as f:
           RELEASE_JSON=$(curl -s https://api.github.com/repos/TanyaShue/MFWPH/releases/latest)
           
           # 查找对应平台的下载URL
-          DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "
-import sys
-import json
-data = json.load(sys.stdin)
-pattern = '${{ matrix.mfwph_pattern }}'
-for asset in data.get('assets', []):
-    if asset['name'] == pattern:
-        print(asset['browser_download_url'])
-        sys.exit(0)
-sys.exit(1)
-")
+          DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "import sys, json; data = json.load(sys.stdin); pattern = '${{ matrix.mfwph_pattern }}'; [print(asset['browser_download_url']) for asset in data.get('assets', []) if asset['name'] == pattern]" | head -n1)
           
           if [ -z "$DOWNLOAD_URL" ]; then
             echo "::error::Could not find ${{ matrix.mfwph_pattern }} in the latest release"
             exit 1
           fi
-
+          
           echo "Downloading MFWPH from: $DOWNLOAD_URL"
           curl -L -o "mfwph-download/${{ matrix.mfwph_pattern }}" "$DOWNLOAD_URL"
           
           # 解压MFWPH
-          if [[ "${{ matrix.archive_extension }}" == ".zip" ]]; then
-            unzip -q "mfwph-download/${{ matrix.mfwph_pattern }}" -d "mfwph-extracted"
-          else
-            tar -xzf "mfwph-download/${{ matrix.mfwph_pattern }}" -C .
-            mv MFWPH mfwph-extracted
-          fi
+          tar -xzf "mfwph-download/${{ matrix.mfwph_pattern }}" -C .
+          mv MFWPH mfwph-extracted
           echo "MFWPH package extracted successfully"
 
-      - name: Prepare resource directory
+      - name: Prepare resource directory (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # 定义要排除的文件和文件夹列表
+          $excludeList = @('.git', '.github', '.idea', '.gitignore', '.gitattributes', 'debug', 'dist', 'mfwph-download', 'mfwph-extracted', 'resources-temp')
+          
+          # 确保资源目录存在
+          New-Item -Path "mfwph-extracted/assets/resource/MaaYYs" -ItemType Directory -Force
+          
+          # 清空目标资源目录（如果存在）
+          if (Test-Path -Path "mfwph-extracted/assets/resource/MaaYYs") {
+            Get-ChildItem -Path "mfwph-extracted/assets/resource/MaaYYs" | Remove-Item -Recurse -Force
+          }
+          
+          # 获取源目录中的所有文件和文件夹
+          $allItems = Get-ChildItem -Path "MaaYYs" -Force
+          
+          # 复制不在排除列表中的所有文件和文件夹
+          foreach ($item in $allItems) {
+            $itemName = $item.Name
+            if ($excludeList -notcontains $itemName) {
+              if (Test-Path -Path $item.FullName -PathType Container) {
+                # 如果是目录，则递归复制
+                New-Item -Path "mfwph-extracted/assets/resource/MaaYYs/$itemName" -ItemType Directory -Force
+                Copy-Item -Path "$($item.FullName)/*" -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Recurse -Force
+                Write-Host "Copied directory $itemName to resource directory"
+              } else {
+                # 如果是文件，则直接复制
+                Copy-Item -Path $item.FullName -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Force
+                Write-Host "Copied file $itemName to resource directory"
+              }
+            } else {
+              Write-Host "Excluded $itemName from resource directory"
+            }
+          }
+          Write-Host "Resources copied successfully to MFWPH package"
+
+      - name: Prepare resource directory (Unix)
+        if: runner.os != 'Windows'
         shell: bash
         run: |
           # 定义要排除的文件和文件夹列表
@@ -218,49 +282,64 @@ sys.exit(1)
           
           echo "Resources copied successfully to MFWPH package"
 
-      - name: Create full package
+      - name: Create full package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # 创建输出目录
+          New-Item -Path "dist" -ItemType Directory -Force
+          
+          # 创建ZIP包
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          [System.IO.Compression.ZipFile]::CreateFromDirectory("mfwph-extracted", "${{ github.workspace }}/dist/MAA_YYS_FULL_${{ matrix.os }}.zip")
+          
+          Write-Host "Created full package: MAA_YYS_FULL_${{ matrix.os }}.zip"
+
+      - name: Create full package (Unix)
+        if: runner.os != 'Windows'
         shell: bash
         run: |
           # 创建输出目录
           mkdir -p dist
           
-          # 根据平台创建不同格式的压缩包
-          if [[ "${{ matrix.archive_extension }}" == ".zip" ]]; then
-            cd mfwph-extracted
-            zip -q -r "../dist/MAA_YYS_FULL_${{ matrix.os }}.zip" .
-            cd ..
-          else
-            tar -czf "dist/MAA_YYS_FULL_${{ matrix.os }}.tar.gz" -C . mfwph-extracted
-          fi
+          # 创建tar.gz包
+          tar -czf "dist/MAA_YYS_FULL_${{ matrix.os }}.tar.gz" -C . mfwph-extracted
           
-          echo "Created full package: MAA_YYS_FULL_${{ matrix.os }}${{ matrix.archive_extension }}"
+          echo "Created full package: MAA_YYS_FULL_${{ matrix.os }}.tar.gz"
 
       - name: Create resources-only package (Windows only)
-        if: matrix.os == 'windows-x64'
-        shell: bash
+        if: runner.os == 'Windows'
+        shell: pwsh
         run: |
           # 定义要包含的文件和文件夹列表
-          INCLUDE_LIST="app custom_dir image model pipeline LICENSE README.md resource_config.json"
+          $includeList = @('app', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md', 'resource_config.json')
           
           # 创建临时目录用于资源包
-          mkdir -p resources-temp
+          New-Item -Path "resources-temp" -ItemType Directory -Force
           
           # 仅复制包含列表中的文件和文件夹到临时目录
-          for item in $INCLUDE_LIST; do
-            if [ -e "MaaYYs/$item" ]; then
-              cp -r "MaaYYs/$item" "resources-temp/"
-              echo "Copied $item to resources-only package"
-            else
-              echo "Warning: $item not found in source repository for resources-only package"
-            fi
-          done
+          foreach ($item in $includeList) {
+            $sourcePath = "MaaYYs/$item"
+            if (Test-Path -Path $sourcePath) {
+              if (Test-Path -Path $sourcePath -PathType Container) {
+                # 如果是目录，则递归复制
+                New-Item -Path "resources-temp/$item" -ItemType Directory -Force
+                Copy-Item -Path "$sourcePath/*" -Destination "resources-temp/$item" -Recurse -Force
+              } else {
+                # 如果是文件，则直接复制
+                Copy-Item -Path $sourcePath -Destination "resources-temp/$item" -Force
+              }
+              Write-Host "Copied $item to resources-only package"
+            } else {
+              Write-Host "Warning: $item not found in source repository for resources-only package"
+            }
+          }
           
           # 创建仅包含资源的ZIP文件
-          cd resources-temp
-          zip -q -r "../dist/MAA_YYS_RESOURCES_ONLY.zip" .
-          cd ..
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          [System.IO.Compression.ZipFile]::CreateFromDirectory("resources-temp", "${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip")
           
-          echo "Created resources-only package: MAA_YYS_RESOURCES_ONLY.zip"
+          Write-Host "Created resources-only package: MAA_YYS_RESOURCES_ONLY.zip"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
