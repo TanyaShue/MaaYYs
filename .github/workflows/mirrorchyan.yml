@@ -33,7 +33,7 @@ jobs:
           arch: ${{ matrix.arch }}
 
   # 兼容老版本升级
-  mirrorchyan_res:
+  mirrorchyan_no_platform:
     runs-on: macos-latest
     steps:
       - uses: MirrorChyan/uploading-action@v1
