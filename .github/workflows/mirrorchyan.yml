@@ -6,14 +6,28 @@ on:
 jobs:
   mirrorchyan:
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows
+            arch: x64
+          - os: macos
+            arch: x64
+          - os: macos
+            arch: arm64
+          - os: linux
+            arch: x64
     steps:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: "*FULL_windows-x64.zip"
+          filename: MAA_YYS_FULL_${{ matrix.os }}-${{ matrix.arch }}.*
           mirrorchyan_rid: MaaYYs
 
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
+          owner: TanyaShue
+          repo: MaaYYs
           upload_token: ${{ secrets.MirrorChyanUploadToken }}
+          os: ${{ matrix.os }}
+          arch: ${{ matrix.arch }}
