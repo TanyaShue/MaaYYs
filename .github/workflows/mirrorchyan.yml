@@ -31,3 +31,18 @@ jobs:
           upload_token: ${{ secrets.MirrorChyanUploadToken }}
           os: ${{ matrix.os }}
           arch: ${{ matrix.arch }}
+
+  # 兼容老版本升级
+  mirrorchyan_res:
+    runs-on: macos-latest
+    steps:
+      - uses: MirrorChyan/uploading-action@v1
+        with:
+          filetype: latest-release
+          filename: "MAA_YYS_FULL_windows-x64.zip"
+          mirrorchyan_rid: MaaYYs
+
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: TanyaShue
+          repo: MaaYYs
+          upload_token: ${{ secrets.MirrorChyanUploadToken }}
