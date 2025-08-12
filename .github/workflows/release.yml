@@ -467,33 +467,9 @@ jobs:
             ### 仅资源包（仅包含 MaaYYs 资源，适用于已有 MFWPH 的用户）
             - **通用**: `MAA_YYS_RESOURCES_ONLY.zip`
             
-            ## 安装说明
-            
-            ### Windows:
-            1. 下载并解压 `MAA_YYS_FULL_windows-x64.zip`
-            2. 运行 `MFWPH.exe`
-            
-            ### macOS:
-            1. 下载对应版本（Intel 或 Apple Silicon）
-            2. 解压：`tar -xzf MAA_YYS_FULL_macos-*.tar.gz`
-            3. 进入目录：`cd mfwph-extracted`
-            4. 添加执行权限：`chmod +x MFWPH`
-            5. 运行：`./MFWPH`
-            6. 首次运行可能需要在系统偏好设置中允许
-            
-            ### Linux:
-            1. 下载并解压：`tar -xzf MAA_YYS_FULL_linux-x64.tar.gz`
-            2. 进入目录：`cd mfwph-extracted`
-            3. 添加执行权限：`chmod +x MFWPH`
-            4. 运行：`./MFWPH`
-            
-            ### 更新资源（已有 MFWPH）:
-            1. 下载 `MAA_YYS_RESOURCES_ONLY.zip`
-            2. 解压到 MFWPH 的 `assets/resource/MaaYYs` 目录
-            
             [已有 Mirror酱 CDK？点击前往高速下载](https://mirrorchyan.com/zh/projects?rid=MaaYYs)
           draft: false
-          prerelease: false
+          prerelease: true
           artifacts: ./release_files/*
           artifactContentType: application/octet-stream
           artifactErrorsFailBuild: true
