@@ -4,7 +4,6 @@
             "点击探索"
         ],
         "next": [
-            "自动秘闻_step_1",
             "自动秘闻4"
         ],
         "custom_action": "TaskList",
@@ -18,9 +17,7 @@
     "自动秘闻_step_1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "next": [
-            "自动秘闻3"
-        ],
+        "next": [],
         "post_delay": 1000,
         "template": [
             "template/screenshot_20250313_160102.png"
@@ -103,8 +100,8 @@
         "post_delay": 2000,
         "custom_action": "SwitchSoul",
         "custom_action_param": {
-            "group_name": "默认秘闻分组",
-            "team_name": "默认秘闻队伍"
+            "group_name": "秘闻",
+            "team_name": "队伍2"
         }
     },
     "自动秘闻_御魂_返回": {
@@ -214,6 +211,7 @@
             "自动秘闻_识别战斗结束",
             "自动秘闻_识别战斗结束_copy1"
         ],
+        "rate_limit": 2000,
         "timeout": 1000000,
         "next": [
             "自动秘闻2"
