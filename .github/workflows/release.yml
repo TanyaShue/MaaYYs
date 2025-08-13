@@ -469,7 +469,7 @@ jobs:
             
             [已有 Mirror酱 CDK？点击前往高速下载](https://mirrorchyan.com/zh/projects?rid=MaaYYs)
           draft: false
-          prerelease: true
+          prerelease: false
           artifacts: ./release_files/*
           artifactContentType: application/octet-stream
           artifactErrorsFailBuild: true
