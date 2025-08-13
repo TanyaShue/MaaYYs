@@ -125,14 +125,17 @@ class SwitchSoul(CustomAction):
         time.sleep(2)
 
         # 开始查找分组
-        max_attempts = 10  # 最大尝试次数
+        max_attempts = 5  # 最大尝试次数
         for attempt in range(1, max_attempts + 1):
             if not self._running:
                 return False
 
             print(f"查找分组 - 第{attempt}次尝试")
 
-            # 截图并识别
+            # 原始识别区域
+            base_roi = [1085, 86, 162, 542]
+
+            # 第一次直接识别
             img = context.tasker.controller.post_screencap().wait().get()
             detail = context.run_recognition("点击分组", img, {
                 "点击分组": {
@@ -140,18 +143,48 @@ class SwitchSoul(CustomAction):
                     "recognition": "OCR",
                     "action": "Click",
                     "expected": group_name,
-                    "roi": [1085, 86, 162, 542]
+                    "roi": base_roi
                 }
             })
 
             # 找到分组
             if detail is not None:
-                # 精确点击位置
                 click_x = random.randint(detail.box.x, detail.box.x + detail.box.w)
                 click_y = random.randint(detail.box.y, detail.box.y + detail.box.h)
                 context.tasker.controller.post_click(click_x, click_y).wait()
                 print(f"成功找到并点击分组: {group_name}")
                 return True
+
+            print("初步未找到，进入分块识别模式…")
+
+            x, y, w, h = base_roi
+            num_parts = 6  # 分成6段
+            step = h / (num_parts + 1)  # 保证有重叠
+
+            for i in range(num_parts):
+                # 带重叠的ROI
+                sub_y = int(y + i * step)
+                sub_h = int(step * 3)  # 高度覆盖3段，制造1/2重叠
+                sub_roi = [x, sub_y, w, sub_h]
+
+                detail = context.run_recognition(f"点击分组_精细_{i + 1}", img, {
+                    f"点击分组_精细_{i + 1}": {
+                        "timeout": 2000,
+                        "recognition": "OCR",
+                        "action": "Click",
+                        "expected": group_name,
+                        "roi": sub_roi
+                    }
+                })
+
+                if detail is not None:
+                    click_x = random.randint(detail.box.x, detail.box.x + detail.box.w)
+                    click_y = random.randint(detail.box.y, detail.box.y + detail.box.h)
+                    context.tasker.controller.post_click(click_x, click_y).wait()
+                    print(f"精细识别第{i + 1}段成功找到并点击分组: {group_name}")
+                    return True
+
+                print("分块识别也未找到分组")
 
             # 未找到分组，尝试滑动到下一页
             if attempt % 3 == 0:  # 每3次尝试，返回顶部重新开始
@@ -207,20 +240,25 @@ class SwitchSoul(CustomAction):
 
             time.sleep(0.5)  # 等待界面稳定
             img = context.tasker.controller.post_screencap().wait().get()
+
+            # 原始识别区域
+            base_roi = [573, 128, 255, 436]
+
+            # 第一次直接识别
             detail = context.run_recognition("点击队伍", img, {
                 "点击队伍": {
                     "timeout": 2000,
                     "recognition": "OCR",
                     "expected": team_name,
-                    "roi": [573,128,255,436]
+                    "roi": base_roi
                 }
             })
             time.sleep(0.5)  # 等待界面稳定
-            # 找到队伍
+
             if detail is not None:
+                # 找到队伍
                 roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
                 print(f"找到队伍: {team_name}，尝试装备御魂")
-                # 点击"装备御魂"按钮，然后点击确定
                 equip_result = context.run_task("通用_装备御魂", {
                     "通用_装备御魂": {
                         "roi": roi
@@ -233,6 +271,44 @@ class SwitchSoul(CustomAction):
                 else:
                     print(f"找到队伍 {team_name} 但装备御魂失败")
                     return False
+
+            print("初步未找到，将进行细致查找")
+
+            x, y, w, h = base_roi
+            num_parts = 6  # 分成6段
+            step = h / (num_parts + 1)  # 用+1是为了保证有重叠
+
+            for i in range(num_parts):
+                # 生成带重叠的ROI，如1-3, 2-4, 3-5...
+                sub_y = int(y + i * step)
+                sub_h = int(step * 3)  # 每段高度覆盖 3/num_parts，总有一半重叠
+                sub_roi = [x, sub_y, w, sub_h]
+
+                detail = context.run_recognition(f"点击队伍_精细_{i + 1}", img, {
+                    f"点击队伍_精细_{i + 1}": {
+                        "timeout": 2000,
+                        "recognition": "OCR",
+                        "expected": team_name,
+                        "roi": sub_roi
+                    }
+                })
+
+                if detail is not None:
+                    roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
+                    print(f"精细识别第{i + 1}段找到队伍: {team_name}，尝试装备御魂")
+                    equip_result = context.run_task("通用_装备御魂", {
+                        "通用_装备御魂": {
+                            "roi": roi
+                        }
+                    })
+                    if equip_result:
+                        print(f"成功装备队伍 {team_name} 的御魂")
+                        return True
+                    else:
+                        print(f"精细识别找到队伍 {team_name} 但装备御魂失败")
+                        return False
+
+                print("分块识别也未找到队伍")
 
             # 未找到队伍，尝试滑动
             if attempt % 3 == 0:  # 每3次尝试，返回顶部重新开始
