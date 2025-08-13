@@ -14,6 +14,9 @@
     "点击地域鬼王": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "地鬼_点击式神录"
         ],
@@ -39,6 +42,9 @@
     "地鬼_点击式神录": {
         "recognition": "OCR",
         "action": "Click",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "装备地狱鬼王预设"
         ],
@@ -60,6 +66,9 @@
     },
     "装备地狱鬼王预设": {
         "action": "Custom",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "地鬼_御魂_返回"
         ],
@@ -72,6 +81,9 @@
     },
     "地鬼_御魂_返回": {
         "action": "Click",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "开始自动挑战鬼王"
         ],
@@ -85,7 +97,12 @@
     },
     "开始自动挑战鬼王": {
         "action": "Custom",
-        "next": "返回庭院",
+        "on_error": [
+            "返回庭院"
+        ],
+        "next": [
+            "返回庭院"
+        ],
         "post_delay": 2000,
         "custom_action": "ChallengeDungeonBoss",
         "custom_action_param": {
@@ -116,6 +133,9 @@
     "自动地鬼2": {
         "recognition": "OCR",
         "action": "Click",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "地鬼_点击式神录"
         ],
