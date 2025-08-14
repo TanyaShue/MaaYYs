@@ -49,7 +49,6 @@ class SwitchSoul(CustomAction):
                 "roi": [1128,637,116,52],
             }
         })
-        print(result)
         # 检查点击结果
         if not result.nodes:
             print("不处于预设选中状态")
@@ -275,7 +274,7 @@ class SwitchSoul(CustomAction):
             print("初步未找到，将进行细致查找")
 
             x, y, w, h = base_roi
-            num_parts = 6  # 分成6段
+            num_parts = 20  # 分成20段
             step = h / (num_parts + 1)  # 用+1是为了保证有重叠
 
             for i in range(num_parts):
