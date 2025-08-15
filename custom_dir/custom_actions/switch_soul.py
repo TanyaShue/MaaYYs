@@ -157,7 +157,7 @@ class SwitchSoul(CustomAction):
             print("初步未找到，进入分块识别模式…")
 
             x, y, w, h = base_roi
-            num_parts = 6  # 分成6段
+            num_parts = 20  # 分成6段
             step = h / (num_parts + 1)  # 保证有重叠
 
             for i in range(num_parts):
