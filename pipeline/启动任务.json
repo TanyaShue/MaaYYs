@@ -26,6 +26,11 @@
         "post_delay": 2000,
         "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2"
     },
+  "关闭阴阳师": {
+        "action": "StopApp",
+        "post_delay": 2000,
+        "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2"
+    },
     "关闭公告": {
         "recognition": "FeatureMatch",
         "action": "Click",

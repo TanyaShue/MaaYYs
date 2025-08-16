@@ -120,6 +120,13 @@
                 "经验副本设置",
                 "金币副本设置"
             ]
+        },
+        {
+            "task_name": "关闭游戏",
+            "task_entry": "关闭阴阳师",
+            "option": [
+                "选择区服"
+            ]
         }
     ],
     "options": [
@@ -198,20 +205,32 @@
                 "官服": {
                     "打开阴阳师": {
                         "package": "com.netease.onmyoji/.tag2"
+                    },
+                    "关闭阴阳师": {
+                        "package": "com.netease.onmyoji/.tag2"
                     }
                 },
                 "官网下载版": {
                     "打开阴阳师": {
+                        "package": "com.netease.onmyoji/.tag2"
+                    },
+                    "关闭阴阳师": {
                         "package": "com.netease.onmyoji/.tag2"
                     }
                 },
                 "MUMU官网下载版": {
                     "打开阴阳师": {
                         "package": "com.netease.onmyoji.wyzymnqsd_cps"
+                    },
+                    "关闭阴阳师": {
+                        "package": "com.netease.onmyoji.wyzymnqsd_cps"
                     }
                 },
                 "bilibili官网下载版": {
                     "打开阴阳师": {
+                        "package": "com.netease.onmyoji.bili/com.netease.onmyoji.tag0"
+                    },
+                    "关闭阴阳师": {
                         "package": "com.netease.onmyoji.bili/com.netease.onmyoji.tag0"
                     }
                 }
