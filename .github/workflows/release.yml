@@ -146,6 +146,9 @@ jobs:
             echo 'EOF'
           } >> $GITHUB_OUTPUT
 
+      # =================================================================
+      # BEGIN: OPTIMIZED FETCH STEP
+      # =================================================================
       - name: Fetch latest MFWPH release (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
@@ -153,9 +156,10 @@ jobs:
           # 创建下载目录
           New-Item -Path "mfwph-download" -ItemType Directory -Force
           
-          # 获取最新的MFWPH发布版本
+          # 获取最新的MFWPH发布版本 (使用 GITHUB_TOKEN 进行认证以避免频率限制)
           Write-Host "Fetching latest MFWPH release..."
-          $release = Invoke-RestMethod -Uri "https://api.github.com/repos/TanyaShue/MFWPH/releases/latest"
+          $headers = @{ "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}" }
+          $release = Invoke-RestMethod -Uri "https://api.github.com/repos/TanyaShue/MFWPH/releases/latest" -Headers $headers
           
           # 查找对应平台的下载URL
           $downloadUrl = ($release.assets | Where-Object { $_.name -eq "${{ matrix.mfwph_pattern }}" }).browser_download_url
@@ -166,7 +170,27 @@ jobs:
           }
           
           Write-Host "Downloading MFWPH from: $downloadUrl"
-          Invoke-WebRequest -Uri $downloadUrl -OutFile "mfwph-download/${{ matrix.mfwph_pattern }}"
+          
+          # 增加重试逻辑
+          $retryCount = 3
+          $retryDelay = 5 # seconds
+          for ($i=1; $i -le $retryCount; $i++) {
+            try {
+              Write-Host "Download attempt $i of $retryCount..."
+              Invoke-WebRequest -Uri $downloadUrl -OutFile "mfwph-download/${{ matrix.mfwph_pattern }}"
+              Write-Host "Download successful."
+              break # 成功后退出循环
+            } catch {
+              Write-Host "::warning::Download failed on attempt $i. Error: $_"
+              if ($i -lt $retryCount) {
+                Write-Host "Retrying in $retryDelay seconds..."
+                Start-Sleep -Seconds $retryDelay
+              } else {
+                Write-Host "::error::Failed to download after $retryCount attempts."
+                exit 1
+              }
+            }
+          }
           
           # 解压MFWPH
           Expand-Archive -Path "mfwph-download/${{ matrix.mfwph_pattern }}" -DestinationPath "mfwph-extracted" -Force
@@ -179,9 +203,9 @@ jobs:
           # 创建下载目录
           mkdir -p mfwph-download
           
-          # 获取最新的MFWPH发布版本
+          # 获取最新的MFWPH发布版本 (使用 GITHUB_TOKEN 进行认证以避免频率限制)
           echo "Fetching latest MFWPH release..."
-          RELEASE_JSON=$(curl -s https://api.github.com/repos/TanyaShue/MFWPH/releases/latest)
+          RELEASE_JSON=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/TanyaShue/MFWPH/releases/latest)
           
           # 查找对应平台的下载URL
           DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "import sys, json; data = json.load(sys.stdin); pattern = '${{ matrix.mfwph_pattern }}'; [print(asset['browser_download_url']) for asset in data.get('assets', []) if asset['name'] == pattern]" | head -n1)
@@ -194,13 +218,30 @@ jobs:
           fi
           
           echo "Downloading MFWPH from: $DOWNLOAD_URL"
-          curl -L -o "mfwph-download/${{ matrix.mfwph_pattern }}" "$DOWNLOAD_URL"
+
+          # 增加重试逻辑
+          retry_count=3
+          retry_delay=5 # seconds
+          for i in $(seq 1 $retry_count); do
+            echo "Download attempt $i of $retry_count..."
+            # 使用 -L 跟踪重定向, --fail 在HTTP错误时失败
+            curl -L --fail -o "mfwph-download/${{ matrix.mfwph_pattern }}" "$DOWNLOAD_URL"
+            if [ $? -eq 0 ]; then
+              echo "Download successful."
+              break # 成功后退出循环
+            fi
+
+            if [ $i -lt $retry_count ]; then
+              echo "::warning::Download failed. Retrying in $retry_delay seconds..."
+              sleep $retry_delay
+            else
+              echo "::error::Failed to download after $retry_count attempts."
+              exit 1
+            fi
+          done
           
-          # 创建解压目录
+          # 创建解压目录并解压
           mkdir -p mfwph-extracted
-          
-          # 解压MFWPH到指定目录
-          echo "Extracting MFWPH package..."
           tar -xzf "mfwph-download/${{ matrix.mfwph_pattern }}" -C mfwph-extracted
           
           # 检查解压后的内容
@@ -326,8 +367,7 @@ jobs:
           New-Item -Path "dist" -ItemType Directory -Force
           
           # 创建ZIP包
-          Add-Type -AssemblyName System.IO.Compression.FileSystem
-          [System.IO.Compression.ZipFile]::CreateFromDirectory("mfwph-extracted", "${{ github.workspace }}/dist/MAA_YYS_FULL_${{ matrix.os }}.zip")
+          Compress-Archive -Path "mfwph-extracted/*" -DestinationPath "${{ github.workspace }}/dist/MAA_YYS_FULL_${{ matrix.os }}.zip" -Force
           
           Write-Host "Created full package: MAA_YYS_FULL_${{ matrix.os }}.zip"
 
@@ -347,7 +387,7 @@ jobs:
           
           # 创建tar.gz包
           echo "Creating archive from mfwph-extracted directory..."
-          tar -czf "dist/MAA_YYS_FULL_${{ matrix.os }}.tar.gz" mfwph-extracted
+          (cd mfwph-extracted && tar -czf "${{ github.workspace }}/dist/MAA_YYS_FULL_${{ matrix.os }}.tar.gz" .)
           
           echo "Created full package: MAA_YYS_FULL_${{ matrix.os }}.tar.gz"
           ls -lh dist/
@@ -368,11 +408,10 @@ jobs:
             if (Test-Path -Path $sourcePath) {
               if (Test-Path -Path $sourcePath -PathType Container) {
                 # 如果是目录，则递归复制
-                New-Item -Path "resources-temp/$item" -ItemType Directory -Force
-                Copy-Item -Path "$sourcePath/*" -Destination "resources-temp/$item" -Recurse -Force
+                Copy-Item -Path $sourcePath -Destination "resources-temp/" -Recurse -Force
               } else {
                 # 如果是文件，则直接复制
-                Copy-Item -Path $sourcePath -Destination "resources-temp/$item" -Force
+                Copy-Item -Path $sourcePath -Destination "resources-temp/" -Force
               }
               Write-Host "Copied $item to resources-only package"
             } else {
@@ -381,8 +420,7 @@ jobs:
           }
           
           # 创建仅包含资源的ZIP文件
-          Add-Type -AssemblyName System.IO.Compression.FileSystem
-          [System.IO.Compression.ZipFile]::CreateFromDirectory("resources-temp", "${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip")
+          Compress-Archive -Path "resources-temp/*" -DestinationPath "${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip" -Force
           
           Write-Host "Created resources-only package: MAA_YYS_RESOURCES_ONLY.zip"
 
