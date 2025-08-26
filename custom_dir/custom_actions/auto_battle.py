@@ -96,7 +96,7 @@ class AutoBattle(CustomAction):
                 }
             })
 
-        time.sleep(2)
+        time.sleep(3)
 
         # 点击分组
         for count in range(1, 21):
@@ -148,7 +148,7 @@ class AutoBattle(CustomAction):
                         }
                     }
                 })
-
+                time.sleep(2)
         return False
 
     def _select_team(self, context: Context, team_name: str) -> bool:
