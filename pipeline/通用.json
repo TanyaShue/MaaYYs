@@ -49,6 +49,12 @@
     },
     "识别庭院特征": {
         "recognition": "TemplateMatch",
+        "interrupt": [
+            "通用2"
+        ],
+        "next": [
+            "通用1"
+        ],
         "post_delay": 2000,
         "roi": [
             0,
@@ -442,6 +448,36 @@
             "通用图标/广告_关闭.png",
             "通用图标/结界突破_关闭.png",
             "通用\\返回庭院_识别叉.png"
+        ]
+    },
+    "通用1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            556,
+            60,
+            127,
+            76
+        ],
+        "expected": "设置",
+        "target": [
+            1085,
+            83,
+            38,
+            36
+        ]
+    },
+    "通用2": {
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "target": [
+            34,
+            43,
+            43,
+            51
         ]
     }
 }
