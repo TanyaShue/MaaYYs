@@ -23,6 +23,11 @@
             ]
         },
         {
+            "task_name": "testAction",
+            "task_entry": "testAction",
+            "option": []
+        },
+        {
             "task_name": "寮三十捐材料",
             "task_entry": "寮3058",
             "option": [
@@ -224,6 +229,14 @@
                     },
                     "关闭阴阳师": {
                         "package": "com.netease.onmyoji.wyzymnqsd_cps"
+                    }
+                },
+                "雷电游戏中心下载版": {
+                    "启动游戏": {
+                        "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag0"
+                    },
+                    "关闭阴阳师": {
+                        "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag0"
                     }
                 },
                 "bilibili官网下载版": {
