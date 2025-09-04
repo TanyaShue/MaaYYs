@@ -139,6 +139,7 @@
             "name": "寄养设置",
             "type": "select",
             "default": "勾玉优先",
+            "doc": "选择自动寄养时优先考虑的收益类型，是优先体力还是勾玉",
             "pipeline_override": {
                 "体力优先": {
                     "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
@@ -170,6 +171,7 @@
             "name": "捐材料",
             "type": "select",
             "default": "低级觉醒材料",
+            "doc": "在寮三十任务中选择需要捐赠的觉醒材料等级",
             "pipeline_override": {
                 "低级觉醒材料": {
                     "寮30_提交材料": {
@@ -206,6 +208,7 @@
             "name": "选择区服",
             "type": "select",
             "default": "官服",
+            "doc": "选择对应的游戏服务器和渠道",
             "pipeline_override": {
                 "官服": {
                     "启动游戏": {
@@ -275,6 +278,7 @@
             "name": "地鬼挑战次数",
             "type": "select",
             "default": "1个",
+            "doc": "根据你当前的地鬼分数选择需要挑战的地鬼个数",
             "pipeline_override": {
                 "1": {
                     "开始自动挑战鬼王": {
@@ -321,6 +325,7 @@
             "name": "悬赏目标",
             "type": "select",
             "default": "探索",
+            "doc": "选择自动悬赏时优先打探索副本还是式神挑战券。注意：部分情况可能两者都没有，会导致任务卡住",
             "pipeline_override": {
                 "探索": {
                     "悬赏封印2": {
@@ -348,6 +353,7 @@
             "name": "是否启动自动轮换",
             "type": "boole",
             "default": false,
+            "doc": "是否在悬赏封印时启用自动轮换队员功能，启动前需确保已在游戏中设置好轮换式神",
             "pipeline_override": {
                 "探索_悬赏_自动轮换": {
                     "enabled": "{boole}"
@@ -358,6 +364,7 @@
             "name": "逢魔答题同步题目",
             "type": "boole",
             "default": true,
+            "doc": "执行逢魔任务时，是否自动从网络获取最新的题目和答案库",
             "pipeline_override": {
                 "自动逢魔2": {
                     "custom_action_param": {
@@ -371,10 +378,16 @@
             "name": "悬赏封印分组预设",
             "type": "input",
             "default": "默认分组",
+            "doc": "填写需要挑战悬赏封印的分组预设名称",
             "pipeline_override": {
                 "装备日常清杂预设": {
                     "custom_action_param": {
                         "group_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换分组: {value}",
+                        "succeeded": "切换分组 {value} 成功",
+                        "failed": "切换分组 {value} 失败"
                     }
                 }
             }
@@ -383,10 +396,16 @@
             "name": "悬赏封印队伍预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写需要挑战悬赏封印的队伍预设名称",
             "pipeline_override": {
                 "装备日常清杂预设": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换队伍: {value}",
+                        "succeeded": "切换队伍 {value} 成功",
+                        "failed": "切换队伍 {value} 失败"
                     }
                 }
             }
@@ -395,10 +414,16 @@
             "name": "结界突破分组预设",
             "type": "input",
             "default": "默认分组",
+            "doc": "填写结界突破需要使用的分组预设名称",
             "pipeline_override": {
                 "装备突破预设": {
                     "custom_action_param": {
                         "group_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换分组: {value}",
+                        "succeeded": "切换分组 {value} 成功",
+                        "failed": "切换分组 {value} 失败"
                     }
                 }
             }
@@ -407,10 +432,16 @@
             "name": "结界突破队伍预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写结界突破需要使用的队伍预设名称",
             "pipeline_override": {
                 "装备突破预设": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换队伍: {value}",
+                        "succeeded": "切换队伍 {value} 成功",
+                        "failed": "切换队伍 {value} 失败"
                     }
                 }
             }
@@ -419,10 +450,16 @@
             "name": "地鬼分组预设",
             "type": "input",
             "default": "默认分组",
+            "doc": "填写地狱鬼王需要使用的分组预设名称",
             "pipeline_override": {
                 "装备地狱鬼王预设": {
                     "custom_action_param": {
                         "group_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换分组: {value}",
+                        "succeeded": "切换分组 {value} 成功",
+                        "failed": "切换分组 {value} 失败"
                     }
                 },
                 "开始自动挑战鬼王": {
@@ -436,10 +473,16 @@
             "name": "地鬼队伍预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写地狱鬼王需要使用的队伍预设名称",
             "pipeline_override": {
                 "装备地狱鬼王预设": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换队伍: {value}",
+                        "succeeded": "切换队伍 {value} 成功",
+                        "failed": "切换队伍 {value} 失败"
                     }
                 },
                 "开始自动挑战鬼王": {
@@ -453,10 +496,16 @@
             "name": "御魂分组预设",
             "type": "input",
             "default": "默认分组",
+            "doc": "填写自动御魂需要使用的分组预设名称",
             "pipeline_override": {
                 "自动御魂_装备挑战御魂副本御魂": {
                     "custom_action_param": {
                         "group_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换分组: {value}",
+                        "succeeded": "切换分组 {value} 成功",
+                        "failed": "切换分组 {value} 失败"
                     }
                 }
             }
@@ -465,10 +514,16 @@
             "name": "御魂队伍预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写自动御魂需要使用的队伍预设名称",
             "pipeline_override": {
                 "自动御魂_装备挑战御魂副本御魂": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换队伍: {value}",
+                        "succeeded": "切换队伍 {value} 成功",
+                        "failed": "切换队伍 {value} 失败"
                     }
                 }
             }
@@ -477,6 +532,7 @@
             "name": "是否使用御魂加成",
             "type": "boole",
             "default": false,
+            "doc": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
             "pipeline_override": {
                 "寮3026_copy1": {
                     "enabled": "{boole}"
@@ -487,6 +543,7 @@
             "name": "自动挑战次数",
             "type": "input",
             "default": "10",
+            "doc": "设置自动挑战御魂的次数，到达指定次数后任务将自动停止",
             "pipeline_override": {
                 "自动御魂3": {
                     "custom_action_param": {
@@ -499,10 +556,16 @@
             "name": "逢魔首领分组预设",
             "type": "input",
             "default": "默认分组",
+            "doc": "填写挑战逢魔首领需要的分组预设名称",
             "pipeline_override": {
                 "现世逢魔_装备式神预设": {
                     "custom_action_param": {
                         "group_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换分组: {value}",
+                        "succeeded": "切换分组 {value} 成功",
+                        "failed": "切换分组 {value} 失败"
                     }
                 }
             }
@@ -511,10 +574,16 @@
             "name": "逢魔首领队伍预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写挑战逢魔首领需要的队伍预设名称",
             "pipeline_override": {
                 "现世逢魔_装备式神预设": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换队伍: {value}",
+                        "succeeded": "切换队伍 {value} 成功",
+                        "failed": "切换队伍 {value} 失败"
                     }
                 }
             }
@@ -523,10 +592,16 @@
             "name": "秘闻分组预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写挑战秘闻副本需要的分组预设名称",
             "pipeline_override": {
                 "自动秘闻_装备式神预设": {
                     "custom_action_param": {
                         "group_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换分组: {value}",
+                        "succeeded": "切换分组 {value} 成功",
+                        "failed": "切换分组 {value} 失败"
                     }
                 },
                 "自动秘闻_出战预设队伍": {
@@ -540,10 +615,16 @@
             "name": "秘闻队伍预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写挑战秘闻副本需要的队伍预设名称",
             "pipeline_override": {
                 "自动秘闻_装备式神预设": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换队伍: {value}",
+                        "succeeded": "切换队伍 {value} 成功",
+                        "failed": "切换队伍 {value} 失败"
                     }
                 },
                 "自动秘闻_出战预设队伍": {
@@ -557,6 +638,7 @@
             "name": "寮30目标副本",
             "type": "select",
             "default": "御魂副本",
+            "doc": "选择寮三十（同心之兰）任务要刷的副本类型",
             "pipeline_override": {
                 "御魂副本": {
                     "寮3021": {
@@ -578,6 +660,7 @@
             "name": "寮30是否为队长",
             "type": "boole",
             "default": false,
+            "doc": "执行寮三十任务时，选择自己是否作为队长发起邀请",
             "pipeline_override": {
                 "寮3017": {
                     "enabled": "{boole}"
@@ -588,6 +671,7 @@
             "name": "寮30是否启用加成",
             "type": "boole",
             "default": true,
+            "doc": "执行寮三十任务时，是否自动开启御魂或觉醒加成Buff",
             "pipeline_override": {
                 "寮3026": {
                     "enable": "{boole}"
@@ -598,10 +682,16 @@
             "name": "寮30分组预设",
             "type": "input",
             "default": "默认分组",
+            "doc": "填写寮三十任务需要使用的分组预设名称",
             "pipeline_override": {
                 "寮306": {
                     "custom_action_param": {
                         "group_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换分组: {value}",
+                        "succeeded": "切换分组 {value} 成功",
+                        "failed": "切换分组 {value} 失败"
                     }
                 }
             }
@@ -610,10 +700,16 @@
             "name": "寮30分队预设",
             "type": "input",
             "default": "默认队伍",
+            "doc": "填写寮三十任务需要使用的队伍预设名称",
             "pipeline_override": {
                 "寮306": {
                     "custom_action_param": {
                         "team_name": "{value}"
+                    },
+                    "focus": {
+                        "start": "正在切换队伍: {value}",
+                        "succeeded": "切换队伍 {value} 成功",
+                        "failed": "切换队伍 {value} 失败"
                     }
                 }
             }
@@ -622,6 +718,7 @@
             "name": "测试ID",
             "type": "input",
             "default": "9999",
+            "doc": "用于开发和调试时使用的测试ID",
             "pipeline_override": {
                 "测试": {
                     "custom_action_param": {
@@ -634,6 +731,7 @@
             "name": "测试端口",
             "type": "input",
             "default": "23456",
+            "doc": "用于开发和调试时使用的测试端口号",
             "pipeline_override": {
                 "测试": {
                     "custom_action_param": {
@@ -646,6 +744,7 @@
             "name": "日常奖励设置",
             "type": "settings_group",
             "default": true,
+            "doc": "在这里选择需要自动领取的各种日常奖励和福利",
             "pipeline_override": {},
             "description": "日常奖励领取设置",
             "settings": [
@@ -653,6 +752,7 @@
                     "name": "日常_送友情点",
                     "type": "boole",
                     "default": true,
+                    "doc": "是否自动给好友赠送友情点",
                     "pipeline_override": {
                         "日常_任务列表": {
                             "custom_action_param": {
@@ -667,6 +767,7 @@
                     "name": "领取奖励_邮件",
                     "type": "boole",
                     "default": true,
+                    "doc": "是否自动领取邮件中的所有奖励",
                     "pipeline_override": {
                         "日常_任务列表": {
                             "custom_action_param": {
@@ -681,6 +782,7 @@
                     "name": "领取奖励_日常庭院奖励",
                     "type": "boole",
                     "default": true,
+                    "doc": "是否自动领取庭院小纸人头顶的奖励",
                     "pipeline_override": {
                         "日常_任务列表": {
                             "custom_action_param": {
@@ -695,6 +797,7 @@
                     "name": "日常_每日免费一抽",
                     "type": "boole",
                     "default": true,
+                    "doc": "是否自动完成每日一次的免费符咒召唤",
                     "pipeline_override": {
                         "日常_任务列表": {
                             "custom_action_param": {
@@ -709,6 +812,7 @@
                     "name": "领取奖励_商店每日奖励",
                     "type": "boole",
                     "default": true,
+                    "doc": "是否自动领取商店中的每日免费奖励",
                     "pipeline_override": {
                         "日常_任务列表": {
                             "custom_action_param": {
@@ -723,6 +827,7 @@
                     "name": "领取奖励_花合战奖励",
                     "type": "boole",
                     "default": true,
+                    "doc": "是否自动领取花合战中已解锁的奖励",
                     "pipeline_override": {
                         "日常_任务列表": {
                             "custom_action_param": {
@@ -739,6 +844,7 @@
             "name": "经验副本设置",
             "type": "settings_group",
             "default": true,
+            "doc": "设置组队经验副本的相关参数，包括预设和加成",
             "pipeline_override": {
                 "组队副本14": {
                     "custom_action_param": {
@@ -755,10 +861,16 @@
                     "name": "经验副本分组预设",
                     "type": "input",
                     "default": "默认分组",
+                    "doc": "填写经验副本需要使用的分组预设名称",
                     "pipeline_override": {
                         "组队副本8_copy1": {
                             "custom_action_param": {
                                 "group_name": "{value}"
+                            },
+                            "focus": {
+                                "start": "正在切换分组: {value}",
+                                "succeeded": "切换分组 {value} 成功",
+                                "failed": "切换分组 {value} 失败"
                             }
                         }
                     }
@@ -767,10 +879,16 @@
                     "name": "经验副本队伍预设",
                     "type": "input",
                     "default": "默认队伍",
+                    "doc": "填写经验副本需要使用的队伍预设名称",
                     "pipeline_override": {
                         "组队副本8_copy1": {
                             "custom_action_param": {
                                 "team_name": "{value}"
+                            },
+                            "focus": {
+                                "start": "正在切换队伍: {value}",
+                                "succeeded": "切换队伍 {value} 成功",
+                                "failed": "切换队伍 {value} 失败"
                             }
                         }
                     }
@@ -779,6 +897,7 @@
                     "name": "启用100%经验加成",
                     "type": "boole",
                     "default": false,
+                    "doc": "挑战经验副本时，是否自动开启100%经验加成Buff",
                     "pipeline_override": {
                         "组队副本4_copy2": {
                             "custom_action_param": {
@@ -791,6 +910,7 @@
                     "name": "启用50%经验加成",
                     "type": "boole",
                     "default": false,
+                    "doc": "挑战经验副本时，是否自动开启50%经验加成Buff",
                     "pipeline_override": {
                         "组队副本4_copy2": {
                             "custom_action_param": {
@@ -805,6 +925,7 @@
             "name": "金币副本设置",
             "type": "settings_group",
             "default": true,
+            "doc": "设置组队金币副本的相关参数，包括预设和加成",
             "pipeline_override": {
                 "组队副本14": {
                     "custom_action_param": {
@@ -820,10 +941,16 @@
                     "name": "金币副本分组预设",
                     "type": "input",
                     "default": "默认分组",
+                    "doc": "填写金币副本需要使用的分组预设名称",
                     "pipeline_override": {
                         "组队副本8": {
                             "custom_action_param": {
                                 "group_name": "{value}"
+                            },
+                            "focus": {
+                                "start": "正在切换分组: {value}",
+                                "succeeded": "切换分组 {value} 成功",
+                                "failed": "切换分组 {value} 失败"
                             }
                         }
                     }
@@ -832,10 +959,16 @@
                     "name": "金币副本队伍预设",
                     "type": "input",
                     "default": "默认队伍",
+                    "doc": "填写金币副本需要使用的队伍预设名称",
                     "pipeline_override": {
                         "组队副本8": {
                             "custom_action_param": {
                                 "team_name": "{value}"
+                            },
+                            "focus": {
+                                "start": "正在切换队伍: {value}",
+                                "succeeded": "切换队伍 {value} 成功",
+                                "failed": "切换队伍 {value} 失败"
                             }
                         }
                     }
@@ -844,6 +977,7 @@
                     "name": "启用100%金币加成",
                     "type": "boole",
                     "default": false,
+                    "doc": "挑战金币副本时，是否自动开启100%金币加成Buff",
                     "pipeline_override": {
                         "组队副本4": {
                             "custom_action_param": {
@@ -856,6 +990,7 @@
                     "name": "启用50%金币加成",
                     "type": "boole",
                     "default": false,
+                    "doc": "挑战金币副本时，是否自动开启50%金币加成Buff",
                     "pipeline_override": {
                         "组队副本4": {
                             "custom_action_param": {
