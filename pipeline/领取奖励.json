@@ -502,7 +502,8 @@
     "领取奖励4": {
         "recognition": "OCR",
         "next": [
-            "领取奖励5"
+            "领取奖励5",
+            "领取奖励8"
         ],
         "roi": [
             521,
@@ -564,5 +565,34 @@
             22
         ],
         "expected": "前往"
+    },
+    "领取奖励8": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": "领取奖励4",
+        "roi_offset": [
+            -11,
+            -9,
+            62,
+            52
+        ],
+        "expected": "已完成1/1次"
+    },
+    "领取奖励_打开花合战_copy2": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "post_delay": 1000,
+        "roi": [
+            310,
+            586,
+            903,
+            101
+        ],
+        "template": [
+            "庭院/庭院_花合战.png",
+            "庭院/庭院_花合战_红点.png"
+        ]
     }
 }
