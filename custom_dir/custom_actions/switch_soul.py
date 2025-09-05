@@ -79,7 +79,7 @@ class SwitchSoul(CustomAction):
                 "timeout": 2000,
                 "recognition": "OCR",
                 "expected": "预设",
-                "roi": [334,69,93,50],
+                "roi": [298, 68, 236, 66],
                 "action": "Click",
                 "next":"识别是否位于预设界面"
             },

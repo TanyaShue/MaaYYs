@@ -181,7 +181,7 @@ class AutoFoster(CustomAction):
             time.sleep(self.WAIT_SHORT)
 
             # 添加一个基础的页数限制 (可选)
-            if page_count > 50:
+            if page_count > 10:
                 print("警告：搜索时已扫描超过50页，停止搜索此标签页。")
                 break
 

@@ -1,50 +1,60 @@
 {
-  "testAction": {
-    "recognition": "DirectHit",
-    "action": "Custom",
-    "custom_action": "SwitchSoul",
-    "custom_action_param": {"group_name": "逢魔", "team_name": "逢魔通用"}
-  },
-"testTaskList":{
-  "recognition": "DirectHit",
-  "action": "Custom",
-  "custom_action": "TaskList",
-  "custom_action_param": {
-    "task_list": ["领取奖励_任务列表"]
-  }
-},
-  "testOCR": {
-    "recognition": "OCR"
-  },
-  "testChallengeBoss": {
-    "recognition": "DirectHit",
-    "action": "Custom",
-    "custom_action": "ChallengeDungeonBoss"
-  }, 
-  "回到主页_key": {
-    "action": "key",
-    "key": 3
-  },
-  "打开阴阳师_key": {
-    "action": "StartApp",
-    "package": "com.netease.onmyoji/.tag0"
-  },
-  "test_OCR_1": {
-      "recognition": "OCR",
-      "expected":".*",
-    "roi":[
-      1053,
-      535,
-      190,
-      153
-    ]
-  },
-  "测试":{
-    "action": "Custom",
-    "custom_action": "TeamBuilder",
-    "custom_action_param": {
-    "id": 1111,
-      "port": 20405
-  }
-  }
+    "testAction": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "focus": {
+            "start": "11111111",
+            "succeeded": "22222222",
+            "failed": "3333333333333"
+        },
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "御魂",
+            "team_name": "队伍3"
+        }
+    },
+    "testTaskList": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "TaskList",
+        "custom_action_param": {
+            "task_list": [
+                "领取奖励_任务列表"
+            ]
+        }
+    },
+    "testOCR": {
+        "recognition": "OCR"
+    },
+    "testChallengeBoss": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "ChallengeDungeonBoss"
+    },
+    "回到主页_key": {
+        "action": "key",
+        "key": 3
+    },
+    "打开阴阳师_key": {
+        "action": "StartApp",
+        "package": "com.netease.onmyoji/.tag0"
+    },
+    "test_OCR_1": {
+        "recognition": "OCR",
+        "roi": [
+            1053,
+            535,
+            190,
+            153
+        ],
+        "expected": ".*"
+    },
+    "测试": {
+        "action": "Custom",
+        "custom_action": "TeamBuilder",
+        "custom_action_param": {
+            "id": 1111,
+            "port": 20405
+        }
+    }
 }
