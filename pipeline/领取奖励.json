@@ -440,5 +440,129 @@
             "领取奖励\\领取奖励_4.png",
             "领取奖励\\领取奖励_5.png"
         ]
+    },
+    "领取奖励1": {
+        "next": [
+            "领取奖励_打开花合战_copy1"
+        ]
+    },
+    "领取奖励_打开花合战_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "领取奖励2"
+        ],
+        "post_delay": 1000,
+        "roi": [
+            310,
+            586,
+            903,
+            101
+        ],
+        "template": [
+            "庭院/庭院_花合战.png",
+            "庭院/庭院_花合战_红点.png"
+        ]
+    },
+    "领取奖励2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "领取奖励3"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            1166,
+            177,
+            102,
+            384
+        ],
+        "expected": "任务"
+    },
+    "领取奖励3": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "领取奖励6"
+        ],
+        "next": [
+            "领取奖励4"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            503,
+            169,
+            462,
+            59
+        ],
+        "expected": "今日"
+    },
+    "领取奖励4": {
+        "recognition": "OCR",
+        "next": [
+            "领取奖励5"
+        ],
+        "roi": [
+            521,
+            226,
+            391,
+            323
+        ],
+        "expected": "每日签到"
+    },
+    "领取奖励5": {
+        "recognition": "OCR",
+        "next": [
+            "领取奖励7"
+        ],
+        "roi": "领取奖励4",
+        "roi_offset": [
+            -11,
+            -9,
+            62,
+            52
+        ],
+        "expected": "已完成0/1次"
+    },
+    "领取奖励6": {
+        "recognition": "OCR",
+        "action": "Swipe",
+        "roi": [
+            500,
+            160,
+            500,
+            67
+        ],
+        "expected": "今日",
+        "begin": [
+            561,
+            467,
+            310,
+            53
+        ],
+        "end": [
+            568,
+            216,
+            310,
+            53
+        ],
+        "duration": 1000
+    },
+    "领取奖励7": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "领取奖励_签到_点击签到"
+        ],
+        "roi": "领取奖励5",
+        "roi_offset": [
+            422,
+            -22,
+            -20,
+            22
+        ],
+        "expected": "前往"
     }
 }

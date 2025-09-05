@@ -5,6 +5,7 @@
         "custom_action": "TaskList",
         "custom_action_param": {
             "task_list": {
+                "领取奖励1": true,
                 "日常_送友情点": true,
                 "领取奖励_邮件": true,
                 "领取奖励_日常奖励": true,
