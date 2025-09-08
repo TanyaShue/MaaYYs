@@ -462,3 +462,4 @@ tools/ImageCropper/**/*.png
 /MaaYYs/.idea/
 /.idea/
 /runtime/
+/assets/date.json
