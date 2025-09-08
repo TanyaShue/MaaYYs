@@ -818,6 +818,21 @@
                     }
                 },
                 {
+                    "name": "日常_每日签到",
+                    "type": "boole",
+                    "default": true,
+                    "doc": "是否自动完成签到",
+                    "pipeline_override": {
+                        "日常_任务列表": {
+                            "custom_action_param": {
+                                "task_list": {
+                                    "领取奖励1_签到": "{boole}"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "领取奖励_商店每日奖励",
                     "type": "boole",
                     "default": true,
