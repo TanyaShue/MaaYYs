@@ -5,13 +5,11 @@ import sys
 # 添加当前脚本目录到 Python 路径
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, current_dir)
+os.chdir(current_dir)
 
 from maa.agent.agent_server import AgentServer
-from maa.custom_action import CustomAction
-from maa.custom_recognition import CustomRecognition
 from maa.toolkit import Toolkit
 from custom_dir.custom_actions import *
-
 from custom_dir.custom_recognition import my_recognizer
 
 
