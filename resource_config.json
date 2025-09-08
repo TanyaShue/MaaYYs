@@ -35,7 +35,8 @@
             "option": [
                 "地鬼挑战次数",
                 "地鬼分组预设",
-                "地鬼队伍预设"
+                "地鬼队伍预设",
+                "每日仅执行一次"
             ]
         },
         {
@@ -531,6 +532,19 @@
             "pipeline_override": {
                 "寮3026_copy1": {
                     "enabled": "{boole}"
+                }
+            }
+        },
+        {
+            "name": "每日仅执行一次",
+            "type": "boole",
+            "default": true,
+            "doc": "在启用状态下,每天只会挑战一次",
+            "pipeline_override": {
+                "开始自动挑战鬼王": {
+                    "custom_action_param": {
+                        "daily_once": "{boole}"
+                    }
                 }
             }
         },

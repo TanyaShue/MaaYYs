@@ -113,7 +113,8 @@
         "custom_action_param": {
             "group_name": "地鬼",
             "team_name": "地域鬼王",
-            "count": 1
+            "count": 1,
+            "daily_once": true
         }
     },
     "自动地鬼1": {
