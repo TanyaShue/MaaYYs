@@ -36,7 +36,8 @@
         "custom_action_param": {
             "task_list": [
                 "阴阳寮奖励领取_阴阳寮金币领取",
-                "阴阳寮奖励领取_阴阳寮体力领取"
+                "阴阳寮奖励领取_阴阳寮体力领取",
+                "阴阳寮奖励9_领取寮金币"
             ]
         }
     },
@@ -683,6 +684,15 @@
     "阴阳寮奖励9": {
         "recognition": "OCR",
         "action": "Click",
+        "interrupt": [
+            "阴阳寮奖励12"
+        ],
+        "next": [
+            "阴阳寮奖励10",
+            "阴阳寮奖励13"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             125,
             598,
@@ -690,5 +700,69 @@
             74
         ],
         "expected": "资金领取"
+    },
+    "阴阳寮奖励10": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "阴阳寮奖励11",
+            "阴阳寮奖励12"
+        ],
+        "next": [
+            "阴阳寮奖励13"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            551,
+            421,
+            182,
+            78
+        ],
+        "expected": "领取"
+    },
+    "阴阳寮奖励11": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            441,
+            172,
+            387,
+            108
+        ],
+        "expected": "获得奖励",
+        "target": [
+            14,
+            0,
+            78,
+            74
+        ]
+    },
+    "阴阳寮奖励12": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            140,
+            78,
+            196,
+            64
+        ],
+        "expected": "信息|管理",
+        "target": [
+            20,
+            0,
+            56,
+            54
+        ]
+    },
+    "阴阳寮奖励13": {
+        "recognition": "OCR",
+        "roi": [
+            852,
+            653,
+            180,
+            66
+        ],
+        "expected": "神社|祈愿"
     }
 }
