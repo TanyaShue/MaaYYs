@@ -151,7 +151,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "next": [
-            "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面"
+            "阴阳寮奖励领取_识别结界特征_2"
         ],
         "post_delay": 1000,
         "template": "通用图标/返回_蓝色.png"
@@ -493,6 +493,7 @@
         ]
     },
     "阴阳寮奖励": {
+        "recognition": "OCR",
         "action": "Custom",
         "on_error": [
             "返回庭院"
@@ -501,6 +502,13 @@
             "阴阳寮奖励领取_结界奖励领取_识别寄养栏位",
             "阴阳寮奖励7"
         ],
+        "roi": [
+            794,
+            7,
+            118,
+            168
+        ],
+        "expected": "好友寄养",
         "custom_action": "LoopAction",
         "custom_action_param": {
             "action_list": [
