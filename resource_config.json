@@ -33,13 +33,13 @@
       "task_name": "自动999",
       "task_entry": "9991",
       "option": [
-                        "双击概率",
-                "单击概率",
-                "长时间等待概率",
-                "短等待最小值",
-                "短等待最大值",
-                "长等待最小值",
-                "长等待最大值"
+        "双击概率",
+        "单击概率",
+        "长时间等待概率",
+        "短等待最小值",
+        "短等待最大值",
+        "长等待最小值",
+        "长等待最大值"
       ]
     },
     {
@@ -1038,54 +1038,96 @@
         }
       ]
     },
-        {
-            "name": "双击概率",
-            "type": "input",
-            "default": "0.45",
-            "doc": "执行双击动作的概率，范围0~1",
-            "pipeline_override": {}
-        },
-        {
-            "name": "单击概率",
-            "type": "input",
-            "default": "0.50",
-            "doc": "执行单击动作的概率，范围0~1",
-            "pipeline_override": {}
-        },
-        {
-            "name": "长时间等待概率",
-            "type": "input",
-            "default": "0.05",
-            "doc": "执行长时间等待动作的概率，范围0~1",
-            "pipeline_override": {}
-        },
-        {
-            "name": "短等待最小值",
-            "type": "input",
-            "default": "1",
-            "doc": "短等待的最小时间（秒）",
-            "pipeline_override": {}
-        },
-        {
-            "name": "短等待最大值",
-            "type": "input",
-            "default": "20",
-            "doc": "短等待的最大时间（秒）",
-            "pipeline_override": {}
-        },
-        {
-            "name": "长等待最小值",
-            "type": "input",
-            "default": "100",
-            "doc": "长等待的最小时间（秒）",
-            "pipeline_override": {}
-        },
-        {
-            "name": "长等待最大值",
-            "type": "input",
-            "default": "200",
-            "doc": "长等待的最大时间（秒）",
-            "pipeline_override": {}
+    {
+      "name": "双击概率",
+      "type": "input",
+      "default": "0.45",
+      "doc": "执行双击动作的概率，范围0~1",
+      "pipeline_override": {
+        "999_奖励_点击一下": {
+          "custom_action_param": {
+            "double_click_prob": "{value}"
+          }
         }
+      }
+    },
+    {
+      "name": "单击概率",
+      "type": "input",
+      "default": "0.5",
+      "doc": "执行单击动作的概率，范围0~1",
+      "pipeline_override": {
+        "999_奖励_点击一下": {
+          "custom_action_param": {
+            "single_click_prob": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "长时间等待概率",
+      "type": "input",
+      "default": "0.05",
+      "doc": "执行长时间等待动作的概率，范围0~1",
+      "pipeline_override": {
+        "999_奖励_点击一下": {
+          "custom_action_param": {
+            "long_wait_prob": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "短等待最小值",
+      "type": "input",
+      "default": "1",
+      "doc": "短等待的最小时间（秒）",
+      "pipeline_override": {
+        "999_奖励_点击一下": {
+          "custom_action_param": {
+            "short_wait_min": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "短等待最大值",
+      "type": "input",
+      "default": "20",
+      "doc": "短等待的最大时间（秒）",
+      "pipeline_override": {
+        "999_奖励_点击一下": {
+          "custom_action_param": {
+            "short_wait_max": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "长等待最小值",
+      "type": "input",
+      "default": "100",
+      "doc": "长等待的最小时间（秒）",
+      "pipeline_override": {
+        "999_奖励_点击一下": {
+          "custom_action_param": {
+            "long_wait_min": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "长等待最大值",
+      "type": "input",
+      "default": "200",
+      "doc": "长等待的最大时间（秒）",
+      "pipeline_override": {
+        "999_奖励_点击一下": {
+          "custom_action_param": {
+            "long_wait_max": "{value}"
+          }
+        }
+      }
+    }
   ]
 }
