@@ -1,46 +1,111 @@
 {
-  "自动999": {
-    "next": [
-      "999",
-      "999_点击屏幕继续"
-    ]
-  },
-  "999": {
-    "is_sub": true,
-    "recognition": "FeatureMatch",
-    "template": "通用图标/999_战斗.png",
-    "action": "Click",
-    "target": [
-      1124,
-      574,
-      114,
-      99
-    ],
-    "post_delay": 8000,
-    "next": "999_奖励_点击一下"
-  },
-  "999_奖励_点击一下": {
-    "recognition": "OCR",
-    "expected": "获得奖励",
-    "roi": [
-      470,
-      163,
-      343,
-      123
-    ],
-    "action": "Custom",
-    "custom_action": "HumanTouch"
-  },
-  "999_点击屏幕继续": {
-    "is_sub": true,
-    "recognition": "OCR",
-    "expected": "点击屏幕继续",
-    "action": "Click",
-    "target": [
-      429,
-      502,
-      521,
-      177
-    ]
-  }
+    "自动999": {
+        "next": [
+            "999",
+            "999_点击屏幕继续"
+        ]
+    },
+    "999": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "is_sub": true,
+        "next": [
+            "999_奖励_点击一下"
+        ],
+        "post_delay": 8000,
+        "roi": [
+            1081,
+            528,
+            198,
+            191
+        ],
+        "template": [
+            "通用图标/999_战斗.png",
+            "999\\999.png"
+        ],
+        "target": [
+            1124,
+            574,
+            114,
+            99
+        ]
+    },
+    "999_奖励_点击一下": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "roi": [
+            470,
+            163,
+            343,
+            123
+        ],
+        "expected": "获得奖励",
+        "custom_action": "HumanTouch"
+    },
+    "999_点击屏幕继续": {
+        "recognition": "OCR",
+        "action": "Click",
+        "is_sub": true,
+        "expected": "点击屏幕继续",
+        "target": [
+            429,
+            502,
+            521,
+            177
+        ]
+    },
+    "9991": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "9992"
+        ],
+        "template": [
+            "999\\9991.png"
+        ]
+    },
+    "9992": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "9993"
+        ],
+        "roi": [
+            363,
+            120,
+            330,
+            332
+        ],
+        "expected": "霜火寂境"
+    },
+    "9993": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "自动999"
+        ],
+        "next": [
+            "9994"
+        ],
+        "roi": [
+            18,
+            94,
+            188,
+            50
+        ],
+        "expected": "战斗驻守平安"
+    },
+    "9994": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            911,
+            12,
+            145,
+            42
+        ],
+        "expected": "0/5000"
+    }
 }
