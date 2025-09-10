@@ -18,13 +18,13 @@ class HumanTouch(CustomAction):
         try:
             # 解析参数
             params = json.loads(argv.custom_action_param)
-            short_wait_min = params.get("short_wait_min", 1)
-            short_wait_max = params.get("short_wait_max", 20)
-            long_wait_prob = params.get("long_wait_prob", 0.05)  # 长时间等待概率
-            long_wait_min = params.get("long_wait_min", 100)
-            long_wait_max = params.get("long_wait_max", 200)
-            double_click_prob = params.get("double_click_prob", 0.45)
-            single_click_prob = params.get("single_click_prob", 0.50)
+            short_wait_min = float(params.get("short_wait_min", 1))
+            short_wait_max = float(params.get("short_wait_max", 20))
+            long_wait_prob = float(params.get("long_wait_prob", 0.05))
+            long_wait_min = float(params.get("long_wait_min", 100))
+            long_wait_max = float(params.get("long_wait_max", 200))
+            double_click_prob = float(params.get("double_click_prob", 0.45))
+            single_click_prob = float(params.get("single_click_prob", 0.50))
 
             # 检查概率总和是否 <= 1
             if double_click_prob + single_click_prob + long_wait_prob > 1:
