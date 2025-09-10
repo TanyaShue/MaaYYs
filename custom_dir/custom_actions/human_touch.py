@@ -44,8 +44,8 @@ class HumanTouch(CustomAction):
 
             if rand_num < double_click_prob:
                 # 随机双击
-                x = random.randint(400, 900)
-                y = random.randint(520, 700)
+                x = random.randint(400, 800)
+                y = random.randint(520, 600)
                 context.tasker.controller.post_click(x, y).wait()
                 sleep(random.uniform(0.5,1.5))
                 context.tasker.controller.post_click(x, y).wait()
@@ -55,8 +55,8 @@ class HumanTouch(CustomAction):
                 # 随机两次单击
                 for _ in range(2):
                     sleep(random.uniform(0.5,1.5))
-                    x = random.randint(400, 900)
-                    y = random.randint(520, 700)
+                    x = random.randint(400, 800)
+                    y = random.randint(520, 600)
                     context.tasker.controller.post_click(x, y).wait()
                     print(f"单击位置: ({x}, {y})")
 
@@ -68,8 +68,8 @@ class HumanTouch(CustomAction):
                 sleep(t)
                 context.run_task("随机等待", {"随机等待": {"focus": {"start": "等待结束"}}})
                 print("长时间等待结束，开始随机点击")
-                x = random.randint(400, 900)
-                y = random.randint(520, 700)
+                x = random.randint(400, 800)
+                y = random.randint(520, 600)
                 context.tasker.controller.post_click(x, y).wait()
                 sleep(random.uniform(1,3))
                 context.tasker.controller.post_click(x, y).wait()
@@ -77,8 +77,8 @@ class HumanTouch(CustomAction):
 
             else:
                 # 默认短等待后单击
-                x = random.randint(400, 900)
-                y = random.randint(520, 700)
+                x = random.randint(400, 800)
+                y = random.randint(520, 600)
                 context.tasker.controller.post_click(x, y).wait()
                 print(f"默认单击位置: ({x}, {y})")
 
