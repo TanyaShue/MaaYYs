@@ -1,5 +1,7 @@
 {
     "自动御灵": {
+        "rate_limit": 3000,
+        "timeout": 2000000,
         "next": [
             "御灵_点击挑战",
             "御灵_点击屏幕继续"
@@ -9,10 +11,7 @@
         "recognition": "OCR",
         "action": "Click",
         "is_sub": true,
-        "next": [
-            "御灵_获取奖励"
-        ],
-        "post_delay": 12000,
+        "post_delay": 1000,
         "roi": [
             1062,
             550,
@@ -27,16 +26,24 @@
             72
         ]
     },
-    "御灵_获取奖励": {
+    "御灵_点击屏幕继续": {
         "recognition": "OCR",
         "action": "Custom",
+        "is_sub": true,
+        "post_delay": 2000,
         "roi": [
-            83,
-            549,
-            143,
-            37
+            371,
+            589,
+            511,
+            130
         ],
-        "expected": "本次通关时间",
+        "expected": "点击屏幕继续",
+        "target": [
+            334,
+            519,
+            272,
+            164
+        ],
         "custom_action": "HumanTouch",
         "custom_action_param": {
             "short_wait_min": 1,
@@ -47,18 +54,6 @@
             "double_click_prob": 0.45,
             "single_click_prob": 0.5
         }
-    },
-    "御灵_点击屏幕继续": {
-        "recognition": "OCR",
-        "action": "Click",
-        "is_sub": true,
-        "expected": "点击屏幕继续",
-        "target": [
-            429,
-            502,
-            521,
-            177
-        ]
     },
     "自动御灵1": {
         "interrupt": [
