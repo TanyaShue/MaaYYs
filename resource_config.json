@@ -39,7 +39,10 @@
         "短等待最小值",
         "短等待最大值",
         "长等待最小值",
-        "长等待最大值"
+        "长等待最大值",
+        "自动挂樱饼的权重",
+        "自动点击的权重",
+        "自动挂樱饼时自动的次数"
       ]
     },
     {
@@ -1125,6 +1128,45 @@
         "999_奖励_点击一下": {
           "custom_action_param": {
             "long_wait_max": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "自动挂樱饼的权重",
+      "type": "input",
+      "default": "1",
+      "doc": "自动挂樱饼的权重,填入数字,按比值计算与自动点击的概率",
+      "pipeline_override": {
+        "9995": {
+          "custom_action_param": {
+            "9996_随机挂樱饼": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "自动点击的权重",
+      "type": "input",
+      "default": "50",
+      "doc": "自动点击的权重,填入数字,按比值计算与自动樱饼的概率",
+      "pipeline_override": {
+        "9995": {
+          "custom_action_param": {
+            "自动999": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "自动挂樱饼时自动的次数",
+      "type": "input",
+      "default": "10",
+      "doc": "每次自动挂樱饼时自动启动的次数",
+      "pipeline_override": {
+        "9996": {
+          "custom_action_param": {
+            "expected_number": "{value}"
           }
         }
       }
