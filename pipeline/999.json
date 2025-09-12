@@ -1,14 +1,13 @@
 {
     "自动999": {
         "next": [
-            "999_1111",
+            "999",
             "999_点击屏幕继续"
         ]
     },
-    "999_1111": {
+    "999": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "is_sub": true,
         "next": [
             "999_奖励_点击一下"
         ],
@@ -81,11 +80,9 @@
     "9993": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "9995"
-        ],
+        "interrupt": [],
         "next": [
-            "9994"
+            "99914"
         ],
         "roi": [
             18,
@@ -113,7 +110,7 @@
         "custom_action": "RandomTask",
         "custom_action_param": {
             "自动999": 50,
-            "9996_随机挂樱饼": 50
+            "9996_随机挂樱饼": 1
         }
     },
     "9996_随机挂樱饼": {
@@ -272,6 +269,22 @@
             212,
             48
         ],
-        "expected": "\\d+秒后自动挑战"
+        "expected": "当前进度"
+    },
+    "99914": {
+        "recognition": "OCR",
+        "interrupt": [
+            "9995"
+        ],
+        "next": [
+            "9994"
+        ],
+        "roi": [
+            65,
+            9,
+            243,
+            66
+        ],
+        "expected": "荒骨巨兽"
     }
 }
