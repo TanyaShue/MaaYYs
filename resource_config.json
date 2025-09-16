@@ -6,14 +6,29 @@
     "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
     "resource_description": "阴阳师自动化脚本",
     "resource_icon": "/assets/logo/logo.png",
+    "resource_pack": [
+      {
+          "name": "Official",
+          "path": [
+              "./resource_pack/Official"
+          ]
+      },
+      {
+        "name": "雷电",
+          "path": [
+            "./resource_pack/Official",
+            "./resource_pack/雷电"
+          ]
+      }
+    ],
     "agent": {
-        "type": "python",
-        "version": "3.11",
-        "agent_path": "./MaaAgent.py",
-        "agent_params": "-path ./custom_dir",
-        "requirements_path": "./requirements.txt",
-        "use_venv": true
-    },
+          "type": "python",
+          "version": "3.11",
+          "agent_path": "./MaaAgent.py",
+          "agent_params": "-path ./custom_dir",
+          "requirements_path": "./requirements.txt",
+          "use_venv": true
+      },
     "resource_tasks": [
         {
             "task_name": "打开游戏",
