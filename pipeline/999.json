@@ -66,8 +66,11 @@
     "9992": {
         "recognition": "OCR",
         "action": "Click",
-        "next": [
+        "interrupt": [
             "9993"
+        ],
+        "next": [
+            "99914"
         ],
         "roi": [
             363,
@@ -80,17 +83,13 @@
     "9993": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [],
-        "next": [
-            "99914"
-        ],
         "roi": [
             18,
             94,
             188,
             50
         ],
-        "expected": "战斗驻守平安"
+        "expected": "(?:战斗\\s*)?驻守平安"
     },
     "9994": {
         "recognition": "OCR",
