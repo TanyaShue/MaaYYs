@@ -1,8 +1,9 @@
 {
     "resource_name": "阴阳师",
+    "resource_id": "MaaYYs",
     "resource_version": "v1.3.4",
     "resource_author": "TanyaShue",
-    "resource_update_service_id": "MaaYYs",
+    "mirror_update_service_id": "MaaYYs",
     "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
     "resource_description": "阴阳师自动化脚本",
     "resource_icon": "/assets/logo/logo.png",
