@@ -1,52 +1,237 @@
 {
-  "自动御灵": {
-    "next": [
-      "御灵_点击挑战",
-      "御灵_点击屏幕继续"
-    ]
-  },
-  "御灵_点击挑战": {
-    "recognition": "OCR",
-    "action": "Click",
-    "expected": "挑战",
-    "next": "御灵_获取奖励",
-    "post_delay": 12000,
-    "is_sub": true,
-    "roi": [
-      1062,
-      550,
-      186,
-      161
-    ],
-    "target": [
-      1115,
-      605,
-      73,
-      72
-    ]
-  },
-  "御灵_获取奖励": {
-    "recognition": "OCR",
-    "expected": "本次通关时间",
-    "roi": [
-      83,
-      549,
-      143,
-      37
-    ],
-    "action": "Custom",
-    "custom_action": "HumanTouch"
-  },
-  "御灵_点击屏幕继续": {
-    "is_sub": true,
-    "recognition": "OCR",
-    "expected": "点击屏幕继续",
-    "action": "Click",
-    "target": [
-      429,
-      502,
-      521,
-      177
-    ]
-  }
+    "自动御灵": {
+        "rate_limit": 3000,
+        "timeout": 2000000,
+        "next": [
+            "御灵_点击挑战",
+            "御灵_点击屏幕继续"
+        ]
+    },
+    "御灵_点击挑战": {
+        "recognition": "OCR",
+        "action": "Click",
+        "is_sub": true,
+        "post_delay": 1000,
+        "roi": [
+            1062,
+            550,
+            186,
+            161
+        ],
+        "expected": "挑战",
+        "target": [
+            1115,
+            605,
+            73,
+            72
+        ]
+    },
+    "御灵_点击屏幕继续": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "is_sub": true,
+        "post_delay": 2000,
+        "roi": [
+            371,
+            589,
+            511,
+            130
+        ],
+        "expected": "点击屏幕继续",
+        "target": [
+            334,
+            519,
+            272,
+            164
+        ],
+        "custom_action": "HumanTouch",
+        "custom_action_param": {
+            "short_wait_min": 1,
+            "short_wait_max": 10,
+            "long_wait_prob": 0.05,
+            "long_wait_min": 60,
+            "long_wait_max": 100,
+            "double_click_prob": 0.45,
+            "single_click_prob": 0.5
+        }
+    },
+    "自动御灵1": {
+        "interrupt": [
+            "点击探索"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "next": [
+            "自动御灵2",
+            "自动御灵3"
+        ]
+    },
+    "自动御灵2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "自动御灵4"
+        ],
+        "roi": [
+            313,
+            602,
+            122,
+            110
+        ],
+        "expected": "御灵"
+    },
+    "自动御灵3": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "自动御灵4"
+        ],
+        "roi": [
+            294,
+            613,
+            249,
+            98
+        ],
+        "template": [
+            "自动御灵\\自动御灵3.png"
+        ]
+    },
+    "自动御灵4": {
+        "recognition": "OCR",
+        "interrupt": [
+            "自动御灵5",
+            "自动御灵5_copy1",
+            "自动御灵5_copy2",
+            "自动御灵5_copy3"
+        ],
+        "next": [
+            "自动御灵6"
+        ],
+        "roi": [
+            48,
+            8,
+            260,
+            62
+        ],
+        "expected": "御灵之境"
+    },
+    "自动御灵5": {
+        "recognition": "OCR",
+        "action": "Click",
+        "inverse": true,
+        "roi": [
+            98,
+            282,
+            234,
+            184
+        ],
+        "expected": "周日开放",
+        "target": [
+            98,
+            282,
+            234,
+            184
+        ]
+    },
+    "自动御灵5_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "inverse": true,
+        "roi": [
+            395,
+            330,
+            214,
+            136
+        ],
+        "expected": "周日开放",
+        "target": [
+            395,
+            330,
+            214,
+            136
+        ]
+    },
+    "自动御灵5_copy2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "inverse": true,
+        "roi": [
+            673,
+            328,
+            234,
+            130
+        ],
+        "expected": "周日开放",
+        "target": [
+            673,
+            328,
+            234,
+            130
+        ]
+    },
+    "自动御灵5_copy3": {
+        "recognition": "OCR",
+        "action": "Click",
+        "inverse": true,
+        "roi": [
+            972,
+            312,
+            214,
+            148
+        ],
+        "expected": "周日开放",
+        "target": [
+            972,
+            312,
+            214,
+            148
+        ]
+    },
+    "自动御灵6": {
+        "recognition": "OCR",
+        "interrupt": [
+            "自动御灵8"
+        ],
+        "next": [
+            "自动御灵7"
+        ],
+        "roi": [
+            0,
+            9,
+            248,
+            66
+        ],
+        "expected": "^御灵$"
+    },
+    "自动御灵7": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "自动御灵"
+        ],
+        "roi": [
+            133,
+            122,
+            360,
+            518
+        ],
+        "expected": "叁层"
+    },
+    "自动御灵8": {
+        "action": "Swipe",
+        "begin": [
+            166,
+            153,
+            239,
+            71
+        ],
+        "end": [
+            184,
+            510,
+            266,
+            84
+        ],
+        "duration": 1000
+    }
 }
