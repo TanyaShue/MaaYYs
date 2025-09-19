@@ -18,7 +18,7 @@ class RepeatChallengeNTimes(CustomAction):
         """
 
         # 读取 custom_param 的参数
-        # {"start_repeat": true, "expected_number": "79"}
+        # {"start_repeat": true, "expected_number": x}
         json_data = json.loads(argv.custom_action_param)
 
         # 获取参数
