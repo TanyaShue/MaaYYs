@@ -1,0 +1,289 @@
+{
+    "自动999": {
+        "next": [
+            "999",
+            "999_点击屏幕继续"
+        ]
+    },
+    "999": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "999_奖励_点击一下"
+        ],
+        "post_delay": 8000,
+        "roi": [
+            1081,
+            528,
+            198,
+            191
+        ],
+        "template": [
+            "通用图标/999_战斗.png",
+            "999\\999.png"
+        ],
+        "target": [
+            1120,
+            580,
+            113,
+            95
+        ]
+    },
+    "999_奖励_点击一下": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "roi": [
+            470,
+            163,
+            343,
+            123
+        ],
+        "expected": "获得奖励",
+        "custom_action": "HumanTouch"
+    },
+    "999_点击屏幕继续": {
+        "recognition": "OCR",
+        "action": "Click",
+        "is_sub": true,
+        "expected": "点击屏幕继续",
+        "target": [
+            429,
+            502,
+            521,
+            177
+        ]
+    },
+    "9991": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "9992"
+        ],
+        "template": [
+            "999\\9991.png"
+        ]
+    },
+    "9992": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "9993"
+        ],
+        "next": [
+            "99914"
+        ],
+        "roi": [
+            363,
+            120,
+            330,
+            332
+        ],
+        "expected": "霜火寂境"
+    },
+    "9993": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            18,
+            94,
+            188,
+            50
+        ],
+        "expected": "(?:战斗\\s*)?驻守平安"
+    },
+    "9994": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            911,
+            12,
+            145,
+            42
+        ],
+        "expected": "^0/5000$"
+    },
+    "9995": {
+        "action": "Custom",
+        "custom_action": "RandomTask",
+        "custom_action_param": {
+            "自动999": 50,
+            "9996_随机挂樱饼": 1
+        }
+    },
+    "9996_随机挂樱饼": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "9996"
+        ],
+        "roi": [
+            1013,
+            631,
+            108,
+            80
+        ],
+        "template": [
+            "自动御魂\\自动御魂2.png",
+            "自动御魂\\自动御魂2_1.png",
+            "自动御魂\\自动御魂2_2.png",
+            "自动御魂\\自动御魂2_3.png",
+            "自动御魂\\自动御魂2_4.png",
+            "自动御魂\\自动御魂2_5.png",
+            "999\\9996_随机挂樱饼.png"
+        ]
+    },
+    "9996": {
+        "action": "Custom",
+        "next": [
+            "9997"
+        ],
+        "custom_action": "RepeatChallengeNTimes",
+        "custom_action_param": {
+            "start_repeat": true,
+            "expected_number": 2
+        }
+    },
+    "9997": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "9998"
+        ],
+        "roi": [
+            529,
+            95,
+            208,
+            63
+        ],
+        "expected": "喂食小纸人",
+        "target": [
+            166,
+            236,
+            146,
+            96
+        ]
+    },
+    "9998": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "99913"
+        ],
+        "timeout": 2000000,
+        "next": [
+            "9999"
+        ],
+        "roi": [
+            962,
+            635,
+            66,
+            77
+        ],
+        "expected": "自动"
+    },
+    "9999": {
+        "recognition": "OCR",
+        "next": [
+            "99910"
+        ],
+        "roi": [
+            419,
+            265,
+            463,
+            117
+        ],
+        "expected": "已完成\\d+次挑战"
+    },
+    "99910": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "99911"
+        ],
+        "roi": [
+            415,
+            392,
+            198,
+            80
+        ],
+        "expected": "取消"
+    },
+    "99911": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "99912"
+        ],
+        "roi": [
+            1013,
+            631,
+            108,
+            80
+        ],
+        "template": [
+            "自动御魂\\自动御魂2.png",
+            "自动御魂\\自动御魂2_1.png",
+            "自动御魂\\自动御魂2_2.png",
+            "自动御魂\\自动御魂2_3.png",
+            "自动御魂\\自动御魂2_4.png",
+            "自动御魂\\自动御魂2_5.png",
+            "999\\9996_随机挂樱饼.png"
+        ]
+    },
+    "99912": {
+        "action": "Custom",
+        "next": [
+            "9997_copy1"
+        ],
+        "custom_action": "RepeatChallengeNTimes",
+        "custom_action_param": {
+            "start_repeat": false,
+            "expected_number": 2
+        }
+    },
+    "9997_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            529,
+            95,
+            208,
+            63
+        ],
+        "expected": "喂食小纸人",
+        "target": [
+            166,
+            236,
+            146,
+            96
+        ]
+    },
+    "99913": {
+        "recognition": "OCR",
+        "roi": [
+            880,
+            503,
+            212,
+            48
+        ],
+        "expected": "当前进度"
+    },
+    "99914": {
+        "recognition": "OCR",
+        "interrupt": [
+            "9995"
+        ],
+        "next": [
+            "9994"
+        ],
+        "roi": [
+            65,
+            9,
+            243,
+            66
+        ],
+        "expected": "荒骨巨兽"
+    }
+}
