@@ -397,7 +397,7 @@ jobs:
         shell: pwsh
         run: |
           # 定义要包含的文件和文件夹列表
-          $includeList = @('app', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md','doc', 'resource_config.json')
+          $includeList = @('app','resource_pack', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md','doc', 'resource_config.json')
           
           # 创建临时目录用于资源包
           New-Item -Path "resources-temp" -ItemType Directory -Force
