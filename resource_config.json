@@ -156,7 +156,6 @@
         "短等待最大值",
         "长等待最小值",
         "长等待最大值",
-        "长等待最大值",
         "自动挂樱饼的权重",
         "自动点击的权重",
         "自动挂樱饼时自动的次数"
@@ -418,11 +417,6 @@
         "装备日常清杂预设": {
           "custom_action_param": {
             "group_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换分组: {value}",
-            "succeeded": "切换分组 {value} 成功",
-            "failed": "切换分组 {value} 失败"
           }
         }
       }
@@ -436,11 +430,6 @@
         "装备日常清杂预设": {
           "custom_action_param": {
             "team_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换队伍: {value}",
-            "succeeded": "切换队伍 {value} 成功",
-            "failed": "切换队伍 {value} 失败"
           }
         }
       }
@@ -454,11 +443,6 @@
         "装备突破预设": {
           "custom_action_param": {
             "group_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换分组: {value}",
-            "succeeded": "切换分组 {value} 成功",
-            "failed": "切换分组 {value} 失败"
           }
         }
       }
@@ -472,11 +456,6 @@
         "装备突破预设": {
           "custom_action_param": {
             "team_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换队伍: {value}",
-            "succeeded": "切换队伍 {value} 成功",
-            "failed": "切换队伍 {value} 失败"
           }
         }
       }
@@ -490,11 +469,6 @@
         "装备地狱鬼王预设": {
           "custom_action_param": {
             "group_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换分组: {value}",
-            "succeeded": "切换分组 {value} 成功",
-            "failed": "切换分组 {value} 失败"
           }
         },
         "开始自动挑战鬼王": {
@@ -513,11 +487,6 @@
         "装备地狱鬼王预设": {
           "custom_action_param": {
             "team_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换队伍: {value}",
-            "succeeded": "切换队伍 {value} 成功",
-            "failed": "切换队伍 {value} 失败"
           }
         },
         "开始自动挑战鬼王": {
@@ -536,11 +505,6 @@
         "自动御魂_装备挑战御魂副本御魂": {
           "custom_action_param": {
             "group_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换分组: {value}",
-            "succeeded": "切换分组 {value} 成功",
-            "failed": "切换分组 {value} 失败"
           }
         }
       }
@@ -554,11 +518,6 @@
         "自动御魂_装备挑战御魂副本御魂": {
           "custom_action_param": {
             "team_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换队伍: {value}",
-            "succeeded": "切换队伍 {value} 成功",
-            "failed": "切换队伍 {value} 失败"
           }
         }
       }
@@ -609,11 +568,6 @@
         "现世逢魔_装备式神预设": {
           "custom_action_param": {
             "group_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换分组: {value}",
-            "succeeded": "切换分组 {value} 成功",
-            "failed": "切换分组 {value} 失败"
           }
         }
       }
@@ -627,11 +581,6 @@
         "现世逢魔_装备式神预设": {
           "custom_action_param": {
             "team_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换队伍: {value}",
-            "succeeded": "切换队伍 {value} 成功",
-            "failed": "切换队伍 {value} 失败"
           }
         }
       }
@@ -645,11 +594,6 @@
         "自动秘闻_装备式神预设": {
           "custom_action_param": {
             "group_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换分组: {value}",
-            "succeeded": "切换分组 {value} 成功",
-            "failed": "切换分组 {value} 失败"
           }
         },
         "自动秘闻_出战预设队伍": {
@@ -668,11 +612,6 @@
         "自动秘闻_装备式神预设": {
           "custom_action_param": {
             "team_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换队伍: {value}",
-            "succeeded": "切换队伍 {value} 成功",
-            "failed": "切换队伍 {value} 失败"
           }
         },
         "自动秘闻_出战预设队伍": {
@@ -735,11 +674,6 @@
         "寮306": {
           "custom_action_param": {
             "group_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换分组: {value}",
-            "succeeded": "切换分组 {value} 成功",
-            "failed": "切换分组 {value} 失败"
           }
         }
       }
@@ -753,11 +687,6 @@
         "寮306": {
           "custom_action_param": {
             "team_name": "{value}"
-          },
-          "focus": {
-            "start": "正在切换队伍: {value}",
-            "succeeded": "切换队伍 {value} 成功",
-            "failed": "切换队伍 {value} 失败"
           }
         }
       }
@@ -929,11 +858,6 @@
             "组队副本8_copy1": {
               "custom_action_param": {
                 "group_name": "{value}"
-              },
-              "focus": {
-                "start": "正在切换分组: {value}",
-                "succeeded": "切换分组 {value} 成功",
-                "failed": "切换分组 {value} 失败"
               }
             }
           }
@@ -947,11 +871,6 @@
             "组队副本8_copy1": {
               "custom_action_param": {
                 "team_name": "{value}"
-              },
-              "focus": {
-                "start": "正在切换队伍: {value}",
-                "succeeded": "切换队伍 {value} 成功",
-                "failed": "切换队伍 {value} 失败"
               }
             }
           }
@@ -1009,11 +928,6 @@
             "组队副本8": {
               "custom_action_param": {
                 "group_name": "{value}"
-              },
-              "focus": {
-                "start": "正在切换分组: {value}",
-                "succeeded": "切换分组 {value} 成功",
-                "failed": "切换分组 {value} 失败"
               }
             }
           }
@@ -1027,11 +941,6 @@
             "组队副本8": {
               "custom_action_param": {
                 "team_name": "{value}"
-              },
-              "focus": {
-                "start": "正在切换队伍: {value}",
-                "succeeded": "切换队伍 {value} 成功",
-                "failed": "切换队伍 {value} 失败"
               }
             }
           }
