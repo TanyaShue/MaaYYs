@@ -9,6 +9,9 @@ from maa.custom_action import CustomAction
 
 from maa.agent.agent_server import AgentServer
 
+from custom_dir import print_to_ui
+
+
 @AgentServer.custom_action("SwitchSoul")
 class SwitchSoul(CustomAction):
     def __init__(self):
@@ -38,6 +41,7 @@ class SwitchSoul(CustomAction):
                 return False
 
             print(f"开始执行自定义动作：装备切换御魂 - 分组：{group_name}，队伍：{team_name}")
+            print_to_ui(context,f"开始执行自定义动作：装备切换御魂 - 分组：{group_name}，队伍：{team_name}")
         except (json.JSONDecodeError, KeyError) as e:
             print(f"参数解析错误: {str(e)}")
             return False
