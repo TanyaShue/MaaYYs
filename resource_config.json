@@ -107,7 +107,8 @@
       "task_name": "日常奖励领取",
       "task_entry": "日常_任务列表",
       "option": [
-        "日常奖励设置"
+        "日常奖励设置",
+        "每日执行一次奖励领取"
       ]
     },
     {
@@ -386,7 +387,7 @@
     {
       "name": "是否启动自动轮换",
       "type": "boole",
-      "default": false,
+      "default": true,
       "doc": "是否在悬赏封印时启用自动轮换队员功能，启动前需确保已在游戏中设置好轮换式神",
       "pipeline_override": {
         "探索_悬赏_自动轮换": {
@@ -1099,6 +1100,19 @@
         "9996": {
           "custom_action_param": {
             "expected_number": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "每日执行一次奖励领取",
+      "type": "boole",
+      "default": true,
+      "doc": "每天仅执行一次部分奖励,如签到,送友情点,商店每日黑碎,每日免费一抽",
+      "pipeline_override": {
+        "日常_任务列表": {
+          "custom_action_param": {
+            "enable_once_a_day": "{boole}"
           }
         }
       }
