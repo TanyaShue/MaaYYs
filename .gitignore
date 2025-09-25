@@ -463,3 +463,5 @@ tools/ImageCropper/**/*.png
 /.idea/
 /runtime/
 /assets/date.json
+/assets/daily_tasks_record.json
+/config/
