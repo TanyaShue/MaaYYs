@@ -553,6 +553,9 @@
     },
     "组队副本14": {
         "action": "Custom",
+        "next": [
+            "组队副本16"
+        ],
         "custom_action": "TaskList",
         "custom_action_param": {
             "task_list": {
@@ -573,5 +576,43 @@
             39
         ],
         "expected": "你还需要(?:(\\d+)小时)?(?:(\\d+)分钟)?才可以再次进入"
+    },
+    "组队副本15": {
+        "action": "Custom",
+        "next": [
+            "组队副本17"
+        ],
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "gold_100%": false,
+            "gold_50%": false,
+            "exp_100%": false,
+            "exp_50%": false
+        }
+    },
+    "组队副本16": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [
+            "组队副本15"
+        ],
+        "roi": [
+            267,
+            0,
+            263,
+            137
+        ],
+        "template": [
+            "组队副本\\组队副本3.png"
+        ]
+    },
+    "组队副本17": {
+        "action": "Click",
+        "target": [
+            117,
+            216,
+            90,
+            263
+        ]
     }
 }
