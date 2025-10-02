@@ -16,5 +16,6 @@ __all__ = [
     "switch_soul",
     "task_list",
     "team_builder",
-    "random_task"
+    "random_task",
+    "guess"
 ]

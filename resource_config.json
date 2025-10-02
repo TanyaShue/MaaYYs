@@ -39,6 +39,12 @@
       ]
     },
     {
+      "task_name": "自动竞猜",
+      "task_entry": "竞猜",
+      "option": [
+      ]
+    },
+    {
       "task_name": "寮三十捐材料",
       "task_entry": "寮3058",
       "option": [
