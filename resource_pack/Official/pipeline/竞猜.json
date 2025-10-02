@@ -1,0 +1,186 @@
+{
+    "竞猜": {
+        "next": [
+            "竞猜1"
+        ]
+    },
+    "竞猜1": {
+        "interrupt": [
+            "竞猜3",
+            "竞猜4"
+        ],
+        "next": [
+            "竞猜2"
+        ]
+    },
+    "竞猜2": {
+        "recognition": "OCR",
+        "next": [
+            "竞猜5",
+            "竞猜6"
+        ],
+        "roi": [
+            489,
+            0,
+            274,
+            62
+        ],
+        "expected": "对弈竞猜"
+    },
+    "竞猜3": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            1151,
+            118,
+            114,
+            433
+        ],
+        "template": [
+            "竞猜\\竞猜3.png"
+        ]
+    },
+    "竞猜4": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            1151,
+            117,
+            102,
+            443
+        ],
+        "template": [
+            "竞猜\\竞猜4.png"
+        ]
+    },
+    "识别左侧人数": {
+        "recognition": "OCR",
+        "roi": [
+            102,
+            472,
+            182,
+            67
+        ],
+        "expected": "^\\d+$"
+    },
+    "识别右侧人数": {
+        "recognition": "OCR",
+        "roi": [
+            1077,
+            489,
+            169,
+            51
+        ],
+        "expected": "^\\d+$"
+    },
+    "竞猜5": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "竞猜6"
+        ],
+        "roi": [
+            647,
+            503,
+            107,
+            91
+        ],
+        "expected": "下一局"
+    },
+    "竞猜6": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "roi": [
+            552,
+            485,
+            161,
+            79
+        ],
+        "expected": "剩余时间",
+        "custom_action": "Guess"
+    },
+    "竞猜7_左边": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "竞猜7"
+        ],
+        "roi": [
+            84,
+            274,
+            184,
+            160
+        ],
+        "expected": "竞猜"
+    },
+    "竞猜7": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "竞猜8"
+        ],
+        "roi": [
+            218,
+            577,
+            788,
+            64
+        ],
+        "expected": "30万"
+    },
+    "竞猜8": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "竞猜9"
+        ],
+        "roi": [
+            956,
+            385,
+            216,
+            158
+        ],
+        "expected": "竞猜"
+    },
+    "竞猜9": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "竞猜10"
+        ],
+        "roi": [
+            675,
+            399,
+            172,
+            66
+        ],
+        "expected": "确定"
+    },
+    "竞猜10_右边": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "竞猜7"
+        ],
+        "roi": [
+            1004,
+            290,
+            184,
+            190
+        ],
+        "expected": "竞猜"
+    },
+    "竞猜10": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            30,
+            246,
+            1185,
+            254
+        ],
+        "expected": "已竞猜"
+    },
+    "竞猜11": {}
+}
