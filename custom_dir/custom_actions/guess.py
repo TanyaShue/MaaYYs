@@ -6,7 +6,7 @@ from maa.context import Context
 from maa.custom_action import CustomAction
 from maa.agent.agent_server import AgentServer
 
-from assets.resource.MaaYYs.custom_dir import print_to_ui
+from custom_dir import print_to_ui
 
 
 @AgentServer.custom_action("Guess")
