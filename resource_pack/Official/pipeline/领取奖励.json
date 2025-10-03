@@ -390,10 +390,12 @@
     "领取奖励_花合战_点击任务": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
-        "on_error": "返回庭院",
-        "next": [
+        "interrupt": [
             "领取奖励_花合战_全部领取"
+        ],
+        "timeout": 1000,
+        "next": [
+            "返回庭院"
         ],
         "post_delay": 1000,
         "roi": [
@@ -410,7 +412,6 @@
     "领取奖励_花合战_全部领取": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "next": "返回庭院",
         "post_delay": 1000,
         "roi": [
             828,
