@@ -13,7 +13,7 @@
                 "领取奖励_花合战奖励": true,
                 "日常_每日免费一抽": true
             },
-          "enable_once_a_day": true
+            "enable_once_a_day": true
         }
     },
     "日常_送友情点": {
@@ -187,17 +187,23 @@
     "日常_每日免费一抽_点击免费一抽": {
         "recognition": "OCR",
         "action": "Click",
-        "timeout": 5000,
-        "on_error": "返回庭院",
+        "interrupt": [
+            "日常1"
+        ],
+        "timeout": 3000,
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
-            "日常_每日免费一抽_点击单抽"
+            "日常_每日免费一抽_点击单抽",
+            "日常_每日免费一抽_点击单抽_小樱"
         ],
         "post_delay": 1000,
         "roi": [
-            569,
-            680,
-            64,
-            34
+            441,
+            671,
+            536,
+            48
         ],
         "expected": "免费",
         "target": [
@@ -211,18 +217,20 @@
         "recognition": "OCR",
         "action": "Click",
         "timeout": 5000,
-        "on_error": "返回庭院",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "日常_每免费一抽_画符"
         ],
         "post_delay": 1000,
         "roi": [
-            544,
-            629,
-            107,
-            64
+            317,
+            546,
+            299,
+            173
         ],
-        "expected": "免费",
+        "expected": "(免费|单抽)",
         "target": [
             399,
             589,
@@ -284,5 +292,32 @@
             328
         ],
         "expected": "召唤"
+    },
+    "日常_每日免费一抽_点击单抽_小樱": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "日常_每免费一抽_画符"
+        ],
+        "roi": [
+            347,
+            526,
+            217,
+            171
+        ],
+        "template": [
+            "日常\\日常_每日免费一抽_点击单抽_小樱.png"
+        ]
+    },
+    "日常1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            998,
+            18,
+            281,
+            144
+        ],
+        "expected": "跳过"
     }
 }
