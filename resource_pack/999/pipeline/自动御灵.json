@@ -52,7 +52,13 @@
             "long_wait_min": 60,
             "long_wait_max": 100,
             "double_click_prob": 0.45,
-            "single_click_prob": 0.5
+            "single_click_prob": 0.5,
+            "roi": [
+                279,
+                624,
+                569,
+                92
+            ]
         }
     },
     "自动御灵1": {
@@ -208,7 +214,7 @@
         "recognition": "OCR",
         "action": "Click",
         "next": [
-            "自动御灵"
+            "自动御灵9"
         ],
         "roi": [
             133,
@@ -233,5 +239,45 @@
             84
         ],
         "duration": 1000
+    },
+    "自动御灵9": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "自动御灵10"
+        ],
+        "roi": [
+            804,
+            613,
+            267,
+            106
+        ],
+        "template": [
+            "自动御灵\\自动御灵9.png"
+        ]
+    },
+    "自动御灵10": {
+        "action": "Custom",
+        "next": [
+            "自动御灵11"
+        ],
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {"group_name": "默认分组", "team_name": "默认队伍"}
+    },
+    "自动御灵11": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "自动御灵"
+        ],
+        "roi": [
+            0,
+            1,
+            148,
+            61
+        ],
+        "template": [
+            "自动御灵\\自动御灵11.png"
+        ]
     }
 }
