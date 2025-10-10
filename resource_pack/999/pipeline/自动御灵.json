@@ -39,10 +39,10 @@
         ],
         "expected": "点击屏幕继续",
         "target": [
-            334,
-            519,
-            272,
-            164
+            279,
+            624,
+            569,
+            92
         ],
         "custom_action": "HumanTouch",
         "custom_action_param": {
@@ -262,7 +262,10 @@
             "自动御灵11"
         ],
         "custom_action": "SwitchSoul",
-        "custom_action_param": {"group_name": "默认分组", "team_name": "默认队伍"}
+        "custom_action_param": {
+            "group_name": "默认分组",
+            "team_name": "默认队伍"
+        }
     },
     "自动御灵11": {
         "recognition": "TemplateMatch",
