@@ -175,9 +175,10 @@
       "option": [
         "御灵分组预设",
         "御灵队伍预设",
-        "御灵_双击概率",
-        "御灵_单击概率",
-        "御灵_长时间等待概率",
+        "御灵_双击权重",
+        "御灵_单击权重",
+        "御灵_短等待权重",
+        "御灵_长时间等待权重",
         "御灵_短等待最小值",
         "御灵_短等待最大值",
         "御灵_长等待最小值",
@@ -1184,40 +1185,53 @@
       }
     },
     {
-      "name": "御灵_双击概率",
+      "name": "御灵_双击权重",
       "type": "input",
-      "default": "0.45",
-      "doc": "执行双击动作的概率，范围0~1",
+      "default": "50",
+      "doc": "执行双击动作的权重。权重越高，被选中的可能性越大。",
       "pipeline_override": {
         "御灵_点击屏幕继续": {
           "custom_action_param": {
-            "double_click_prob": "{value}"
+            "double_click_weight": "{value}"
           }
         }
       }
     },
     {
-      "name": "御灵_单击概率",
+      "name": "御灵_单击权重",
       "type": "input",
-      "default": "0.5",
-      "doc": "执行单击动作的概率，范围0~1",
+      "default": "50",
+      "doc": "执行单击动作的权重。权重越高，被选中的可能性越大。",
       "pipeline_override": {
         "御灵_点击屏幕继续": {
           "custom_action_param": {
-            "single_click_prob": "{value}"
+            "single_click_weight": "{value}"
           }
         }
       }
     },
     {
-      "name": "御灵_长时间等待概率",
+      "name": "御灵_短等待权重",
       "type": "input",
-      "default": "0.05",
-      "doc": "执行长时间等待动作的概率，范围0~1",
+      "default": "95",
+      "doc": "执行短时间等待的权重。权重越高，被选中的可能性越大。",
       "pipeline_override": {
         "御灵_点击屏幕继续": {
           "custom_action_param": {
-            "long_wait_prob": "{value}"
+            "short_wait_weight": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "御灵_长时间等待权重",
+      "type": "input",
+      "default": "5",
+      "doc": "执行长时间等待的权重。权重越高，被选中的可能性越大。",
+      "pipeline_override": {
+        "御灵_点击屏幕继续": {
+          "custom_action_param": {
+            "long_wait_weight": "{value}"
           }
         }
       }

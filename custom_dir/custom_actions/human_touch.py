@@ -24,7 +24,7 @@ class HumanTouch(CustomAction):
                 try:
                     # 尝试解析JSON字符串
                     decoded_params = json.loads(argv.custom_action_param)
-                    # 确保解析结果是一个字典，防止传入 "null" 或其他非字典的JSON
+                    # 确保解析结果是一个字典
                     if isinstance(decoded_params, dict):
                         params = decoded_params
                     else:
@@ -32,12 +32,13 @@ class HumanTouch(CustomAction):
                 except json.JSONDecodeError:
                     print(f"警告: 解析JSON参数失败。将使用默认值。收到的参数: {argv.custom_action_param}")
 
-            # --- 新增：解析ROI参数 ---
+            # --- 解析ROI参数 ---
             # 设置默认点击区域
             x_min, y_min, x_max, y_max = 400, 520, 800, 600
-
-            roi = params.get("roi")
+            print(argv.custom_action_param)
+            roi = params.get("ROI_1")
             # 检查传入的roi是否为包含4个数字的列表
+            print(roi)
             if isinstance(roi, list) and len(roi) == 4 and all(isinstance(n, (int, float)) for n in roi):
                 # [x, y, w, h] -> 计算出点击范围的左上角和右下角坐标
                 x_min = int(roi[0])
@@ -53,76 +54,77 @@ class HumanTouch(CustomAction):
                 # 如果没有传入roi
                 print(f"未传入ROI参数，使用默认点击区域: x范围({x_min}, {x_max}), y范围({y_min}, {y_max})")
 
-            # 解析其他参数，如果键不存在，.get() 会返回指定的默认值
+            # --- 新增：安全检查，防止min > max的情况 ---
+            if x_min > x_max:
+                print(f"警告: 检测到 x_min > x_max。已自动交换值为: x范围({x_max}, {x_min})")
+                x_min, x_max = x_max, x_min
+            if y_min > y_max:
+                print(f"警告: 检测到 y_min > y_max。已自动交换值为: y范围({y_max}, {y_min})")
+                y_min, y_max = y_max, y_min
+
+            # --- 等待和点击权重解析 ---
+            # 等待时间参数
             short_wait_min = float(params.get("short_wait_min", 1))
             short_wait_max = float(params.get("short_wait_max", 20))
-            long_wait_prob = float(params.get("long_wait_prob", 0.05))
             long_wait_min = float(params.get("long_wait_min", 100))
             long_wait_max = float(params.get("long_wait_max", 200))
-            double_click_prob = float(params.get("double_click_prob", 0.45))
-            single_click_prob = float(params.get("single_click_prob", 0.50))
 
-            # 检查概率总和是否 <= 1
-            if double_click_prob + single_click_prob + long_wait_prob > 1:
-                raise ValueError("double_click_prob + single_click_prob + long_wait_prob 必须 <= 1")
+            # 用于等待时间决策的权重
+            short_wait_weight = float(params.get("short_wait_weight", 95))
+            long_wait_weight = float(params.get("long_wait_weight", 5))
 
-            # 随机等待
-            random_time = round(random.uniform(short_wait_min, short_wait_max), 2)
-            print(f"开始等待: 随机等待时间为：{random_time}秒")
-            context.run_task("随机等待", {"随机等待": {"focus": {"start": f"即将开始等待: {random_time} 秒"}}})
-            sleep(random_time)
-            print("随机等待结束，开始随机点击")
+            # 用于点击类型决策的权重
+            single_click_weight = float(params.get("single_click_weight", 50))
+            double_click_weight = float(params.get("double_click_weight", 50))
 
-            # 决定点击类型
-            rand_num = random.random()
-            print(f"随机数为：{rand_num}")
+            # --- 独立的加权随机决策 - 等待时间 ---
+            total_wait_weight = short_wait_weight + long_wait_weight
+            wait_rand_num = random.uniform(0, total_wait_weight)
 
-            if rand_num < double_click_prob:
-                # 随机双击
-                x = random.randint(x_min, x_max)
-                y = random.randint(y_min, y_max)
-                context.tasker.controller.post_click(x, y).wait()
-                sleep(random.uniform(0.5, 1.5))
-                context.tasker.controller.post_click(x, y).wait()
-                print(f"双击位置: ({x}, {y})")
-
-            elif rand_num < double_click_prob + single_click_prob:
-                # 随机两次单击
-                for _ in range(2):
-                    sleep(random.uniform(0.5, 1.5))
-                    x = random.randint(x_min, x_max)
-                    y = random.randint(y_min, y_max)
-                    context.tasker.controller.post_click(x, y).wait()
-                    print(f"单击位置: ({x}, {y})")
-
-            elif rand_num < double_click_prob + single_click_prob + long_wait_prob:
+            if wait_rand_num < long_wait_weight:
                 # 长时间等待
-                print("长时间等待开始")
-                t = round(random.uniform(long_wait_min, long_wait_max), 2)
-                context.run_task("随机等待", {"随机等待": {"focus": {"start": f"即将开始较长等待: {t} 秒"}}})
-                sleep(t)
-                context.run_task("随机等待", {"随机等待": {"focus": {"start": "长时间等待结束"}}})
-                print("长时间等待结束，开始随机点击")
-                x = random.randint(x_min, x_max)
-                y = random.randint(y_min, y_max)
-                context.tasker.controller.post_click(x, y).wait()
-                sleep(random.uniform(1, 3))
-                context.tasker.controller.post_click(x, y).wait()
-                print(f"长时间等待后双击位置: ({x}, {y})")
-
+                wait_time = round(random.uniform(long_wait_min, long_wait_max), 2)
+                print(f"开始长等待: {wait_time}秒")
+                context.run_task("随机等待", {"随机等待": {"focus": {"start": f"即将开始较长等待: {wait_time} 秒"}}})
+                sleep(wait_time)
+                print("长等待结束。")
             else:
-                # 默认短等待后单击
-                x = random.randint(x_min, x_max)
-                y = random.randint(y_min, y_max)
-                context.tasker.controller.post_click(x, y).wait()
-                print(f"默认单击位置: ({x}, {y})")
+                # 短时间等待
+                wait_time = round(random.uniform(short_wait_min, short_wait_max), 2)
+                print(f"开始短等待: {wait_time}秒")
+                context.run_task("随机等待", {"随机等待": {"focus": {"start": f"即将开始等待: {wait_time} 秒"}}})
+                sleep(wait_time)
+                print("短等待结束。")
 
-            # 计数
+            # --- 独立的加权随机决策 - 点击类型 ---
+            total_click_weight = single_click_weight + double_click_weight
+            click_rand_num = random.uniform(0, total_click_weight)
+
+            print("等待结束，开始随机点击。")
+            # 此处的 x_min, x_max, y_min, y_max 经过了安全检查，保证是有效范围
+            x = random.randint(x_min, x_max)
+            y = random.randint(y_min, y_max)
+
+            if click_rand_num < double_click_weight:
+                # 双击
+                print(f"执行双击，位置: ({x}, {y})")
+                context.tasker.controller.post_click(x, y).wait()
+                # 模拟真实双击的短暂延迟
+                sleep(random.uniform(0.1, 0.4))
+                context.tasker.controller.post_click(x, y).wait()
+            else:
+                # 单击
+                print(f"执行单击，位置: ({x}, {y})")
+                context.tasker.controller.post_click(x, y).wait()
+
+            # --- 计数 ---
             HumanTouch.count += 1
             if HumanTouch.count % 10 == 0:
                 context.run_task("随机等待", {"随机等待": {"focus": {"start": f"已经执行了 {HumanTouch.count} 次"}}})
                 print(f"HumanTouch 已执行 {HumanTouch.count} 次")
-            print("任务结束")
+
+            print("任务结束。")
+
         except Exception as e:
             # 捕获其他任何意外错误
             print(f"执行动作时出错: {e}")
