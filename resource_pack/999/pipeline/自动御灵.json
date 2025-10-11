@@ -38,12 +38,6 @@
             130
         ],
         "expected": "点击屏幕继续",
-        "target": [
-            279,
-            624,
-            569,
-            92
-        ],
         "custom_action": "HumanTouch",
         "custom_action_param": {
             "short_wait_min": 1,
@@ -53,7 +47,7 @@
             "long_wait_max": 100,
             "double_click_prob": 0.45,
             "single_click_prob": 0.5,
-            "roi": [
+            "ROI_1": [
                 279,
                 624,
                 569,
