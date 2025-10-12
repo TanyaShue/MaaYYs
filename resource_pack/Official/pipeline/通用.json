@@ -410,7 +410,8 @@
         "action": "Click",
         "timeout": 2000,
         "next": [
-            "通用_装备御魂_点击确定"
+            "通用_装备御魂_点击确定",
+            "通用3"
         ],
         "post_delay": 100,
         "template": [
@@ -424,6 +425,9 @@
         "recognition": "OCR",
         "action": "Click",
         "timeout": 2000,
+        "next": [
+            "通用3"
+        ],
         "pre_delay": 1000,
         "roi": [
             400,
@@ -479,5 +483,17 @@
             43,
             51
         ]
+    },
+    "通用3": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 2000,
+        "roi": [
+            400,
+            350,
+            475,
+            175
+        ],
+        "expected": "确定"
     }
 }
