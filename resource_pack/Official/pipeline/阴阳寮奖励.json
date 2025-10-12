@@ -749,7 +749,9 @@
     },
     "阴阳寮奖励12": {
         "recognition": "OCR",
-        "action": "Click",
+        "next": [
+            "阴阳寮奖励15"
+        ],
         "roi": [
             140,
             78,
@@ -789,6 +791,19 @@
             525,
             316,
             126
+        ]
+    },
+    "阴阳寮奖励15": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            0,
+            0,
+            129,
+            114
+        ],
+        "template": [
+            "阴阳寮奖励\\阴阳寮奖励15.png"
         ]
     }
 }
