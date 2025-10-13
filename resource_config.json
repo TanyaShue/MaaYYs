@@ -74,6 +74,14 @@
       ]
     },
     {
+      "task_name": "自动麒麟",
+      "task_entry": "麒麟",
+      "option": [
+        "麒麟分组预设",
+        "麒麟队伍预设"
+      ]
+    },
+    {
       "task_name": "组队寮30(自动同心队拉队友)",
       "task_entry": "寮30",
       "option": [
@@ -596,6 +604,32 @@
       "type": "input",
       "default": "默认队伍",
       "doc": "填写自动御灵队伍需要使用的队伍名称",
+      "pipeline_override": {
+        "自动御灵10": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "麒麟分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "doc": "填写狩猎站攻打麒麟时需要使用的分组名称",
+      "pipeline_override": {
+        "自动御灵10": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "麒麟队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "doc": "填写狩猎站攻打麒麟时队伍需要使用的队伍名称",
       "pipeline_override": {
         "自动御灵10": {
           "custom_action_param": {
