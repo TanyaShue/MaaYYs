@@ -85,7 +85,12 @@
         "action": "Custom",
         "next": [
             "麒麟7"
-        ]
+        ],
+      "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "麒麟_默认分组",
+            "team_name": "麒麟_默认队伍"
+        }
     },
     "麒麟7": {
         "recognition": "TemplateMatch",
@@ -150,7 +155,10 @@
             126,
             100
         ],
-        "expected": "狩猎成功"
+        "expected": "狩猎成功",
+        "focus": {
+          "succeeded": "狩猎完成,返回庭院"
+        }
     },
     "麒麟11": {
         "recognition": "OCR",
