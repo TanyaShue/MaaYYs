@@ -114,7 +114,8 @@
             "group_name": "地鬼",
             "team_name": "地域鬼王",
             "count": 1,
-            "daily_once": true
+            "daily_once": true,
+            "lock_squad": true
         }
     },
     "自动地鬼1": {
@@ -157,6 +158,34 @@
             652,
             28,
             34
+        ]
+    },
+    "自动地鬼3_点击锁定": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "timeout": 1000,
+        "roi": [
+            1108,
+            651,
+            44,
+            52
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼3_点击锁定.png"
+        ]
+    },
+    "自动地鬼3_解锁阵容": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "timeout": 1000,
+        "roi": [
+            1093,
+            646,
+            63,
+            54
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼3_解锁阵容.png"
         ]
     }
 }

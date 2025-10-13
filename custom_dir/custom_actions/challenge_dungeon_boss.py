@@ -28,6 +28,7 @@ class ChallengeDungeonBoss(CustomAction):
 
         # 新增逻辑：检查是否需要每日只执行一次
         daily_once = json_data.get("daily_once", False)
+        lock_squad = json_data.get("lock_squad", True)
         task_name = "ChallengeDungeonBoss"  # 定义当前任务的唯一名称
 
         if daily_once:
@@ -62,16 +63,22 @@ class ChallengeDungeonBoss(CustomAction):
             # 选择挑战等级
             # TODO
 
+            if lock_squad:
+                context.run_task("自动地鬼3_点击锁定")
+            else:
+                context.run_task("自动地鬼3_解锁阵容")
+
             print("点击挑战")
 
             # 点击挑战
             context.run_task("挑战地鬼", {
                 "挑战地鬼": {"post_delay": 2000, "action": "Click", "target": [1109, 493, 102, 63]}})
             time.sleep(5)
-            context.run_task("自动挑战", {
-                "自动挑战": {"timeout": 100, "action": "Custom", "custom_action": "AutoBattle",
-                             "custom_action_param": {"group_name": json_data["group_name"],
-                                                     "team_name": json_data["team_name"]}}})
+            if not lock_squad:
+                context.run_task("自动挑战", {
+                    "自动挑战": {"timeout": 100, "action": "Custom", "custom_action": "AutoBattle",
+                                 "custom_action_param": {"group_name": json_data["group_name"],
+                                                         "team_name": json_data["team_name"]}}})
 
             time.sleep(20)
             print("等待识别分享按钮")
