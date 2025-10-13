@@ -58,7 +58,8 @@
         "地鬼挑战次数",
         "地鬼分组预设",
         "地鬼队伍预设",
-        "每日仅执行一次"
+        "每日仅执行一次",
+        "地鬼_锁定阵容"
       ]
     },
     {
@@ -623,6 +624,19 @@
         "开始自动挑战鬼王": {
           "custom_action_param": {
             "daily_once": "{boole}"
+          }
+        }
+      }
+    },
+    {
+      "name": "地鬼_锁定阵容",
+      "type": "boole",
+      "default": true,
+      "doc": "在启用状态下,会自动锁定阵容",
+      "pipeline_override": {
+        "开始自动挑战鬼王": {
+          "custom_action_param": {
+            "lock_squad": "{boole}"
           }
         }
       }
