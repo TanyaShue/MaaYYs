@@ -1,0 +1,169 @@
+{
+    "麒麟": {
+        "interrupt": [
+            "打开底部菜单"
+        ],
+        "next": [
+            "麒麟1"
+        ]
+    },
+    "麒麟1": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "麒麟2"
+        ],
+        "roi": [
+            428,
+            577,
+            335,
+            116
+        ],
+        "template": [
+            "麒麟\\麒麟1.png"
+        ]
+    },
+    "麒麟2": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "麒麟3"
+        ],
+        "roi": [
+            1006,
+            570,
+            273,
+            149
+        ],
+        "template": [
+            "麒麟\\麒麟2.png"
+        ]
+    },
+    "麒麟3": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "麒麟4"
+        ],
+        "roi": [
+            1163,
+            102,
+            84,
+            501
+        ],
+        "expected": "神社"
+    },
+    "麒麟4": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "麒麟11"
+        ],
+        "roi": [
+            92,
+            102,
+            1052,
+            509
+        ],
+        "expected": "狩猎战"
+    },
+    "麒麟5": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "麒麟6"
+        ],
+        "roi": [
+            781,
+            595,
+            325,
+            115
+        ],
+        "expected": "式神录"
+    },
+    "麒麟6": {
+        "action": "Custom",
+        "next": [
+            "麒麟7"
+        ]
+    },
+    "麒麟7": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "麒麟8"
+        ],
+        "roi": [
+            0,
+            0,
+            183,
+            115
+        ],
+        "template": [
+            "麒麟\\麒麟7.png"
+        ]
+    },
+    "麒麟8": {
+        "recognition": "OCR",
+        "action": "Click",
+        "rate_limit": 3000,
+        "timeout": 400000,
+        "next": [
+            "麒麟9"
+        ],
+        "roi": [
+            1103,
+            553,
+            158,
+            144
+        ],
+        "expected": "挑战"
+    },
+    "麒麟9": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "麒麟10"
+        ],
+        "roi": [
+            302,
+            292,
+            736,
+            90
+        ],
+        "expected": "本次伤害",
+        "target": [
+            322,
+            623,
+            481,
+            96
+        ]
+    },
+    "麒麟10": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            754,
+            495,
+            126,
+            100
+        ],
+        "expected": "狩猎成功"
+    },
+    "麒麟11": {
+        "recognition": "OCR",
+        "next": [
+            "麒麟10",
+            "麒麟5"
+        ],
+        "roi": [
+            22,
+            0,
+            254,
+            82
+        ],
+        "expected": "狩猎战"
+    }
+}
