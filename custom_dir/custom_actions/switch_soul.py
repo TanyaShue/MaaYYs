@@ -119,9 +119,9 @@ class SwitchSoul(CustomAction):
                 "action": "Custom",
                 "custom_action": "RandomSwipe",
                 "custom_action_param": {
-                    "end_roi": [1085, 442, 152, 60],
-                    "start_roi": [1085, 161, 162, 58],
-                    "delay": 1000
+                    "start_roi": [1127,94,82,28],
+                    "end_roi": [1115,571,100,40],
+                    "delay": 500
                 }
             }
         })
@@ -136,7 +136,7 @@ class SwitchSoul(CustomAction):
             print(f"查找分组 - 第{attempt}次尝试")
 
             # 原始识别区域
-            base_roi = [1085, 86, 162, 542]
+            base_roi = [1099, 82, 140, 545]
 
             # 第一次直接识别
             img = context.tasker.controller.post_screencap().wait().get()
@@ -187,7 +187,6 @@ class SwitchSoul(CustomAction):
                     print(f"精细识别第{i + 1}段成功找到并点击分组: {group_name}")
                     return True
 
-                print("分块识别也未找到分组")
 
             # 未找到分组，尝试滑动到下一页
             if attempt % 3 == 0:  # 每3次尝试，返回顶部重新开始
@@ -197,13 +196,14 @@ class SwitchSoul(CustomAction):
                         "action": "Custom",
                         "custom_action": "RandomSwipe",
                         "custom_action_param": {
-                            "end_roi": [1085, 442, 152, 60],
-                            "start_roi": [1085, 161, 162, 58],
-                            "delay": 1000
+                            "start_roi": [1127,94,82,28],
+                            "end_roi": [1115,571,100,40],
+                            "delay": 500
                         }
                     }
                 })
             else:
+
                 # 向下滑动
                 print("向下滑动继续查找")
                 context.run_task("下一页", {
@@ -212,8 +212,8 @@ class SwitchSoul(CustomAction):
                         "post_delay": 1000,  # 减少延迟时间
                         "custom_action": "RandomSwipe",
                         "custom_action_param": {
-                            "start_roi": [1085, 442, 152, 60],
-                            "end_roi": [1085, 161, 162, 58],
+                            "start_roi": [1115,571,100,40],
+                            "end_roi": [1127,94,82,28],
                             "delay": 1000
                         }
                     }
