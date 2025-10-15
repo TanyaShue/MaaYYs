@@ -86,7 +86,7 @@
         "next": [
             "麒麟7"
         ],
-      "custom_action": "SwitchSoul",
+        "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "麒麟_默认分组",
             "team_name": "麒麟_默认队伍"
@@ -111,10 +111,14 @@
     "麒麟8": {
         "recognition": "OCR",
         "action": "Click",
+        "interrupt": [
+            "麒麟13"
+        ],
         "rate_limit": 3000,
         "timeout": 400000,
         "next": [
-            "麒麟9"
+            "麒麟9",
+            "麒麟14"
         ],
         "roi": [
             1103,
@@ -149,22 +153,20 @@
         "next": [
             "返回庭院"
         ],
+        "focus": true,
         "roi": [
-            754,
-            495,
-            126,
-            100
+            41,
+            357,
+            207,
+            56
         ],
-        "expected": "狩猎成功",
-        "focus": {
-          "succeeded": "狩猎完成,返回庭院"
-        }
+        "expected": "^\\d{2,}$"
     },
     "麒麟11": {
         "recognition": "OCR",
         "next": [
             "麒麟10",
-            "麒麟5"
+            "麒麟12"
         ],
         "roi": [
             22,
@@ -173,5 +175,43 @@
             82
         ],
         "expected": "狩猎战"
+    },
+    "麒麟12": {
+        "recognition": "OCR",
+        "next": [
+            "麒麟5"
+        ],
+        "roi": [
+            37,
+            362,
+            247,
+            53
+        ],
+        "expected": "大人未挑战"
+    },
+    "麒麟13": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1108,
+            518,
+            139,
+            176
+        ],
+        "expected": "准备"
+    },
+    "麒麟14": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "麒麟10"
+        ],
+        "roi": [
+            347,
+            591,
+            501,
+            128
+        ],
+        "expected": "点击屏幕继续"
     }
 }
