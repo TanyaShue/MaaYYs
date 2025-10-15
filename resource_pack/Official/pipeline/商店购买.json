@@ -1,3 +1,54 @@
 {
-    "商店购买_寮商店兑换_1": {}
+    "商店购买_寮商店兑换_1": {
+        "interrupt": [
+            "打开底部菜单"
+        ],
+        "next": [
+            "商店购买"
+        ]
+    },
+    "商店购买": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "商店购买1"
+        ],
+        "template": [
+            "商店购买\\商店购买.png"
+        ]
+    },
+    "商店购买1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "商店购买2"
+        ],
+        "roi": [
+            776,
+            631,
+            196,
+            88
+        ],
+        "expected": "杂货铺"
+    },
+    "商店购买2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1044,
+            84,
+            234,
+            531
+        ],
+        "expected": "勋章"
+    },
+    "商店购买3": {
+        "recognition": "OCR",
+        "roi": [
+            138,
+            96,
+            888,
+            485
+        ]
+    }
 }
