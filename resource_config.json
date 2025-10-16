@@ -193,6 +193,14 @@
         "御灵_长等待最小值",
         "御灵_长等待最大值"
       ]
+    },
+    {
+      "task_name": "自动道馆突破",
+      "task_entry": "自动道馆",
+      "option": [
+        "道馆分组预设",
+        "道馆队伍预设"
+      ]
     }
   ],
   "options": [
@@ -518,6 +526,32 @@
       "doc": "填写结界突破需要使用的队伍预设名称",
       "pipeline_override": {
         "装备突破预设": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "道馆分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "doc": "填写结界突破需要使用的分组预设名称",
+      "pipeline_override": {
+        "自动道馆10": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "道馆队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "doc": "填写结界突破需要使用的队伍预设名称",
+      "pipeline_override": {
+        "自动道馆10": {
           "custom_action_param": {
             "team_name": "{value}"
           }
