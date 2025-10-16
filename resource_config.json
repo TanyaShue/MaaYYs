@@ -618,7 +618,7 @@
       "default": "默认分组",
       "doc": "填写狩猎站攻打麒麟时需要使用的分组名称",
       "pipeline_override": {
-        "自动御灵10": {
+        "麒麟6": {
           "custom_action_param": {
             "group_name": "{value}"
           }
@@ -631,7 +631,7 @@
       "default": "默认队伍",
       "doc": "填写狩猎站攻打麒麟时队伍需要使用的队伍名称",
       "pipeline_override": {
-        "自动御灵10": {
+        "麒麟6": {
           "custom_action_param": {
             "team_name": "{value}"
           }
