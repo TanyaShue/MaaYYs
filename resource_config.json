@@ -970,8 +970,7 @@
         "组队副本14": {
           "custom_action_param": {
             "task_list": {
-              "组队副本_经验副本": "{boole}",
-              "组队副本_金币副本": "{boole}"
+              "组队副本_经验副本": "{boole}"
             }
           }
         }
