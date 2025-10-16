@@ -13,6 +13,7 @@ class AutoFoster(CustomAction):
     自动寄养脚本：
     根据用户偏好（勾玉或体力），遍历好友和跨区好友列表，
     找到收益最高的寄养位置并进行选择。
+    如果最佳奖励在选择阶段消失，会自动尝试次佳奖励。
     """
     # --- 常量定义 ---
     # MAA 任务名称 (请确保与你的 MAA 配置一致)
@@ -122,39 +123,33 @@ class AutoFoster(CustomAction):
 
         return all_tab_rewards
 
-    def _find_best_reward(self, all_rewards: list[dict], prioritized_type: str) -> dict | None:
-        """根据优先级查找最佳奖励"""
+    def _get_sorted_rewards(self, all_rewards: list[dict], prioritized_type: str) -> list[dict]:
+        """对收集到的所有奖励进行去重和排序"""
         if not all_rewards:
-            return None
+            return []
 
-        # 按优先级筛选
-        priority_rewards = [r for r in all_rewards if r["yield_type"] == prioritized_type]
+        # 将 dict 转换为可哈希的元组以进行去重
+        rewards_as_tuples = {tuple(sorted(r.items())) for r in all_rewards}
+        unique_rewards = [dict(t) for t in rewards_as_tuples]
 
-        best_reward = None
-        if priority_rewards:
-            # 在优先类型中找最大值
-            best_value = max(r["yield_value"] for r in priority_rewards)
-            best_reward = next((r for r in priority_rewards if r["yield_value"] == best_value), None)
-            print(f"最佳优先奖励 ({prioritized_type}): 价值 {best_value}")
-        else:
-            # 如果没有优先类型的奖励，则在所有奖励中找最大值
-            if all_rewards: # 确保列表不为空
-                best_value = max(r["yield_value"] for r in all_rewards)
-                best_reward = next((r for r in all_rewards if r["yield_value"] == best_value), None)
-                if best_reward:
-                    print(f"未找到优先类型奖励。最佳全局奖励 ({best_reward['yield_type']}): 价值 {best_value}")
-            else:
-                 print("奖励列表为空，无法确定最佳奖励。")
-
-
-        return best_reward
+        # 排序逻辑:
+        # 1. 奖励类型是否为优先类型 (True > False)
+        # 2. 奖励的数值
+        # reverse=True 表示降序排列，即最优的在前
+        sorted_unique_rewards = sorted(
+            unique_rewards,
+            key=lambda r: (r["yield_type"] == prioritized_type, r["yield_value"]),
+            reverse=True
+        )
+        print(f"排序后的奖励列表: {sorted_unique_rewards}")
+        return sorted_unique_rewards
 
     def _find_and_select_best_on_tab(self, context: Context, best_reward: dict) -> bool:
         """在当前标签页查找并选择第一个匹配最佳奖励的目标"""
         page_count = 0
         while True:
             page_count += 1
-            print(f"在当前标签页第 {page_count} 页搜索最佳奖励...")
+            print(f"在当前标签页第 {page_count} 页搜索奖励 [{best_reward['yield_type']} +{best_reward['yield_value']}]...")
             img = context.tasker.controller.post_screencap().wait().get()
             targets_recog = context.run_recognition(self.TASK_RECOG_TARGET, img)
 
@@ -167,8 +162,7 @@ class AutoFoster(CustomAction):
                     reward_type, reward_value = self._click_target_and_get_reward(context, target)
 
                     if reward_type == best_reward["yield_type"] and reward_value == best_reward["yield_value"]:
-                        print(f"找到并选择了最佳奖励: {reward_type} +{reward_value}")
-
+                        print(f"找到并选择了匹配的奖励: {reward_type} +{reward_value}")
                         return True # 成功找到并选择
 
             # 如果当前页（非第一页）没找到目标，认为结束
@@ -182,10 +176,10 @@ class AutoFoster(CustomAction):
 
             # 添加一个基础的页数限制 (可选)
             if page_count > 10:
-                print("警告：搜索时已扫描超过50页，停止搜索此标签页。")
+                print("警告：搜索时已扫描超过10页，停止搜索此标签页。")
                 break
 
-        print("在此标签页未找到最佳奖励。")
+        print(f"在此标签页未找到奖励 [{best_reward['yield_type']} +{best_reward['yield_value']}]。")
         return False # 在此标签页未找到
 
     # --- 主执行逻辑 ---
@@ -193,6 +187,7 @@ class AutoFoster(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         """
         主执行函数：先收集所有奖励，找到最佳，再回去查找并选择。
+        如果最佳奖励找不到，则依次尝试次佳奖励。
         """
         print("开始执行自动寄养脚本。")
         try:
@@ -226,41 +221,44 @@ class AutoFoster(CustomAction):
         print(f"从跨区好友标签页收集到 {len(cross_rewards)} 个奖励信息。")
 
         print(f"总共收集到 {len(all_rewards)} 个奖励信息。")
-        # print(f"所有收集到的奖励: {all_rewards}") # 按需取消注释
 
         if not all_rewards:
             print("未在任何标签页找到可寄养的奖励。脚本结束。")
-            return False # 返回 False 表示未执行选择操作
+            return False
 
-        # 找出最佳奖励
-        best_reward = self._find_best_reward(all_rewards, prioritized_type)
+        # --- 阶段 2: 依次查找并选择最佳奖励 ---
+        sorted_rewards = self._get_sorted_rewards(all_rewards, prioritized_type)
 
-        if not best_reward:
-             print("虽然收集到了奖励信息，但未能确定最佳奖励。脚本结束。")
-             return False
+        if not sorted_rewards:
+            print("未能确定任何有效奖励。脚本结束。")
+            return False
 
-        print(f"计算出的最佳奖励为: {best_reward['yield_type']} +{best_reward['yield_value']}")
+        # 从最佳奖励开始，遍历所有可能性
+        for reward_to_find in sorted_rewards:
+            print("-" * 25)
+            print(f"==> 开始查找下一个最佳奖励: {reward_to_find['yield_type']} +{reward_to_find['yield_value']} <==")
 
-        # --- 阶段 2: 查找并选择最佳奖励 ---
-        # 首先在好友标签页查找
-        print("切换回好友标签页进行查找和选择...")
-        context.run_task(self.TASK_CLICK_FRIEND_TAB)
-        time.sleep(self.WAIT_SHORT)
-        if self._find_and_select_best_on_tab(context, best_reward):
-            print("已成功在好友标签页找到并选择最佳奖励。")
-            return True # 成功找到并选择
+            # 首先在好友标签页查找
+            print("切换回好友标签页进行查找...")
+            context.run_task(self.TASK_CLICK_FRIEND_TAB)
+            time.sleep(self.WAIT_SHORT)
+            if self._find_and_select_best_on_tab(context, reward_to_find):
+                print(f"已成功在好友标签页选择奖励。脚本执行成功。")
+                return True
 
-        # 如果好友页没找到，则去跨区好友页查找
-        print("切换到跨区好友标签页进行查找和选择...")
-        context.run_task(self.TASK_CLICK_CROSS_TAB)
-        time.sleep(self.WAIT_SHORT)
-        if self._find_and_select_best_on_tab(context, best_reward):
-            print("已成功在跨区好友标签页找到并选择最佳奖励。")
-            return True # 成功找到并选择
+            # 如果好友页没找到，则去跨区好友页查找
+            print("切换到跨区好友标签页进行查找...")
+            context.run_task(self.TASK_CLICK_CROSS_TAB)
+            time.sleep(self.WAIT_SHORT)
+            if self._find_and_select_best_on_tab(context, reward_to_find):
+                print(f"已成功在跨区好友标签页选择奖励。脚本执行成功。")
+                return True
 
-        # 如果两个标签页都没找到（可能因为列表刷新等原因）
-        print("警告：在第二阶段未能重新找到之前计算出的最佳奖励。")
-        return False # 返回 False 表示找到了最佳值但未能成功点击
+            print(f"未能找到奖励: {reward_to_find['yield_type']} +{reward_to_find['yield_value']}。将尝试列表中的下一个。")
+
+        # 如果循环完成，说明所有之前找到的奖励都无法再次定位
+        print("警告：在第二阶段未能重新找到任何之前收集到的奖励。可能列表已完全刷新。")
+        return False
 
     def stop(self):
         """停止执行（占位）"""
