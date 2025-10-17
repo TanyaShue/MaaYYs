@@ -877,7 +877,11 @@
     "寮3040": {
         "recognition": "OCR",
         "interrupt": [
-            "寮3048"
+            "寮3048",
+            "寮3059"
+        ],
+        "on_error": [
+            "返回庭院"
         ],
         "next": [
             "寮3056",
@@ -900,6 +904,8 @@
         "next": [
             "寮3051"
         ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             228,
             467,
@@ -956,13 +962,15 @@
         "next": [
             "寮3052"
         ],
+        "pre_delay": 2000,
+        "post_delay": 2000,
         "roi": [
             534,
             54,
             206,
             47
         ],
-        "expected": "将提交30次任务"
+        "expected": "将提交(1\\d|2\\d)次任务"
     },
     "寮3052": {
         "recognition": "OCR",
@@ -974,6 +982,8 @@
         "next": [
             "寮3055"
         ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             567,
             590,
@@ -988,6 +998,8 @@
         "next": [
             "寮3053_copy1"
         ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             432,
             175,
@@ -1005,6 +1017,8 @@
     "寮3053_copy1": {
         "recognition": "OCR",
         "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             432,
             175,
@@ -1037,6 +1051,8 @@
         "next": [
             "返回庭院"
         ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "roi": [
             1171,
             116,
@@ -1076,6 +1092,19 @@
         ],
         "next": [
             "寮301"
+        ]
+    },
+    "寮3059": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            176,
+            448,
+            356,
+            116
+        ],
+        "template": [
+            "寮30\\寮3059.png"
         ]
     }
 }
