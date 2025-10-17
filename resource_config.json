@@ -209,6 +209,14 @@
         "寮突分组预设",
         "寮突队伍预设"
       ]
+    },
+    {
+      "task_name": "自动阴界之门",
+      "task_entry": "阴间之门",
+      "option": [
+        "阴界之门分组预设",
+        "阴界之门队伍预设"
+      ]
     }
   ],
   "options": [
@@ -700,6 +708,32 @@
       "doc": "填写狩猎站攻打麒麟时队伍需要使用的队伍名称",
       "pipeline_override": {
         "麒麟6": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "阴界之门分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "doc": "填写阴界之门使用的分组名称",
+      "pipeline_override": {
+        "阴间之门11": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "阴界之门队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "doc": "填写阴界之门需要使用的队伍名称",
+      "pipeline_override": {
+        "阴间之门11": {
           "custom_action_param": {
             "team_name": "{value}"
           }
