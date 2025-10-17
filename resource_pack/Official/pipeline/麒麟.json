@@ -42,6 +42,10 @@
     "麒麟3": {
         "recognition": "OCR",
         "action": "Click",
+        "timeout": 4000,
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "麒麟4"
         ],
