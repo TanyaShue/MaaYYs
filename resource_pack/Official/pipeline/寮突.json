@@ -1,0 +1,642 @@
+{
+    "寮突": {
+        "interrupt": [
+            "点击探索"
+        ],
+        "next": [
+            "寮突1"
+        ]
+    },
+    "寮突1": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突3"
+        ],
+        "next": [
+            "寮突2"
+        ],
+        "roi": [
+            58,
+            659,
+            469,
+            49
+        ],
+        "expected": "结界突破"
+    },
+    "寮突2": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突5"
+        ],
+        "next": [
+            "寮突4"
+        ],
+        "roi": [
+            510,
+            41,
+            235,
+            84
+        ],
+        "expected": "结界突破"
+    },
+    "寮突3": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            58,
+            659,
+            469,
+            49
+        ],
+        "expected": "结界突破"
+    },
+    "寮突4": {
+        "recognition": "OCR",
+        "interrupt": [],
+        "next": [
+            "寮突20",
+            "寮突6",
+            "寮突12"
+        ],
+        "roi": [
+            127,
+            293,
+            235,
+            63
+        ],
+        "expected": "突破进度"
+    },
+    "寮突5": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1176,
+            237,
+            87,
+            304
+        ],
+        "expected": "阴|阳寮|阴阳寮"
+    },
+    "寮突6": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突23"
+        ],
+        "next": [
+            "寮突24"
+        ],
+        "roi": [
+            262,
+            547,
+            66,
+            54
+        ],
+        "expected": "0/6"
+    },
+    "寮突7": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "寮突8",
+            "寮突10"
+        ],
+        "rate_limit": 2000,
+        "timeout": 2000000,
+        "next": [
+            "寮突25",
+            "寮突9"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            375,
+            102,
+            722,
+            617
+        ],
+        "expected": "进攻"
+    },
+    "寮突8": {
+        "recognition": "OCR",
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            300,
+            36,
+            732,
+            300
+        ],
+        "expected": "失败"
+    },
+    "寮突9": {
+        "recognition": "OCR",
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            146,
+            549,
+            132,
+            52
+        ],
+        "expected": "击败次数"
+    },
+    "寮突10": {
+        "recognition": "OCR",
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            314,
+            621,
+            603,
+            98
+        ],
+        "expected": "点击屏幕继续"
+    },
+    "寮突11": {
+        "recognition": "OCR",
+        "next": [
+            "寮突18_从上往下打"
+        ],
+        "roi": [
+            262,
+            547,
+            66,
+            54
+        ],
+        "expected": "1/6|2/6|3/6|4/6|5/6|6/6"
+    },
+    "寮突12": {
+        "recognition": "TemplateMatch",
+        "interrupt": [
+            "寮突23"
+        ],
+        "next": [
+            "寮突24"
+        ],
+        "roi": [
+            419,
+            138,
+            334,
+            141
+        ],
+        "template": [
+            "寮突\\寮突12.png"
+        ]
+    },
+    "寮突13": {
+        "next": [
+            "寮突14"
+        ]
+    },
+    "寮突14": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突16"
+        ],
+        "next": [
+            "寮突15"
+        ],
+        "roi": [
+            148,
+            551,
+            112,
+            48
+        ],
+        "expected": "击败次数"
+    },
+    "寮突15": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            403,
+            413,
+            689,
+            240
+        ],
+        "template": [
+            "寮突\\寮突12.png"
+        ]
+    },
+    "寮突16": {
+        "action": "Swipe",
+        "begin": [
+            600,
+            420,
+            240,
+            100
+        ],
+        "end": [
+            600,
+            260,
+            240,
+            100
+        ],
+        "duration": 500
+    },
+    "寮突18_从上往下打": {
+        "interrupt": [
+            "寮突18_第一个待选目标",
+            "寮突18_第二个待选目标",
+            "寮突18_第三个待选目标",
+            "寮突18_第四个待选目标",
+            "寮突16_copy1"
+        ],
+        "rate_limit": 3000,
+        "timeout": 5000,
+        "next": [
+            "寮突6",
+            "寮突12"
+        ],
+        "pre_delay": 2000,
+        "post_delay": 1000
+    },
+    "寮突18_第一个待选目标": {
+        "recognition": "TemplateMatch",
+        "next": [
+            "寮突17_copy1"
+        ],
+        "inverse": true,
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            615,
+            106,
+            146,
+            166
+        ],
+        "template": [
+            "寮突\\寮突18_第一个待选目标.png",
+            "寮突\\寮突18_第一个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标.png",
+            "寮突\\寮突18_第三个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标_2.png"
+        ]
+    },
+    "寮突18_第二个待选目标": {
+        "recognition": "TemplateMatch",
+        "next": [
+            "寮突17_copy2"
+        ],
+        "inverse": true,
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            936,
+            92,
+            152,
+            182
+        ],
+        "template": [
+            "寮突\\寮突18_第一个待选目标.png",
+            "寮突\\寮突18_第一个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标.png",
+            "寮突\\寮突18_第三个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标_2.png"
+        ]
+    },
+    "寮突18_第三个待选目标": {
+        "recognition": "TemplateMatch",
+        "next": [
+            "寮突17"
+        ],
+        "inverse": true,
+        "pre_delay": 1000,
+        "roi": [
+            617,
+            240,
+            132,
+            152
+        ],
+        "template": [
+            "寮突\\寮突18_第一个待选目标.png",
+            "寮突\\寮突18_第一个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标.png",
+            "寮突\\寮突18_第三个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标_2.png"
+        ]
+    },
+    "寮突18_第四个待选目标": {
+        "recognition": "TemplateMatch",
+        "next": [
+            "寮突17_copy3"
+        ],
+        "inverse": true,
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            952,
+            240,
+            160,
+            182
+        ],
+        "template": [
+            "寮突\\寮突18_第一个待选目标.png",
+            "寮突\\寮突18_第一个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标.png",
+            "寮突\\寮突18_第三个待选目标_1.png",
+            "寮突\\寮突18_第三个待选目标_2.png"
+        ]
+    },
+    "寮突16_copy1": {
+        "action": "Swipe",
+        "post_delay": 1000,
+        "begin": [
+            600,
+            420,
+            240,
+            100
+        ],
+        "end": [
+            600,
+            260,
+            240,
+            100
+        ],
+        "duration": 1000
+    },
+    "寮突17": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "寮突7"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            617,
+            240,
+            132,
+            152
+        ],
+        "template": [
+            "寮突\\寮突17.png",
+            "寮突\\寮突17_1.png"
+        ]
+    },
+    "寮突17_copy1": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "寮突7"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            615,
+            106,
+            146,
+            166
+        ],
+        "template": [
+            "寮突\\寮突17.png",
+            "寮突\\寮突17_1.png"
+        ]
+    },
+    "寮突17_copy2": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "寮突7"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            936,
+            92,
+            152,
+            182
+        ],
+        "template": [
+            "寮突\\寮突17.png",
+            "寮突\\寮突17_1.png"
+        ]
+    },
+    "寮突17_copy3": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "寮突7"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            952,
+            240,
+            160,
+            182
+        ],
+        "template": [
+            "寮突\\寮突17.png",
+            "寮突\\寮突17_1.png"
+        ]
+    },
+    "寮突18": {
+        "recognition": "OCR",
+        "action": "Click",
+        "pre_delay": 2000,
+        "post_delay": 2000,
+        "roi": [
+            1173,
+            605,
+            106,
+            92
+        ],
+        "expected": "式神录"
+    },
+    "寮突19": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "interrupt": [
+            "寮突22"
+        ],
+        "rate_limit": 2000,
+        "next": [
+            "寮突21"
+        ],
+        "pre_delay": 2000,
+        "post_delay": 2000,
+        "roi": [
+            0,
+            2,
+            232,
+            66
+        ],
+        "expected": "式神录",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "默认寮突分组",
+            "team_name": "默认寮突队伍"
+        }
+    },
+    "寮突20": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突18"
+        ],
+        "rate_limit": 3000,
+        "next": [
+            "寮突19"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 2000,
+        "roi": [
+            262,
+            547,
+            66,
+            54
+        ],
+        "expected": "1/6|2/6|3/6|4/6|5/6|6/6"
+    },
+    "寮突21": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突11"
+        ],
+        "next": [
+            "寮突12",
+            "寮突6"
+        ],
+        "pre_delay": 2000,
+        "post_delay": 2000,
+        "roi": [
+            134,
+            537,
+            138,
+            66
+        ],
+        "expected": "击败次数"
+    },
+    "寮突22": {
+        "action": "Click",
+        "pre_delay": 2000,
+        "post_delay": 2000,
+        "target": [
+            16,
+            10,
+            58,
+            58
+        ]
+    },
+    "寮突23": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "template": [
+            "寮突\\寮突23.png"
+        ]
+    },
+    "寮突24": {
+        "recognition": "OCR",
+        "next": [
+            "返回庭院"
+        ],
+        "roi": [
+            144,
+            649,
+            573,
+            68
+        ],
+        "expected": "御魂|结界突破|御灵"
+    },
+    "寮突25": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突26"
+        ],
+        "next": [
+            "寮突27"
+        ],
+        "roi": [
+            423,
+            128,
+            443,
+            128
+        ],
+        "expected": "该结界已被攻破"
+    },
+    "寮突26": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "template": [
+            "寮突\\寮突26.png"
+        ]
+    },
+    "寮突27": {
+        "recognition": "OCR",
+        "next": [
+            "寮突1_copy1"
+        ],
+        "roi": [
+            144,
+            649,
+            573,
+            68
+        ],
+        "expected": "御魂|结界突破|御灵"
+    },
+    "寮突28": {},
+    "寮突4_copy1": {
+        "recognition": "OCR",
+        "roi": [
+            127,
+            293,
+            235,
+            63
+        ],
+        "expected": "突破进度"
+    },
+    "寮突3_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            58,
+            659,
+            469,
+            49
+        ],
+        "expected": "结界突破"
+    },
+    "寮突5_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1176,
+            237,
+            87,
+            304
+        ],
+        "expected": "阴|阳寮|阴阳寮"
+    },
+    "寮突2_copy1": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突5_copy1"
+        ],
+        "next": [
+            "寮突4_copy1"
+        ],
+        "roi": [
+            510,
+            41,
+            235,
+            84
+        ],
+        "expected": "结界突破"
+    },
+    "寮突1_copy1": {
+        "recognition": "OCR",
+        "interrupt": [
+            "寮突3_copy1"
+        ],
+        "next": [
+            "寮突2_copy1"
+        ],
+        "roi": [
+            58,
+            659,
+            469,
+            49
+        ],
+        "expected": "结界突破"
+    }
+}
