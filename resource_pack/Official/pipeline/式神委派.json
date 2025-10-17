@@ -106,12 +106,23 @@
     "式神委派7": {
         "recognition": "OCR",
         "action": "Custom",
+        "next": [
+            "返回庭院"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "custom_action": "CustomAppointment",
         "custom_action_param": {
-            "以鱼为礼": true,
+            "樱饼配方": false,
             "奇怪的痕迹": false,
-            "寻找耳环": true,
-            "捡到的宝石": true
+            "接送弥助": false,
+            "伊吹的藤球": false,
+            "捡到的宝石": false,
+            "以鱼为礼": false,
+            "帮忙搬运": false,
+            "猫老大": false,
+            "寻找耳环": false,
+            "弥助的画": false
         }
     },
     "识别当前存在任务列表": {
@@ -236,6 +247,9 @@
     },
     "式神委派16": {
         "recognition": "OCR",
+        "next": [
+            "式神委派7"
+        ],
         "inverse": true,
         "roi": [
             963,
