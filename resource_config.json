@@ -217,6 +217,15 @@
         "阴界之门分组预设",
         "阴界之门队伍预设"
       ]
+    },
+    {
+      "task_name": "自动委派",
+      "task_entry": "式神委派",
+      "option": [
+        "300体任务",
+        "200体任务",
+        "100体及以下任务"
+      ]
     }
   ],
   "options": [
@@ -1449,6 +1458,166 @@
           }
         }
       }
+    },
+    {
+      "name": "300体任务",
+      "type": "settings_group",
+      "default": true,
+      "doc": "设置组队金币副本的相关参数，包括预设和加成",
+      "pipeline_override": {},
+      "description": "委派300体任务设置",
+      "settings": [
+        {
+          "name": "弥助的画",
+          "type": "boole",
+          "default": true,
+          "doc": "是否委派 弥助的画 任务",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "弥助的画": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "寻找耳环",
+          "type": "boole",
+          "default": true,
+          "doc": "是否委派 寻找耳环 任务",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "寻找耳环": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "猫老大",
+          "type": "boole",
+          "default": true,
+          "doc": "是否委派 猫老大 任务",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "猫老大": "{boole}"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "200体任务",
+      "type": "settings_group",
+      "default": true,
+      "doc": "设置组队金币副本的相关参数，包括预设和加成",
+      "pipeline_override": {},
+      "description": "委派200体任务设置",
+      "settings": [
+        {
+          "name": "捡到的宝石",
+          "type": "boole",
+          "default": false,
+          "doc": "是否委派 捡到的宝石 任务",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "捡到的宝石": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "以鱼为礼",
+          "type": "boole",
+          "default": false,
+          "doc": "是否委派 以鱼为礼 任务",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "以鱼为礼": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "帮忙搬运",
+          "type": "boole",
+          "default": false,
+          "doc": "是否委派 帮忙搬运 任务",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "帮忙搬运": "{boole}"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "100体及以下任务",
+      "type": "settings_group",
+      "default": true,
+      "doc": "设置组队金币副本的相关参数，包括预设和加成",
+      "pipeline_override": {},
+      "description": "委派100体及以下任务设置",
+      "settings": [
+        {
+          "name": "樱饼配方",
+          "type": "boole",
+          "default": false,
+          "doc": "是否委派 樱饼配方 任务（50体）",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "樱饼配方": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "奇怪的痕迹",
+          "type": "boole",
+          "default": false,
+          "doc": "是否委派 奇怪的痕迹 任务（100体）",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "奇怪的痕迹": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "接送弥助",
+          "type": "boole",
+          "default": false,
+          "doc": "是否委派 接送弥助 任务（100体）",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "接送弥助": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "伊吹的藤球",
+          "type": "boole",
+          "default": false,
+          "doc": "是否委派 伊吹的藤球 任务（100体）",
+          "pipeline_override": {
+            "式神委派7": {
+              "custom_action_param": {
+                "伊吹的藤球": "{boole}"
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }

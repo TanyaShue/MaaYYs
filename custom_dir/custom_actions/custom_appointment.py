@@ -9,10 +9,16 @@ from maa.custom_action import CustomAction
 @AgentServer.custom_action("CustomAppointment")
 class CustomAppointment(CustomAction):
     Default = {
-        "以鱼为礼": False,
-        "奇怪的痕跡": False,
-        "捡到的宝石": False,
-        "樱饼配方": False,
+        "樱饼配方": False,#50体
+        "奇怪的痕迹": False,#100体
+        "接送弥助": False,#100体
+        "伊吹的藤球": False,#100体
+        "捡到的宝石": False,#200体
+        "以鱼为礼": False,#200体
+        "帮忙搬运": False,#200体
+        "猫老大": False,#300体
+        "寻找耳环": False,#300体
+        "弥助的画": False, #300体
     }
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> Union[CustomAction.RunResult, bool]:
