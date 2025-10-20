@@ -390,12 +390,12 @@
     "领取奖励_花合战_点击任务": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "领取奖励_花合战_全部领取"
-        ],
         "timeout": 1000,
-        "next": [
+        "on_error": [
             "返回庭院"
+        ],
+        "next": [
+            "领取奖励_花合战_全部领取"
         ],
         "post_delay": 1000,
         "roi": [
@@ -412,6 +412,9 @@
     "领取奖励_花合战_全部领取": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "next": [
+            "返回庭院"
+        ],
         "post_delay": 1000,
         "roi": [
             828,
@@ -490,6 +493,9 @@
         "interrupt": [
             "领取奖励6"
         ],
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "领取奖励4"
         ],
@@ -505,6 +511,9 @@
     },
     "领取奖励4": {
         "recognition": "OCR",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "领取奖励5",
             "领取奖励8"
@@ -519,6 +528,10 @@
     },
     "领取奖励5": {
         "recognition": "OCR",
+        "timeout": 2000,
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "领取奖励7"
         ],
@@ -558,6 +571,10 @@
     "领取奖励7": {
         "recognition": "OCR",
         "action": "Click",
+        "timeout": 2000,
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "领取奖励_签到_点击签到"
         ],
