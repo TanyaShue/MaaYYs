@@ -1,0 +1,8 @@
+{
+  "Screenshot": {
+    "action": "Custom",
+    "custom_action": "ReStart",
+    "custom_action_param": {
+    }
+  }
+}
