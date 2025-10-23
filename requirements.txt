@@ -6,3 +6,4 @@ qasync
 cryptography
 semver
 pandas
+Pillow
