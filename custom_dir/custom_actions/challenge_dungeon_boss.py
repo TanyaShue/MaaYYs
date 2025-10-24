@@ -62,18 +62,14 @@ class ChallengeDungeonBoss(CustomAction):
 
             # 选择挑战等级
             # TODO
-
-            if lock_squad:
-                context.run_task("自动地鬼3_锁定阵容")
-
             print("点击挑战")
 
             # 开始挑战
             if lock_squad:
-                context.run_task("自动地鬼3_开始挑战",{"自动地鬼12_装备预设": {"enabled": False}})
+                context.run_task("自动地鬼3",{"自动地鬼12_装备预设": {"enabled": False}})
 
             else:
-                context.run_task("自动地鬼3_开始挑战", {"自动地鬼12": {
+                context.run_task("自动地鬼3", {"自动地鬼12": {
                     "custom_action_param": {"group_name": json_data["group_name"],
                                             "team_name": json_data["team_name"]}},
                                                         "自动地鬼12_装备预设": {"enabled": True}})
