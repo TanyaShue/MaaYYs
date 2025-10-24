@@ -465,3 +465,4 @@ tools/ImageCropper/**/*.png
 /assets/date.json
 /assets/daily_tasks_record.json
 /config/
+/screencap.png

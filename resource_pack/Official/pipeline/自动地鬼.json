@@ -11,6 +11,17 @@
             "自动地鬼2"
         ]
     },
+    "挑战地鬼": {
+        "interrupt": [
+            "自动地鬼4"
+        ],
+        "timeout": 200000,
+        "next": [
+            "自动地鬼5",
+            "自动地鬼6"
+        ],
+        "post_delay": 2000
+    },
     "点击地域鬼王": {
         "recognition": "TemplateMatch",
         "action": "Click",
@@ -176,8 +187,10 @@
     },
     "自动地鬼3_解锁阵容": {
         "recognition": "TemplateMatch",
-        "action": "Click",
         "timeout": 1000,
+        "next": [
+            "挑战地鬼"
+        ],
         "roi": [
             1093,
             646,
@@ -187,5 +200,181 @@
         "template": [
             "自动地鬼\\自动地鬼3_解锁阵容.png"
         ]
-    }
+    },
+    "自动地鬼3_锁定阵容": {
+        "interrupt": [
+            "自动地鬼3_点击锁定"
+        ],
+        "next": [
+            "自动地鬼3_解锁阵容"
+        ]
+    },
+    "自动地鬼3": {
+        "next": [
+            "自动地鬼3_锁定阵容",
+            "挑战地鬼"
+        ]
+    },
+    "自动地鬼4": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "自动地鬼12_装备预设",
+            "自动地鬼15"
+        ],
+        "roi": [
+            1080,
+            518,
+            157,
+            63
+        ],
+        "expected": "挑战"
+    },
+    "自动地鬼5": {
+        "recognition": "OCR",
+        "timeout": 200000,
+        "next": [
+            "自动地鬼6"
+        ],
+        "roi": [
+            18,
+            627,
+            103,
+            78
+        ],
+        "expected": "自动"
+    },
+    "自动地鬼6": {
+        "recognition": "OCR",
+        "interrupt": [
+            "自动地鬼7"
+        ],
+        "next": [
+            "自动地鬼8"
+        ],
+        "roi": [
+            654,
+            93,
+            404,
+            201
+        ],
+        "expected": "胜利|失败"
+    },
+    "自动地鬼7": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            421,
+            656,
+            387,
+            63
+        ],
+        "expected": "点击屏幕继续"
+    },
+    "自动地鬼8": {
+        "recognition": "OCR",
+        "interrupt": [
+            "自动地鬼9"
+        ],
+        "next": [
+            "自动地鬼10",
+            "自动地鬼13",
+            "自动地鬼14"
+        ],
+        "roi": [
+            637,
+            400,
+            541,
+            99
+        ],
+        "expected": "世界|小组|评分"
+    },
+    "自动地鬼9": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            1062,
+            9,
+            208,
+            97
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼9.png"
+        ]
+    },
+    "自动地鬼10": {
+        "recognition": "OCR",
+        "roi": [
+            7,
+            340,
+            178,
+            379
+        ],
+        "expected": "今日挑战|地域最强"
+    },
+    "自动地鬼11": {
+        "recognition": "OCR",
+        "roi": [
+            1127,
+            483,
+            152,
+            236
+        ],
+        "expected": "式神录|阴阳术"
+    },
+    "自动地鬼12_装备预设": {
+        "recognition": "OCR",
+        "next": [
+            "自动地鬼12"
+        ],
+        "enabled": false,
+        "roi": [
+            26,
+            631,
+            63,
+            75
+        ],
+        "expected": "预设"
+    },
+    "自动地鬼12": {
+        "recognition": "OCR",
+        "action": "Custom",
+        "roi": [
+            26,
+            631,
+            63,
+            75
+        ],
+        "expected": "预设",
+        "custom_action": "AutoBattle",
+        "custom_action_param": {
+            "group_name": "默认分组",
+            "team_name": "默认队伍"
+        }
+    },
+    "自动地鬼13": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            323,
+            0,
+            539,
+            129
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼13.png"
+        ]
+    },
+    "自动地鬼14": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            0,
+            201,
+            131
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼14.png"
+        ]
+    },
+    "自动地鬼15": {}
 }
