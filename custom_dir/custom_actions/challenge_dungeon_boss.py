@@ -62,34 +62,17 @@ class ChallengeDungeonBoss(CustomAction):
 
             # 选择挑战等级
             # TODO
-
-            if lock_squad:
-                context.run_task("自动地鬼3_点击锁定")
-            else:
-                context.run_task("自动地鬼3_解锁阵容")
-
             print("点击挑战")
 
-            # 点击挑战
-            context.run_task("挑战地鬼", {
-                "挑战地鬼": {"post_delay": 2000, "action": "Click", "target": [1109, 493, 102, 63]}})
-            time.sleep(5)
-            if not lock_squad:
-                context.run_task("自动挑战", {
-                    "自动挑战": {"timeout": 100, "action": "Custom", "custom_action": "AutoBattle",
-                                 "custom_action_param": {"group_name": json_data["group_name"],
-                                                         "team_name": json_data["team_name"]}}})
+            # 开始挑战
+            if lock_squad:
+                context.run_task("自动地鬼3",{"自动地鬼12_装备预设": {"enabled": False}})
 
-            time.sleep(20)
-            print("等待识别分享按钮")
-
-            context.run_task("结束战斗",
-                             {"结束战斗": {"next": ["点击叉叉"], "interrupt": "点击屏幕继续", "timeout": 300000, },
-                              "点击屏幕继续": {
-                                  "roi": [481, 641, 380, 78], "recognition": "OCR", "expected": "点击屏幕继续",
-                                  "action": "Click", "target": [275, 488, 652, 112]},
-                              "点击叉叉": {"recognition": "TemplateMatch", "template": "通用图标/地鬼_关闭.png",
-                                           "action": "Click"}})
+            else:
+                context.run_task("自动地鬼3", {"自动地鬼12": {
+                    "custom_action_param": {"group_name": json_data["group_name"],
+                                            "team_name": json_data["team_name"]}},
+                                                        "自动地鬼12_装备预设": {"enabled": True}})
 
         print("自动地鬼挑战完成")
 

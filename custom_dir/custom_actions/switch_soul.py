@@ -45,22 +45,21 @@ class SwitchSoul(CustomAction):
         except (json.JSONDecodeError, KeyError) as e:
             print(f"参数解析错误: {str(e)}")
             return False
-        result = context.run_task("识别是否位于预设界面", {
-            "识别是否位于预设界面":{
-                "timeout": 1000,
-                "recognition": "OCR",
-                "expected": "管理分组",
-                "roi": [1128,637,116,52],
-            }
-        })
-        # 检查点击结果
-        if not result.nodes:
-            print("不处于预设选中状态")
+        # result = context.run_task("识别是否位于预设界面", {
+        #     "识别是否位于预设界面":{
+        #         "timeout": 1000,
+        #         "recognition": "OCR",
+        #         "expected": "管理分组",
+        #         "roi": [1128,637,116,52],
+        #     }
+        # })
+        # if not result.nodes:
+        # print("不处于预设选中状态")
 
-            # 步骤1：点击预设按钮
-            if not self._click_preset(context):
-                print("点击预设按钮失败")
-                return False
+        # 步骤1：点击预设按钮
+        if not self._click_preset(context):
+            print("点击预设按钮失败")
+            return False
 
         # 步骤2：查找并点击指定分组
         if not self._find_and_click_group(context, group_name):
@@ -78,22 +77,7 @@ class SwitchSoul(CustomAction):
     def _click_preset(self, context: Context) -> bool:
         """点击预设按钮"""
         print("尝试点击预设按钮")
-        result = context.run_task("识别预设", {
-            "识别预设": {
-                "timeout": 2000,
-                "recognition": "OCR",
-                "expected": "预设",
-                "roi": [298, 68, 236, 66],
-                "action": "Click",
-                "next":"识别是否位于预设界面"
-            },
-            "识别是否位于预设界面":{
-                "timeout": 2000,
-                "recognition": "OCR",
-                "expected": "管理分组",
-                "roi": [1128,637,116,52],
-            }
-        })
+        result = context.run_task("通用_切换御魂_识别预设")
 
         # 检查点击结果
         if not result.nodes:

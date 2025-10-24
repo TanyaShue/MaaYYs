@@ -56,7 +56,7 @@
         "next": [
             "通用1"
         ],
-        "post_delay": 2000,
+        "post_delay": 1000,
         "roi": [
             0,
             92,
@@ -95,7 +95,7 @@
     "识别蓝色返回": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "post_delay": 2000,
+        "post_delay": 1000,
         "roi": [
             0,
             0,
@@ -110,7 +110,7 @@
     "识别黄色返回": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "post_delay": 2000,
+        "post_delay": 1000,
         "roi": [
             0,
             0,
@@ -131,7 +131,7 @@
     "识别蓝色返回_模板识别": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "post_delay": 2000,
+        "post_delay": 1000,
         "roi": [
             0,
             0,
@@ -146,7 +146,7 @@
     "识别黄色返回_模板识别": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "post_delay": 2000,
+        "post_delay": 1000,
         "roi": [
             0,
             0,
@@ -410,6 +410,7 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "timeout": 2000,
+      "on_error": "跳过",
         "next": [
             "通用_装备御魂_点击确定",
             "通用3"
@@ -421,6 +422,31 @@
             "通用\\装备御魂.png",
             "通用\\装备御魂_1.png"
         ]
+    },
+  "跳过": {},
+    "通用_切换御魂_识别预设": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 2000,
+        "next": [],
+        "roi": [
+            214,
+            58,
+            292,
+            76
+        ],
+        "expected": "预设"
+    },
+    "通用_切换御魂_识别是否位于预设界面": {
+        "recognition": "OCR",
+        "timeout": 2000,
+        "roi": [
+            1128,
+            637,
+            116,
+            52
+        ],
+        "expected": "管理分组"
     },
     "通用_装备御魂_点击确定": {
         "recognition": "OCR",
@@ -496,5 +522,21 @@
             175
         ],
         "expected": "确定"
+    },
+    "通用_切换御魂_开始": {
+        "recognition": "OCR",
+        "interrupt": [
+            "通用_切换御魂_识别预设"
+        ],
+        "next": [
+            "通用_切换御魂_识别是否位于预设界面"
+        ],
+        "roi": [
+            50,
+            0,
+            178,
+            64
+        ],
+        "expected": "式神录"
     }
 }
