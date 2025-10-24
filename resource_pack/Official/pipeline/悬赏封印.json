@@ -12,9 +12,7 @@
     "悬赏封印": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "next": [
-            "悬赏封印_点击叉叉"
-        ],
+        "next": [],
         "post_delay": 2000,
         "roi": [
             4,
