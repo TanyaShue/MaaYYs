@@ -9,6 +9,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "next": [
+            "阴阳寮奖励16",
             "阴阳寮奖励领取_阴阳寮奖励领取"
         ],
         "post_delay": 4000,
@@ -804,6 +805,16 @@
         ],
         "template": [
             "阴阳寮奖励\\阴阳寮奖励15.png"
+        ]
+    },
+    "阴阳寮奖励16": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "阴阳寮奖励领取_阴阳寮奖励领取"
+        ],
+        "template": [
+            "阴阳寮奖励\\阴阳寮奖励16.png"
         ]
     }
 }
