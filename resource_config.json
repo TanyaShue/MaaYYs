@@ -336,6 +336,14 @@
             "package": "com.netease.onmyoji.wyzymnqsd_cps"
           }
         },
+        "华为渠道服": {
+          "启动游戏": {
+            "package": "com.netease.onmyoji.huawei"
+          },
+          "关闭阴阳师": {
+            "package": "com.netease.onmyoji.huawei"
+          }
+        },
         "bilibili官网下载版": {
           "启动游戏": {
             "package": "com.netease.onmyoji.bili/com.netease.onmyoji.tag0"
@@ -365,6 +373,10 @@
         {
           "name": "雷电游戏中心下载版",
           "value": "雷电游戏中心下载版"
+        },
+        {
+          "name": "华为渠道服",
+          "value": "华为渠道服"
         }
       ]
     },
