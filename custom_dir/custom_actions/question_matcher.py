@@ -183,7 +183,7 @@ class QuestionMatcher(CustomAction):
                 response = requests.post(
                     f"{self.api_base_url}/api/upload",
                     files=files,
-                    timeout=30
+                    timeout=5
                 )
 
             if response.status_code == 200:
