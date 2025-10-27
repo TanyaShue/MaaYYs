@@ -2,6 +2,7 @@
     "投喂宠物": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "on_error": "跳过",
         "next": [
             "投喂宠物2",
             "投喂宠物1"
@@ -17,6 +18,7 @@
     "投喂宠物1": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "next": [
             "投喂宠物2"
         ],
@@ -122,6 +124,7 @@
     "投喂宠物6": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "on_error": "跳过",
         "next": [
             "投喂宠物8"
         ],
