@@ -24,7 +24,7 @@ class LoopAction(CustomAction):
         # 获取动作列表和循环次数
         action_list = json_data.get("action_list", [])
         loop_times = json_data.get("loop_times", 1)
-
+        on_error= json_data.get("on_error", None)
         if not action_list or loop_times < 1:
             print("无效的action_list或loop_times")
             return False
@@ -38,7 +38,10 @@ class LoopAction(CustomAction):
                 action_time_name = f"第{i + 1}次{action}任务"
                 print(f"执行动作: {action_time_name}")
 
-                context.run_task(action_time_name, {action_time_name:{"next":action,"timeout":1000}})
+                if on_error is not None:
+                    context.run_task(action_time_name, {action_time_name:{"next":action,"timeout":1000,"on_error":on_error}})
+                else:
+                    context.run_task(action_time_name, {action_time_name:{"next":action,"timeout":1000}})
 
                 time.sleep(0.5)  # 可根据需求设置不同的延迟
 

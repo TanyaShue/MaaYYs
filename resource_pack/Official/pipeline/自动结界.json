@@ -197,6 +197,7 @@
     "挑战第一个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+      "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_点击进攻"
@@ -219,7 +220,8 @@
     "挑战第二个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 2000,
+        "timeout": 2000,      "on_error": "跳过",
+
         "next": [
             "突破_点击进攻"
         ],
@@ -241,6 +243,7 @@
     "挑战第三个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_点击进攻"
@@ -263,6 +266,7 @@
     "挑战第四个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_点击进攻"
@@ -285,6 +289,7 @@
     "挑战第五个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_点击进攻"
@@ -307,6 +312,7 @@
     "挑战第六个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_点击进攻"
@@ -329,6 +335,7 @@
     "挑战第七个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_点击进攻"
@@ -351,6 +358,7 @@
     "挑战第八个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_点击进攻"
@@ -373,6 +381,7 @@
     "挑战第九个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "突破_最后一个进攻"
@@ -395,7 +404,8 @@
     "突破_最后一个进攻": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "timeout": 200000,
+        "on_error": "跳过",
+        "timeout": 400000,
         "next": [
             "突破_重新挑战四次"
         ],
@@ -422,7 +432,8 @@
             "action_list": [
                 "突破_重新挑战"
             ],
-            "loop_times": 6
+            "loop_times": 6,
+            "on_error": "跳过"
         }
     },
     "突破_重新挑战": {

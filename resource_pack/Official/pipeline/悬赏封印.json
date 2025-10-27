@@ -152,6 +152,7 @@
     "悬赏封印_识别宝箱": {
         "recognition": "FeatureMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 1000,
         "next": [
             "悬赏封印_领取宝箱奖励"
@@ -170,6 +171,7 @@
     },
     "悬赏封印_领取宝箱奖励": {
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 1000,
         "next": [
             "悬赏封印_识别宝箱"
@@ -227,6 +229,7 @@
     "悬赏封印_关闭章节界面": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 1000,
         "post_delay": 1000,
         "roi": [
