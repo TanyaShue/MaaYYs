@@ -160,8 +160,7 @@
     },
     "打开底部菜单": {
         "next": [
-            "打开底部菜单_匹配",
-            "点击底部菜单位置"
+            "通用6"
         ]
     },
     "打开底部菜单_匹配": {
@@ -410,7 +409,9 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "timeout": 2000,
-      "on_error": "跳过",
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "通用_装备御魂_点击确定",
             "通用3"
@@ -423,7 +424,7 @@
             "通用\\装备御魂_1.png"
         ]
     },
-  "跳过": {},
+    "跳过": {},
     "通用_切换御魂_识别预设": {
         "recognition": "OCR",
         "action": "Click",
@@ -538,5 +539,32 @@
             64
         ],
         "expected": "式神录"
+    },
+    "通用4": {
+        "recognition": "TemplateMatch",
+        "interrupt": [],
+        "template": [
+            "通用\\通用4.png",
+            "通用\\通用4_1.png"
+        ]
+    },
+    "通用5": {
+        "interrupt": [
+            "打开底部菜单_匹配",
+            "点击底部菜单位置"
+        ],
+        "next": [
+            "通用4"
+        ]
+    },
+    "通用6": {
+        "recognition": "TemplateMatch",
+        "next": [
+            "通用5"
+        ],
+        "template": [
+            "通用\\通用6.png",
+            "通用\\通用6_1.png"
+        ]
     }
 }
