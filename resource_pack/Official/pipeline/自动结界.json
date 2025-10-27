@@ -438,6 +438,7 @@
     },
     "突破_重新挑战": {
         "recognition": "FeatureMatch",
+        "on_error": "跳过",
         "action": "Click",
         "next": [
             "退出战斗_确认"
@@ -456,6 +457,7 @@
     },
     "退出战斗_确认": {
         "recognition": "OCR",
+        "on_error": "跳过",
         "action": "Click",
         "next": [
             "突破_再次挑战"
