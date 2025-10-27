@@ -44,6 +44,7 @@
     },
     "阴阳寮奖励领取_阴阳寮金币领取": {
         "recognition": "FeatureMatch",
+        "on_error": "跳过",
         "action": "Click",
         "timeout": 1000,
         "next": [
@@ -80,6 +81,7 @@
     "阴阳寮奖励领取_阴阳寮体力领取": {
         "recognition": "TemplateMatch",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 1000,
         "next": [
             "阴阳寮奖励领取_体力领取_点击一下屏幕"
@@ -341,16 +343,28 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 1000,
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
         ],
         "post_delay": 1000,
+        "roi": [
+            533,
+            461,
+            250,
+            127
+        ],
         "template": "阴阳寮/阴阳寮_结界_体力_取出.png"
     },
     "阴阳寮奖励领取_结界奖励领取_点击一下屏幕": {
         "action": "Click",
         "interrupt": [
             "阴阳寮奖励领取_结界奖励领取_点击经验酒壶"
+        ],
+        "on_error": [
+            "返回庭院"
         ],
         "next": [
             "阴阳寮奖励18"
@@ -381,6 +395,9 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 3000,
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "阴阳寮奖励领取_结界奖励领取_领取溢出经验",
             "阴阳寮奖励领取_结界奖励领取_关闭食盒界面"
@@ -391,7 +408,9 @@
     "阴阳寮奖励领取_结界奖励领取_领取溢出经验": {
         "recognition": "OCR",
         "action": "Click",
-        "next": "返回庭院",
+        "next": [
+            "返回庭院"
+        ],
         "post_delay": 1000,
         "roi": [
             662,
@@ -662,7 +681,7 @@
         "expected": "^\\d{2}:\\d{2}:\\d{2}$"
     },
     "阴阳寮奖励8": {
-        "recognition": "TemplateMatch",
+        "recognition": "OCR",
         "next": [
             "阴阳寮奖励"
         ],
@@ -671,9 +690,6 @@
             620,
             73,
             66
-        ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励8.png"
         ],
         "expected": "式神育成"
     },
@@ -822,6 +838,9 @@
     },
     "阴阳寮奖励6": {
         "recognition": "OCR",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "阴阳寮奖励领取_结界奖励领取_领取体力_取出",
             "阴阳寮奖励17"
@@ -837,6 +856,9 @@
     "阴阳寮奖励17": {
         "recognition": "OCR",
         "action": "Click",
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
             "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
         ],

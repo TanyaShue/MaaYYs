@@ -449,6 +449,7 @@
     "通用_装备御魂_点击确定": {
         "recognition": "OCR",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "next": [
             "通用3"
@@ -482,6 +483,7 @@
     "通用3": {
         "recognition": "OCR",
         "action": "Click",
+        "on_error": "跳过",
         "timeout": 2000,
         "roi": [
             400,
