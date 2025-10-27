@@ -45,16 +45,6 @@ class SwitchSoul(CustomAction):
         except (json.JSONDecodeError, KeyError) as e:
             print(f"参数解析错误: {str(e)}")
             return False
-        # result = context.run_task("识别是否位于预设界面", {
-        #     "识别是否位于预设界面":{
-        #         "timeout": 1000,
-        #         "recognition": "OCR",
-        #         "expected": "管理分组",
-        #         "roi": [1128,637,116,52],
-        #     }
-        # })
-        # if not result.nodes:
-        # print("不处于预设选中状态")
 
         # 步骤1：点击预设按钮
         if not self._click_preset(context):
