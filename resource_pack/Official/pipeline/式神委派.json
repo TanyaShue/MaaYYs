@@ -76,7 +76,15 @@
         "expected": "完成任务"
     },
     "式神委派4": {
+        "recognition": "OCR",
         "action": "Click",
+        "roi": [
+            306,
+            505,
+            596,
+            188
+        ],
+        "expected": ".*",
         "target": [
             983,
             163,
@@ -85,7 +93,15 @@
         ]
     },
     "式神委派5": {
+        "recognition": "OCR",
         "action": "Click",
+        "roi": [
+            306,
+            505,
+            596,
+            188
+        ],
+        "expected": ".*",
         "target": [
             471,
             602,
