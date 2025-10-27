@@ -494,17 +494,6 @@ jobs:
             
             ${{ steps.changelog.outputs.CHANGELOG }}
             
-            ## 下载说明
-            
-            ### 完整包（包含 MFWPH 和 MaaYYs 资源）
-            - **Windows x64**: `MAA_YYS_FULL_windows-x64.zip`
-            - **macOS Intel**: `MAA_YYS_FULL_macos-x64.tar.gz`
-            - **macOS Apple Silicon**: `MAA_YYS_FULL_macos-arm64.tar.gz`
-            - **Linux x64**: `MAA_YYS_FULL_linux-x64.tar.gz`
-            
-            ### 仅资源包（仅包含 MaaYYs 资源，适用于已有 MFWPH 的用户）
-            - **通用**: `MAA_YYS_RESOURCES_ONLY.zip`
-            
             [已有 Mirror酱 CDK？点击前往高速下载](https://mirrorchyan.com/zh/projects?rid=MaaYYs)
           draft: false
           prerelease: false
