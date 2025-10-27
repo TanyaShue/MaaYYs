@@ -10,29 +10,28 @@ from maa.agent.agent_server import AgentServer
 @AgentServer.custom_action("ReStart")
 class ReStart(CustomAction):
     # 用于记录上一次的任务节点名称
-    the_last_node = None
+    the_last_entry = None
     # 用于记录同一个任务节点连续出现的次数
     node_count = 0
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        # current_node = argv.node_name
-        # current_entry = argv.task_detail.entry
-        # print(f"当前任务入口: {current_entry}")
-        # print(f"当前任务节点: {current_node}")
-        #
+        current_entry = argv.task_detail.entry
+        print(f"当前任务入口: {current_entry}")
+        print("触发time_out")
+
         # # 判断当前任务节点是否与上一个相同
-        # if ReStart.the_last_node == current_node:
+        # if ReStart.current_entry == current_entry:
         #     ReStart.node_count += 1
-        #     print(f"任务节点 '{current_node}' 已连续出现 {ReStart.node_count} 次。")
+        #     print(f"任务节点 '{current_entry}' 已连续出现 {ReStart.node_count} 次。")
         # else:
         #     # 如果是新的任务节点，则更新记录并重置计数器
-        #     ReStart.the_last_node = current_node
+        #     ReStart.current_entry = current_entry
         #     ReStart.node_count = 1
-        #     print(f"任务节点: '{current_node}'，计数重置为 1。")
+        #     print(f"任务节点: '{current_entry}'，计数重置为 1。")
         #
         #
         # if ReStart.node_count <= 3:
-        #     print(f"'{current_node}' 任务出错")
+        #     print(f"'{current_entry}' 任务出错")
         #     context.run_task("返回庭院")
         #     sleep(3)
         #     # context.run_task(f"{current_entry}")
@@ -40,7 +39,7 @@ class ReStart(CustomAction):
         #
         # # 当同一个任务节点连续出现超过3次时，执行重启操作
         # if ReStart.node_count > 3:
-        #     print(f"'{current_node}' 连续出错次数超过3次，开始执行重启...")
+        #     print(f"'{current_entry}' 连续出错次数超过3次，开始执行重启...")
         #
         #     # 截图用于调试分析
         #     try:
@@ -54,7 +53,7 @@ class ReStart(CustomAction):
         #
         #     # 重置计数器，以免重启后立即再次触发
         #     ReStart.node_count = 0
-        #     ReStart.the_last_node = None
+        #     ReStart.the_last_entry = None
         #
         #     # 执行重启流程
         #     context.run_task("关闭阴阳师")
@@ -65,10 +64,10 @@ class ReStart(CustomAction):
         #     print(f"将从任务入口 '{current_entry}' 重新开始执行。")
         #     context.run_task(f"{current_entry}")
         #     return True
-        #
-        # print("计数未超限，本次不执行重启。")
-        # # 如果未超过限制，返回 False 以便 MAA 继续执行后续的常规错误处理逻辑
-        return False
+
+        print("计数未超限，本次不执行重启。")
+        # 如果未超过限制，返回 False 以便 MAA 继续执行后续的常规错误处理逻辑
+        return True
 
     def stop(self) -> None:
         pass
