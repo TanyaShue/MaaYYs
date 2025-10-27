@@ -596,7 +596,7 @@
         "expected": "前往"
     },
     "领取奖励8": {
-        "timeout": "2000",
+        "timeout": 2000,
         "recognition": "OCR",
         "next": [
             "返回庭院"
