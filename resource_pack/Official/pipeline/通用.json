@@ -491,7 +491,7 @@
         ],
         "expected": "确定"
     },
-    "通用_切换御魂_开始": {
+    "通用_切换御魂_开始_1": {
         "recognition": "OCR",
         "interrupt": [
             "通用_切换御魂_识别预设"
@@ -505,7 +505,7 @@
             178,
             64
         ],
-        "expected": "式神录"
+        "expected": "式神录|首页|精灵百科"
     },
     "通用4": {
         "recognition": "TemplateMatch",
@@ -532,6 +532,65 @@
         "template": [
             "通用\\通用6.png",
             "通用\\通用6_1.png"
+        ]
+    },
+    "通用1": {
+        "recognition": "OCR",
+        "next": [
+            "通用2"
+        ],
+        "roi": [
+            212,
+            0,
+            606,
+            70
+        ],
+        "expected": "首页|精灵百科"
+    },
+    "通用2": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "通用_切换御魂_开始_1"
+        ],
+        "template": [
+            "通用\\通用2.png"
+        ]
+    },
+    "通用_切换御魂_开始": {
+        "next": [
+            "通用_切换御魂_开始_1",
+            "通用1",
+            "通用7"
+        ]
+    },
+    "通用7": {
+        "recognition": "OCR",
+        "next": [
+            "通用8"
+        ],
+        "roi": [
+            23,
+            92,
+            60,
+            487
+        ],
+        "expected": "情报|语音|绘卷|插画"
+    },
+    "通用8": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "next": [
+            "通用_切换御魂_开始_1"
+        ],
+        "roi": [
+            5,
+            0,
+            191,
+            106
+        ],
+        "template": [
+            "通用\\通用8.png"
         ]
     }
 }
