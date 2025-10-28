@@ -10,14 +10,70 @@ permissions:
   actions: write
 
 jobs:
+  update-and-commit:
+    name: Update version and commit
+    runs-on: ubuntu-latest
+    # 定义输出，以便其他任务可以使用新commit的SHA
+    outputs:
+      commit_sha: ${{ steps.commit_push.outputs.commit_sha }}
+
+    steps:
+      - name: Checkout MaaYYs repository
+        uses: actions/checkout@v4
+        with:
+          # 使用拥有推送权限的 GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # 检出与标签关联的commit
+          ref: ${{ github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Update resource_version in config file
+        shell: bash
+        run: |
+          currentTag="${{ github.ref_name }}"
+          echo "Updating resource_config.json with version: $currentTag"
+          python3 -c "import json; config_path = 'resource_config.json'; f = open(config_path, 'r+'); config = json.load(f); config['resource_version'] = '$currentTag'; f.seek(0); f.truncate(); json.dump(config, f, indent=2, ensure_ascii=False)"
+          echo "resource_config.json updated successfully:"
+          cat resource_config.json
+
+      - name: Commit and Push changes
+        id: commit_push # 给这一步一个ID，以便引用其输出
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          if ! git diff --quiet resource_config.json; then
+            echo "Changes detected. Committing and pushing..."
+            git add resource_config.json
+            git commit -m "ci: Update resource_version to ${{ github.ref_name }}" -m "[skip ci]"
+            
+            # 推送到仓库的默认分支
+            DEFAULT_BRANCH=${{ github.event.repository.default_branch }}
+            echo "Pushing changes to default branch: $DEFAULT_BRANCH"
+            git push origin HEAD:$DEFAULT_BRANCH
+          else
+            echo "No changes to commit."
+          fi
+
+          # 获取新 commit 的完整 SHA 并设置为输出
+          NEW_COMMIT_SHA=$(git rev-parse HEAD)
+          echo "New commit SHA: $NEW_COMMIT_SHA"
+          echo "commit_sha=${NEW_COMMIT_SHA}" >> $GITHUB_OUTPUT
+
   build:
     name: Build ${{ matrix.os }}
+    needs: update-and-commit # 依赖于上一个任务
     runs-on: ${{ matrix.runner }}
 
     strategy:
       fail-fast: false
       matrix:
         include:
+          # ... (matrix 配置保持不变)
           # Windows x64
           - os: windows-x64
             runner: windows-latest
@@ -46,8 +102,10 @@ jobs:
       - name: Checkout MaaYYs repository
         uses: actions/checkout@v4
         with:
+          # 明确检出由上一个任务创建并推送的新commit
+          ref: ${{ needs.update-and-commit.outputs.commit_sha }}
           path: MaaYYs
-          fetch-depth: 0  # 获取完整历史以便生成变更日志
+          fetch-depth: 0
 
       - name: Set up Python (Unix)
         if: runner.os != 'Windows'
@@ -55,69 +113,25 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Update resource_version in config file (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        working-directory: MaaYYs
-        run: |
-          # Get the current tag
-          $currentTag = "${{ github.ref_name }}"
-          Write-Host "Updating resource_config.json with version: $currentTag"
-          
-          # Read and update JSON
-          $config = Get-Content -Path "resource_config.json" -Raw | ConvertFrom-Json
-          $config.resource_version = $currentTag
-          $config | ConvertTo-Json -Depth 10 | Set-Content -Path "resource_config.json"
-          
-          Write-Host "resource_config.json updated successfully"
-          Get-Content -Path "resource_config.json"
-
-      - name: Update resource_version in config file (Unix)
-        if: runner.os != 'Windows'
-        shell: bash
-        working-directory: MaaYYs
-        run: |
-          # Get the current tag
-          currentTag="${{ github.ref_name }}"
-          echo "Updating resource_config.json with version: $currentTag"
-          
-          # Use Python for JSON manipulation
-          python3 -c "import json; config = json.load(open('resource_config.json')); config['resource_version'] = '$currentTag'; json.dump(config, open('resource_config.json', 'w'), indent=2, ensure_ascii=False)"
-          
-          echo "resource_config.json updated successfully"
-          cat resource_config.json
-
       - name: Generate Changelog (Windows)
         if: runner.os == 'Windows'
         id: changelog_windows
         shell: pwsh
         working-directory: MaaYYs
         run: |
-          # 获取当前标签
           $currentTag = "${{ github.ref_name }}"
-          Write-Host "Current tag: $currentTag"
-          
-          # 获取上一个标签
           $previousTag = git describe --tags --abbrev=0 HEAD^ 2>$null
           if (-not $previousTag) {
-            Write-Host "No previous tag found, using first commit"
             $previousTag = git rev-list --max-parents=0 HEAD
           }
-          Write-Host "Previous tag/commit: $previousTag"
-          
-          # 生成变更日志
           $changelog = git log --pretty=format:"* %s (%h)" "$previousTag..$currentTag"
           if (-not $changelog) {
             $changelog = "* 首次发布"
           }
-          
-          # 设置变更日志为GitHub Actions输出变量
           $changelog = $changelog -replace "`n", "%0A"
           echo "CHANGELOG<<EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           echo $changelog | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           echo "EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-          
-          Write-Host "Generated changelog for release"
 
       - name: Generate Changelog (Unix)
         if: runner.os != 'Windows'
@@ -125,30 +139,18 @@ jobs:
         shell: bash
         working-directory: MaaYYs
         run: |
-          # 获取当前标签
           CURRENT_TAG="${{ github.ref_name }}"
-          echo "Current tag: $CURRENT_TAG"
-          
-          # 获取上一个标签
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          echo "Previous tag/commit: $PREVIOUS_TAG"
-          
-          # 生成变更日志
           CHANGELOG=$(git log --pretty=format:"* %s (%h)" "$PREVIOUS_TAG..$CURRENT_TAG")
           if [ -z "$CHANGELOG" ]; then
             CHANGELOG="* 首次发布"
           fi
-          
-          # 设置输出
           {
             echo 'CHANGELOG<<EOF'
             echo "$CHANGELOG"
             echo 'EOF'
           } >> $GITHUB_OUTPUT
 
-      # =================================================================
-      # BEGIN: OPTIMIZED FETCH STEP
-      # =================================================================
       - name: Fetch latest MFWPH release (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
@@ -433,7 +435,7 @@ jobs:
 
   release:
     name: Create Release
-    needs: build
+    needs: [build, update-and-commit] # 明确依赖两个任务
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
 
@@ -441,6 +443,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          # 同样，检出包含版本更新的那个commit
+          ref: ${{ needs.update-and-commit.outputs.commit_sha }}
           fetch-depth: 0
 
       - name: Download all artifacts
@@ -451,21 +455,14 @@ jobs:
       - name: Generate Changelog
         id: changelog
         run: |
-          # 获取当前标签
           CURRENT_TAG="${{ github.ref_name }}"
-          echo "Current tag: $CURRENT_TAG"
-          
-          # 获取上一个标签
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          echo "Previous tag/commit: $PREVIOUS_TAG"
-          
-          # 生成变更日志
+          # 这个命令的范围是 <PREVIOUS_TAG>...<CURRENT_TAG>
+          # 自动生成的 commit 在 <CURRENT_TAG> 之后, 因此不会被包含
           CHANGELOG=$(git log --pretty=format:"* %s (%h)" "$PREVIOUS_TAG..$CURRENT_TAG")
           if [ -z "$CHANGELOG" ]; then
             CHANGELOG="* 首次发布"
           fi
-          
-          # 设置输出
           {
             echo 'CHANGELOG<<EOF'
             echo "$CHANGELOG"
