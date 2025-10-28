@@ -406,9 +406,7 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": [
-            "跳过"
-        ],
+        "on_error": "跳过",
         "next": [
             "通用_装备御魂_点击确定",
             "通用3"

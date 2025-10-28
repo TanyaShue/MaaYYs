@@ -499,6 +499,7 @@
     },
     "悬赏封印4": {
         "recognition": "OCR",
+        "on_error": "跳过",
         "action": "Click",
         "interrupt": [
             "悬赏封印5"
@@ -518,6 +519,7 @@
     },
     "悬赏封印5": {
         "recognition": "OCR",
+        "on_error": "跳过",
         "action": "Click",
         "pre_delay": 1000,
         "post_delay": 1000,
