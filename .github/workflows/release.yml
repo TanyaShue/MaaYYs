@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 检出与标签关联的commit
           ref: ${{ github.ref }}
 
       - name: Set up Python
@@ -45,7 +44,6 @@ jobs:
           
           if ! git diff --quiet resource_config.json; then
             git add resource_config.json
-            # 提交信息以 "ci:" 开头，方便过滤
             git commit -m "ci: Update resource_version to ${{ github.ref_name }}" -m "[skip ci]"
             DEFAULT_BRANCH=${{ github.event.repository.default_branch }}
             git push origin HEAD:$DEFAULT_BRANCH
@@ -90,7 +88,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      # 在 build 任务中也使用过滤，保持一致性
+      # ================== MODIFIED CHANGELOG LOGIC (WINDOWS) ==================
       - name: Generate Changelog (Windows)
         if: runner.os == 'Windows'
         id: changelog_windows
@@ -98,11 +96,19 @@ jobs:
         working-directory: MaaYYs
         run: |
           $currentTag = "${{ github.ref_name }}"
-          $previousTag = git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>$null
-          if (-not $previousTag) {
+          # Find the latest stable tag by filtering out pre-release tags
+          $latestStableTag = git tag --sort=-v:refname | Select-String -Pattern '-beta' -NotMatch | Select-String -Pattern '-rc' -NotMatch | Select-Object -First 1
+          
+          if (-not $latestStableTag) {
+            # Fallback to the initial commit if no stable tag is found
             $previousTag = git rev-list --max-parents=0 HEAD
+            Write-Host "No stable tag found, using initial commit as baseline."
+          } else {
+            $previousTag = $latestStableTag
+            Write-Host "Found latest stable tag: $previousTag"
           }
-          # 增加 --invert-grep 来过滤掉 CI 自动提交
+
+          # Generate changelog from the last stable tag to the current tag, excluding CI commits
           $changelog = git log --pretty=format:"* %s (%h)" --invert-grep --grep="^ci: Update resource_version" "$previousTag..$currentTag"
           if (-not $changelog) {
             $changelog = "* 首次发布或无用户提交"
@@ -112,6 +118,7 @@ jobs:
           $changelog | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           "EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
+      # ================== MODIFIED CHANGELOG LOGIC (UNIX) ==================
       - name: Generate Changelog (Unix)
         if: runner.os != 'Windows'
         id: changelog_unix
@@ -119,8 +126,19 @@ jobs:
         working-directory: MaaYYs
         run: |
           CURRENT_TAG="${{ github.ref_name }}"
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          # 增加 --invert-grep 来过滤掉 CI 自动提交
+          # Find the latest stable tag by filtering out pre-release tags
+          LATEST_STABLE_TAG=$(git tag --sort=-v:refname | grep -v -- '-beta' | grep -v -- '-rc' | head -n 1)
+
+          if [ -z "$LATEST_STABLE_TAG" ]; then
+            # Fallback to the initial commit if no stable tag is found
+            PREVIOUS_TAG=$(git rev-list --max-parents=0 HEAD)
+            echo "No stable tag found, using initial commit as baseline."
+          else
+            PREVIOUS_TAG=$LATEST_STABLE_TAG
+            echo "Found latest stable tag: $PREVIOUS_TAG"
+          fi
+
+          # Generate changelog from the last stable tag to the current tag, excluding CI commits
           CHANGELOG=$(git log --pretty=format:"* %s (%h)" --invert-grep --grep="^ci: Update resource_version" "$PREVIOUS_TAG..$CURRENT_TAG")
           if [ -z "$CHANGELOG" ]; then
             CHANGELOG="* 首次发布或无用户提交"
@@ -135,33 +153,24 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          # 创建下载目录
           New-Item -Path "mfwph-download" -ItemType Directory -Force
-          
-          # 获取最新的MFWPH发布版本 (使用 GITHUB_TOKEN 进行认证以避免频率限制)
           Write-Host "Fetching latest MFWPH release..."
           $headers = @{ "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}" }
           $release = Invoke-RestMethod -Uri "https://api.github.com/repos/TanyaShue/MFWPH/releases/latest" -Headers $headers
-          
-          # 查找对应平台的下载URL
           $downloadUrl = ($release.assets | Where-Object { $_.name -eq "${{ matrix.mfwph_pattern }}" }).browser_download_url
-          
           if (-not $downloadUrl) {
             Write-Host "::error::Could not find ${{ matrix.mfwph_pattern }} in the latest release"
             exit 1
           }
-          
           Write-Host "Downloading MFWPH from: $downloadUrl"
-          
-          # 增加重试逻辑
           $retryCount = 3
-          $retryDelay = 5 # seconds
+          $retryDelay = 5
           for ($i=1; $i -le $retryCount; $i++) {
             try {
               Write-Host "Download attempt $i of $retryCount..."
               Invoke-WebRequest -Uri $downloadUrl -OutFile "mfwph-download/${{ matrix.mfwph_pattern }}"
               Write-Host "Download successful."
-              break # 成功后退出循环
+              break
             } catch {
               Write-Host "::warning::Download failed on attempt $i. Error: $_"
               if ($i -lt $retryCount) {
@@ -173,8 +182,6 @@ jobs:
               }
             }
           }
-          
-          # 解压MFWPH
           Expand-Archive -Path "mfwph-download/${{ matrix.mfwph_pattern }}" -DestinationPath "mfwph-extracted" -Force
           Write-Host "MFWPH package extracted successfully"
 
@@ -182,37 +189,26 @@ jobs:
         if: runner.os != 'Windows'
         shell: bash
         run: |
-          # 创建下载目录
           mkdir -p mfwph-download
-          
-          # 获取最新的MFWPH发布版本 (使用 GITHUB_TOKEN 进行认证以避免频率限制)
           echo "Fetching latest MFWPH release..."
           RELEASE_JSON=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/TanyaShue/MFWPH/releases/latest)
-          
-          # 查找对应平台的下载URL
           DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "import sys, json; data = json.load(sys.stdin); pattern = '${{ matrix.mfwph_pattern }}'; [print(asset['browser_download_url']) for asset in data.get('assets', []) if asset['name'] == pattern]" | head -n1)
-          
           if [ -z "$DOWNLOAD_URL" ]; then
             echo "::error::Could not find ${{ matrix.mfwph_pattern }} in the latest release"
             echo "Available assets:"
             echo "$RELEASE_JSON" | python3 -c "import sys, json; data = json.load(sys.stdin); [print(asset['name']) for asset in data.get('assets', [])]"
             exit 1
           fi
-          
           echo "Downloading MFWPH from: $DOWNLOAD_URL"
-
-          # 增加重试逻辑
           retry_count=3
-          retry_delay=5 # seconds
+          retry_delay=5
           for i in $(seq 1 $retry_count); do
             echo "Download attempt $i of $retry_count..."
-            # 使用 -L 跟踪重定向, --fail 在HTTP错误时失败
             curl -L --fail -o "mfwph-download/${{ matrix.mfwph_pattern }}" "$DOWNLOAD_URL"
             if [ $? -eq 0 ]; then
               echo "Download successful."
-              break # 成功后退出循环
+              break
             fi
-
             if [ $i -lt $retry_count ]; then
               echo "::warning::Download failed. Retrying in $retry_delay seconds..."
               sleep $retry_delay
@@ -221,57 +217,27 @@ jobs:
               exit 1
             fi
           done
-          
-          # 创建解压目录并解压
           mkdir -p mfwph-extracted
           tar -xzf "mfwph-download/${{ matrix.mfwph_pattern }}" -C mfwph-extracted
-          
-          # 检查解压后的内容
-          echo "Extracted contents:"
-          ls -la mfwph-extracted/
-          
-          # 如果解压后有一个MFWPH子目录，将其内容移到上一级
           if [ -d "mfwph-extracted/MFWPH" ]; then
-            echo "Moving MFWPH contents up one level..."
             mv mfwph-extracted/MFWPH/* mfwph-extracted/ 2>/dev/null || true
-            mv mfwph-extracted/MFWPH/.* mfwph-extracted/ 2>/dev/null || true
             rmdir mfwph-extracted/MFWPH 2>/dev/null || true
           fi
-          
-          echo "Final structure:"
-          ls -la mfwph-extracted/
           echo "MFWPH package extracted successfully"
 
       - name: Prepare resource directory (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          # 定义要排除的文件和文件夹列表
           $excludeList = @('.git', '.github', '.idea', '.gitignore', '.gitattributes', 'debug', 'dist', 'mfwph-download', 'mfwph-extracted', 'resources-temp')
-          
-          # 确保资源目录存在
-          New-Item -Path "mfwph-extracted/assets/resource/MaaYYs" -ItemType Directory -Force
-          
-          # 清空目标资源目录（如果存在）
-          if (Test-Path -Path "mfwph-extracted/assets/resource/MaaYYs") {
-            Get-ChildItem -Path "mfwph-extracted/assets/resource/MaaYYs" | Remove-Item -Recurse -Force
+          $destDir = "mfwph-extracted/assets/resource/MaaYYs"
+          New-Item -Path $destDir -ItemType Directory -Force
+          if (Test-Path -Path $destDir) {
+            Get-ChildItem -Path $destDir | Remove-Item -Recurse -Force
           }
-          
-          # 获取源目录中的所有文件和文件夹
-          $allItems = Get-ChildItem -Path "MaaYYs" -Force
-          
-          # 复制不在排除列表中的所有文件和文件夹
-          foreach ($item in $allItems) {
-            $itemName = $item.Name
-            if ($excludeList -notcontains $itemName) {
-              if (Test-Path -Path $item.FullName -PathType Container) {
-                # 如果是目录，则递归复制
-                New-Item -Path "mfwph-extracted/assets/resource/MaaYYs/$itemName" -ItemType Directory -Force
-                Copy-Item -Path "$($item.FullName)/*" -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Recurse -Force
-              } else {
-                # 如果是文件，则直接复制
-                Copy-Item -Path $item.FullName -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Force
-              }
+          Get-ChildItem -Path "MaaYYs" -Force | ForEach-Object {
+            if ($excludeList -notcontains $_.Name) {
+              Copy-Item -Path $_.FullName -Destination $destDir -Recurse -Force
             }
           }
           Write-Host "Resources copied successfully to MFWPH package"
@@ -280,59 +246,10 @@ jobs:
         if: runner.os != 'Windows'
         shell: bash
         run: |
-          # 定义要排除的文件和文件夹列表
-          EXCLUDE_LIST=".git .github .idea .gitignore .gitattributes debug dist mfwph-download mfwph-extracted resources-temp"
-          
-          # 确保mfwph-extracted是目录
-          if [ ! -d "mfwph-extracted" ]; then
-            echo "Error: mfwph-extracted is not a directory"
-            ls -la
-            exit 1
-          fi
-          
-          # 确保资源目录存在
-          mkdir -p "mfwph-extracted/assets/resource/MaaYYs"
-          
-          # 清空目标资源目录（如果存在内容）
-          if [ -d "mfwph-extracted/assets/resource/MaaYYs" ]; then
-            rm -rf "mfwph-extracted/assets/resource/MaaYYs"/*
-          fi
-          
-          # 复制资源文件（排除不需要的）
-          for item in MaaYYs/*; do
-            basename_item=$(basename "$item")
-            skip=false
-            for exclude in $EXCLUDE_LIST; do
-              if [ "$basename_item" = "$exclude" ]; then
-                skip=true
-                break
-              fi
-            done
-            
-            if [ "$skip" = false ]; then
-              cp -r "$item" "mfwph-extracted/assets/resource/MaaYYs/"
-            fi
-          done
-          
-          # 复制隐藏文件（如果需要）
-          shopt -s dotglob 2>/dev/null || true
-          for item in MaaYYs/.*; do
-            basename_item=$(basename "$item")
-            if [ "$basename_item" != "." ] && [ "$basename_item" != ".." ]; then
-              skip=false
-              for exclude in $EXCLUDE_LIST; do
-                if [ "$basename_item" = "$exclude" ]; then
-                  skip=true
-                  break
-                fi
-              done
-              
-              if [ "$skip" = false ]; then
-                cp -r "$item" "mfwph-extracted/assets/resource/MaaYYs/" 2>/dev/null || true
-              fi
-            fi
-          done
-          
+          EXCLUDE_LIST=(".git" ".github" ".idea" ".gitignore" ".gitattributes" "debug" "dist" "mfwph-download" "mfwph-extracted" "resources-temp")
+          DEST_DIR="mfwph-extracted/assets/resource/MaaYYs"
+          mkdir -p "$DEST_DIR"
+          rsync -av --delete --exclude-from=<(printf "%s\n" "${EXCLUDE_LIST[@]}") MaaYYs/ "$DEST_DIR/"
           echo "Resources copied successfully to MFWPH package"
 
       - name: Create full package (Windows)
@@ -391,18 +308,28 @@ jobs:
         with:
           path: ./artifacts
 
+      # ================== MODIFIED CHANGELOG LOGIC (RELEASE JOB) ==================
       - name: Generate Changelog
         id: changelog
         run: |
           CURRENT_TAG="${{ github.ref_name }}"
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          # Find the latest stable tag by filtering out pre-release tags
+          LATEST_STABLE_TAG=$(git tag --sort=-v:refname | grep -v -- '-beta' | grep -v -- '-rc' | head -n 1)
+
+          if [ -z "$LATEST_STABLE_TAG" ]; then
+            # Fallback to the initial commit if no stable tag is found
+            PREVIOUS_TAG=$(git rev-list --max-parents=0 HEAD)
+            echo "No stable tag found, using initial commit as baseline."
+          else
+            PREVIOUS_TAG=$LATEST_STABLE_TAG
+            echo "Found latest stable tag: $PREVIOUS_TAG"
+          fi
+          
           echo "Generating changelog between $PREVIOUS_TAG and $CURRENT_TAG"
           
-          # ================== 这是最关键的修正 ==================
-          # 使用 --invert-grep 排除掉所有以 "ci: Update resource_version" 开头的提交
+          # Generate changelog from the last stable tag to the current tag, excluding CI commits
           CHANGELOG=$(git log --pretty=format:"* %s (%h)" --invert-grep --grep="^ci: Update resource_version" "$PREVIOUS_TAG..$CURRENT_TAG")
           
-          # 如果过滤后日志为空，则提供默认信息
           if [ -z "$CHANGELOG" ]; then
             CHANGELOG="* 首次发布或本次发布无用户提交。"
           fi
