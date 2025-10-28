@@ -177,8 +177,18 @@
         ]
     },
     "点击底部菜单位置": {
+        "recognition": "TemplateMatch",
         "action": "Click",
         "post_delay": 1000,
+        "roi": [
+            0,
+            445,
+            209,
+            269
+        ],
+        "template": [
+            "通用\\点击底部菜单位置.png"
+        ],
         "target": [
             1177,
             578,
@@ -406,7 +416,9 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "通用_装备御魂_点击确定",
             "通用3"
@@ -447,8 +459,10 @@
     "通用_装备御魂_点击确定": {
         "recognition": "OCR",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "通用3"
         ],
@@ -481,8 +495,10 @@
     "通用3": {
         "recognition": "OCR",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "roi": [
             400,
             350,
@@ -509,13 +525,13 @@
     },
     "通用4": {
         "recognition": "TemplateMatch",
-        "interrupt": [],
         "template": [
             "通用\\通用4.png",
             "通用\\通用4_1.png"
         ]
     },
     "通用5": {
+        "timeout": 5000,
         "interrupt": [
             "打开底部菜单_匹配",
             "点击底部菜单位置"
