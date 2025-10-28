@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          # 检出与标签关联的commit
           ref: ${{ github.ref }}
 
       - name: Set up Python
@@ -34,8 +35,7 @@ jobs:
           currentTag="${{ github.ref_name }}"
           echo "Updating resource_config.json with version: $currentTag"
           python3 -c "import json; config_path = 'resource_config.json'; f = open(config_path, 'r+'); config = json.load(f); config['resource_version'] = '$currentTag'; f.seek(0); f.truncate(); json.dump(config, f, indent=2, ensure_ascii=False)"
-          echo "resource_config.json updated successfully:"
-          cat resource_config.json
+          echo "resource_config.json updated successfully"
 
       - name: Commit and Push changes
         id: commit_push
@@ -44,18 +44,14 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           if ! git diff --quiet resource_config.json; then
-            echo "Changes detected. Committing and pushing..."
             git add resource_config.json
+            # 提交信息以 "ci:" 开头，方便过滤
             git commit -m "ci: Update resource_version to ${{ github.ref_name }}" -m "[skip ci]"
             DEFAULT_BRANCH=${{ github.event.repository.default_branch }}
-            echo "Pushing changes to default branch: $DEFAULT_BRANCH"
             git push origin HEAD:$DEFAULT_BRANCH
-          else
-            echo "No changes to commit."
           fi
 
           NEW_COMMIT_SHA=$(git rev-parse HEAD)
-          echo "New commit SHA: $NEW_COMMIT_SHA"
           echo "commit_sha=${NEW_COMMIT_SHA}" >> $GITHUB_OUTPUT
 
   build:
@@ -70,19 +66,15 @@ jobs:
           - os: windows-x64
             runner: windows-latest
             mfwph_pattern: 'MFWPH_windows-x64.zip'
-            archive_extension: '.zip'
           - os: macos-x64
             runner: macos-13
             mfwph_pattern: 'MFWPH_macos-x64.tar.gz'
-            archive_extension: '.tar.gz'
           - os: macos-arm64
             runner: macos-14
             mfwph_pattern: 'MFWPH_macos-arm64.tar.gz'
-            archive_extension: '.tar.gz'
           - os: linux-x64
             runner: ubuntu-latest
             mfwph_pattern: 'MFWPH_linux-x64.tar.gz'
-            archive_extension: '.tar.gz'
 
     steps:
       - name: Checkout MaaYYs repository
@@ -98,8 +90,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      # 注意：这里的Changelog生成只是为了给build job内部使用（如果需要的话）
-      # release job会独立重新生成一次，所以这里的逻辑暂时保留，但最终发布以release job为准
+      # 在 build 任务中也使用过滤，保持一致性
       - name: Generate Changelog (Windows)
         if: runner.os == 'Windows'
         id: changelog_windows
@@ -107,14 +98,14 @@ jobs:
         working-directory: MaaYYs
         run: |
           $currentTag = "${{ github.ref_name }}"
-          # 使用修正后的逻辑
           $previousTag = git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>$null
           if (-not $previousTag) {
             $previousTag = git rev-list --max-parents=0 HEAD
           }
-          $changelog = git log --pretty=format:"* %s (%h)" "$previousTag..$currentTag"
+          # 增加 --invert-grep 来过滤掉 CI 自动提交
+          $changelog = git log --pretty=format:"* %s (%h)" --invert-grep --grep="^ci: Update resource_version" "$previousTag..$currentTag"
           if (-not $changelog) {
-            $changelog = "* 首次发布"
+            $changelog = "* 首次发布或无用户提交"
           }
           $changelog = $changelog -replace "`n", "%0A"
           "CHANGELOG<<EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
@@ -128,11 +119,11 @@ jobs:
         working-directory: MaaYYs
         run: |
           CURRENT_TAG="${{ github.ref_name }}"
-          # 使用修正后的逻辑
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          CHANGELOG=$(git log --pretty=format:"* %s (%h)" "$PREVIOUS_TAG..$CURRENT_TAG")
+          # 增加 --invert-grep 来过滤掉 CI 自动提交
+          CHANGELOG=$(git log --pretty=format:"* %s (%h)" --invert-grep --grep="^ci: Update resource_version" "$PREVIOUS_TAG..$CURRENT_TAG")
           if [ -z "$CHANGELOG" ]; then
-            CHANGELOG="* 首次发布"
+            CHANGELOG="* 首次发布或无用户提交"
           fi
           {
             echo 'CHANGELOG<<EOF'
@@ -277,14 +268,10 @@ jobs:
                 # 如果是目录，则递归复制
                 New-Item -Path "mfwph-extracted/assets/resource/MaaYYs/$itemName" -ItemType Directory -Force
                 Copy-Item -Path "$($item.FullName)/*" -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Recurse -Force
-                Write-Host "Copied directory $itemName to resource directory"
               } else {
                 # 如果是文件，则直接复制
                 Copy-Item -Path $item.FullName -Destination "mfwph-extracted/assets/resource/MaaYYs/$itemName" -Force
-                Write-Host "Copied file $itemName to resource directory"
               }
-            } else {
-              Write-Host "Excluded $itemName from resource directory"
             }
           }
           Write-Host "Resources copied successfully to MFWPH package"
@@ -318,14 +305,12 @@ jobs:
             for exclude in $EXCLUDE_LIST; do
               if [ "$basename_item" = "$exclude" ]; then
                 skip=true
-                echo "Excluded $basename_item from resource directory"
                 break
               fi
             done
             
             if [ "$skip" = false ]; then
               cp -r "$item" "mfwph-extracted/assets/resource/MaaYYs/"
-              echo "Copied $basename_item to resource directory"
             fi
           done
           
@@ -354,65 +339,31 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          # 创建输出目录
           New-Item -Path "dist" -ItemType Directory -Force
-          
-          # 创建ZIP包
           Compress-Archive -Path "mfwph-extracted/*" -DestinationPath "${{ github.workspace }}/dist/MAA_YYS_FULL_${{ matrix.os }}.zip" -Force
-          
           Write-Host "Created full package: MAA_YYS_FULL_${{ matrix.os }}.zip"
 
       - name: Create full package (Unix)
         if: runner.os != 'Windows'
         shell: bash
         run: |
-          # 创建输出目录
           mkdir -p dist
-          
-          # 检查mfwph-extracted目录
-          if [ ! -d "mfwph-extracted" ]; then
-            echo "Error: mfwph-extracted directory not found"
-            ls -la
-            exit 1
-          fi
-          
-          # 创建tar.gz包
-          echo "Creating archive from mfwph-extracted directory..."
           (cd mfwph-extracted && tar -czf "${{ github.workspace }}/dist/MAA_YYS_FULL_${{ matrix.os }}.tar.gz" .)
-          
           echo "Created full package: MAA_YYS_FULL_${{ matrix.os }}.tar.gz"
-          ls -lh dist/
 
       - name: Create resources-only package (Windows only)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          # 定义要包含的文件和文件夹列表
           $includeList = @('app','resource_pack', 'custom_dir', 'image', 'model', 'pipeline', 'LICENSE', 'README.md','doc', 'resource_config.json')
-          
-          # 创建临时目录用于资源包
           New-Item -Path "resources-temp" -ItemType Directory -Force
-          
-          # 仅复制包含列表中的文件和文件夹到临时目录
           foreach ($item in $includeList) {
             $sourcePath = "MaaYYs/$item"
             if (Test-Path -Path $sourcePath) {
-              if (Test-Path -Path $sourcePath -PathType Container) {
-                # 如果是目录，则递归复制
-                Copy-Item -Path $sourcePath -Destination "resources-temp/" -Recurse -Force
-              } else {
-                # 如果是文件，则直接复制
-                Copy-Item -Path $sourcePath -Destination "resources-temp/" -Force
-              }
-              Write-Host "Copied $item to resources-only package"
-            } else {
-              Write-Host "Warning: $item not found in source repository for resources-only package"
+              Copy-Item -Path $sourcePath -Destination "resources-temp/" -Recurse -Force
             }
           }
-          
-          # 创建仅包含资源的ZIP文件
           Compress-Archive -Path "resources-temp/*" -DestinationPath "${{ github.workspace }}/dist/MAA_YYS_RESOURCES_ONLY.zip" -Force
-          
           Write-Host "Created resources-only package: MAA_YYS_RESOURCES_ONLY.zip"
 
       - name: Upload build artifacts
@@ -444,17 +395,18 @@ jobs:
         id: changelog
         run: |
           CURRENT_TAG="${{ github.ref_name }}"
-          # ================== 此处是关键修正 ==================
-          # 直接基于当前标签的父提交来查找上一个标签
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          echo "Current tag: $CURRENT_TAG"
-          echo "Previous tag: $PREVIOUS_TAG"
+          echo "Generating changelog between $PREVIOUS_TAG and $CURRENT_TAG"
           
-          # 这个命令的范围现在是正确的 <PREVIOUS_TAG>...<CURRENT_TAG>
-          CHANGELOG=$(git log --pretty=format:"* %s (%h)" "$PREVIOUS_TAG..$CURRENT_TAG")
+          # ================== 这是最关键的修正 ==================
+          # 使用 --invert-grep 排除掉所有以 "ci: Update resource_version" 开头的提交
+          CHANGELOG=$(git log --pretty=format:"* %s (%h)" --invert-grep --grep="^ci: Update resource_version" "$PREVIOUS_TAG..$CURRENT_TAG")
+          
+          # 如果过滤后日志为空，则提供默认信息
           if [ -z "$CHANGELOG" ]; then
-            CHANGELOG="* 首次发布"
+            CHANGELOG="* 首次发布或本次发布无用户提交。"
           fi
+          
           {
             echo 'CHANGELOG<<EOF'
             echo "$CHANGELOG"
@@ -464,8 +416,7 @@ jobs:
       - name: Prepare release files
         run: |
           mkdir -p release_files
-          find ./artifacts -type f \( -name "*.zip" -o -name "*.tar.gz" \) \
-            -exec mv {} ./release_files/ \;
+          find ./artifacts -type f \( -name "*.zip" -o -name "*.tar.gz" \) -exec mv {} ./release_files/ \;
           echo "Release files:"
           ls -la ./release_files/
 
