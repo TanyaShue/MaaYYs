@@ -13,7 +13,6 @@ jobs:
   update-and-commit:
     name: Update version and commit
     runs-on: ubuntu-latest
-    # 定义输出，以便其他任务可以使用新commit的SHA
     outputs:
       commit_sha: ${{ steps.commit_push.outputs.commit_sha }}
 
@@ -21,9 +20,7 @@ jobs:
       - name: Checkout MaaYYs repository
         uses: actions/checkout@v4
         with:
-          # 使用拥有推送权限的 GITHUB_TOKEN
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 检出与标签关联的commit
           ref: ${{ github.ref }}
 
       - name: Set up Python
@@ -41,7 +38,7 @@ jobs:
           cat resource_config.json
 
       - name: Commit and Push changes
-        id: commit_push # 给这一步一个ID，以便引用其输出
+        id: commit_push
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -50,8 +47,6 @@ jobs:
             echo "Changes detected. Committing and pushing..."
             git add resource_config.json
             git commit -m "ci: Update resource_version to ${{ github.ref_name }}" -m "[skip ci]"
-            
-            # 推送到仓库的默认分支
             DEFAULT_BRANCH=${{ github.event.repository.default_branch }}
             echo "Pushing changes to default branch: $DEFAULT_BRANCH"
             git push origin HEAD:$DEFAULT_BRANCH
@@ -59,40 +54,31 @@ jobs:
             echo "No changes to commit."
           fi
 
-          # 获取新 commit 的完整 SHA 并设置为输出
           NEW_COMMIT_SHA=$(git rev-parse HEAD)
           echo "New commit SHA: $NEW_COMMIT_SHA"
           echo "commit_sha=${NEW_COMMIT_SHA}" >> $GITHUB_OUTPUT
 
   build:
     name: Build ${{ matrix.os }}
-    needs: update-and-commit # 依赖于上一个任务
+    needs: update-and-commit
     runs-on: ${{ matrix.runner }}
 
     strategy:
       fail-fast: false
       matrix:
         include:
-          # ... (matrix 配置保持不变)
-          # Windows x64
           - os: windows-x64
             runner: windows-latest
             mfwph_pattern: 'MFWPH_windows-x64.zip'
             archive_extension: '.zip'
-
-          # macOS Intel
           - os: macos-x64
             runner: macos-13
             mfwph_pattern: 'MFWPH_macos-x64.tar.gz'
             archive_extension: '.tar.gz'
-
-          # macOS Apple Silicon
           - os: macos-arm64
             runner: macos-14
             mfwph_pattern: 'MFWPH_macos-arm64.tar.gz'
             archive_extension: '.tar.gz'
-
-          # Linux x64
           - os: linux-x64
             runner: ubuntu-latest
             mfwph_pattern: 'MFWPH_linux-x64.tar.gz'
@@ -102,7 +88,6 @@ jobs:
       - name: Checkout MaaYYs repository
         uses: actions/checkout@v4
         with:
-          # 明确检出由上一个任务创建并推送的新commit
           ref: ${{ needs.update-and-commit.outputs.commit_sha }}
           path: MaaYYs
           fetch-depth: 0
@@ -113,6 +98,8 @@ jobs:
         with:
           python-version: '3.x'
 
+      # 注意：这里的Changelog生成只是为了给build job内部使用（如果需要的话）
+      # release job会独立重新生成一次，所以这里的逻辑暂时保留，但最终发布以release job为准
       - name: Generate Changelog (Windows)
         if: runner.os == 'Windows'
         id: changelog_windows
@@ -120,7 +107,8 @@ jobs:
         working-directory: MaaYYs
         run: |
           $currentTag = "${{ github.ref_name }}"
-          $previousTag = git describe --tags --abbrev=0 HEAD^ 2>$null
+          # 使用修正后的逻辑
+          $previousTag = git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>$null
           if (-not $previousTag) {
             $previousTag = git rev-list --max-parents=0 HEAD
           }
@@ -129,9 +117,9 @@ jobs:
             $changelog = "* 首次发布"
           }
           $changelog = $changelog -replace "`n", "%0A"
-          echo "CHANGELOG<<EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-          echo $changelog | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-          echo "EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "CHANGELOG<<EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          $changelog | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - name: Generate Changelog (Unix)
         if: runner.os != 'Windows'
@@ -140,7 +128,8 @@ jobs:
         working-directory: MaaYYs
         run: |
           CURRENT_TAG="${{ github.ref_name }}"
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          # 使用修正后的逻辑
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
           CHANGELOG=$(git log --pretty=format:"* %s (%h)" "$PREVIOUS_TAG..$CURRENT_TAG")
           if [ -z "$CHANGELOG" ]; then
             CHANGELOG="* 首次发布"
@@ -435,7 +424,7 @@ jobs:
 
   release:
     name: Create Release
-    needs: [build, update-and-commit] # 明确依赖两个任务
+    needs: [build, update-and-commit]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
 
@@ -443,7 +432,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          # 同样，检出包含版本更新的那个commit
           ref: ${{ needs.update-and-commit.outputs.commit_sha }}
           fetch-depth: 0
 
@@ -456,9 +444,13 @@ jobs:
         id: changelog
         run: |
           CURRENT_TAG="${{ github.ref_name }}"
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          # 这个命令的范围是 <PREVIOUS_TAG>...<CURRENT_TAG>
-          # 自动生成的 commit 在 <CURRENT_TAG> 之后, 因此不会被包含
+          # ================== 此处是关键修正 ==================
+          # 直接基于当前标签的父提交来查找上一个标签
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${{ github.ref_name }}^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          echo "Current tag: $CURRENT_TAG"
+          echo "Previous tag: $PREVIOUS_TAG"
+          
+          # 这个命令的范围现在是正确的 <PREVIOUS_TAG>...<CURRENT_TAG>
           CHANGELOG=$(git log --pretty=format:"* %s (%h)" "$PREVIOUS_TAG..$CURRENT_TAG")
           if [ -z "$CHANGELOG" ]; then
             CHANGELOG="* 首次发布"
@@ -471,12 +463,9 @@ jobs:
 
       - name: Prepare release files
         run: |
-          # 移动所有构建产物到发布目录
           mkdir -p release_files
           find ./artifacts -type f \( -name "*.zip" -o -name "*.tar.gz" \) \
             -exec mv {} ./release_files/ \;
-          
-          # 列出所有文件
           echo "Release files:"
           ls -la ./release_files/
 
