@@ -914,7 +914,6 @@
         ],
         "expected": "提交"
     },
-    "寮3047": {},
     "寮3048": {
         "recognition": "OCR",
         "action": "Click",
@@ -974,6 +973,7 @@
     },
     "寮3052": {
         "recognition": "OCR",
+        "on_error": "跳过",
         "action": "Click",
         "interrupt": [
             "寮3053",
@@ -994,6 +994,7 @@
     },
     "寮3053": {
         "recognition": "OCR",
+        "on_error": "跳过",
         "action": "Click",
         "next": [
             "寮3053_copy1"

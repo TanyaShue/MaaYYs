@@ -40,8 +40,8 @@ class SwitchSoul(CustomAction):
                 print("参数错误：分组名称和队伍名称不能为空")
                 return False
 
-            print(f"开始执行自定义动作：装备切换御魂 - 分组：{group_name}，队伍：{team_name}")
-            print_to_ui(context,f"开始执行自定义动作：装备切换御魂 - 分组：{group_name}，队伍：{team_name}")
+            print(f"切换御魂 - 分组：{group_name}，队伍：{team_name}")
+            print_to_ui(context,f"切换御魂 分组：{group_name}，队伍：{team_name}")
         except (json.JSONDecodeError, KeyError) as e:
             print(f"参数解析错误: {str(e)}")
             return False
