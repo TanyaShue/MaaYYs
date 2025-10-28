@@ -76,7 +76,6 @@ class ReStart(CustomAction):
             context.run_task(f"{current_entry}")
             return True
 
-        print("计数未超限，本次不执行重启。")
         return True
 
     def stop(self) -> None:
