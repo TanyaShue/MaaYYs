@@ -1,0 +1,8 @@
+{
+          "启动游戏": {
+            "package": "com.tencent.tmgp.yys.zqb"
+          },
+          "关闭阴阳师": {
+            "package": "com.tencent.tmgp.yys.zqb"
+          }
+}
