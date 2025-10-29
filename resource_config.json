@@ -1,7 +1,7 @@
 {
   "resource_name": "阴阳师",
   "resource_id": "MaaYYs",
-  "resource_version": "v1.9.2-beta.6",
+  "resource_version": "v1.9.2",
   "resource_author": "TanyaShue",
   "mirror_update_service_id": "MaaYYs",
   "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
@@ -55,8 +55,7 @@
     {
       "task_name": "打开游戏",
       "task_entry": "启动游戏",
-      "option": [
-      ]
+      "option": []
     },
     {
       "task_name": "自动竞猜",
@@ -177,8 +176,7 @@
     {
       "task_name": "关闭游戏",
       "task_entry": "关闭阴阳师",
-      "option": [
-      ]
+      "option": []
     },
     {
       "task_name": "自动999",
