@@ -34,6 +34,13 @@
         "./resource_pack/base",
         "./resource_pack/huawei"
       ]
+    },
+    {
+      "name": "应用宝渠道服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/tencent"
+      ]
     }
   ],
   "agent": {
