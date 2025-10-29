@@ -275,7 +275,8 @@
     "自动地鬼8": {
         "recognition": "OCR",
         "interrupt": [
-            "自动地鬼9"
+            "自动地鬼9",
+            "自动地鬼7"
         ],
         "next": [
             "自动地鬼10",
@@ -288,7 +289,7 @@
             541,
             99
         ],
-        "expected": "世界|小组|评分"
+        "expected": "^(世界|小组|评分)$"
     },
     "自动地鬼9": {
         "recognition": "TemplateMatch",
