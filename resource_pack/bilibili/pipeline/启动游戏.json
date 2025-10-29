@@ -1,0 +1,8 @@
+{
+          "启动游戏": {
+            "package": "com.netease.onmyoji.bili/com.netease.onmyoji.tag0"
+          },
+          "关闭阴阳师": {
+            "package": "com.netease.onmyoji.bili"
+          }
+}
