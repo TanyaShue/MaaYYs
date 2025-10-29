@@ -9,16 +9,30 @@
   "resource_icon": "/assets/logo/logo.png",
   "resource_pack": [
     {
-      "name": "Official",
+      "name": "官服",
       "path": [
-        "./resource_pack/Official"
+        "./resource_pack/base"
       ]
     },
     {
-      "name": "有风险",
+      "name": "官服2(雷电,mumu下载的选这个)",
       "path": [
-        "./resource_pack/Official",
-        "./resource_pack/999"
+        "./resource_pack/base",
+        "./resource_pack/official"
+      ]
+    },
+    {
+      "name": "bilibili服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/bilibili"
+      ]
+    },
+    {
+      "name": "华为渠道服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/huawei"
       ]
     }
   ],
@@ -35,7 +49,6 @@
       "task_name": "打开游戏",
       "task_entry": "启动游戏",
       "option": [
-        "选择区服"
       ]
     },
     {
@@ -158,7 +171,6 @@
       "task_name": "关闭游戏",
       "task_entry": "关闭阴阳师",
       "option": [
-        "选择区服"
       ]
     },
     {
@@ -294,88 +306,6 @@
         {
           "name": "高级觉醒材料",
           "value": "高级觉醒材料"
-        }
-      ]
-    },
-    {
-      "name": "选择区服",
-      "type": "select",
-      "default": "官服",
-      "doc": "选择对应的游戏服务器和渠道",
-      "pipeline_override": {
-        "官服": {
-          "启动游戏": {
-            "package": "com.netease.onmyoji/.tag2"
-          },
-          "关闭阴阳师": {
-            "package": "com.netease.onmyoji"
-          }
-        },
-        "官网下载版": {
-          "启动游戏": {
-            "package": "com.netease.onmyoji/.tag2"
-          },
-          "关闭阴阳师": {
-            "package": "com.netease.onmyoji"
-          }
-        },
-        "MUMU官网下载版": {
-          "启动游戏": {
-            "package": "com.netease.onmyoji.wyzymnqsd_cps"
-          },
-          "关闭阴阳师": {
-            "package": "com.netease.onmyoji.wyzymnqsd_cps"
-          }
-        },
-        "雷电游戏中心下载版": {
-          "启动游戏": {
-            "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag0"
-          },
-          "关闭阴阳师": {
-            "package": "com.netease.onmyoji.wyzymnqsd_cps"
-          }
-        },
-        "华为渠道服": {
-          "启动游戏": {
-            "package": "com.netease.onmyoji.huawei"
-          },
-          "关闭阴阳师": {
-            "package": "com.netease.onmyoji.huawei"
-          }
-        },
-        "bilibili官网下载版": {
-          "启动游戏": {
-            "package": "com.netease.onmyoji.bili/com.netease.onmyoji.tag0"
-          },
-          "关闭阴阳师": {
-            "package": "com.netease.onmyoji.bili"
-          }
-        }
-      },
-      "choices": [
-        {
-          "name": "官服",
-          "value": "官服"
-        },
-        {
-          "name": "官网下载版",
-          "value": "官网下载版"
-        },
-        {
-          "name": "MUMU官网下载版",
-          "value": "MUMU官网下载版"
-        },
-        {
-          "name": "bilibili官网下载版",
-          "value": "bilibili官网下载版"
-        },
-        {
-          "name": "雷电游戏中心下载版",
-          "value": "雷电游戏中心下载版"
-        },
-        {
-          "name": "华为渠道服",
-          "value": "华为渠道服"
         }
       ]
     },

@@ -1,0 +1,131 @@
+{
+    "启动游戏": {
+        "action": "StartApp",
+        "interrupt": [
+            "启动游戏1",
+            "启动游戏3"
+        ],
+        "rate_limit": 2000,
+        "next": [
+            "关闭公告",
+            "关闭广告",
+            "启动任务1",
+            "启动任务5",
+            "识别庭院特征",
+            "启动游戏2"
+        ],
+        "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2"
+    },
+    "启动游戏1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            481,
+            563,
+            310,
+            64
+        ],
+        "expected": "进入游戏"
+    },
+  "关闭公告": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "roi": [
+            1116,
+            7,
+            163,
+            89
+        ],
+        "template": "通用图标/踏雪寻踪_公告_关闭.png"
+    },
+        "关闭广告": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "roi": [
+            908,
+            4,
+            371,
+            370
+        ],
+        "template": "通用图标/广告_关闭.png"
+    },
+
+    "启动任务1": {
+        "recognition": "OCR",
+        "next": [
+            "启动任务2"
+        ],
+        "roi": [
+            343,
+            183,
+            590,
+            110
+        ],
+        "expected": "下载插画"
+    },
+    "启动任务2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            438,
+            347,
+            445,
+            133
+        ],
+        "expected": "下载"
+    },
+    "启动任务5": {
+        "recognition": "OCR",
+        "next": [
+            "启动任务6"
+        ],
+        "roi": [
+            343,
+            183,
+            590,
+            110
+        ],
+        "expected": "是否打开|加成"
+    },
+    "启动任务6": {
+        "recognition": "OCR",
+        "roi": [
+            438,
+            347,
+            445,
+            133
+        ],
+        "expected": "取消"
+    },
+    "启动游戏2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            535,
+            57,
+            196,
+            53
+        ],
+        "expected": "设置",
+        "target": [
+            1074,
+            80,
+            49,
+            47
+        ]
+    },
+    "启动游戏3": {
+        "action": "Click",
+        "target": [
+            22,
+            22,
+            70,
+            87
+        ]
+    },
+      "关闭阴阳师": {
+        "action": "StopApp",
+        "post_delay": 2000,
+        "package": "com.netease.onmyoji.wyzymnqsd_cps"
+    }
+}
