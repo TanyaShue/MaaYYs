@@ -382,7 +382,13 @@
     "自动逢魔1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
+        "interrupt": [
+            "自动逢魔1_copy2"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔6"
         ],
@@ -607,11 +613,15 @@
                 "自动逢魔11_2_copy1",
                 "自动逢魔11_2_copy1",
                 "自动逢魔11_2_copy2"
-            ]
+            ],
+            "on_error": "跳过"
         }
     },
     "自动逢魔11_1": {
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔1",
             "自动逢魔3",
@@ -620,6 +630,9 @@
     },
     "自动逢魔11_2": {
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔1_copy1",
             "自动逢魔3_copy1",
@@ -629,7 +642,13 @@
     "自动逢魔1_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
+        "interrupt": [
+            "自动逢魔1_copy1_copy3"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔6"
         ],
@@ -689,6 +708,9 @@
     },
     "自动逢魔11_2_copy1": {
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔1_copy1_copy1",
             "自动逢魔3_copy1_copy1",
@@ -698,7 +720,13 @@
     "自动逢魔1_copy1_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
+        "interrupt": [
+            "自动逢魔1_copy1_copy1_copy1"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔6"
         ],
@@ -733,6 +761,9 @@
     },
     "自动逢魔11_2_copy2": {
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔1_copy1_copy2",
             "自动逢魔3_copy1_copy2",
@@ -742,7 +773,13 @@
     "自动逢魔1_copy1_copy2": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
+        "interrupt": [
+            "自动逢魔1_copy1_copy2_copy1"
+        ],
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "自动逢魔6"
         ],
@@ -757,7 +794,23 @@
             "自动逢魔/自动逢魔1_1.png"
         ]
     },
-    "自动逢魔10": {},
+    "自动逢魔10": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            438,
+            163,
+            414,
+            133
+        ],
+        "expected": "获得奖励",
+        "target": [
+            583,
+            606,
+            122,
+            72
+        ]
+    },
     "自动逢魔12": {
         "interrupt": [
             "打开底部菜单"
@@ -805,17 +858,78 @@
         "recognition": "OCR",
         "action": "Click",
         "roi": [
-            319,
-            78,
-            689,
-            239
+            438,
+            163,
+            414,
+            133
         ],
         "expected": "获得奖励",
         "target": [
-            553,
-            549,
+            583,
+            606,
             122,
-            51
+            72
+        ]
+    },
+    "自动逢魔18": {},
+    "自动逢魔1_copy1_copy3": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 1000,
+        "roi": [
+            1189,
+            337,
+            90,
+            67
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ]
+    },
+    "自动逢魔1_copy1_copy1_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 5000,
+        "roi": [
+            1183,
+            408,
+            96,
+            64
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ]
+    },
+    "自动逢魔1_copy2": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 5000,
+        "roi": [
+            1171,
+            266,
+            108,
+            83
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ]
+    },
+    "自动逢魔1_copy1_copy2_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 5000,
+        "roi": [
+            1179,
+            468,
+            100,
+            67
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
         ]
     }
 }
