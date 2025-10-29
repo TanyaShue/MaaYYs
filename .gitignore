@@ -467,3 +467,4 @@ tools/ImageCropper/**/*.png
 /config/
 /screencap.png
 /screencap.png
+/screencap_error.png
