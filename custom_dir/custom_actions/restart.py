@@ -18,7 +18,12 @@ class ReStart(CustomAction):
         current_entry = argv.task_detail.entry
         print(f"当前任务入口: {current_entry}")
         print("触发time_out")
-
+        if current_entry =="寮突":
+            print("寮突错误")
+            return True
+        if current_entry =="组队副本14":
+            print("组队副本14")
+            return True
         # 判断当前任务节点是否与上一个相同
         if ReStart.the_last_entry == current_entry:
             ReStart.node_count += 1
