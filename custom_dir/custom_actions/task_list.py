@@ -27,6 +27,7 @@ class TaskList(CustomAction):
         print("开始执行自定义动作：任务列表")
         json_data = json.loads(argv.custom_action_param)
         task_list = json_data.get("task_list", {})
+        on_error = json_data.get("on_error", None)
 
         # 1. 获取新参数 enable_once_a_day，如果参数未提供，则默认为 True
         enable_once_a_day = json_data.get("enable_once_a_day", True)
@@ -55,7 +56,10 @@ class TaskList(CustomAction):
                         continue
 
                 print(f"执行任务: {task}")
-                context.run_task(task)
+                if on_error is not None:
+                    context.run_task(task, {task:{"on_error":on_error}})
+                else:
+                    context.run_task(task)
                 print(f"任务 {task} 执行完成")
 
                 # 4. 如果任务是每日一次的，执行完后记录，增加 enable_once_a_day 条件
@@ -74,7 +78,10 @@ class TaskList(CustomAction):
                             continue
 
                     print(f"执行任务: {task}")
-                    context.run_task(task)
+                    if on_error is not None:
+                        context.run_task(task, {task: {"on_error": on_error}})
+                    else:
+                        context.run_task(task)
                     print(f"任务 {task} 执行完成")
 
                     # 4. 如果任务是每日一次的，执行完后记录 (同样应用于字典格式)
