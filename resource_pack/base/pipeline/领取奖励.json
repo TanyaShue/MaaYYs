@@ -596,8 +596,8 @@
         "expected": "前往"
     },
     "领取奖励8": {
-        "timeout": 2000,
         "recognition": "OCR",
+        "timeout": 2000,
         "next": [
             "返回庭院"
         ],
@@ -643,6 +643,7 @@
     },
     "领取奖励9": {
         "recognition": "OCR",
+        "timeout": 3000,
         "on_error": [
             "邮件_领取奖励_点击关闭"
         ],
