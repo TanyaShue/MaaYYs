@@ -158,6 +158,7 @@
       "task_entry": "阴阳寮奖励领取",
       "option": [
         "寄养设置",
+        "是否启用自动挂卡",
         "自动挂卡设置",
         "挂卡星级设置"
       ]
@@ -429,7 +430,22 @@
       ]
     },
     {
-      "name": "自动挂卡设置",
+      "name": "是否启用自动挂卡",
+      "type": "boole",
+      "default": true,
+      "doc": "是否启用自动挂卡",
+      "pipeline_override": {
+        "阴阳寮奖励领取_识别结界特征": {
+          "custom_action_param": {
+            "task_list": {
+                "阴阳寮奖励24_挂结界卡": "{boole}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "自动挂卡类型设置",
       "type": "select",
       "default": "太鼓",
       "doc": "选择自动挂结界卡的种类",
