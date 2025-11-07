@@ -53,7 +53,14 @@
     },
     "test": {
         "recognition": "NeuralNetworkDetect",
-        "model": "best.onnx",
-        "labels":["white_dog","white_cat","black_dog","black_cat"]
+        "model": "jiejie_v1.onnx",
+        "labels":["式神育成", "结界卡", "结界防守"],
+        "expected": 0
+    },
+    "test_model_jiejiecard": {
+        "recognition": "NeuralNetworkDetect",
+        "model": "jiejiecard.onnx",
+        "labels":["1start", "2start", "3start", "4start", "5start", "6start"],
+        "expected": 0
     }
 }

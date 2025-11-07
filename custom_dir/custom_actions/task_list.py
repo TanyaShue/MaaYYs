@@ -19,7 +19,7 @@ class TaskList(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         """
         :param argv: 运行参数
-                     字典格式: {"task_list": {"A": True, "B": False}, "enable_once_a_day": true}
+                     字典格式: {"task_list": {"A": True, "B": False}, "enable_once_a_day": true,"on_error":"TaskA"}
                      列表格式: {"task_list": ["A", "B", "C"], "enable_once_a_day": false}
         :param context: 运行上下文
         :return: 是否执行成功。
