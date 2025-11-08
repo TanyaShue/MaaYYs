@@ -176,6 +176,7 @@
         "template": "通用图标/结界突破_关闭.png"
     },
     "开始自动结界": {
+        "recognition": "OCR",
         "interrupt": [
             "突破_结束战斗",
             "突破_领取奖励",
@@ -192,13 +193,20 @@
         "next": [
             "结束突破"
         ],
-        "post_delay": 1000
+        "post_delay": 1000,
+        "roi": [
+            526,
+            54,
+            200,
+            86
+        ],
+        "expected": "结界突破"
     },
     "挑战第一个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-      "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -220,8 +228,8 @@
     "挑战第二个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 2000,      "on_error": "跳过",
-
+        "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -243,8 +251,8 @@
     "挑战第三个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -266,8 +274,8 @@
     "挑战第四个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -289,8 +297,8 @@
     "挑战第五个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -312,8 +320,8 @@
     "挑战第六个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -335,8 +343,8 @@
     "挑战第七个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -358,8 +366,8 @@
     "挑战第八个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_点击进攻"
         ],
@@ -381,8 +389,8 @@
     "挑战第九个结界": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 2000,
+        "on_error": "跳过",
         "next": [
             "突破_最后一个进攻"
         ],
@@ -404,8 +412,8 @@
     "突破_最后一个进攻": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 400000,
+        "on_error": "跳过",
         "next": [
             "突破_重新挑战四次"
         ],
@@ -438,8 +446,8 @@
     },
     "突破_重新挑战": {
         "recognition": "FeatureMatch",
-        "on_error": "跳过",
         "action": "Click",
+        "on_error": "跳过",
         "next": [
             "退出战斗_确认"
         ],
@@ -457,8 +465,8 @@
     },
     "退出战斗_确认": {
         "recognition": "OCR",
-        "on_error": "跳过",
         "action": "Click",
+        "on_error": "跳过",
         "next": [
             "突破_再次挑战"
         ],
