@@ -412,10 +412,10 @@
     "突破_最后一个进攻": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "timeout": 400000,
+        "timeout": 4000000,
         "on_error": "跳过",
         "next": [
-            "突破_重新挑战四次"
+            "突破_重新挑战六次"
         ],
         "post_delay": 1000,
         "roi": [
@@ -426,8 +426,9 @@
         ],
         "template": "自动结界/突破_进攻.png"
     },
-    "突破_重新挑战四次": {
+    "突破_重新挑战六次": {
         "recognition": "DirectHit",
+        "timeout": 2000000,
         "action": "Custom",
         "interrupt": [
             "突破_结束战斗"
