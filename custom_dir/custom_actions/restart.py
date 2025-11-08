@@ -39,6 +39,7 @@ class ReStart(CustomAction):
             context.run_task("关闭阴阳师")
             sleep(3)
             context.run_task("启动游戏")
+            print(f"重启完成,跳过任务")
             return True
 
 
