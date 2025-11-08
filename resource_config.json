@@ -1,7 +1,7 @@
 {
   "resource_name": "阴阳师",
   "resource_id": "MaaYYs",
-  "resource_version": "v1.9.8-beta.1",
+  "resource_version": "v1.9.8",
   "resource_author": "TanyaShue",
   "mirror_update_service_id": "MaaYYs",
   "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
@@ -439,7 +439,7 @@
         "阴阳寮奖励领取_识别结界特征": {
           "custom_action_param": {
             "task_list": {
-                "阴阳寮奖励24_挂结界卡": "{boole}"
+              "阴阳寮奖励24_挂结界卡": "{boole}"
             }
           }
         }
@@ -487,22 +487,44 @@
       "pipeline_override": {
         "6星及以下": {
           "阴阳寮奖励28": {
-            "expected":[0,1,2,3,4,5]
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
           }
         },
         "5星及以下": {
           "阴阳寮奖励28": {
-            "expected":[0,1,2,3,4]
+            "expected": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
           }
         },
         "4星及以下": {
           "阴阳寮奖励28": {
-            "expected":[0,1,2,3]
+            "expected": [
+              0,
+              1,
+              2,
+              3
+            ]
           }
         },
         "3星及以下": {
           "阴阳寮奖励28": {
-            "expected":[0,1,2]
+            "expected": [
+              0,
+              1,
+              2
+            ]
           }
         }
       },
