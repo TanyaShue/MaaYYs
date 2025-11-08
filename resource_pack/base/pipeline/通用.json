@@ -1,5 +1,8 @@
 {
     "点击探索": {
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "点击探索_识别是否位于探索界面",
             "点击探索_识别是否位于探索界面_OCR",
@@ -78,6 +81,9 @@
     },
     "识别探索特征": {
         "recognition": "TemplateMatch",
+        "on_error": [
+            "跳过"
+        ],
         "post_delay": 1000,
         "roi": [
             9,
@@ -202,6 +208,9 @@
     "左滑一下屏幕": {
         "action": "Custom",
         "is_sub": true,
+        "on_error": [
+            "跳过"
+        ],
         "custom_action": "RandomSwipe",
         "custom_action_param": {
             "start_roi": [
@@ -223,6 +232,9 @@
         "recognition": "ColorMatch",
         "action": "Click",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "roi": [
             253,
             447,
@@ -246,6 +258,9 @@
         "recognition": "ColorMatch",
         "action": "Click",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "roi": [
             252,
             444,
@@ -267,6 +282,9 @@
     },
     "通用_识别挑战次数": {
         "recognition": "OCR",
+        "on_error": [
+            "跳过"
+        ],
         "roi": [
             309,
             478,
@@ -276,6 +294,9 @@
     },
     "通用_测试挑战次数": {
         "action": "Custom",
+        "on_error": [
+            "跳过"
+        ],
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
             "start_repeat": false,
@@ -285,6 +306,9 @@
     "设置挑战次数_点击数字编辑": {
         "action": "Click",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "target": [
             324,
             484,
@@ -295,6 +319,9 @@
     "设置挑战次数_点击目标数字": {
         "recognition": "OCR",
         "action": "Click",
+        "on_error": [
+            "跳过"
+        ],
         "pre_delay": 1000,
         "post_delay": 2000,
         "roi": [
@@ -307,6 +334,9 @@
     "设置挑战次数_点击确定": {
         "recognition": "OCR",
         "action": "Click",
+        "on_error": [
+            "跳过"
+        ],
         "roi": [
             563,
             650,
@@ -319,6 +349,9 @@
         "recognition": "ColorMatch",
         "action": "Click",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "roi": "通用_识别加成",
         "roi_offset": [
             334,
@@ -342,6 +375,9 @@
         "recognition": "ColorMatch",
         "action": "Click",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "roi": "通用_识别加成",
         "roi_offset": [
             334,
@@ -364,6 +400,9 @@
     "通用_识别加成": {
         "recognition": "OCR",
         "timeout": 2000,
+        "on_error": [
+            "跳过"
+        ],
         "roi": [
             426,
             128,
@@ -374,6 +413,9 @@
     },
     "通用": {
         "action": "Custom",
+        "on_error": [
+            "跳过"
+        ],
         "custom_action": "BonusToggleAction",
         "custom_action_param": {
             "bonus_type": "exp_100%",
@@ -578,6 +620,9 @@
         ]
     },
     "通用_切换御魂_开始": {
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "通用_切换御魂_开始_1",
             "通用1",
