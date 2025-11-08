@@ -152,8 +152,8 @@
     "悬赏封印_识别宝箱": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 1000,
+        "on_error": "跳过",
         "next": [
             "悬赏封印_领取宝箱奖励"
         ],
@@ -171,8 +171,8 @@
     },
     "悬赏封印_领取宝箱奖励": {
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 1000,
+        "on_error": "跳过",
         "next": [
             "悬赏封印_识别宝箱"
         ],
@@ -229,8 +229,8 @@
     "悬赏封印_关闭章节界面": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "on_error": "跳过",
         "timeout": 1000,
+        "on_error": "跳过",
         "post_delay": 1000,
         "roi": [
             842,
@@ -318,7 +318,7 @@
         "next": [
             "悬赏封印1",
             "探索_悬赏_自动轮换",
-            "探索_悬赏_自动挑战"
+            "悬赏封印13"
         ],
         "post_delay": 2000,
         "roi": [
@@ -365,12 +365,12 @@
         "next": [
             "探索_悬赏_识别章节开始界面"
         ],
-        "post_delay": 30000,
+        "post_delay": 10000,
         "roi": [
-            1037,
-            642,
-            64,
-            53
+            1030,
+            629,
+            74,
+            78
         ],
         "template": "通用图标/探索_自动挑战.png",
         "method": 40,
@@ -393,8 +393,11 @@
     "探索_悬赏_自动轮换": {
         "recognition": "ColorMatch",
         "action": "Click",
-        "next": [
+        "on_error": [
             "探索_悬赏_自动挑战"
+        ],
+        "next": [
+            "悬赏封印13"
         ],
         "enabled": true,
         "post_delay": 1000,
@@ -453,7 +456,7 @@
         "timeout": 5000,
         "next": [
             "探索_悬赏_自动轮换",
-            "探索_悬赏_自动挑战"
+            "悬赏封印13"
         ],
         "template": [
             "悬赏封印/悬赏封印1.png"
@@ -499,11 +502,11 @@
     },
     "悬赏封印4": {
         "recognition": "OCR",
-        "on_error": "跳过",
         "action": "Click",
         "interrupt": [
             "悬赏封印5"
         ],
+        "on_error": "跳过",
         "next": [
             "探索_悬赏_识别章节开始界面"
         ],
@@ -519,8 +522,8 @@
     },
     "悬赏封印5": {
         "recognition": "OCR",
-        "on_error": "跳过",
         "action": "Click",
+        "on_error": "跳过",
         "pre_delay": 1000,
         "post_delay": 1000,
         "expected": "点击屏幕继续"
@@ -578,7 +581,6 @@
         ],
         "expected": "悬赏封印"
     },
-    "悬赏封印10": {},
     "悬赏封印11": {
         "recognition": "OCR",
         "next": [
@@ -592,5 +594,99 @@
         ],
         "expected": "切换"
     },
-    "悬赏封印12": {}
+    "悬赏封印12": {},
+    "悬赏_取消设置挑战次数": {
+        "recognition": "ColorMatch",
+        "action": "Click",
+        "timeout": 2000,
+        "on_error": [],
+        "next": [
+            "悬赏封印14"
+        ],
+        "roi": [
+            650,
+            462,
+            51,
+            60
+        ],
+        "method": 40,
+        "count": 500,
+        "lower": [
+            12,
+            63,
+            103
+        ],
+        "upper": [
+            22,
+            147,
+            200
+        ]
+    },
+    "悬赏封印13": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
+        "next": [
+            "悬赏封印10"
+        ],
+        "roi": [
+            689,
+            537,
+            590,
+            182
+        ],
+        "template": [
+            "悬赏封印\\悬赏封印13.png",
+            "自动御魂\\自动御魂2.png",
+            "自动御魂\\自动御魂2_1.png",
+            "自动御魂\\自动御魂2_2.png",
+            "自动御魂\\自动御魂2_3.png",
+            "自动御魂\\自动御魂2_4.png",
+            "自动御魂\\自动御魂2_5.png",
+            "自动御魂\\自动御魂2_6.png"
+        ]
+    },
+    "悬赏封印10": {
+        "recognition": "OCR",
+        "timeout": 3000,
+        "on_error": [
+            "悬赏封印14"
+        ],
+        "next": [
+            "悬赏_取消设置挑战次数"
+        ],
+        "roi": [
+            888,
+            99,
+            294,
+            101
+        ],
+        "expected": "喂食小纸人"
+    },
+    "悬赏封印14": {
+        "recognition": "OCR",
+        "action": "Click",
+        "on_error": [
+            "跳过"
+        ],
+        "next": [
+            "探索_悬赏_自动挑战"
+        ],
+        "roi": [
+            888,
+            99,
+            294,
+            101
+        ],
+        "expected": "喂食小纸人",
+        "target": [
+            438,
+            24,
+            124,
+            60
+        ]
+    }
 }
