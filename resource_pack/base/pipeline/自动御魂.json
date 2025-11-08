@@ -81,8 +81,11 @@
     "自动御魂_点击目标层数": {
         "recognition": "OCR",
         "action": "Click",
-        "next": [
+        "interrupt": [
             "自动御魂_点击式神录"
+        ],
+        "next": [
+            "自动御魂_装备挑战御魂副本御魂"
         ],
         "post_delay": 1000,
         "roi": [
@@ -96,9 +99,7 @@
     "自动御魂_点击式神录": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "next": [
-            "自动御魂_装备挑战御魂副本御魂"
-        ],
+        "next": [],
         "post_delay": 1000,
         "roi": [
             788,
@@ -109,11 +110,22 @@
         "template": "庭院/通用_式神录__816_637_55_68__766_587_155_133.png"
     },
     "自动御魂_装备挑战御魂副本御魂": {
+        "recognition": "OCR",
         "action": "Custom",
+        "interrupt": [
+            "自动御魂1"
+        ],
         "next": [
             "自动御魂_返回副本界面"
         ],
         "post_delay": 2000,
+        "roi": [
+            0,
+            0,
+            217,
+            65
+        ],
+        "expected": "式神录",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "御魂",
@@ -121,16 +133,23 @@
         }
     },
     "自动御魂_返回副本界面": {
-        "next": [
-            "自动御魂1"
-        ]
-    },
-    "自动御魂1": {
-        "recognition": "FeatureMatch",
+        "recognition": "OCR",
         "action": "Click",
         "next": [
             "自动御魂2"
         ],
+        "roi": [
+            0,
+            0,
+            262,
+            78
+        ],
+        "expected": "御魂"
+    },
+    "自动御魂1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "next": [],
         "roi": [
             0,
             0,
@@ -216,7 +235,9 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "interrupt": [
-            "自动御魂9"
+            "自动御魂9",
+            "自动御魂11",
+            "自动御魂16"
         ],
         "rate_limit": 3000,
         "timeout": 2000000,
@@ -360,7 +381,6 @@
         ],
         "expected": "当前进度"
     },
-    "自动御魂11": {},
     "寮3015_copy1_copy1": {
         "action": "Click",
         "next": [
@@ -383,13 +403,6 @@
         "custom_action": "BonusToggleAction",
         "custom_action_param": {
             "drop_soul": false
-        }
-    },
-    "自动御魂8_copy2": {
-        "action": "Custom",
-        "custom_action": "BonusToggleAction",
-        "custom_action_param": {
-            "drop_soul": true
         }
     },
     "自动御魂12": {
@@ -447,18 +460,94 @@
         "recognition": "OCR",
         "action": "Click",
         "interrupt": [
-            "自动御魂9"
+            "自动御魂9",
+            "自动御魂11",
+            "自动御魂16"
         ],
         "timeout": 2000000,
         "next": [
             "自动御魂6"
         ],
         "roi": [
-            694,
-            580,
-            62,
-            31
+            647,
+            550,
+            240,
+            66
         ],
-        "expected": "自动"
+        "expected": "自动|自动挑战"
+    },
+    "自动御魂11": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 3000,
+        "on_error": [
+            "跳过"
+        ],
+        "next": [
+            "自动御魂14"
+        ],
+        "roi": [
+            33,
+            122,
+            250,
+            178
+        ],
+        "template": [
+            "自动御魂\\自动御魂11.png"
+        ]
+    },
+    "自动御魂14": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "on_error": [
+            "跳过"
+        ],
+        "next": [
+            "自动御魂15"
+        ],
+        "roi": [
+            612,
+            452,
+            500,
+            193
+        ],
+        "template": [
+            "自动御魂\\自动御魂14.png"
+        ]
+    },
+    "自动御魂15": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 3000,
+        "roi": [
+            420,
+            160,
+            496,
+            150
+        ],
+        "expected": "获得奖励",
+        "target": [
+            651,
+            498,
+            107,
+            46
+        ]
+    },
+    "自动御魂16": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            420,
+            160,
+            496,
+            150
+        ],
+        "expected": "获得宝藏|发现宝藏",
+        "target": [
+            204,
+            608,
+            133,
+            91
+        ]
     }
 }
