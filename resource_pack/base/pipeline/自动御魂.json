@@ -134,7 +134,6 @@
     },
     "自动御魂_返回副本界面": {
         "recognition": "OCR",
-        "action": "Click",
         "next": [
             "自动御魂2"
         ],
