@@ -121,7 +121,7 @@
     "阴阳寮奖励领取_识别结界特征": {
         "recognition": "FeatureMatch",
         "action": "Custom",
-        "timeout": 1000,
+        "timeout": 10000,
         "next": [
             "返回庭院"
         ],
@@ -228,7 +228,7 @@
     },
     "阴阳寮奖励领取_识别结界特征_2": {
         "recognition": "FeatureMatch",
-        "timeout": 1000,
+        "timeout": 10000,
         "pre_delay": 1000,
         "post_delay": 1000,
         "template": "阴阳寮/阴阳寮_结界_结界换装.png"
@@ -811,6 +811,11 @@
         "on_error": [
             "跳过"
         ],
+        "next": [
+            "阴阳寮奖励33"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
         "threshold": 0.6,
         "expected": 1,
         "model": "jiejie_v1.onnx",
@@ -818,6 +823,12 @@
             "式神育成",
             "结界卡",
             "结界防守"
+        ],
+        "target_offset": [
+            4,
+            -73,
+            -2,
+            -20
         ]
     },
     "阴阳寮奖励领取_识别结界特征_copy1": {
@@ -1010,7 +1021,7 @@
             "阴阳寮奖励14",
             "阴阳寮奖励19"
         ],
-        "timeout": 1000,
+        "timeout": 10000,
         "next": [
             "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面"
         ],
@@ -1027,7 +1038,7 @@
         "interrupt": [
             "阴阳寮奖励领取_结界奖励领取_点击结界奖励"
         ],
-        "timeout": 1000,
+        "timeout": 10000,
         "next": [
             "阴阳寮结界_识别是否位于食盒界面"
         ],
@@ -1041,20 +1052,14 @@
     },
     "阴阳寮奖励领取_识别结界特征_2_copy1": {
         "recognition": "FeatureMatch",
-        "timeout": 1000,
+        "timeout": 10000,
         "pre_delay": 1000,
         "post_delay": 1000,
         "template": "阴阳寮/阴阳寮_结界_结界换装.png"
     },
     "阴阳寮奖励领取_识别结界特征_copy4": {
         "recognition": "FeatureMatch",
-        "timeout": 1000,
-        "post_delay": 500,
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png"
-    },
-    "阴阳寮奖励领取_识别结界特征_copy5": {
-        "recognition": "FeatureMatch",
-        "timeout": 1000,
+        "timeout": 10000,
         "post_delay": 500,
         "template": "阴阳寮/阴阳寮_结界_结界换装.png"
     },
@@ -1073,8 +1078,22 @@
     "阴阳寮奖励20": {},
     "阴阳寮奖励领取_识别结界特征_copy6": {
         "recognition": "FeatureMatch",
-        "timeout": 1000,
+        "timeout": 10000,
         "post_delay": 500,
         "template": "阴阳寮/阴阳寮_结界_结界换装.png"
+    },
+    "阴阳寮奖励33": {
+        "recognition": "NeuralNetworkDetect",
+        "action": "Click",
+        "on_error": [
+            "跳过"
+        ],
+        "expected": 1,
+        "model": "jiejie_v1.onnx",
+        "labels": [
+            "式神育成",
+            "结界卡",
+            "结界防守"
+        ]
     }
 }
