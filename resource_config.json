@@ -41,6 +41,13 @@
         "./resource_pack/base",
         "./resource_pack/tencent"
       ]
+    },
+    {
+      "name": "OPPO渠道服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/OPPO"
+      ]
     }
   ],
   "agent": {
