@@ -24,6 +24,9 @@ class ReStart(CustomAction):
         if current_entry =="组队副本14":
             print("组队副本14")
             return True
+        if current_entry =="自动悬赏封印":
+            print("自动悬赏封印")
+            return True
         # 判断当前任务节点是否与上一个相同
         if ReStart.the_last_entry == current_entry:
             ReStart.node_count += 1
