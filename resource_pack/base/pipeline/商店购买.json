@@ -20,20 +20,21 @@
     "商店购买1": {
         "recognition": "OCR",
         "action": "Click",
-        "next": [
-            "商店购买2"
-        ],
+        "next": [],
         "roi": [
-            776,
-            631,
-            196,
-            88
+            837,
+            633,
+            138,
+            86
         ],
         "expected": "杂货铺"
     },
     "商店购买2": {
         "recognition": "OCR",
         "action": "Click",
+        "next": [
+            "商店购买3"
+        ],
         "roi": [
             1044,
             84,
@@ -43,12 +44,83 @@
         "expected": "勋章"
     },
     "商店购买3": {
+        "action": "Custom"
+    },
+    "商店购买4": {
         "recognition": "OCR",
+        "action": "Click",
+        "on_error": [
+            "跳过"
+        ],
+        "next": [
+            "商店购买5"
+        ],
         "roi": [
             138,
-            96,
-            888,
-            485
+            85,
+            886,
+            503
+        ],
+        "expected": "神秘的符咒"
+    },
+    "商店购买5": {
+        "recognition": "OCR",
+        "next": [
+            "商店购买6"
+        ],
+        "roi": [
+            425,
+            154,
+            439,
+            141
+        ],
+        "expected": "神秘的符咒"
+    },
+    "商店购买6": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "商店购买7_copy1"
+        ],
+        "next": [
+            "商店购买7"
+        ],
+        "pre_delay": 2000,
+        "post_delay": 2000,
+        "roi": [
+            423,
+            453,
+            430,
+            136
+        ],
+        "expected": "180"
+    },
+    "商店购买7": {
+        "recognition": "OCR",
+        "inverse": true,
+        "roi": [
+            411,
+            127,
+            510,
+            211
+        ],
+        "expected": "获得奖励"
+    },
+    "商店购买7_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            411,
+            127,
+            510,
+            211
+        ],
+        "expected": "获得奖励",
+        "target": [
+            271,
+            12,
+            71,
+            40
         ]
     }
 }
