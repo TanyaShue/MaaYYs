@@ -1,8 +1,44 @@
 {
-  "Screenshot": {
-    "action": "Custom",
-    "custom_action": "ReStart",
-    "custom_action_param": {
+    "ReStart": {
+        "action": "Custom",
+        "custom_action": "ReStart",
+        "custom_action_param": {}
+    },
+    "悬赏封印_协助战斗": {
+        "recognition": "OCR",
+        "timeout": 3000,
+        "on_error": [
+            "ReStart"
+        ],
+        "next": [
+            "悬赏封印_拒绝邀请"
+        ],
+        "roi": [
+            493,
+            115,
+            305,
+            500
+        ],
+        "expected": "悬赏封印"
+    },
+    "悬赏封印_拒绝邀请": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            815,
+            367,
+            193,
+            232
+        ],
+        "expected": "拒绝"
+    },
+    "debug": {
+        "timeout": 3000,
+        "on_error": [
+            "ReStart"
+        ],
+        "next": [
+            "悬赏封印_协助战斗"
+        ]
     }
-  }
 }
