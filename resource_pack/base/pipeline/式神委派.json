@@ -50,10 +50,10 @@
         "order_by": "Vertical",
         "expected": "完成",
         "target_offset": [
-            111,
-            24,
-            -7,
-            30
+            109,
+            38,
+            0,
+            -6
         ]
     },
     "式神委派3": {
@@ -130,6 +130,13 @@
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
+        "roi": [
+            28,
+            7,
+            262,
+            106
+        ],
+        "expected": "式神委派",
         "custom_action": "CustomAppointment",
         "custom_action_param": {
             "樱饼配方": false,
@@ -257,13 +264,23 @@
         "expected": "返回"
     },
     "式神委派13": {
+        "recognition": "OCR",
         "interrupt": [
             "式神委派2",
             "式神委派4"
         ],
+        "timeout": 5000,
+        "on_error": [],
         "next": [
             "式神委派16"
-        ]
+        ],
+        "roi": [
+            28,
+            7,
+            262,
+            106
+        ],
+        "expected": "式神委派"
     },
     "式神委派16": {
         "recognition": "OCR",
@@ -277,6 +294,7 @@
             136,
             526
         ],
+        "order_by": "Vertical",
         "expected": "完成"
     },
     "式神委派17": {
