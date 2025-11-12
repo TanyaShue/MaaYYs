@@ -27,10 +27,8 @@ def main():
     parser.add_argument('-id', '--socket_id', default='maa-agent-server',
                         help='Socket ID for server connection (default: maa-agent-server)')
 
-    # Parse arguments
     args = parser.parse_args()
 
-    # Initialize toolkit
     Toolkit.init_option("./")
 
     # Use the arguments
@@ -38,7 +36,6 @@ def main():
     device_name = args.device
     socket_id = args.socket_id
 
-    # 2. 在此处调用函数，设置全局设备名称
     set_device_name(device_name)
 
     print(f"使用自定义路径: {custom_objects_path}")
