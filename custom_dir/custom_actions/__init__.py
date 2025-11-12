@@ -3,6 +3,7 @@
 __all__ = [
     "auto_battle",
     "auto_foster",
+    "kun28",
     "bonus_toggle",
     "bounty_monster_recognition",
     "challenge_dungeon_boss",
