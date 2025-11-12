@@ -10,6 +10,8 @@ from maa.agent.agent_server import AgentServer
 
 from custom_dir.until.daily_task_tracker import DailyTaskTracker
 
+from assets.resource.MaaYYs.custom_dir import print_to_ui
+
 
 @AgentServer.custom_action("TaskList")
 class TaskList(CustomAction):
@@ -30,7 +32,7 @@ class TaskList(CustomAction):
         on_error = json_data.get("on_error", None)
 
         # 1. 获取新参数 enable_once_a_day，如果参数未提供，则默认为 True
-        enable_once_a_day = json_data.get("enable_once_a_day", True)
+        enable_once_a_day = json_data.get("enable_once_a_day", False)
 
         if not task_list:
             print("无效的 task_list")
@@ -42,11 +44,8 @@ class TaskList(CustomAction):
         else:
             print("每日一次任务检查：已禁用")
 
-        # 2. 在任务开始前，创建一个 DailyTaskTracker 实例
-        # 即使禁用检查，创建此对象的开销也很小，代码更整洁
         tracker = DailyTaskTracker()
 
-        # 处理列表格式
         if isinstance(task_list, list):
             for task in task_list:
                 # 3. 在执行任务前进行检查，增加 enable_once_a_day 条件
@@ -56,6 +55,7 @@ class TaskList(CustomAction):
                         continue
 
                 print(f"执行任务: {task}")
+                print_to_ui(context,f"开始执行任务:{task}")
                 if on_error is not None:
                     context.run_task(task, {task:{"on_error":on_error}})
                 else:
