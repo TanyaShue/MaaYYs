@@ -1,11 +1,19 @@
 {
     "自动御灵": {
+        "recognition": "OCR",
         "rate_limit": 3000,
         "timeout": 2000000,
         "next": [
             "御灵_点击挑战",
             "御灵_点击屏幕继续"
-        ]
+        ],
+        "roi": [
+            8,
+            0,
+            226,
+            83
+        ],
+        "expected": "御灵"
     },
     "御灵_点击挑战": {
         "recognition": "OCR",
@@ -207,8 +215,11 @@
     "自动御灵7": {
         "recognition": "OCR",
         "action": "Click",
-        "next": [
+        "interrupt": [
             "自动御灵9"
+        ],
+        "next": [
+            "自动御灵10"
         ],
         "roi": [
             133,
@@ -237,9 +248,7 @@
     "自动御灵9": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "next": [
-            "自动御灵10"
-        ],
+        "next": [],
         "roi": [
             804,
             613,
@@ -251,10 +260,22 @@
         ]
     },
     "自动御灵10": {
+        "recognition": "OCR",
         "action": "Custom",
-        "next": [
-            "自动御灵11"
+        "interrupt": [
+            "自动御灵11",
+            "自动御灵12"
         ],
+        "next": [
+            "自动御灵"
+        ],
+        "roi": [
+            0,
+            0,
+            224,
+            63
+        ],
+        "expected": "式神录",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "默认分组",
@@ -264,9 +285,7 @@
     "自动御灵11": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "next": [
-            "自动御灵"
-        ],
+        "next": [],
         "roi": [
             0,
             1,
@@ -275,6 +294,23 @@
         ],
         "template": [
             "自动御灵\\自动御灵11.png"
+        ]
+    },
+    "自动御灵12": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            0,
+            0,
+            224,
+            63
+        ],
+        "expected": "式神录",
+        "target": [
+            14,
+            8,
+            45,
+            31
         ]
     }
 }
