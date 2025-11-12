@@ -333,7 +333,11 @@
     },
     "kun2820": {
         "action": "Custom",
-        "custom_action": "Kun28"
+        "custom_action": "Kun28",
+        "custom_action_param": {
+            "group_name": "日常",
+            "team_name": "日常清杂"
+        }
     },
     "kun2821": {
         "recognition": "OCR",

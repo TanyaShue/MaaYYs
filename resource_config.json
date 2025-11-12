@@ -252,7 +252,12 @@
     {
       "task_name": "肝绘卷",
       "task_entry": "kun2820",
-      "option": []
+      "option": [
+        "绘卷结界预设分组",
+        "绘卷结界预设队伍",
+        "绘卷探索分组",
+        "绘卷探索队伍"
+      ]
     },
     {
       "task_name": "关闭游戏",
@@ -632,6 +637,58 @@
       "doc": "填写结界突破需要使用的队伍预设名称",
       "pipeline_override": {
         "装备突破预设": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "绘卷结界预设分组",
+      "type": "input",
+      "default": "默认分组",
+      "doc": "填写绘卷结界需要使用的分组预设名称",
+      "pipeline_override": {
+        "装备突破预设": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "绘卷结界预设队伍",
+      "type": "input",
+      "default": "默认队伍",
+      "doc": "填写绘卷结界需要使用的队伍预设名称",
+      "pipeline_override": {
+        "装备突破预设": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "绘卷探索分组",
+      "type": "input",
+      "default": "默认分组",
+      "doc": "填写绘卷探索需要使用的分组预设名称",
+      "pipeline_override": {
+        "kun288": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "绘卷探索队伍",
+      "type": "input",
+      "default": "默认队伍",
+      "doc": "填写绘卷探索需要使用的队伍预设名称",
+      "pipeline_override": {
+        "kun288": {
           "custom_action_param": {
             "team_name": "{value}"
           }
