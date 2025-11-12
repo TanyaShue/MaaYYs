@@ -58,6 +58,11 @@
     "requirements_path": "./requirements.txt",
     "use_venv": true
   },
+  "platform_release_names": {
+    "windows": "MAA_YYS_FULL_windows-x64.zip",
+    "linux": "MAA_YYS_FULL_linux-x64.tar.gz",
+    "darwin": "MAA_YYS_FULL_macos-arm64.tar.gz"
+  },
   "resource_tasks": [
     {
       "task_name": "打开游戏",
