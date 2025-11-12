@@ -10,7 +10,7 @@ from maa.agent.agent_server import AgentServer
 
 from custom_dir.until.daily_task_tracker import DailyTaskTracker
 
-from assets.resource.MaaYYs.custom_dir import print_to_ui
+from custom_dir import print_to_ui
 
 
 @AgentServer.custom_action("TaskList")
