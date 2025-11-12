@@ -113,7 +113,8 @@
         "recognition": "OCR",
         "action": "Custom",
         "interrupt": [
-            "自动御魂1"
+            "自动御魂1",
+            "自动御魂17"
         ],
         "next": [
             "自动御魂_返回副本界面"
@@ -148,7 +149,6 @@
     "自动御魂1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "next": [],
         "roi": [
             0,
             0,
@@ -547,6 +547,23 @@
             608,
             133,
             91
+        ]
+    },
+    "自动御魂17": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            0,
+            0,
+            217,
+            65
+        ],
+        "expected": "式神录",
+        "target": [
+            15,
+            7,
+            43,
+            40
         ]
     }
 }
