@@ -40,11 +40,22 @@
         "template": "探索/探索_式神录.png"
     },
     "装备突破预设": {
+        "recognition": "OCR",
         "action": "Custom",
-        "next": [
+        "interrupt": [
             "探索_突破_御魂_返回"
         ],
+        "next": [
+            "自动结界3"
+        ],
         "post_delay": 2000,
+        "roi": [
+            0,
+            0,
+            222,
+            64
+        ],
+        "expected": "式神录",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "斗技",
@@ -52,12 +63,16 @@
         }
     },
     "探索_突破_御魂_返回": {
+        "recognition": "OCR",
         "action": "Click",
-        "next": [
-            "自动结界1",
-            "开始自动结界"
-        ],
         "post_delay": 2000,
+        "roi": [
+            0,
+            0,
+            222,
+            64
+        ],
+        "expected": "式神录",
         "target": [
             20,
             10,
@@ -428,11 +443,11 @@
     },
     "突破_重新挑战六次": {
         "recognition": "DirectHit",
-        "timeout": 2000000,
         "action": "Custom",
         "interrupt": [
             "突破_结束战斗"
         ],
+        "timeout": 2000000,
         "next": [
             "识别突破界面"
         ],
@@ -625,5 +640,19 @@
             142
         ],
         "expected": "式神录"
+    },
+    "自动结界3": {
+        "recognition": "OCR",
+        "next": [
+            "自动结界1",
+            "开始自动结界"
+        ],
+        "roi": [
+            524,
+            64,
+            190,
+            64
+        ],
+        "expected": "结界突破"
     }
 }
