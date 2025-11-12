@@ -185,11 +185,6 @@
       ]
     },
     {
-      "task_name": "关闭游戏",
-      "task_entry": "关闭阴阳师",
-      "option": []
-    },
-    {
       "task_name": "自动999",
       "task_entry": "9991",
       "option": [
@@ -253,6 +248,16 @@
         "200体任务",
         "100体及以下任务"
       ]
+    },
+    {
+      "task_name": "肝绘卷",
+      "task_entry": "kun2820",
+      "option": []
+    },
+    {
+      "task_name": "关闭游戏",
+      "task_entry": "关闭阴阳师",
+      "option": []
     }
   ],
   "options": [

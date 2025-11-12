@@ -16,8 +16,8 @@ class ReStart(CustomAction):
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         current_entry = argv.task_detail.entry
-        # print(f"当前任务入口: {current_entry}")
-        # print("触发timeout")
+        print(f"当前任务入口: {current_entry}")
+        print("触发timeout")
         # if current_entry =="寮突":
         #     print("寮突错误")
         #     return True
