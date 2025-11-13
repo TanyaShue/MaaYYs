@@ -1,5 +1,3 @@
-# --- START OF FILE task_list.py ---
-
 # -*- coding: UTF-8 -*-
 import json
 import time
@@ -32,7 +30,7 @@ class TaskList(CustomAction):
         on_error = json_data.get("on_error", None)
 
         # 1. 获取新参数 enable_once_a_day，如果参数未提供，则默认为 True
-        enable_once_a_day = json_data.get("enable_once_a_day", False)
+        enable_once_a_day = json_data.get("enable_once_a_day", True)
 
         if not task_list:
             print("无效的 task_list")

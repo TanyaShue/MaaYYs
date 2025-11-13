@@ -9,15 +9,15 @@
         "custom_action": "LoopAction",
         "custom_action_param": {
             "action_list": [
-                "组队副本1"
+                "组队副本18"
             ],
             "loop_times": 2
         }
     },
     "组队副本1": {
         "recognition": "FeatureMatch",
-        "action": "Click",
         "interrupt": [
+            "组队副本1_copy2",
             "组队副本10"
         ],
         "next": [
@@ -25,6 +25,12 @@
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
+        "roi": [
+            298,
+            518,
+            348,
+            195
+        ],
         "template": [
             "组队副本\\组队副本1.png"
         ],
@@ -81,10 +87,10 @@
     "组队副本5": {
         "action": "Click",
         "interrupt": [
-            "组队副本7"
+            "打开底部菜单"
         ],
         "next": [
-            "组队副本6"
+            "组队副本7"
         ],
         "target": [
             117,
@@ -96,30 +102,46 @@
     "组队副本6": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "next": [
-            "组队副本8"
-        ],
+        "next": [],
         "template": [
             "组队副本\\组队副本6.png"
         ]
     },
     "组队副本7": {
+        "recognition": "OCR",
         "action": "Click",
-        "target": [
-            1204,
-            638,
-            25,
-            35
-        ]
+        "interrupt": [
+            "组队副本6",
+            "组队副本7_copy2"
+        ],
+        "next": [
+            "组队副本8"
+        ],
+        "roi": [
+            721,
+            648,
+            468,
+            43
+        ],
+        "expected": "式神录"
     },
     "组队副本8": {
+        "recognition": "OCR",
         "action": "Custom",
         "on_error": [
             "返回庭院"
         ],
         "next": [
-            "组队副本9"
+            "组队副本9",
+            "组队副本9_返回庭院"
         ],
+        "roi": [
+            0,
+            0,
+            296,
+            105
+        ],
+        "expected": "式神录",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "组队",
@@ -150,21 +172,31 @@
     },
     "组队副本2": {
         "recognition": "OCR",
-        "action": "Click",
+        "interrupt": [
+            "组队副本10_copy1_copy1"
+        ],
         "timeout": 10000,
         "next": [
-            "组队副本11"
+            "组队副本2_copy1_copy1"
         ],
         "roi": [
-            122,
-            115,
-            265,
-            542
+            0,
+            0,
+            258,
+            64
         ],
-        "expected": "金币妖怪"
+        "expected": "组队"
     },
     "组队副本10": {
-        "action": "Swipe",
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            303,
+            603,
+            368,
+            99
+        ],
+        "expected": "组队",
         "begin": [
             143,
             595,
@@ -181,50 +213,27 @@
     },
     "组队副本11": {
         "recognition": "OCR",
-        "action": "Click",
+        "interrupt": [
+            "组队副本11_copy1"
+        ],
         "timeout": 60000,
+        "on_error": [
+            "返回庭院"
+        ],
         "next": [
-            "组队副本12",
-            "组队副本3"
+            "组队副本3",
+            "组队副本12_copy1",
+            "组队副本19"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
         "roi": [
-            670,
-            576,
-            248,
-            107
+            398,
+            108,
+            222,
+            74
         ],
-        "expected": "自动匹配"
-    },
-    "组队副本12": {
-        "recognition": "OCR",
-        "action": "Click",
-        "timeout": 120000,
-        "next": [
-            "组队副本13"
-        ],
-        "pre_delay": 1000,
-        "roi": [
-            1099,
-            527,
-            169,
-            141
-        ],
-        "expected": "准备"
-    },
-    "组队副本13": {
-        "recognition": "OCR",
-        "action": "Click",
-        "pre_delay": 1000,
-        "post_delay": 2000,
-        "roi": [
-            441,
-            668,
-            366,
-            51
-        ],
-        "expected": "点击空白区域继续"
+        "expected": "金币妖怪|经验妖怪"
     },
     "组队副本3_copy1": {
         "recognition": "FeatureMatch",
@@ -281,9 +290,7 @@
     "组队副本6_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "next": [
-            "组队副本8_copy1"
-        ],
+        "next": [],
         "template": [
             "组队副本\\组队副本6.png"
         ]
@@ -313,10 +320,10 @@
     "组队副本5_copy2": {
         "action": "Click",
         "interrupt": [
-            "组队副本7_copy1"
+            "打开底部菜单"
         ],
         "next": [
-            "组队副本6_copy1"
+            "组队副本7_copy1"
         ],
         "target": [
             117,
@@ -329,10 +336,11 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "interrupt": [
-            "组队副本10_copy1"
+            "组队副本1_copy2_copy1",
+            "组队副本10_copy2"
         ],
         "next": [
-            "组队副本2_copy1"
+            "组队副本2_copy2"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -351,7 +359,7 @@
         "action": "Click",
         "timeout": 10000,
         "next": [
-            "组队副本11_copy1"
+            "组队副本11"
         ],
         "roi": [
             122,
@@ -385,9 +393,12 @@
     "组队副本12_copy1": {
         "recognition": "OCR",
         "action": "Click",
-        "timeout": 120000,
-        "next": [
+        "interrupt": [
             "组队副本13_copy1"
+        ],
+        "timeout": 200000,
+        "next": [
+            "识别庭院特征"
         ],
         "pre_delay": 1000,
         "roi": [
@@ -399,7 +410,15 @@
         "expected": "准备"
     },
     "组队副本10_copy1": {
+        "recognition": "OCR",
         "action": "Swipe",
+        "roi": [
+            0,
+            0,
+            258,
+            64
+        ],
+        "expected": "组队",
         "begin": [
             143,
             595,
@@ -489,19 +508,28 @@
         "custom_action": "LoopAction",
         "custom_action_param": {
             "action_list": [
-                "组队副本1_copy1"
+                "组队副本18_copy1"
             ],
             "loop_times": 2
         }
     },
     "组队副本7_copy1": {
+        "recognition": "OCR",
         "action": "Click",
-        "target": [
-            1204,
-            638,
-            25,
-            35
-        ]
+        "interrupt": [
+            "组队副本6_copy1",
+            "组队副本7_copy2_copy1"
+        ],
+        "next": [
+            "组队副本8_copy1"
+        ],
+        "roi": [
+            721,
+            648,
+            468,
+            43
+        ],
+        "expected": "式神录"
     },
     "组队副本13_copy1": {
         "recognition": "OCR",
@@ -519,11 +547,8 @@
     "组队副本11_copy1": {
         "recognition": "OCR",
         "action": "Click",
-        "timeout": 60000,
-        "next": [
-            "组队副本12_copy1",
-            "组队副本3"
-        ],
+        "timeout": 300000,
+        "next": [],
         "pre_delay": 1000,
         "post_delay": 1000,
         "roi": [
@@ -535,13 +560,22 @@
         "expected": "自动匹配"
     },
     "组队副本8_copy1": {
+        "recognition": "OCR",
         "action": "Custom",
         "on_error": [
             "返回庭院"
         ],
         "next": [
-            "组队副本9_copy1"
+            "组队副本9_copy1",
+            "组队副本9_返回庭院_copy1"
         ],
+        "roi": [
+            0,
+            0,
+            296,
+            105
+        ],
+        "expected": "式神录",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "组队",
@@ -572,6 +606,7 @@
     },
     "组队副本3": {
         "recognition": "OCR",
+        "timeout": 200000,
         "next": [
             "返回庭院"
         ],
@@ -581,7 +616,7 @@
             472,
             39
         ],
-        "expected": "你还需要(?:(\\d+)小时)?(?:(\\d+)分钟)?才可以再次进入"
+        "expected": "你还需要|才可以|再次进入"
     },
     "组队副本15": {
         "action": "Custom",
@@ -620,5 +655,233 @@
             90,
             263
         ]
+    },
+    "组队副本7_copy2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            721,
+            648,
+            468,
+            43
+        ],
+        "expected": "式神录"
+    },
+    "组队副本9_返回庭院": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "组队副本"
+        ],
+        "roi": [
+            0,
+            0,
+            258,
+            64
+        ],
+        "expected": "式神录",
+        "target": [
+            27,
+            9,
+            33,
+            40
+        ]
+    },
+    "组队副本9_返回庭院_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "组队副本_copy1"
+        ],
+        "roi": [
+            0,
+            0,
+            258,
+            64
+        ],
+        "expected": "式神录",
+        "target": [
+            27,
+            9,
+            33,
+            40
+        ]
+    },
+    "组队副本7_copy2_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            721,
+            648,
+            468,
+            43
+        ],
+        "expected": "式神录"
+    },
+    "组队副本18": {
+        "interrupt": [
+            "打开底部菜单"
+        ],
+        "next": [
+            "组队副本1"
+        ]
+    },
+    "组队副本1_copy2": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            298,
+            518,
+            348,
+            195
+        ],
+        "template": [
+            "组队副本\\组队副本1.png"
+        ],
+        "target": [
+            454,
+            627,
+            21,
+            38
+        ]
+    },
+    "组队副本1_copy2_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            298,
+            518,
+            348,
+            195
+        ],
+        "template": [
+            "组队副本\\组队副本1.png"
+        ],
+        "target": [
+            454,
+            627,
+            21,
+            38
+        ]
+    },
+    "组队副本10_copy2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            303,
+            603,
+            368,
+            99
+        ],
+        "expected": "组队",
+        "begin": [
+            143,
+            595,
+            216,
+            44
+        ],
+        "end": [
+            155,
+            143,
+            206,
+            58
+        ],
+        "duration": 2000
+    },
+    "组队副本2_copy2": {
+        "recognition": "OCR",
+        "interrupt": [
+            "组队副本10_copy1"
+        ],
+        "timeout": 10000,
+        "next": [
+            "组队副本2_copy1"
+        ],
+        "roi": [
+            0,
+            0,
+            258,
+            64
+        ],
+        "expected": "组队"
+    },
+    "组队副本18_copy1": {
+        "next": [
+            "组队副本1_copy1"
+        ]
+    },
+    "组队副本10_copy1_copy1": {
+        "recognition": "OCR",
+        "action": "Swipe",
+        "roi": [
+            0,
+            0,
+            258,
+            64
+        ],
+        "expected": "组队",
+        "begin": [
+            143,
+            595,
+            216,
+            44
+        ],
+        "end": [
+            155,
+            143,
+            206,
+            58
+        ],
+        "duration": 2000
+    },
+    "组队副本2_copy1_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 10000,
+        "next": [
+            "组队副本11"
+        ],
+        "roi": [
+            122,
+            115,
+            265,
+            542
+        ],
+        "expected": "金币妖怪"
+    },
+    "组队副本19": {
+        "recognition": "OCR",
+        "timeout": 180000,
+        "next": [
+            "组队副本20",
+            "组队副本12_copy1"
+        ],
+        "roi": [
+            0,
+            0,
+            301,
+            93
+        ],
+        "expected": "协战队伍"
+    },
+    "组队副本20": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "组队副本12_copy1"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            1151,
+            577,
+            128,
+            142
+        ],
+        "expected": "挑战"
     }
 }
