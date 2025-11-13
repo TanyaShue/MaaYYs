@@ -53,7 +53,6 @@ class TaskList(CustomAction):
                         continue
 
                 print(f"执行任务: {task}")
-                print_to_ui(context,f"开始执行任务:{task}")
                 if on_error is not None:
                     context.run_task(task, {task:{"on_error":on_error}})
                 else:

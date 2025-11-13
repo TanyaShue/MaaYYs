@@ -260,9 +260,7 @@
         "recognition": "OCR",
         "action": "Click",
         "on_error": [],
-        "next": [
-            "现世逢魔_装备式神预设"
-        ],
+        "next": [],
         "post_delay": 1000,
         "roi": [
             1092,
@@ -302,7 +300,6 @@
         "recognition": "OCR",
         "action": "Click",
         "timeout": 350000,
-        "next": [],
         "post_delay": 4000,
         "roi": [
             0,
