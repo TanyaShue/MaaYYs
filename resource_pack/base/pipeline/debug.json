@@ -1,8 +1,13 @@
 {
     "ReStart": {
-        "action": "Custom",
-        "custom_action": "ReStart",
-        "custom_action_param": {}
+      "action": "Custom",
+      "custom_action": "ReStart",
+      "focus": {
+        "start": "出现异常了!!! 这是预期流程之外的超时,请反馈给开发者",
+        "level": {
+          "start": "error"
+        }
+      }
     },
     "StopTask": {
       "action": "StopTask"
@@ -42,13 +47,7 @@
         ],
         "next": [
             "悬赏封印_协助战斗"
-        ],
-      "focus": {
-        "start": "出现异常了!!! 这是预期流程之外的超时,请反馈给开发者",
-        "level": {
-          "start": "error"
-        }
-      }
+        ]
     },
     "超时_切换御魂失败": {
       "action": "Custom",

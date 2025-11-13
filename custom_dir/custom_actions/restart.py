@@ -40,10 +40,11 @@ class ReStart(CustomAction):
         #
         # if ReStart.node_count >= 2:
         #     print("任务失败两次即将重启游戏并跳过任务")
-        #     context.run_task("关闭阴阳师")
+        #     context.run_action("StopTask")
         #     sleep(3)
         #     context.run_task("启动游戏")
         #     print(f"重启完成,跳过任务")
+        #     context.run_task("关闭阴阳师")
         #     return True
         #
         #
@@ -54,7 +55,7 @@ class ReStart(CustomAction):
         #     context.run_task("启动游戏")
         #     print(f"将从任务入口 '{current_entry}' 重新开始执行。")
         #     context.run_task(f"{current_entry}")
-
+        #     context.run_action("StopTask")
         return True
 
     def stop(self) -> None:
