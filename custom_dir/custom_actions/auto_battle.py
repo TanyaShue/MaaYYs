@@ -25,8 +25,9 @@ class AutoBattle(CustomAction):
 
         # 点击预设
         if not json_data == {} and json_data["group_name"]:
-            context.run_task("点击预设", {"点击预设": {"timeout": 100, "action": "Click", "target": [49, 658, 26, 51]}})
+            context.run_task("通用_点击预设")
 
+            print("预设点击成功")
             # 添加重试机制，最多尝试3次
             max_retries = 3
             for retry in range(1, max_retries + 1):
