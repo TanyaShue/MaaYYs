@@ -5,7 +5,12 @@
         "focus": {
             "start": "11111111",
             "succeeded": "22222222",
-            "failed": "3333333333333"
+            "failed": "3333333333333",
+            "level": {
+              "start": "info",
+              "succeeded": "debug",
+              "failed": "warning"
+            }
         },
         "custom_action": "SwitchSoul",
         "custom_action_param": {
