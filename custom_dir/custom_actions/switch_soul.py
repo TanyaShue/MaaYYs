@@ -123,9 +123,13 @@ class SwitchSoul(CustomAction):
                     "roi": base_roi
                 }
             })
+            print("--------------xxxxxxxx")
+            print(detail.hit)
+            print(detail.best_result)
+            print(detail)
 
             # 找到分组
-            if detail is not None:
+            if detail.hit:
                 click_x = random.randint(detail.box.x, detail.box.x + detail.box.w)
                 click_y = random.randint(detail.box.y, detail.box.y + detail.box.h)
                 context.tasker.controller.post_click(click_x, click_y).wait()
@@ -154,7 +158,7 @@ class SwitchSoul(CustomAction):
                     }
                 })
 
-                if detail is not None:
+                if detail.hit:
                     click_x = random.randint(detail.box.x, detail.box.x + detail.box.w)
                     click_y = random.randint(detail.box.y, detail.box.y + detail.box.h)
                     context.tasker.controller.post_click(click_x, click_y).wait()
@@ -232,7 +236,7 @@ class SwitchSoul(CustomAction):
             })
             time.sleep(0.5)  # 等待界面稳定
 
-            if detail is not None:
+            if detail.hit:
                 # 找到队伍
                 roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
                 print(f"找到队伍: {team_name}，尝试装备御魂")
@@ -270,7 +274,7 @@ class SwitchSoul(CustomAction):
                     }
                 })
 
-                if detail is not None:
+                if detail.hit:
                     roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
                     print(f"精细识别第{i + 1}段找到队伍: {team_name}，尝试装备御魂")
                     equip_result = context.run_task("通用_装备御魂", {
