@@ -12,11 +12,11 @@ class ReStartGame(CustomAction):
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         print("即将重启游戏并跳过任务")
-        context.run_action("StopTask")
         context.run_task("关闭阴阳师")
         sleep(3)
         context.run_task("启动游戏")
         print(f"重启完成,跳过任务")
+        context.run_action("StopTask")
         return True
 
 

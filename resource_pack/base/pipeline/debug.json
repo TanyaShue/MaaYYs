@@ -4,6 +4,9 @@
         "custom_action": "ReStart",
         "custom_action_param": {}
     },
+    "StopTask": {
+      "action": "StopTask"
+    },
     "悬赏封印_协助战斗": {
         "recognition": "OCR",
         "timeout": 3000,
@@ -41,14 +44,20 @@
             "悬赏封印_协助战斗"
         ],
       "focus": {
-        "start": "出现异常了!!! 这是预期流程之外的超时,请反馈给开发者"
+        "start": "出现异常了!!! 这是预期流程之外的超时,请反馈给开发者",
+        "level": {
+          "start": "error"
+        }
       }
     },
     "超时_切换御魂失败": {
       "action": "Custom",
       "custom_action": "ReStartGame",
       "focus": {
-        "start": "当前任务切换御魂失败,请确保队伍名称或者分组正确后重试,即将重启后执行下一个任务"
+        "start": "当前任务切换御魂失败,请确保队伍名称或者分组正确后重试,即将重启后执行下一个任务",
+        "level": {
+          "start": "warning"
+        }
       }
     }
 }
