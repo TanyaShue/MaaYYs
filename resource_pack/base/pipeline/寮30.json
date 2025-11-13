@@ -129,6 +129,7 @@
             98,
             52
         ],
+        "on_error": "超时_切换御魂失败",
         "expected": "预设",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
