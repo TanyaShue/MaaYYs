@@ -1,4 +1,4 @@
-maafw==4.5.2
+maafw==5.0.2
 requests
 psutil
 asyncify

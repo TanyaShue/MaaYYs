@@ -24,7 +24,8 @@
         }
     },
     "testOCR": {
-        "recognition": "OCR"
+        "recognition": "OCR",
+        "expected": "AAACCC"
     },
     "testChallengeBoss": {
         "recognition": "DirectHit",
