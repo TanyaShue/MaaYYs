@@ -335,6 +335,7 @@
             "探索_悬赏_御魂_返回"
         ],
         "post_delay": 2000,
+        "on_error": "超时_切换御魂失败",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "日常清杂分组",

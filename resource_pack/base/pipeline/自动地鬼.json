@@ -82,9 +82,7 @@
     "装备地狱鬼王预设": {
         "recognition": "OCR",
         "action": "Custom",
-        "on_error": [
-            "返回庭院"
-        ],
+        "on_error": "超时_切换御魂失败",
         "next": [
             "地鬼_御魂_返回"
         ],

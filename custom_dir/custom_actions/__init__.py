@@ -19,6 +19,7 @@ __all__ = [
     "team_builder",
     "random_task",
     "restart",
+    "restartgame",
     "guess",
     "custom_appointment"
 ]

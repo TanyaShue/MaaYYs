@@ -90,6 +90,7 @@
         "next": [
             "麒麟7"
         ],
+        "on_error": "超时_切换御魂失败",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "麒麟_默认分组",
