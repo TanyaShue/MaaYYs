@@ -1,7 +1,7 @@
 {
     "ReStart": {
       "action": "Custom",
-      "custom_action": "ReStart",
+      "custom_action": "ReStartGame",
       "focus": {
         "start": "出现异常了!!! 这是预期流程之外的超时,请反馈给开发者",
         "level": {
