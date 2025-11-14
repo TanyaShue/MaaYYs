@@ -1,14 +1,14 @@
-# --- START OF FILE challenge_dungeon_boss.py ---
-
 # -*- coding: UTF-8 -*-
-import time
 import json
+from datetime import datetime, time
 
 from maa.context import Context
 from maa.custom_action import CustomAction
 from maa.agent.agent_server import AgentServer
 
 from custom_dir.until.daily_task_tracker import DailyTaskTracker
+
+from custom_dir import print_to_ui
 
 
 @AgentServer.custom_action("ChallengeDungeonBoss")
@@ -22,8 +22,12 @@ class ChallengeDungeonBoss(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
-
-        # 读取 custom_param 的参数{"group_name":"xxx", "team_name":"xxx", "count":3, "daily_once": true}
+        now = datetime.now().time()
+        start = time(0, 0, 0)  # 00:00:00
+        end = time(6, 0, 0)  # 06:00:00
+        if start <= now < end:
+            print_to_ui(context,"未在活动开放时间,跳过任务","warning")
+            return True
         json_data = json.loads(argv.custom_action_param)
 
         # 新增逻辑：检查是否需要每日只执行一次
@@ -60,8 +64,6 @@ class ChallengeDungeonBoss(CustomAction):
                                  "recognition": "TemplateMatch", "template": "地域鬼王/地鬼_挑战.png",
                                  "action": "Click", "roi": [1035, 192, 135, 504]}})
 
-            # 选择挑战等级
-            # TODO
             print("点击挑战")
 
             # 开始挑战
