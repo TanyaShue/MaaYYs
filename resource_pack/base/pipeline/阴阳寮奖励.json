@@ -754,7 +754,7 @@
         ],
         "threshold": 0.6,
         "expected": 0,
-        "model": "jiejie_v1.onnx",
+        "model": "Barrier_v1.onnx",
         "labels": [
             "式神育成",
             "结界卡",
@@ -818,7 +818,7 @@
         "post_delay": 1000,
         "threshold": 0.6,
         "expected": 1,
-        "model": "jiejie_v1.onnx",
+        "model": "Barrier_v1.onnx",
         "labels": [
             "式神育成",
             "结界卡",
@@ -920,7 +920,7 @@
             3,
             4
         ],
-        "model": "jiejiecard.onnx"
+        "model": "BarrierCard.onnx"
     },
     "阴阳寮奖励29": {
         "recognition": "OCR",
@@ -1090,7 +1090,7 @@
             "跳过"
         ],
         "expected": 1,
-        "model": "jiejie_v1.onnx",
+        "model": "Barrier_v1.onnx",
         "labels": [
             "式神育成",
             "结界卡",
