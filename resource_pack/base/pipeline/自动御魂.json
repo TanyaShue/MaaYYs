@@ -132,7 +132,7 @@
         "custom_action_param": {
             "group_name": "御魂",
             "team_name": "魂土"
-        }
+        },
     },
     "自动御魂_返回副本界面": {
         "recognition": "OCR",
@@ -535,20 +535,13 @@
     },
     "自动御魂16": {
         "recognition": "OCR",
-        "action": "Click",
         "roi": [
             420,
             160,
             496,
             150
         ],
-        "expected": "获得宝藏|发现宝藏",
-        "target": [
-            204,
-            608,
-            133,
-            91
-        ]
+        "expected": "获得宝藏|发现宝藏"
     },
     "自动御魂17": {
         "recognition": "OCR",
