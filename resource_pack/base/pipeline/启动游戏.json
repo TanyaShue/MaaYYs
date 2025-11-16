@@ -69,12 +69,12 @@
         "recognition": "OCR",
         "action": "Click",
         "roi": [
-            438,
-            347,
-            445,
-            133
+            315,
+            166,
+            618,
+            449
         ],
-        "expected": "下载"
+        "expected": "^下载$"
     },
     "启动任务5": {
         "recognition": "OCR",
