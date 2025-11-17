@@ -352,7 +352,27 @@
             "跳过"
         ],
         "next": [
-            "投喂宠物_1"
+            "投喂宠物_1",
+            "投喂宠物17"
+        ]
+    },
+    "投喂宠物17": {
+        "recognition": "NeuralNetworkDetect",
+        "action": "Click",
+        "on_error": [
+            "跳过"
+        ],
+        "next": [
+            "投喂宠物2"
+        ],
+        "threshold": 0.8,
+        "expected": 1,
+        "model": "Courtyard.onnx",
+        "labels": [
+            "召唤",
+            "宠物小屋",
+            "探索",
+            "神龛"
         ]
     }
 }
