@@ -653,6 +653,22 @@
         ],
         "expected": "情报|语音|绘卷|插画"
     },
+    "通用_出战队伍": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 10000,
+        "on_error": [
+            "跳过"
+        ],
+        "post_delay": 1000,
+        "roi": [
+            181,
+            629,
+            531,
+            81
+        ],
+        "expected": "出战"
+    },
     "通用8": {
         "recognition": "TemplateMatch",
         "action": "Click",
