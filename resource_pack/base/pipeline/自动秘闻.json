@@ -4,7 +4,8 @@
             "点击探索"
         ],
         "next": [
-            "自动秘闻4"
+            "自动秘闻4",
+            "自动秘闻7"
         ],
         "custom_action": "TaskList",
         "custom_action_param": {
@@ -302,11 +303,19 @@
         "expected": "秘闻副本"
     },
     "自动秘闻3": {
+        "recognition": "OCR",
         "action": "Click",
         "next": [
             "自动秘闻_step_2",
             "自动秘闻5"
         ],
+        "roi": [
+            58,
+            1,
+            210,
+            72
+        ],
+        "expected": "秘闻副本",
         "target": [
             874,
             293,
@@ -375,5 +384,19 @@
             113
         ],
         "expected": "秘闻副本"
+    },
+    "自动秘闻7": {
+        "recognition": "OCR",
+        "action": "Click",
+        "next": [
+            "自动秘闻3"
+        ],
+        "roi": [
+            525,
+            606,
+            102,
+            113
+        ],
+        "expected": "秘闻|副本"
     }
 }
