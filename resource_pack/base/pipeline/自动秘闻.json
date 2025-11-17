@@ -208,7 +208,8 @@
         "action": "Custom",
         "interrupt": [
             "自动秘闻_识别战斗结束",
-            "自动秘闻_识别战斗结束_copy1"
+            "自动秘闻_识别战斗结束_copy1",
+            "自动秘闻8"
         ],
         "rate_limit": 2000,
         "timeout": 1000000,
@@ -398,5 +399,16 @@
             113
         ],
         "expected": "秘闻|副本"
+    },
+    "自动秘闻8": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            455,
+            636,
+            389,
+            83
+        ],
+        "expected": "点击屏幕继续"
     }
 }
