@@ -120,6 +120,7 @@
     "寮306": {
         "recognition": "OCR",
         "action": "Custom",
+        "on_error": "超时_切换御魂失败",
         "next": [
             "寮307"
         ],
@@ -129,7 +130,6 @@
             98,
             52
         ],
-        "on_error": "超时_切换御魂失败",
         "expected": "预设",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
@@ -878,6 +878,7 @@
     "寮3040": {
         "recognition": "OCR",
         "interrupt": [
+            "寮3047",
             "寮3048",
             "寮3059"
         ],
@@ -885,8 +886,7 @@
             "返回庭院"
         ],
         "next": [
-            "寮3056",
-            "寮30_提交材料"
+            "寮3060"
         ],
         "roi": [
             526,
@@ -974,12 +974,12 @@
     },
     "寮3052": {
         "recognition": "OCR",
-        "on_error": "跳过",
         "action": "Click",
         "interrupt": [
             "寮3053",
             "寮3054"
         ],
+        "on_error": "跳过",
         "next": [
             "寮3055"
         ],
@@ -995,8 +995,8 @@
     },
     "寮3053": {
         "recognition": "OCR",
-        "on_error": "跳过",
         "action": "Click",
+        "on_error": "跳过",
         "next": [
             "寮3053_copy1"
         ],
@@ -1108,5 +1108,37 @@
         "template": [
             "寮30\\寮3059.png"
         ]
+    },
+    "寮3047": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "跳过"
+        ],
+        "next": [
+            "寮3053"
+        ],
+        "roi": [
+            154,
+            451,
+            975,
+            101
+        ],
+        "expected": "领取奖励"
+    },
+    "寮3060": {
+        "recognition": "OCR",
+        "next": [
+            "寮3056",
+            "寮30_提交材料"
+        ],
+        "inverse": true,
+        "roi": [
+            154,
+            451,
+            975,
+            101
+        ],
+        "expected": "领取奖励"
     }
 }
