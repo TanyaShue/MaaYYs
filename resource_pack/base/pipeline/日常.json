@@ -135,7 +135,8 @@
         ],
         "next": [
             "日常_每日免费一抽_开始_点击灯笼",
-            "日常"
+            "日常",
+            "日常5"
         ]
     },
     "日常_每日免费一抽_开始_点击灯笼": {
@@ -369,5 +370,24 @@
             482
         ],
         "expected": "好友"
+    },
+    "日常5": {
+        "recognition": "NeuralNetworkDetect",
+        "action": "Click",
+        "on_error": [
+            "返回庭院"
+        ],
+        "next": [
+            "日常_每日免费一抽_点击免费一抽"
+        ],
+        "threshold": 0.7,
+        "expected": 0,
+        "model": "Courtyard.onnx",
+        "labels": [
+            "召唤",
+            "宠物小屋",
+            "探索",
+            "神龛"
+        ]
     }
 }
