@@ -195,6 +195,7 @@
     "kun288": {
         "recognition": "OCR",
         "action": "Custom",
+        "on_error": "超时_切换御魂失败",
         "next": [
             "kun2813"
         ],
@@ -204,7 +205,6 @@
             84,
             48
         ],
-        "on_error": "超时_切换御魂失败",
         "expected": "预设",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
@@ -227,10 +227,12 @@
     },
     "kun28_结束战斗": {
         "recognition": "OCR",
-        "timeout": 1000,
+        "timeout": 6000,
         "next": [
             "kun2817",
-            "kun2822"
+            "kun2822",
+            "kun2823",
+            "kun28"
         ],
         "roi": [
             1121,
@@ -247,7 +249,7 @@
             "kun2814",
             "kun2821"
         ],
-        "timeout": 10000,
+        "timeout": 60000,
         "next": [
             "kun28_结束战斗",
             "kun2823"
@@ -276,6 +278,9 @@
             "kun2815"
         ],
         "timeout": 200000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "kun2816"
         ],
@@ -312,7 +317,10 @@
     "kun2818": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "timeout": 1000,
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "kun2819"
         ],
@@ -343,7 +351,10 @@
     "kun2821": {
         "recognition": "OCR",
         "action": "Swipe",
-        "timeout": 1000,
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "kun28_copy1",
             "kun2818",
@@ -547,6 +558,23 @@
             491,
             208,
             102
+        ],
+        "expected": "第二十八章"
+    },
+    "kun28": {
+        "recognition": "OCR",
+        "timeout": 3000,
+        "on_error": [
+            "跳过"
+        ],
+        "next": [
+            "kun2823"
+        ],
+        "roi": [
+            1057,
+            194,
+            199,
+            404
         ],
         "expected": "第二十八章"
     }
