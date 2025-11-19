@@ -177,19 +177,10 @@
     },
     "kun2812": {
         "interrupt": [
-            "kun287"
+            "打开底部菜单"
         ],
         "next": [
             "kun2811"
-        ]
-    },
-    "kun287": {
-        "action": "Click",
-        "target": [
-            1177,
-            619,
-            54,
-            65
         ]
     },
     "kun288": {
@@ -277,7 +268,6 @@
         "interrupt": [
             "kun2815"
         ],
-        "timeout": 200000,
         "on_error": [
             "跳过"
         ],
@@ -345,13 +335,14 @@
         "custom_action": "Kun28",
         "custom_action_param": {
             "group_name": "日常",
-            "team_name": "日常清杂"
+            "team_name": "日常清杂",
+            "target": "鬼王"
         }
     },
     "kun2821": {
         "recognition": "OCR",
         "action": "Swipe",
-        "timeout": 5000,
+        "timeout": 2000,
         "on_error": [
             "跳过"
         ],
@@ -577,5 +568,15 @@
             404
         ],
         "expected": "第二十八章"
+    },
+    "kun28_识别鬼王卷数量": {
+        "recognition": "OCR",
+        "roi": [
+            273,
+            3,
+            223,
+            59
+        ],
+        "expected": "^([0-9]+)\\/50$"
     }
 }
