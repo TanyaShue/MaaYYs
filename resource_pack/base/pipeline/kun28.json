@@ -517,6 +517,9 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "timeout": 1000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "kun28_点击屏幕继续"
         ],
