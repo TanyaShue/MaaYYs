@@ -259,6 +259,7 @@
       "task_name": "肝绘卷|超鬼王肝门票",
       "task_entry": "kun2820",
       "option": [
+        "本次目标",
         "绘卷结界预设分组",
         "绘卷结界预设队伍",
         "绘卷探索分组",
@@ -595,6 +596,39 @@
       }
     },
     {
+      "name": "本次目标",
+      "type": "select",
+      "default": "鬼王门票",
+      "doc": "这次是肝绘卷还是刷鬼王门票",
+      "pipeline_override": {
+        "鬼王门票": {
+          "kun2820": {
+            "custom_action_param": {
+                "target": "鬼王"
+            }
+         }
+        },
+        "肝绘卷": {
+          "kun2820": {
+            "custom_action_param": {
+                "target": "绘卷"
+            }
+         }
+        }
+
+      },
+      "choices": [
+        {
+          "name": "肝绘卷",
+          "value": "肝绘卷"
+        },
+        {
+          "name": "鬼王门票",
+          "value": "鬼王门票"
+        }
+      ]
+    },
+    {
       "name": "逢魔答题同步题目",
       "type": "boole",
       "default": true,
@@ -666,7 +700,7 @@
       "default": "默认分组",
       "doc": "填写绘卷结界需要使用的分组预设名称",
       "pipeline_override": {
-        "装备突破预设": {
+        "kun2820": {
           "custom_action_param": {
             "group_name": "{value}"
           }
@@ -679,7 +713,7 @@
       "default": "默认队伍",
       "doc": "填写绘卷结界需要使用的队伍预设名称",
       "pipeline_override": {
-        "装备突破预设": {
+        "kun2820": {
           "custom_action_param": {
             "team_name": "{value}"
           }
