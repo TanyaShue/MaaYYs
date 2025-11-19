@@ -42,12 +42,15 @@
     "麒麟3": {
         "recognition": "OCR",
         "action": "Click",
+        "interrupt": [
+            "麒麟4"
+        ],
         "timeout": 4000,
         "on_error": [
             "返回庭院"
         ],
         "next": [
-            "麒麟4"
+            "麒麟11"
         ],
         "roi": [
             1163,
@@ -60,9 +63,7 @@
     "麒麟4": {
         "recognition": "OCR",
         "action": "Click",
-        "next": [
-            "麒麟11"
-        ],
+        "next": [],
         "roi": [
             92,
             102,
@@ -87,10 +88,10 @@
     },
     "麒麟6": {
         "action": "Custom",
+        "on_error": "超时_切换御魂失败",
         "next": [
             "麒麟7"
         ],
-        "on_error": "超时_切换御魂失败",
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "麒麟_默认分组",
