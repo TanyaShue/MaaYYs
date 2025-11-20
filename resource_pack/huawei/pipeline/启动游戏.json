@@ -1,8 +1,23 @@
 {
-          "启动游戏": {
-            "package": "com.netease.onmyoji.huawei"
-          },
-          "关闭阴阳师": {
-            "package": "com.netease.onmyoji.huawei"
-          }
+  "启动游戏": {
+    "package": "com.netease.onmyoji.huawei",
+    "interrupt": [
+      "启动游戏1",
+      "启动任务1",
+      "关闭华为更新提示",
+      "关闭广告",
+      "关闭公告",
+      "启动任务5",
+      "启动游戏3"
+    ]
+  },
+  "关闭阴阳师": {
+    "package": "com.netease.onmyoji.huawei"
+  },
+  "关闭华为更新提示": {
+    "action": "Click",
+    "recognition": "OCR",
+    "expected": "以后再说",
+    "roi": [717, 477, 192, 134]
+  }
 }
