@@ -79,5 +79,176 @@
             53
         ],
         "expected": "召唤|鬼王"
+    },
+    "超鬼王_copy1": {
+        "recognition": "OCR",
+        "interrupt": [
+            "超鬼王7",
+            "超鬼王8"
+        ],
+        "rate_limit": 10000,
+        "timeout": 9900000,
+        "next": [
+            "超鬼王6"
+        ],
+        "roi": [
+            0,
+            0,
+            265,
+            78
+        ],
+        "expected": "蝶引迷津"
+    },
+    "超鬼王6": {
+        "inverse": true
+    },
+    "超鬼王7": {
+        "recognition": "OCR",
+        "roi": [
+            1107,
+            558,
+            143,
+            126
+        ],
+        "expected": "挑战"
+    },
+    "超鬼王8": {
+        "recognition": "OCR",
+        "action": "Click",
+        "timeout": 60000,
+        "next": [
+            "超鬼王9"
+        ],
+        "roi": [
+            1126,
+            574,
+            103,
+            53
+        ],
+        "expected": "召唤|鬼王"
+    },
+    "超鬼王9": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "超鬼王12"
+        ],
+        "next": [
+            "超鬼王11"
+        ],
+        "roi": [
+            142,
+            159,
+            96,
+            38
+        ],
+        "expected": "剩余时间"
+    },
+    "超鬼王10": {
+        "recognition": "OCR",
+        "roi": [
+            1111,
+            572,
+            133,
+            129
+        ]
+    },
+    "超鬼王11": {
+        "recognition": "OCR",
+        "interrupt": [
+            "超鬼王14"
+        ],
+        "next": [
+            "超鬼王13"
+        ],
+        "roi": [
+            354,
+            76,
+            592,
+            85
+        ],
+        "expected": "好友"
+    },
+    "超鬼王12": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            142,
+            159,
+            96,
+            38
+        ],
+        "expected": "剩余时间",
+        "target": [
+            259,
+            151,
+            36,
+            47
+        ]
+    },
+    "超鬼王13": {
+        "recognition": "OCR",
+        "action": "Click",
+        "interrupt": [
+            "超鬼王16"
+        ],
+        "next": [
+            "超鬼王15"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000,
+        "roi": [
+            340,
+            155,
+            594,
+            380
+        ],
+        "expected": "好友名称"
+    },
+    "超鬼王14": {
+        "recognition": "OCR",
+        "action": "Swipe",
+        "roi": [
+            354,
+            76,
+            592,
+            85
+        ],
+        "expected": "好友",
+        "begin": [
+            557,
+            482,
+            115,
+            51
+        ],
+        "end": [
+            566,
+            179,
+            106,
+            45
+        ],
+        "duration": 2000
+    },
+    "超鬼王15": {
+        "recognition": "OCR",
+        "inverse": true,
+        "roi": [
+            380,
+            544,
+            522,
+            64
+        ],
+        "expected": "公开|邀请"
+    },
+    "超鬼王16": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            698,
+            539,
+            159,
+            73
+        ],
+        "expected": "邀请"
     }
 }
