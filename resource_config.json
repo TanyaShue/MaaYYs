@@ -272,6 +272,11 @@
       "option": []
     },
     {
+      "task_name": "超鬼王上供",
+      "task_entry": "超鬼王_copy1",
+      "option": ["上供目标"]
+    },
+    {
       "task_name": "关闭游戏",
       "task_entry": "关闭阴阳师",
       "option": []
@@ -1158,6 +1163,17 @@
           "custom_action_param": {
             "port": "{value}"
           }
+        }
+      }
+    },
+    {
+      "name": "上供目标",
+      "type": "input",
+      "default": "好友名称",
+      "doc": "超鬼王上供目标",
+      "pipeline_override": {
+        "超鬼王13": {
+          "expected": "{value}"
         }
       }
     },
