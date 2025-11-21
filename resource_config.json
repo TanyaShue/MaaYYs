@@ -1,7 +1,7 @@
 {
   "resource_name": "阴阳师",
   "resource_id": "MaaYYs",
-  "resource_version": "v2.1.9.beta.4",
+  "resource_version": "v2.1.9-beta.5",
   "resource_author": "TanyaShue",
   "mirror_update_service_id": "MaaYYs",
   "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
@@ -274,9 +274,7 @@
     {
       "task_name": "超鬼王上供",
       "task_entry": "超鬼王_copy1",
-      "option": [
-        "上供目标"
-      ]
+      "option": ["上供目标"]
     },
     {
       "task_name": "关闭游戏",
