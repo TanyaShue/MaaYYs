@@ -75,14 +75,14 @@ class Kun28(CustomAction):
                     else:
                         context.run_task(task)
 
-                    # 任务间的随机等待
-                    if random.random() < 0.9:
-                        number = random.randint(1, 100)  # 90% 概率短等待
-                    else:
-                        number = random.randint(1, 600)  # 10% 概率长等待
+                # 任务间的随机等待
+                if random.random() < 0.9:
+                    number = random.randint(1, 100)  # 90% 概率短等待
+                else:
+                    number = random.randint(1, 600)  # 10% 概率长等待
 
-                    print(f"清理结界中随机休息: {number} 秒")
-                    time.sleep(number)
+                print(f"清理结界中随机休息: {number} 秒")
+                time.sleep(number)
             else:
                 # 突破卷不足，继续探索/战斗
                 print("突破卷 < 20，执行探索任务...")
