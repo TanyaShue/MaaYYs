@@ -240,7 +240,8 @@
             "kun28_copy1",
             "kun2818",
             "kun2814",
-            "kun2821"
+            "kun2821",
+            "kun28_copy1_copy1"
         ],
         "timeout": 60000,
         "next": [
@@ -351,7 +352,8 @@
         "next": [
             "kun28_copy1",
             "kun2818",
-            "kun2821_copy1"
+            "kun2821_copy1",
+            "kun28_copy1_copy1"
         ],
         "pre_delay": 2000,
         "post_delay": 2000,
@@ -411,7 +413,8 @@
         "next": [
             "kun28_copy1",
             "kun2818",
-            "kun2821_copy2"
+            "kun2821_copy2",
+            "kun28_copy1_copy1"
         ],
         "pre_delay": 2000,
         "post_delay": 2000,
@@ -443,7 +446,8 @@
         "next": [
             "kun28_copy1",
             "kun2818",
-            "kun2821_copy3"
+            "kun2821_copy3",
+            "kun28_copy1_copy1"
         ],
         "pre_delay": 2000,
         "post_delay": 2000,
@@ -600,5 +604,25 @@
             384
         ],
         "expected": "第|章"
+    },
+    "kun28_copy1_copy1": {
+        "recognition": "FeatureMatch",
+        "action": "Click",
+        "timeout": 10000,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "roi": [
+            5,
+            110,
+            1274,
+            530
+        ],
+        "template": [
+            "kun28\\kun28.png",
+            "kun28\\kun28_1.png",
+            "kun28\\kun28_2.png",
+            "kun28\\kun28_copy1.png",
+            "kun28\\kun28_copy1_1.png"
+        ]
     }
 }
