@@ -1,0 +1,83 @@
+{
+    "超鬼王": {
+        "recognition": "OCR",
+        "interrupt": [
+            "超鬼王2",
+            "超鬼王3",
+            "超鬼王4",
+            "超鬼王5"
+        ],
+        "rate_limit": 2000,
+        "timeout": 200000,
+        "next": [
+            "超鬼王1"
+        ],
+        "roi": [
+            0,
+            0,
+            265,
+            78
+        ],
+        "expected": "蝶引迷津"
+    },
+    "超鬼王1": {
+        "recognition": "OCR",
+        "roi": [
+            1096,
+            16,
+            182,
+            55
+        ],
+        "expected": "\\b\\d{3}/100\\b"
+    },
+    "超鬼王2": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1107,
+            558,
+            143,
+            126
+        ],
+        "expected": "挑战"
+    },
+    "超鬼王3": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1089,
+            505,
+            150,
+            159
+        ],
+        "expected": "准备"
+    },
+    "超鬼王4": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            389,
+            226,
+            514,
+            240
+        ],
+        "expected": "本次伤害",
+        "target": [
+            459,
+            641,
+            85,
+            76
+        ]
+    },
+    "超鬼王5": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1126,
+            574,
+            103,
+            53
+        ],
+        "expected": "召唤|鬼王"
+    }
+}
