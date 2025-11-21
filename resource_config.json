@@ -274,7 +274,9 @@
     {
       "task_name": "超鬼王上供",
       "task_entry": "超鬼王_copy1",
-      "option": ["上供目标"]
+      "option": [
+        "上供目标"
+      ]
     },
     {
       "task_name": "关闭游戏",
