@@ -516,7 +516,8 @@
             "kun28\\kun28_1.png",
             "kun28\\kun28_2.png",
             "kun28\\kun28_copy1.png",
-            "kun28\\kun28_copy1_1.png"
+            "kun28\\kun28_copy1_1.png",
+            "kun28\\kun2825.png"
         ]
     },
     "kun2817": {
@@ -622,7 +623,12 @@
             "kun28\\kun28_1.png",
             "kun28\\kun28_2.png",
             "kun28\\kun28_copy1.png",
-            "kun28\\kun28_copy1_1.png"
+            "kun28\\kun28_copy1_1.png",
+            "kun28\\kun2825.png"
         ]
+    },
+    "kun2825": {
+        "recognition": "TemplateMatch",
+        "template": []
     }
 }
