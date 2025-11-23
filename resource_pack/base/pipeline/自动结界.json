@@ -106,7 +106,7 @@
     "识别突破界面": {
         "recognition": "OCR",
         "interrupt": [
-            "突破_结束战斗_copy1"
+            "突破_结束战斗"
         ],
         "next": [
             "自动结界6"
@@ -510,7 +510,7 @@
     "突破_再次挑战": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
+        "timeout": 5000,
         "next": [
             "确认再次挑战"
         ],
@@ -554,7 +554,7 @@
     "突破_再次挑战_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
+        "timeout": 5000,
         "next": [
             "确认再次挑战_copy1"
         ],
@@ -586,7 +586,7 @@
     "突破_再次挑战_copy1_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "timeout": 1000,
+        "timeout": 5000,
         "next": [
             "自动结界4"
         ],
@@ -691,23 +691,5 @@
             38
         ],
         "expected": "点击屏幕继续"
-    },
-    "突破_结束战斗_copy1": {
-        "recognition": "OCR",
-        "action": "Click",
-        "post_delay": 1000,
-        "roi": [
-            514,
-            676,
-            323,
-            38
-        ],
-        "expected": "点击屏幕继续",
-        "target": [
-            219,
-            419,
-            1002,
-            168
-        ]
     }
 }
