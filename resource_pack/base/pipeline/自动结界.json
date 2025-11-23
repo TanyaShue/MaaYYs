@@ -511,6 +511,9 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ],
         "next": [
             "确认再次挑战"
         ],
@@ -556,7 +559,8 @@
         "action": "Click",
         "timeout": 5000,
         "next": [
-            "确认再次挑战_copy1"
+            "确认再次挑战_copy1",
+            "自动结界7"
         ],
         "post_delay": 500,
         "roi": [
@@ -585,8 +589,13 @@
     },
     "突破_再次挑战_copy1_copy1": {
         "recognition": "FeatureMatch",
-        "action": "Click",
+        "interrupt": [
+            "突破_结束战斗"
+        ],
         "timeout": 5000,
+        "on_error": [
+            "识别突破界面"
+        ],
         "next": [
             "自动结界4"
         ],
@@ -609,7 +618,7 @@
         "recognition": "OCR",
         "action": "Click",
         "next": [
-            "识别突破界面"
+            "自动结界8"
         ],
         "roi": [
             961,
@@ -691,5 +700,59 @@
             38
         ],
         "expected": "点击屏幕继续"
+    },
+    "自动结界7": {
+        "recognition": "OCR",
+        "next": [
+            "突破_再次挑战_copy1_copy1"
+        ],
+        "roi": [
+            5,
+            630,
+            131,
+            71
+        ],
+        "expected": "自动"
+    },
+    "自动结界8": {
+        "recognition": "OCR",
+        "interrupt": [
+            "自动结界9_copy1"
+        ],
+        "next": [
+            "自动结界9"
+        ],
+        "roi": [
+            412,
+            268,
+            451,
+            204
+        ],
+        "expected": "刷新后攻破记录"
+    },
+    "自动结界9": {
+        "recognition": "OCR",
+        "next": [
+            "识别突破界面"
+        ],
+        "inverse": true,
+        "roi": [
+            669,
+            386,
+            171,
+            76
+        ],
+        "expected": "确定"
+    },
+    "自动结界9_copy1": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            669,
+            386,
+            171,
+            76
+        ],
+        "expected": "确定"
     }
 }
