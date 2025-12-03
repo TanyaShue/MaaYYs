@@ -89,7 +89,8 @@ class BonusToggleAction(CustomAction):
                 "通用_识别加成": {
                     "expected": expected_text,
                     "next": next_task,
-                    "timeout":2000
+                    "timeout":2000,
+                    "on_error":"跳过"
                 }
             })
 
