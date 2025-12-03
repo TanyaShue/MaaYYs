@@ -256,28 +256,16 @@
       ]
     },
     {
-      "task_name": "肝绘卷|超鬼王肝门票",
+      "task_name": "肝绘卷",
       "task_entry": "kun2820",
       "option": [
-        "本次目标",
         "绘卷结界预设分组",
         "绘卷结界预设队伍",
         "绘卷探索分组",
         "绘卷探索队伍"
       ]
     },
-    {
-      "task_name": "超鬼王",
-      "task_entry": "超鬼王",
-      "option": []
-    },
-    {
-      "task_name": "超鬼王上供",
-      "task_entry": "超鬼王_copy1",
-      "option": [
-        "上供目标"
-      ]
-    },
+
     {
       "task_name": "关闭游戏",
       "task_entry": "关闭阴阳师",
@@ -610,7 +598,7 @@
     {
       "name": "本次目标",
       "type": "select",
-      "default": "鬼王门票",
+      "default": "肝绘卷",
       "doc": "这次是肝绘卷还是刷鬼王门票",
       "pipeline_override": {
         "鬼王门票": {

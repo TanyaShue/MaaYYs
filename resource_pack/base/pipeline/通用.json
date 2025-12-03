@@ -185,7 +185,7 @@
             "通用4",
             "通用10"
         ],
-      "timeout": 60000
+        "timeout": 60000
     },
     "打开底部菜单_匹配": {
         "recognition": "FeatureMatch",
