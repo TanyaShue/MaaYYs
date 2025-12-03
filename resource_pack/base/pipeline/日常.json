@@ -131,24 +131,16 @@
         ]
     },
     "日常_每日免费一抽": {
-        "interrupt": [
-            "日常2"
-        ],
+        "interrupt": [],
         "next": [
-            "日常_每日免费一抽_开始_点击灯笼",
-            "日常",
-            "日常5"
+            "日常2"
         ]
     },
     "日常_每日免费一抽_开始_点击灯笼": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "timeout": 5000,
         "on_error": [
             "返回庭院"
-        ],
-        "next": [
-            "日常_每日免费一抽_点击免费一抽"
         ],
         "post_delay": 1000,
         "roi": [
@@ -285,9 +277,7 @@
         "on_error": [
             "返回庭院"
         ],
-        "next": [
-            "日常_每日免费一抽_点击免费一抽"
-        ],
+        "next": [],
         "roi": [
             309,
             103,
@@ -324,21 +314,22 @@
         "expected": "跳过"
     },
     "日常2": {
-        "recognition": "TemplateMatch",
+        "action": "Custom",
+        "interrupt": [
+            "日常5",
+            "日常_每日免费一抽_开始_点击灯笼",
+            "日常"
+        ],
         "next": [
-            "日常_每日免费一抽_向左滑一下"
+            "日常8"
         ],
-        "roi": [
-            0,
-            496,
-            387,
-            220
-        ],
-        "template": [
-            "日常\\日常2.png",
-            "日常\\日常2_1.png",
-            "日常\\日常2_2.png"
-        ]
+        "custom_action": "LoopAction",
+        "custom_action_param": {
+            "action_list": [
+                "日常_每日免费一抽_向左滑一下"
+            ],
+            "loop_times": 3
+        }
     },
     "日常3": {
         "recognition": "OCR",
@@ -378,9 +369,7 @@
         "on_error": [
             "返回庭院"
         ],
-        "next": [
-            "日常_每日免费一抽_点击免费一抽"
-        ],
+        "next": [],
         "threshold": 0.7,
         "expected": 0,
         "model": "Courtyard.onnx",
@@ -401,5 +390,22 @@
             32
         ],
         "expected": "好友"
+    },
+    "日常7": {},
+    "日常8": {
+        "recognition": "OCR",
+        "on_error": [
+            "返回庭院"
+        ],
+        "next": [
+            "日常_每日免费一抽_点击免费一抽"
+        ],
+        "roi": [
+            83,
+            0,
+            162,
+            85
+        ],
+        "expected": "召唤"
     }
 }
