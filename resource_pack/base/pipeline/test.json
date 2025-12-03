@@ -7,9 +7,9 @@
             "succeeded": "22222222",
             "failed": "3333333333333",
             "level": {
-              "start": "info",
-              "succeeded": "debug",
-              "failed": "warning"
+                "start": "info",
+                "succeeded": "debug",
+                "failed": "warning"
             }
         },
         "custom_action": "SwitchSoul",
@@ -54,18 +54,28 @@
         ],
         "expected": ".*"
     },
-    "测试": {
-    },
+    "测试": {},
     "test": {
         "recognition": "NeuralNetworkDetect",
         "model": "Barrier_v1.onnx",
-        "labels":["式神育成", "结界卡", "结界防守"],
+        "labels": [
+            "式神育成",
+            "结界卡",
+            "结界防守"
+        ],
         "expected": 0
     },
     "test_model_BarrierCard": {
         "recognition": "NeuralNetworkDetect",
         "model": "BarrierCard.onnx",
-        "labels":["1start", "2start", "3start", "4start", "5start", "6start"],
+        "labels": [
+            "1start",
+            "2start",
+            "3start",
+            "4start",
+            "5start",
+            "6start"
+        ],
         "expected": 0
     }
 }
