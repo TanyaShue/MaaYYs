@@ -195,30 +195,29 @@
         "next": [
             "投喂宠物10"
         ],
-        "expected": "排骨|鲜鱼",
-        "target": [
-            209,
-            99,
-            250,
-            86
-        ]
+        "roi": [
+            179,
+            140,
+            352,
+            510
+        ],
+        "expected": "排骨|鲜鱼"
     },
     "投喂宠物10": {
         "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            716,
-            243,
-            360,
-            49
+        "interrupt": [
+            "投喂宠物14"
         ],
-        "expected": "排骨|鲜鱼",
-        "target": [
-            784,
-            567,
-            160,
-            49
-        ]
+        "next": [
+            "投喂宠物12"
+        ],
+        "roi": [
+            688,
+            242,
+            348,
+            133
+        ],
+        "expected": "排骨|鲜鱼"
     },
     "投喂宠物7_copy1": {
         "recognition": "TemplateMatch",
@@ -404,5 +403,27 @@
             50
         ],
         "expected": "快速喂养"
+    },
+    "投喂宠物12": {
+        "recognition": "OCR",
+        "inverse": true,
+        "roi": [
+            782,
+            564,
+            156,
+            61
+        ],
+        "expected": "放置食材"
+    },
+    "投喂宠物14": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            782,
+            564,
+            156,
+            61
+        ],
+        "expected": "放置食材"
     }
 }
