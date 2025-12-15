@@ -65,7 +65,7 @@ jobs:
             runner: windows-latest
             mfwph_pattern: 'MFWPH_windows-x64.zip'
           - os: macos-x64
-            runner: macos-13
+            runner: macos-15-intel
             mfwph_pattern: 'MFWPH_macos-x64.tar.gz'
           - os: macos-arm64
             runner: macos-14
