@@ -40,15 +40,13 @@
     "麒麟3": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "麒麟4"
-        ],
         "timeout": 4000,
         "on_error": [
             "返回庭院"
         ],
         "next": [
-            "麒麟11"
+            "麒麟11",
+            "[JumpBack]麒麟4"
         ],
         "roi": [
             1163,
@@ -86,7 +84,7 @@
     },
     "麒麟6": {
         "action": "Custom",
-        "on_error": "超时_切换御魂失败",
+        "on_error": ["超时_切换御魂失败"],
         "next": [
             "麒麟7"
         ],

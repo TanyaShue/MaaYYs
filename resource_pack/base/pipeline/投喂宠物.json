@@ -2,16 +2,14 @@
     "投喂宠物_1": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "interrupt": [
-            "投喂宠物_1_copy1",
-            "投喂宠物1"
-        ],
         "on_error": [
             "跳过"
         ],
         "next": [
             "投喂宠物2",
-            "投喂宠物18"
+            "投喂宠物18",
+            "[JumpBack]投喂宠物_1_copy1",
+            "[JumpBack]投喂宠物1"
         ],
         "roi": [
             712,
@@ -44,7 +42,7 @@
     "投喂宠物1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [],
         "roi": [
             1103,
@@ -128,11 +126,9 @@
     "投喂宠物5": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "interrupt": [
-            "投喂宠物16"
-        ],
         "next": [
-            "投喂宠物11"
+            "投喂宠物11",
+            "[JumpBack]投喂宠物16"
         ],
         "roi": [
             0,
@@ -153,7 +149,7 @@
     "投喂宠物6": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "投喂宠物8"
         ],
@@ -205,11 +201,9 @@
     },
     "投喂宠物10": {
         "recognition": "OCR",
-        "interrupt": [
-            "投喂宠物14"
-        ],
         "next": [
-            "投喂宠物12"
+            "投喂宠物12",
+            "[JumpBack]投喂宠物14"
         ],
         "roi": [
             688,
@@ -239,12 +233,10 @@
     },
     "投喂宠物11": {
         "recognition": "OCR",
-        "interrupt": [
-            "投喂宠物7",
-            "投喂宠物6"
-        ],
         "next": [
-            "投喂宠物7_copy1"
+            "投喂宠物7_copy1",
+            "[JumpBack]投喂宠物7",
+            "[JumpBack]投喂宠物6"
         ],
         "pre_delay": 1000,
         "post_delay": 2000,
@@ -305,15 +297,13 @@
     "投喂宠物17": {
         "recognition": "NeuralNetworkDetect",
         "action": "Click",
-        "interrupt": [
-            "投喂宠物1"
-        ],
         "on_error": [
             "跳过"
         ],
         "next": [
             "投喂宠物2",
-            "投喂宠物18"
+            "投喂宠物18",
+            "[JumpBack]投喂宠物1"
         ],
         "threshold": 0.8,
         "expected": 1,

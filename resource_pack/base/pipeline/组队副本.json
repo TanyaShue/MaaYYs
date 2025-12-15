@@ -16,12 +16,10 @@
     },
     "组队副本1": {
         "recognition": "FeatureMatch",
-        "interrupt": [
-            "组队副本1_copy2",
-            "组队副本10"
-        ],
         "next": [
-            "组队副本2"
+            "组队副本2",
+            "[JumpBack]组队副本1_copy2",
+            "[JumpBack]组队副本10"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -87,11 +85,9 @@
     },
     "组队副本5": {
         "action": "Click",
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "next": [
-            "组队副本7"
+            "组队副本7",
+            "[JumpBack]打开底部菜单"
         ],
         "target": [
             117,
@@ -111,12 +107,10 @@
     "组队副本7": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "组队副本6",
-            "组队副本7_copy2"
-        ],
         "next": [
-            "组队副本8"
+            "组队副本8",
+            "[JumpBack]组队副本6",
+            "[JumpBack]组队副本7_copy2"
         ],
         "roi": [
             721,
@@ -173,12 +167,10 @@
     },
     "组队副本2": {
         "recognition": "OCR",
-        "interrupt": [
-            "组队副本10_copy1_copy1"
-        ],
         "timeout": 10000,
         "next": [
-            "组队副本2_copy1_copy1"
+            "组队副本2_copy1_copy1",
+            "[JumpBack]组队副本10_copy1_copy1"
         ],
         "roi": [
             0,
@@ -214,9 +206,6 @@
     },
     "组队副本11": {
         "recognition": "OCR",
-        "interrupt": [
-            "组队副本11_copy1"
-        ],
         "timeout": 60000,
         "on_error": [
             "返回庭院"
@@ -224,7 +213,8 @@
         "next": [
             "组队副本3",
             "组队副本12_copy1",
-            "组队副本19"
+            "组队副本19",
+            "[JumpBack]组队副本11_copy1"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -322,11 +312,9 @@
     },
     "组队副本5_copy2": {
         "action": "Click",
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "next": [
-            "组队副本7_copy1"
+            "组队副本7_copy1",
+            "[JumpBack]打开底部菜单"
         ],
         "target": [
             117,
@@ -338,12 +326,10 @@
     "组队副本1_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "组队副本1_copy2_copy1",
-            "组队副本10_copy2"
-        ],
         "next": [
-            "组队副本2_copy2"
+            "组队副本2_copy2",
+            "[JumpBack]组队副本1_copy2_copy1",
+            "[JumpBack]组队副本10_copy2"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -396,12 +382,10 @@
     "组队副本12_copy1": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "组队副本13_copy1"
-        ],
         "timeout": 200000,
         "next": [
-            "识别庭院特征"
+            "识别庭院特征",
+            "[JumpBack]组队副本13_copy1"
         ],
         "pre_delay": 1000,
         "roi": [
@@ -520,12 +504,10 @@
     "组队副本7_copy1": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "组队副本6_copy1",
-            "组队副本7_copy2_copy1"
-        ],
         "next": [
-            "组队副本8_copy1"
+            "组队副本8_copy1",
+            "[JumpBack]组队副本6_copy1",
+            "[JumpBack]组队副本7_copy2_copy1"
         ],
         "roi": [
             721,
@@ -724,11 +706,9 @@
         "expected": "式神录"
     },
     "组队副本18": {
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "next": [
-            "组队副本1"
+            "组队副本1",
+            "[JumpBack]打开底部菜单"
         ]
     },
     "组队副本1_copy2": {
@@ -799,12 +779,10 @@
     },
     "组队副本2_copy2": {
         "recognition": "OCR",
-        "interrupt": [
-            "组队副本10_copy1"
-        ],
         "timeout": 10000,
         "next": [
-            "组队副本2_copy1"
+            "组队副本2_copy1",
+            "[JumpBack]组队副本10_copy1"
         ],
         "roi": [
             0,

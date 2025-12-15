@@ -1,11 +1,9 @@
 {
     "自动结界": {
-        "interrupt": [
-            "点击探索"
-        ],
-        "on_error": "返回庭院",
+        "on_error": ["返回庭院"],
         "next": [
-            "结界突破_点击结界突破"
+            "结界突破_点击结界突破",
+            "[JumpBack]点击探索"
         ]
     },
     "结界突破_点击结界突破": {
@@ -42,12 +40,10 @@
     "装备突破预设": {
         "recognition": "OCR",
         "action": "Custom",
-        "interrupt": [
-            "探索_突破_御魂_返回"
-        ],
-        "on_error": "超时_切换御魂失败",
+        "on_error": ["超时_切换御魂失败"],
         "next": [
-            "自动结界3"
+            "自动结界3",
+            "[JumpBack]探索_突破_御魂_返回"
         ],
         "post_delay": 2000,
         "roi": [
@@ -84,15 +80,13 @@
     "突破_点击进攻": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "interrupt": [
-            "突破_结束战斗"
-        ],
         "rate_limit": 2000,
         "timeout": 200000,
         "next": [
             "识别突破界面",
             "突破_再次挑战_copy1",
-            "自动结界2_战斗准备"
+            "自动结界2_战斗准备",
+            "[JumpBack]突破_结束战斗"
         ],
         "post_delay": 10000,
         "roi": [
@@ -105,11 +99,9 @@
     },
     "识别突破界面": {
         "recognition": "OCR",
-        "interrupt": [
-            "突破_结束战斗"
-        ],
         "next": [
-            "自动结界6"
+            "自动结界6",
+            "[JumpBack]突破_结束战斗"
         ],
         "post_delay": 1000,
         "roi": [
@@ -157,11 +149,9 @@
     },
     "结束突破": {
         "recognition": "OCR",
-        "interrupt": [
-            "关闭结界突破"
-        ],
         "next": [
-            "突破_识别探索特征_OCR"
+            "突破_识别探索特征_OCR",
+            "[JumpBack]关闭结界突破"
         ],
         "post_delay": 2000,
         "roi": [
@@ -199,21 +189,19 @@
     },
     "开始自动结界": {
         "recognition": "OCR",
-        "interrupt": [
-            "突破_结束战斗",
-            "突破_领取奖励",
-            "挑战第一个结界",
-            "挑战第二个结界",
-            "挑战第三个结界",
-            "挑战第四个结界",
-            "挑战第五个结界",
-            "挑战第六个结界",
-            "挑战第七个结界",
-            "挑战第八个结界",
-            "挑战第九个结界"
-        ],
         "next": [
-            "结束突破"
+            "结束突破",
+            "[JumpBack]突破_结束战斗",
+            "[JumpBack]突破_领取奖励",
+            "[JumpBack]挑战第一个结界",
+            "[JumpBack]挑战第二个结界",
+            "[JumpBack]挑战第三个结界",
+            "[JumpBack]挑战第四个结界",
+            "[JumpBack]挑战第五个结界",
+            "[JumpBack]挑战第六个结界",
+            "[JumpBack]挑战第七个结界",
+            "[JumpBack]挑战第八个结界",
+            "[JumpBack]挑战第九个结界"
         ],
         "post_delay": 1000,
         "roi": [
@@ -228,7 +216,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -251,7 +239,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -274,7 +262,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -297,7 +285,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -320,7 +308,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -343,7 +331,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -366,7 +354,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -389,7 +377,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_点击进攻"
         ],
@@ -412,7 +400,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 2000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_最后一个进攻",
             "自动结界5"
@@ -453,15 +441,13 @@
     },
     "突破_重新挑战六次": {
         "action": "Custom",
-        "interrupt": [
-            "突破_结束战斗"
-        ],
         "timeout": 2000000,
         "on_error": [
             "跳过"
         ],
         "next": [
-            "识别突破界面"
+            "识别突破界面",
+            "[JumpBack]突破_结束战斗"
         ],
         "custom_action": "LoopAction",
         "custom_action_param": {
@@ -475,7 +461,7 @@
     "突破_重新挑战": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "退出战斗_确认"
         ],
@@ -494,7 +480,7 @@
     "退出战斗_确认": {
         "recognition": "OCR",
         "action": "Click",
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "突破_再次挑战"
         ],
@@ -589,15 +575,13 @@
     },
     "突破_再次挑战_copy1_copy1": {
         "recognition": "FeatureMatch",
-        "interrupt": [
-            "突破_结束战斗"
-        ],
         "timeout": 5000,
         "on_error": [
             "识别突破界面"
         ],
         "next": [
-            "自动结界4"
+            "自动结界4",
+            "[JumpBack]突破_结束战斗"
         ],
         "post_delay": 500,
         "roi": [
@@ -631,12 +615,10 @@
     "自动结界2_战斗准备": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "突破_结束战斗"
-        ],
         "next": [
             "突破_再次挑战_copy1",
-            "识别突破界面"
+            "识别突破界面",
+            "[JumpBack]突破_结束战斗"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -716,11 +698,9 @@
     },
     "自动结界8": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动结界9_copy1"
-        ],
         "next": [
-            "自动结界9"
+            "自动结界9",
+            "[JumpBack]自动结界9_copy1"
         ],
         "roi": [
             412,

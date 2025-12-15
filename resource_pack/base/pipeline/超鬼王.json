@@ -1,16 +1,14 @@
 {
     "超鬼王": {
         "recognition": "OCR",
-        "interrupt": [
-            "超鬼王2",
-            "超鬼王3",
-            "超鬼王4",
-            "超鬼王5"
-        ],
         "rate_limit": 2000,
         "timeout": 200000,
         "next": [
-            "超鬼王1"
+            "超鬼王1",
+            "[JumpBack]超鬼王2",
+            "[JumpBack]超鬼王3",
+            "[JumpBack]超鬼王4",
+            "[JumpBack]超鬼王5"
         ],
         "roi": [
             0,
@@ -82,14 +80,12 @@
     },
     "超鬼王_copy1": {
         "recognition": "OCR",
-        "interrupt": [
-            "超鬼王7",
-            "超鬼王8"
-        ],
         "rate_limit": 10000,
         "timeout": 9900000,
         "next": [
-            "超鬼王6"
+            "超鬼王6",
+            "[JumpBack]超鬼王7",
+            "[JumpBack]超鬼王8"
         ],
         "roi": [
             0,
@@ -130,11 +126,9 @@
     "超鬼王9": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "超鬼王12"
-        ],
         "next": [
-            "超鬼王11"
+            "超鬼王11",
+            "[JumpBack]超鬼王12"
         ],
         "roi": [
             142,
@@ -155,11 +149,9 @@
     },
     "超鬼王11": {
         "recognition": "OCR",
-        "interrupt": [
-            "超鬼王14"
-        ],
         "next": [
-            "超鬼王13"
+            "超鬼王13",
+            "[JumpBack]超鬼王14"
         ],
         "roi": [
             354,
@@ -189,11 +181,9 @@
     "超鬼王13": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "超鬼王16"
-        ],
         "next": [
-            "超鬼王15"
+            "超鬼王15",
+            "[JumpBack]超鬼王16"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,

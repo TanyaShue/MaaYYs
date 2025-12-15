@@ -1,19 +1,17 @@
 {
     "启动游戏": {
         "action": "StartApp",
-        "interrupt": [
-            "启动游戏1",
-            "启动任务1",
-            "关闭广告",
-            "关闭公告",
-            "启动任务5",
-            "启动游戏3"
-        ],
         "rate_limit": 2000,
         "timeout": 60000,
         "next": [
             "启动游戏5",
-            "启动游戏2"
+            "启动游戏2",
+            "[JumpBack]启动游戏1",
+            "[JumpBack]启动任务1",
+            "[JumpBack]关闭广告",
+            "[JumpBack]关闭公告",
+            "[JumpBack]启动任务5",
+            "[JumpBack]启动游戏3"
         ],
         "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2"
     },
@@ -99,11 +97,9 @@
     },
     "启动游戏2": {
         "recognition": "OCR",
-        "interrupt": [
-            "启动游戏4"
-        ],
         "next": [
-            "启动游戏7"
+            "启动游戏7",
+            "[JumpBack]启动游戏4"
         ],
         "roi": [
             517,
@@ -134,17 +130,15 @@
     "启动游戏5": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "interrupt": [
-            "启动任务5",
-            "启动游戏1",
-            "启动任务1",
-            "关闭广告",
-            "关闭公告",
-            "启动游戏3"
-        ],
         "timeout": 60000,
         "next": [
-            "启动游戏2"
+            "启动游戏2",
+            "[JumpBack]启动任务5",
+            "[JumpBack]启动游戏1",
+            "[JumpBack]启动任务1",
+            "[JumpBack]关闭广告",
+            "[JumpBack]关闭公告",
+            "[JumpBack]启动游戏3"
         ],
         "template": [
             "庭院/庭院_探索_望月幽庭.png",

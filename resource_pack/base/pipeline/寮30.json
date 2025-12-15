@@ -15,7 +15,6 @@
     "寮301": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [],
         "next": [
             "寮302"
         ],
@@ -120,7 +119,7 @@
     "寮306": {
         "recognition": "OCR",
         "action": "Custom",
-        "on_error": "超时_切换御魂失败",
+        "on_error": ["超时_切换御魂失败"],
         "next": [
             "寮307"
         ],
@@ -279,13 +278,11 @@
     "寮3017": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "interrupt": [
-            "寮3013"
-        ],
         "rate_limit": 8000,
         "next": [
             "寮3018",
-            "寮3019"
+            "寮3019",
+            "[JumpBack]寮3013"
         ],
         "roi": [
             42,
@@ -537,12 +534,10 @@
         ]
     },
     "寮3034": {
-        "interrupt": [
-            "寮3032"
-        ],
         "timeout": 40000,
         "next": [
-            "寮3035"
+            "寮3035",
+            "[JumpBack]寮3032"
         ]
     },
     "寮3035": {
@@ -877,16 +872,14 @@
     },
     "寮3040": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮3047",
-            "寮3048",
-            "寮3059"
-        ],
         "on_error": [
             "返回庭院"
         ],
         "next": [
-            "寮3060"
+            "寮3060",
+            "[JumpBack]寮3047",
+            "[JumpBack]寮3048",
+            "[JumpBack]寮3059"
         ],
         "roi": [
             526,
@@ -899,11 +892,9 @@
     "寮30": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "寮3050"
-        ],
         "next": [
-            "寮3051"
+            "寮3051",
+            "[JumpBack]寮3050"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -975,13 +966,11 @@
     "寮3052": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "寮3053",
-            "寮3054"
-        ],
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
-            "寮3055"
+            "寮3055",
+            "[JumpBack]寮3053",
+            "[JumpBack]寮3054"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -996,7 +985,7 @@
     "寮3053": {
         "recognition": "OCR",
         "action": "Click",
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "寮3053_copy1"
         ],
@@ -1065,11 +1054,9 @@
     },
     "寮3056": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮3054"
-        ],
         "next": [
-            "寮3055"
+            "寮3055",
+            "[JumpBack]寮3054"
         ],
         "roi": [
             213,
@@ -1089,11 +1076,9 @@
         ]
     },
     "寮3058": {
-        "interrupt": [
-            "寮3057"
-        ],
         "next": [
-            "寮301"
+            "寮301",
+            "[JumpBack]寮3057"
         ]
     },
     "寮3059": {
@@ -1112,11 +1097,9 @@
     "寮3047": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "跳过"
-        ],
         "next": [
-            "寮3053"
+            "寮3053",
+            "[JumpBack]跳过"
         ],
         "roi": [
             154,
@@ -1128,14 +1111,12 @@
     },
     "寮3060": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮3047",
-            "寮3048",
-            "寮3059"
-        ],
         "next": [
             "寮3056",
-            "寮30_提交材料"
+            "寮30_提交材料",
+            "[JumpBack]寮3047",
+            "[JumpBack]寮3048",
+            "[JumpBack]寮3059"
         ],
         "inverse": true,
         "roi": [
