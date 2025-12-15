@@ -102,7 +102,7 @@ class Kun28(CustomAction):
 
         # --- 识别突破卷 ---
         result_tupo = context.run_recognition("kun28_识别突破卷数量", img)
-        if result_tupo and result_tupo.best_result:
+        if result_tupo.hit and result_tupo.best_result:
             try:
                 text = result_tupo.best_result.text
                 # 假设格式为 "15/30" 或类似，取 "/" 前面的数字

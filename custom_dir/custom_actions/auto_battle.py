@@ -105,7 +105,7 @@ class AutoBattle(CustomAction):
             })
             time.sleep(1)
 
-            if detail is not None:
+            if detail.hit:
                 context.tasker.controller.post_click(
                     random.randint(detail.box.x, detail.box.x + detail.box.h),
                     random.randint(detail.box.y, detail.box.y + detail.box.w)
@@ -165,7 +165,7 @@ class AutoBattle(CustomAction):
             })
             time.sleep(1)
 
-            if detail is not None:
+            if detail.hit:
                 time.sleep(1)
                 print(f"切换到队伍 {team_name}")
                 context.tasker.controller.post_click(

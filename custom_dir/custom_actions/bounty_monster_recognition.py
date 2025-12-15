@@ -34,14 +34,14 @@ class BountyMonsterRecognition(CustomAction):
             detail_1 = context.run_recognition("悬赏封印_识别挑战次数", img)
             detail_2= context.run_recognition("悬赏封印_识别妖怪_图片识别", img)
 
-            if detail or detail_1 or detail_2:
+            if detail.hit or detail_1.hit or detail_2.hit:
                 # 整合识别结果
                 results = []
-                if detail and hasattr(detail, 'filterd_results'):
+                if detail.hit and hasattr(detail, 'filterd_results'):
                     results.extend(detail.filterd_results)
-                if detail_1 and hasattr(detail_1, 'filterd_results'):
+                if detail_1.hit and hasattr(detail_1, 'filterd_results'):
                     results.extend(detail_1.filterd_results)
-                if detail_2 and hasattr(detail_2, 'filterd_results'):
+                if detail_2.hit and hasattr(detail_2, 'filterd_results'):
                     results.extend(detail_2.filterd_results)
 
                 if results:
@@ -60,7 +60,7 @@ class BountyMonsterRecognition(CustomAction):
                             {"悬赏封印_识别完成度": {"roi": result.box, "roi_offset": [-10, -10, 50, 50]}}
                         )
 
-                        if detail_recognition:
+                        if detail_recognition.hit:
                             print("该目标的完成度已满")
                             continue
 
@@ -76,7 +76,7 @@ class BountyMonsterRecognition(CustomAction):
                             img
                         )
 
-                        if detail_click is None:
+                        if not detail_click.hit:
                             print("未处于线索界面，尝试重新识别妖怪")
                             context.run_task("悬赏封印_关闭章节界面")
                             context.run_task("悬赏封印_关闭线索界面")
@@ -86,7 +86,7 @@ class BountyMonsterRecognition(CustomAction):
                         img = context.tasker.controller.post_screencap().wait().get()
                         detail_not_found = context.run_recognition("识别未发现妖怪", img)
 
-                        if detail_not_found:
+                        if detail_not_found.hit:
                             time.sleep(1)
                             context.run_task("悬赏封印_关闭线索界面")
                             continue
