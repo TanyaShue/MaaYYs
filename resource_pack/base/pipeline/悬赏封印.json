@@ -1,12 +1,10 @@
 {
     "自动悬赏封印": {
-        "interrupt": [
-            "悬赏封印7",
-            "悬赏封印11",
-            "悬赏封印"
-        ],
         "next": [
-            "悬赏封印9"
+            "悬赏封印9",
+            "[JumpBack]悬赏封印7",
+            "[JumpBack]悬赏封印11",
+            "[JumpBack]悬赏封印"
         ]
     },
     "悬赏封印": {
@@ -44,14 +42,12 @@
     "悬赏封印_点击叉叉": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "on_error": [
             "返回庭院"
         ],
         "next": [
-            "庭院_点击式神录"
+            "庭院_点击式神录",
+            "[JumpBack]打开底部菜单"
         ],
         "roi": [
             1127,
@@ -102,7 +98,7 @@
     },
     "探索_悬赏_开始识别探索妖怪": {
         "action": "Custom",
-        "next": "返回庭院",
+        "next": ["返回庭院"],
         "custom_action": "BountyMonsterRecognition"
     },
     "识别探索目标_向上滑动": {
@@ -154,7 +150,7 @@
         "recognition": "FeatureMatch",
         "action": "Click",
         "timeout": 1000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "悬赏封印_领取宝箱奖励"
         ],
@@ -173,7 +169,7 @@
     "悬赏封印_领取宝箱奖励": {
         "action": "Click",
         "timeout": 1000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
             "悬赏封印_识别宝箱"
         ],
@@ -231,7 +227,7 @@
         "recognition": "TemplateMatch",
         "action": "Click",
         "timeout": 1000,
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "post_delay": 1000,
         "roi": [
             842,
@@ -256,12 +252,10 @@
         "expected": "发现地点"
     },
     "悬赏_开始识别探索": {
-        "interrupt": [
-            "悬赏_向上滑动一下"
-        ],
         "next": [
             "悬赏封印2",
-            "识别探索目标"
+            "识别探索目标",
+            "[JumpBack]悬赏_向上滑动一下"
         ]
     },
     "悬赏_向上滑动一下": {
@@ -333,7 +327,7 @@
     },
     "装备日常清杂预设": {
         "action": "Custom",
-        "on_error": "超时_切换御魂失败",
+        "on_error": ["超时_切换御魂失败"],
         "next": [
             "探索_悬赏_御魂_返回"
         ],
@@ -346,12 +340,10 @@
     },
     "探索_悬赏_御魂_返回": {
         "action": "Click",
-        "interrupt": [
-            "点击探索"
-        ],
         "next": [
             "探索_悬赏_识别探索特征",
-            "悬赏封印6"
+            "悬赏封印6",
+            "[JumpBack]点击探索"
         ],
         "post_delay": 2000,
         "target": [
@@ -507,12 +499,10 @@
     "悬赏封印4": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "悬赏封印5"
-        ],
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "next": [
-            "探索_悬赏_识别章节开始界面"
+            "探索_悬赏_识别章节开始界面",
+            "[JumpBack]悬赏封印5"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -527,7 +517,7 @@
     "悬赏封印5": {
         "recognition": "OCR",
         "action": "Click",
-        "on_error": "跳过",
+        "on_error": ["跳过"],
         "pre_delay": 1000,
         "post_delay": 1000,
         "expected": "点击屏幕继续"

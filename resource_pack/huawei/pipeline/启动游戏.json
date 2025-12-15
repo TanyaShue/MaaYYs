@@ -1,15 +1,15 @@
 {
   "启动游戏": {
-    "package": "com.netease.onmyoji.huawei",
-    "interrupt": [
-      "启动游戏1",
-      "启动任务1",
-      "关闭华为更新提示",
-      "关闭广告",
-      "关闭公告",
-      "启动任务5",
-      "启动游戏3"
-    ]
+    "next": [
+      "[JumpBack]启动游戏1",
+      "[JumpBack]启动任务1",
+      "[JumpBack]关闭华为更新提示",
+      "[JumpBack]关闭广告",
+      "[JumpBack]关闭公告",
+      "[JumpBack]启动任务5",
+      "[JumpBack]启动游戏3"
+    ],
+    "package": "com.netease.onmyoji.huawei"
   },
   "关闭阴阳师": {
     "package": "com.netease.onmyoji.huawei"

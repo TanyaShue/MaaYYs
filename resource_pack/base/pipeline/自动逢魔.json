@@ -11,16 +11,14 @@
         "expected": ".*"
     },
     "自动逢魔": {
-        "interrupt": [
-            "点击逢魔",
-            "自动逢魔14",
-            "自动逢魔21"
-        ],
         "on_error": [
             "自动逢魔12"
         ],
         "next": [
-            "自动逢魔16"
+            "自动逢魔16",
+            "[JumpBack]点击逢魔",
+            "[JumpBack]自动逢魔14",
+            "[JumpBack]自动逢魔21"
         ]
     },
     "点击逢魔": {
@@ -107,11 +105,9 @@
         "template": "自动逢魔/现世逢魔_参加__530_162_86_83__480_112_186_183.png"
     },
     "开始现世逢魔": {
-        "interrupt": [
-            "现世逢魔"
-        ],
         "next": [
-            "识别是否用完现世逢魔次数"
+            "识别是否用完现世逢魔次数",
+            "[JumpBack]现世逢魔"
         ]
     },
     "关闭石像日常界面": {
@@ -123,12 +119,10 @@
     "识别是否用完现世逢魔次数": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "现世逢魔"
-        ],
         "next": [
             "现世逢魔_领取奖励",
-            "自动逢魔9"
+            "自动逢魔9",
+            "[JumpBack]现世逢魔"
         ],
         "post_delay": 1000,
         "roi": [
@@ -211,11 +205,9 @@
     },
     "现世逢魔_点击具体首领": {
         "action": "Click",
-        "interrupt": [
-            "现世逢魔_点击首领"
-        ],
         "next": [
-            "识别集结挑战"
+            "识别集结挑战",
+            "[JumpBack]现世逢魔_点击首领"
         ],
         "post_delay": 1000,
         "target": [
@@ -275,14 +267,12 @@
     "现世逢魔_装备式神预设": {
         "recognition": "OCR",
         "action": "Custom",
-        "interrupt": [
-            "现世逢魔_御魂_返回"
-        ],
         "on_error": [
             "超时_切换御魂失败"
         ],
         "next": [
-            "自动逢魔15"
+            "自动逢魔15",
+            "[JumpBack]现世逢魔_御魂_返回"
         ],
         "post_delay": 2000,
         "roi": [
@@ -320,7 +310,6 @@
     "开始自动挑战首领": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [],
         "timeout": 350000,
         "next": [
             "现世逢魔_识别结束界面"
@@ -338,13 +327,11 @@
     "现世逢魔_识别结束界面": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "现世逢魔_识别结束界面_copy1"
-        ],
         "rate_limit": 2000,
         "timeout": 350000,
         "next": [
-            "现世逢魔_首领_返回"
+            "现世逢魔_首领_返回",
+            "[JumpBack]现世逢魔_识别结束界面_copy1"
         ],
         "pre_delay": 5000,
         "post_delay": 3000,
@@ -395,15 +382,13 @@
     "自动逢魔1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "自动逢魔1_copy2"
-        ],
         "timeout": 5000,
         "on_error": [
             "跳过"
         ],
         "next": [
-            "自动逢魔6"
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy2"
         ],
         "roi": [
             1171,
@@ -553,12 +538,10 @@
     },
     "自动逢魔6": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动逢魔17",
-            "自动逢魔8"
-        ],
         "next": [
-            "自动逢魔7"
+            "自动逢魔7",
+            "[JumpBack]自动逢魔17",
+            "[JumpBack]自动逢魔8"
         ],
         "roi": [
             419,
@@ -654,15 +637,13 @@
     "自动逢魔1_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "自动逢魔1_copy1_copy3"
-        ],
         "timeout": 5000,
         "on_error": [
             "跳过"
         ],
         "next": [
-            "自动逢魔6"
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy1_copy3"
         ],
         "roi": [
             1189,
@@ -732,15 +713,13 @@
     "自动逢魔1_copy1_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "自动逢魔1_copy1_copy1_copy1"
-        ],
         "timeout": 5000,
         "on_error": [
             "跳过"
         ],
         "next": [
-            "自动逢魔6"
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy1_copy1_copy1"
         ],
         "roi": [
             1183,
@@ -785,15 +764,13 @@
     "自动逢魔1_copy1_copy2": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "自动逢魔1_copy1_copy2_copy1"
-        ],
         "timeout": 5000,
         "on_error": [
             "跳过"
         ],
         "next": [
-            "自动逢魔6"
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy1_copy2_copy1"
         ],
         "roi": [
             1179,
@@ -825,11 +802,9 @@
     },
     "自动逢魔12": {
         "recognition": "OCR",
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "next": [
-            "自动逢魔13"
+            "自动逢魔13",
+            "[JumpBack]打开底部菜单"
         ],
         "roi": [
             4,
@@ -984,20 +959,16 @@
         "expected": "日常"
     },
     "自动逢魔19": {
-        "interrupt": [
-            "关闭石像日常界面"
-        ],
         "next": [
-            "自动逢魔12"
+            "自动逢魔12",
+            "[JumpBack]关闭石像日常界面"
         ]
     },
     "自动逢魔20": {
-        "interrupt": [
-            "现世逢魔_点击式神录",
-            "打开底部菜单"
-        ],
         "next": [
-            "现世逢魔_装备式神预设"
+            "现世逢魔_装备式神预设",
+            "[JumpBack]现世逢魔_点击式神录",
+            "[JumpBack]打开底部菜单"
         ]
     },
     "自动逢魔14": {
