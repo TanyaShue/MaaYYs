@@ -1,20 +1,16 @@
 {
     "自动道馆": {
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "next": [
-            "自动道馆1"
+            "自动道馆1",
+            "[JumpBack]打开底部菜单"
         ]
     },
     "自动道馆1": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "自动道馆3"
-        ],
         "next": [
-            "自动道馆2"
+            "自动道馆2",
+            "[JumpBack]自动道馆3"
         ],
         "roi": [
             257,
@@ -26,11 +22,9 @@
     },
     "自动道馆2": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动道馆5"
-        ],
         "next": [
-            "自动道馆4"
+            "自动道馆4",
+            "[JumpBack]自动道馆5"
         ],
         "roi": [
             1145,
@@ -53,11 +47,9 @@
     },
     "自动道馆4": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动道馆7"
-        ],
         "next": [
-            "自动道馆6"
+            "自动道馆6",
+            "[JumpBack]自动道馆7"
         ],
         "roi": [
             89,
@@ -80,15 +72,13 @@
     },
     "自动道馆6": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动道馆9"
-        ],
         "timeout": 10000,
         "on_error": [
             "返回庭院"
         ],
         "next": [
-            "自动道馆8"
+            "自动道馆8",
+            "[JumpBack]自动道馆9"
         ],
         "roi": [
             73,
@@ -112,11 +102,9 @@
     "自动道馆8": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "自动道馆11"
-        ],
         "next": [
-            "自动道馆10"
+            "自动道馆10",
+            "[JumpBack]自动道馆11"
         ],
         "roi": [
             388,
@@ -148,11 +136,9 @@
     "自动道馆10": {
         "recognition": "OCR",
         "action": "Custom",
-        "interrupt": [
-            "自动道馆13"
-        ],
         "next": [
-            "自动道馆12"
+            "自动道馆12",
+            "[JumpBack]自动道馆13"
         ],
         "roi": [
             1,
@@ -180,14 +166,12 @@
     },
     "自动道馆12": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动道馆15"
-        ],
         "rate_limit": 5000,
         "timeout": 12000000,
         "next": [
             "自动道馆14",
-            "自动道馆20"
+            "自动道馆20",
+            "[JumpBack]自动道馆15"
         ],
         "roi": [
             510,
@@ -223,7 +207,6 @@
     "自动道馆15": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [],
         "next": [
             "自动道馆18"
         ],
@@ -259,13 +242,11 @@
     },
     "自动道馆18": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动道馆16",
-            "自动道馆17"
-        ],
         "timeout": 2000000,
         "next": [
-            "自动道馆19"
+            "自动道馆19",
+            "[JumpBack]自动道馆16",
+            "[JumpBack]自动道馆17"
         ],
         "roi": [
             0,

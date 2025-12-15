@@ -1,10 +1,8 @@
 {
     "商店购买_寮商店兑换_1": {
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "next": [
-            "商店购买"
+            "商店购买",
+            "[JumpBack]打开底部菜单"
         ]
     },
     "商店购买": {
@@ -79,11 +77,9 @@
     "商店购买6": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "商店购买7_copy1"
-        ],
         "next": [
-            "商店购买7"
+            "商店购买7",
+            "[JumpBack]商店购买7_copy1"
         ],
         "pre_delay": 2000,
         "post_delay": 2000,

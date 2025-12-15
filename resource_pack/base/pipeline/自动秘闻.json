@@ -1,10 +1,8 @@
 {
     "自动秘闻": {
-        "interrupt": [
-            "点击探索"
-        ],
         "next": [
-            "自动秘闻4"
+            "自动秘闻4",
+            "[JumpBack]点击探索"
         ],
         "custom_action": "TaskList",
         "custom_action_param": {
@@ -76,7 +74,7 @@
     "自动秘闻_点击式神录": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "on_error": "返回庭院",
+        "on_error": ["返回庭院"],
         "next": [
             "自动秘闻_装备式神预设"
         ],
@@ -106,13 +104,11 @@
     },
     "自动秘闻_御魂_返回": {
         "action": "Click",
-        "interrupt": [
-            "自动秘闻_识别是否为未解锁",
-            "自动秘闻_向上滑动一下"
-        ],
         "next": [
             "自动秘闻1",
-            "自动秘闻_点击目标关卡"
+            "自动秘闻_点击目标关卡",
+            "[JumpBack]自动秘闻_识别是否为未解锁",
+            "[JumpBack]自动秘闻_向上滑动一下"
         ],
         "post_delay": 2000,
         "target": [
@@ -207,14 +203,12 @@
     },
     "自动秘闻_出战预设队伍": {
         "action": "Custom",
-        "interrupt": [
-            "自动秘闻_识别战斗结束",
-            "自动秘闻_识别战斗结束_copy1"
-        ],
         "rate_limit": 2000,
         "timeout": 1000000,
         "next": [
-            "自动秘闻2"
+            "自动秘闻2",
+            "[JumpBack]自动秘闻_识别战斗结束",
+            "[JumpBack]自动秘闻_识别战斗结束_copy1"
         ],
         "post_delay": 2000,
         "custom_action": "AutoBattle",
