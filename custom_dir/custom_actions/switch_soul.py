@@ -123,10 +123,6 @@ class SwitchSoul(CustomAction):
                     "roi": base_roi
                 }
             })
-            print("--------------xxxxxxxx")
-            print(detail.hit)
-            print(detail.best_result)
-            print(detail)
 
             # 找到分组
             if detail.hit:

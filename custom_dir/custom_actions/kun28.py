@@ -62,7 +62,7 @@ class Kun28(CustomAction):
         img = context.tasker.controller.post_screencap().wait().get()
 
         result = context.run_recognition("kun28_识别突破卷数量", img)
-        if result and result.best_result:
+        if result.hit:
             text = result.best_result.text  # 例如 "18/30"
             self.num_tupo = int(text.split("/")[0])
         print(f"识别到的突破卷数量为:{self.num_tupo}")

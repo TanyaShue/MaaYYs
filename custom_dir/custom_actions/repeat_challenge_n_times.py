@@ -64,7 +64,7 @@ class RepeatChallengeNTimes(CustomAction):
         # 运行识别任务
         img = context.tasker.controller.post_screencap().wait().get()
         result = context.run_recognition("通用_识别挑战次数",img)
-        if result and result.best_result:
+        if result.hit and result.best_result:
             try:
                 value = str(result.best_result.text)
                 return value

@@ -1,19 +1,15 @@
 {
     "寮突": {
-        "interrupt": [
-            "点击探索"
-        ],
         "next": [
-            "寮突1"
+            "寮突1",
+            "[JumpBack]点击探索"
         ]
     },
     "寮突1": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突3"
-        ],
         "next": [
-            "寮突2"
+            "寮突2",
+            "[JumpBack]寮突3"
         ],
         "roi": [
             58,
@@ -25,11 +21,9 @@
     },
     "寮突2": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突5"
-        ],
         "next": [
-            "寮突4"
+            "寮突4",
+            "[JumpBack]寮突5"
         ],
         "roi": [
             510,
@@ -52,7 +46,6 @@
     },
     "寮突4": {
         "recognition": "OCR",
-        "interrupt": [],
         "next": [
             "寮突20",
             "寮突6",
@@ -79,11 +72,9 @@
     },
     "寮突6": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突23"
-        ],
         "next": [
-            "寮突24"
+            "寮突24",
+            "[JumpBack]寮突23"
         ],
         "roi": [
             262,
@@ -96,15 +87,13 @@
     "寮突7": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "寮突8",
-            "寮突10"
-        ],
         "rate_limit": 2000,
         "timeout": 2000000,
         "next": [
             "寮突25",
-            "寮突9"
+            "寮突9",
+            "[JumpBack]寮突8",
+            "[JumpBack]寮突10"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -172,11 +161,9 @@
     },
     "寮突12": {
         "recognition": "TemplateMatch",
-        "interrupt": [
-            "寮突23"
-        ],
         "next": [
-            "寮突24"
+            "寮突24",
+            "[JumpBack]寮突23"
         ],
         "roi": [
             419,
@@ -195,11 +182,9 @@
     },
     "寮突14": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突16"
-        ],
         "next": [
-            "寮突15"
+            "寮突15",
+            "[JumpBack]寮突16"
         ],
         "roi": [
             148,
@@ -238,13 +223,6 @@
         "duration": 500
     },
     "寮突18_从上往下打": {
-        "interrupt": [
-            "寮突18_第一个待选目标",
-            "寮突18_第二个待选目标",
-            "寮突18_第三个待选目标",
-            "寮突18_第四个待选目标",
-            "寮突16_copy1"
-        ],
         "rate_limit": 3000,
         "timeout": 5000,
         "on_error": [
@@ -252,7 +230,12 @@
         ],
         "next": [
             "寮突6",
-            "寮突12"
+            "寮突12",
+            "[JumpBack]寮突18_第一个待选目标",
+            "[JumpBack]寮突18_第二个待选目标",
+            "[JumpBack]寮突18_第三个待选目标",
+            "[JumpBack]寮突18_第四个待选目标",
+            "[JumpBack]寮突16_copy1"
         ],
         "pre_delay": 2000,
         "post_delay": 1000
@@ -461,12 +444,10 @@
     "寮突19": {
         "recognition": "OCR",
         "action": "Custom",
-        "interrupt": [
-            "寮突22"
-        ],
         "rate_limit": 2000,
         "next": [
-            "寮突21"
+            "寮突21",
+            "[JumpBack]寮突22"
         ],
         "pre_delay": 2000,
         "post_delay": 2000,
@@ -485,12 +466,10 @@
     },
     "寮突20": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突18"
-        ],
         "rate_limit": 3000,
         "next": [
-            "寮突19"
+            "寮突19",
+            "[JumpBack]寮突18"
         ],
         "pre_delay": 1000,
         "post_delay": 2000,
@@ -504,12 +483,10 @@
     },
     "寮突21": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突11"
-        ],
         "next": [
             "寮突12",
-            "寮突6"
+            "寮突6",
+            "[JumpBack]寮突11"
         ],
         "pre_delay": 2000,
         "post_delay": 2000,
@@ -562,11 +539,9 @@
     },
     "寮突25": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突26"
-        ],
         "next": [
-            "寮突27"
+            "寮突27",
+            "[JumpBack]寮突26"
         ],
         "roi": [
             423,
@@ -631,11 +606,9 @@
     },
     "寮突2_copy1": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突5_copy1"
-        ],
         "next": [
-            "寮突4_copy1"
+            "寮突4_copy1",
+            "[JumpBack]寮突5_copy1"
         ],
         "roi": [
             510,
@@ -647,11 +620,9 @@
     },
     "寮突1_copy1": {
         "recognition": "OCR",
-        "interrupt": [
-            "寮突3_copy1"
-        ],
         "next": [
-            "寮突2_copy1"
+            "寮突2_copy1",
+            "[JumpBack]寮突3_copy1"
         ],
         "roi": [
             58,

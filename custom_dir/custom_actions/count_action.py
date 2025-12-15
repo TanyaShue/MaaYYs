@@ -52,7 +52,7 @@ class CountAction(CustomAction):
             # 执行需要计数的任务
             result = context.run_recognition(task_to_count,image)
             # 检查任务执行结果
-            if result and result.best_result:
+            if result.hit:
                 current_count += 1
                 print(f"任务 {task_to_count} 执行成功，计数增加到 {current_count}")
             else:

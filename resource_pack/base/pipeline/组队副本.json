@@ -17,11 +17,9 @@
     "组队副本1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "组队副本10"
-        ],
         "next": [
-            "组队副本2"
+            "组队副本2",
+            "[JumpBack]组队副本10"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -80,11 +78,9 @@
     },
     "组队副本5": {
         "action": "Click",
-        "interrupt": [
-            "组队副本7"
-        ],
         "next": [
-            "组队副本6"
+            "组队副本6",
+            "[JumpBack]组队副本7"
         ],
         "target": [
             117,
@@ -312,11 +308,9 @@
     },
     "组队副本5_copy2": {
         "action": "Click",
-        "interrupt": [
-            "组队副本7_copy1"
-        ],
         "next": [
-            "组队副本6_copy1"
+            "组队副本6_copy1",
+            "[JumpBack]组队副本7_copy1"
         ],
         "target": [
             117,
@@ -328,11 +322,9 @@
     "组队副本1_copy1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "组队副本10_copy1"
-        ],
         "next": [
-            "组队副本2_copy1"
+            "组队副本2_copy1",
+            "[JumpBack]组队副本10_copy1"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,

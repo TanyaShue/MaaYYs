@@ -1,38 +1,7 @@
 {
-    "启动游戏": {
-        "action": "StartApp",
-        "interrupt": [
-            "启动游戏1",
-            "启动任务1",
-            "关闭广告",
-            "关闭公告",
-            "启动任务5",
-            "启动游戏3"
-        ],
-        "rate_limit": 2000,
-        "on_error": [
-            "跳过"
-        ],
-        "next": [
-            "启动游戏5",
-            "启动游戏2"
-        ],
-        "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2"
-    },
-    "启动游戏1": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            481,
-            563,
-            310,
-            64
-        ],
-        "expected": "进入游戏"
-    },
     "关闭公告": {
-        "recognition": "FeatureMatch",
         "action": "Click",
+        "recognition": "FeatureMatch",
         "roi": [
             1116,
             7,
@@ -42,8 +11,8 @@
         "template": "通用图标/踏雪寻踪_公告_关闭.png"
     },
     "关闭广告": {
-        "recognition": "FeatureMatch",
         "action": "Click",
+        "recognition": "FeatureMatch",
         "roi": [
             908,
             4,
@@ -52,74 +21,113 @@
         ],
         "template": "通用图标/广告_关闭.png"
     },
+    "关闭阴阳师": {
+        "action": "StopApp",
+        "package": "com.netease.onmyoji.wyzymnqsd_cps",
+        "post_delay": 2000,
+        "recognition": "DirectHit"
+    },
     "启动任务1": {
-        "recognition": "OCR",
+        "expected": "下载插画",
         "next": [
             "启动任务2"
         ],
+        "recognition": "OCR",
         "roi": [
-            343,
-            183,
-            590,
-            110
-        ],
-        "expected": "下载插画"
+            351,
+            199,
+            587,
+            328
+        ]
     },
     "启动任务2": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "^下载$",
+        "recognition": "OCR",
         "roi": [
-            438,
-            347,
-            445,
-            133
-        ],
-        "expected": "下载"
+            315,
+            166,
+            618,
+            449
+        ]
     },
     "启动任务5": {
-        "recognition": "OCR",
+        "expected": "是否打开|加成",
         "next": [
             "启动任务6"
         ],
+        "recognition": "OCR",
         "roi": [
             343,
             183,
             590,
             110
-        ],
-        "expected": "是否打开|加成"
+        ]
     },
     "启动任务6": {
+        "expected": "取消",
         "recognition": "OCR",
         "roi": [
             438,
             347,
             445,
             133
+        ]
+    },
+    "启动游戏": {
+        "action": "StartApp",
+        "next": [
+            "启动游戏2",
+            "[JumpBack]启动游戏1",
+            "[JumpBack]启动任务1",
+            "[JumpBack]关闭广告",
+            "[JumpBack]关闭公告",
+            "[JumpBack]启动任务5",
+            "[JumpBack]启动游戏3"
         ],
-        "expected": "取消"
+        "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2",
+        "rate_limit": 2000,
+        "recognition": "DirectHit",
+        "timeout": 600000
+    },
+    "启动游戏1": {
+        "action": "Click",
+        "expected": "进入游戏",
+        "recognition": "OCR",
+        "roi": [
+            481,
+            563,
+            310,
+            64
+        ]
     },
     "启动游戏2": {
-        "recognition": "OCR",
+        "expected": "设置",
         "next": [
-            "启动游戏4"
+            "启动游戏7",
+            "[JumpBack]启动游戏4"
         ],
+        "recognition": "OCR",
         "roi": [
-            535,
-            57,
-            196,
-            53
-        ],
-        "expected": "设置"
+            517,
+            7,
+            231,
+            169
+        ]
     },
-    "关闭阴阳师": {
-        "action": "StopApp",
-        "post_delay": 2000,
-        "package": "com.netease.onmyoji.wyzymnqsd_cps"
+    "启动游戏3": {
+        "action": "Click",
+        "recognition": "DirectHit",
+        "target": [
+            22,
+            21,
+            42,
+            45
+        ]
     },
     "启动游戏4": {
-        "recognition": "TemplateMatch",
         "action": "Click",
+        "recognition": "TemplateMatch",
         "roi": [
             1048,
             50,
@@ -130,46 +138,15 @@
             "启动游戏\\启动游戏4.png"
         ]
     },
-    "启动游戏5": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "interrupt": [
-            "启动任务5",
-            "启动游戏1",
-            "启动任务1",
-            "关闭广告",
-            "关闭公告",
-            "启动游戏3"
-        ],
-        "next": [
-            "启动游戏2"
-        ],
-        "template": [
-            "庭院/庭院_探索_望月幽庭.png",
-            "庭院/庭院_探索_织梦莲庭.png",
-            "庭院/庭院_探索_枫色秋庭.png",
-            "庭院/庭院_探索_初语谧景.png",
-            "庭院/闲庭__14_596_125_90__0_546_189_174.png",
-            "庭院/召唤__715_164_39_77__665_114_139_177.png",
-            "庭院/庭院_町中_织梦莲庭.png",
-            "通用\\识别庭院特征.png",
-            "通用\\识别庭院特征_1.png",
-            "通用\\识别庭院特征_2.png"
-        ],
-        "target": [
-            21,
-            42,
-            86,
-            56
-        ]
-    },
-    "启动游戏3": {
-        "action": "Click",
-        "target": [
-            21,
-            42,
-            86,
-            56
+    "启动游戏7": {
+        "expected": "音画|交互|权限|安全|游戏",
+        "inverse": true,
+        "recognition": "OCR",
+        "roi": [
+            1090,
+            107,
+            136,
+            523
         ]
     }
 }

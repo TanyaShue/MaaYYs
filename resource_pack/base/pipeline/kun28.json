@@ -11,11 +11,9 @@
     },
     "kun281": {
         "recognition": "OCR",
-        "interrupt": [
-            "kun283"
-        ],
         "next": [
-            "kun282"
+            "kun282",
+            "[JumpBack]kun283"
         ],
         "roi": [
             1121,
@@ -28,11 +26,9 @@
     "kun282": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "kun282_copy1"
-        ],
         "next": [
-            "kun284"
+            "kun284",
+            "[JumpBack]kun282_copy1"
         ],
         "roi": [
             1046,
@@ -131,11 +127,9 @@
         ]
     },
     "kun289": {
-        "interrupt": [
-            "点击探索"
-        ],
         "next": [
-            "kun2810"
+            "kun2810",
+            "[JumpBack]点击探索"
         ]
     },
     "kun2810": {
@@ -153,12 +147,10 @@
         ]
     },
     "kun28_开始战斗": {
-        "interrupt": [
-            "kun28_开始点击妖怪"
-        ],
         "next": [
             "kun28_结束战斗",
-            "kun2823"
+            "kun2823",
+            "[JumpBack]kun28_开始点击妖怪"
         ]
     },
     "kun2811": {
@@ -176,11 +168,9 @@
         "expected": "式神录"
     },
     "kun2812": {
-        "interrupt": [
-            "kun287"
-        ],
         "next": [
-            "kun2811"
+            "kun2811",
+            "[JumpBack]kun287"
         ]
     },
     "kun287": {
@@ -214,11 +204,9 @@
     "kun2813": {
         "recognition": "TemplateMatch",
         "action": "Click",
-        "interrupt": [
-            "点击探索"
-        ],
         "next": [
-            "kun281"
+            "kun281",
+            "[JumpBack]点击探索"
         ],
         "template": [
             "kun28\\kun2813.png"
@@ -240,16 +228,14 @@
         "expected": "妖"
     },
     "kun28_开始点击妖怪": {
-        "interrupt": [
-            "kun28_copy1",
-            "kun2818",
-            "kun2814",
-            "kun2821"
-        ],
         "timeout": 10000,
         "next": [
             "kun28_结束战斗",
-            "kun2823"
+            "kun2823",
+            "[JumpBack]kun28_copy1",
+            "[JumpBack]kun2818",
+            "[JumpBack]kun2814",
+            "[JumpBack]kun2821"
         ]
     },
     "kun28_点击屏幕继续": {
@@ -271,12 +257,10 @@
     },
     "kun2814": {
         "recognition": "OCR",
-        "interrupt": [
-            "kun2815"
-        ],
         "timeout": 200000,
         "next": [
-            "kun2816"
+            "kun2816",
+            "[JumpBack]kun2815"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,

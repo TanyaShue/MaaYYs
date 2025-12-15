@@ -4,8 +4,8 @@
         "rate_limit": 3000,
         "timeout": 2000000,
         "next": [
-            "御灵_点击挑战",
-            "御灵_点击屏幕继续"
+            "[JumpBack]御灵_点击挑战",
+            "[JumpBack]御灵_点击屏幕继续"
         ],
         "roi": [
             8,
@@ -18,7 +18,6 @@
     "御灵_点击挑战": {
         "recognition": "OCR",
         "action": "Click",
-        "is_sub": true,
         "post_delay": 1000,
         "roi": [
             1062,
@@ -37,7 +36,6 @@
     "御灵_点击屏幕继续": {
         "recognition": "OCR",
         "action": "Custom",
-        "is_sub": true,
         "post_delay": 2000,
         "roi": [
             371,
@@ -64,15 +62,13 @@
         }
     },
     "自动御灵1": {
-        "interrupt": [
-            "点击探索"
-        ],
         "on_error": [
             "返回庭院"
         ],
         "next": [
             "自动御灵2",
-            "自动御灵3"
+            "自动御灵3",
+            "[JumpBack]点击探索"
         ]
     },
     "自动御灵2": {
@@ -107,14 +103,12 @@
     },
     "自动御灵4": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动御灵5",
-            "自动御灵5_copy1",
-            "自动御灵5_copy2",
-            "自动御灵5_copy3"
-        ],
         "next": [
-            "自动御灵6"
+            "自动御灵6",
+            "[JumpBack]自动御灵5",
+            "[JumpBack]自动御灵5_copy1",
+            "[JumpBack]自动御灵5_copy2",
+            "[JumpBack]自动御灵5_copy3"
         ],
         "roi": [
             48,
@@ -198,11 +192,9 @@
     },
     "自动御灵6": {
         "recognition": "OCR",
-        "interrupt": [
-            "自动御灵8"
-        ],
         "next": [
-            "自动御灵7"
+            "自动御灵7",
+            "[JumpBack]自动御灵8"
         ],
         "roi": [
             0,
@@ -215,11 +207,9 @@
     "自动御灵7": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "自动御灵9"
-        ],
         "next": [
-            "自动御灵10"
+            "自动御灵10",
+            "[JumpBack]自动御灵9"
         ],
         "roi": [
             133,
@@ -262,12 +252,10 @@
     "自动御灵10": {
         "recognition": "OCR",
         "action": "Custom",
-        "interrupt": [
-            "自动御灵11",
-            "自动御灵12"
-        ],
         "next": [
-            "自动御灵"
+            "自动御灵",
+            "[JumpBack]自动御灵11",
+            "[JumpBack]自动御灵12"
         ],
         "roi": [
             0,
