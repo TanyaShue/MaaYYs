@@ -1,10 +1,8 @@
 {
     "麒麟": {
-        "interrupt": [
-            "打开底部菜单"
-        ],
         "next": [
-            "麒麟1"
+            "麒麟1",
+            "[JumpBack]打开底部菜单"
         ]
     },
     "麒麟1": {
@@ -117,14 +115,12 @@
     "麒麟8": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "麒麟13"
-        ],
         "rate_limit": 3000,
         "timeout": 400000,
         "next": [
             "麒麟9",
-            "麒麟14"
+            "麒麟14",
+            "[JumpBack]麒麟13"
         ],
         "roi": [
             1103,

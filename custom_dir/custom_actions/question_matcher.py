@@ -270,7 +270,7 @@ class QuestionMatcher(CustomAction):
         question = ""
         img = context.tasker.controller.post_screencap().wait().get()
         result = context.run_recognition("自动逢魔_识别题目", img)
-        if result and result.filterd_results:
+        if result.hit and result.filterd_results:
             for r in result.filterd_results:
                 question = question + r.text
         else:
@@ -282,7 +282,7 @@ class QuestionMatcher(CustomAction):
         answers = []
         for i in range(1, 4):
             result = context.run_recognition(f"自动逢魔_识别答案_{i}", img)
-            if result and result.best_result:
+            if result.hit and result.best_result:
                 answers.append({
                     "text": result.best_result.text.strip(),
                     "box": result.best_result.box
@@ -292,7 +292,7 @@ class QuestionMatcher(CustomAction):
     def get_and_save_correct_answer(self, context: Context) -> str:
         img = context.tasker.controller.post_screencap().wait().get()
         result = context.run_recognition("自动逢魔_识别正确答案", img)
-        if not result or not result.best_result:
+        if not result.hit or not result.best_result:
             print("警告：未能识别到正确答案标识")
             return ""
 

@@ -5,12 +5,10 @@
         ]
     },
     "竞猜1": {
-        "interrupt": [
-            "竞猜3",
-            "竞猜4"
-        ],
         "next": [
-            "竞猜2"
+            "竞猜2",
+            "[JumpBack]竞猜3",
+            "[JumpBack]竞猜4"
         ]
     },
     "竞猜2": {
@@ -187,11 +185,9 @@
     "竞猜12": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "竞猜13"
-        ],
         "next": [
-            "竞猜5"
+            "竞猜5",
+            "[JumpBack]竞猜13"
         ],
         "roi": [
             461,

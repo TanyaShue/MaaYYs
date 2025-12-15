@@ -2,7 +2,7 @@
     "自动999": {
         "next": [
             "999",
-            "999_点击屏幕继续"
+            "[JumpBack]999_点击屏幕继续"
         ]
     },
     "999_奖励_点击一下": {
@@ -20,7 +20,6 @@
     "999_点击屏幕继续": {
         "recognition": "OCR",
         "action": "Click",
-        "is_sub": true,
         "expected": "点击屏幕继续",
         "target": [
             429,
@@ -42,11 +41,9 @@
     "9992": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "9993"
-        ],
         "next": [
-            "99914"
+            "99914",
+            "[JumpBack]9993"
         ],
         "roi": [
             363,
@@ -144,12 +141,10 @@
     "9998": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "99913"
-        ],
         "timeout": 2000000,
         "next": [
-            "9999"
+            "9999",
+            "[JumpBack]99913"
         ],
         "roi": [
             962,
@@ -248,11 +243,9 @@
     },
     "99914": {
         "recognition": "OCR",
-        "interrupt": [
-            "9995"
-        ],
         "next": [
-            "9994"
+            "9994",
+            "[JumpBack]9995"
         ],
         "roi": [
             65,

@@ -62,7 +62,7 @@ class AutoFoster(CustomAction):
         reward_type = None
         reward_value = 0
         # 简化处理：假设识别成功且 best_result 存在
-        if earnings_recog and getattr(earnings_recog, "best_result", None):
+        if earnings_recog.hit and getattr(earnings_recog, "best_result", None):
              # 尝试获取 text 属性，兼容不同版本的 MAA 结果
             reward_text = getattr(earnings_recog.best_result, 'text', None)
             if not reward_text and isinstance(earnings_recog.best_result, str):
@@ -82,7 +82,7 @@ class AutoFoster(CustomAction):
         targets_recog = context.run_recognition(self.TASK_RECOG_TARGET, img)
 
         # 简化处理：假设识别成功且 filterd_results 存在
-        if targets_recog and getattr(targets_recog, "filterd_results", None):
+        if targets_recog.hit and getattr(targets_recog, "filterd_results", None):
             print(f"当前页找到 {len(targets_recog.filterd_results)} 个目标。")
             for target in targets_recog.filterd_results:
                 reward_type, reward_value = self._click_target_and_get_reward(context, target)
@@ -154,7 +154,7 @@ class AutoFoster(CustomAction):
             targets_recog = context.run_recognition(self.TASK_RECOG_TARGET, img)
 
             targets_found = False
-            if targets_recog and getattr(targets_recog, "filterd_results", None):
+            if targets_recog.hit and getattr(targets_recog, "filterd_results", None):
                 targets_found = True
                 print(f"找到 {len(targets_recog.filterd_results)} 个目标，检查是否匹配...")
                 for target in targets_recog.filterd_results:

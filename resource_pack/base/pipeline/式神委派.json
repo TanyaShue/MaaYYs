@@ -1,20 +1,16 @@
 {
     "式神委派": {
-        "interrupt": [
-            "点击探索"
-        ],
         "next": [
-            "式神委派1"
+            "式神委派1",
+            "[JumpBack]点击探索"
         ]
     },
     "式神委派1": {
         "recognition": "FeatureMatch",
         "action": "Click",
-        "interrupt": [
-            "式神委派18"
-        ],
         "next": [
-            "式神委派17"
+            "式神委派17",
+            "[JumpBack]式神委派18"
         ],
         "roi": [
             357,
@@ -35,11 +31,9 @@
     "式神委派2": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "式神委派4"
-        ],
         "next": [
-            "式神委派3"
+            "式神委派3",
+            "[JumpBack]式神委派4"
         ],
         "roi": [
             963,
@@ -59,11 +53,9 @@
     "式神委派3": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "式神委派5"
-        ],
         "next": [
-            "式神委派6"
+            "式神委派6",
+            "[JumpBack]式神委派5"
         ],
         "pre_delay": 1000,
         "post_delay": 1000,
@@ -163,12 +155,10 @@
     "式神委派8": {
         "recognition": "OCR",
         "action": "Click",
-        "interrupt": [
-            "式神委派9"
-        ],
         "next": [
             "式神委派10",
-            "式神委派14"
+            "式神委派14",
+            "[JumpBack]式神委派9"
         ],
         "pre_delay": 500,
         "roi": [
@@ -265,14 +255,12 @@
     },
     "式神委派13": {
         "recognition": "OCR",
-        "interrupt": [
-            "式神委派2",
-            "式神委派4"
-        ],
         "timeout": 5000,
         "on_error": [],
         "next": [
-            "式神委派16"
+            "式神委派16",
+            "[JumpBack]式神委派2",
+            "[JumpBack]式神委派4"
         ],
         "roi": [
             28,
