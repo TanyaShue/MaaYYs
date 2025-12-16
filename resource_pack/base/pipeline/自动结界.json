@@ -477,8 +477,8 @@
         "on_error": [
             "跳过"
         ],
-        "timeout": 2000000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 2000000
     },
     "突破_领取奖励": {
         "action": "Click",
@@ -512,9 +512,21 @@
             66
         ]
     },
+    "结界突破_确保位于式神录界面": {
+        "expected": "式神录",
+        "next": [
+            "装备突破预设"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            7,
+            0,
+            218,
+            65
+        ]
+    },
     "结界突破_点击式神录": {
         "action": "Click",
-        "next": [],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -538,9 +550,9 @@
     },
     "自动结界": {
         "next": [
+            "识别结界突破界面",
             "[JumpBack]结界突破_点击结界突破",
-            "[JumpBack]点击探索",
-            "识别结界突破界面"
+            "[JumpBack]点击探索"
         ],
         "on_error": [
             "返回庭院"
@@ -566,7 +578,6 @@
     "自动结界2": {
         "action": "Click",
         "expected": "式神录",
-        "next": [],
         "recognition": "OCR",
         "roi": [
             1157,
@@ -737,6 +748,22 @@
             65
         ]
     },
+    "识别结界突破界面": {
+        "expected": "结界突破",
+        "next": [
+            "结束突破",
+            "结界突破_确保位于式神录界面",
+            "[JumpBack]结界突破_点击式神录",
+            "[JumpBack]自动结界2"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            518,
+            52,
+            227,
+            79
+        ]
+    },
     "退出战斗_确认": {
         "action": "Click",
         "expected": "确认",
@@ -753,35 +780,6 @@
             359,
             194,
             113
-        ]
-    },
-    "识别结界突破界面": {
-        "recognition": "OCR",
-        "expected": "结界突破",
-        "roi": [
-            518,
-            52,
-            227,
-            79
-        ],
-        "next": [
-            "结束突破",
-            "[JumpBack]结界突破_点击式神录",
-            "[JumpBack]自动结界2",
-            "结界突破_取保位于式神录界面"
-        ]
-    },
-    "结界突破_取保位于式神录界面": {
-        "recognition": "OCR",
-        "roi": [
-            7,
-            0,
-            218,
-            65
-        ],
-        "expected": "式神录",
-        "next": [
-            "装备突破预设"
         ]
     }
 }
