@@ -47,8 +47,8 @@
             "通用4",
             "通用10"
         ],
-        "timeout": 60000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 60000
     },
     "打开底部菜单_匹配": {
         "action": "Click",
@@ -150,14 +150,14 @@
         "on_error": [
             "跳过"
         ],
+        "recognition": "DirectHit",
         "target": [
             324,
             484,
             38,
             21
         ],
-        "timeout": 2000,
-        "recognition": "DirectHit"
+        "timeout": 2000
     },
     "设置挑战次数_点击目标数字": {
         "action": "Click",
@@ -278,7 +278,7 @@
     },
     "返回庭院": {
         "next": [
-            "通用13",
+            "识别庭院特征",
             "[JumpBack]识别蓝色返回",
             "[JumpBack]识别黄色返回",
             "[JumpBack]识别蓝色返回_模板识别",
@@ -369,7 +369,7 @@
         "recognition": "NeuralNetworkDetect",
         "threshold": 0.7
     },
-    "通用13": {
+    "识别庭院特征": {
         "expected": "纳物库|珍旅居|闲庭|纳物库",
         "recognition": "OCR",
         "roi": [
@@ -425,8 +425,8 @@
             "[JumpBack]点击底部菜单位置",
             "[JumpBack]通用9"
         ],
-        "timeout": 10000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 10000
     },
     "通用6": {
         "next": [
