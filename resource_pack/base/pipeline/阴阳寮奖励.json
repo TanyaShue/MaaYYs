@@ -342,13 +342,13 @@
     },
     "阴阳寮奖励3": {
         "action": "Click",
+        "recognition": "DirectHit",
         "target": [
             1009,
             569,
             34,
             53
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "阴阳寮奖励30": {
         "expected": "^\\d{2}:\\d{2}:\\d{2}$",
@@ -628,24 +628,24 @@
     "阴阳寮奖励领取_体力领取_点击一下屏幕": {
         "action": "Click",
         "post_delay": 1000,
+        "recognition": "DirectHit",
         "target": [
             453,
             481,
             437,
             110
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "阴阳寮奖励领取_寮金币领取_点击一下屏幕": {
         "action": "Click",
         "post_delay": 1000,
+        "recognition": "DirectHit",
         "target": [
             453,
             481,
             437,
             110
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "阴阳寮奖励领取_点击结界": {
         "action": "Click",
@@ -757,13 +757,13 @@
             "阴阳寮奖励领取_结界奖励领取_寄养式神_确定第一个式神寄养"
         ],
         "post_delay": 1000,
+        "recognition": "DirectHit",
         "target": [
             153,
             497,
             119,
             183
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "阴阳寮奖励领取_结界奖励领取_点击一下屏幕": {
         "action": "Click",
@@ -775,13 +775,13 @@
             "返回庭院"
         ],
         "post_delay": 1000,
+        "recognition": "DirectHit",
         "target": [
             825,
             515,
             125,
             59
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "阴阳寮奖励领取_结界奖励领取_点击经验酒壶": {
         "action": "Click",

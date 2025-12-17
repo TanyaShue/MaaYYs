@@ -270,8 +270,8 @@ class QuestionMatcher(CustomAction):
         question = ""
         img = context.tasker.controller.post_screencap().wait().get()
         result = context.run_recognition("自动逢魔_识别题目", img)
-        if result.hit and result.filterd_results:
-            for r in result.filterd_results:
+        if result.hit and result.filtered_results:
+            for r in result.filtered_results:
                 question = question + r.text
         else:
             print("警告：未能识别到题目文本")
