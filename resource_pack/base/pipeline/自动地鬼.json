@@ -1,124 +1,21 @@
 {
-    "自动地鬼": {
-        "on_error": [
-            "返回庭院"
-        ],
-        "next": [
-            "点击地域鬼王",
-            "自动地鬼2",
-            "[JumpBack]点击探索"
-        ]
-    },
-    "挑战地鬼": {
-        "timeout": 200000,
-        "next": [
-            "自动地鬼5",
-            "自动地鬼6",
-            "自动地鬼16",
-            "自动地鬼17",
-            "[JumpBack]自动地鬼4"
-        ],
-        "post_delay": 2000
-    },
-    "点击地域鬼王": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
-        "next": [
-            "地鬼_点击式神录"
-        ],
-        "post_delay": 2000,
-        "roi": [
-            585,
-            591,
-            146,
-            128
-        ],
-        "template": [
-            "探索/探索_地域鬼王.png",
-            "自动地鬼\\点击地域鬼王.png",
-            "自动地鬼\\点击地域鬼王_1.png",
-            "自动地鬼\\点击地域鬼王_4.png",
-            "自动地鬼\\点击地域鬼王_5.png"
-        ],
-        "target": [
-            632,
-            626,
-            83,
-            88
-        ]
-    },
-    "地鬼_点击式神录": {
-        "recognition": "OCR",
-        "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
-        "next": [
-            "装备地狱鬼王预设"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 3000,
-        "roi": [
-            1152,
-            535,
-            127,
-            65
-        ],
-        "expected": "式神录",
-        "target": [
-            1165,
-            495,
-            82,
-            86
-        ]
-    },
-    "装备地狱鬼王预设": {
-        "recognition": "OCR",
-        "action": "Custom",
-        "on_error": "超时_切换御魂失败",
-        "next": [
-            "地鬼_御魂_返回"
-        ],
-        "post_delay": 2000,
-        "roi": [
-            0,
-            0,
-            224,
-            63
-        ],
-        "expected": "式神录",
-        "target": [
-            1152,
-            535,
-            127,
-            65
-        ],
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "地鬼",
-            "team_name": "地域鬼王"
-        }
-    },
     "地鬼_御魂_返回": {
-        "recognition": "OCR",
         "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
+        "expected": "式神录",
         "next": [
             "开始自动挑战鬼王"
         ],
+        "on_error": [
+            "返回庭院"
+        ],
         "post_delay": 2000,
+        "recognition": "OCR",
         "roi": [
             0,
             0,
             224,
             63
         ],
-        "expected": "式神录",
         "target": [
             15,
             7,
@@ -126,241 +23,168 @@
             40
         ]
     },
+    "地鬼_点击式神录": {
+        "action": "Click",
+        "expected": "式神录",
+        "next": [
+            "装备地狱鬼王预设"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "post_delay": 3000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            1152,
+            535,
+            127,
+            65
+        ],
+        "target": [
+            1165,
+            495,
+            82,
+            86
+        ]
+    },
     "开始自动挑战鬼王": {
         "action": "Custom",
+        "custom_action": "ChallengeDungeonBoss",
+        "custom_action_param": {
+            "count": 1,
+            "daily_once": true,
+            "group_name": "地鬼",
+            "lock_squad": true,
+            "team_name": "地域鬼王"
+        },
         "next": [
             "返回庭院"
         ],
         "post_delay": 2000,
-        "custom_action": "ChallengeDungeonBoss",
-        "custom_action_param": {
-            "group_name": "地鬼",
-            "team_name": "地域鬼王",
-            "count": 1,
-            "daily_once": true,
-            "lock_squad": true
-        }
+        "recognition": "DirectHit"
+    },
+    "挑战地鬼": {
+        "next": [
+            "自动地鬼5",
+            "自动地鬼6",
+            "自动地鬼16",
+            "自动地鬼17",
+            "[JumpBack]自动地鬼4"
+        ],
+        "post_delay": 2000,
+        "timeout": 200000,
+        "recognition": "DirectHit"
+    },
+    "点击地域鬼王": {
+        "action": "Click",
+        "next": [
+            "地鬼_点击式神录"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            585,
+            591,
+            146,
+            128
+        ],
+        "target": [
+            632,
+            626,
+            83,
+            88
+        ],
+        "template": [
+            "探索/探索_地域鬼王.png",
+            "自动地鬼\\点击地域鬼王.png",
+            "自动地鬼\\点击地域鬼王_1.png",
+            "自动地鬼\\点击地域鬼王_4.png",
+            "自动地鬼\\点击地域鬼王_5.png"
+        ]
+    },
+    "自动地鬼": {
+        "next": [
+            "点击地域鬼王",
+            "自动地鬼2",
+            "[JumpBack]点击探索"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "DirectHit"
     },
     "自动地鬼1": {
-        "recognition": "TemplateMatch",
         "action": "Click",
+        "recognition": "TemplateMatch",
         "roi": [
             1125,
             461,
             154,
             133
         ],
-        "template": [
-            "自动地鬼\\自动地鬼1.png"
-        ],
         "target": [
             1114,
             38,
             28,
             21
-        ]
-    },
-    "自动地鬼2": {
-        "recognition": "OCR",
-        "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
-        "next": [
-            "地鬼_点击式神录"
-        ],
-        "roi": [
-            587,
-            598,
-            166,
-            121
-        ],
-        "expected": "地域鬼王",
-        "target": [
-            657,
-            652,
-            28,
-            34
-        ]
-    },
-    "自动地鬼3_点击锁定": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "timeout": 1000,
-        "roi": [
-            1108,
-            651,
-            44,
-            52
         ],
         "template": [
-            "自动地鬼\\自动地鬼3_点击锁定.png"
-        ]
-    },
-    "自动地鬼3_解锁阵容": {
-        "recognition": "TemplateMatch",
-        "timeout": 1000,
-        "next": [
-            "挑战地鬼"
-        ],
-        "roi": [
-            1093,
-            646,
-            63,
-            54
-        ],
-        "template": [
-            "自动地鬼\\自动地鬼3_解锁阵容.png",
-            "自动地鬼\\自动地鬼3_解锁阵容_1.png"
-        ]
-    },
-    "自动地鬼3_锁定阵容": {
-        "next": [
-            "自动地鬼3_解锁阵容",
-            "[JumpBack]自动地鬼3_点击锁定"
-        ]
-    },
-    "自动地鬼3": {
-        "next": [
-            "自动地鬼3_锁定阵容",
-            "挑战地鬼"
-        ]
-    },
-    "自动地鬼4": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "自动地鬼12_装备预设",
-            "自动地鬼15"
-        ],
-        "roi": [
-            1080,
-            518,
-            157,
-            63
-        ],
-        "expected": "挑战"
-    },
-    "自动地鬼5": {
-        "recognition": "OCR",
-        "timeout": 200000,
-        "next": [
-            "自动地鬼6",
-            "自动地鬼16",
-            "自动地鬼17"
-        ],
-        "roi": [
-            18,
-            627,
-            103,
-            78
-        ],
-        "expected": "自动"
-    },
-    "自动地鬼6": {
-        "recognition": "OCR",
-        "next": [
-            "自动地鬼8",
-            "[JumpBack]自动地鬼7"
-        ],
-        "roi": [
-            654,
-            93,
-            404,
-            201
-        ],
-        "expected": "胜利|失败"
-    },
-    "自动地鬼7": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            421,
-            656,
-            387,
-            63
-        ],
-        "expected": "点击屏幕继续"
-    },
-    "自动地鬼8": {
-        "recognition": "OCR",
-        "next": [
-            "自动地鬼10",
-            "自动地鬼13",
-            "自动地鬼14",
-            "[JumpBack]自动地鬼9",
-            "[JumpBack]自动地鬼7"
-        ],
-        "roi": [
-            637,
-            400,
-            541,
-            99
-        ],
-        "expected": "^(世界|小组|评分)$"
-    },
-    "自动地鬼9": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "roi": [
-            1062,
-            9,
-            208,
-            97
-        ],
-        "template": [
-            "自动地鬼\\自动地鬼9.png"
+            "自动地鬼\\自动地鬼1.png"
         ]
     },
     "自动地鬼10": {
+        "expected": "今日挑战|地域最强",
         "recognition": "OCR",
         "roi": [
             7,
             340,
             178,
             379
-        ],
-        "expected": "今日挑战|地域最强"
+        ]
     },
     "自动地鬼11": {
+        "expected": "式神录|阴阳术",
         "recognition": "OCR",
         "roi": [
             1127,
             483,
             152,
             236
-        ],
-        "expected": "式神录|阴阳术"
-    },
-    "自动地鬼12_装备预设": {
-        "recognition": "OCR",
-        "next": [
-            "自动地鬼12"
-        ],
-        "enabled": false,
-        "roi": [
-            26,
-            631,
-            63,
-            75
-        ],
-        "expected": "预设"
+        ]
     },
     "自动地鬼12": {
-        "recognition": "OCR",
         "action": "Custom",
-        "roi": [
-            26,
-            631,
-            63,
-            75
-        ],
-        "expected": "预设",
         "custom_action": "AutoBattle",
         "custom_action_param": {
             "group_name": "默认分组",
             "team_name": "默认队伍"
-        }
+        },
+        "expected": "预设",
+        "recognition": "OCR",
+        "roi": [
+            26,
+            631,
+            63,
+            75
+        ]
+    },
+    "自动地鬼12_装备预设": {
+        "enabled": false,
+        "expected": "预设",
+        "next": [
+            "自动地鬼12"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            26,
+            631,
+            63,
+            75
+        ]
     },
     "自动地鬼13": {
         "recognition": "TemplateMatch",
@@ -386,27 +210,29 @@
             "自动地鬼\\自动地鬼14.png"
         ]
     },
-    "自动地鬼15": {},
+    "自动地鬼15": {
+        "recognition": "DirectHit"
+    },
     "自动地鬼16": {
-        "recognition": "OCR",
+        "expected": "^(世界排名|小组排名|本次评分)$",
         "next": [
             "自动地鬼8",
             "[JumpBack]自动地鬼7"
         ],
+        "recognition": "OCR",
         "roi": [
             117,
             569,
             883,
             83
-        ],
-        "expected": "^(世界排名|小组排名|本次评分)$"
+        ]
     },
     "自动地鬼17": {
-        "recognition": "TemplateMatch",
         "next": [
             "自动地鬼8",
             "[JumpBack]自动地鬼7"
         ],
+        "recognition": "TemplateMatch",
         "roi": [
             1076,
             533,
@@ -416,5 +242,206 @@
         "template": [
             "自动地鬼\\自动地鬼17.png"
         ]
+    },
+    "自动地鬼2": {
+        "action": "Click",
+        "expected": "地域鬼王",
+        "next": [
+            "地鬼_点击式神录"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            587,
+            598,
+            166,
+            121
+        ],
+        "target": [
+            657,
+            652,
+            28,
+            34
+        ]
+    },
+    "自动地鬼3": {
+        "next": [
+            "自动地鬼3_锁定阵容",
+            "挑战地鬼"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动地鬼3_点击锁定": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1108,
+            651,
+            44,
+            52
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼3_点击锁定.png"
+        ],
+        "timeout": 1000
+    },
+    "自动地鬼3_解锁阵容": {
+        "next": [
+            "挑战地鬼"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            1093,
+            646,
+            63,
+            54
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼3_解锁阵容.png",
+            "自动地鬼\\自动地鬼3_解锁阵容_1.png"
+        ],
+        "timeout": 1000
+    },
+    "自动地鬼3_锁定阵容": {
+        "next": [
+            "自动地鬼3_解锁阵容",
+            "[JumpBack]自动地鬼3_点击锁定"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动地鬼4": {
+        "action": "Click",
+        "expected": "挑战",
+        "next": [
+            "自动地鬼12_装备预设",
+            "自动地鬼15"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1080,
+            518,
+            157,
+            63
+        ]
+    },
+    "自动地鬼5": {
+        "expected": "自动",
+        "next": [
+            "自动地鬼6",
+            "自动地鬼16",
+            "自动地鬼17"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            18,
+            627,
+            103,
+            78
+        ],
+        "timeout": 200000
+    },
+    "自动地鬼6": {
+        "expected": "胜利|失败",
+        "next": [
+            "自动地鬼8",
+            "[JumpBack]自动地鬼7"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            654,
+            93,
+            404,
+            201
+        ]
+    },
+    "自动地鬼7": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [
+            421,
+            656,
+            387,
+            63
+        ]
+    },
+    "自动地鬼8": {
+        "expected": "^(世界|小组|评分)$",
+        "next": [
+            "自动地鬼10",
+            "自动地鬼13",
+            "自动地鬼14",
+            "[JumpBack]自动地鬼9",
+            "[JumpBack]自动地鬼7"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            637,
+            400,
+            541,
+            99
+        ]
+    },
+    "自动地鬼9": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1062,
+            9,
+            208,
+            97
+        ],
+        "template": [
+            "自动地鬼\\自动地鬼9.png"
+        ]
+    },
+    "装备地狱鬼王预设": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "地鬼",
+            "team_name": "地域鬼王"
+        },
+        "expected": "式神录",
+        "next": [
+            "地鬼_御魂_返回"
+        ],
+        "on_error": "超时_切换御魂失败",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            224,
+            63
+        ],
+        "target": [
+            1152,
+            535,
+            127,
+            65
+        ]
+    },
+    "开始地鬼-检查时间": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "TimeCheck",
+        "custom_action_param": {
+            "start": "6:00",
+            "end": "23:59",
+            "mode": "in"
+        },
+        "next": [
+            "自动地鬼"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "focus": {
+            "Node.Action.Starting": "开始自动地鬼时间检查",
+            "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束"
+        }
     }
 }
