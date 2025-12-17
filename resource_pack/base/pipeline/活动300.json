@@ -22,7 +22,33 @@
             57
         ]
     },
-    "月活动-识别挑战": {
+    "月活动-挑战开始前随机等待": {
+        "action": "Custom",
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "max": 5,
+            "min": 1
+        },
+        "next": [
+            "月活动-结束挑战",
+            "月活动-点击开始挑战"
+        ],
+        "recognition": "DirectHit"
+    },
+    "月活动-挑战结束后随机等待": {
+        "action": "Custom",
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "max": 10,
+            "min": 1
+        },
+        "next": [
+            "月活动-结束挑战"
+        ],
+        "recognition": "DirectHit"
+    },
+    "月活动-点击开始挑战": {
+        "action": "Click",
         "expected": "挑战",
         "recognition": "OCR",
         "roi": [
@@ -30,9 +56,6 @@
             589,
             107,
             79
-        ],
-        "next": [
-            "月活动-挑战开始前随机等待"
         ]
     },
     "月活动-点击爬塔界面": {
@@ -62,6 +85,17 @@
         ],
         "timeout": 120000
     },
+    "月活动-结束挑战": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [
+            478,
+            653,
+            345,
+            67
+        ]
+    },
     "月活动-获取每日奖励": {
         "action": "Click",
         "expected": "获得奖励",
@@ -79,6 +113,19 @@
             79
         ]
     },
+    "月活动-识别挑战": {
+        "expected": "挑战",
+        "next": [
+            "月活动-挑战开始前随机等待"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1125,
+            589,
+            107,
+            79
+        ]
+    },
     "月活动-识别挑战次数是否剩余0次": {
         "expected": "挑战剩余0次",
         "recognition": "OCR",
@@ -91,15 +138,15 @@
     },
     "月活动-识别挑战结束后点击屏幕继续": {
         "expected": "点击屏幕继续",
+        "next": [
+            "月活动-挑战结束后随机等待"
+        ],
         "recognition": "OCR",
         "roi": [
             478,
             653,
             345,
             67
-        ],
-        "next": [
-            "月活动-挑战结束后随机等待"
         ]
     },
     "月活动-进入爬塔": {
@@ -131,55 +178,10 @@
         ],
         "template": [
             "活动300\\自动活动爬塔-点击活动_1.png",
-            "活动300\\自动活动爬塔-点击活动_2.png"
+            "活动300\\自动活动爬塔-点击活动_2.png",
+            "活动300\\自动活动爬塔-点击活动_3.png",
+            "活动300\\自动活动爬塔-点击活动_4.png"
         ],
         "timeout": 120000
-    },
-    "月活动-结束挑战": {
-        "expected": "点击屏幕继续",
-        "recognition": "OCR",
-        "roi": [
-            478,
-            653,
-            345,
-            67
-        ],
-        "action": "Click"
-    },
-    "月活动-挑战结束后随机等待": {
-        "recognition": "DirectHit",
-        "action": "Custom",
-        "next": [
-            "月活动-结束挑战"
-        ],
-        "custom_action": "RandomWait",
-        "custom_action_param": {
-            "min": 1,
-            "max": 10
-        }
-    },
-    "月活动-点击开始挑战": {
-        "action": "Click",
-        "expected": "挑战",
-        "recognition": "OCR",
-        "roi": [
-            1125,
-            589,
-            107,
-            79
-        ]
-    },
-    "月活动-挑战开始前随机等待": {
-        "recognition": "DirectHit",
-        "action": "Custom",
-        "next": [
-            "月活动-结束挑战",
-            "月活动-点击开始挑战"
-        ],
-        "custom_action": "RandomWait",
-        "custom_action_param": {
-            "min": 1,
-            "max": 5
-        }
     }
 }
