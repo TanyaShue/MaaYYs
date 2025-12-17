@@ -82,9 +82,9 @@ class AutoFoster(CustomAction):
         targets_recog = context.run_recognition(self.TASK_RECOG_TARGET, img)
 
         # 简化处理：假设识别成功且 filterd_results 存在
-        if targets_recog.hit and getattr(targets_recog, "filterd_results", None):
-            print(f"当前页找到 {len(targets_recog.filterd_results)} 个目标。")
-            for target in targets_recog.filterd_results:
+        if targets_recog.hit and getattr(targets_recog, "filtered_results", None):
+            print(f"当前页找到 {len(targets_recog.filtered_results)} 个目标。")
+            for target in targets_recog.filtered_results:
                 reward_type, reward_value = self._click_target_and_get_reward(context, target)
                 if reward_type is not None and reward_value > 0:
                     page_results.append({
@@ -154,10 +154,10 @@ class AutoFoster(CustomAction):
             targets_recog = context.run_recognition(self.TASK_RECOG_TARGET, img)
 
             targets_found = False
-            if targets_recog.hit and getattr(targets_recog, "filterd_results", None):
+            if targets_recog.hit and getattr(targets_recog, "filtered_results", None):
                 targets_found = True
-                print(f"找到 {len(targets_recog.filterd_results)} 个目标，检查是否匹配...")
-                for target in targets_recog.filterd_results:
+                print(f"找到 {len(targets_recog.filtered_results)} 个目标，检查是否匹配...")
+                for target in targets_recog.filtered_results:
                     # 再次点击并检查奖励
                     reward_type, reward_value = self._click_target_and_get_reward(context, target)
 
