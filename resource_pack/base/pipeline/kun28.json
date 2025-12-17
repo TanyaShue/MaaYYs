@@ -1,42 +1,384 @@
 {
-    "kun28_识别突破卷数量": {
+    "kun28": {
+        "expected": "第二十八章",
+        "next": [
+            "kun2823"
+        ],
+        "on_error": [
+            "跳过"
+        ],
         "recognition": "OCR",
         "roi": [
-            726,
-            1,
-            123,
-            46
+            1057,
+            194,
+            199,
+            404
         ],
-        "expected": "^([0-9]+)\\/30$"
+        "timeout": 3000
     },
     "kun281": {
-        "recognition": "OCR",
+        "expected": "妖",
         "next": [
             "kun282",
             "[JumpBack]kun283"
         ],
+        "recognition": "OCR",
         "roi": [
             1121,
             122,
             68,
             50
+        ]
+    },
+    "kun2810": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            649,
+            2,
+            105,
+            54
         ],
-        "expected": "妖"
+        "template": [
+            "kun28\\kun2810.png",
+            "kun28\\kun2810_1.png"
+        ]
+    },
+    "kun2811": {
+        "action": "Click",
+        "expected": "式神录",
+        "next": [
+            "kun288"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1085,
+            651,
+            100,
+            36
+        ]
+    },
+    "kun2812": {
+        "next": [
+            "kun2811",
+            "[JumpBack]打开底部菜单"
+        ],
+        "recognition": "DirectHit"
+    },
+    "kun2813": {
+        "action": "Click",
+        "next": [
+            "kun281",
+            "kun287",
+            "[JumpBack]点击探索"
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "kun28\\kun2813.png"
+        ]
+    },
+    "kun2814": {
+        "expected": "点击屏幕继续",
+        "next": [
+            "kun2816",
+            "[JumpBack]kun2815"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            482,
+            658,
+            324,
+            61
+        ]
+    },
+    "kun2815": {
+        "action": "Click",
+        "target": [
+            843,
+            389,
+            177,
+            250
+        ],
+        "recognition": "DirectHit"
+    },
+    "kun2816": {
+        "expected": "自动轮换",
+        "recognition": "OCR",
+        "roi": [
+            150,
+            646,
+            129,
+            63
+        ]
+    },
+    "kun2817": {
+        "action": "Click",
+        "next": [
+            "kun28_点击屏幕继续"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            8,
+            129,
+            124,
+            501
+        ],
+        "template": [
+            "kun28\\kun2817_3.png"
+        ],
+        "timeout": 1000
+    },
+    "kun2818": {
+        "action": "Click",
+        "next": [
+            "kun2819"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "kun28\\kun2817.png",
+            "kun28\\kun2817_1.png",
+            "kun28\\kun2817_2.png"
+        ],
+        "timeout": 5000
+    },
+    "kun2819": {
+        "action": "Click",
+        "post_delay": 1000,
+        "target": [
+            965,
+            279,
+            252,
+            235
+        ],
+        "recognition": "DirectHit"
     },
     "kun282": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "第二十八章",
         "next": [
             "kun284",
             "[JumpBack]kun282_copy1"
         ],
+        "recognition": "OCR",
         "roi": [
             1046,
             491,
             208,
             102
+        ]
+    },
+    "kun2820": {
+        "action": "Custom",
+        "custom_action": "Kun28",
+        "custom_action_param": {
+            "group_name": "日常",
+            "target": "鬼王",
+            "team_name": "日常清杂"
+        },
+        "recognition": "DirectHit"
+    },
+    "kun2821": {
+        "action": "Swipe",
+        "begin": [
+            30,
+            235,
+            97,
+            259
         ],
-        "expected": "第二十八章"
+        "duration": 500,
+        "end": [
+            1155,
+            253,
+            101,
+            261
+        ],
+        "expected": "自动轮换",
+        "next": [
+            "kun28_copy1",
+            "kun2818",
+            "kun2821_copy1",
+            "kun28_copy1_copy1"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "post_delay": 2000,
+        "pre_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            153,
+            650,
+            112,
+            50
+        ],
+        "timeout": 2000
+    },
+    "kun2821_copy1": {
+        "action": "Swipe",
+        "begin": [
+            30,
+            235,
+            97,
+            259
+        ],
+        "duration": 500,
+        "end": [
+            1155,
+            253,
+            101,
+            261
+        ],
+        "expected": "自动轮换",
+        "next": [
+            "kun28_copy1",
+            "kun2818",
+            "kun2821_copy2",
+            "kun28_copy1_copy1"
+        ],
+        "post_delay": 2000,
+        "pre_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            153,
+            650,
+            112,
+            50
+        ],
+        "timeout": 1000,
+        "on_error": [
+            "跳过"
+        ]
+    },
+    "kun2821_copy2": {
+        "action": "Swipe",
+        "begin": [
+            1155,
+            253,
+            101,
+            261
+        ],
+        "duration": 500,
+        "end": [
+            30,
+            235,
+            97,
+            259
+        ],
+        "expected": "自动轮换",
+        "next": [
+            "kun28_copy1",
+            "kun2818",
+            "kun2821_copy3",
+            "kun28_copy1_copy1"
+        ],
+        "post_delay": 2000,
+        "pre_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            153,
+            650,
+            112,
+            50
+        ],
+        "timeout": 1000,
+        "on_error": [
+            "跳过"
+        ]
+    },
+    "kun2821_copy3": {
+        "action": "Swipe",
+        "begin": [
+            1155,
+            253,
+            101,
+            261
+        ],
+        "duration": 500,
+        "end": [
+            30,
+            235,
+            97,
+            259
+        ],
+        "expected": "自动轮换",
+        "post_delay": 2000,
+        "pre_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            153,
+            650,
+            112,
+            50
+        ],
+        "timeout": 1000,
+        "on_error": [
+            "跳过"
+        ]
+    },
+    "kun2822": {
+        "action": "Click",
+        "expected": "宝箱",
+        "recognition": "OCR",
+        "roi": [
+            11,
+            120,
+            139,
+            519
+        ],
+        "timeout": 1000
+    },
+    "kun2823": {
+        "expected": "探索",
+        "next": [
+            "kun2824"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1061,
+            236,
+            59,
+            105
+        ],
+        "timeout": 10000
+    },
+    "kun2824": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            944,
+            95,
+            179,
+            108
+        ],
+        "template": [
+            "kun28\\kun2824.png",
+            "kun28\\kun2824_1.png"
+        ]
+    },
+    "kun2825": {
+        "recognition": "TemplateMatch",
+        "template": []
+    },
+    "kun282_copy1": {
+        "action": "Click",
+        "expected": "第二十八章",
+        "recognition": "OCR",
+        "roi": [
+            1046,
+            491,
+            208,
+            102
+        ]
     },
     "kun283": {
         "action": "Swipe",
@@ -51,79 +393,85 @@
             207,
             198,
             59
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "kun284": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "困难",
         "next": [
             "kun285"
         ],
+        "recognition": "OCR",
         "roi": [
             256,
             169,
             291,
             125
-        ],
-        "expected": "困难"
+        ]
     },
     "kun285": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "探索",
         "next": [
             "kun286"
         ],
+        "recognition": "OCR",
         "roi": [
             878,
             513,
             146,
             54
-        ],
-        "expected": "探索"
+        ]
     },
     "kun286": {
-        "recognition": "OCR",
+        "expected": "自动轮换",
         "next": [
             "kun28_自动轮换",
             "kun28_开始战斗"
         ],
+        "recognition": "OCR",
         "roi": [
             146,
             636,
             144,
             59
-        ],
-        "expected": "自动轮换"
+        ]
     },
-    "kun28_自动轮换": {
-        "recognition": "ColorMatch",
-        "action": "Click",
+    "kun287": {
+        "expected": "第|章",
         "next": [
-            "kun28_开始战斗"
+            "kun282",
+            "[JumpBack]kun283"
         ],
-        "post_delay": 1000,
+        "recognition": "OCR",
         "roi": [
-            99,
-            643,
-            59,
-            63
+            1057,
+            188,
+            192,
+            384
+        ]
+    },
+    "kun288": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "日常",
+            "team_name": "日常清杂"
+        },
+        "expected": "预设",
+        "next": [
+            "kun2813"
         ],
-        "template": "通用图标/探索_自动挑战.png",
-        "method": 40,
-        "count": 100,
-        "lower": [
-            [
-                75,
-                0,
-                50
-            ]
+        "on_error": [
+            "超时_切换御魂失败"
         ],
-        "upper": [
-            [
-                125,
-                100,
-                150
-            ]
+        "recognition": "OCR",
+        "roi": [
+            339,
+            75,
+            84,
+            48
         ]
     },
     "kun289": {
@@ -131,100 +479,60 @@
             "kun2810",
             "识别探索特征",
             "[JumpBack]点击探索"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
-    "kun2810": {
+    "kun28_copy1": {
+        "action": "Click",
+        "post_delay": 0,
+        "pre_delay": 0,
         "recognition": "TemplateMatch",
-        "next": [],
         "roi": [
-            649,
-            2,
-            105,
-            54
+            5,
+            110,
+            1274,
+            530
         ],
         "template": [
-            "kun28\\kun2810.png",
-            "kun28\\kun2810_1.png"
-        ]
+            "kun28\\kun28.png",
+            "kun28\\kun28_1.png",
+            "kun28\\kun28_2.png",
+            "kun28\\kun28_copy1.png",
+            "kun28\\kun28_copy1_1.png",
+            "kun28\\kun2825.png"
+        ],
+        "timeout": 10000
+    },
+    "kun28_copy1_copy1": {
+        "action": "Click",
+        "post_delay": 0,
+        "pre_delay": 0,
+        "recognition": "FeatureMatch",
+        "roi": [
+            5,
+            110,
+            1274,
+            530
+        ],
+        "template": [
+            "kun28\\kun28.png",
+            "kun28\\kun28_1.png",
+            "kun28\\kun28_2.png",
+            "kun28\\kun28_copy1.png",
+            "kun28\\kun28_copy1_1.png",
+            "kun28\\kun2825.png"
+        ],
+        "timeout": 10000
     },
     "kun28_开始战斗": {
         "next": [
             "kun28_结束战斗",
             "kun2823",
             "[JumpBack]kun28_开始点击妖怪"
-        ]
-    },
-    "kun2811": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "kun288"
         ],
-        "roi": [
-            1085,
-            651,
-            100,
-            36
-        ],
-        "expected": "式神录"
-    },
-    "kun2812": {
-        "next": [
-            "kun2811",
-            "[JumpBack]打开底部菜单"
-        ]
-    },
-    "kun288": {
-        "recognition": "OCR",
-        "action": "Custom",
-        "on_error": ["超时_切换御魂失败"],
-        "next": [
-            "kun2813"
-        ],
-        "roi": [
-            339,
-            75,
-            84,
-            48
-        ],
-        "expected": "预设",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "日常",
-            "team_name": "日常清杂"
-        }
-    },
-    "kun2813": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "next": [
-            "kun281",
-            "kun287",
-            "[JumpBack]点击探索"
-        ],
-        "template": [
-            "kun28\\kun2813.png"
-        ]
-    },
-    "kun28_结束战斗": {
-        "recognition": "OCR",
-        "timeout": 6000,
-        "next": [
-            "kun2817",
-            "kun2822",
-            "kun2823",
-            "kun28"
-        ],
-        "roi": [
-            1121,
-            122,
-            68,
-            50
-        ],
-        "expected": "妖"
+        "recognition": "DirectHit"
     },
     "kun28_开始点击妖怪": {
-        "timeout": 60000,
         "next": [
             "kun28_结束战斗",
             "kun2823",
@@ -233,18 +541,20 @@
             "[JumpBack]kun2814",
             "[JumpBack]kun2821",
             "[JumpBack]kun28_copy1_copy1"
-        ]
+        ],
+        "timeout": 60000,
+        "recognition": "DirectHit"
     },
     "kun28_点击屏幕继续": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
         "roi": [
             276,
             594,
             710,
             125
         ],
-        "expected": "点击屏幕继续",
         "target": [
             916,
             463,
@@ -252,365 +562,72 @@
             119
         ]
     },
-    "kun2814": {
-        "recognition": "OCR",
-        "on_error": [
-            "跳过"
-        ],
+    "kun28_结束战斗": {
+        "expected": "妖",
         "next": [
-            "kun2816",
-            "[JumpBack]kun2815"
+            "kun2817",
+            "kun2822",
+            "kun2823",
+            "kun28"
         ],
-        "pre_delay": 1000,
-        "post_delay": 1000,
-        "roi": [
-            482,
-            658,
-            324,
-            61
-        ],
-        "expected": "点击屏幕继续"
-    },
-    "kun2815": {
-        "action": "Click",
-        "target": [
-            843,
-            389,
-            177,
-            250
-        ]
-    },
-    "kun2816": {
         "recognition": "OCR",
-        "next": [],
         "roi": [
-            150,
-            646,
-            129,
+            1121,
+            122,
+            68,
+            50
+        ],
+        "timeout": 6000
+    },
+    "kun28_自动轮换": {
+        "action": "Click",
+        "count": 100,
+        "lower": [
+            [
+                75,
+                0,
+                50
+            ]
+        ],
+        "method": 40,
+        "next": [
+            "kun28_开始战斗"
+        ],
+        "post_delay": 1000,
+        "recognition": "ColorMatch",
+        "roi": [
+            99,
+            643,
+            59,
             63
         ],
-        "expected": "自动轮换"
-    },
-    "kun2818": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "timeout": 5000,
-        "on_error": [
-            "跳过"
-        ],
-        "next": [
-            "kun2819"
-        ],
-        "template": [
-            "kun28\\kun2817.png",
-            "kun28\\kun2817_1.png",
-            "kun28\\kun2817_2.png"
+        "template": "通用图标/探索_自动挑战.png",
+        "upper": [
+            [
+                125,
+                100,
+                150
+            ]
         ]
     },
-    "kun2819": {
-        "action": "Click",
-        "post_delay": 1000,
-        "target": [
-            965,
-            279,
-            252,
-            235
+    "kun28_识别突破卷数量": {
+        "expected": "^([0-9]+)\\/30$",
+        "recognition": "OCR",
+        "roi": [
+            726,
+            1,
+            123,
+            46
         ]
-    },
-    "kun2820": {
-        "action": "Custom",
-        "custom_action": "Kun28",
-        "custom_action_param": {
-            "group_name": "日常",
-            "team_name": "日常清杂",
-            "target": "鬼王"
-        }
-    },
-    "kun2821": {
-        "recognition": "OCR",
-        "action": "Swipe",
-        "timeout": 2000,
-        "on_error": [
-            "跳过"
-        ],
-        "next": [
-            "kun28_copy1",
-            "kun2818",
-            "kun2821_copy1",
-            "kun28_copy1_copy1"
-        ],
-        "pre_delay": 2000,
-        "post_delay": 2000,
-        "roi": [
-            153,
-            650,
-            112,
-            50
-        ],
-        "expected": "自动轮换",
-        "begin": [
-            30,
-            235,
-            97,
-            259
-        ],
-        "end": [
-            1155,
-            253,
-            101,
-            261
-        ],
-        "duration": 500
-    },
-    "kun2823": {
-        "recognition": "OCR",
-        "timeout": 10000,
-        "next": [
-            "kun2824"
-        ],
-        "roi": [
-            1061,
-            236,
-            59,
-            105
-        ],
-        "expected": "探索"
-    },
-    "kun2824": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "roi": [
-            944,
-            95,
-            179,
-            108
-        ],
-        "template": [
-            "kun28\\kun2824.png",
-            "kun28\\kun2824_1.png"
-        ]
-    },
-    "kun2821_copy1": {
-        "recognition": "OCR",
-        "action": "Swipe",
-        "timeout": 1000,
-        "next": [
-            "kun28_copy1",
-            "kun2818",
-            "kun2821_copy2",
-            "kun28_copy1_copy1"
-        ],
-        "pre_delay": 2000,
-        "post_delay": 2000,
-        "roi": [
-            153,
-            650,
-            112,
-            50
-        ],
-        "expected": "自动轮换",
-        "begin": [
-            30,
-            235,
-            97,
-            259
-        ],
-        "end": [
-            1155,
-            253,
-            101,
-            261
-        ],
-        "duration": 500
-    },
-    "kun2821_copy2": {
-        "recognition": "OCR",
-        "action": "Swipe",
-        "timeout": 1000,
-        "next": [
-            "kun28_copy1",
-            "kun2818",
-            "kun2821_copy3",
-            "kun28_copy1_copy1"
-        ],
-        "pre_delay": 2000,
-        "post_delay": 2000,
-        "roi": [
-            153,
-            650,
-            112,
-            50
-        ],
-        "expected": "自动轮换",
-        "begin": [
-            1155,
-            253,
-            101,
-            261
-        ],
-        "end": [
-            30,
-            235,
-            97,
-            259
-        ],
-        "duration": 500
-    },
-    "kun2821_copy3": {
-        "recognition": "OCR",
-        "action": "Swipe",
-        "timeout": 1000,
-        "pre_delay": 2000,
-        "post_delay": 2000,
-        "roi": [
-            153,
-            650,
-            112,
-            50
-        ],
-        "expected": "自动轮换",
-        "begin": [
-            1155,
-            253,
-            101,
-            261
-        ],
-        "end": [
-            30,
-            235,
-            97,
-            259
-        ],
-        "duration": 500
-    },
-    "kun28_copy1": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "timeout": 10000,
-        "pre_delay": 0,
-        "post_delay": 0,
-        "roi": [
-            5,
-            110,
-            1274,
-            530
-        ],
-        "template": [
-            "kun28\\kun28.png",
-            "kun28\\kun28_1.png",
-            "kun28\\kun28_2.png",
-            "kun28\\kun28_copy1.png",
-            "kun28\\kun28_copy1_1.png",
-            "kun28\\kun2825.png"
-        ]
-    },
-    "kun2817": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "timeout": 1000,
-        "on_error": [
-            "跳过"
-        ],
-        "next": [
-            "kun28_点击屏幕继续"
-        ],
-        "roi": [
-            8,
-            129,
-            124,
-            501
-        ],
-        "template": [
-            "kun28\\kun2817_3.png"
-        ]
-    },
-    "kun2822": {
-        "recognition": "OCR",
-        "action": "Click",
-        "timeout": 1000,
-        "roi": [
-            11,
-            120,
-            139,
-            519
-        ],
-        "expected": "宝箱"
-    },
-    "kun282_copy1": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            1046,
-            491,
-            208,
-            102
-        ],
-        "expected": "第二十八章"
-    },
-    "kun28": {
-        "recognition": "OCR",
-        "timeout": 3000,
-        "on_error": [
-            "跳过"
-        ],
-        "next": [
-            "kun2823"
-        ],
-        "roi": [
-            1057,
-            194,
-            199,
-            404
-        ],
-        "expected": "第二十八章"
     },
     "kun28_识别鬼王卷数量": {
+        "expected": "^([0-9]+)\\/50$",
         "recognition": "OCR",
         "roi": [
             273,
             3,
             223,
             59
-        ],
-        "expected": "^([0-9]+)\\/50$"
-    },
-    "kun287": {
-        "recognition": "OCR",
-        "next": [
-            "kun282",
-            "[JumpBack]kun283"
-        ],
-        "roi": [
-            1057,
-            188,
-            192,
-            384
-        ],
-        "expected": "第|章"
-    },
-    "kun28_copy1_copy1": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "timeout": 10000,
-        "pre_delay": 0,
-        "post_delay": 0,
-        "roi": [
-            5,
-            110,
-            1274,
-            530
-        ],
-        "template": [
-            "kun28\\kun28.png",
-            "kun28\\kun28_1.png",
-            "kun28\\kun28_2.png",
-            "kun28\\kun28_copy1.png",
-            "kun28\\kun28_copy1_1.png",
-            "kun28\\kun2825.png"
         ]
-    },
-    "kun2825": {
-        "recognition": "TemplateMatch",
-        "template": []
     }
 }
