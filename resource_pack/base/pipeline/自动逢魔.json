@@ -157,13 +157,13 @@
             "[JumpBack]现世逢魔_点击首领"
         ],
         "post_delay": 1000,
+        "recognition": "DirectHit",
         "target": [
             584,
             301,
             106,
             112
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "现世逢魔_点击参加": {
         "action": "Click",
@@ -411,8 +411,8 @@
         "on_error": [
             "跳过"
         ],
-        "timeout": 2000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 2000
     },
     "自动逢魔11_2": {
         "next": [
@@ -423,8 +423,8 @@
         "on_error": [
             "跳过"
         ],
-        "timeout": 2000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 2000
     },
     "自动逢魔11_2_copy1": {
         "next": [
@@ -435,8 +435,8 @@
         "on_error": [
             "跳过"
         ],
-        "timeout": 2000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 2000
     },
     "自动逢魔11_2_copy2": {
         "next": [
@@ -447,8 +447,8 @@
         "on_error": [
             "跳过"
         ],
-        "timeout": 2000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 2000
     },
     "自动逢魔12": {
         "expected": "图鉴|珍旅居|闲庭",
@@ -868,13 +868,13 @@
     },
     "自动逢魔5": {
         "action": "Click",
+        "recognition": "DirectHit",
         "target": [
             907,
             364,
             88,
             121
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "自动逢魔6": {
         "expected": "逢魔密信",
@@ -1024,5 +1024,25 @@
             62
         ],
         "timeout": 350000
+    },
+    "开始逢魔-检查时间": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "next": [
+            "自动逢魔20"
+        ],
+        "custom_action": "TimeCheck",
+        "custom_action_param": {
+            "start": "17:00",
+            "end": "23:00",
+            "mode": "in"
+        },
+        "on_error": [
+            "返回庭院"
+        ],
+        "focus": {
+          "Node.Action.Starting": "[info]开始检查时间...",
+          "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束"
+        }
     }
 }
