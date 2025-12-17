@@ -1,0 +1,186 @@
+{
+    "开始自动活动300爬塔": {
+        "next": [
+            "自动活动爬塔-点击活动"
+        ],
+        "recognition": "DirectHit"
+    },
+    "月活动-关闭补给界面": {
+        "action": "Click",
+        "expected": "入梦补给",
+        "recognition": "OCR",
+        "roi": [
+            124,
+            238,
+            431,
+            118
+        ],
+        "target": [
+            1068,
+            115,
+            61,
+            57
+        ]
+    },
+    "月活动-识别挑战": {
+        "action": "Click",
+        "expected": "挑战",
+        "recognition": "OCR",
+        "roi": [
+            1125,
+            589,
+            107,
+            79
+        ],
+        "next": [
+            "月活动-挑战开始前随机等待"
+        ]
+    },
+    "月活动-点击爬塔界面": {
+        "action": "Click",
+        "expected": "魇兽讨伐",
+        "recognition": "OCR",
+        "roi": [
+            93,
+            120,
+            170,
+            46
+        ]
+    },
+    "月活动-确保位于爬塔界面": {
+        "expected": "魔兽讨伐",
+        "next": [
+            "月活动-识别挑战次数是否剩余0次",
+            "[JumpBack]月活动-识别挑战",
+            "[JumpBack]月活动-识别挑战结束后点击屏幕继续"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            343,
+            467,
+            159,
+            61
+        ],
+        "timeout": 120000
+    },
+    "月活动-获取每日奖励": {
+        "action": "Click",
+        "expected": "获得奖励",
+        "recognition": "OCR",
+        "roi": [
+            459,
+            179,
+            374,
+            103
+        ],
+        "target": [
+            60,
+            641,
+            483,
+            79
+        ]
+    },
+    "月活动-识别挑战次数是否剩余0次": {
+        "expected": "挑战剩余0次",
+        "recognition": "OCR",
+        "roi": [
+            367,
+            578,
+            145,
+            43
+        ]
+    },
+    "月活动-识别挑战结束后点击屏幕继续": {
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [
+            478,
+            653,
+            345,
+            67
+        ],
+        "next": [
+            "月活动-挑战结束后随机等待"
+        ]
+    },
+    "月活动-进入爬塔": {
+        "action": "Click",
+        "expected": "梦魔突围",
+        "recognition": "OCR",
+        "roi": [
+            644,
+            141,
+            50,
+            133
+        ]
+    },
+    "自动活动爬塔-点击活动": {
+        "action": "Click",
+        "next": [
+            "[JumpBack]月活动-获取每日奖励",
+            "[JumpBack]月活动-关闭补给界面",
+            "[JumpBack]月活动-进入爬塔",
+            "[JumpBack]月活动-点击爬塔界面",
+            "月活动-确保位于爬塔界面"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            19,
+            126,
+            1261,
+            474
+        ],
+        "template": [
+            "活动300\\自动活动爬塔-点击活动_1.png",
+            "活动300\\自动活动爬塔-点击活动_2.png"
+        ],
+        "timeout": 120000
+    },
+    "月活动-结束挑战": {
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [
+            478,
+            653,
+            345,
+            67
+        ],
+        "action": "Click"
+    },
+    "月活动-挑战结束后随机等待": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "next": [
+            "月活动-结束挑战"
+        ],
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "min": 1,
+            "max": 10
+        }
+    },
+    "月活动-点击开始挑战": {
+        "action": "Click",
+        "expected": "挑战",
+        "recognition": "OCR",
+        "roi": [
+            1125,
+            589,
+            107,
+            79
+        ]
+    },
+    "月活动-挑战开始前随机等待": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "next": [
+            "月活动-结束挑战",
+            "月活动-点击开始挑战"
+        ],
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "min": 1,
+            "max": 5
+        }
+    }
+}
