@@ -23,7 +23,6 @@
         ]
     },
     "月活动-识别挑战": {
-        "action": "Click",
         "expected": "挑战",
         "recognition": "OCR",
         "roi": [
