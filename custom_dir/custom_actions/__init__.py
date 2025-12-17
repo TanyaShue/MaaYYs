@@ -21,5 +21,6 @@ __all__ = [
     "restart",
     "restartgame",
     "guess",
-    "custom_appointment"
+    "custom_appointment",
+    "time_check"
 ]
