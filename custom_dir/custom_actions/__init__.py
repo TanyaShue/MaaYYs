@@ -18,6 +18,7 @@ __all__ = [
     "task_list",
     "team_builder",
     "random_task",
+    "random_wait",
     "restart",
     "restartgame",
     "guess",

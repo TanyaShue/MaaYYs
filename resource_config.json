@@ -70,9 +70,14 @@
       "option": []
     },
     {
-      "task_name": "自动竞猜",
-      "task_entry": "竞猜",
-      "option": []
+      "task_name": "活动-300次爬塔(手动切换队伍预设)",
+      "task_entry": "开始自动活动300爬塔",
+      "option": [
+        "活动-300次爬塔-开始前随机等待时间的最短时间",
+        "活动-300次爬塔-开始前随机等待时间的最长时间",
+        "活动-300次爬塔-打完一句后随机等待时间的最短时间",
+        "活动-300次爬塔-打完一句后随机等待时间的最长时间"
+      ]
     },
     {
       "task_name": "寮三十捐材料",
@@ -1635,6 +1640,58 @@
         "御灵_点击屏幕继续": {
           "custom_action_param": {
             "long_wait_max": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "活动-300次爬塔-开始前随机等待时间的最短时间",
+      "type": "input",
+      "default": "1",
+      "doc": "始前随机等待时间的最短时间（秒）",
+      "pipeline_override": {
+        "月活动-挑战开始前随机等待": {
+          "custom_action_param": {
+            "min": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "活动-300次爬塔-开始前随机等待时间的最长时间",
+      "type": "input",
+      "default": "5",
+      "doc": "开始前随机等待时间的最长时间（秒）",
+      "pipeline_override": {
+        "月活动-挑战开始前随机等待": {
+          "custom_action_param": {
+            "max": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "活动-300次爬塔-打完一句后随机等待时间的最短时间",
+      "type": "input",
+      "default": "1",
+      "doc": "打完一句后随机等待时间的最短时间（秒）",
+      "pipeline_override": {
+        "月活动-挑战结束后随机等待": {
+          "custom_action_param": {
+            "min": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "活动-300次爬塔-打完一句后随机等待时间的最长时间",
+      "type": "input",
+      "default": "10",
+      "doc": "打完一句后随机等待时间的最长时间（秒）",
+      "pipeline_override": {
+        "月活动-挑战结束后随机等待": {
+          "custom_action_param": {
+            "max": "{value}"
           }
         }
       }
