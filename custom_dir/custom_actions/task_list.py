@@ -27,7 +27,7 @@ class TaskList(CustomAction):
         print("开始执行自定义动作：任务列表")
         json_data = json.loads(argv.custom_action_param)
         task_list = json_data.get("task_list", {})
-        on_error = json_data.get("on_error", None)
+        on_error = json_data.get("on_error", [])
 
         # 1. 获取新参数 enable_once_a_day，如果参数未提供，则默认为 True
         enable_once_a_day = json_data.get("enable_once_a_day", True)
