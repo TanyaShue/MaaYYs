@@ -14,8 +14,8 @@ class ReStartGame(CustomAction):
         sleep(3)
         context.run_task("启动游戏")
         print(f"重启完成,跳过任务")
-        context.run_action("StopTask")
-        print(f"结束任务链")
+        # context.run_task("StopTask")
+        # print(f"结束任务链")
         return True
 
 
