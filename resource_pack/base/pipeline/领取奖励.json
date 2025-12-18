@@ -73,13 +73,13 @@
     "邮件_领取奖励_点击底部关闭奖励界面": {
         "action": "Click",
         "post_delay": 1000,
+        "recognition": "DirectHit",
         "target": [
             414,
             517,
             445,
             135
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "领取奖励": {
         "index": -2,
@@ -392,13 +392,13 @@
         "next": [
             "返回庭院"
         ],
+        "recognition": "DirectHit",
         "target": [
             16,
             5,
             46,
             45
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "领取奖励_打开商店": {
         "action": "Click",
@@ -420,9 +420,6 @@
     },
     "领取奖励_打开花合战": {
         "action": "Click",
-        "next": [
-            "领取奖励_花合战_点击任务"
-        ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -539,13 +536,13 @@
             "返回庭院"
         ],
         "post_delay": 1000,
+        "recognition": "DirectHit",
         "target": [
             493,
             560,
             392,
             114
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "领取奖励_签到": {
         "action": "Click",
@@ -596,13 +593,13 @@
             "关闭签到界面"
         ],
         "post_delay": 3000,
+        "recognition": "DirectHit",
         "target": [
             562,
             153,
             143,
             219
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "领取奖励_花合战_全部领取": {
         "action": "Click",
@@ -646,7 +643,9 @@
     },
     "领取奖励_花合战奖励": {
         "next": [
-            "领取奖励_打开花合战",
+            "领取奖励-确保位于花合战界面",
+            "[JumpBack]领取奖励_打开花合战",
+            "[JumpBack]领取奖励-点击花合战",
             "[JumpBack]打开底部菜单"
         ],
         "recognition": "DirectHit"
@@ -719,5 +718,29 @@
             "庭院/签到小垃圾_3.png",
             "领取奖励\\领取奖励_领取签到小垃圾.png"
         ]
+    },
+    "领取奖励-确保位于花合战界面": {
+        "recognition": "OCR",
+        "roi": [
+            74,
+            9,
+            142,
+            64
+        ],
+        "expected": "花合战",
+        "next": [
+            "领取奖励_花合战_点击任务"
+        ]
+    },
+    "领取奖励-点击花合战": {
+        "recognition": "OCR",
+        "roi": [
+            719,
+            651,
+            177,
+            53
+        ],
+        "expected": "花合战",
+        "action": "Click"
     }
 }
