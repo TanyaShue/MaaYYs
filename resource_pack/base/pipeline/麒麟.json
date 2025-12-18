@@ -1,16 +1,59 @@
 {
     "麒麟": {
         "next": [
-            "麒麟1",
+            "麒麟-确保位于阴阳寮内",
+            "[JumpBack]麒麟1",
+            "[JumpBack]麒麟-点击阴阳寮"
+        ],
+        "on_error": [
             "[JumpBack]打开底部菜单"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "rate_limit": 5000,
+        "recognition": "DirectHit",
+        "timeout": 10000
+    },
+    "麒麟-打开寮信息面板": {
+        "action": "Click",
+        "expected": "寮|信息",
+        "recognition": "OCR",
+        "roi": [
+            1149,
+            658,
+            127,
+            62
+        ]
+    },
+    "麒麟-点击阴阳寮": {
+        "action": "Click",
+        "expected": "阴阳寮",
+        "recognition": "OCR",
+        "roi": [
+            530,
+            630,
+            112,
+            62
+        ]
+    },
+    "麒麟-确保位于阴阳寮内": {
+        "expected": "寮|信息",
+        "next": [
+            "麒麟3",
+            "[JumpBack]麒麟2",
+            "[JumpBack]麒麟-打开寮信息面板"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1149,
+            658,
+            127,
+            62
         ]
     },
     "麒麟1": {
-        "recognition": "TemplateMatch",
         "action": "Click",
-        "next": [
-            "麒麟2"
-        ],
+        "recognition": "TemplateMatch",
         "roi": [
             428,
             577,
@@ -21,12 +64,74 @@
             "麒麟\\麒麟1.png"
         ]
     },
-    "麒麟2": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
+    "麒麟10": {
+        "expected": "^\\d{2,}$",
         "next": [
-            "麒麟3"
+            "返回庭院"
         ],
+        "recognition": "OCR",
+        "roi": [
+            41,
+            357,
+            207,
+            56
+        ]
+    },
+    "麒麟11": {
+        "expected": "狩猎战",
+        "next": [
+            "麒麟10",
+            "麒麟12"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            22,
+            0,
+            254,
+            82
+        ]
+    },
+    "麒麟12": {
+        "expected": "大人未挑战",
+        "next": [
+            "麒麟5"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            37,
+            362,
+            247,
+            53
+        ]
+    },
+    "麒麟13": {
+        "action": "Click",
+        "expected": "准备",
+        "recognition": "OCR",
+        "roi": [
+            1108,
+            518,
+            139,
+            176
+        ]
+    },
+    "麒麟14": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "next": [
+            "麒麟10"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            347,
+            591,
+            501,
+            128
+        ]
+    },
+    "麒麟2": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
         "roi": [
             1006,
             570,
@@ -38,68 +143,70 @@
         ]
     },
     "麒麟3": {
-        "recognition": "OCR",
         "action": "Click",
-        "timeout": 4000,
-        "on_error": [
-            "返回庭院"
-        ],
+        "expected": "神",
         "next": [
             "麒麟11",
             "[JumpBack]麒麟4"
         ],
-        "roi": [
-            1163,
-            102,
-            84,
-            501
+        "on_error": [
+            "返回庭院"
         ],
-        "expected": "神社"
+        "recognition": "OCR",
+        "roi": [
+            1174,
+            369,
+            47,
+            92
+        ],
+        "timeout": 4000
     },
     "麒麟4": {
-        "recognition": "OCR",
         "action": "Click",
-        "next": [],
+        "expected": "狩猎战",
+        "recognition": "OCR",
         "roi": [
             92,
             102,
             1052,
             509
-        ],
-        "expected": "狩猎战"
+        ]
     },
     "麒麟5": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "式神录",
         "next": [
             "麒麟6"
         ],
+        "recognition": "OCR",
         "roi": [
             1011,
             616,
             95,
             98
-        ],
-        "expected": "式神录"
+        ]
     },
     "麒麟6": {
         "action": "Custom",
-        "on_error": ["超时_切换御魂失败"],
-        "next": [
-            "麒麟7"
-        ],
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "麒麟_默认分组",
             "team_name": "麒麟_默认队伍"
-        }
+        },
+        "next": [
+            "麒麟7"
+        ],
+        "on_error": [
+            "超时_切换御魂失败"
+        ],
+        "recognition": "DirectHit"
     },
     "麒麟7": {
-        "recognition": "TemplateMatch",
         "action": "Click",
         "next": [
             "麒麟8"
         ],
+        "recognition": "TemplateMatch",
         "roi": [
             0,
             0,
@@ -111,106 +218,41 @@
         ]
     },
     "麒麟8": {
-        "recognition": "OCR",
         "action": "Click",
-        "rate_limit": 3000,
-        "timeout": 400000,
+        "expected": "挑战",
         "next": [
             "麒麟9",
             "麒麟14",
             "[JumpBack]麒麟13"
         ],
+        "rate_limit": 3000,
+        "recognition": "OCR",
         "roi": [
             1103,
             553,
             158,
             144
         ],
-        "expected": "挑战"
+        "timeout": 400000
     },
     "麒麟9": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "本次伤害",
         "next": [
             "麒麟10"
         ],
+        "recognition": "OCR",
         "roi": [
             302,
             292,
             736,
             90
         ],
-        "expected": "本次伤害",
         "target": [
             322,
             623,
             481,
             96
         ]
-    },
-    "麒麟10": {
-        "recognition": "OCR",
-        "next": [
-            "返回庭院"
-        ],
-        "roi": [
-            41,
-            357,
-            207,
-            56
-        ],
-        "expected": "^\\d{2,}$"
-    },
-    "麒麟11": {
-        "recognition": "OCR",
-        "next": [
-            "麒麟10",
-            "麒麟12"
-        ],
-        "roi": [
-            22,
-            0,
-            254,
-            82
-        ],
-        "expected": "狩猎战"
-    },
-    "麒麟12": {
-        "recognition": "OCR",
-        "next": [
-            "麒麟5"
-        ],
-        "roi": [
-            37,
-            362,
-            247,
-            53
-        ],
-        "expected": "大人未挑战"
-    },
-    "麒麟13": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            1108,
-            518,
-            139,
-            176
-        ],
-        "expected": "准备"
-    },
-    "麒麟14": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "麒麟10"
-        ],
-        "roi": [
-            347,
-            591,
-            501,
-            128
-        ],
-        "expected": "点击屏幕继续"
     }
 }
