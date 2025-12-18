@@ -1,74 +1,76 @@
 {
+    "N-1766075283687": {
+        "inverse": true,
+        "recognition": "DirectHit"
+    },
+    "N-1766075325965": {
+        "action": "StopTask",
+        "recognition": "DirectHit"
+    },
+    "N-1766075412419": {
+        "inverse": true,
+        "recognition": "DirectHit"
+    },
+    "test": {
+        "expected": 0,
+        "labels": [
+            "式神育成",
+            "结界卡",
+            "结界防守"
+        ],
+        "model": "Barrier_v1.onnx",
+        "recognition": "NeuralNetworkDetect"
+    },
     "testAction": {
-        "recognition": "DirectHit",
         "action": "Custom",
-        "focus": {
-            "start": "11111111",
-            "succeeded": "22222222",
-            "failed": "3333333333333",
-            "level": {
-                "start": "info",
-                "succeeded": "debug",
-                "failed": "warning"
-            }
-        },
         "custom_action": "SwitchSoul",
         "custom_action_param": {
             "group_name": "御魂",
             "team_name": "队伍3"
-        }
+        },
+        "focus": {
+            "failed": "3333333333333",
+            "level": {
+                "failed": "warning",
+                "start": "info",
+                "succeeded": "debug"
+            },
+            "start": "11111111",
+            "succeeded": "22222222"
+        },
+        "recognition": "DirectHit"
+    },
+    "testChallengeBoss": {
+        "action": "Custom",
+        "custom_action": "ChallengeDungeonBoss",
+        "recognition": "DirectHit"
+    },
+    "testOCR": {
+        "expected": "AAACCC",
+        "recognition": "OCR"
     },
     "testTaskList": {
-        "recognition": "DirectHit",
         "action": "Custom",
         "custom_action": "TaskList",
         "custom_action_param": {
             "task_list": [
                 "领取奖励_任务列表"
             ]
-        }
-    },
-    "testOCR": {
-        "recognition": "OCR",
-        "expected": "AAACCC"
-    },
-    "testChallengeBoss": {
-        "recognition": "DirectHit",
-        "action": "Custom",
-        "custom_action": "ChallengeDungeonBoss"
-    },
-    "回到主页_key": {
-        "action": "key",
-        "key": 3
-    },
-    "打开阴阳师_key": {
-        "action": "StartApp",
-        "package": "com.netease.onmyoji/.tag0"
+        },
+        "recognition": "DirectHit"
     },
     "test_OCR_1": {
+        "expected": ".*",
         "recognition": "OCR",
         "roi": [
             1053,
             535,
             190,
             153
-        ],
-        "expected": ".*"
-    },
-    "测试": {},
-    "test": {
-        "recognition": "NeuralNetworkDetect",
-        "model": "Barrier_v1.onnx",
-        "labels": [
-            "式神育成",
-            "结界卡",
-            "结界防守"
-        ],
-        "expected": 0
+        ]
     },
     "test_model_BarrierCard": {
-        "recognition": "NeuralNetworkDetect",
-        "model": "BarrierCard.onnx",
+        "expected": 0,
         "labels": [
             "1start",
             "2start",
@@ -77,6 +79,31 @@
             "5start",
             "6start"
         ],
-        "expected": 0
+        "model": "BarrierCard.onnx",
+        "recognition": "NeuralNetworkDetect"
+    },
+    "回到主页_key": {
+        "action": "key",
+        "key": 3,
+        "recognition": "DirectHit"
+    },
+    "打开阴阳师_key": {
+        "action": "StartApp",
+        "package": "com.netease.onmyoji/.tag0",
+        "recognition": "DirectHit"
+    },
+    "测试": {
+        "recognition": "DirectHit"
+    },
+    "测试-停止任务": {
+        "next": [
+            "[JumpBack]N-1766075283687",
+            "N-1766075412419"
+        ],
+        "on_error": [
+            "N-1766075325965"
+        ],
+        "recognition": "DirectHit",
+        "timeout": 5000
     }
 }
