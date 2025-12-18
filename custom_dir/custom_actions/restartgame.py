@@ -1,7 +1,5 @@
 # -*- coding: UTF-8 -*-
 from time import sleep
-
-from PIL import Image
 from maa.context import Context
 from maa.custom_action import CustomAction
 from maa.agent.agent_server import AgentServer
@@ -17,6 +15,7 @@ class ReStartGame(CustomAction):
         context.run_task("启动游戏")
         print(f"重启完成,跳过任务")
         context.run_action("StopTask")
+        print(f"结束任务链")
         return True
 
 

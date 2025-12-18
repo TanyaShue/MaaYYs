@@ -33,7 +33,6 @@
             "min": 1
         },
         "next": [
-            "月活动-结束挑战",
             "月活动-点击开始挑战"
         ],
         "recognition": "DirectHit"
