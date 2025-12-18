@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 from time import sleep
 
-from PIL import Image
 from maa.context import Context
 from maa.custom_action import CustomAction
 from maa.agent.agent_server import AgentServer
