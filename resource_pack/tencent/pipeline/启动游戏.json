@@ -1,8 +1,21 @@
 {
-          "启动游戏": {
-            "package": "com.tencent.tmgp.yys.zqb"
-          },
-          "关闭阴阳师": {
-            "package": "com.tencent.tmgp.yys.zqb"
-          }
+    "关闭阴阳师": {
+        "package": "com.tencent.tmgp.yys.zqb",
+        "recognition": "DirectHit"
+    },
+    "启动游戏": {
+        "package": "com.tencent.tmgp.yys.zqb",
+        "recognition": "DirectHit"
+    },
+    "应用服-QQ登录": {
+        "recognition": "OCR",
+        "roi": [
+            458,
+            487,
+            362,
+            59
+        ],
+        "action": "Click",
+        "expected": "QQ登录"
+    }
 }
