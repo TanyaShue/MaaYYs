@@ -1,15 +1,32 @@
 {
-    "N-1765788914074": {
+    "喂宠物-点击喂食": {
         "action": "Click",
-        "expected": "快速喂养",
+        "expected": "食|喂",
         "next": [
-            "投喂宠物3"
+            "投喂宠物11",
+            "[JumpBack]投喂宠物15_copy1",
+            "[JumpBack]投喂宠物4",
+            "[JumpBack]投喂宠物-识别是否位于宠物小屋"
         ],
         "recognition": "OCR",
         "roi": [
-            529,
-            87,
-            180,
+            900,
+            503,
+            96,
+            84
+        ]
+    },
+    "喂宠物-确保位于快速喂养界面": {
+        "expected": "快速喂养",
+        "next": [
+            "投喂宠物3",
+            "喂宠物-点击喂食"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            538,
+            88,
+            153,
             61
         ]
     },
@@ -24,11 +41,37 @@
         "recognition": "DirectHit",
         "timeout": 5000
     },
+    "投喂宠物-关闭拜访好友界面": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            981,
+            129,
+            59,
+            61
+        ],
+        "template": [
+            "投喂宠物\\投喂宠物-关闭拜访好友界面_1.png",
+            "投喂宠物\\投喂宠物-关闭拜访好友界面_2.png"
+        ]
+    },
+    "投喂宠物-判断是否位于拜访好友界面": {
+        "expected": "拜访好友",
+        "next": [
+            "投喂宠物-关闭拜访好友界面"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            509,
+            49,
+            255,
+            69
+        ]
+    },
     "投喂宠物-识别是否位于宠物小屋": {
         "expected": "宠物小屋",
         "next": [
-            "投喂宠物11",
-            "[JumpBack]投喂宠物5"
+            "投喂宠物5"
         ],
         "recognition": "OCR",
         "roi": [
@@ -126,10 +169,6 @@
     "投喂宠物15_copy1": {
         "action": "Click",
         "expected": "跳过",
-        "next": [
-            "投喂宠物11",
-            "[JumpBack]投喂宠物5"
-        ],
         "post_delay": 1000,
         "pre_delay": 1000,
         "recognition": "OCR",
@@ -153,8 +192,7 @@
         "next": [
             "[JumpBack]投喂宠物2",
             "投喂宠物18",
-            "[JumpBack]投喂宠物1",
-            "N-1765788914074"
+            "[JumpBack]投喂宠物1"
         ],
         "on_error": [
             "跳过"
@@ -166,9 +204,10 @@
         "action": "Click",
         "expected": "快速喂养",
         "next": [
-            "投喂宠物3"
+            "喂宠物-确保位于快速喂养界面"
         ],
         "on_error": [
+            "[JumpBack]投喂宠物-判断是否位于拜访好友界面",
             "返回庭院"
         ],
         "recognition": "OCR",
@@ -205,9 +244,10 @@
     "投喂宠物3": {
         "action": "Click",
         "next": [
-            "投喂宠物15_copy1",
-            "投喂宠物4",
-            "投喂宠物-识别是否位于宠物小屋"
+            "投喂宠物11",
+            "[JumpBack]投喂宠物15_copy1",
+            "[JumpBack]投喂宠物4",
+            "[JumpBack]投喂宠物-识别是否位于宠物小屋"
         ],
         "recognition": "TemplateMatch",
         "roi": [
@@ -223,10 +263,6 @@
     "投喂宠物4": {
         "action": "Click",
         "expected": "获得奖励",
-        "next": [
-            "投喂宠物11",
-            "[JumpBack]投喂宠物5"
-        ],
         "recognition": "OCR",
         "roi": [
             458,
@@ -339,8 +375,7 @@
         "next": [
             "[JumpBack]投喂宠物2",
             "投喂宠物18",
-            "[JumpBack]投喂宠物1",
-            "N-1765788914074"
+            "[JumpBack]投喂宠物1"
         ],
         "on_error": [
             "跳过"
