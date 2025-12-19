@@ -77,7 +77,8 @@
     "悬赏_开始识别探索": {
         "next": [
             "悬赏封印2",
-            "识别探索目标",
+            "点击开始探索",
+            "[JumpBack]识别探索目标",
             "[JumpBack]悬赏_向上滑动一下"
         ],
         "recognition": "DirectHit"
@@ -682,9 +683,6 @@
     "识别探索目标": {
         "action": "Click",
         "expected": "探索",
-        "next": [
-            "点击开始探索"
-        ],
         "order_by": "Vertical",
         "recognition": "OCR",
         "roi": [
