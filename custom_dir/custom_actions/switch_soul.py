@@ -237,10 +237,13 @@ class SwitchSoul(CustomAction):
                 roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
                 print(f"找到队伍: {team_name}，尝试装备御魂")
                 equip_result = context.run_task("通用_装备御魂", {
-                    "通用_装备御魂": {
-                        "roi": roi
-                    }
-                })
+                        "通用_装备御魂-模板匹配": {
+                            "roi": roi
+                        },
+                        "通用_装备御魂-特征匹配": {
+                            "roi": roi
+                        }
+                    })
 
                 if equip_result:
                     print(f"成功装备队伍 {team_name} 的御魂")
@@ -274,7 +277,10 @@ class SwitchSoul(CustomAction):
                     roi = [detail.box.x - 30, detail.box.y - 30, 500, 80]
                     print(f"精细识别第{i + 1}段找到队伍: {team_name}，尝试装备御魂")
                     equip_result = context.run_task("通用_装备御魂", {
-                        "通用_装备御魂": {
+                        "通用_装备御魂-模板匹配": {
+                            "roi": roi
+                        },
+                        "通用_装备御魂-特征匹配": {
                             "roi": roi
                         }
                     })
