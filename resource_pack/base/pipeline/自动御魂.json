@@ -1,170 +1,244 @@
 {
+    "寮3015_copy1": {
+        "action": "Click",
+        "post_delay": 2000,
+        "pre_delay": 2000,
+        "target": [
+            1032,
+            239,
+            78,
+            255
+        ],
+        "recognition": "DirectHit"
+    },
+    "寮3015_copy1_copy1": {
+        "action": "Click",
+        "next": [
+            "返回庭院"
+        ],
+        "post_delay": 2000,
+        "pre_delay": 2000,
+        "target": [
+            1032,
+            239,
+            78,
+            255
+        ],
+        "recognition": "DirectHit"
+    },
+    "寮3026_copy1": {
+        "action": "Click",
+        "enabled": false,
+        "next": [
+            "自动御魂8"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            269,
+            0,
+            580,
+            121
+        ],
+        "template": [
+            "寮30/寮3026.png",
+            "自动御魂\\寮3026_copy1.png"
+        ]
+    },
     "自动御魂": {
-        "on_error": ["返回庭院"],
         "next": [
             "自动御魂_点击御魂",
             "[JumpBack]点击探索"
-        ]
-    },
-    "自动御魂_下滑查找目标层数": {
-        "action": "Swipe",
-        "roi": [
-            219,
-            170,
-            178,
-            39
         ],
-        "begin": [
-            212,
-            524,
-            262,
-            26
+        "on_error": [
+            "返回庭院"
         ],
-        "end": [
-            219,
-            170,
-            178,
-            39
-        ],
-        "duration": 1000
-    },
-    "自动御魂_点击御魂": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "next": [
-            "自动御魂_点击大蛇副本"
-        ],
-        "post_delay": 1000,
-        "roi": [
-            121,
-            575,
-            119,
-            145
-        ],
-        "template": "探索/探索_御魂.png"
-    },
-    "自动御魂_点击大蛇副本": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "next": [
-            "自动御魂_点击八岐大蛇"
-        ],
-        "post_delay": 1000,
-        "roi": [
-            8,
-            81,
-            388,
-            623
-        ],
-        "template": "御魂副本_八岐大蛇__53_116_198_228__3_66_298_328.png"
-    },
-    "自动御魂_点击八岐大蛇": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "自动御魂_点击目标层数",
-            "[JumpBack]自动御魂_下滑查找目标层数"
-        ],
-        "post_delay": 1000,
-        "roi": [
-            39,
-            98,
-            80,
-            514
-        ],
-        "expected": "八岐大蛇"
-    },
-    "自动御魂_点击目标层数": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "自动御魂_装备挑战御魂副本御魂",
-            "[JumpBack]自动御魂_点击式神录"
-        ],
-        "post_delay": 1000,
-        "roi": [
-            163,
-            129,
-            316,
-            507
-        ],
-        "expected": "悲鸣"
-    },
-    "自动御魂_点击式神录": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "next": [],
-        "post_delay": 1000,
-        "roi": [
-            788,
-            616,
-            98,
-            91
-        ],
-        "template": "庭院/通用_式神录__816_637_55_68__766_587_155_133.png"
-    },
-    "自动御魂_装备挑战御魂副本御魂": {
-        "recognition": "OCR",
-        "action": "Custom",
-        "on_error": ["超时_切换御魂失败"],
-        "next": [
-            "自动御魂_返回副本界面",
-            "[JumpBack]自动御魂1",
-            "[JumpBack]自动御魂17"
-        ],
-        "post_delay": 2000,
-        "roi": [
-            0,
-            0,
-            217,
-            65
-        ],
-        "expected": "式神录",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "御魂",
-            "team_name": "魂土"
-        }
-    },
-    "自动御魂_返回副本界面": {
-        "recognition": "OCR",
-        "next": [
-            "自动御魂18",
-            "自动御魂2"
-        ],
-        "roi": [
-            0,
-            0,
-            262,
-            78
-        ],
-        "expected": "御魂"
+        "recognition": "DirectHit"
     },
     "自动御魂1": {
-        "recognition": "FeatureMatch",
         "action": "Click",
+        "recognition": "FeatureMatch",
         "roi": [
             0,
             0,
             127,
             66
         ],
-        "template": [
-            "自动御魂\\自动御魂1.png"
-        ],
         "target": [
             26,
             18,
             30,
             23
+        ],
+        "template": [
+            "自动御魂\\自动御魂1.png"
+        ]
+    },
+    "自动御魂10": {
+        "action": "Click",
+        "expected": "自动|自动挑战",
+        "next": [
+            "自动御魂6",
+            "[JumpBack]自动御魂9",
+            "[JumpBack]自动御魂11",
+            "[JumpBack]自动御魂16",
+            "[JumpBack]自动御魂19"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            647,
+            550,
+            240,
+            66
+        ],
+        "timeout": 2000000
+    },
+    "自动御魂11": {
+        "action": "Click",
+        "next": [
+            "自动御魂14"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            33,
+            122,
+            250,
+            178
+        ],
+        "template": [
+            "自动御魂\\自动御魂11.png",
+            "自动御魂\\待喂食.png",
+            "自动御魂\\待喂食_1.png"
+        ],
+        "timeout": 3000
+    },
+    "自动御魂12": {
+        "action": "Click",
+        "expected": "加成",
+        "next": [
+            "自动御魂8_copy1"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            406,
+            9,
+            54,
+            77
+        ]
+    },
+    "自动御魂13": {
+        "action": "Click",
+        "next": [
+            "自动御魂8_copy1"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            270,
+            2,
+            225,
+            94
+        ],
+        "template": [
+            "自动御魂\\自动御魂13.png",
+            "自动御魂\\自动御魂13_1.png"
+        ]
+    },
+    "自动御魂14": {
+        "action": "Click",
+        "next": [
+            "自动御魂15"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            612,
+            452,
+            500,
+            193
+        ],
+        "template": [
+            "自动御魂\\自动御魂14.png"
+        ]
+    },
+    "自动御魂15": {
+        "action": "Click",
+        "expected": "获得奖励",
+        "recognition": "OCR",
+        "roi": [
+            420,
+            160,
+            496,
+            150
+        ],
+        "target": [
+            651,
+            498,
+            107,
+            46
+        ],
+        "timeout": 3000
+    },
+    "自动御魂16": {
+        "expected": "获得宝藏|发现宝藏",
+        "recognition": "OCR",
+        "roi": [
+            420,
+            160,
+            496,
+            150
+        ]
+    },
+    "自动御魂17": {
+        "action": "Click",
+        "expected": "式神录",
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            217,
+            65
+        ],
+        "target": [
+            15,
+            7,
+            43,
+            40
+        ]
+    },
+    "自动御魂18": {
+        "action": "Click",
+        "next": [
+            "自动御魂2"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "自动御魂\\自动御魂18.png"
+        ]
+    },
+    "自动御魂19": {
+        "action": "Click",
+        "expected": "准备",
+        "recognition": "OCR",
+        "roi": [
+            1124,
+            533,
+            125,
+            110
         ]
     },
     "自动御魂2": {
-        "recognition": "FeatureMatch",
         "action": "Click",
         "next": [
             "自动御魂3"
         ],
+        "recognition": "FeatureMatch",
         "roi": [
             794,
             533,
@@ -181,260 +255,12 @@
             "自动御魂\\自动御魂2_6.png"
         ]
     },
-    "自动御魂3": {
-        "recognition": "OCR",
-        "action": "Custom",
-        "next": [
-            "自动御魂4"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 1000,
-        "roi": [
-            458,
-            424,
-            116,
-            53
-        ],
-        "expected": "本次消耗",
-        "custom_action": "RepeatChallengeNTimes",
-        "custom_action_param": {
-            "start_repeat": true,
-            "expected_number": 2
-        }
-    },
-    "自动御魂4": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "寮3026_copy1",
-            "自动御魂5",
-            "自动御魂10"
-        ],
-        "roi": [
-            458,
-            424,
-            116,
-            53
-        ],
-        "expected": "本次消耗",
-        "target": [
-            436,
-            629,
-            261,
-            72
-        ]
-    },
-    "自动御魂5": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "rate_limit": 3000,
-        "timeout": 2000000,
-        "next": [
-            "自动御魂6",
-            "[JumpBack]自动御魂9",
-            "[JumpBack]自动御魂11",
-            "[JumpBack]自动御魂16",
-            "[JumpBack]自动御魂19"
-        ],
-        "roi": [
-            620,
-            546,
-            225,
-            63
-        ],
-        "template": [
-            "自动御魂\\自动御魂5_1.png",
-            "自动御魂\\自动御魂5_2.png",
-            "自动御魂\\自动御魂5_3.png"
-        ]
-    },
-    "寮3026_copy1": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "next": [
-            "自动御魂8"
-        ],
-        "enabled": false,
-        "roi": [
-            269,
-            0,
-            580,
-            121
-        ],
-        "template": [
-            "寮30/寮3026.png",
-            "自动御魂\\寮3026_copy1.png"
-        ]
-    },
-    "寮3015_copy1": {
-        "action": "Click",
-        "next": [
-            "自动御魂5",
-            "自动御魂10"
-        ],
-        "pre_delay": 2000,
-        "post_delay": 2000,
-        "target": [
-            1032,
-            239,
-            78,
-            255
-        ]
-    },
-    "自动御魂6": {
-        "recognition": "OCR",
-        "rate_limit": 3000,
-        "timeout": 2000000,
-        "next": [
-            "自动御魂7"
-        ],
-        "roi": [
-            401,
-            246,
-            113,
-            94
-        ],
-        "expected": "已完成"
-    },
-    "自动御魂7": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "自动御魂2_copy2"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 1000,
-        "roi": [
-            432,
-            403,
-            172,
-            56
-        ],
-        "expected": "取消"
-    },
-    "自动御魂3_copy1": {
-        "recognition": "OCR",
-        "action": "Custom",
-        "next": [
-            "自动御魂4_copy1"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 1000,
-        "roi": [
-            458,
-            424,
-            116,
-            53
-        ],
-        "expected": "本次消耗",
-        "custom_action": "RepeatChallengeNTimes",
-        "custom_action_param": {
-            "start_repeat": false,
-            "expected_number": 1
-        }
-    },
-    "自动御魂4_copy1": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "自动御魂12",
-            "自动御魂13"
-        ],
-        "roi": [
-            458,
-            424,
-            116,
-            53
-        ],
-        "expected": "本次消耗",
-        "target": [
-            436,
-            629,
-            261,
-            72
-        ]
-    },
-    "自动御魂8": {
-        "action": "Custom",
-        "next": [
-            "寮3015_copy1"
-        ],
-        "custom_action": "BonusToggleAction",
-        "custom_action_param": {
-            "drop_soul": true
-        }
-    },
-    "自动御魂9": {
-        "recognition": "OCR",
-        "roi": [
-            889,
-            501,
-            202,
-            77
-        ],
-        "expected": "当前进度"
-    },
-    "寮3015_copy1_copy1": {
-        "action": "Click",
-        "next": [
-            "返回庭院"
-        ],
-        "pre_delay": 2000,
-        "post_delay": 2000,
-        "target": [
-            1032,
-            239,
-            78,
-            255
-        ]
-    },
-    "自动御魂8_copy1": {
-        "action": "Custom",
-        "next": [
-            "寮3015_copy1_copy1"
-        ],
-        "custom_action": "BonusToggleAction",
-        "custom_action_param": {
-            "drop_soul": false
-        }
-    },
-    "自动御魂12": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "自动御魂8_copy1"
-        ],
-        "roi": [
-            406,
-            9,
-            54,
-            77
-        ],
-        "expected": "加成"
-    },
-    "自动御魂13": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "next": [
-            "自动御魂8_copy1"
-        ],
-        "roi": [
-            270,
-            2,
-            225,
-            94
-        ],
-        "template": [
-            "自动御魂\\自动御魂13.png",
-            "自动御魂\\自动御魂13_1.png"
-        ]
-    },
     "自动御魂2_copy2": {
-        "recognition": "TemplateMatch",
         "action": "Click",
         "next": [
             "自动御魂3_copy1"
         ],
+        "recognition": "TemplateMatch",
         "roi": [
             804,
             520,
@@ -449,10 +275,93 @@
             "自动御魂\\自动御魂2_4.png"
         ]
     },
-    "自动御魂10": {
+    "自动御魂3": {
+        "action": "Custom",
+        "custom_action": "RepeatChallengeNTimes",
+        "custom_action_param": {
+            "expected_number": 2,
+            "start_repeat": true
+        },
+        "expected": "本次消耗",
+        "next": [
+            "自动御魂4"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
         "recognition": "OCR",
+        "roi": [
+            458,
+            424,
+            116,
+            53
+        ]
+    },
+    "自动御魂3_copy1": {
+        "action": "Custom",
+        "custom_action": "RepeatChallengeNTimes",
+        "custom_action_param": {
+            "expected_number": 1,
+            "start_repeat": false
+        },
+        "expected": "本次消耗",
+        "next": [
+            "自动御魂4_copy1"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            458,
+            424,
+            116,
+            53
+        ]
+    },
+    "自动御魂4": {
         "action": "Click",
-        "timeout": 2000000,
+        "expected": "本次消耗",
+        "next": [
+            "寮3026_copy1",
+            "自动御魂5",
+            "自动御魂10"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            458,
+            424,
+            116,
+            53
+        ],
+        "target": [
+            436,
+            629,
+            261,
+            72
+        ]
+    },
+    "自动御魂4_copy1": {
+        "action": "Click",
+        "expected": "本次消耗",
+        "next": [
+            "自动御魂12",
+            "自动御魂13"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            458,
+            424,
+            116,
+            53
+        ],
+        "target": [
+            436,
+            629,
+            261,
+            72
+        ]
+    },
+    "自动御魂5": {
+        "action": "Click",
         "next": [
             "自动御魂6",
             "[JumpBack]自动御魂9",
@@ -460,122 +369,241 @@
             "[JumpBack]自动御魂16",
             "[JumpBack]自动御魂19"
         ],
-        "roi": [
-            647,
-            550,
-            240,
-            66
-        ],
-        "expected": "自动|自动挑战"
-    },
-    "自动御魂11": {
-        "recognition": "FeatureMatch",
-        "action": "Click",
-        "timeout": 3000,
-        "on_error": [
-            "跳过"
-        ],
-        "next": [
-            "自动御魂14"
-        ],
-        "roi": [
-            33,
-            122,
-            250,
-            178
-        ],
-        "template": [
-            "自动御魂\\自动御魂11.png",
-            "自动御魂\\待喂食.png",
-            "自动御魂\\待喂食_1.png"
-        ]
-    },
-    "自动御魂14": {
+        "rate_limit": 3000,
         "recognition": "TemplateMatch",
-        "action": "Click",
-        "on_error": [
-            "跳过"
-        ],
-        "next": [
-            "自动御魂15"
-        ],
         "roi": [
-            612,
-            452,
-            500,
-            193
+            620,
+            546,
+            225,
+            63
         ],
         "template": [
-            "自动御魂\\自动御魂14.png"
-        ]
-    },
-    "自动御魂15": {
-        "recognition": "OCR",
-        "action": "Click",
-        "timeout": 3000,
-        "roi": [
-            420,
-            160,
-            496,
-            150
+            "自动御魂\\自动御魂5_1.png",
+            "自动御魂\\自动御魂5_2.png",
+            "自动御魂\\自动御魂5_3.png"
         ],
-        "expected": "获得奖励",
-        "target": [
-            651,
-            498,
-            107,
-            46
-        ]
+        "timeout": 2000000
     },
-    "自动御魂16": {
+    "自动御魂6": {
+        "expected": "已完成",
+        "next": [
+            "自动御魂7"
+        ],
+        "rate_limit": 3000,
         "recognition": "OCR",
         "roi": [
-            420,
-            160,
-            496,
-            150
+            401,
+            246,
+            113,
+            94
         ],
-        "expected": "获得宝藏|发现宝藏"
+        "timeout": 2000000
     },
-    "自动御魂17": {
-        "recognition": "OCR",
+    "自动御魂7": {
         "action": "Click",
+        "expected": "取消",
+        "next": [
+            "自动御魂2_copy2"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            432,
+            403,
+            172,
+            56
+        ]
+    },
+    "自动御魂8": {
+        "action": "Custom",
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "drop_soul": true
+        },
+        "next": [
+            "自动御魂-确保关闭加成",
+            "[JumpBack]寮3015_copy1"
+        ],
+        "recognition": "OCR",
+        "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
+        "roi": [
+            354,
+            117,
+            411,
+            346
+        ]
+    },
+    "自动御魂8_copy1": {
+        "action": "Custom",
+        "custom_action": "BonusToggleAction",
+        "custom_action_param": {
+            "drop_soul": false
+        },
+        "next": [
+            "寮3015_copy1_copy1"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动御魂9": {
+        "expected": "当前进度",
+        "recognition": "OCR",
+        "roi": [
+            889,
+            501,
+            202,
+            77
+        ]
+    },
+    "自动御魂_下滑查找目标层数": {
+        "action": "Swipe",
+        "begin": [
+            212,
+            524,
+            262,
+            26
+        ],
+        "duration": 1000,
+        "end": [
+            219,
+            170,
+            178,
+            39
+        ],
+        "roi": [
+            219,
+            170,
+            178,
+            39
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动御魂_点击八岐大蛇": {
+        "action": "Click",
+        "expected": "八岐大蛇",
+        "next": [
+            "自动御魂_点击目标层数",
+            "[JumpBack]自动御魂_下滑查找目标层数"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            39,
+            98,
+            80,
+            514
+        ]
+    },
+    "自动御魂_点击大蛇副本": {
+        "action": "Click",
+        "next": [
+            "自动御魂_点击八岐大蛇"
+        ],
+        "post_delay": 1000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            8,
+            81,
+            388,
+            623
+        ],
+        "template": "御魂副本_八岐大蛇__53_116_198_228__3_66_298_328.png"
+    },
+    "自动御魂_点击式神录": {
+        "action": "Click",
+        "post_delay": 1000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            788,
+            616,
+            98,
+            91
+        ],
+        "template": "庭院/通用_式神录__816_637_55_68__766_587_155_133.png"
+    },
+    "自动御魂_点击御魂": {
+        "action": "Click",
+        "next": [
+            "自动御魂_点击大蛇副本"
+        ],
+        "post_delay": 1000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            121,
+            575,
+            119,
+            145
+        ],
+        "template": "探索/探索_御魂.png"
+    },
+    "自动御魂_点击目标层数": {
+        "action": "Click",
+        "expected": "悲鸣",
+        "next": [
+            "自动御魂_装备挑战御魂副本御魂",
+            "[JumpBack]自动御魂_点击式神录"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            163,
+            129,
+            316,
+            507
+        ]
+    },
+    "自动御魂_装备挑战御魂副本御魂": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "御魂",
+            "team_name": "魂土"
+        },
+        "expected": "式神录",
+        "next": [
+            "自动御魂_返回副本界面",
+            "[JumpBack]自动御魂1",
+            "[JumpBack]自动御魂17"
+        ],
+        "on_error": [
+            "超时_切换御魂失败"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
         "roi": [
             0,
             0,
             217,
             65
-        ],
-        "expected": "式神录",
-        "target": [
-            15,
-            7,
-            43,
-            40
         ]
     },
-    "自动御魂18": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "on_error": [
-            "跳过"
-        ],
+    "自动御魂_返回副本界面": {
+        "expected": "御魂",
         "next": [
+            "自动御魂18",
             "自动御魂2"
         ],
-        "template": [
-            "自动御魂\\自动御魂18.png"
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            262,
+            78
         ]
     },
-    "自动御魂19": {
+    "自动御魂-确保关闭加成": {
         "recognition": "OCR",
-        "action": "Click",
         "roi": [
-            1124,
-            533,
-            125,
-            110
+            354,
+            117,
+            411,
+            346
         ],
-        "expected": "准备"
+        "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
+        "inverse": true,
+        "next": [
+            "自动御魂5",
+            "自动御魂10"
+        ]
     }
 }
