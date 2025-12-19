@@ -188,6 +188,16 @@
             49
         ]
     },
+    "识别庭院特征": {
+        "expected": "纳物库|珍旅居|闲庭|纳物库",
+        "recognition": "OCR",
+        "roi": [
+            1,
+            612,
+            755,
+            108
+        ]
+    },
     "识别探索特征": {
         "on_error": [
             "跳过"
@@ -368,16 +378,6 @@
         "model": "Courtyard.onnx",
         "recognition": "NeuralNetworkDetect",
         "threshold": 0.7
-    },
-    "识别庭院特征": {
-        "expected": "纳物库|珍旅居|闲庭|纳物库",
-        "recognition": "OCR",
-        "roi": [
-            1,
-            612,
-            755,
-            108
-        ]
     },
     "通用2": {
         "action": "Click",
@@ -699,7 +699,7 @@
             102
         ]
     },
-    "通用_装备御魂": {
+    "通用_装备御魂-模板匹配": {
         "action": "Click",
         "next": [
             "通用_装备御魂_点击确定",
@@ -708,15 +708,35 @@
         "on_error": [
             "跳过"
         ],
-        "post_delay": 100,
+        "post_delay": 1000,
         "recognition": "TemplateMatch",
         "template": [
-            "通用图标/装备御魂.png",
-            "通用图标/装备御魂_2.png",
             "通用\\装备御魂.png",
-            "通用\\装备御魂_1.png"
+            "通用\\装备御魂_1.png",
+            "通用\\通用_装备御魂_1.png",
+            "通用图标/装备御魂.png",
+            "通用图标/装备御魂_2.png"
         ],
-        "timeout": 2000
+        "timeout": 5000
+    },
+    "通用_装备御魂-特征匹配": {
+        "recognition": "FeatureMatch",
+        "template": [
+            "通用\\装备御魂.png",
+            "通用\\装备御魂_1.png",
+            "通用\\通用_装备御魂_1.png",
+            "通用图标/装备御魂.png",
+            "通用图标/装备御魂_2.png"
+        ],
+        "next": [
+            "通用_装备御魂_点击确定",
+            "通用3"
+        ],
+        "post_delay": 1000,
+        "timeout": 5000,
+        "on_error": [
+            "跳过"
+        ]
     },
     "通用_装备御魂_点击确定": {
         "action": "Click",
@@ -762,5 +782,22 @@
             78,
             35
         ]
+    },
+    "通用_装备御魂": {
+        "recognition": "OCR",
+        "next": [
+            "通用_装备御魂-模板匹配",
+            "通用_装备御魂-特征匹配"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "roi": [
+            78,
+            0,
+            124,
+            52
+        ],
+        "expected": "式神录"
     }
 }
