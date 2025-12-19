@@ -35,7 +35,10 @@
         "next": [
             "月活动-点击开始挑战"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "跳过"
+        ]
     },
     "月活动-挑战结束后随机等待": {
         "action": "Custom",
@@ -47,7 +50,10 @@
         "next": [
             "月活动-结束挑战"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "跳过"
+        ]
     },
     "月活动-点击开始挑战": {
         "action": "Click",
@@ -126,6 +132,9 @@
             589,
             107,
             79
+        ],
+        "on_error": [
+            "跳过"
         ]
     },
     "月活动-识别挑战次数是否剩余0次": {
@@ -149,6 +158,9 @@
             653,
             345,
             67
+        ],
+        "on_error": [
+            "跳过"
         ]
     },
     "月活动-进入爬塔": {
