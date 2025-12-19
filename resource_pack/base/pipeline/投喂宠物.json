@@ -220,9 +220,6 @@
     },
     "投喂宠物2": {
         "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
         "recognition": "TemplateMatch",
         "roi": [
             692,
