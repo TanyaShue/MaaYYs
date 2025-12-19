@@ -7,10 +7,14 @@
         ],
         "custom_action": "TaskList",
         "custom_action_param": {
-            "task_list": [
-                "点击探索",
-                "自动秘闻_step_1"
-            ]
+            "tasks":{              "点击探索":{
+                "enabled": true,
+                "once_per_day": false
+              },
+              "自动秘闻_step_1":{
+                "enabled": true,
+                "once_per_day": false
+              }}
         }
     },
     "自动秘闻_step_1": {

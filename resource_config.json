@@ -450,10 +450,10 @@
       "pipeline_override": {
         "阴阳寮奖励领取_识别结界特征": {
           "custom_action_param": {
-            "task_list": {
-              "阴阳寮奖励33_寄养": true,
-              "阴阳寮奖励34_领取体力和经验": true,
-              "阴阳寮奖励24_挂结界卡": "{boole}"
+            "tasks": {
+              "阴阳寮奖励24_挂结界卡": {
+                "enabled": "{boole}"
+              }
             }
           }
         }
@@ -1171,8 +1171,10 @@
           "pipeline_override": {
             "日常_任务列表": {
               "custom_action_param": {
-                "task_list": {
-                  "日常_送友情点": "{boole}"
+                "tasks": {
+                  "日常_送友情点": {
+                    "enabled": "{boole}"
+                  }
                 }
               }
             }
@@ -1186,8 +1188,10 @@
           "pipeline_override": {
             "日常_任务列表": {
               "custom_action_param": {
-                "task_list": {
-                  "领取奖励_邮件": "{boole}"
+                "tasks": {
+                  "领取奖励_邮件": {
+                    "enabled": "{boole}"
+                  }
                 }
               }
             }
@@ -1201,8 +1205,10 @@
           "pipeline_override": {
             "日常_任务列表": {
               "custom_action_param": {
-                "task_list": {
-                  "领取奖励_日常奖励": "{boole}"
+                "tasks": {
+                  "领取奖励_日常奖励": {
+                    "enabled": "{boole}"
+                  }
                 }
               }
             }
@@ -1216,8 +1222,10 @@
           "pipeline_override": {
             "日常_任务列表": {
               "custom_action_param": {
-                "task_list": {
-                  "日常_每日免费一抽": "{boole}"
+                "tasks": {
+                  "日常_每日免费一抽": {
+                    "enabled": "{boole}"
+                  }
                 }
               }
             }
@@ -1231,8 +1239,10 @@
           "pipeline_override": {
             "日常_任务列表": {
               "custom_action_param": {
-                "task_list": {
-                  "领取奖励1_签到": "{boole}"
+                "tasks": {
+                  "领取奖励1_签到": {
+                    "enabled": "{boole}"
+                  }
                 }
               }
             }
@@ -1246,8 +1256,10 @@
           "pipeline_override": {
             "日常_任务列表": {
               "custom_action_param": {
-                "task_list": {
-                  "领取奖励_商店每日奖励": "{boole}"
+                "tasks": {
+                  "领取奖励_商店每日奖励": {
+                    "enabled": "{boole}"
+                  }
                 }
               }
             }
@@ -1261,8 +1273,10 @@
           "pipeline_override": {
             "日常_任务列表": {
               "custom_action_param": {
-                "task_list": {
-                  "领取奖励_花合战奖励": "{boole}"
+                "tasks": {
+                  "领取奖励_花合战奖励": {
+                    "enabled": "{boole}"
+                  }
                 }
               }
             }
@@ -1278,8 +1292,10 @@
       "pipeline_override": {
         "组队副本14": {
           "custom_action_param": {
-            "task_list": {
-              "组队副本_经验副本": "{boole}"
+            "tasks": {
+              "组队副本_经验副本": {
+                "enabled": "{boole}"
+              }
             }
           }
         }
@@ -1348,8 +1364,10 @@
       "pipeline_override": {
         "组队副本14": {
           "custom_action_param": {
-            "task_list": {
-              "组队副本_金币副本": "{boole}"
+            "tasks": {
+              "组队副本_金币副本": {
+                "enabled": "{boole}"
+              }
             }
           }
         }

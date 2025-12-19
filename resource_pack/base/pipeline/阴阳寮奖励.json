@@ -1,1163 +1,1172 @@
 {
-    "阴阳寮奖励": {
-        "action": "Custom",
-        "custom_action": "LoopAction",
-        "custom_action_param": {
-            "action_list": [
-                "阴阳寮奖励2"
-            ],
-            "loop_times": 6
+  "阴阳寮奖励": {
+    "action": "Custom",
+    "custom_action": "LoopAction",
+    "custom_action_param": {
+      "action_list": [
+        "阴阳寮奖励2"
+      ],
+      "loop_times": 6
+    },
+    "expected": "式神育成",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_识别寄养栏位",
+      "阴阳寮奖励7"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      8,
+      344,
+      92
+    ],
+    "threshold": 0.6,
+    "timeout": 5000
+  },
+  "阴阳寮奖励1": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      953,
+      485,
+      172,
+      197
+    ],
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励1.png"
+    ]
+  },
+  "阴阳寮奖励10": {
+    "action": "Click",
+    "expected": "领取",
+    "next": [
+      "阴阳寮奖励13",
+      "[JumpBack]阴阳寮奖励11",
+      "[JumpBack]阴阳寮奖励12"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      551,
+      421,
+      182,
+      78
+    ]
+  },
+  "阴阳寮奖励11": {
+    "action": "Click",
+    "expected": "获得奖励",
+    "recognition": "OCR",
+    "roi": [
+      441,
+      172,
+      387,
+      108
+    ],
+    "target": [
+      14,
+      0,
+      78,
+      74
+    ]
+  },
+  "阴阳寮奖励12": {
+    "expected": "信息|管理",
+    "next": [
+      "阴阳寮奖励15"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      140,
+      78,
+      196,
+      64
+    ],
+    "target": [
+      20,
+      0,
+      56,
+      54
+    ]
+  },
+  "阴阳寮奖励13": {
+    "expected": "神社|祈愿",
+    "recognition": "OCR",
+    "roi": [
+      852,
+      653,
+      180,
+      66
+    ]
+  },
+  "阴阳寮奖励14": {
+    "action": "Click",
+    "expected": "获得奖励",
+    "recognition": "OCR",
+    "roi": [
+      377,
+      118,
+      607,
+      200
+    ],
+    "target": [
+      397,
+      525,
+      316,
+      126
+    ]
+  },
+  "阴阳寮奖励15": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      0,
+      129,
+      114
+    ],
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励15.png"
+    ]
+  },
+  "阴阳寮奖励16": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励领取_阴阳寮奖励领取"
+    ],
+    "recognition": "TemplateMatch",
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励16.png"
+    ]
+  },
+  "阴阳寮奖励17": {
+    "action": "Click",
+    "expected": "取出",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      531,
+      488,
+      196,
+      98
+    ]
+  },
+  "阴阳寮奖励18": {
+    "expected": "经验",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_领取经验_提取"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      479,
+      229,
+      311,
+      78
+    ]
+  },
+  "阴阳寮奖励19": {
+    "action": "Click",
+    "expected": 0,
+    "labels": [
+      "式神育成",
+      "结界卡",
+      "结界防守"
+    ],
+    "model": "Barrier_v1.onnx",
+    "next": [
+      "阴阳寮奖励8"
+    ],
+    "on_error": [
+      "阴阳寮奖励22",
+      "阴阳寮奖励23"
+    ],
+    "recognition": "NeuralNetworkDetect",
+    "threshold": 0.6,
+    "timeout": 5000
+  },
+  "阴阳寮奖励2": {
+    "next": [
+      "阴阳寮奖励1",
+      "阴阳寮奖励3"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励20": {
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励21": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "template": "通用图标/返回_蓝色.png"
+  },
+  "阴阳寮奖励22": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励22.png"
+    ]
+  },
+  "阴阳寮奖励23": {
+    "expected": "防守阵容|式神育成",
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_copy4",
+      "[JumpBack]阴阳寮奖励21"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      347,
+      115
+    ]
+  },
+  "阴阳寮奖励24": {
+    "action": "Click",
+    "expected": "结界",
+    "recognition": "OCR",
+    "roi": [
+      941,
+      565,
+      338,
+      154
+    ]
+  },
+  "阴阳寮奖励24_挂结界卡": {
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_copy1"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励25": {
+    "expected": "结界卡",
+    "next": [
+      "阴阳寮奖励30",
+      "阴阳寮奖励27",
+      "[JumpBack]阴阳寮奖励26"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      563,
+      30,
+      136,
+      67
+    ]
+  },
+  "阴阳寮奖励26": {
+    "action": "Click",
+    "expected": "全部",
+    "next": [
+      "阴阳寮奖励26_筛选对应结界卡"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      349,
+      76,
+      170,
+      79
+    ]
+  },
+  "阴阳寮奖励26_筛选对应结界卡": {
+    "action": "Click",
+    "expected": "太鼓",
+    "recognition": "OCR",
+    "roi": [
+      372,
+      99,
+      140,
+      436
+    ]
+  },
+  "阴阳寮奖励27": {
+    "expected": "太鼓",
+    "next": [
+      "阴阳寮奖励30_确保选中结界卡",
+      "[JumpBack]阴阳寮奖励28",
+      "[JumpBack]阴阳寮奖励29"
+    ],
+    "rate_limit": 2000,
+    "recognition": "OCR",
+    "roi": [
+      358,
+      95,
+      166,
+      53
+    ],
+    "timeout": 60000
+  },
+  "阴阳寮奖励28": {
+    "action": "Click",
+    "expected": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "model": "BarrierCard.onnx",
+    "recognition": "NeuralNetworkDetect",
+    "threshold": 0.8
+  },
+  "阴阳寮奖励29": {
+    "action": "Swipe",
+    "begin": [
+      212,
+      588,
+      251,
+      51
+    ],
+    "duration": 1000,
+    "end": [
+      239,
+      193,
+      226,
+      42
+    ],
+    "expected": "太鼓",
+    "recognition": "OCR",
+    "roi": [
+      356,
+      102,
+      134,
+      46
+    ]
+  },
+  "阴阳寮奖励3": {
+    "action": "Click",
+    "recognition": "DirectHit",
+    "target": [
+      1009,
+      569,
+      34,
+      53
+    ]
+  },
+  "阴阳寮奖励30": {
+    "expected": "^\\d{2}:\\d{2}:\\d{2}$",
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_copy6",
+      "[JumpBack]阴阳寮奖励31"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      879,
+      242,
+      164,
+      60
+    ]
+  },
+  "阴阳寮奖励30_确保选中结界卡": {
+    "expected": "太鼓|斗鱼",
+    "next": [
+      "阴阳寮奖励5",
+      "阴阳寮奖励32"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      787,
+      234,
+      230,
+      141
+    ]
+  },
+  "阴阳寮奖励31": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1060,
+      31,
+      207,
+      143
+    ],
+    "template": "通用图标/关闭.png"
+  },
+  "阴阳寮奖励32": {
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_copy6",
+      "[JumpBack]阴阳寮奖励31"
+    ],
+    "recognition": "TemplateMatch",
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励32.png"
+    ]
+  },
+  "阴阳寮奖励33": {
+    "action": "Click",
+    "expected": 1,
+    "labels": [
+      "式神育成",
+      "结界卡",
+      "结界防守"
+    ],
+    "model": "Barrier_v1.onnx",
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "NeuralNetworkDetect"
+  },
+  "阴阳寮奖励33_寄养": {
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_copy2"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励34": {
+    "expected": "是否将",
+    "next": [
+      "阴阳寮奖励35"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      431,
+      266,
+      423,
+      93
+    ]
+  },
+  "阴阳寮奖励34_领取体力和经验": {
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_copy2_copy1"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励35": {
+    "action": "Click",
+    "expected": "确定",
+    "next": [
+      "阴阳寮奖励30"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      641,
+      394,
+      234,
+      88
+    ]
+  },
+  "阴阳寮奖励36": {
+    "action": "Click",
+    "expected": "阴阳寮",
+    "recognition": "OCR",
+    "roi": [
+      335,
+      625,
+      513,
+      76
+    ]
+  },
+  "阴阳寮奖励37": {
+    "action": "Click",
+    "enabled": false,
+    "next": [
+      "阴阳寮奖励38"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      429,
+      94,
+      420,
+      520
+    ],
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励37.png"
+    ]
+  },
+  "阴阳寮奖励38": {
+    "action": "Click",
+    "expected": "获得奖励|获得宝藏",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面",
+      "[JumpBack]阴阳寮奖励14",
+      "[JumpBack]阴阳寮奖励19"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      375,
+      103,
+      531,
+      353
+    ],
+    "target": [
+      491,
+      642,
+      210,
+      77
+    ]
+  },
+  "阴阳寮奖励39": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      731,
+      65,
+      433,
+      356
+    ],
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励39.png"
+    ]
+  },
+  "阴阳寮奖励5": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励30",
+      "阴阳寮奖励34"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      993,
+      494,
+      196,
+      198
+    ],
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励5.png"
+    ]
+  },
+  "阴阳寮奖励6": {
+    "expected": "体力",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_领取体力_取出",
+      "阴阳寮奖励17"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      496,
+      184,
+      333,
+      161
+    ]
+  },
+  "阴阳寮奖励7": {
+    "expected": "^\\d{2}:\\d{2}:\\d{2}$",
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_2",
+      "[JumpBack]阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1118,
+      116,
+      134,
+      35
+    ]
+  },
+  "阴阳寮奖励8": {
+    "expected": "式神育成",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      8,
+      344,
+      92
+    ]
+  },
+  "阴阳寮奖励9": {
+    "action": "Click",
+    "expected": "资金领取",
+    "next": [
+      "阴阳寮奖励10",
+      "阴阳寮奖励13",
+      "[JumpBack]阴阳寮奖励12"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      125,
+      598,
+      326,
+      74
+    ]
+  },
+  "阴阳寮奖励9_领取寮金币": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励9"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      1031,
+      580,
+      248,
+      138
+    ],
+    "template": [
+      "阴阳寮奖励\\阴阳寮奖励9_领取寮金币.png",
+      "阴阳寮奖励\\阴阳寮奖励9_领取寮金币_1.png"
+    ]
+  },
+  "阴阳寮奖励领取": {
+    "next": [
+      "阴阳寮奖励领取-确保进入阴阳寮",
+      "[JumpBack]阴阳寮奖励领取_点击阴阳寮",
+      "[JumpBack]阴阳寮奖励36",
+      "[JumpBack]打开底部菜单"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励领取-确保进入阴阳寮": {
+    "expected": "神社|寮信息|结界|祈愿",
+    "next": [
+      "阴阳寮奖励16",
+      "阴阳寮奖励领取_阴阳寮奖励领取"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      860,
+      666,
+      394,
+      54
+    ]
+  },
+  "阴阳寮奖励领取_体力领取_点击一下屏幕": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "DirectHit",
+    "target": [
+      453,
+      481,
+      437,
+      110
+    ]
+  },
+  "阴阳寮奖励领取_寮金币领取_点击一下屏幕": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "DirectHit",
+    "target": [
+      453,
+      481,
+      437,
+      110
+    ]
+  },
+  "阴阳寮奖励领取_点击结界": {
+    "action": "Click",
+    "post_delay": 4000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      1041,
+      591,
+      111,
+      119
+    ],
+    "template": "阴阳寮/阴阳寮_结界.png"
+  },
+  "阴阳寮奖励领取_点击阴阳寮": {
+    "action": "Click",
+    "post_delay": 4000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      494,
+      567,
+      155,
+      141
+    ],
+    "template": [
+      "庭院/庭院_阴阳寮.png",
+      "庭院/庭院_阴阳寮_红点.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_点击阴阳寮_1.png"
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_关闭食盒界面": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      919,
+      106,
+      182,
+      112
+    ],
+    "template": "通用图标/关闭.png"
+  },
+  "阴阳寮奖励领取_结界奖励领取_寄养式神_点击进入寄养结界": {
+    "action": "Click",
+    "expected": "进入结界",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_寄养式神_选择第一个式神寄养"
+    ],
+    "post_delay": 3000,
+    "recognition": "OCR",
+    "roi": [
+      786,
+      532,
+      182,
+      64
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_寄养式神_确定第一个式神寄养": {
+    "action": "Click",
+    "expected": "确定",
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_2",
+      "[JumpBack]阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      669,
+      515,
+      135,
+      56
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      0,
+      0,
+      92,
+      105
+    ],
+    "template": [
+      "通用图标/返回_蓝色.png",
+      "通用图标/返回_蓝色_2.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界.png"
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+    "action": "Custom",
+    "custom_action": "AutoFoster",
+    "custom_action_param": {
+      "FosterTarget": 1
+    },
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_寄养式神_点击进入寄养结界"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励领取_结界奖励领取_寄养式神_选择第一个式神寄养": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_寄养式神_确定第一个式神寄养"
+    ],
+    "post_delay": 1000,
+    "recognition": "DirectHit",
+    "target": [
+      153,
+      497,
+      119,
+      183
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_点击一下屏幕": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励18",
+      "[JumpBack]阴阳寮奖励领取_结界奖励领取_点击经验酒壶"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "DirectHit",
+    "target": [
+      825,
+      515,
+      125,
+      59
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_点击经验酒壶": {
+    "action": "Click",
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      379,
+      605,
+      598,
+      108
+    ],
+    "template": "阴阳寮/阴阳寮结界_经验酒壶__655_616_226_79__605_566_326_154.png"
+  },
+  "阴阳寮奖励领取_结界奖励领取_点击结界奖励": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      823,
+      388,
+      216,
+      175
+    ],
+    "template": [
+      "阴阳寮/阴阳寮结界_食盒__878_535_198_35__828_485_298_135.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_1.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_2.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_3.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_4.png"
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_识别寄养栏位": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      1019,
+      8,
+      272,
+      168
+    ],
+    "template": "阴阳寮/阴阳寮_结界_寄养.png"
+  },
+  "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面": {
+    "expected": "式神育成",
+    "next": [
+      "阴阳寮奖励"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      8,
+      344,
+      92
+    ],
+    "timeout": 5000
+  },
+  "阴阳寮奖励领取_结界奖励领取_领取体力_取出": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      533,
+      461,
+      250,
+      127
+    ],
+    "template": "阴阳寮/阴阳寮_结界_体力_取出.png",
+    "timeout": 1000
+  },
+  "阴阳寮奖励领取_结界奖励领取_领取溢出经验": {
+    "action": "Click",
+    "expected": "确定",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      662,
+      387,
+      190,
+      85
+    ]
+  },
+  "阴阳寮奖励领取_结界奖励领取_领取经验_提取": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_2_copy1",
+      "[JumpBack]阴阳寮奖励领取_结界奖励领取_领取溢出经验",
+      "[JumpBack]阴阳寮奖励领取_结界奖励领取_关闭食盒界面"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_经验_提取.png",
+    "timeout": 3000
+  },
+  "阴阳寮奖励领取_结界寄养_点击好友": {
+    "action": "Click",
+    "expected": "好友",
+    "recognition": "OCR",
+    "roi": [
+      197,
+      71,
+      131,
+      88
+    ],
+    "target": [
+      246,
+      116,
+      54,
+      33
+    ]
+  },
+  "阴阳寮奖励领取_结界寄养_点击跨区好友": {
+    "action": "Click",
+    "expected": "跨区",
+    "recognition": "OCR",
+    "roi": [
+      327,
+      70,
+      184,
+      90
+    ],
+    "target": [
+      361,
+      107,
+      60,
+      42
+    ]
+  },
+  "阴阳寮奖励领取_结界寄养_识别寄养目标": {
+    "recognition": "FeatureMatch",
+    "roi": [
+      531,
+      169,
+      94,
+      422
+    ],
+    "template": [
+      "阴阳寮/结界_太鼓_2星__183_273_108_107__133_223_208_207.png",
+      "阴阳寮/结界_太鼓_3星__190_385_102_94__140_335_202_194.png",
+      "阴阳寮/结界_太鼓_4星__183_504_115_103__133_454_215_203.png",
+      "阴阳寮/结界_太鼓_5星__181_317_117_107__131_267_217_207.png",
+      "阴阳寮/结界_太鼓_6星__184_185_105_100__134_135_205_200.png",
+      "阴阳寮/结界_斗鱼_1星__180_522_114_110__130_472_214_210.png",
+      "阴阳寮/结界_斗鱼_2星__181_380_114_111__131_330_214_211.png",
+      "阴阳寮/结界_斗鱼_3星__182_486_117_112__132_436_217_212.png",
+      "阴阳寮/结界_斗鱼_4星__183_293_113_112__133_243_213_212.png",
+      "阴阳寮/结界_斗鱼_5星__186_461_110_112__136_411_210_212.png",
+      "阴阳寮/结界_斗鱼_6星__183_177_112_108__133_127_212_208.png"
+    ]
+  },
+  "阴阳寮奖励领取_结界寄养_识别寄养目标_下一页": {
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "delay": 2000,
+      "end_roi": [
+        232,
+        183,
+        320,
+        61
+      ],
+      "start_roi": [
+        244,
+        503,
+        316,
+        57
+      ]
+    },
+    "post_delay": 2000,
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励领取_结界寄养_识别结界卡收益": {
+    "expected": "^.*",
+    "recognition": "OCR",
+    "roi": [
+      792,
+      418,
+      183,
+      33
+    ]
+  },
+  "阴阳寮奖励领取_识别结界特征": {
+    "action": "Custom",
+    "custom_action": "TaskList",
+    "custom_action_param": {
+      "tasks": {
+        "阴阳寮奖励24_挂结界卡":{
+          "enabled": true
         },
-        "expected": "式神育成",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_识别寄养栏位",
-            "阴阳寮奖励7"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            0,
-            8,
-            344,
-            92
-        ],
-        "threshold": 0.6,
-        "timeout": 5000
-    },
-    "阴阳寮奖励1": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            953,
-            485,
-            172,
-            197
-        ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励1.png"
-        ]
-    },
-    "阴阳寮奖励10": {
-        "action": "Click",
-        "expected": "领取",
-        "next": [
-            "阴阳寮奖励13",
-            "[JumpBack]阴阳寮奖励11",
-            "[JumpBack]阴阳寮奖励12"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            551,
-            421,
-            182,
-            78
-        ]
-    },
-    "阴阳寮奖励11": {
-        "action": "Click",
-        "expected": "获得奖励",
-        "recognition": "OCR",
-        "roi": [
-            441,
-            172,
-            387,
-            108
-        ],
-        "target": [
-            14,
-            0,
-            78,
-            74
-        ]
-    },
-    "阴阳寮奖励12": {
-        "expected": "信息|管理",
-        "next": [
-            "阴阳寮奖励15"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            140,
-            78,
-            196,
-            64
-        ],
-        "target": [
-            20,
-            0,
-            56,
-            54
-        ]
-    },
-    "阴阳寮奖励13": {
-        "expected": "神社|祈愿",
-        "recognition": "OCR",
-        "roi": [
-            852,
-            653,
-            180,
-            66
-        ]
-    },
-    "阴阳寮奖励14": {
-        "action": "Click",
-        "expected": "获得奖励",
-        "recognition": "OCR",
-        "roi": [
-            377,
-            118,
-            607,
-            200
-        ],
-        "target": [
-            397,
-            525,
-            316,
-            126
-        ]
-    },
-    "阴阳寮奖励15": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            0,
-            0,
-            129,
-            114
-        ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励15.png"
-        ]
-    },
-    "阴阳寮奖励16": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励领取_阴阳寮奖励领取"
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励16.png"
-        ]
-    },
-    "阴阳寮奖励17": {
-        "action": "Click",
-        "expected": "取出",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            531,
-            488,
-            196,
-            98
-        ]
-    },
-    "阴阳寮奖励18": {
-        "expected": "经验",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_领取经验_提取"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            479,
-            229,
-            311,
-            78
-        ]
-    },
-    "阴阳寮奖励19": {
-        "action": "Click",
-        "expected": 0,
-        "labels": [
-            "式神育成",
-            "结界卡",
-            "结界防守"
-        ],
-        "model": "Barrier_v1.onnx",
-        "next": [
-            "阴阳寮奖励8"
-        ],
-        "on_error": [
-            "阴阳寮奖励22",
-            "阴阳寮奖励23"
-        ],
-        "recognition": "NeuralNetworkDetect",
-        "threshold": 0.6,
-        "timeout": 5000
-    },
-    "阴阳寮奖励2": {
-        "next": [
-            "阴阳寮奖励1",
-            "阴阳寮奖励3"
-        ],
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励20": {
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励21": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "template": "通用图标/返回_蓝色.png"
-    },
-    "阴阳寮奖励22": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励22.png"
-        ]
-    },
-    "阴阳寮奖励23": {
-        "expected": "防守阵容|式神育成",
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_copy4",
-            "[JumpBack]阴阳寮奖励21"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            0,
-            0,
-            347,
-            115
-        ]
-    },
-    "阴阳寮奖励24": {
-        "action": "Click",
-        "expected": "结界",
-        "recognition": "OCR",
-        "roi": [
-            941,
-            565,
-            338,
-            154
-        ]
-    },
-    "阴阳寮奖励24_挂结界卡": {
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_copy1"
-        ],
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励25": {
-        "expected": "结界卡",
-        "next": [
-            "阴阳寮奖励30",
-            "阴阳寮奖励27",
-            "[JumpBack]阴阳寮奖励26"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            563,
-            30,
-            136,
-            67
-        ]
-    },
-    "阴阳寮奖励26": {
-        "action": "Click",
-        "expected": "全部",
-        "next": [
-            "阴阳寮奖励26_筛选对应结界卡"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            349,
-            76,
-            170,
-            79
-        ]
-    },
-    "阴阳寮奖励26_筛选对应结界卡": {
-        "action": "Click",
-        "expected": "太鼓",
-        "recognition": "OCR",
-        "roi": [
-            372,
-            99,
-            140,
-            436
-        ]
-    },
-    "阴阳寮奖励27": {
-        "expected": "太鼓",
-        "next": [
-            "阴阳寮奖励30_确保选中结界卡",
-            "[JumpBack]阴阳寮奖励28",
-            "[JumpBack]阴阳寮奖励29"
-        ],
-        "rate_limit": 2000,
-        "recognition": "OCR",
-        "roi": [
-            358,
-            95,
-            166,
-            53
-        ],
-        "timeout": 60000
-    },
-    "阴阳寮奖励28": {
-        "action": "Click",
-        "expected": [
-            0,
-            1,
-            2,
-            3,
-            4
-        ],
-        "model": "BarrierCard.onnx",
-        "recognition": "NeuralNetworkDetect",
-        "threshold": 0.8
-    },
-    "阴阳寮奖励29": {
-        "action": "Swipe",
-        "begin": [
-            212,
-            588,
-            251,
-            51
-        ],
-        "duration": 1000,
-        "end": [
-            239,
-            193,
-            226,
-            42
-        ],
-        "expected": "太鼓",
-        "recognition": "OCR",
-        "roi": [
-            356,
-            102,
-            134,
-            46
-        ]
-    },
-    "阴阳寮奖励3": {
-        "action": "Click",
-        "recognition": "DirectHit",
-        "target": [
-            1009,
-            569,
-            34,
-            53
-        ]
-    },
-    "阴阳寮奖励30": {
-        "expected": "^\\d{2}:\\d{2}:\\d{2}$",
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_copy6",
-            "[JumpBack]阴阳寮奖励31"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            879,
-            242,
-            164,
-            60
-        ]
-    },
-    "阴阳寮奖励30_确保选中结界卡": {
-        "expected": "太鼓|斗鱼",
-        "next": [
-            "阴阳寮奖励5",
-            "阴阳寮奖励32"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            787,
-            234,
-            230,
-            141
-        ]
-    },
-    "阴阳寮奖励31": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            1060,
-            31,
-            207,
-            143
-        ],
-        "template": "通用图标/关闭.png"
-    },
-    "阴阳寮奖励32": {
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_copy6",
-            "[JumpBack]阴阳寮奖励31"
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励32.png"
-        ]
-    },
-    "阴阳寮奖励33": {
-        "action": "Click",
-        "expected": 1,
-        "labels": [
-            "式神育成",
-            "结界卡",
-            "结界防守"
-        ],
-        "model": "Barrier_v1.onnx",
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "NeuralNetworkDetect"
-    },
-    "阴阳寮奖励33_寄养": {
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_copy2"
-        ],
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励34": {
-        "expected": "是否将",
-        "next": [
-            "阴阳寮奖励35"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            431,
-            266,
-            423,
-            93
-        ]
-    },
-    "阴阳寮奖励34_领取体力和经验": {
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_copy2_copy1"
-        ],
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励35": {
-        "action": "Click",
-        "expected": "确定",
-        "next": [
-            "阴阳寮奖励30"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            641,
-            394,
-            234,
-            88
-        ]
-    },
-    "阴阳寮奖励36": {
-        "action": "Click",
-        "expected": "阴阳寮",
-        "recognition": "OCR",
-        "roi": [
-            335,
-            625,
-            513,
-            76
-        ]
-    },
-    "阴阳寮奖励37": {
-        "action": "Click",
-        "enabled": false,
-        "next": [
-            "阴阳寮奖励38"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            429,
-            94,
-            420,
-            520
-        ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励37.png"
-        ]
-    },
-    "阴阳寮奖励38": {
-        "action": "Click",
-        "expected": "获得奖励|获得宝藏",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面",
-            "[JumpBack]阴阳寮奖励14",
-            "[JumpBack]阴阳寮奖励19"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            375,
-            103,
-            531,
-            353
-        ],
-        "target": [
-            491,
-            642,
-            210,
-            77
-        ]
-    },
-    "阴阳寮奖励39": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            731,
-            65,
-            433,
-            356
-        ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励39.png"
-        ]
-    },
-    "阴阳寮奖励5": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励30",
-            "阴阳寮奖励34"
-        ],
-        "recognition": "TemplateMatch",
-        "roi": [
-            993,
-            494,
-            196,
-            198
-        ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励5.png"
-        ]
-    },
-    "阴阳寮奖励6": {
-        "expected": "体力",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_领取体力_取出",
-            "阴阳寮奖励17"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            496,
-            184,
-            333,
-            161
-        ]
-    },
-    "阴阳寮奖励7": {
-        "expected": "^\\d{2}:\\d{2}:\\d{2}$",
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_2",
-            "[JumpBack]阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1118,
-            116,
-            134,
-            35
-        ]
-    },
-    "阴阳寮奖励8": {
-        "expected": "式神育成",
-        "recognition": "OCR",
-        "roi": [
-            0,
-            8,
-            344,
-            92
-        ]
-    },
-    "阴阳寮奖励9": {
-        "action": "Click",
-        "expected": "资金领取",
-        "next": [
-            "阴阳寮奖励10",
-            "阴阳寮奖励13",
-            "[JumpBack]阴阳寮奖励12"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            125,
-            598,
-            326,
-            74
-        ]
-    },
-    "阴阳寮奖励9_领取寮金币": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励9"
-        ],
-        "recognition": "TemplateMatch",
-        "roi": [
-            1031,
-            580,
-            248,
-            138
-        ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币.png",
-            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币_1.png"
-        ]
-    },
-    "阴阳寮奖励领取": {
-        "next": [
-            "阴阳寮奖励领取-确保进入阴阳寮",
-            "[JumpBack]阴阳寮奖励领取_点击阴阳寮",
-            "[JumpBack]阴阳寮奖励36",
-            "[JumpBack]打开底部菜单"
-        ],
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励领取-确保进入阴阳寮": {
-        "expected": "神社|寮信息|结界|祈愿",
-        "next": [
-            "阴阳寮奖励16",
-            "阴阳寮奖励领取_阴阳寮奖励领取"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            860,
-            666,
-            394,
-            54
-        ]
-    },
-    "阴阳寮奖励领取_体力领取_点击一下屏幕": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "DirectHit",
-        "target": [
-            453,
-            481,
-            437,
-            110
-        ]
-    },
-    "阴阳寮奖励领取_寮金币领取_点击一下屏幕": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "DirectHit",
-        "target": [
-            453,
-            481,
-            437,
-            110
-        ]
-    },
-    "阴阳寮奖励领取_点击结界": {
-        "action": "Click",
-        "post_delay": 4000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            1041,
-            591,
-            111,
-            119
-        ],
-        "template": "阴阳寮/阴阳寮_结界.png"
-    },
-    "阴阳寮奖励领取_点击阴阳寮": {
-        "action": "Click",
-        "post_delay": 4000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            494,
-            567,
-            155,
-            141
-        ],
-        "template": [
-            "庭院/庭院_阴阳寮.png",
-            "庭院/庭院_阴阳寮_红点.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_点击阴阳寮_1.png"
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_关闭食盒界面": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            919,
-            106,
-            182,
-            112
-        ],
-        "template": "通用图标/关闭.png"
-    },
-    "阴阳寮奖励领取_结界奖励领取_寄养式神_点击进入寄养结界": {
-        "action": "Click",
-        "expected": "进入结界",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_寄养式神_选择第一个式神寄养"
-        ],
-        "post_delay": 3000,
-        "recognition": "OCR",
-        "roi": [
-            786,
-            532,
-            182,
-            64
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_寄养式神_确定第一个式神寄养": {
-        "action": "Click",
-        "expected": "确定",
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_2",
-            "[JumpBack]阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            669,
-            515,
-            135,
-            56
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界": {
-        "action": "Click",
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            0,
-            0,
-            92,
-            105
-        ],
-        "template": [
-            "通用图标/返回_蓝色.png",
-            "通用图标/返回_蓝色_2.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_寄养式神_返回结界.png"
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
-        "action": "Custom",
-        "custom_action": "AutoFoster",
-        "custom_action_param": {
-            "FosterTarget": 1
+        "阴阳寮奖励33_寄养":{
+        "enabled": true
         },
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_寄养式神_点击进入寄养结界"
-        ],
-        "recognition": "DirectHit"
+        "阴阳寮奖励34_领取体力和经验":{
+        "enabled": true
+        }
+        }
     },
-    "阴阳寮奖励领取_结界奖励领取_寄养式神_选择第一个式神寄养": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_寄养式神_确定第一个式神寄养"
-        ],
-        "post_delay": 1000,
-        "recognition": "DirectHit",
-        "target": [
-            153,
-            497,
-            119,
-            183
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_点击一下屏幕": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励18",
-            "[JumpBack]阴阳寮奖励领取_结界奖励领取_点击经验酒壶"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "DirectHit",
-        "target": [
-            825,
-            515,
-            125,
-            59
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_点击经验酒壶": {
-        "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            379,
-            605,
-            598,
-            108
-        ],
-        "template": "阴阳寮/阴阳寮结界_经验酒壶__655_616_226_79__605_566_326_154.png"
-    },
-    "阴阳寮奖励领取_结界奖励领取_点击结界奖励": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            823,
-            388,
-            216,
-            175
-        ],
-        "template": [
-            "阴阳寮/阴阳寮结界_食盒__878_535_198_35__828_485_298_135.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_1.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_2.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_3.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_结界奖励领取_点击结界奖励_4.png"
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_识别寄养栏位": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            1019,
-            8,
-            272,
-            168
-        ],
-        "template": "阴阳寮/阴阳寮_结界_寄养.png"
-    },
-    "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面": {
-        "expected": "式神育成",
-        "next": [
-            "阴阳寮奖励"
-        ],
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            0,
-            8,
-            344,
-            92
-        ],
-        "timeout": 5000
-    },
-    "阴阳寮奖励领取_结界奖励领取_领取体力_取出": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            533,
-            461,
-            250,
-            127
-        ],
-        "template": "阴阳寮/阴阳寮_结界_体力_取出.png",
-        "timeout": 1000
-    },
-    "阴阳寮奖励领取_结界奖励领取_领取溢出经验": {
-        "action": "Click",
-        "expected": "确定",
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            662,
-            387,
-            190,
-            85
-        ]
-    },
-    "阴阳寮奖励领取_结界奖励领取_领取经验_提取": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励领取_识别结界特征_2_copy1",
-            "[JumpBack]阴阳寮奖励领取_结界奖励领取_领取溢出经验",
-            "[JumpBack]阴阳寮奖励领取_结界奖励领取_关闭食盒界面"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_经验_提取.png",
-        "timeout": 3000
-    },
-    "阴阳寮奖励领取_结界寄养_点击好友": {
-        "action": "Click",
-        "expected": "好友",
-        "recognition": "OCR",
-        "roi": [
-            197,
-            71,
-            131,
-            88
-        ],
-        "target": [
-            246,
-            116,
-            54,
-            33
-        ]
-    },
-    "阴阳寮奖励领取_结界寄养_点击跨区好友": {
-        "action": "Click",
-        "expected": "跨区",
-        "recognition": "OCR",
-        "roi": [
-            327,
-            70,
-            184,
-            90
-        ],
-        "target": [
-            361,
-            107,
-            60,
-            42
-        ]
-    },
-    "阴阳寮奖励领取_结界寄养_识别寄养目标": {
-        "recognition": "FeatureMatch",
-        "roi": [
-            531,
-            169,
-            94,
-            422
-        ],
-        "template": [
-            "阴阳寮/结界_太鼓_2星__183_273_108_107__133_223_208_207.png",
-            "阴阳寮/结界_太鼓_3星__190_385_102_94__140_335_202_194.png",
-            "阴阳寮/结界_太鼓_4星__183_504_115_103__133_454_215_203.png",
-            "阴阳寮/结界_太鼓_5星__181_317_117_107__131_267_217_207.png",
-            "阴阳寮/结界_太鼓_6星__184_185_105_100__134_135_205_200.png",
-            "阴阳寮/结界_斗鱼_1星__180_522_114_110__130_472_214_210.png",
-            "阴阳寮/结界_斗鱼_2星__181_380_114_111__131_330_214_211.png",
-            "阴阳寮/结界_斗鱼_3星__182_486_117_112__132_436_217_212.png",
-            "阴阳寮/结界_斗鱼_4星__183_293_113_112__133_243_213_212.png",
-            "阴阳寮/结界_斗鱼_5星__186_461_110_112__136_411_210_212.png",
-            "阴阳寮/结界_斗鱼_6星__183_177_112_108__133_127_212_208.png"
-        ]
-    },
-    "阴阳寮奖励领取_结界寄养_识别寄养目标_下一页": {
-        "action": "Custom",
-        "custom_action": "RandomSwipe",
-        "custom_action_param": {
-            "delay": 2000,
-            "end_roi": [
-                232,
-                183,
-                320,
-                61
-            ],
-            "start_roi": [
-                244,
-                503,
-                316,
-                57
-            ]
+    "next": [
+      "返回庭院"
+    ],
+    "post_delay": 500,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_识别结界特征_2": {
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_识别结界特征_2_copy1": {
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_识别结界特征_copy1": {
+    "next": [
+      "阴阳寮奖励25",
+      "[JumpBack]阴阳寮奖励23",
+      "[JumpBack]阴阳寮奖励39",
+      "[JumpBack]阴阳寮奖励33"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "post_delay": 500,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_识别结界特征_copy2": {
+    "next": [
+      "阴阳寮奖励37",
+      "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面",
+      "[JumpBack]阴阳寮奖励14",
+      "[JumpBack]阴阳寮奖励19"
+    ],
+    "post_delay": 500,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_识别结界特征_copy2_copy1": {
+    "next": [
+      "阴阳寮结界_识别是否位于食盒界面",
+      "[JumpBack]阴阳寮奖励领取_结界奖励领取_点击结界奖励"
+    ],
+    "post_delay": 500,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_识别结界特征_copy4": {
+    "post_delay": 500,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_识别结界特征_copy6": {
+    "post_delay": 500,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_结界_结界换装.png",
+    "timeout": 10000
+  },
+  "阴阳寮奖励领取_阴阳寮体力领取": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励领取_体力领取_点击一下屏幕"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "template": [
+      "阴阳寮/阴阳寮_体力.png",
+      "阴阳寮奖励\\阴阳寮奖励领取_阴阳寮体力领取.png"
+    ],
+    "timeout": 1000
+  },
+  "阴阳寮奖励领取_阴阳寮奖励领取": {
+    "action": "Custom",
+    "custom_action": "TaskList",
+    "custom_action_param": {
+      "tasks": {
+        "阴阳寮奖励领取_阴阳寮金币领取": {
+          "enabled": true
         },
-        "post_delay": 2000,
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励领取_结界寄养_识别结界卡收益": {
-        "expected": "^.*",
-        "recognition": "OCR",
-        "roi": [
-            792,
-            418,
-            183,
-            33
-        ]
-    },
-    "阴阳寮奖励领取_识别结界特征": {
-        "action": "Custom",
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "enable_once_a_day": false,
-            "on_error": "跳过",
-            "task_list": {
-                "阴阳寮奖励24_挂结界卡": true,
-                "阴阳寮奖励33_寄养": true,
-                "阴阳寮奖励34_领取体力和经验": true
-            }
+        "阴阳寮奖励领取_阴阳寮体力领取": {
+          "enabled": true
         },
-        "next": [
-            "返回庭院"
-        ],
-        "post_delay": 500,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
+        "阴阳寮奖励9_领取寮金币": {
+          "enabled": true
+        }
+      }
     },
-    "阴阳寮奖励领取_识别结界特征_2": {
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
-    },
-    "阴阳寮奖励领取_识别结界特征_2_copy1": {
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
-    },
-    "阴阳寮奖励领取_识别结界特征_copy1": {
-        "next": [
-            "阴阳寮奖励25",
-            "[JumpBack]阴阳寮奖励23",
-            "[JumpBack]阴阳寮奖励39",
-            "[JumpBack]阴阳寮奖励33"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "post_delay": 500,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
-    },
-    "阴阳寮奖励领取_识别结界特征_copy2": {
-        "next": [
-            "阴阳寮奖励37",
-            "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面",
-            "[JumpBack]阴阳寮奖励14",
-            "[JumpBack]阴阳寮奖励19"
-        ],
-        "post_delay": 500,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
-    },
-    "阴阳寮奖励领取_识别结界特征_copy2_copy1": {
-        "next": [
-            "阴阳寮结界_识别是否位于食盒界面",
-            "[JumpBack]阴阳寮奖励领取_结界奖励领取_点击结界奖励"
-        ],
-        "post_delay": 500,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
-    },
-    "阴阳寮奖励领取_识别结界特征_copy4": {
-        "post_delay": 500,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
-    },
-    "阴阳寮奖励领取_识别结界特征_copy6": {
-        "post_delay": 500,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_结界_结界换装.png",
-        "timeout": 10000
-    },
-    "阴阳寮奖励领取_阴阳寮体力领取": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励领取_体力领取_点击一下屏幕"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "template": [
-            "阴阳寮/阴阳寮_体力.png",
-            "阴阳寮奖励\\阴阳寮奖励领取_阴阳寮体力领取.png"
-        ],
-        "timeout": 1000
-    },
-    "阴阳寮奖励领取_阴阳寮奖励领取": {
-        "action": "Custom",
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "on_error": "跳过",
-            "task_list": [
-                "阴阳寮奖励领取_阴阳寮金币领取",
-                "阴阳寮奖励领取_阴阳寮体力领取",
-                "阴阳寮奖励9_领取寮金币"
-            ]
-        },
-        "next": [
-            "阴阳寮奖励领取_识别结界特征",
-            "[JumpBack]阴阳寮奖励领取_点击结界",
-            "[JumpBack]阴阳寮奖励24"
-        ],
-        "post_delay": 1000,
-        "recognition": "DirectHit"
-    },
-    "阴阳寮奖励领取_阴阳寮金币领取": {
-        "action": "Click",
-        "next": [
-            "阴阳寮奖励领取_领取寮金币"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "template": "阴阳寮/阴阳寮_金币礼包.png",
-        "timeout": 1000
-    },
-    "阴阳寮奖励领取_领取寮金币": {
-        "action": "Click",
-        "expected": "领取",
-        "next": [
-            "阴阳寮奖励领取_寮金币领取_点击一下屏幕"
-        ],
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            568,
-            426,
-            139,
-            59
-        ]
-    },
-    "阴阳寮结界_识别是否位于食盒界面": {
-        "expected": "体力食盒|经验酒壶",
-        "next": [
-            "阴阳寮奖励6",
-            "[JumpBack]阴阳寮结界_食盒_领取体力_点击体力食盒"
-        ],
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            282,
-            75,
-            725,
-            633
-        ]
-    },
-    "阴阳寮结界_食盒_领取体力_点击体力食盒": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            379,
-            605,
-            598,
-            108
-        ],
-        "template": "阴阳寮/阴阳寮结界_体力食盒__408_615_222_83__358_565_322_155.png"
-    }
+    "next": [
+      "阴阳寮奖励领取_识别结界特征",
+      "[JumpBack]阴阳寮奖励领取_点击结界",
+      "[JumpBack]阴阳寮奖励24"
+    ],
+    "post_delay": 1000,
+    "recognition": "DirectHit"
+  },
+  "阴阳寮奖励领取_阴阳寮金币领取": {
+    "action": "Click",
+    "next": [
+      "阴阳寮奖励领取_领取寮金币"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "template": "阴阳寮/阴阳寮_金币礼包.png",
+    "timeout": 1000
+  },
+  "阴阳寮奖励领取_领取寮金币": {
+    "action": "Click",
+    "expected": "领取",
+    "next": [
+      "阴阳寮奖励领取_寮金币领取_点击一下屏幕"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      568,
+      426,
+      139,
+      59
+    ]
+  },
+  "阴阳寮结界_识别是否位于食盒界面": {
+    "expected": "体力食盒|经验酒壶",
+    "next": [
+      "阴阳寮奖励6",
+      "[JumpBack]阴阳寮结界_食盒_领取体力_点击体力食盒"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      282,
+      75,
+      725,
+      633
+    ]
+  },
+  "阴阳寮结界_食盒_领取体力_点击体力食盒": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      379,
+      605,
+      598,
+      108
+    ],
+    "template": "阴阳寮/阴阳寮结界_体力食盒__408_615_222_83__358_565_322_155.png"
+  }
 }

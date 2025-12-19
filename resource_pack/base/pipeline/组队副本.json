@@ -206,10 +206,14 @@
         "action": "Custom",
         "custom_action": "TaskList",
         "custom_action_param": {
-            "task_list": {
-                "组队副本_经验副本": true,
-                "组队副本_金币副本": true
-            }
+          "tasks": {
+            "组队副本_经验副本":{
+                  "enabled": true
+              },
+              "组队副本_金币副本":{
+                  "enabled": true
+              }
+          }
         },
         "next": [
             "组队副本16"
