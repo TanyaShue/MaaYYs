@@ -48,6 +48,26 @@
             86
         ]
     },
+    "开始地鬼-检查时间": {
+        "action": "Custom",
+        "custom_action": "TimeCheck",
+        "custom_action_param": {
+            "end": "23:59",
+            "mode": "in",
+            "start": "6:00"
+        },
+        "focus": {
+            "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束",
+            "Node.Action.Starting": "开始自动地鬼时间检查"
+        },
+        "next": [
+            "自动地鬼"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "DirectHit"
+    },
     "开始自动挑战鬼王": {
         "action": "Custom",
         "custom_action": "ChallengeDungeonBoss",
@@ -73,8 +93,8 @@
             "[JumpBack]自动地鬼4"
         ],
         "post_delay": 2000,
-        "timeout": 200000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 200000
     },
     "点击地域鬼王": {
         "action": "Click",
@@ -309,11 +329,14 @@
             "自动地鬼3_解锁阵容",
             "[JumpBack]自动地鬼3_点击锁定"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "挑战地鬼"
+        ]
     },
     "自动地鬼4": {
         "action": "Click",
-        "expected": "挑战",
+        "expected": "挑|战",
         "next": [
             "自动地鬼12_装备预设",
             "自动地鬼15"
@@ -423,25 +446,5 @@
             127,
             65
         ]
-    },
-    "开始地鬼-检查时间": {
-        "recognition": "DirectHit",
-        "action": "Custom",
-        "custom_action": "TimeCheck",
-        "custom_action_param": {
-            "start": "6:00",
-            "end": "23:59",
-            "mode": "in"
-        },
-        "next": [
-            "自动地鬼"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "focus": {
-            "Node.Action.Starting": "开始自动地鬼时间检查",
-            "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束"
-        }
     }
 }
