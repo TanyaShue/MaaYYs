@@ -17,6 +17,7 @@
             "结束突破",
             "[JumpBack]突破_结束战斗",
             "[JumpBack]突破_领取奖励",
+            "[JumpBack]突破_点击进攻",
             "[JumpBack]挑战第一个结界",
             "[JumpBack]挑战第二个结界",
             "[JumpBack]挑战第三个结界",
@@ -34,17 +35,12 @@
             54,
             200,
             86
-        ]
+        ],
+        "timeout": 40000
     },
     "挑战第一个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
             253,
@@ -53,10 +49,10 @@
             149
         ],
         "target": [
-            165,
-            156,
-            276,
-            94
+            291,
+            160,
+            151,
+            96
         ],
         "template": "自动结界/突破_击破.png",
         "timeout": 2000
@@ -64,18 +60,12 @@
     "挑战第七个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
-            137,
-            401,
-            344,
-            141
+            249,
+            405,
+            227,
+            136
         ],
         "target": [
             241,
@@ -89,18 +79,12 @@
     "挑战第三个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
-            811,
-            118,
-            347,
-            160
+            905,
+            136,
+            249,
+            143
         ],
         "target": [
             904,
@@ -123,10 +107,10 @@
         ],
         "recognition": "FeatureMatch",
         "roi": [
-            798,
-            399,
-            351,
-            145
+            910,
+            403,
+            241,
+            148
         ],
         "target": [
             901,
@@ -140,24 +124,18 @@
     "挑战第二个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
-            479,
-            121,
-            333,
-            145
+            575,
+            143,
+            237,
+            134
         ],
         "target": [
-            495,
-            156,
-            279,
-            83
+            618,
+            167,
+            175,
+            91
         ],
         "template": "自动结界/突破_击破.png",
         "timeout": 2000
@@ -165,18 +143,12 @@
     "挑战第五个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
-            472,
-            266,
-            335,
-            140
+            573,
+            269,
+            239,
+            150
         ],
         "target": [
             575,
@@ -190,17 +162,11 @@
     "挑战第八个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
-            471,
+            576,
             406,
-            333,
+            234,
             136
         ],
         "target": [
@@ -215,18 +181,12 @@
     "挑战第六个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
-            807,
-            270,
-            329,
-            137
+            905,
+            276,
+            237,
+            129
         ],
         "target": [
             906,
@@ -240,24 +200,18 @@
     "挑战第四个结界": {
         "action": "Click",
         "inverse": true,
-        "next": [
-            "突破_点击进攻"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
-            142,
-            263,
-            336,
-            147
+            265,
+            272,
+            215,
+            139
         ],
         "target": [
-            156,
-            289,
-            292,
-            97
+            270,
+            298,
+            188,
+            91
         ],
         "template": "自动结界/突破_击破.png",
         "timeout": 2000
@@ -325,7 +279,10 @@
             202
         ],
         "template": "自动结界/突破_再次挑战.png",
-        "timeout": 5000
+        "timeout": 5000,
+        "focus": {
+            "Node.Recognition.Failed": "[waring]尝试退6失败,可以试试稍微慢一点的队伍,不要一上来就直接秒"
+        }
     },
     "突破_再次挑战_copy1": {
         "action": "Click",
