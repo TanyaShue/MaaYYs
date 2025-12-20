@@ -1,9 +1,6 @@
 {
     "庭院_点击式神录": {
         "action": "Click",
-        "next": [
-            "装备日常清杂预设"
-        ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -339,8 +336,11 @@
     "悬赏封印9": {
         "expected": "悬赏封印",
         "next": [
-            "悬赏封印_点击一键追踪",
-            "悬赏封印_点击叉叉"
+            "装备日常清杂预设",
+            "[JumpBack]悬赏封印_点击一键追踪",
+            "[JumpBack]悬赏封印_点击叉叉",
+            "[JumpBack]庭院_点击式神录",
+            "[JumpBack]打开底部菜单"
         ],
         "recognition": "OCR",
         "roi": [
@@ -383,9 +383,6 @@
     "悬赏封印_点击一键追踪": {
         "action": "Click",
         "expected": "键",
-        "next": [
-            "悬赏封印_点击叉叉"
-        ],
         "recognition": "OCR",
         "roi": [
             1053,
@@ -396,13 +393,6 @@
     },
     "悬赏封印_点击叉叉": {
         "action": "Click",
-        "next": [
-            "庭院_点击式神录",
-            "[JumpBack]打开底部菜单"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
         "recognition": "TemplateMatch",
         "roi": [
             1127,
@@ -671,6 +661,7 @@
             "group_name": "日常清杂分组",
             "team_name": "日常清杂队伍"
         },
+        "expected": "式神录",
         "next": [
             "探索_悬赏_御魂_返回"
         ],
@@ -678,7 +669,13 @@
             "超时_切换御魂失败"
         ],
         "post_delay": 2000,
-        "recognition": "DirectHit"
+        "recognition": "OCR",
+        "roi": [
+            55,
+            0,
+            162,
+            57
+        ]
     },
     "识别探索目标": {
         "action": "Click",
