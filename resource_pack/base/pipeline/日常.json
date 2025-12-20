@@ -81,9 +81,6 @@
             "神龛"
         ],
         "model": "Courtyard.onnx",
-        "on_error": [
-            "返回庭院"
-        ],
         "recognition": "NeuralNetworkDetect",
         "threshold": 0.7
     },
@@ -124,29 +121,29 @@
         "custom_action": "TaskList",
         "custom_action_param": {
             "tasks": {
-                "日常_每日免费一抽":{
+                "日常_每日免费一抽": {
                     "enabled": true,
                     "once_per_day": true
                 },
-                "日常_送友情点":{
+                "日常_送友情点": {
                     "enabled": true,
                     "once_per_day": true
                 },
-                "领取奖励1_签到":{
+                "领取奖励1_签到": {
                     "enabled": true,
                     "once_per_day": true
                 },
-                "领取奖励_商店每日奖励":{
+                "领取奖励_商店每日奖励": {
                     "enabled": true,
                     "once_per_day": true
                 },
-                "领取奖励_日常奖励":{
+                "领取奖励_日常奖励": {
                     "enabled": true
                 },
-                "领取奖励_花合战奖励":{
+                "领取奖励_花合战奖励": {
                     "enabled": true
                 },
-                "领取奖励_邮件":{
+                "领取奖励_邮件": {
                     "enabled": true
                 }
             }
@@ -323,19 +320,19 @@
             536,
             48
         ],
+        "target": [
+            618,
+            682,
+            100,
+            38
+        ],
         "target_offset": [
             3,
             -85,
             -7,
             15
         ],
-        "timeout": 10000,
-        "target": [
-            618,
-            682,
-            100,
-            38
-        ]
+        "timeout": 10000
     },
     "日常_每日免费一抽_点击单抽": {
         "action": "Click",

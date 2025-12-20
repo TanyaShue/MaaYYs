@@ -1,1055 +1,1068 @@
 {
-  "关闭石像日常界面": {
-    "action": "Click",
-    "recognition": "FeatureMatch",
-    "template": "庭院/石像_日常_关闭__1119_72_45_44__1069_22_145_144.png"
-  },
-  "向右滑一下": {
-    "action": "Custom",
-    "custom_action": "RandomSwipe",
-    "custom_action_param": {
-      "delay": 500,
-      "end_roi": [
-        797,
-        300,
-        99,
-        309
-      ],
-      "start_roi": [
-        382,
-        254,
-        102,
-        310
-      ]
+    "关闭石像日常界面": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "template": "庭院/石像_日常_关闭__1119_72_45_44__1069_22_145_144.png"
     },
-    "post_delay": 500,
-    "recognition": "DirectHit"
-  },
-  "开始现世逢魔": {
-    "next": [
-      "识别是否用完现世逢魔次数",
-      "[JumpBack]现世逢魔"
-    ],
-    "recognition": "DirectHit"
-  },
-  "开始自动挑战首领": {
-    "action": "Click",
-    "next": [
-      "现世逢魔_识别结束界面"
-    ],
-    "post_delay": 30000,
-    "pre_delay": 3000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      1031,
-      528,
-      231,
-      161
-    ],
-    "template": "自动逢魔/现世封魔_准备.png",
-    "timeout": 350000
-  },
-  "点击石像_日常": {
-    "action": "Click",
-    "next": [
-      "点击逢魔_识别逢魔"
-    ],
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      1084,
-      146,
-      48,
-      120
-    ],
-    "template": "庭院/石像_日常.png"
-  },
-  "点击逢魔": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "template": [
-      "庭院/庭院_逢魔.png",
-      "庭院/通用_地藏石像__587_407_63_52__537_357_163_152.png",
-      "自动逢魔\\点击逢魔.png"
-    ]
-  },
-  "点击逢魔_识别逢魔": {
-    "next": [
-      "现世逢魔_点击参加"
-    ],
-    "on_error": [
-      "自动逢魔19"
-    ],
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      237,
-      140,
-      827,
-      343
-    ],
-    "template": "自动逢魔/石像_逢魔.png",
-    "timeout": 2000
-  },
-  "现世逢魔": {
-    "action": "Click",
-    "expected": "现世逢魔",
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      1104,
-      685,
-      106,
-      34
-    ],
-    "target": [
-      1132,
-      605,
-      95,
-      81
-    ]
-  },
-  "现世逢魔_御魂_返回": {
-    "action": "Click",
-    "expected": "式神录",
-    "post_delay": 4000,
-    "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      327,
-      112
-    ],
-    "target": [
-      19,
-      14,
-      46,
-      38
-    ],
-    "timeout": 350000
-  },
-  "现世逢魔_点击一下屏幕下方": {
-    "action": "Click",
-    "expected": "获得奖励",
-    "next": [
-      "自动逢魔9"
-    ],
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      419,
-      130,
-      417,
-      128
-    ],
-    "target": [
-      2,
-      115,
-      143,
-      491
-    ]
-  },
-  "现世逢魔_点击具体首领": {
-    "action": "Click",
-    "next": [
-      "识别集结挑战",
-      "[JumpBack]现世逢魔_点击首领"
-    ],
-    "post_delay": 1000,
-    "recognition": "DirectHit",
-    "target": [
-      584,
-      301,
-      106,
-      112
-    ]
-  },
-  "现世逢魔_点击参加": {
-    "action": "Click",
-    "next": [
-      "开始现世逢魔"
-    ],
-    "on_error": [
-      "自动逢魔19"
-    ],
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "roi": "点击逢魔_识别逢魔",
-    "roi_offset": [
-      270,
-      0,
-      0,
-      0
-    ],
-    "template": "自动逢魔/现世逢魔_参加__530_162_86_83__480_112_186_183.png"
-  },
-  "现世逢魔_点击式神录": {
-    "action": "Click",
-    "expected": "式神录",
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      1092,
-      604,
-      94,
-      94
-    ]
-  },
-  "现世逢魔_点击确定": {
-    "action": "Click",
-    "expected": "确定",
-    "next": [
-      "开始自动挑战首领"
-    ],
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      667,
-      390,
-      189,
-      70
-    ],
-    "timeout": 350000
-  },
-  "现世逢魔_点击首领": {
-    "action": "Click",
-    "next": [
-      "现世逢魔_点击具体首领"
-    ],
-    "post_delay": 1000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      691,
-      538,
-      414,
-      181
-    ],
-    "template": "自动逢魔/现世逢魔_首领.png"
-  },
-  "现世逢魔_装备式神预设": {
-    "action": "Custom",
-    "custom_action": "SwitchSoul",
-    "custom_action_param": {
-      "group_name": "逢魔",
-      "team_name": "逢魔队伍"
-    },
-    "expected": "式神录",
-    "next": [
-      "自动逢魔15",
-      "[JumpBack]现世逢魔_御魂_返回"
-    ],
-    "on_error": [
-      "超时_切换御魂失败"
-    ],
-    "post_delay": 2000,
-    "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      327,
-      112
-    ]
-  },
-  "现世逢魔_识别结束界面": {
-    "action": "Click",
-    "expected": "点击屏幕继续",
-    "next": [
-      "现世逢魔_首领_返回",
-      "[JumpBack]现世逢魔_识别结束界面_copy1"
-    ],
-    "post_delay": 3000,
-    "pre_delay": 5000,
-    "rate_limit": 2000,
-    "recognition": "OCR",
-    "roi": [
-      501,
-      658,
-      295,
-      53
-    ],
-    "target": [
-      587,
-      590,
-      289,
-      107
-    ],
-    "timeout": 350000
-  },
-  "现世逢魔_识别结束界面_copy1": {
-    "action": "Click",
-    "expected": "点击屏幕继续",
-    "post_delay": 3000,
-    "pre_delay": 5000,
-    "rate_limit": 2000,
-    "recognition": "OCR",
-    "roi": [
-      501,
-      658,
-      295,
-      53
-    ],
-    "target": [
-      587,
-      590,
-      289,
-      107
-    ],
-    "timeout": 1000
-  },
-  "现世逢魔_领取奖励": {
-    "action": "Click",
-    "next": [
-      "现世逢魔_点击一下屏幕下方"
-    ],
-    "post_delay": 1000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      1141,
-      192,
-      138,
-      98
-    ],
-    "template": "自动逢魔/现世逢魔_奖励达摩.png",
-    "timeout": 1000
-  },
-  "现世逢魔_首领_返回": {
-    "action": "Click",
-    "next": [
-      "现世首领_返回_确认"
-    ],
-    "post_delay": 4000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      0,
-      73,
-      72
-    ],
-    "template": "通用图标/现世逢魔_首领_返回.png"
-  },
-  "现世首领_返回_确认": {
-    "action": "Click",
-    "expected": "确认",
-    "next": [
-      "返回庭院"
-    ],
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      667,
-      390,
-      189,
-      70
-    ]
-  },
-  "自动逢魔": {
-    "next": [
-      "自动逢魔16",
-      "[JumpBack]点击逢魔",
-      "[JumpBack]自动逢魔14",
-      "[JumpBack]自动逢魔21"
-    ],
-    "on_error": [
-      "自动逢魔12"
-    ],
-    "recognition": "DirectHit"
-  },
-  "自动逢魔1": {
-    "action": "Click",
-    "next": [
-      "自动逢魔6",
-      "[JumpBack]自动逢魔1_copy2"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "FeatureMatch",
-    "roi": [
-      1171,
-      266,
-      108,
-      83
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔10": {
-    "action": "Click",
-    "expected": "获得奖励",
-    "recognition": "OCR",
-    "roi": [
-      438,
-      163,
-      414,
-      133
-    ],
-    "target": [
-      583,
-      606,
-      122,
-      72
-    ]
-  },
-  "自动逢魔11": {
-    "next": [
-      "自动逢魔4",
-      "自动逢魔4_copy1",
-      "自动逢魔5"
-    ],
-    "recognition": "DirectHit"
-  },
-  "自动逢魔11_1": {
-    "next": [
-      "自动逢魔1",
-      "自动逢魔3",
-      "自动逢魔10"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "DirectHit",
-    "timeout": 2000
-  },
-  "自动逢魔11_2": {
-    "next": [
-      "自动逢魔1_copy1",
-      "自动逢魔3_copy1",
-      "自动逢魔10"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "DirectHit",
-    "timeout": 2000
-  },
-  "自动逢魔11_2_copy1": {
-    "next": [
-      "自动逢魔1_copy1_copy1",
-      "自动逢魔3_copy1_copy1",
-      "自动逢魔10"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "DirectHit",
-    "timeout": 2000
-  },
-  "自动逢魔11_2_copy2": {
-    "next": [
-      "自动逢魔1_copy1_copy2",
-      "自动逢魔3_copy1_copy2",
-      "自动逢魔10"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "DirectHit",
-    "timeout": 2000
-  },
-  "自动逢魔12": {
-    "expected": "图鉴|珍旅居|闲庭",
-    "next": [
-      "自动逢魔13",
-      "[JumpBack]打开底部菜单"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      4,
-      572,
-      311,
-      147
-    ]
-  },
-  "自动逢魔13": {
-    "action": "Click",
-    "expected": "阴阳寮",
-    "next": [
-      "返回庭院"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      296,
-      617,
-      627,
-      90
-    ]
-  },
-  "自动逢魔14": {
-    "action": "Click",
-    "expected": "切换|替换|换肤|前尘",
-    "recognition": "OCR",
-    "roi": [
-      256,
-      93,
-      911,
-      511
-    ],
-    "target": [
-      12,
-      522,
-      52,
-      38
-    ]
-  },
-  "自动逢魔15": {
-    "action": "Custom",
-    "custom_action": "LoopAction",
-    "custom_action_param": {
-      "action_list": [
-        "向右滑一下"
-      ],
-      "loop_times": 4
-    },
-    "next": [
-      "自动逢魔"
-    ],
-    "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      468,
-      428,
-      232
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔15.png",
-      "自动逢魔\\自动逢魔15_1.png",
-      "自动逢魔\\自动逢魔15_2.png"
-    ]
-  },
-  "自动逢魔16": {
-    "expected": "日常|活动|通知",
-    "next": [
-      "点击石像_日常",
-      "自动逢魔18"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      1085,
-      155,
-      56,
-      410
-    ]
-  },
-  "自动逢魔17": {
-    "action": "Click",
-    "expected": "获得奖励",
-    "recognition": "OCR",
-    "roi": [
-      438,
-      163,
-      414,
-      133
-    ],
-    "target": [
-      583,
-      606,
-      122,
-      72
-    ]
-  },
-  "自动逢魔18": {
-    "action": "Click",
-    "expected": "日常",
-    "next": [
-      "点击逢魔_识别逢魔"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      1085,
-      155,
-      56,
-      410
-    ]
-  },
-  "自动逢魔19": {
-    "next": [
-      "自动逢魔12",
-      "[JumpBack]关闭石像日常界面"
-    ],
-    "recognition": "DirectHit"
-  },
-  "自动逢魔1_copy1": {
-    "action": "Click",
-    "next": [
-      "自动逢魔6",
-      "[JumpBack]自动逢魔1_copy1_copy3"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "FeatureMatch",
-    "roi": [
-      1189,
-      337,
-      90,
-      67
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔1_copy1_copy1": {
-    "action": "Click",
-    "next": [
-      "自动逢魔6",
-      "[JumpBack]自动逢魔1_copy1_copy1_copy1"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "FeatureMatch",
-    "roi": [
-      1183,
-      408,
-      96,
-      64
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔1_copy1_copy1_copy1": {
-    "action": "Click",
-    "recognition": "FeatureMatch",
-    "roi": [
-      1183,
-      408,
-      96,
-      64
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔1_copy1_copy2": {
-    "action": "Click",
-    "next": [
-      "自动逢魔6",
-      "[JumpBack]自动逢魔1_copy1_copy2_copy1"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "FeatureMatch",
-    "roi": [
-      1179,
-      468,
-      100,
-      67
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔1_copy1_copy2_copy1": {
-    "action": "Click",
-    "recognition": "FeatureMatch",
-    "roi": [
-      1179,
-      468,
-      100,
-      67
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔1_copy1_copy3": {
-    "action": "Click",
-    "recognition": "FeatureMatch",
-    "roi": [
-      1189,
-      337,
-      90,
-      67
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 1000
-  },
-  "自动逢魔1_copy2": {
-    "action": "Click",
-    "recognition": "FeatureMatch",
-    "roi": [
-      1171,
-      266,
-      108,
-      83
-    ],
-    "template": [
-      "自动逢魔/自动逢魔1.png",
-      "自动逢魔/自动逢魔1_1.png"
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔2": {
-    "action": "Custom",
-    "custom_action": "QuestionMatcher",
-    "custom_action_param": {
-      "sync": true,
-      "upload": true
-    },
-    "expected": "逢魔密信",
-    "recognition": "OCR",
-    "roi": [
-      419,
-      67,
-      342,
-      68
-    ]
-  },
-  "自动逢魔20": {
-    "next": [
-      "现世逢魔_装备式神预设",
-      "[JumpBack]现世逢魔_点击式神录",
-      "[JumpBack]打开底部菜单"
-    ],
-    "recognition": "DirectHit"
-  },
-  "自动逢魔21": {
-    "expected": "悬赏封印",
-    "next": [
-      "自动逢魔22"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      256,
-      93,
-      911,
-      511
-    ],
-    "timeout": 5000
-  },
-  "自动逢魔22": {
-    "action": "Click",
-    "recognition": "TemplateMatch",
-    "roi": [
-      1127,
-      74,
-      129,
-      157
-    ],
-    "template": "通用图标\\关闭.png"
-  },
-  "自动逢魔3": {
-    "action": "Click",
-    "next": [
-      "自动逢魔11"
-    ],
-    "post_delay": 1000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      1171,
-      266,
-      108,
-      83
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔3.png"
-    ],
-    "timeout": 1000
-  },
-  "自动逢魔3_copy1": {
-    "action": "Click",
-    "next": [
-      "自动逢魔11"
-    ],
-    "post_delay": 1000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      1189,
-      337,
-      90,
-      67
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔3.png"
-    ],
-    "timeout": 1000
-  },
-  "自动逢魔3_copy1_copy1": {
-    "action": "Click",
-    "next": [
-      "自动逢魔11"
-    ],
-    "post_delay": 1000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      1183,
-      408,
-      96,
-      64
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔3.png"
-    ],
-    "timeout": 1000
-  },
-  "自动逢魔3_copy1_copy2": {
-    "action": "Click",
-    "next": [
-      "自动逢魔11"
-    ],
-    "post_delay": 1000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      1179,
-      468,
-      100,
-      67
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔3.png"
-    ],
-    "timeout": 1000
-  },
-  "自动逢魔4": {
-    "action": "Click",
-    "next": [
-      "自动逢魔5"
-    ],
-    "recognition": "TemplateMatch",
-    "roi": [
-      408,
-      289,
-      464,
-      121
-    ],
-    "target": [
-      883,
-      328,
-      64,
-      172
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔4.png"
-    ]
-  },
-  "自动逢魔4_copy1": {
-    "action": "Click",
-    "next": [
-      "自动逢魔5"
-    ],
-    "recognition": "TemplateMatch",
-    "roi": [
-      408,
-      289,
-      464,
-      121
-    ],
-    "target": [
-      883,
-      328,
-      64,
-      172
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔4_copy1.png"
-    ]
-  },
-  "自动逢魔5": {
-    "action": "Click",
-    "recognition": "DirectHit",
-    "target": [
-      907,
-      364,
-      88,
-      121
-    ]
-  },
-  "自动逢魔6": {
-    "expected": "逢魔密信",
-    "next": [
-      "自动逢魔7",
-      "[JumpBack]自动逢魔17",
-      "[JumpBack]自动逢魔8"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      419,
-      67,
-      342,
-      68
-    ]
-  },
-  "自动逢魔7": {
-    "expected": "逢魔密信",
-    "inverse": true,
-    "recognition": "OCR",
-    "roi": [
-      419,
-      67,
-      342,
-      68
-    ]
-  },
-  "自动逢魔8": {
-    "expected": "逢魔密信",
-    "next": [
-      "自动逢魔2"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      419,
-      67,
-      342,
-      68
-    ]
-  },
-  "自动逢魔9": {
-    "action": "Custom",
-    "custom_action": "TaskList",
-    "custom_action_param": {
-      "tasks": {
-        "自动逢魔11_1":{
-          "enabled": true,
-          "once_per_day": false
+    "向右滑一下": {
+        "action": "Custom",
+        "custom_action": "RandomSwipe",
+        "custom_action_param": {
+            "delay": 500,
+            "end_roi": [
+                797,
+                300,
+                99,
+                309
+            ],
+            "start_roi": [
+                382,
+                254,
+                102,
+                310
+            ]
         },
-        "自动逢魔11_2_copy1":{
-          "enabled": true,
-          "once_per_day": false
+        "post_delay": 500,
+        "recognition": "DirectHit"
+    },
+    "开始现世逢魔": {
+        "next": [
+            "识别是否用完现世逢魔次数",
+            "[JumpBack]现世逢魔"
+        ],
+        "recognition": "DirectHit"
+    },
+    "开始自动挑战首领": {
+        "action": "Click",
+        "next": [
+            "现世逢魔_识别结束界面"
+        ],
+        "post_delay": 30000,
+        "pre_delay": 3000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            1031,
+            528,
+            231,
+            161
+        ],
+        "template": "自动逢魔/现世封魔_准备.png",
+        "timeout": 350000
+    },
+    "开始逢魔-检查时间": {
+        "action": "Custom",
+        "custom_action": "TimeCheck",
+        "custom_action_param": {
+            "end": "23:00",
+            "mode": "in",
+            "start": "17:00"
         },
-        "自动逢魔11_2_copy2":{
-          "enabled": true,
-          "once_per_day": false
-        }
-        }
+        "focus": {
+            "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束",
+            "Node.Action.Starting": "[info]开始检查时间..."
+        },
+        "next": [
+            "自动逢魔20"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "DirectHit"
     },
-    "next": [
-      "现世逢魔_点击首领"
-    ],
-    "recognition": "DirectHit"
-  },
-  "自动逢魔_识别正确答案": {
-    "recognition": "FeatureMatch",
-    "roi": [
-      762,
-      264,
-      117,
-      256
-    ],
-    "template": [
-      "自动逢魔\\自动逢魔.png",
-      "自动逢魔\\自动逢魔_识别正确答案_1.png",
-      "自动逢魔\\自动逢魔_识别正确答案_2.png",
-      "自动逢魔\\自动逢魔_识别正确答案_3.png",
-      "自动逢魔\\自动逢魔_识别正确答案_4.png"
-    ]
-  },
-  "自动逢魔_识别答案_1": {
-    "expected": ".*",
-    "order_by": "Vertical",
-    "recognition": "OCR",
-    "roi": [
-      431,
-      262,
-      443,
-      71
-    ]
-  },
-  "自动逢魔_识别答案_2": {
-    "expected": ".*",
-    "order_by": "Vertical",
-    "recognition": "OCR",
-    "roi": [
-      435,
-      354,
-      436,
-      66
-    ]
-  },
-  "自动逢魔_识别答案_3": {
-    "expected": ".*",
-    "order_by": "Vertical",
-    "recognition": "OCR",
-    "roi": [
-      430,
-      437,
-      443,
-      69
-    ]
-  },
-  "自动逢魔_识别题目": {
-    "order_by": "Vertical",
-    "recognition": "OCR",
-    "roi": [
-      427,
-      162,
-      448,
-      88
-    ]
-  },
-  "识别是否用完现世逢魔次数": {
-    "action": "Click",
-    "expected": "0/4",
-    "next": [
-      "现世逢魔_领取奖励",
-      "自动逢魔9",
-      "[JumpBack]现世逢魔"
-    ],
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      1202,
-      683,
-      60,
-      36
-    ]
-  },
-  "识别集结挑战": {
-    "action": "Click",
-    "expected": "集结挑战",
-    "next": [
-      "现世逢魔_点击确定",
-      "开始自动挑战首领"
-    ],
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      1043,
-      563,
-      141,
-      62
-    ],
-    "timeout": 350000
-  },
-  "开始逢魔-检查时间": {
-    "recognition": "DirectHit",
-    "action": "Custom",
-    "next": [
-      "自动逢魔20"
-    ],
-    "custom_action": "TimeCheck",
-    "custom_action_param": {
-      "start": "17:00",
-      "end": "23:00",
-      "mode": "in"
+    "点击石像_日常": {
+        "action": "Click",
+        "next": [
+            "点击逢魔_识别逢魔"
+        ],
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            1084,
+            146,
+            48,
+            120
+        ],
+        "template": "庭院/石像_日常.png"
     },
-    "on_error": [
-      "返回庭院"
-    ],
-    "focus": {
-      "Node.Action.Starting": "[info]开始检查时间...",
-      "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束"
+    "点击石像神龛": {
+        "action": "Click",
+        "expected": 3,
+        "labels": [
+            "召唤",
+            "宠物小屋",
+            "探索",
+            "神龛"
+        ],
+        "model": "Courtyard.onnx",
+        "recognition": "NeuralNetworkDetect"
+    },
+    "点击逢魔": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "template": [
+            "庭院/庭院_逢魔.png",
+            "庭院/通用_地藏石像__587_407_63_52__537_357_163_152.png",
+            "自动逢魔\\点击逢魔.png"
+        ]
+    },
+    "点击逢魔_识别逢魔": {
+        "next": [
+            "现世逢魔_点击参加"
+        ],
+        "on_error": [
+            "自动逢魔19"
+        ],
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            237,
+            140,
+            827,
+            343
+        ],
+        "template": "自动逢魔/石像_逢魔.png",
+        "timeout": 2000
+    },
+    "现世逢魔": {
+        "action": "Click",
+        "expected": "现世逢魔",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            1104,
+            685,
+            106,
+            34
+        ],
+        "target": [
+            1132,
+            605,
+            95,
+            81
+        ]
+    },
+    "现世逢魔_御魂_返回": {
+        "action": "Click",
+        "expected": "式神录",
+        "post_delay": 4000,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            327,
+            112
+        ],
+        "target": [
+            19,
+            14,
+            46,
+            38
+        ],
+        "timeout": 350000
+    },
+    "现世逢魔_点击一下屏幕下方": {
+        "action": "Click",
+        "expected": "获得奖励",
+        "next": [
+            "自动逢魔9"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            419,
+            130,
+            417,
+            128
+        ],
+        "target": [
+            2,
+            115,
+            143,
+            491
+        ]
+    },
+    "现世逢魔_点击具体首领": {
+        "action": "Click",
+        "next": [
+            "识别集结挑战",
+            "[JumpBack]现世逢魔_点击首领"
+        ],
+        "post_delay": 1000,
+        "recognition": "DirectHit",
+        "target": [
+            584,
+            301,
+            106,
+            112
+        ]
+    },
+    "现世逢魔_点击参加": {
+        "action": "Click",
+        "next": [
+            "开始现世逢魔"
+        ],
+        "on_error": [
+            "自动逢魔19"
+        ],
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "roi": "点击逢魔_识别逢魔",
+        "roi_offset": [
+            270,
+            0,
+            0,
+            0
+        ],
+        "template": "自动逢魔/现世逢魔_参加__530_162_86_83__480_112_186_183.png"
+    },
+    "现世逢魔_点击式神录": {
+        "action": "Click",
+        "expected": "式神录",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            1092,
+            604,
+            94,
+            94
+        ]
+    },
+    "现世逢魔_点击确定": {
+        "action": "Click",
+        "expected": "确定",
+        "next": [
+            "开始自动挑战首领"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            667,
+            390,
+            189,
+            70
+        ],
+        "timeout": 350000
+    },
+    "现世逢魔_点击首领": {
+        "action": "Click",
+        "next": [
+            "现世逢魔_点击具体首领"
+        ],
+        "post_delay": 1000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            691,
+            538,
+            414,
+            181
+        ],
+        "template": "自动逢魔/现世逢魔_首领.png"
+    },
+    "现世逢魔_装备式神预设": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "逢魔",
+            "team_name": "逢魔队伍"
+        },
+        "expected": "式神录",
+        "next": [
+            "自动逢魔15",
+            "[JumpBack]现世逢魔_御魂_返回"
+        ],
+        "on_error": [
+            "超时_切换御魂失败"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            327,
+            112
+        ]
+    },
+    "现世逢魔_识别结束界面": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "next": [
+            "现世逢魔_首领_返回",
+            "[JumpBack]现世逢魔_识别结束界面_copy1"
+        ],
+        "post_delay": 3000,
+        "pre_delay": 5000,
+        "rate_limit": 2000,
+        "recognition": "OCR",
+        "roi": [
+            501,
+            658,
+            295,
+            53
+        ],
+        "target": [
+            587,
+            590,
+            289,
+            107
+        ],
+        "timeout": 350000
+    },
+    "现世逢魔_识别结束界面_copy1": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "post_delay": 3000,
+        "pre_delay": 5000,
+        "rate_limit": 2000,
+        "recognition": "OCR",
+        "roi": [
+            501,
+            658,
+            295,
+            53
+        ],
+        "target": [
+            587,
+            590,
+            289,
+            107
+        ],
+        "timeout": 1000
+    },
+    "现世逢魔_领取奖励": {
+        "action": "Click",
+        "next": [
+            "现世逢魔_点击一下屏幕下方"
+        ],
+        "post_delay": 1000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            1141,
+            192,
+            138,
+            98
+        ],
+        "template": "自动逢魔/现世逢魔_奖励达摩.png",
+        "timeout": 1000
+    },
+    "现世逢魔_首领_返回": {
+        "action": "Click",
+        "next": [
+            "现世首领_返回_确认"
+        ],
+        "post_delay": 4000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            0,
+            73,
+            72
+        ],
+        "template": "通用图标/现世逢魔_首领_返回.png"
+    },
+    "现世首领_返回_确认": {
+        "action": "Click",
+        "expected": "确认",
+        "next": [
+            "返回庭院"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            667,
+            390,
+            189,
+            70
+        ]
+    },
+    "自动逢魔": {
+        "next": [
+            "自动逢魔16",
+            "[JumpBack]点击逢魔",
+            "[JumpBack]自动逢魔14",
+            "[JumpBack]自动逢魔21",
+            "[JumpBack]点击石像神龛"
+        ],
+        "on_error": [
+            "自动逢魔12"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动逢魔1": {
+        "action": "Click",
+        "next": [
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy2"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            1171,
+            266,
+            108,
+            83
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔10": {
+        "action": "Click",
+        "expected": "获得奖励",
+        "recognition": "OCR",
+        "roi": [
+            438,
+            163,
+            414,
+            133
+        ],
+        "target": [
+            583,
+            606,
+            122,
+            72
+        ]
+    },
+    "自动逢魔11": {
+        "next": [
+            "自动逢魔4",
+            "自动逢魔4_copy1",
+            "自动逢魔5"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动逢魔11_1": {
+        "next": [
+            "自动逢魔1",
+            "自动逢魔3",
+            "自动逢魔10"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "DirectHit",
+        "timeout": 2000
+    },
+    "自动逢魔11_2": {
+        "next": [
+            "自动逢魔1_copy1",
+            "自动逢魔3_copy1",
+            "自动逢魔10"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "DirectHit",
+        "timeout": 2000
+    },
+    "自动逢魔11_2_copy1": {
+        "next": [
+            "自动逢魔1_copy1_copy1",
+            "自动逢魔3_copy1_copy1",
+            "自动逢魔10"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "DirectHit",
+        "timeout": 2000
+    },
+    "自动逢魔11_2_copy2": {
+        "next": [
+            "自动逢魔1_copy1_copy2",
+            "自动逢魔3_copy1_copy2",
+            "自动逢魔10"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "DirectHit",
+        "timeout": 2000
+    },
+    "自动逢魔12": {
+        "expected": "图鉴|珍旅居|闲庭",
+        "next": [
+            "自动逢魔13",
+            "[JumpBack]打开底部菜单"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            4,
+            572,
+            311,
+            147
+        ]
+    },
+    "自动逢魔13": {
+        "action": "Click",
+        "expected": "阴阳寮",
+        "next": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            296,
+            617,
+            627,
+            90
+        ]
+    },
+    "自动逢魔14": {
+        "action": "Click",
+        "expected": "切换|替换|换肤|前尘",
+        "recognition": "OCR",
+        "roi": [
+            256,
+            93,
+            911,
+            511
+        ],
+        "target": [
+            12,
+            522,
+            52,
+            38
+        ]
+    },
+    "自动逢魔15": {
+        "action": "Custom",
+        "custom_action": "LoopAction",
+        "custom_action_param": {
+            "action_list": [
+                "向右滑一下"
+            ],
+            "loop_times": 4
+        },
+        "next": [
+            "自动逢魔"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            468,
+            428,
+            232
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔15.png",
+            "自动逢魔\\自动逢魔15_1.png",
+            "自动逢魔\\自动逢魔15_2.png"
+        ]
+    },
+    "自动逢魔16": {
+        "expected": "日常|活动|通知",
+        "next": [
+            "点击石像_日常",
+            "自动逢魔18"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1085,
+            155,
+            56,
+            410
+        ]
+    },
+    "自动逢魔17": {
+        "action": "Click",
+        "expected": "获得奖励",
+        "recognition": "OCR",
+        "roi": [
+            438,
+            163,
+            414,
+            133
+        ],
+        "target": [
+            583,
+            606,
+            122,
+            72
+        ]
+    },
+    "自动逢魔18": {
+        "action": "Click",
+        "expected": "日常",
+        "next": [
+            "点击逢魔_识别逢魔"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1085,
+            155,
+            56,
+            410
+        ]
+    },
+    "自动逢魔19": {
+        "next": [
+            "自动逢魔12",
+            "[JumpBack]关闭石像日常界面"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动逢魔1_copy1": {
+        "action": "Click",
+        "next": [
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy1_copy3"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            1189,
+            337,
+            90,
+            67
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔1_copy1_copy1": {
+        "action": "Click",
+        "next": [
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy1_copy1_copy1"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            1183,
+            408,
+            96,
+            64
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔1_copy1_copy1_copy1": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1183,
+            408,
+            96,
+            64
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔1_copy1_copy2": {
+        "action": "Click",
+        "next": [
+            "自动逢魔6",
+            "[JumpBack]自动逢魔1_copy1_copy2_copy1"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            1179,
+            468,
+            100,
+            67
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔1_copy1_copy2_copy1": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1179,
+            468,
+            100,
+            67
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔1_copy1_copy3": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1189,
+            337,
+            90,
+            67
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 1000
+    },
+    "自动逢魔1_copy2": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1171,
+            266,
+            108,
+            83
+        ],
+        "template": [
+            "自动逢魔/自动逢魔1.png",
+            "自动逢魔/自动逢魔1_1.png"
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔2": {
+        "action": "Custom",
+        "custom_action": "QuestionMatcher",
+        "custom_action_param": {
+            "sync": true,
+            "upload": true
+        },
+        "expected": "逢魔密信",
+        "recognition": "OCR",
+        "roi": [
+            419,
+            67,
+            342,
+            68
+        ]
+    },
+    "自动逢魔20": {
+        "next": [
+            "现世逢魔_装备式神预设",
+            "[JumpBack]现世逢魔_点击式神录",
+            "[JumpBack]打开底部菜单"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动逢魔21": {
+        "expected": "悬赏封印",
+        "next": [
+            "自动逢魔22"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            256,
+            93,
+            911,
+            511
+        ],
+        "timeout": 5000
+    },
+    "自动逢魔22": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1127,
+            74,
+            129,
+            157
+        ],
+        "template": "通用图标\\关闭.png"
+    },
+    "自动逢魔3": {
+        "action": "Click",
+        "next": [
+            "自动逢魔11"
+        ],
+        "post_delay": 1000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1171,
+            266,
+            108,
+            83
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔3.png"
+        ],
+        "timeout": 1000
+    },
+    "自动逢魔3_copy1": {
+        "action": "Click",
+        "next": [
+            "自动逢魔11"
+        ],
+        "post_delay": 1000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1189,
+            337,
+            90,
+            67
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔3.png"
+        ],
+        "timeout": 1000
+    },
+    "自动逢魔3_copy1_copy1": {
+        "action": "Click",
+        "next": [
+            "自动逢魔11"
+        ],
+        "post_delay": 1000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1183,
+            408,
+            96,
+            64
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔3.png"
+        ],
+        "timeout": 1000
+    },
+    "自动逢魔3_copy1_copy2": {
+        "action": "Click",
+        "next": [
+            "自动逢魔11"
+        ],
+        "post_delay": 1000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1179,
+            468,
+            100,
+            67
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔3.png"
+        ],
+        "timeout": 1000
+    },
+    "自动逢魔4": {
+        "action": "Click",
+        "next": [
+            "自动逢魔5"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            408,
+            289,
+            464,
+            121
+        ],
+        "target": [
+            883,
+            328,
+            64,
+            172
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔4.png"
+        ]
+    },
+    "自动逢魔4_copy1": {
+        "action": "Click",
+        "next": [
+            "自动逢魔5"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            408,
+            289,
+            464,
+            121
+        ],
+        "target": [
+            883,
+            328,
+            64,
+            172
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔4_copy1.png"
+        ]
+    },
+    "自动逢魔5": {
+        "action": "Click",
+        "recognition": "DirectHit",
+        "target": [
+            907,
+            364,
+            88,
+            121
+        ]
+    },
+    "自动逢魔6": {
+        "expected": "逢魔密信",
+        "next": [
+            "自动逢魔7",
+            "[JumpBack]自动逢魔17",
+            "[JumpBack]自动逢魔8"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            419,
+            67,
+            342,
+            68
+        ]
+    },
+    "自动逢魔7": {
+        "expected": "逢魔密信",
+        "inverse": true,
+        "recognition": "OCR",
+        "roi": [
+            419,
+            67,
+            342,
+            68
+        ]
+    },
+    "自动逢魔8": {
+        "expected": "逢魔密信",
+        "next": [
+            "自动逢魔2"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            419,
+            67,
+            342,
+            68
+        ]
+    },
+    "自动逢魔9": {
+        "action": "Custom",
+        "custom_action": "TaskList",
+        "custom_action_param": {
+            "tasks": {
+                "自动逢魔11_1": {
+                    "enabled": true,
+                    "once_per_day": false
+                },
+                "自动逢魔11_2_copy1": {
+                    "enabled": true,
+                    "once_per_day": false
+                },
+                "自动逢魔11_2_copy2": {
+                    "enabled": true,
+                    "once_per_day": false
+                }
+            }
+        },
+        "next": [
+            "现世逢魔_点击首领"
+        ],
+        "recognition": "DirectHit"
+    },
+    "自动逢魔_识别正确答案": {
+        "recognition": "FeatureMatch",
+        "roi": [
+            762,
+            264,
+            117,
+            256
+        ],
+        "template": [
+            "自动逢魔\\自动逢魔.png",
+            "自动逢魔\\自动逢魔_识别正确答案_1.png",
+            "自动逢魔\\自动逢魔_识别正确答案_2.png",
+            "自动逢魔\\自动逢魔_识别正确答案_3.png",
+            "自动逢魔\\自动逢魔_识别正确答案_4.png"
+        ]
+    },
+    "自动逢魔_识别答案_1": {
+        "expected": ".*",
+        "order_by": "Vertical",
+        "recognition": "OCR",
+        "roi": [
+            431,
+            262,
+            443,
+            71
+        ]
+    },
+    "自动逢魔_识别答案_2": {
+        "expected": ".*",
+        "order_by": "Vertical",
+        "recognition": "OCR",
+        "roi": [
+            435,
+            354,
+            436,
+            66
+        ]
+    },
+    "自动逢魔_识别答案_3": {
+        "expected": ".*",
+        "order_by": "Vertical",
+        "recognition": "OCR",
+        "roi": [
+            430,
+            437,
+            443,
+            69
+        ]
+    },
+    "自动逢魔_识别题目": {
+        "order_by": "Vertical",
+        "recognition": "OCR",
+        "roi": [
+            427,
+            162,
+            448,
+            88
+        ]
+    },
+    "识别是否用完现世逢魔次数": {
+        "action": "Click",
+        "expected": "0/4",
+        "next": [
+            "现世逢魔_领取奖励",
+            "自动逢魔9",
+            "[JumpBack]现世逢魔"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            1202,
+            683,
+            60,
+            36
+        ]
+    },
+    "识别集结挑战": {
+        "action": "Click",
+        "expected": "集结挑战",
+        "next": [
+            "现世逢魔_点击确定",
+            "开始自动挑战首领"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            1043,
+            563,
+            141,
+            62
+        ],
+        "timeout": 350000
     }
-  }
 }
