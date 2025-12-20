@@ -1,15 +1,37 @@
 {
+    "N-1766236011441": {
+        "action": "Click",
+        "enabled": false,
+        "next": [],
+        "recognition": "FeatureMatch",
+        "roi": [
+            269,
+            0,
+            580,
+            121
+        ],
+        "target": [
+            425,
+            40,
+            29,
+            40
+        ],
+        "template": [
+            "寮30/寮3026.png",
+            "自动御魂\\寮3026_copy1.png"
+        ]
+    },
     "寮3015_copy1": {
         "action": "Click",
         "post_delay": 2000,
         "pre_delay": 2000,
+        "recognition": "DirectHit",
         "target": [
             1032,
             239,
             78,
             255
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "寮3015_copy1_copy1": {
         "action": "Click",
@@ -18,19 +40,20 @@
         ],
         "post_delay": 2000,
         "pre_delay": 2000,
+        "recognition": "DirectHit",
         "target": [
             1032,
             239,
             78,
             255
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "寮3026_copy1": {
         "action": "Click",
         "enabled": false,
         "next": [
-            "自动御魂8"
+            "自动御魂8",
+            "[JumpBack]N-1766236011441"
         ],
         "recognition": "FeatureMatch",
         "roi": [
@@ -38,6 +61,12 @@
             0,
             580,
             121
+        ],
+        "target": [
+            425,
+            40,
+            29,
+            40
         ],
         "template": [
             "寮30/寮3026.png",
@@ -53,6 +82,21 @@
             "返回庭院"
         ],
         "recognition": "DirectHit"
+    },
+    "自动御魂-确保关闭加成": {
+        "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
+        "inverse": true,
+        "next": [
+            "自动御魂5",
+            "自动御魂10"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            354,
+            117,
+            411,
+            346
+        ]
     },
     "自动御魂1": {
         "action": "Click",
@@ -421,12 +465,12 @@
         "custom_action_param": {
             "drop_soul": true
         },
+        "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
         "next": [
             "自动御魂-确保关闭加成",
             "[JumpBack]寮3015_copy1"
         ],
         "recognition": "OCR",
-        "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
         "roi": [
             354,
             117,
@@ -470,13 +514,13 @@
             178,
             39
         ],
+        "recognition": "DirectHit",
         "roi": [
             219,
             170,
             178,
             39
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "自动御魂_点击八岐大蛇": {
         "action": "Click",
@@ -589,21 +633,6 @@
             0,
             262,
             78
-        ]
-    },
-    "自动御魂-确保关闭加成": {
-        "recognition": "OCR",
-        "roi": [
-            354,
-            117,
-            411,
-            346
-        ],
-        "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
-        "inverse": true,
-        "next": [
-            "自动御魂5",
-            "自动御魂10"
         ]
     }
 }
