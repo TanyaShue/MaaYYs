@@ -90,7 +90,8 @@
             "自动地鬼6",
             "自动地鬼16",
             "自动地鬼17",
-            "[JumpBack]自动地鬼4"
+            "[JumpBack]自动地鬼4",
+            "[JumpBack]自动地鬼-准备战斗"
         ],
         "post_delay": 2000,
         "recognition": "DirectHit",
@@ -230,9 +231,6 @@
             "自动地鬼\\自动地鬼14.png"
         ]
     },
-    "自动地鬼15": {
-        "recognition": "DirectHit"
-    },
     "自动地鬼16": {
         "expected": "^(世界排名|小组排名|本次评分)$",
         "next": [
@@ -329,17 +327,16 @@
             "自动地鬼3_解锁阵容",
             "[JumpBack]自动地鬼3_点击锁定"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "挑战地鬼"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "自动地鬼4": {
         "action": "Click",
         "expected": "挑|战",
         "next": [
-            "自动地鬼12_装备预设",
-            "自动地鬼15"
+            "自动地鬼12_装备预设"
         ],
         "recognition": "OCR",
         "roi": [
@@ -446,5 +443,16 @@
             127,
             65
         ]
+    },
+    "自动地鬼-准备战斗": {
+        "recognition": "OCR",
+        "action": "Click",
+        "roi": [
+            1027,
+            494,
+            241,
+            170
+        ],
+        "expected": "准备"
     }
 }
