@@ -127,6 +127,45 @@
             "自动地鬼\\点击地域鬼王_5.png"
         ]
     },
+    "点击热门": {
+        "action": "Click",
+        "post_delay": 2000,
+        "timeout": 500,
+        "recognition": "OCR",
+        "roi": [
+            1180,
+            222,
+            69,
+            229
+        ],
+        "expected": "热门|热|门"
+    },
+    "点击筛选": {
+        "recognition": "DirectHit",
+        "next": [
+            "确保打开筛选界面",
+            "[JumpBack]点击筛选_1"
+        ]
+    },
+    "点击筛选_1": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1077,
+            2,
+            99,
+            121
+        ],
+        "target": [
+            1102,
+            17,
+            58,
+            73
+        ],
+        "template": "地域鬼王/地域鬼王_筛选.png",
+        "timeout": 500
+    },
     "自动地鬼": {
         "next": [
             "点击地域鬼王",
@@ -138,23 +177,15 @@
         ],
         "recognition": "DirectHit"
     },
-    "自动地鬼1": {
+    "自动地鬼-准备战斗": {
         "action": "Click",
-        "recognition": "TemplateMatch",
+        "expected": "准备",
+        "recognition": "OCR",
         "roi": [
-            1125,
-            461,
-            154,
-            133
-        ],
-        "target": [
-            1114,
-            38,
-            28,
-            21
-        ],
-        "template": [
-            "自动地鬼\\自动地鬼1.png"
+            1027,
+            494,
+            241,
+            170
         ]
     },
     "自动地鬼10": {
@@ -165,16 +196,6 @@
             340,
             178,
             379
-        ]
-    },
-    "自动地鬼11": {
-        "expected": "式神录|阴阳术",
-        "recognition": "OCR",
-        "roi": [
-            1127,
-            483,
-            152,
-            236
         ]
     },
     "自动地鬼12": {
@@ -444,15 +465,56 @@
             65
         ]
     },
-    "自动地鬼-准备战斗": {
-        "recognition": "OCR",
+    "识别挑战位置": {
         "action": "Click",
+        "order_by": "Vertical",
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
         "roi": [
-            1027,
-            494,
-            241,
-            170
+            1035,
+            192,
+            135,
+            504
         ],
-        "expected": "准备"
+        "template": "地域鬼王/地鬼_挑战.png",
+        "timeout": 500
+    },
+    "确保打开筛选界面": {
+        "recognition": "OCR",
+        "roi": [
+            1191,
+            116,
+            50,
+            580
+        ],
+        "expected": "悬赏|热门|最新|征服|收藏",
+        "next": [
+            "识别是否位于热门",
+            "[JumpBack]点击热门"
+        ]
+    },
+    "识别是否位于热门": {
+        "recognition": "OCR",
+        "roi": [
+            907,
+            107,
+            232,
+            81
+        ],
+        "expected": "击杀数最多|最多|击杀",
+        "next": [
+            "地鬼=确保处于可挑战界面",
+            "[JumpBack]识别挑战位置"
+        ]
+    },
+    "地鬼=确保处于可挑战界面": {
+        "recognition": "OCR",
+        "roi": [
+            1084,
+            506,
+            151,
+            76
+        ],
+        "expected": "挑战"
     }
 }
