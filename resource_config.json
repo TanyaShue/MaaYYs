@@ -1,7 +1,7 @@
 {
   "resource_name": "阴阳师",
   "resource_id": "MaaYYs",
-  "resource_version": "v2.3.3-beta.2",
+  "resource_version": "v2.3.3",
   "resource_author": "TanyaShue",
   "mirror_update_service_id": "MaaYYs",
   "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
@@ -455,10 +455,10 @@
                 "enabled": "{boole}"
               },
               "阴阳寮奖励33_寄养": {
-                  "enabled": true
+                "enabled": true
               },
               "阴阳寮奖励34_领取体力和经验": {
-                  "enabled": true
+                "enabled": true
               }
             }
           }
