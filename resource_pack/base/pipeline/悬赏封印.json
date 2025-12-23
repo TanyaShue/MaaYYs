@@ -179,7 +179,10 @@
             "悬赏封印\\悬赏封印13_1.png"
         ],
         "threshold": 0.6,
-        "timeout": 10000
+        "timeout": 10000,
+        "on_error": [
+            "探索_悬赏_自动挑战"
+        ]
     },
     "悬赏封印14": {
         "action": "Click",
