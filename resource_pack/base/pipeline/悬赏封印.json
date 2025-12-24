@@ -160,6 +160,9 @@
         "next": [
             "悬赏封印10"
         ],
+        "on_error": [
+            "探索_悬赏_自动挑战"
+        ],
         "recognition": "TemplateMatch",
         "roi": [
             1172,
@@ -178,11 +181,7 @@
             "自动御魂\\自动御魂2_6.png",
             "悬赏封印\\悬赏封印13_1.png"
         ],
-        "threshold": 0.6,
-        "timeout": 10000,
-        "on_error": [
-            "探索_悬赏_自动挑战"
-        ]
+        "threshold": 0.6
     },
     "悬赏封印14": {
         "action": "Click",
