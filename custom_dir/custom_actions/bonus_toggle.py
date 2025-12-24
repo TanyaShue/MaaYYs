@@ -85,7 +85,7 @@ class BonusToggleAction(CustomAction):
 
         try:
             # 执行识别和切换任务
-            result = context.run_task("通用_识别加成", {
+            context.run_task("通用_识别加成", {
                 "通用_识别加成": {
                     "expected": expected_text,
                     "next": next_task

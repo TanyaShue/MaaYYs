@@ -1,189 +1,74 @@
 {
     "阴间之门": {
         "next": [
-            "阴间之门1",
+            "阴间之门2",
+            "[JumpBack]阴间之门1",
             "[JumpBack]打开底部菜单"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "阴间之门1": {
-        "recognition": "OCR",
         "action": "Click",
-        "next": [
-            "阴间之门2"
-        ],
+        "expected": "阴阳寮",
+        "recognition": "OCR",
         "roi": [
             493,
             635,
             236,
             66
-        ],
-        "expected": "阴阳寮"
-    },
-    "阴间之门2": {
-        "recognition": "OCR",
-        "next": [
-            "阴间之门3",
-            "[JumpBack]阴间之门4"
-        ],
-        "roi": [
-            1141,
-            649,
-            116,
-            70
-        ],
-        "expected": "寮信息"
-    },
-    "阴间之门3": {
-        "recognition": "OCR",
-        "timeout": 5000,
-        "on_error": [
-            "返回庭院"
-        ],
-        "next": [
-            "阴间之门5",
-            "[JumpBack]阴间之门6"
-        ],
-        "roi": [
-            1175,
-            130,
-            54,
-            447
-        ],
-        "expected": "信息|祈愿|神社|顺位"
-    },
-    "阴间之门4": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            1141,
-            649,
-            116,
-            70
-        ],
-        "expected": "寮信息"
-    },
-    "阴间之门5": {
-        "recognition": "OCR",
-        "timeout": 5000,
-        "on_error": [
-            "返回庭院"
-        ],
-        "next": [
-            "阴间之门25",
-            "阴间之门8",
-            "阴间之门26",
-            "[JumpBack]阴间之门7"
-        ],
-        "roi": [
-            106,
-            92,
-            1028,
-            527
-        ],
-        "expected": "阴界之门|集体任务"
-    },
-    "阴间之门6": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            1175,
-            130,
-            54,
-            447
-        ],
-        "expected": "神社"
-    },
-    "阴间之门7": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            106,
-            92,
-            1028,
-            527
-        ],
-        "expected": "阴界之门"
-    },
-    "阴间之门8": {
-        "recognition": "OCR",
-        "next": [
-            "阴间之门9",
-            "[JumpBack]阴间之门10"
-        ],
-        "roi": [
-            1062,
-            589,
-            217,
-            116
-        ],
-        "expected": "攻打中"
-    },
-    "阴间之门9": {
-        "recognition": "OCR",
-        "next": [
-            "阴间之门11",
-            "[JumpBack]阴间之门12",
-            "[JumpBack]阴间之门13"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 2000,
-        "roi": [
-            543,
-            36,
-            172,
-            60
-        ],
-        "expected": "阴界之门"
+        ]
     },
     "阴间之门10": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "阴界之门|攻打中",
+        "recognition": "OCR",
         "roi": [
             1062,
             589,
             217,
             116
-        ],
-        "expected": "阴界之门|攻打中"
+        ]
     },
     "阴间之门11": {
-        "recognition": "OCR",
         "action": "Custom",
-        "on_error": ["超时_切换御魂失败"],
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "阴界之门_默认分组",
+            "team_name": "阴界之门_默认队伍"
+        },
+        "expected": "式神录",
         "next": [
             "阴间之门15",
             "阴间之门16",
             "[JumpBack]阴间之门14"
         ],
-        "pre_delay": 3000,
+        "on_error": [
+            "超时_切换御魂失败"
+        ],
         "post_delay": 1000,
+        "pre_delay": 3000,
+        "recognition": "OCR",
         "roi": [
             0,
             0,
             266,
             110
-        ],
-        "expected": "式神录",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "阴界之门_默认分组",
-            "team_name": "阴界之门_默认队伍"
-        }
+        ]
     },
     "阴间之门12": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "式神录",
+        "recognition": "OCR",
         "roi": [
             130,
             627,
             104,
             38
-        ],
-        "expected": "式神录"
+        ]
     },
     "阴间之门13": {
-        "recognition": "TemplateMatch",
         "action": "Click",
+        "recognition": "TemplateMatch",
         "roi": [
             34,
             495,
@@ -195,8 +80,8 @@
         ]
     },
     "阴间之门14": {
-        "recognition": "TemplateMatch",
         "action": "Click",
+        "recognition": "TemplateMatch",
         "roi": [
             0,
             0,
@@ -208,183 +93,299 @@
         ]
     },
     "阴间之门15": {
-        "recognition": "OCR",
+        "expected": "阴界之门",
         "next": [
             "阴间之门18",
             "[JumpBack]阴间之门17"
         ],
+        "recognition": "OCR",
         "roi": [
             499,
             22,
             234,
             92
-        ],
-        "expected": "阴界之门"
+        ]
     },
     "阴间之门16": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "阴界之门|攻打中",
         "next": [
             "阴间之门15"
         ],
+        "recognition": "OCR",
         "roi": [
             1137,
             593,
             142,
             116
-        ],
-        "expected": "阴界之门|攻打中"
+        ]
     },
     "阴间之门17": {
-        "recognition": "OCR",
         "action": "Click",
-        "pre_delay": 1000,
+        "expected": "挑战",
         "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
         "roi": [
             310,
             587,
             162,
             66
-        ],
-        "expected": "挑战"
+        ]
     },
     "阴间之门18": {
-        "recognition": "OCR",
+        "expected": "开始进行挑战",
         "next": [
             "阴间之门20",
             "[JumpBack]阴间之门19"
         ],
+        "recognition": "OCR",
         "roi": [
             413,
             236,
             457,
             248
-        ],
-        "expected": "开始进行挑战"
+        ]
     },
     "阴间之门19": {
-        "recognition": "OCR",
         "action": "Click",
-        "pre_delay": 3000,
+        "expected": "确定",
         "post_delay": 3000,
+        "pre_delay": 3000,
+        "recognition": "OCR",
         "roi": [
             427,
             369,
             439,
             104
+        ]
+    },
+    "阴间之门2": {
+        "expected": "寮信息",
+        "next": [
+            "阴间之门3",
+            "[JumpBack]阴间之门4"
         ],
-        "expected": "确定"
+        "recognition": "OCR",
+        "roi": [
+            1141,
+            649,
+            116,
+            70
+        ]
     },
     "阴间之门20": {
-        "recognition": "OCR",
+        "expected": "协战队伍",
         "next": [
             "阴间之门22",
             "[JumpBack]阴间之门21"
         ],
+        "recognition": "OCR",
         "roi": [
             82,
             10,
             162,
             56
-        ],
-        "expected": "协战队伍"
+        ]
     },
     "阴间之门21": {
-        "recognition": "OCR",
         "action": "Click",
-        "pre_delay": 2000,
+        "expected": "挑战|挑|战",
         "post_delay": 2000,
+        "pre_delay": 2000,
+        "recognition": "OCR",
         "roi": [
             1147,
             573,
             132,
             142
-        ],
-        "expected": "挑战|挑|战"
+        ]
     },
     "阴间之门22": {
-        "recognition": "OCR",
-        "timeout": 600000,
+        "expected": "准备",
         "next": [
             "阴间之门25",
             "阴间之门27",
             "[JumpBack]阴间之门23",
             "[JumpBack]阴间之门24"
         ],
-        "pre_delay": 2000,
         "post_delay": 2000,
+        "pre_delay": 2000,
+        "recognition": "OCR",
         "roi": [
             1113,
             533,
             156,
             140
         ],
-        "expected": "准备"
+        "timeout": 600000
     },
     "阴间之门23": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "准备",
+        "recognition": "OCR",
         "roi": [
             1113,
             533,
             156,
             140
-        ],
-        "expected": "准备"
+        ]
     },
     "阴间之门24": {
-        "recognition": "OCR",
         "action": "Click",
-        "pre_delay": 1000,
+        "expected": "点击屏幕继续",
         "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
         "roi": [
             483,
             635,
             342,
             84
-        ],
-        "expected": "点击屏幕继续"
+        ]
     },
     "阴间之门25": {
-        "recognition": "OCR",
+        "expected": "已挑战",
         "next": [
             "返回庭院"
         ],
+        "recognition": "OCR",
         "roi": [
             1038,
             601,
             241,
             106
-        ],
-        "expected": "已挑战"
+        ]
     },
     "阴间之门26": {
-        "recognition": "OCR",
+        "expected": "活动开放时间",
         "next": [
             "返回庭院"
         ],
+        "recognition": "OCR",
         "roi": [
             300,
             125,
             673,
             148
-        ],
-        "expected": "活动开放时间"
+        ]
     },
     "阴间之门27": {
-        "recognition": "OCR",
-        "timeout": 600000,
+        "expected": "胜利",
         "next": [
             "阴间之门25",
             "[JumpBack]阴间之门24",
             "[JumpBack]阴间之门23"
         ],
+        "recognition": "OCR",
         "roi": [
             682,
             81,
             432,
             199
         ],
-        "expected": "胜利"
+        "timeout": 600000
+    },
+    "阴间之门3": {
+        "expected": "信息|祈愿|神社|顺位",
+        "next": [
+            "阴间之门5",
+            "[JumpBack]阴间之门6"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1175,
+            130,
+            54,
+            447
+        ],
+        "timeout": 5000
+    },
+    "阴间之门4": {
+        "action": "Click",
+        "expected": "寮信息",
+        "recognition": "OCR",
+        "roi": [
+            1141,
+            649,
+            116,
+            70
+        ]
+    },
+    "阴间之门5": {
+        "expected": "阴界之门|集体任务",
+        "next": [
+            "阴间之门25",
+            "阴间之门8",
+            "阴间之门26",
+            "[JumpBack]阴间之门7"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            106,
+            92,
+            1028,
+            527
+        ],
+        "timeout": 5000
+    },
+    "阴间之门6": {
+        "action": "Click",
+        "expected": "神社",
+        "recognition": "OCR",
+        "roi": [
+            1175,
+            130,
+            54,
+            447
+        ]
+    },
+    "阴间之门7": {
+        "action": "Click",
+        "expected": "阴界之门",
+        "recognition": "OCR",
+        "roi": [
+            106,
+            92,
+            1028,
+            527
+        ]
+    },
+    "阴间之门8": {
+        "expected": "攻打中",
+        "next": [
+            "阴间之门9",
+            "[JumpBack]阴间之门10"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1062,
+            589,
+            217,
+            116
+        ]
+    },
+    "阴间之门9": {
+        "expected": "阴界之门",
+        "next": [
+            "阴间之门11",
+            "[JumpBack]阴间之门12",
+            "[JumpBack]阴间之门13"
+        ],
+        "post_delay": 2000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            543,
+            36,
+            172,
+            60
+        ]
     }
 }
