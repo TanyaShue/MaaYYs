@@ -43,33 +43,13 @@
     },
     "日常3": {
         "expected": "好友",
-        "next": [
-            "日常_点击好友选项卡",
-            "日常4"
-        ],
         "recognition": "OCR",
         "roi": [
-            574,
-            37,
-            117,
-            61
+            593,
+            50,
+            88,
+            46
         ]
-    },
-    "日常4": {
-        "action": "Click",
-        "expected": "好友",
-        "next": [
-            "识别是否位于友情点界面",
-            "[JumpBack]日常_好友_点击友情点"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1146,
-            155,
-            109,
-            482
-        ],
-        "timeout": 3000
     },
     "日常5": {
         "action": "Click",
@@ -189,9 +169,6 @@
     "日常_好友_点击友情点": {
         "action": "Click",
         "expected": "好友",
-        "on_error": [
-            "返回庭院"
-        ],
         "post_delay": 1000,
         "recognition": "OCR",
         "roi": [
@@ -400,10 +377,6 @@
     },
     "日常_点击好友选项卡": {
         "action": "Click",
-        "next": [
-            "识别是否位于友情点界面",
-            "[JumpBack]日常_好友_点击友情点"
-        ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "template": "庭院/庭院_好友选项卡.png",
@@ -411,7 +384,9 @@
     },
     "日常_送友情点": {
         "next": [
-            "日常3",
+            "送友情点-确保位于好友选项卡中",
+            "[JumpBack]日常_点击好友选项卡",
+            "[JumpBack]日常3",
             "[JumpBack]日常_点击好友",
             "[JumpBack]日常6",
             "[JumpBack]打开底部菜单"
@@ -423,20 +398,39 @@
             "日常_好友_点击一键收取"
         ],
         "on_error": [
-            "日常_关闭好友界面"
+            "日常_关闭好友界面",
+            "返回庭院"
         ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
-            401,
-            180,
-            115,
-            511
+            410,
+            196,
+            93,
+            381
         ],
         "template": [
             "庭院/好友_送友情点_1.png",
             "庭院/好友_送友情点_2.png"
         ],
         "timeout": 1000
+    },
+    "送友情点-确保位于好友选项卡中": {
+        "expected": "好友|最近",
+        "next": [
+            "识别是否位于友情点界面",
+            "[JumpBack]日常_好友_点击友情点"
+        ],
+        "on_error": [
+            "日常_关闭好友界面",
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            148,
+            90,
+            189,
+            53
+        ]
     }
 }
