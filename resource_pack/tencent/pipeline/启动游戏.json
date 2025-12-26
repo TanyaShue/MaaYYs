@@ -12,6 +12,7 @@
         "next": [
             "启动游戏2",
             "[JumpBack]应用服-QQ登录",
+            "[JumpBack]qq登录-同意登录",
             "[JumpBack]关闭广告",
             "[JumpBack]启动游戏1",
             "[JumpBack]启动任务1",
@@ -28,15 +29,15 @@
         "next": [
             "qq登录-同意登录"
         ],
+        "on_error": [
+            "跳过"
+        ],
         "recognition": "OCR",
         "roi": [
             458,
             487,
             362,
             59
-        ],
-        "on_error": [
-            "跳过"
         ]
     }
 }
