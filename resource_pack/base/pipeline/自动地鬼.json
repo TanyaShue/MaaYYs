@@ -153,9 +153,43 @@
     "点击筛选": {
         "next": [
             "确保打开筛选界面",
-            "[JumpBack]点击筛选_1"
+            "[JumpBack]点击筛选_1",
+            "[JumpBack]点击筛选-绿色掩码",
+            "点击筛选-ocr"
         ],
         "recognition": "DirectHit"
+    },
+    "点击筛选-ocr": {
+        "action": "Click",
+        "expected": "筛选",
+        "recognition": "OCR",
+        "roi": [
+            1096,
+            57,
+            71,
+            40
+        ]
+    },
+    "点击筛选-绿色掩码": {
+        "action": "Click",
+        "green_mask": true,
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1077,
+            2,
+            99,
+            121
+        ],
+        "target": [
+            1102,
+            17,
+            58,
+            73
+        ],
+        "template": [
+            "自动地鬼\\点击筛选-绿色掩码_1.png"
+        ]
     },
     "点击筛选_1": {
         "action": "Click",
@@ -173,8 +207,7 @@
             58,
             73
         ],
-        "template": "地域鬼王/地域鬼王_筛选.png",
-        "timeout": 500
+        "template": "地域鬼王/地域鬼王_筛选.png"
     },
     "确保打开筛选界面": {
         "expected": "悬赏|热门|最新|征服|收藏",
@@ -414,7 +447,7 @@
             103,
             78
         ],
-        "timeout": 200000
+        "timeout": 600000
     },
     "自动地鬼6": {
         "expected": "胜利|失败",
