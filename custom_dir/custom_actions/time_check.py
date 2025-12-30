@@ -12,20 +12,60 @@ class TimeCheck(CustomAction):
             context: Context,
             argv: CustomAction.RunArg) -> bool:
         """
-        自定义动作：检查当前系统时间是否在指定范围内
-        :param argv: custom_action_param JSON格式：
+        自定义动作：检查当前系统时间是否在指定范围内（支持时间 + 日期规则）
+
+        该动作用于判断“当前系统时间”是否满足指定的时间区间，
+        并可选地结合日期规则（具体日期 / 每月几号 / 每周星期几）进行限制。
+        若未提供日期规则，则默认对所有日期生效（完全兼容旧逻辑）。
+
+        :param argv: custom_action_param，JSON 格式字符串，示例：
+
                      {
-                        "start": "23:00",   // 开始时间 (HH:MM 或 HH:MM:SS)
-                        "end": "06:00",     // 结束时间
-                        "mode": "in"        // "in" 表示在时间段内返回True，"out" 表示在时间段外返回True
+                        "start": "23:00",        // 开始时间 (HH:MM 或 HH:MM:SS)
+                        "end": "06:00",          // 结束时间 (HH:MM 或 HH:MM:SS)
+                        "mode": "in",            // 可选，默认 "in"
+                                                  // "in"  : 在时间段内返回 True
+                                                  // "out" : 在时间段外返回 True
+
+                        "date_rule": {           // 【可选】日期规则，不传表示不限制日期
+                            "type": "week",      // 规则类型，见下方说明
+                            "value": [1, 2, 3]   // 规则值
+                        }
                      }
-        :param context: 执行上下文
-        :return: 根据 mode 配置，条件满足返回 True，不满足返回 False
+
+        【date_rule.type 支持类型说明】
+
+        - "date"      : 指定某一天
+                        value 示例："2025-01-20"
+
+        - "dates"     : 指定多个具体日期
+                        value 示例：["2025-01-20", "2025-01-25"]
+
+        - "month_day" : 每月的某几号
+                        value 示例：[1, 15, 28]
+
+        - "week"      : 每周星期几（ISO 标准）
+                        1=周一 ... 7=周日
+                        value 示例：[1, 2, 3, 4, 5]
+
+        - "none" 或 不传 date_rule
+                      : 不进行日期限制，任意日期均可
+
+        :param context: 执行上下文（由框架传入）
+
+        :return:
+            - 当 mode = "in"  时：
+                当前时间 + 日期规则 均满足条件 → 返回 True
+                否则 → 返回 False
+
+            - 当 mode = "out" 时：
+                当前时间或日期规则不满足 → 返回 True
+                否则 → 返回 False
         """
 
-        print("开始执行自定义动作：时间范围检查")
+        print("开始执行自定义动作：时间 + 日期范围检查")
 
-        # 1. 参数解析
+        # ========== 1. 参数解析 ==========
         try:
             params = json.loads(argv.custom_action_param)
             if not isinstance(params, dict):
@@ -34,8 +74,8 @@ class TimeCheck(CustomAction):
 
             start_str = params.get("start")
             end_str = params.get("end")
-            # mode 默认为 "in" (判断是否在区间内)
             mode = params.get("mode", "in").lower()
+            date_rule = params.get("date_rule")  # 新增日期规则
 
             if not start_str or not end_str:
                 print("错误：必须提供 start 和 end 时间")
@@ -45,12 +85,13 @@ class TimeCheck(CustomAction):
             print(f"参数JSON解析失败: {e}")
             return False
 
-        # 2. 时间处理逻辑
-        try:
-            now_dt = datetime.datetime.now()
-            now_time = now_dt.time()
+        # ========== 2. 当前时间 ==========
+        now_dt = datetime.datetime.now()
+        now_time = now_dt.time()
+        today = now_dt.date()
 
-            # 解析输入时间字符串，自动处理 HH:MM 或 HH:MM:SS
+        # ========== 3. 时间解析 ==========
+        try:
             def parse_time(t_str):
                 try:
                     return datetime.datetime.strptime(t_str, "%H:%M").time()
@@ -60,41 +101,76 @@ class TimeCheck(CustomAction):
             start_time = parse_time(start_str)
             end_time = parse_time(end_str)
 
-            print(f"当前时间: {now_time.strftime('%H:%M:%S')}")
-            print(f"设定范围: {start_time} - {end_time}, 模式: {mode}")
+            print(f"当前时间: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"时间范围: {start_time} - {end_time}, 模式: {mode}")
 
         except ValueError as e:
-            print(f"时间格式错误，请使用 HH:MM 或 HH:MM:SS。详细信息: {e}")
+            print(f"时间格式错误: {e}")
             return False
 
-        # 3. 判断逻辑 (核心算法)
+        # ========== 4. 日期规则判断 ==========
+        def check_date_rule(rule) -> bool:
+            """不传规则默认 True"""
+            if not rule:
+                return True
+
+            rule_type = rule.get("type")
+            value = rule.get("value")
+
+            if rule_type == "date":
+                target = datetime.datetime.strptime(value, "%Y-%m-%d").date()
+                return today == target
+
+            elif rule_type == "dates":
+                targets = [
+                    datetime.datetime.strptime(d, "%Y-%m-%d").date()
+                    for d in value
+                ]
+                return today in targets
+
+            elif rule_type == "month_day":
+                # 每月几号
+                return today.day in value
+
+            elif rule_type == "week":
+                # Monday=1 ... Sunday=7
+                return today.isoweekday() in value
+
+            elif rule_type == "none":
+                return True
+
+            else:
+                print(f"未知 date_rule.type: {rule_type}")
+                return False
+
+        date_ok = check_date_rule(date_rule)
+        print(f"日期规则检查结果: {date_ok}")
+
+        if not date_ok:
+            return False if mode == "in" else True
+
+        # ========== 5. 时间范围判断 ==========
         is_in_range = False
 
         if start_time < end_time:
-            # 情况 A: 同一天 (例如 09:00 - 18:00)
+            # 同一天
             if start_time <= now_time <= end_time:
                 is_in_range = True
         else:
-            # 情况 B: 跨天 (例如 22:00 - 05:00)
-            # 当前时间 >= 开始时间 (23:00)  或者  当前时间 <= 结束时间 (04:00)
+            # 跨天
             if now_time >= start_time or now_time <= end_time:
                 is_in_range = True
 
-        # 4. 根据模式返回结果
-        result = False
+        # ========== 6. 模式判断 ==========
         if mode == "in":
-            # 模式 in: 在范围内返回 True
             result = is_in_range
-            desc = "在范围内" if is_in_range else "不在范围内"
         elif mode == "out":
-            # 模式 out: 在范围外返回 True
             result = not is_in_range
-            desc = "在范围外" if not is_in_range else "在范围内(不满足out模式)"
         else:
-            print(f"未知模式 '{mode}'，请使用 'in' 或 'out'")
+            print(f"未知模式 '{mode}'")
             return False
 
-        print(f"检查结果: {desc} -> 返回 {result}")
+        print(f"最终结果: {result}")
         return result
 
     def stop(self) -> None:
