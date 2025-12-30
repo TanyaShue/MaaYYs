@@ -147,9 +147,6 @@
     },
     "投喂宠物13": {
         "action": "Click",
-        "next": [
-            "返回庭院"
-        ],
         "recognition": "TemplateMatch",
         "template": [
             "投喂宠物\\投喂宠物13.png"
@@ -328,8 +325,10 @@
     "投喂宠物7_copy1": {
         "inverse": true,
         "next": [
-            "投喂宠物13"
+            "识别庭院特征",
+            "[JumpBack]投喂宠物13"
         ],
+        "post_delay": 1000,
         "recognition": "TemplateMatch",
         "template": [
             "投喂宠物\\投喂宠物7.png",
