@@ -5,6 +5,7 @@
             "[JumpBack]阴间之门1",
             "[JumpBack]打开底部菜单"
         ],
+        "rate_limit": 4000,
         "recognition": "DirectHit"
     },
     "阴间之门1": {
