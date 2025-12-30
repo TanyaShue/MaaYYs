@@ -47,8 +47,15 @@
             "通用4",
             "通用10"
         ],
-        "recognition": "DirectHit",
-        "timeout": 60000
+        "recognition": "OCR",
+        "timeout": 60000,
+        "roi": [
+            33,
+            651,
+            72,
+            43
+        ],
+        "expected": "闲|庭|闲庭"
     },
     "打开底部菜单_匹配": {
         "action": "Click",
