@@ -22,12 +22,6 @@ class ChallengeDungeonBoss(CustomAction):
         :param context: 运行上下文
         :return: 是否执行成功。
         """
-        now = datetime.now().time()
-        start = time(0, 0, 0)  # 00:00:00
-        end = time(6, 0, 0)  # 06:00:00
-        if start <= now < end:
-            print_to_ui(context,"未在活动开放时间,跳过任务","warning")
-            return True
         json_data = json.loads(argv.custom_action_param)
 
         # 新增逻辑：检查是否需要每日只执行一次
