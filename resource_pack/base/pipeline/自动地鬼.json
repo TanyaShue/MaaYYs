@@ -155,7 +155,7 @@
             "确保打开筛选界面",
             "[JumpBack]点击筛选_1",
             "[JumpBack]点击筛选-绿色掩码",
-            "点击筛选-ocr"
+            "[JumpBack]点击筛选-ocr"
         ],
         "recognition": "DirectHit"
     },
