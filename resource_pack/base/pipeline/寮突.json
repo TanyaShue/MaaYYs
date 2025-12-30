@@ -229,14 +229,14 @@
         ]
     },
     "寮突18_从上往下打": {
+        "expected": "0/6",
+        "inverse": true,
         "next": [
-            "寮突6",
-            "寮突12",
-            "[JumpBack]寮突18_第一个待选目标",
-            "[JumpBack]寮突18_第二个待选目标",
-            "[JumpBack]寮突18_第三个待选目标",
-            "[JumpBack]寮突18_第四个待选目标",
-            "[JumpBack]寮突16_copy1"
+            "寮突18_第一个待选目标",
+            "寮突18_第二个待选目标",
+            "寮突18_第三个待选目标",
+            "寮突18_第四个待选目标",
+            "寮突16_copy1"
         ],
         "on_error": [
             "跳过"
@@ -244,8 +244,14 @@
         "post_delay": 1000,
         "pre_delay": 2000,
         "rate_limit": 3000,
-        "timeout": 5000,
-        "recognition": "DirectHit"
+        "recognition": "OCR",
+        "roi": [
+            262,
+            547,
+            66,
+            54
+        ],
+        "timeout": 5000
     },
     "寮突18_第一个待选目标": {
         "inverse": true,
@@ -512,10 +518,10 @@
         "expected": "结界突破",
         "recognition": "OCR",
         "roi": [
-            58,
-            659,
-            469,
-            49
+            218,
+            670,
+            129,
+            40
         ]
     },
     "寮突3_copy1": {
