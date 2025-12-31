@@ -1,4 +1,18 @@
 {
+    "点击寮信息": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1031,
+            580,
+            248,
+            138
+        ],
+        "template": [
+            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币.png",
+            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币_1.png"
+        ]
+    },
     "阴阳寮奖励": {
         "action": "Custom",
         "custom_action": "LoopAction",
@@ -603,7 +617,8 @@
         "action": "Click",
         "next": [
             "阴阳寮奖励9",
-            "[JumpBack]点击寮信息"
+            "[JumpBack]点击寮信息",
+            "[JumpBack]点击寮信息-ocr"
         ],
         "recognition": "TemplateMatch",
         "roi": [
@@ -1178,21 +1193,15 @@
         ],
         "template": "阴阳寮/阴阳寮结界_体力食盒__408_615_222_83__358_565_322_155.png"
     },
-    "点击寮信息": {
+    "点击寮信息-ocr": {
+        "recognition": "OCR",
         "action": "Click",
-        "next": [
-            "阴阳寮奖励9"
-        ],
-        "recognition": "TemplateMatch",
         "roi": [
-            1031,
-            580,
-            248,
-            138
+            1046,
+            638,
+            234,
+            82
         ],
-        "template": [
-            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币.png",
-            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币_1.png"
-        ]
+        "expected": "寮|信息"
     }
 }
