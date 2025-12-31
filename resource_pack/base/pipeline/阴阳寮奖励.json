@@ -456,15 +456,15 @@
     "阴阳寮奖励36": {
         "action": "Click",
         "expected": "阴阳寮",
+        "post_delay": 3000,
+        "pre_delay": 3000,
         "recognition": "OCR",
         "roi": [
             335,
             625,
             513,
             76
-        ],
-        "post_delay": 3000,
-        "pre_delay": 3000
+        ]
     },
     "阴阳寮奖励37": {
         "action": "Click",
@@ -602,7 +602,8 @@
     "阴阳寮奖励9_领取寮金币": {
         "action": "Click",
         "next": [
-            "阴阳寮奖励9"
+            "阴阳寮奖励9",
+            "[JumpBack]点击寮信息"
         ],
         "recognition": "TemplateMatch",
         "roi": [
@@ -623,10 +624,10 @@
             "[JumpBack]阴阳寮奖励36",
             "[JumpBack]打开底部菜单"
         ],
-        "recognition": "DirectHit",
-        "rate_limit": 5000,
+        "post_delay": 1000,
         "pre_delay": 1000,
-        "post_delay": 1000
+        "rate_limit": 5000,
+        "recognition": "DirectHit"
     },
     "阴阳寮奖励领取-确保进入阴阳寮": {
         "expected": "神社|寮信息|结界|祈愿",
@@ -679,6 +680,7 @@
     "阴阳寮奖励领取_点击阴阳寮": {
         "action": "Click",
         "post_delay": 4000,
+        "pre_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
             494,
@@ -690,8 +692,7 @@
             "庭院/庭院_阴阳寮.png",
             "庭院/庭院_阴阳寮_红点.png",
             "阴阳寮奖励\\阴阳寮奖励领取_点击阴阳寮_1.png"
-        ],
-        "pre_delay": 1000
+        ]
     },
     "阴阳寮奖励领取_结界奖励领取_关闭食盒界面": {
         "action": "Click",
@@ -1176,5 +1177,22 @@
             108
         ],
         "template": "阴阳寮/阴阳寮结界_体力食盒__408_615_222_83__358_565_322_155.png"
+    },
+    "点击寮信息": {
+        "action": "Click",
+        "next": [
+            "阴阳寮奖励9"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            1031,
+            580,
+            248,
+            138
+        ],
+        "template": [
+            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币.png",
+            "阴阳寮奖励\\阴阳寮奖励9_领取寮金币_1.png"
+        ]
     }
 }

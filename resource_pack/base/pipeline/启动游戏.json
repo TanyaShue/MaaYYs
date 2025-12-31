@@ -87,8 +87,8 @@
         ],
         "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2",
         "rate_limit": 2000,
-        "timeout": 60000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 60000
     },
     "启动游戏1": {
         "action": "Click",
@@ -117,13 +117,13 @@
     },
     "启动游戏3": {
         "action": "Click",
+        "recognition": "DirectHit",
         "target": [
             22,
             21,
             42,
             45
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "启动游戏4": {
         "action": "Click",

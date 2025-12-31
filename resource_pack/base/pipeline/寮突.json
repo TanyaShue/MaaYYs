@@ -368,7 +368,7 @@
         "expected": "结界突破",
         "next": [
             "寮突2_copy1",
-            "[JumpBack]寮突3_copy1"
+            "[JumpBack]寮突3"
         ],
         "recognition": "OCR",
         "roi": [
@@ -522,17 +522,6 @@
             670,
             129,
             40
-        ]
-    },
-    "寮突3_copy1": {
-        "action": "Click",
-        "expected": "结界突破",
-        "recognition": "OCR",
-        "roi": [
-            58,
-            659,
-            469,
-            49
         ]
     },
     "寮突4": {
