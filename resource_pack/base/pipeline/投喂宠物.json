@@ -320,6 +320,9 @@
         "recognition": "TemplateMatch",
         "template": [
             "投喂宠物\\投喂宠物7.png"
+        ],
+        "on_error": [
+            "跳过"
         ]
     },
     "投喂宠物7_copy1": {
