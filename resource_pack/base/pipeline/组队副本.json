@@ -15,6 +15,16 @@
         "pre_delay": 1000,
         "recognition": "DirectHit"
     },
+    "组队副本-确保在匹配": {
+        "expected": "金币妖怪",
+        "recognition": "OCR",
+        "roi": [
+            425,
+            0,
+            413,
+            124
+        ]
+    },
     "组队副本1": {
         "next": [
             "组队副本2",
@@ -142,7 +152,8 @@
             "组队副本3",
             "组队副本12_copy1",
             "组队副本19",
-            "[JumpBack]组队副本11_copy1"
+            "[JumpBack]组队副本11_copy1",
+            "[JumpBack]组队副本-确保在匹配"
         ],
         "on_error": [
             "返回庭院"
@@ -179,7 +190,8 @@
             "识别庭院特征",
             "[JumpBack]组队副本13_copy1"
         ],
-        "pre_delay": 1000,
+        "post_delay": 10000,
+        "pre_delay": 10000,
         "recognition": "OCR",
         "roi": [
             1099,
@@ -206,14 +218,14 @@
         "action": "Custom",
         "custom_action": "TaskList",
         "custom_action_param": {
-          "tasks": {
-            "组队副本_经验副本":{
-                  "enabled": true
-              },
-              "组队副本_金币副本":{
-                  "enabled": true
-              }
-          }
+            "tasks": {
+                "组队副本_经验副本": {
+                    "enabled": true
+                },
+                "组队副本_金币副本": {
+                    "enabled": true
+                }
+            }
         },
         "next": [
             "组队副本16"
@@ -253,13 +265,13 @@
     },
     "组队副本17": {
         "action": "Click",
+        "recognition": "DirectHit",
         "target": [
             117,
             216,
             90,
             263
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "组队副本18": {
         "next": [
@@ -467,29 +479,6 @@
             "组队副本\\组队副本.png"
         ]
     },
-    "组队副本3_copy1_copy1": {
-        "action": "Click",
-        "next": [
-            "组队副本4_copy1_copy1"
-        ],
-        "recognition": "FeatureMatch",
-        "roi": [
-            267,
-            0,
-            263,
-            137
-        ],
-        "target": [
-            377,
-            45,
-            10,
-            23
-        ],
-        "template": [
-            "组队副本\\组队副本3.png",
-            "组队副本\\组队副本.png"
-        ]
-    },
     "组队副本4": {
         "action": "Custom",
         "custom_action": "BonusToggleAction",
@@ -516,32 +505,13 @@
         "custom_action": "BonusToggleAction",
         "custom_action_param": {
             "gold_100%": false,
-            "gold_50%": false
-        },
-        "expected": "觉醒副本掉落额外的觉醒材料",
-        "next": [
-            "组队副本5_copy1"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            424,
-            135,
-            330,
-            39
-        ]
-    },
-    "组队副本4_copy1_copy1": {
-        "action": "Custom",
-        "custom_action": "BonusToggleAction",
-        "custom_action_param": {
+            "gold_50%": false,
             "exp_100%": false,
             "exp_50%": false
         },
         "expected": "觉醒副本掉落额外的觉醒材料",
         "next": [
-            "组队副本5_copy1_copy1"
+            "组队副本5_copy1"
         ],
         "post_delay": 1000,
         "pre_delay": 1000,
@@ -580,33 +550,23 @@
             "组队副本7",
             "[JumpBack]打开底部菜单"
         ],
+        "recognition": "DirectHit",
         "target": [
             117,
             216,
             90,
             263
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "组队副本5_copy1": {
         "action": "Click",
+        "recognition": "DirectHit",
         "target": [
             117,
             216,
             90,
             263
-        ],
-        "recognition": "DirectHit"
-    },
-    "组队副本5_copy1_copy1": {
-        "action": "Click",
-        "target": [
-            117,
-            216,
-            90,
-            263
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "组队副本5_copy2": {
         "action": "Click",
@@ -614,13 +574,13 @@
             "组队副本7_copy1",
             "[JumpBack]打开底部菜单"
         ],
+        "recognition": "DirectHit",
         "target": [
             117,
             216,
             90,
             263
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "组队副本6": {
         "action": "Click",
@@ -830,7 +790,7 @@
             "loop_times": 2
         },
         "next": [
-            "组队副本3_copy1_copy1"
+            "组队副本3_copy1"
         ],
         "post_delay": 1000,
         "pre_delay": 1000,
