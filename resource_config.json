@@ -1170,91 +1170,6 @@
       "description": "日常奖励领取设置",
       "settings": [
         {
-          "name": "日常_送友情点",
-          "type": "boole",
-          "default": true,
-          "doc": "是否自动给好友赠送友情点",
-          "pipeline_override": {
-            "日常_任务列表": {
-              "custom_action_param": {
-                "tasks": {
-                  "日常_送友情点": {
-                    "enabled": "{boole}"
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "领取奖励_邮件",
-          "type": "boole",
-          "default": true,
-          "doc": "是否自动领取邮件中的所有奖励",
-          "pipeline_override": {
-            "日常_任务列表": {
-              "custom_action_param": {
-                "tasks": {
-                  "领取奖励_邮件": {
-                    "enabled": "{boole}"
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "领取奖励_日常庭院奖励",
-          "type": "boole",
-          "default": true,
-          "doc": "是否自动领取庭院小纸人头顶的奖励",
-          "pipeline_override": {
-            "日常_任务列表": {
-              "custom_action_param": {
-                "tasks": {
-                  "领取奖励_日常奖励": {
-                    "enabled": "{boole}"
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "日常_每日免费一抽",
-          "type": "boole",
-          "default": true,
-          "doc": "是否自动完成每日一次的免费符咒召唤",
-          "pipeline_override": {
-            "日常_任务列表": {
-              "custom_action_param": {
-                "tasks": {
-                  "日常_每日免费一抽": {
-                    "enabled": "{boole}"
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "日常_每日签到",
-          "type": "boole",
-          "default": true,
-          "doc": "是否自动完成签到",
-          "pipeline_override": {
-            "日常_任务列表": {
-              "custom_action_param": {
-                "tasks": {
-                  "领取奖励1_签到": {
-                    "enabled": "{boole}"
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
           "name": "领取奖励_商店每日奖励",
           "type": "boole",
           "default": true,
@@ -1264,6 +1179,23 @@
               "custom_action_param": {
                 "tasks": {
                   "领取奖励_商店每日奖励": {
+                    "enabled": "{boole}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "领取奖励_庭院事务",
+          "type": "boole",
+          "default": true,
+          "doc": "是否自动领取庭院事务",
+          "pipeline_override": {
+            "日常_任务列表": {
+              "custom_action_param": {
+                "tasks": {
+                  "日常-开始庭院事务": {
                     "enabled": "{boole}"
                   }
                 }
