@@ -41,6 +41,7 @@
         ]
     },
     "打开底部菜单": {
+        "expected": "闲|庭|闲庭",
         "next": [
             "通用6",
             "通用11",
@@ -48,14 +49,13 @@
             "通用10"
         ],
         "recognition": "OCR",
-        "timeout": 60000,
         "roi": [
             33,
             651,
             72,
             43
         ],
-        "expected": "闲|庭|闲庭"
+        "timeout": 60000
     },
     "打开底部菜单_匹配": {
         "action": "Click",
@@ -296,6 +296,8 @@
     "返回庭院": {
         "next": [
             "识别庭院特征",
+            "[JumpBack]通用-快捷返回庭院",
+            "[JumpBack]通用-快捷返回庭院-特征匹配",
             "[JumpBack]识别蓝色返回",
             "[JumpBack]识别黄色返回",
             "[JumpBack]识别蓝色返回_模板识别",
@@ -806,5 +808,35 @@
             78,
             35
         ]
+    },
+    "通用-快捷返回庭院": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            0,
+            0,
+            179,
+            85
+        ],
+        "template": [
+            "通用\\通用-快捷返回庭院_1.png"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000
+    },
+    "通用-快捷返回庭院-特征匹配": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            0,
+            0,
+            179,
+            85
+        ],
+        "template": [
+            "通用\\通用-快捷返回庭院_1.png"
+        ],
+        "pre_delay": 1000,
+        "post_delay": 1000
     }
 }
