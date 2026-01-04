@@ -41,12 +41,23 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
+
           if ! git diff --quiet resource_config.json; then
             git add resource_config.json
             git commit -m "ci: Update resource_version to ${{ github.ref_name }}" -m "[skip ci]"
+
             DEFAULT_BRANCH=${{ github.event.repository.default_branch }}
-            git push origin HEAD:$DEFAULT_BRANCH
+
+            # 拉取远程更改以避免推送冲突
+            git pull --rebase origin $DEFAULT_BRANCH || git pull origin $DEFAULT_BRANCH
+
+            # 如果rebase/pull失败，尝试强制推送（仅用于CI自动更新）
+            if [ $? -ne 0 ]; then
+              echo "Pull failed, attempting force push with lease..."
+              git push --force-with-lease origin HEAD:$DEFAULT_BRANCH
+            else
+              git push origin HEAD:$DEFAULT_BRANCH
+            fi
           fi
 
           NEW_COMMIT_SHA=$(git rev-parse HEAD)
