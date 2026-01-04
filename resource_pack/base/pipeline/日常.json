@@ -13,6 +13,209 @@
             328
         ]
     },
+    "日常-事务-确保返回事务界面": {
+        "expected": "庭院|事务",
+        "next": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            246,
+            30,
+            218,
+            89
+        ]
+    },
+    "日常-事务-领取成功": {
+        "action": "Click",
+        "expected": "领取|成功",
+        "post_delay": 1000,
+        "pre_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            291,
+            23,
+            239,
+            337
+        ],
+        "target": [
+            1196,
+            415,
+            60,
+            77
+        ]
+    },
+    "日常-关闭签到页面": {
+        "expected": "第|签",
+        "next": [
+            "日常-关闭签到页面-确认关闭-模板匹配",
+            "日常-关闭签到页面-确认关闭-特征匹配"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            382,
+            78,
+            434,
+            112
+        ],
+        "timeout": 10000
+    },
+    "日常-关闭签到页面-确认关闭-模板匹配": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            821,
+            77,
+            98,
+            68
+        ],
+        "template": [
+            "日常\\日常-关闭签到页面-确认关闭-模板匹配_1.png",
+            "日常\\日常-关闭签到页面-确认关闭-模板匹配_2.png"
+        ]
+    },
+    "日常-关闭签到页面-确认关闭-特征匹配": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            821,
+            77,
+            98,
+            68
+        ],
+        "template": [
+            "日常\\日常-关闭签到页面-确认关闭-模板匹配_1.png",
+            "日常\\日常-关闭签到页面-确认关闭-模板匹配_2.png"
+        ]
+    },
+    "日常-开始庭院事务": {
+        "next": [
+            "日常-确保位于事务界面",
+            "[JumpBack]日常-点击庭院事务-特征匹配",
+            "[JumpBack]日常-点击庭院事务-模板匹配",
+            "[JumpBack]日常-点击切换-模板匹配",
+            "[JumpBack]日常-点击切换-特征匹配"
+        ],
+        "recognition": "DirectHit",
+        "timeout": 200020
+    },
+    "日常-满结界经验领取": {
+        "expected": "您在|结界中放置的式神|已满|是否领取",
+        "next": [
+            "日常-满结界经验领取-确认领取"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            442,
+            262,
+            397,
+            110
+        ],
+        "timeout": 10000
+    },
+    "日常-满结界经验领取-确认领取": {
+        "action": "Click",
+        "expected": "确认",
+        "recognition": "OCR",
+        "roi": [
+            680,
+            396,
+            127,
+            58
+        ]
+    },
+    "日常-点击一键完成": {
+        "action": "Click",
+        "expected": "一键|完成",
+        "next": [
+            "[JumpBack]日常-满结界经验领取",
+            "[JumpBack]日常-关闭签到页面",
+            "[JumpBack]日常-事务-领取成功",
+            "日常-事务-确保返回事务界面"
+        ],
+        "post_delay": 3000,
+        "pre_delay": 3000,
+        "recognition": "OCR",
+        "roi": [
+            1098,
+            585,
+            124,
+            107
+        ]
+    },
+    "日常-点击切换-模板匹配": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1163,
+            121,
+            93,
+            459
+        ],
+        "template": [
+            "日常\\日常-点击切换_1.png"
+        ]
+    },
+    "日常-点击切换-特征匹配": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1163,
+            121,
+            93,
+            459
+        ],
+        "template": [
+            "日常\\日常-点击切换_1.png"
+        ]
+    },
+    "日常-点击庭院事务-模板匹配": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1163,
+            124,
+            93,
+            394
+        ],
+        "template": [
+            "日常\\日常-点击庭院事务_1.png"
+        ]
+    },
+    "日常-点击庭院事务-特征匹配": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1163,
+            124,
+            93,
+            394
+        ],
+        "template": [
+            "日常\\日常-点击庭院事务_1.png"
+        ]
+    },
+    "日常-确保位于事务界面": {
+        "expected": "庭院|事务",
+        "next": [
+            "日常-点击一键完成"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            246,
+            30,
+            218,
+            89
+        ]
+    },
     "日常1": {
         "action": "Click",
         "expected": "跳过",
@@ -101,15 +304,7 @@
         "custom_action": "TaskList",
         "custom_action_param": {
             "tasks": {
-                "日常_每日免费一抽": {
-                    "enabled": true,
-                    "once_per_day": true
-                },
-                "日常_送友情点": {
-                    "enabled": true,
-                    "once_per_day": true
-                },
-                "领取奖励1_签到": {
+                "日常-开始庭院事务": {
                     "enabled": true,
                     "once_per_day": true
                 },
@@ -117,13 +312,7 @@
                     "enabled": true,
                     "once_per_day": true
                 },
-                "领取奖励_日常奖励": {
-                    "enabled": true
-                },
                 "领取奖励_花合战奖励": {
-                    "enabled": true
-                },
-                "领取奖励_邮件": {
                     "enabled": true
                 }
             }
