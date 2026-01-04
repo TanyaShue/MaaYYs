@@ -235,10 +235,10 @@
         ],
         "recognition": "OCR",
         "roi": [
-            73,
-            25,
-            171,
-            61
+            138,
+            0,
+            205,
+            80
         ],
         "timeout": 10000
     },
@@ -288,8 +288,8 @@
         ]
     },
     "道馆突破-点击阴阳寮": {
-        "recognition": "FeatureMatch",
         "action": "Click",
+        "recognition": "FeatureMatch",
         "roi": [
             515,
             588,
