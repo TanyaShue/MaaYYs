@@ -1219,6 +1219,23 @@
               }
             }
           }
+        },
+        {
+          "name": "领取奖励_邮件",
+          "type": "boole",
+          "default": true,
+          "doc": "是否自动领取邮件奖励",
+          "pipeline_override": {
+            "日常_任务列表": {
+              "custom_action_param": {
+                "tasks": {
+                  "领取奖励_邮件": {
+                    "enabled": "{boole}"
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     },
