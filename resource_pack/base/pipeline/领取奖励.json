@@ -429,8 +429,6 @@
     },
     "领取奖励_商店每日奖励_点击礼包屋": {
         "action": "Click",
-        "next": [],
-        "on_error": [],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -693,7 +691,7 @@
             "庭院/花合战_任务.png",
             "庭院/花合战_任务_红点.png"
         ],
-        "timeout": 5000
+        "timeout": 10000
     },
     "领取奖励_花合战奖励": {
         "next": [
