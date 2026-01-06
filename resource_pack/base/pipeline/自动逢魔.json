@@ -184,10 +184,6 @@
     },
     "现世逢魔_点击具体首领": {
         "action": "Click",
-        "next": [
-            "识别集结挑战",
-            "[JumpBack]现世逢魔_点击首领"
-        ],
         "post_delay": 1000,
         "recognition": "DirectHit",
         "target": [
@@ -739,15 +735,15 @@
             "upload": true
         },
         "expected": "逢魔密信",
+        "on_error": [
+            "跳过"
+        ],
         "recognition": "OCR",
         "roi": [
             419,
             67,
             342,
             68
-        ],
-        "on_error": [
-            "跳过"
         ]
     },
     "自动逢魔20": {
@@ -943,15 +939,15 @@
         "next": [
             "自动逢魔2"
         ],
+        "on_error": [
+            "跳过"
+        ],
         "recognition": "OCR",
         "roi": [
             419,
             67,
             342,
             68
-        ],
-        "on_error": [
-            "跳过"
         ]
     },
     "自动逢魔9": {
@@ -974,7 +970,8 @@
             }
         },
         "next": [
-            "现世逢魔_点击首领"
+            "识别集结挑战",
+            "[JumpBack]现世逢魔_点击首领"
         ],
         "recognition": "DirectHit"
     },
