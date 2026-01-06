@@ -788,7 +788,7 @@
         "action": "Click",
         "post_delay": 1000,
         "pre_delay": 1000,
-        "recognition": "FeatureMatch",
+        "recognition": "TemplateMatch",
         "roi": [
             0,
             0,
@@ -1152,7 +1152,8 @@
             "[JumpBack]阴阳寮奖励24"
         ],
         "post_delay": 1000,
-        "rate_limit": 3000
+        "rate_limit": 3000,
+        "recognition": "DirectHit"
     },
     "阴阳寮奖励领取_阴阳寮金币领取": {
         "action": "Click",
