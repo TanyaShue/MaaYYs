@@ -304,11 +304,9 @@
             "[JumpBack]识别黄色返回_模板识别",
             "[JumpBack]返回庭院_识别叉"
         ],
-        "on_error": [
-            "跳过"
-        ],
         "rate_limit": 100,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 60000
     },
     "返回庭院_识别叉": {
         "action": "Click",
@@ -338,6 +336,36 @@
             "跳过"
         ],
         "recognition": "DirectHit"
+    },
+    "通用-快捷返回庭院": {
+        "action": "Click",
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            0,
+            179,
+            85
+        ],
+        "template": [
+            "通用\\通用-快捷返回庭院_1.png"
+        ]
+    },
+    "通用-快捷返回庭院-特征匹配": {
+        "action": "Click",
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            0,
+            179,
+            85
+        ],
+        "template": [
+            "通用\\通用-快捷返回庭院_1.png"
+        ]
     },
     "通用1": {
         "expected": "首页|精灵百科",
@@ -808,35 +836,5 @@
             78,
             35
         ]
-    },
-    "通用-快捷返回庭院": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "roi": [
-            0,
-            0,
-            179,
-            85
-        ],
-        "template": [
-            "通用\\通用-快捷返回庭院_1.png"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 1000
-    },
-    "通用-快捷返回庭院-特征匹配": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "roi": [
-            0,
-            0,
-            179,
-            85
-        ],
-        "template": [
-            "通用\\通用-快捷返回庭院_1.png"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 1000
     }
 }
