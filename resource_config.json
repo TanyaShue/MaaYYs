@@ -1,7 +1,7 @@
 {
   "resource_name": "阴阳师",
   "resource_id": "MaaYYs",
-  "resource_version": "v2.4.3",
+  "resource_version": "v2.4.4",
   "resource_author": "TanyaShue",
   "mirror_update_service_id": "MaaYYs",
   "resource_rep_url": "https://github.com/TanyaShue/MaaYYs",
@@ -247,8 +247,7 @@
     {
       "task_name": "自动领取奖励_花合战奖励",
       "task_entry": "领取奖励_花合战奖励",
-      "option": [
-      ]
+      "option": []
     },
     {
       "task_name": "肝绘卷(有风险,风险自付)",
