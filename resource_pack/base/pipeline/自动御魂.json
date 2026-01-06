@@ -2,7 +2,6 @@
     "N-1766236011441": {
         "action": "Click",
         "enabled": false,
-        "next": [],
         "recognition": "FeatureMatch",
         "roi": [
             269,
@@ -227,6 +226,7 @@
         "timeout": 3000
     },
     "自动御魂16": {
+        "action": "Click",
         "expected": "获得宝藏|发现宝藏",
         "recognition": "OCR",
         "roi": [
@@ -234,6 +234,12 @@
             160,
             496,
             150
+        ],
+        "target": [
+            213,
+            635,
+            174,
+            71
         ]
     },
     "自动御魂17": {
@@ -431,7 +437,8 @@
     "自动御魂6": {
         "expected": "已完成",
         "next": [
-            "自动御魂7"
+            "自动御魂7",
+            "[JumpBack]自动御魂16"
         ],
         "rate_limit": 3000,
         "recognition": "OCR",
