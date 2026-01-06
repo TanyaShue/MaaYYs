@@ -245,6 +245,12 @@
       ]
     },
     {
+      "task_name": "自动领取奖励_花合战奖励",
+      "task_entry": "领取奖励_花合战奖励",
+      "option": [
+      ]
+    },
+    {
       "task_name": "肝绘卷(有风险,风险自付)",
       "task_entry": "kun2820",
       "option": [
