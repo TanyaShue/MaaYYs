@@ -397,30 +397,32 @@
     },
     "突破_重新挑战": {
         "next": [
-            "突破_重新挑战_特征匹配",
-            "突破_重新挑战-模板匹配"
+            "退出战斗_确认",
+            "[JumpBack]突破_重新挑战_特征匹配",
+            "[JumpBack]突破_重新挑战-模板匹配"
         ],
         "on_error": [
             "跳过"
         ],
-        "recognition": "DirectHit",
-        "rate_limit": 200
+        "rate_limit": 200,
+        "recognition": "DirectHit"
     },
     "突破_重新挑战-模板匹配": {
         "action": "Click",
-        "next": [
-            "退出战斗_确认"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "post_delay": 500,
+        "pre_delay": 1,
         "recognition": "TemplateMatch",
         "roi": [
             0,
             4,
             77,
             75
+        ],
+        "target": [
+            19,
+            17,
+            32,
+            33
         ],
         "template": [
             "自动结界\\突破_重新挑战-模板匹配_1.png",
@@ -431,19 +433,20 @@
     },
     "突破_重新挑战_特征匹配": {
         "action": "Click",
-        "next": [
-            "退出战斗_确认"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "post_delay": 500,
+        "pre_delay": 1,
         "recognition": "FeatureMatch",
         "roi": [
             0,
             4,
             77,
             75
+        ],
+        "target": [
+            19,
+            17,
+            32,
+            33
         ],
         "template": [
             "自动结界\\突破_重新挑战-模板匹配_1.png",
