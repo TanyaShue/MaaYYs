@@ -264,9 +264,6 @@
     },
     "突破_再次挑战": {
         "action": "Click",
-        "focus": {
-            "Node.Recognition.Failed": ""
-        },
         "next": [
             "确认再次挑战"
         ],
