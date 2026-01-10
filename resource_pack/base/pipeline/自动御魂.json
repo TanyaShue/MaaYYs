@@ -437,8 +437,8 @@
     "自动御魂6": {
         "expected": "已完成",
         "next": [
-            "自动御魂7",
-            "[JumpBack]自动御魂16"
+            "[JumpBack]自动御魂16",
+            "自动御魂7"
         ],
         "rate_limit": 3000,
         "recognition": "OCR",
