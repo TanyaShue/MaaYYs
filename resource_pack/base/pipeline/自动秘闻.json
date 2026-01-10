@@ -1,4 +1,22 @@
 {
+    "秘闻-关闭海报": {
+        "action": "Click",
+        "expected": "难度",
+        "inverse": true,
+        "recognition": "OCR",
+        "roi": [
+            853,
+            507,
+            74,
+            39
+        ],
+        "target": [
+            1173,
+            302,
+            51,
+            50
+        ]
+    },
     "自动秘闻": {
         "custom_action": "TaskList",
         "custom_action_param": {
@@ -53,7 +71,7 @@
         "next": [
             "自动秘闻_step_2",
             "自动秘闻5",
-            "秘闻-关闭海报"
+            "[JumpBack]秘闻-关闭海报"
         ],
         "recognition": "OCR",
         "roi": [
@@ -417,24 +435,6 @@
             649,
             336,
             45
-        ]
-    },
-    "秘闻-关闭海报": {
-        "recognition": "OCR",
-        "roi": [
-            853,
-            507,
-            74,
-            39
-        ],
-        "expected": "难度",
-        "inverse": true,
-        "action": "Click",
-        "target": [
-            1173,
-            302,
-            51,
-            50
         ]
     }
 }

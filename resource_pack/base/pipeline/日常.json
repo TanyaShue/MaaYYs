@@ -134,8 +134,8 @@
         "action": "Click",
         "expected": "一键|完成",
         "next": [
-            "[JumpBack]日常-满结界经验领取",
             "[JumpBack]日常-关闭签到页面",
+            "[JumpBack]日常-满结界经验领取",
             "[JumpBack]日常-事务-领取成功",
             "日常-事务-确保返回事务界面"
         ],

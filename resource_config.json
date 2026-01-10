@@ -9,16 +9,16 @@
   "resource_icon": "/assets/logo/logo.png",
   "resource_pack": [
     {
-      "name": "官服",
-      "path": [
-        "./resource_pack/base"
-      ]
-    },
-    {
-      "name": "官服2(雷电,mumu下载的选这个)",
+      "name": "官服(雷电,mumu下载的选这个)",
       "path": [
         "./resource_pack/base",
         "./resource_pack/official"
+      ]
+    },
+    {
+      "name": "官服2(mumu和雷电下载的不要选这个,选第二个)",
+      "path": [
+        "./resource_pack/base"
       ]
     },
     {
