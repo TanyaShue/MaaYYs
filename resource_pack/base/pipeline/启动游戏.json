@@ -81,6 +81,7 @@
             "[JumpBack]启动游戏1",
             "[JumpBack]启动任务1",
             "[JumpBack]关闭广告",
+            "客户端更新提示处理",
             "[JumpBack]关闭公告",
             "[JumpBack]启动任务5",
             "[JumpBack]启动游戏3"
@@ -147,6 +148,26 @@
             107,
             136,
             523
+        ]
+    },
+    "客户端更新提示处理": {
+        "action": "Click",
+        "expected": [
+            "客.*端更新"
+        ],
+        "post_delay": 500,
+        "recognition": "OCR",
+        "roi": [
+            493,
+            100,
+            314,
+            98
+        ],
+        "target": [
+            896,
+            127,
+            43,
+            41
         ]
     }
 }
