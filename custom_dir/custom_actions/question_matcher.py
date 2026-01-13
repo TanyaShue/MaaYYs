@@ -169,8 +169,13 @@ class QuestionMatcher(CustomAction):
         for screen_answer in answers:
             if screen_answer['text'] in known_correct_answers:
                 box = screen_answer['box']
-                center_x = (box[0] + box[2]) // 2
-                center_y = (box[1] + box[3]) // 2
+                # 修复：box格式为 [x, y, w, h]，计算中心点应为 x + w/2
+                # 原错误代码：center_x = (box[0] + box[2]) // 2
+
+                x, y, w, h = box
+                center_x = int(x + w / 2)
+                center_y = int(y + h / 2)
+
                 context.tasker.controller.post_click(center_x, center_y).wait()
                 print(f"已从题库中找到并点击答案: {screen_answer['text']}, 位置:({center_x},{center_y})")
                 return screen_answer['text']
