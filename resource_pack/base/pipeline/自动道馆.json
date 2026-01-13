@@ -67,7 +67,10 @@
             240,
             73
         ],
-        "timeout": 12000000
+        "timeout": 1200000,
+        "on_error": [
+            "返回庭院"
+        ]
     },
     "自动道馆13": {
         "action": "Click",
@@ -85,12 +88,19 @@
         "rate_limit": 5000,
         "recognition": "OCR",
         "roi": [
-            386,
-            49,
-            472,
-            190
+            609,
+            21,
+            229,
+            119
         ],
-        "timeout": 1200000
+        "timeout": 1200000,
+        "action": "Click",
+        "target": [
+            18,
+            637,
+            230,
+            80
+        ]
     },
     "自动道馆15": {
         "action": "Click",
@@ -133,7 +143,9 @@
         "next": [
             "自动道馆19",
             "[JumpBack]自动道馆16",
-            "[JumpBack]自动道馆17"
+            "[JumpBack]自动道馆17",
+            "[JumpBack]N-1768312988212",
+            "[JumpBack]N-1768313000871"
         ],
         "recognition": "OCR",
         "roi": [
@@ -142,7 +154,10 @@
             225,
             173
         ],
-        "timeout": 2000000
+        "timeout": 2000000,
+        "on_error": [
+            "返回庭院"
+        ]
     },
     "自动道馆19": {
         "expected": "道馆突破",
@@ -298,6 +313,48 @@
         ],
         "template": [
             "自动道馆\\道馆突破-点击阴阳寮_1.png"
+        ]
+    },
+    "N-1768312988212": {
+        "expected": "胜利",
+        "next": [
+            "返回庭院"
+        ],
+        "pre_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            609,
+            21,
+            229,
+            119
+        ],
+        "timeout": 1200000,
+        "action": "Click",
+        "target": [
+            1168,
+            382,
+            79,
+            93
+        ]
+    },
+    "N-1768313000871": {
+        "action": "Click",
+        "expected": "失败",
+        "next": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            386,
+            49,
+            472,
+            190
+        ],
+        "target": [
+            1098,
+            455,
+            136,
+            93
         ]
     }
 }
