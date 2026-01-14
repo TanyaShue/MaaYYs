@@ -32,12 +32,6 @@
         "on_error": [
             "跳过"
         ],
-        "recognition": "OCR",
-        "roi": [
-            458,
-            487,
-            362,
-            59
-        ]
+        "recognition": "OCR"
     }
 }
