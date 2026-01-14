@@ -141,9 +141,6 @@
     },
     "寮突17": {
         "action": "Click",
-        "next": [
-            "寮突7"
-        ],
         "post_delay": 1000,
         "pre_delay": 1000,
         "recognition": "TemplateMatch",
@@ -160,9 +157,6 @@
     },
     "寮突17_copy1": {
         "action": "Click",
-        "next": [
-            "寮突7"
-        ],
         "post_delay": 1000,
         "pre_delay": 1000,
         "recognition": "TemplateMatch",
@@ -179,9 +173,6 @@
     },
     "寮突17_copy2": {
         "action": "Click",
-        "next": [
-            "寮突7"
-        ],
         "post_delay": 1000,
         "pre_delay": 1000,
         "recognition": "TemplateMatch",
@@ -198,9 +189,6 @@
     },
     "寮突17_copy3": {
         "action": "Click",
-        "next": [
-            "寮突7"
-        ],
         "post_delay": 1000,
         "pre_delay": 1000,
         "recognition": "TemplateMatch",
@@ -256,7 +244,8 @@
     "寮突18_第一个待选目标": {
         "inverse": true,
         "next": [
-            "寮突17_copy1"
+            "寮突7",
+            "[JumpBack]寮突17_copy1"
         ],
         "post_delay": 1000,
         "pre_delay": 1000,
@@ -278,7 +267,8 @@
     "寮突18_第三个待选目标": {
         "inverse": true,
         "next": [
-            "寮突17"
+            "寮突7",
+            "[JumpBack]寮突17"
         ],
         "pre_delay": 1000,
         "recognition": "TemplateMatch",
@@ -299,7 +289,8 @@
     "寮突18_第二个待选目标": {
         "inverse": true,
         "next": [
-            "寮突17_copy2"
+            "寮突7",
+            "[JumpBack]寮突17_copy2"
         ],
         "post_delay": 1000,
         "pre_delay": 1000,
@@ -321,7 +312,8 @@
     "寮突18_第四个待选目标": {
         "inverse": true,
         "next": [
-            "寮突17_copy3"
+            "寮突7",
+            "[JumpBack]寮突17_copy3"
         ],
         "post_delay": 1000,
         "pre_delay": 1000,
