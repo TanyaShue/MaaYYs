@@ -152,9 +152,7 @@
     },
     "客户端更新提示处理": {
         "action": "Click",
-        "expected": [
-            "客.*端更新"
-        ],
+        "expected": "客.*端更新",
         "post_delay": 500,
         "recognition": "OCR",
         "roi": [
