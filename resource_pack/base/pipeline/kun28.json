@@ -1,20 +1,34 @@
 {
-    "kun28": {
+    "kun28-确保关闭章节面板": {
         "expected": "第二十八章",
-        "next": [
-            "kun2823"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "OCR",
         "roi": [
-            1057,
-            194,
-            199,
-            404
+            1058,
+            193,
+            210,
+            380
+        ]
+    },
+    "kun28-识别探索界面的妖字": {
+        "focus": {
+            "Node.Recognition.Succeeded": "[debug]返回到探索界面"
+        },
+        "next": [
+            "kun2817",
+            "kun2822",
+            "kun2823",
+            "kun28-确保关闭章节面板"
         ],
-        "timeout": 3000
+        "recognition": "TemplateMatch",
+        "roi": [
+            1089,
+            90,
+            145,
+            112
+        ],
+        "template": [
+            "kun28\\N-1768450130083_1.png"
+        ]
     },
     "kun281": {
         "expected": "妖",
@@ -77,14 +91,8 @@
         ]
     },
     "kun2814": {
+        "action": "Click",
         "expected": "点击屏幕继续",
-        "next": [
-            "kun2816",
-            "[JumpBack]kun2815"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "post_delay": 1000,
         "pre_delay": 1000,
         "recognition": "OCR",
@@ -93,26 +101,12 @@
             658,
             324,
             61
-        ]
-    },
-    "kun2815": {
-        "action": "Click",
+        ],
         "target": [
             843,
             389,
             177,
             250
-        ],
-        "recognition": "DirectHit"
-    },
-    "kun2816": {
-        "expected": "自动轮换",
-        "recognition": "OCR",
-        "roi": [
-            150,
-            646,
-            129,
-            63
         ]
     },
     "kun2817": {
@@ -137,30 +131,14 @@
     },
     "kun2818": {
         "action": "Click",
-        "next": [
-            "kun2819"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "TemplateMatch",
         "template": [
             "kun28\\kun2817.png",
             "kun28\\kun2817_1.png",
             "kun28\\kun2817_2.png"
         ],
+        "threshold": 0.79,
         "timeout": 5000
-    },
-    "kun2819": {
-        "action": "Click",
-        "post_delay": 1000,
-        "target": [
-            965,
-            279,
-            252,
-            235
-        ],
-        "recognition": "DirectHit"
     },
     "kun282": {
         "action": "Click",
@@ -245,6 +223,9 @@
             "kun2821_copy2",
             "kun28_copy1_copy1"
         ],
+        "on_error": [
+            "跳过"
+        ],
         "post_delay": 2000,
         "pre_delay": 2000,
         "recognition": "OCR",
@@ -254,10 +235,7 @@
             112,
             50
         ],
-        "timeout": 1000,
-        "on_error": [
-            "跳过"
-        ]
+        "timeout": 1000
     },
     "kun2821_copy2": {
         "action": "Swipe",
@@ -281,6 +259,9 @@
             "kun2821_copy3",
             "kun28_copy1_copy1"
         ],
+        "on_error": [
+            "跳过"
+        ],
         "post_delay": 2000,
         "pre_delay": 2000,
         "recognition": "OCR",
@@ -290,10 +271,7 @@
             112,
             50
         ],
-        "timeout": 1000,
-        "on_error": [
-            "跳过"
-        ]
+        "timeout": 1000
     },
     "kun2821_copy3": {
         "action": "Swipe",
@@ -320,14 +298,17 @@
             112,
             50
         ],
-        "timeout": 1000,
-        "on_error": [
-            "跳过"
-        ]
+        "timeout": 1000
     },
     "kun2822": {
         "action": "Click",
         "expected": "宝箱",
+        "next": [
+            "kun28_点击屏幕继续"
+        ],
+        "on_error": [
+            "跳过"
+        ],
         "recognition": "OCR",
         "roi": [
             11,
@@ -340,7 +321,11 @@
     "kun2823": {
         "expected": "探索",
         "next": [
-            "kun2824"
+            "[JumpBack]kun2824",
+            "kun28-确保关闭章节面板"
+        ],
+        "on_error": [
+            "跳过"
         ],
         "recognition": "OCR",
         "roi": [
@@ -526,7 +511,7 @@
     },
     "kun28_开始战斗": {
         "next": [
-            "kun28_结束战斗",
+            "kun28-识别探索界面的妖字",
             "kun2823",
             "[JumpBack]kun28_开始点击妖怪"
         ],
@@ -534,16 +519,16 @@
     },
     "kun28_开始点击妖怪": {
         "next": [
-            "kun28_结束战斗",
             "kun2823",
+            "kun28-识别探索界面的妖字",
             "[JumpBack]kun28_copy1",
+            "[JumpBack]kun28_copy1_copy1",
             "[JumpBack]kun2818",
             "[JumpBack]kun2814",
-            "[JumpBack]kun2821",
-            "[JumpBack]kun28_copy1_copy1"
+            "[JumpBack]kun2821"
         ],
-        "timeout": 60000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 60000
     },
     "kun28_点击屏幕继续": {
         "action": "Click",
@@ -556,28 +541,11 @@
             125
         ],
         "target": [
-            916,
-            463,
-            119,
-            119
+            1125,
+            124,
+            60,
+            46
         ]
-    },
-    "kun28_结束战斗": {
-        "expected": "妖",
-        "next": [
-            "kun2817",
-            "kun2822",
-            "kun2823",
-            "kun28"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1121,
-            122,
-            68,
-            50
-        ],
-        "timeout": 6000
     },
     "kun28_自动轮换": {
         "action": "Click",
