@@ -1,0 +1,109 @@
+{
+    "N-1768457062947": {
+        "action": "Click",
+        "expected": "点击屏幕|继续",
+        "recognition": "OCR"
+    },
+    "活动爬塔-梦魇挑战": {
+        "expected": "梦魔挑战",
+        "next": [
+            "爬塔-梦魇挑战-活动票花光",
+            "爬塔-梦魇挑战-体力票花光",
+            "[JumpBack]活动爬塔-梦魇挑战-识别挑战",
+            "[JumpBack]活动爬塔-梦魇挑战-点击屏幕继续"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            136,
+            9,
+            158,
+            67
+        ],
+        "timeout": 200000
+    },
+    "活动爬塔-梦魇挑战-点击屏幕继续": {
+        "action": "Custom",
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "max": 5,
+            "min": 1
+        },
+        "expected": "点击屏幕|继续",
+        "next": [
+            "N-1768457062947"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "OCR"
+    },
+    "活动爬塔-梦魇挑战-点击挑战": {
+        "action": "Click",
+        "expected": "挑战",
+        "recognition": "OCR",
+        "roi": [
+            1117,
+            591,
+            136,
+            72
+        ]
+    },
+    "活动爬塔-梦魇挑战-识别挑战": {
+        "action": "Custom",
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "max": 10,
+            "min": 1
+        },
+        "expected": "挑战",
+        "focus": {
+            "Node.Action.Starting": "[debug]开始随机等待",
+            "Node.Action.Succeeded": "[debug]随机等待结束"
+        },
+        "next": [
+            "活动爬塔-梦魇挑战-点击挑战"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1117,
+            591,
+            136,
+            72
+        ]
+    },
+    "爬塔-梦魇挑战-体力票花光": {
+        "expected": "^0$",
+        "focus": {
+            "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
+        },
+        "next": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            544,
+            10,
+            68,
+            43
+        ]
+    },
+    "爬塔-梦魇挑战-活动票花光": {
+        "expected": "^0$",
+        "focus": {
+            "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
+        },
+        "next": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            544,
+            10,
+            68,
+            43
+        ]
+    }
+}
