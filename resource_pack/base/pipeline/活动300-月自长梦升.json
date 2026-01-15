@@ -77,7 +77,7 @@
     "爬塔-梦魇挑战-体力票花光": {
         "expected": "^0$",
         "focus": {
-            "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
+            "Node.Recognition.Succeeded": "体力票刷完了!!!,任务结束"
         },
         "next": [
             "返回庭院"
@@ -91,6 +91,7 @@
         ]
     },
     "爬塔-梦魇挑战-活动票花光": {
+        "enabled": false,
         "expected": "^0$",
         "focus": {
             "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
