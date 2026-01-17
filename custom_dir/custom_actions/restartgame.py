@@ -7,17 +7,22 @@ from maa.agent.agent_server import AgentServer
 
 @AgentServer.custom_action("ReStartGame")
 class ReStartGame(CustomAction):
-
+    cont=0
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        print("即将重启游戏并跳过任务")
-        context.run_task("关闭阴阳师")
-        sleep(3)
-        context.run_task("启动游戏")
-        print(f"重启完成,跳过任务")
-        # context.run_task("StopTask")
-        # print(f"结束任务链")
-        return True
 
-
+        if self.cont <5:
+            print("即将重启游戏并跳过任务")
+            context.run_task("关闭阴阳师")
+            sleep(3)
+            context.run_task("启动游戏")
+            print(f"重启完成,跳过任务")
+            self.cont=self.cont+1
+            print(f"当前重启次数为:{str(self.cont)}")
+            # context.run_task("StopTask")
+            # print(f"结束任务链")
+            return True
+        else:
+            context.run_task("StopTask")
+            return True
     def stop(self) -> None:
         pass
