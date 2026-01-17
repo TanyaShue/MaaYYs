@@ -6,6 +6,7 @@ import time
 from maa.context import Context
 from maa.custom_action import CustomAction
 from maa.agent.agent_server import AgentServer
+from maa.define import Status
 
 
 @AgentServer.custom_action("Kun28")
@@ -31,14 +32,19 @@ class Kun28(CustomAction):
         print(f"当前模式: {target}, 预设队伍: {group_name}-{team_name}")
 
         # --- 初始准备阶段 ---
-        context.run_task("kun289")
+        r=context.run_task("kun289")
+        if r.status==Status.failed:
+            return False
         self.recognition_status(context)  # 初始识别
 
-        context.run_task("返回庭院")
-
+        r=context.run_task("返回庭院")
+        if r.status==Status.failed:
+            return False
         # 如果一开始突破卷就很多，先清一波
         if self.num_tupo < 20:
-            context.run_task("kun2812")
+            r=context.run_task("kun2812")
+            if r.status==Status.failed:
+                return False
             self.recognition_status(context)
 
         loop_count = 0
@@ -66,14 +72,18 @@ class Kun28(CustomAction):
                 for task in ["返回庭院", "自动结界", "返回庭院", "kun2812"]:
                     if task == "自动结界":
                         # 动态传入队伍参数
-                        context.run_task(task, {"装备突破预设": {
+                        r=context.run_task(task, {"装备突破预设": {
                             "custom_action_param": {
                                 "group_name": f"{group_name}",
                                 "team_name": f"{team_name}"
                             }
                         }})
+                        if r.status==Status.failed:
+                            return False
                     else:
-                        context.run_task(task)
+                        r=context.run_task(task)
+                        if r.status==Status.failed:
+                            return False
 
                 # 任务间的随机等待
                 if random.random() < 0.9:
@@ -86,8 +96,10 @@ class Kun28(CustomAction):
             else:
                 # 突破卷不足，继续探索/战斗
                 print("突破卷 < 20，执行探索任务...")
-                context.run_task("kun281")
+                r=context.run_task("kun281")
 
+                if r.status==Status.failed:
+                    return False
             # 3. 状态更新
             self.recognition_status(context)
             loop_count += 1
