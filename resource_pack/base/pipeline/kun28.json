@@ -82,6 +82,7 @@
         "action": "Click",
         "next": [
             "kun281",
+            "N-kun281",
             "kun287",
             "[JumpBack]点击探索"
         ],
@@ -596,6 +597,29 @@
             3,
             223,
             59
+        ]
+    },
+    "N-kun281": {
+        "focus": {
+            "Node.Recognition.Succeeded": "[debug]返回到探索界面"
+        },
+        "next": [
+            "kun2817",
+            "kun2822",
+            "kun2823",
+            "kun28-确保关闭章节面板",
+            "kun282",
+            "[JumpBack]kun283"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            1089,
+            90,
+            145,
+            112
+        ],
+        "template": [
+            "kun28\\N-1768450130083_1.png"
         ]
     }
 }
