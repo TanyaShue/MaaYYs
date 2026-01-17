@@ -97,7 +97,6 @@ class Kun28(CustomAction):
                 # 突破卷不足，继续探索/战斗
                 print("突破卷 < 20，执行探索任务...")
                 r=context.run_task("kun281")
-
                 if r.status==Status.failed:
                     return False
             # 3. 状态更新

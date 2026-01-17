@@ -2,11 +2,7 @@
     "N-1768623524914": {
         "action": "Click",
         "expected": "结界突破|结界",
-        "next": [
-            "寮突2",
-            "[JumpBack]寮突3",
-            "[JumpBack]寮突-点击结界突破"
-        ],
+        "next": [],
         "recognition": "OCR",
         "roi": [
             229,
