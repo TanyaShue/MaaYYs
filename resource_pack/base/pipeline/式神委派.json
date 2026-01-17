@@ -3,46 +3,166 @@
         "next": [
             "式神委派1",
             "[JumpBack]点击探索"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "式神委派1": {
-        "recognition": "FeatureMatch",
         "action": "Click",
         "next": [
             "式神委派17",
             "[JumpBack]式神委派18"
         ],
+        "recognition": "FeatureMatch",
         "roi": [
             357,
             607,
             184,
             99
         ],
-        "template": [
-            "式神委派\\式神委派1.png"
-        ],
         "target": [
             467,
             653,
             22,
             27
+        ],
+        "template": [
+            "式神委派\\式神委派1.png"
         ]
     },
-    "式神委派2": {
-        "recognition": "OCR",
+    "式神委派10": {
         "action": "Click",
+        "expected": "委派式神",
+        "next": [
+            "式神委派11"
+        ],
+        "pre_delay": 500,
+        "recognition": "OCR",
+        "roi": [
+            917,
+            247,
+            238,
+            256
+        ]
+    },
+    "式神委派11": {
+        "action": "Click",
+        "expected": "一键选择",
+        "next": [
+            "式神委派12"
+        ],
+        "pre_delay": 500,
+        "recognition": "OCR",
+        "roi": [
+            1017,
+            379,
+            230,
+            115
+        ]
+    },
+    "式神委派12": {
+        "action": "Click",
+        "expected": "出发",
+        "next": [
+            "式神委派6"
+        ],
+        "pre_delay": 500,
+        "recognition": "OCR",
+        "roi": [
+            1060,
+            527,
+            182,
+            128
+        ]
+    },
+    "式神委派13": {
+        "expected": "式神委派",
+        "next": [
+            "式神委派16",
+            "[JumpBack]式神委派2",
+            "[JumpBack]式神委派4"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            28,
+            7,
+            262,
+            106
+        ],
+        "timeout": 5000
+    },
+    "式神委派14": {
+        "expected": "完成任务",
+        "next": [
+            "式神委派15"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            381,
+            405,
+            390,
+            91
+        ]
+    },
+    "式神委派15": {
+        "action": "Click",
+        "expected": "返回",
+        "next": [
+            "式神委派6"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            903,
+            237,
+            243,
+            283
+        ]
+    },
+    "式神委派16": {
+        "expected": "完成",
+        "inverse": true,
+        "next": [
+            "式神委派7"
+        ],
+        "order_by": "Vertical",
+        "recognition": "OCR",
+        "roi": [
+            963,
+            110,
+            136,
+            526
+        ]
+    },
+    "式神委派17": {
+        "expected": "式神委派",
+        "next": [
+            "式神委派13"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            84,
+            4,
+            234,
+            124
+        ]
+    },
+    "式神委派18": {
+        "recognition": "DirectHit"
+    },
+    "式神委派2": {
+        "action": "Click",
+        "expected": "完成",
         "next": [
             "式神委派3",
             "[JumpBack]式神委派4"
         ],
+        "order_by": "Vertical",
+        "recognition": "OCR",
         "roi": [
             963,
             110,
             136,
             526
         ],
-        "order_by": "Vertical",
-        "expected": "完成",
         "target_offset": [
             109,
             38,
@@ -51,32 +171,32 @@
         ]
     },
     "式神委派3": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "完成任务",
         "next": [
             "式神委派6",
             "[JumpBack]式神委派5"
         ],
-        "pre_delay": 1000,
         "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
         "roi": [
             917,
             246,
             298,
             151
-        ],
-        "expected": "完成任务"
+        ]
     },
     "式神委派4": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": ".*",
+        "recognition": "OCR",
         "roi": [
             306,
             505,
             596,
             188
         ],
-        "expected": ".*",
         "target": [
             983,
             163,
@@ -85,15 +205,15 @@
         ]
     },
     "式神委派5": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": ".*",
+        "recognition": "OCR",
         "roi": [
             306,
             505,
             596,
             188
         ],
-        "expected": ".*",
         "target": [
             471,
             602,
@@ -115,33 +235,57 @@
         ]
     },
     "式神委派7": {
-        "recognition": "OCR",
         "action": "Custom",
+        "custom_action": "CustomAppointment",
+        "custom_action_param": {
+            "以鱼为礼": false,
+            "伊吹的藤球": false,
+            "奇怪的痕迹": false,
+            "寻找耳环": false,
+            "帮忙搬运": false,
+            "弥助的画": false,
+            "捡到的宝石": false,
+            "接送弥助": false,
+            "樱饼配方": false,
+            "猫老大": false
+        },
+        "expected": "式神委派",
         "next": [
             "返回庭院"
         ],
-        "pre_delay": 1000,
         "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
         "roi": [
             28,
             7,
             262,
             106
-        ],
-        "expected": "式神委派",
-        "custom_action": "CustomAppointment",
-        "custom_action_param": {
-            "樱饼配方": false,
-            "奇怪的痕迹": false,
-            "接送弥助": false,
-            "伊吹的藤球": false,
-            "捡到的宝石": false,
-            "以鱼为礼": false,
-            "帮忙搬运": false,
-            "猫老大": false,
-            "寻找耳环": false,
-            "弥助的画": false
-        }
+        ]
+    },
+    "式神委派8-点击对应委派": {
+        "action": "Click",
+        "expected": "樱饼配方",
+        "pre_delay": 500,
+        "recognition": "OCR",
+        "roi": [
+            1087,
+            134,
+            171,
+            506
+        ]
+    },
+    "式神委派9": {
+        "action": "Click",
+        "expected": "跳过",
+        "pre_delay": 500,
+        "recognition": "OCR",
+        "roi": [
+            630,
+            470,
+            405,
+            121
+        ]
     },
     "识别当前存在任务列表": {
         "recognition": "OCR",
@@ -153,150 +297,12 @@
         ]
     },
     "式神委派8": {
-        "recognition": "OCR",
-        "action": "Click",
+        "recognition": "DirectHit",
         "next": [
             "式神委派10",
             "式神委派14",
-            "[JumpBack]式神委派9"
-        ],
-        "pre_delay": 500,
-        "roi": [
-            1087,
-            134,
-            171,
-            506
-        ],
-        "expected": "樱饼配方"
-    },
-    "式神委派9": {
-        "recognition": "OCR",
-        "action": "Click",
-        "pre_delay": 500,
-        "roi": [
-            630,
-            470,
-            405,
-            121
-        ],
-        "expected": "跳过"
-    },
-    "式神委派10": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "式神委派11"
-        ],
-        "pre_delay": 500,
-        "roi": [
-            917,
-            247,
-            238,
-            256
-        ],
-        "expected": "委派式神"
-    },
-    "式神委派11": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "式神委派12"
-        ],
-        "pre_delay": 500,
-        "roi": [
-            1017,
-            379,
-            230,
-            115
-        ],
-        "expected": "一键选择"
-    },
-    "式神委派12": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "式神委派6"
-        ],
-        "pre_delay": 500,
-        "roi": [
-            1060,
-            527,
-            182,
-            128
-        ],
-        "expected": "出发"
-    },
-    "式神委派14": {
-        "recognition": "OCR",
-        "next": [
-            "式神委派15"
-        ],
-        "roi": [
-            381,
-            405,
-            390,
-            91
-        ],
-        "expected": "完成任务"
-    },
-    "式神委派15": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "式神委派6"
-        ],
-        "roi": [
-            903,
-            237,
-            243,
-            283
-        ],
-        "expected": "返回"
-    },
-    "式神委派13": {
-        "recognition": "OCR",
-        "timeout": 5000,
-        "on_error": [],
-        "next": [
-            "式神委派16",
-            "[JumpBack]式神委派2",
-            "[JumpBack]式神委派4"
-        ],
-        "roi": [
-            28,
-            7,
-            262,
-            106
-        ],
-        "expected": "式神委派"
-    },
-    "式神委派16": {
-        "recognition": "OCR",
-        "next": [
-            "式神委派7"
-        ],
-        "inverse": true,
-        "roi": [
-            963,
-            110,
-            136,
-            526
-        ],
-        "order_by": "Vertical",
-        "expected": "完成"
-    },
-    "式神委派17": {
-        "recognition": "OCR",
-        "next": [
-            "式神委派13"
-        ],
-        "roi": [
-            84,
-            4,
-            234,
-            124
-        ],
-        "expected": "式神委派"
-    },
-    "式神委派18": {}
+            "[JumpBack]式神委派9",
+            "[JumpBack]式神委派8-点击对应委派"
+        ]
+    }
 }

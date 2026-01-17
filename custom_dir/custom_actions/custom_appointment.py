@@ -51,7 +51,7 @@ class CustomAppointment(CustomAction):
             # 2. task_name 存在于屏幕上识别到的任务列表中
             if should_run and task_name in on_screen_tasks:
                 print(f"任务 '{task_name}' 符合执行条件，开始委派...")
-                context.run_task(f"式神委派8",{"式神委派8":{"expected":f"{task_name}"}})
+                context.run_task(f"式神委派8",{"式神委派8-点击对应委派":{"expected":f"{task_name}"}})
                 print("任务执行完成")
             elif should_run:
                 print(f"式神委派8 '{task_name}'，但未在屏幕上找到。")
