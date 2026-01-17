@@ -76,6 +76,9 @@
     },
     "启动游戏": {
         "action": "StartApp",
+        "focus": {
+            "Node.Action.Failed": "[error]启动失败,检查游戏区服是否正确"
+        },
         "next": [
             "启动游戏2",
             "[JumpBack]启动游戏1",
