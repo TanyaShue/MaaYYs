@@ -1,4 +1,20 @@
 {
+    "N-1768623524914": {
+        "action": "Click",
+        "expected": "结界突破|结界",
+        "next": [
+            "寮突2",
+            "[JumpBack]寮突3",
+            "[JumpBack]寮突-点击结界突破"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            229,
+            668,
+            101,
+            40
+        ]
+    },
     "寮突": {
         "next": [
             "寮突1",
@@ -6,11 +22,24 @@
         ],
         "recognition": "DirectHit"
     },
+    "寮突-点击结界突破": {
+        "action": "Click",
+        "expected": "结|界|突破",
+        "recognition": "OCR",
+        "roi": [
+            213,
+            677,
+            121,
+            42
+        ]
+    },
     "寮突1": {
         "expected": "结界突破|结界",
         "next": [
             "寮突2",
-            "[JumpBack]寮突3"
+            "[JumpBack]寮突3",
+            "[JumpBack]寮突-点击结界突破",
+            "[JumpBack]N-1768623524914"
         ],
         "recognition": "OCR",
         "roi": [
@@ -360,7 +389,9 @@
         "expected": "结界突破",
         "next": [
             "寮突2_copy1",
-            "[JumpBack]寮突3"
+            "[JumpBack]寮突3",
+            "[JumpBack]寮突-点击结界突破",
+            "[JumpBack]N-1768623524914"
         ],
         "recognition": "OCR",
         "roi": [
@@ -508,13 +539,13 @@
     },
     "寮突3": {
         "action": "Click",
-        "expected": "结界突破",
+        "expected": "结界|突破",
         "recognition": "OCR",
         "roi": [
-            218,
-            670,
-            129,
-            40
+            225,
+            669,
+            107,
+            35
         ]
     },
     "寮突4": {
