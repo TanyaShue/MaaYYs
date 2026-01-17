@@ -2,62 +2,64 @@
     "ReStart": {
         "action": "Custom",
         "custom_action": "ReStartGame",
+        "next": "StopTask",
+        "recognition": "DirectHit",
         "focus": {
-            "start": "出现异常了!!! 这是预期流程之外的超时,请反馈给开发者",
-            "level": {
-                "start": "error"
-            }
-        },
-      "next": "StopTask"
+            "Node.Recognition.Starting": "[error]出现异常了!!! 这是预期流程之外的超时,请反馈给开发者",
+            "Node.Action.Failed": "[error]重启失败,检查游戏区服是否正确"
+        }
     },
     "StopTask": {
-        "action": "StopTask"
+        "action": "StopTask",
+        "recognition": "DirectHit"
     },
     "悬赏封印_协助战斗": {
-        "recognition": "OCR",
-        "timeout": 3000,
-        "on_error": [
-            "ReStart"
-        ],
+        "expected": "悬赏封印",
         "next": [
             "悬赏封印_拒绝邀请"
         ],
+        "on_error": [
+            "ReStart"
+        ],
+        "recognition": "OCR",
         "roi": [
             493,
             115,
             305,
             500
         ],
-        "expected": "悬赏封印"
+        "timeout": 3000
     },
     "悬赏封印_拒绝邀请": {
-        "recognition": "OCR",
         "action": "Click",
+        "expected": "拒绝",
+        "recognition": "OCR",
         "roi": [
             815,
             367,
             193,
             232
-        ],
-        "expected": "拒绝"
-    },
-    "超时了_出现异常咯": {
-        "timeout": 3000,
-        "on_error": [
-            "ReStart"
-        ],
-        "next": [
-            "悬赏封印_协助战斗"
         ]
     },
     "超时_切换御魂失败": {
         "action": "Custom",
         "custom_action": "ReStartGame",
         "focus": {
-            "start": "当前任务切换御魂失败,请确保队伍名称或者分组正确后重试,即将重启后执行下一个任务",
             "level": {
                 "start": "warning"
-            }
-        }
+            },
+            "start": "当前任务切换御魂失败,请确保队伍名称或者分组正确后重试,即将重启后执行下一个任务"
+        },
+        "recognition": "DirectHit"
+    },
+    "超时了_出现异常咯": {
+        "next": [
+            "悬赏封印_协助战斗"
+        ],
+        "on_error": [
+            "ReStart"
+        ],
+        "timeout": 3000,
+        "recognition": "DirectHit"
     }
 }
