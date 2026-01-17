@@ -12,7 +12,23 @@
         "pre_delay": 1000,
         "rate_limit": 5000,
         "recognition": "DirectHit",
-        "timeout": 10000
+        "timeout": 10000,
+        "action": "Custom",
+        "custom_action": "TimeCheck",
+        "custom_action_param": {
+            "end": "23:00",
+            "start": "06:00",
+            "mode": "in",
+            "date_rule": {
+                "type": "week",
+                "value": [
+                    1,
+                    2,
+                    3,
+                    4
+                ]
+            }
+        }
     },
     "麒麟-打开寮信息面板": {
         "action": "Click",
