@@ -309,7 +309,6 @@
     "组队副本20": {
         "action": "Click",
         "expected": "挑|战",
-        "next": [],
         "post_delay": 1000,
         "pre_delay": 1000,
         "recognition": "OCR",
@@ -470,7 +469,9 @@
     "组队副本5": {
         "action": "Click",
         "next": [
-            "组队副本7",
+            "组队副本8",
+            "[JumpBack]组队副本7_copy2",
+            "[JumpBack]组队副本6",
             "[JumpBack]打开底部菜单"
         ],
         "recognition": "DirectHit",
@@ -494,7 +495,9 @@
     "组队副本5_copy2": {
         "action": "Click",
         "next": [
-            "组队副本7_copy1",
+            "组队副本8_copy1",
+            "[JumpBack]组队副本7_copy2",
+            "[JumpBack]组队副本6",
             "[JumpBack]打开底部菜单"
         ],
         "recognition": "DirectHit",
@@ -510,38 +513,6 @@
         "recognition": "FeatureMatch",
         "template": [
             "组队副本\\组队副本6.png"
-        ]
-    },
-    "组队副本7": {
-        "action": "Click",
-        "expected": "式神录",
-        "next": [
-            "组队副本8",
-            "[JumpBack]组队副本6",
-            "[JumpBack]组队副本7_copy2"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            721,
-            648,
-            468,
-            43
-        ]
-    },
-    "组队副本7_copy1": {
-        "action": "Click",
-        "expected": "式神录",
-        "next": [
-            "组队副本8_copy1",
-            "[JumpBack]组队副本6",
-            "[JumpBack]组队副本7_copy2"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            721,
-            648,
-            468,
-            43
         ]
     },
     "组队副本7_copy2": {
