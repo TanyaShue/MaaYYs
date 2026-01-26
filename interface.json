@@ -1,0 +1,1734 @@
+{
+  "interface_version": 2,
+  "name": "MaaYYs",
+  "label": "阴阳师",
+  "version": "v2.5.6",
+  "github": "https://github.com/TanyaShue/MaaYYs",
+  "description": "阴阳师自动化脚本",
+  "icon": "/assets/logo/logo.png",
+  "mirrorchyan_rid": "MaaYYs",
+  "mirrorchyan_multiplatform": true,
+  "contact": "TanyaShue",
+  "controller": [
+    {
+      "name": "Android",
+      "label": "安卓设备",
+      "type": "Adb",
+      "description": "通过ADB连接的安卓设备"
+    }
+  ],
+  "resource": [
+    {
+      "name": "官服(雷电,mumu下载的选这个)",
+      "label": "官服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/official"
+      ]
+    },
+    {
+      "name": "官服2(mumu和雷电下载的不要选这个,选第二个)",
+      "label": "官服2",
+      "path": [
+        "./resource_pack/base"
+      ]
+    },
+    {
+      "name": "bilibili服",
+      "label": "B站服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/bilibili"
+      ]
+    },
+    {
+      "name": "华为渠道服",
+      "label": "华为服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/huawei"
+      ]
+    },
+    {
+      "name": "应用宝渠道服",
+      "label": "应用宝服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/tencent"
+      ]
+    },
+    {
+      "name": "OPPO渠道服",
+      "label": "OPPO服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/OPPO"
+      ]
+    }
+  ],
+  "agent": {
+    "child_exec": "python",
+    "child_args": [
+      "./MaaAgent.py"
+    ]
+  },
+  "task": [
+    {
+      "name": "打开游戏",
+      "label": "打开游戏",
+      "entry": "启动游戏"
+    },
+    {
+      "name": "寮三十捐材料",
+      "label": "寮三十捐材料",
+      "entry": "寮3058",
+      "option": [
+        "捐材料"
+      ]
+    },
+    {
+      "name": "活动爬塔-梦魇挑战",
+      "label": "活动爬塔-梦魇挑战",
+      "entry": "活动爬塔-梦魇挑战",
+      "description": "活动爬塔-梦魇挑战(爬塔界面开始,手动装备御魂,锁定阵容)",
+      "option": [
+        "活动爬塔-梦魇挑战-开始前随机等待时间",
+        "活动爬塔-梦魇挑战-打完一局后随机等待时间"
+      ]
+    },
+    {
+      "name": "自动地鬼",
+      "label": "自动地鬼",
+      "entry": "开始地鬼-检查时间",
+      "option": [
+        "地鬼挑战次数",
+        "地鬼阵容预设",
+        "每日仅执行一次",
+        "地鬼_锁定阵容"
+      ]
+    },
+    {
+      "name": "自动御魂",
+      "label": "自动御魂",
+      "entry": "自动御魂",
+      "option": [
+        "御魂挑战目标",
+        "御魂阵容预设",
+        "是否使用御魂加成",
+        "是否在战斗中投喂宠物",
+        "自动挑战次数"
+      ]
+    },
+    {
+      "name": "自动麒麟",
+      "label": "自动麒麟",
+      "entry": "麒麟",
+      "option": [
+        "麒麟阵容预设"
+      ]
+    },
+    {
+      "name": "英杰试炼",
+      "label": "英杰试炼",
+      "entry": "英杰试炼",
+      "option": [
+        "英杰试炼阵容预设"
+      ]
+    },
+    {
+      "name": "自动悬赏",
+      "label": "自动悬赏",
+      "entry": "自动悬赏封印",
+      "option": [
+        "悬赏目标",
+        "悬赏封印阵容预设",
+        "是否启动自动轮换"
+      ]
+    },
+    {
+      "name": "结界突破",
+      "label": "结界突破",
+      "entry": "自动结界",
+      "option": [
+        "结界突破阵容预设"
+      ]
+    },
+    {
+      "name": "自动逢魔",
+      "label": "自动逢魔",
+      "entry": "开始逢魔-检查时间",
+      "option": [
+        "逢魔答题同步题目",
+        "逢魔首领阵容预设"
+      ]
+    },
+    {
+      "name": "日常奖励领取",
+      "label": "日常奖励领取",
+      "entry": "日常_任务列表",
+      "option": [
+        "领取奖励_商店每日奖励",
+        "领取奖励_庭院事务",
+        "领取奖励_花合战奖励",
+        "领取奖励_邮件",
+        "每日执行一次奖励领取"
+      ]
+    },
+    {
+      "name": "自动秘闻",
+      "label": "自动秘闻",
+      "entry": "自动秘闻",
+      "option": [
+        "秘闻阵容预设"
+      ]
+    },
+    {
+      "name": "结界奖励领取",
+      "label": "结界奖励领取",
+      "entry": "阴阳寮奖励领取",
+      "option": [
+        "寄养设置",
+        "是否领取寄养奖励",
+        "是否启用自动挂卡",
+        "自动挂卡类型设置",
+        "挂卡星级设置"
+      ]
+    },
+    {
+      "name": "投喂宠物",
+      "label": "投喂宠物",
+      "entry": "投喂宠物"
+    },
+    {
+      "name": "组队副本",
+      "label": "组队副本",
+      "entry": "组队副本14",
+      "option": [
+        "经验副本设置",
+        "金币副本设置"
+      ]
+    },
+    {
+      "name": "自动御灵",
+      "label": "自动御灵",
+      "entry": "自动御灵1",
+      "option": [
+        "御灵点击策略设置"
+      ]
+    },
+    {
+      "name": "自动道馆突破",
+      "label": "自动道馆突破",
+      "entry": "自动道馆",
+      "option": [
+        "道馆阵容预设"
+      ]
+    },
+    {
+      "name": "自动寮突破",
+      "label": "自动寮突破",
+      "entry": "寮突",
+      "option": [
+        "寮突阵容预设"
+      ]
+    },
+    {
+      "name": "自动阴界之门",
+      "label": "自动阴界之门",
+      "entry": "阴间之门",
+      "option": [
+        "阴界之门阵容预设"
+      ]
+    },
+    {
+      "name": "自动委派",
+      "label": "自动委派",
+      "entry": "式神委派",
+      "option": [
+        "委派_弥助的画",
+        "委派_寻找耳环",
+        "委派_猫老大",
+        "委派_捡到的宝石",
+        "委派_以鱼为礼",
+        "委派_帮忙搬运",
+        "委派_樱饼配方",
+        "委派_奇怪的痕迹",
+        "委派_接送弥助",
+        "委派_伊吹的藤球"
+      ]
+    },
+    {
+      "name": "肝绘卷",
+      "label": "肝绘卷(有风险,风险自付)",
+      "entry": "kun2820",
+      "option": [
+        "绘卷结界阵容预设",
+        "绘卷探索阵容预设"
+      ]
+    },
+    {
+      "name": "关闭游戏",
+      "label": "关闭游戏",
+      "entry": "关闭阴阳师",
+      "option": []
+    }
+  ],
+  "option": {
+    "寄养设置": {
+      "type": "select",
+      "label": "寄养设置",
+      "description": "选择自动寄养时优先考虑的收益类型，是优先体力还是勾玉",
+      "default_case": "勾玉优先",
+      "cases": [
+        {
+          "name": "勾玉优先",
+          "label": "勾玉优先",
+          "pipeline_override": {
+            "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+              "custom_action_param": {
+                "FosterTarget": 1
+              }
+            }
+          }
+        },
+        {
+          "name": "体力优先",
+          "label": "体力优先",
+          "pipeline_override": {
+            "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+              "custom_action_param": {
+                "FosterTarget": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    "捐材料": {
+      "type": "select",
+      "label": "捐材料",
+      "default_case": "低级觉醒材料",
+      "cases": [
+        {
+          "name": "低级觉醒材料",
+          "label": "低级觉醒材料",
+          "pipeline_override": {
+            "寮30_提交材料": {
+              "expected": "提交低级觉醒材料"
+            }
+          }
+        },
+        {
+          "name": "中级觉醒材料",
+          "label": "中级觉醒材料",
+          "pipeline_override": {
+            "寮30_提交材料": {
+              "expected": "提交中级觉醒材料"
+            }
+          }
+        },
+        {
+          "name": "高级觉醒材料",
+          "label": "高级觉醒材料",
+          "pipeline_override": {
+            "寮30_提交材料": {
+              "expected": "提交高级觉醒材料"
+            }
+          }
+        }
+      ]
+    },
+    "地鬼挑战次数": {
+      "type": "select",
+      "label": "地鬼挑战次数",
+      "default_case": "1个",
+      "cases": [
+        {
+          "name": "1个",
+          "label": "1个",
+          "value": "1",
+          "pipeline_override": {
+            "开始自动挑战鬼王": {
+              "custom_action_param": {
+                "count": 1
+              }
+            }
+          }
+        },
+        {
+          "name": "2个",
+          "label": "2个",
+          "value": "2",
+          "pipeline_override": {
+            "开始自动挑战鬼王": {
+              "custom_action_param": {
+                "count": 2
+              }
+            }
+          }
+        },
+        {
+          "name": "3个",
+          "label": "3个",
+          "value": "3",
+          "pipeline_override": {
+            "开始自动挑战鬼王": {
+              "custom_action_param": {
+                "count": 3
+              }
+            }
+          }
+        }
+      ]
+    },
+    "御魂挑战目标": {
+      "type": "select",
+      "label": "御魂挑战目标",
+      "description": "根据你当前的地鬼分数选择需要挑战的地鬼个数",
+      "default_case": "魂土",
+      "cases": [
+        {
+          "name": "魂土",
+          "label": "魂土",
+          "value": "魂土",
+          "pipeline_override": {
+            "自动御魂_点击目标层数": {
+              "expected": "悲鸣"
+            }
+          }
+        },
+        {
+          "name": "魂十",
+          "label": "魂十",
+          "value": "魂十",
+          "pipeline_override": {
+            "自动御魂_点击目标层数": {
+              "expected": "拾层"
+            }
+          }
+        },
+        {
+          "name": "魂王",
+          "label": "魂王",
+          "value": "魂王",
+          "pipeline_override": {
+            "自动御魂_点击目标层数": {
+              "expected": "神罚"
+            }
+          }
+        }
+      ]
+    },
+    "悬赏目标": {
+      "type": "select",
+      "label": "悬赏目标",
+      "description": "选择自动悬赏时优先打探索副本还是式神挑战券。注意：部分情况可能两者都没有，会导致任务卡住",
+      "default_case": "探索",
+      "cases": [
+        {
+          "name": "探索",
+          "label": "只打探索",
+          "value": "探索",
+          "pipeline_override": {
+            "悬赏封印2": {
+              "enable": false
+            }
+          }
+        },
+        {
+          "name": "挑战",
+          "label": "挑战优先",
+          "value": "挑战",
+          "pipeline_override": {
+            "悬赏封印2": {
+              "enable": true
+            }
+          }
+        }
+      ]
+    },
+    "是否启用自动挂卡": {
+      "type": "switch",
+      "label": "是否启用自动挂卡",
+      "description": "是否启用自动挂卡",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "阴阳寮奖励领取_识别结界特征": {
+          "custom_action_param": {
+            "tasks": {
+              "阴阳寮奖励24_挂结界卡": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "是否领取寄养奖励": {
+      "type": "switch",
+      "label": "是否领取寄养奖励",
+      "description": "是否领取寄养奖励",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "阴阳寮奖励37": {
+          "enabled": true
+        }
+      }
+    },
+    "自动挂卡类型设置": {
+      "type": "select",
+      "label": "自动挂卡类型设置",
+      "description": "选择自动挂结界卡的种类",
+      "default_case": "太鼓",
+      "cases": [
+        {
+          "name": "太鼓",
+          "label": "太鼓",
+          "value": "太鼓",
+          "pipeline_override": {
+            "阴阳寮奖励27": {
+              "expected": "太鼓"
+            },
+            "阴阳寮奖励29": {
+              "expected": "太鼓"
+            }
+          }
+        },
+        {
+          "name": "斗鱼",
+          "label": "斗鱼",
+          "value": "斗鱼",
+          "pipeline_override": {
+            "阴阳寮奖励27": {
+              "expected": "斗鱼"
+            },
+            "阴阳寮奖励29": {
+              "expected": "斗鱼"
+            }
+          }
+        }
+      ]
+    },
+    "挂卡星级设置": {
+      "type": "select",
+      "label": "挂卡星级设置",
+      "description": "选择自动挂结界卡的星级",
+      "default_case": "5星及以下",
+      "cases": [
+        {
+          "name": "6星及以下",
+          "label": "6星及以下",
+          "value": "6星及以下",
+          "pipeline_override": {
+            "阴阳寮奖励28": {
+              "expected": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          }
+        },
+        {
+          "name": "5星及以下",
+          "label": "5星及以下",
+          "value": "5星及以下",
+          "pipeline_override": {
+            "阴阳寮奖励28": {
+              "expected": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ]
+            }
+          }
+        },
+        {
+          "name": "4星及以下",
+          "label": "4星及以下",
+          "value": "4星及以下",
+          "pipeline_override": {
+            "阴阳寮奖励28": {
+              "expected": [
+                0,
+                1,
+                2,
+                3
+              ]
+            }
+          }
+        },
+        {
+          "name": "3星及以下",
+          "label": "3星及以下",
+          "value": "3星及以下",
+          "pipeline_override": {
+            "阴阳寮奖励28": {
+              "expected": [
+                0,
+                1,
+                2
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "是否启动自动轮换": {
+      "type": "switch",
+      "label": "是否启动自动轮换",
+      "description": "是否在悬赏封印时启用自动轮换队员功能，启动前需确保已在游戏中设置好轮换式神",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "探索_悬赏_自动轮换": {
+          "enabled": true
+        }
+      }
+    },
+    "逢魔答题同步题目": {
+      "type": "switch",
+      "label": "逢魔答题同步题目",
+      "description": "执行逢魔任务时，是否自动从网络获取最新的题目和答案库",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "自动逢魔2": {
+          "custom_action_param": {
+            "upload": true,
+            "sync": true
+          }
+        }
+      }
+    },
+    "悬赏封印阵容预设": {
+      "type": "input",
+      "label": "悬赏封印阵容预设",
+      "description": "填写需要挑战悬赏封印的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "装备日常清杂预设": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "结界突破阵容预设": {
+      "type": "input",
+      "label": "结界突破阵容预设",
+      "description": "填写结界突破需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "装备突破预设": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "绘卷结界阵容预设": {
+      "type": "input",
+      "label": "绘卷结界阵容预设",
+      "description": "填写绘卷结界需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "kun2820": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "绘卷探索阵容预设": {
+      "type": "input",
+      "label": "绘卷探索阵容预设",
+      "description": "填写绘卷探索需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "kun288": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "道馆阵容预设": {
+      "type": "input",
+      "label": "道馆阵容预设",
+      "description": "填写道馆需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "自动道馆10": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "寮突阵容预设": {
+      "type": "input",
+      "label": "寮突阵容预设",
+      "description": "填写阴阳寮突破需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "寮突19": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "地鬼阵容预设": {
+      "type": "input",
+      "label": "地鬼阵容预设",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "预设分组",
+          "label": "分组名称",
+          "description": "填写预设的分组名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "预设队伍",
+          "label": "队伍名称",
+          "description": "填写预设的队伍名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "装备地狱鬼王预设": {
+          "custom_action_param": {
+            "group_name": "{预设分组}",
+            "team_name": "{预设队伍}"
+          }
+        },
+        "开始自动挑战鬼王": {
+          "custom_action_param": {
+            "group_name": "{预设分组}",
+            "team_name": "{预设队伍}"
+          }
+        }
+      }
+    },
+    "御魂阵容预设": {
+      "type": "input",
+      "label": "御魂阵容预设",
+      "description": "填写自动御魂需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "自动御魂_装备挑战御魂副本御魂": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "御灵阵容预设": {
+      "type": "input",
+      "label": "御灵阵容预设",
+      "description": "填写自动御灵时需要使用的分组和队伍名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "自动御灵10": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "英杰试炼阵容预设": {
+      "type": "input",
+      "label": "英杰试炼阵容预设",
+      "description": "填写英杰试炼时需要使用的分组和队伍名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "英杰试炼-确保位于式神录-装备御魂": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "麒麟阵容预设": {
+      "type": "input",
+      "label": "麒麟阵容预设",
+      "description": "填写狩猎站攻打麒麟时需要使用的分组和队伍名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "麒麟6": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "阴界之门阵容预设": {
+      "type": "input",
+      "label": "阴界之门阵容预设",
+      "description": "填写阴界之门使用的分组和队伍名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "阴间之门11": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "是否使用御魂加成": {
+      "type": "switch",
+      "label": "是否使用御魂加成",
+      "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "寮3026_copy1": {
+          "enabled": true
+        }
+      }
+    },
+    "是否在战斗中投喂宠物": {
+      "type": "switch",
+      "label": "是否在战斗中投喂宠物",
+      "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "自动御魂11": {
+          "enabled": true
+        }
+      }
+    },
+    "每日仅执行一次": {
+      "type": "switch",
+      "label": "每日仅执行一次",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "default_case ": "No",
+      "pipeline_override": {
+        "开始自动挑战鬼王": {
+          "custom_action_param": {
+            "daily_once": true
+          }
+        }
+      }
+    },
+    "地鬼_锁定阵容": {
+      "type": "switch",
+      "label": "地鬼_锁定阵容",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "default_case ": "Yes",
+      "pipeline_override": {
+        "开始自动挑战鬼王": {
+          "custom_action_param": {
+            "lock_squad": true
+          }
+        },
+        "自动地鬼3_锁定阵容": {
+          "enable": true
+        }
+      }
+    },
+    "自动挑战次数": {
+      "type": "input",
+      "label": "自动挑战次数",
+      "description": "设置自动挑战御魂的次数，到达指定次数后任务将自动停止",
+      "default": "10",
+      "inputs": [
+        {
+          "name": "挑战次数",
+          "label": "挑战次数",
+          "description": "填写挑战次数",
+          "default": "10",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "自动御魂3": {
+          "custom_action_param": {
+            "expected_number": "{挑战次数}"
+          }
+        }
+      }
+    },
+    "逢魔首领阵容预设": {
+      "type": "input",
+      "label": "逢魔首领阵容预设",
+      "description": "填写挑战逢魔首领需要的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "现世逢魔_装备式神预设": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "秘闻阵容预设": {
+      "type": "input",
+      "label": "秘闻阵容预设",
+      "description": "填写挑战秘闻副本需要的分组和队伍预设名称",
+      "default": "默认队伍",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "自动秘闻_装备式神预设": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        },
+        "自动秘闻_出战预设队伍": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "上供目标": {
+      "type": "input",
+      "label": "上供目标",
+      "description": "超鬼王上供目标",
+      "default": "好友名称",
+      "inputs": [
+        {
+          "name": "value",
+          "label": "上供目标",
+          "description": "填写上供目标",
+          "default": "好友名称",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "超鬼王13": {
+          "expected": "{value}"
+        }
+      }
+    },
+    "领取奖励_商店每日奖励": {
+      "type": "switch",
+      "label": "领取奖励_商店每日奖励",
+      "description": "是否自动领取商店中的每日免费奖励",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "日常_任务列表": {
+          "custom_action_param": {
+            "tasks": {
+              "领取奖励_商店每日奖励": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "领取奖励_庭院事务": {
+      "type": "switch",
+      "label": "领取奖励_庭院事务",
+      "description": "是否自动领取庭院事务",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "日常_任务列表": {
+          "custom_action_param": {
+            "tasks": {
+              "日常-开始庭院事务": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "领取奖励_花合战奖励": {
+      "type": "switch",
+      "label": "领取奖励_花合战奖励",
+      "description": "是否自动领取花合战中已解锁的奖励",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "日常_任务列表": {
+          "custom_action_param": {
+            "tasks": {
+              "领取奖励_花合战奖励": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "领取奖励_邮件": {
+      "type": "switch",
+      "label": "领取奖励_邮件",
+      "description": "是否自动领取邮件奖励",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "日常_任务列表": {
+          "custom_action_param": {
+            "tasks": {
+              "领取奖励_邮件": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "经验副本设置": {
+      "type": "select",
+      "label": "经验副本设置",
+      "description": "设置组队经验副本的相关参数，包括预设和加成",
+      "default_case": "经验副本分组预设",
+      "cases": [
+        {
+          "name": "经验副本分组预设",
+          "label": "经验副本分组预设",
+          "description": "填写经验副本需要使用的分组预设名称",
+          "pipeline_override": {
+            "组队副本8_copy1": {
+              "custom_action_param": {
+                "group_name": "{value}"
+              }
+            }
+          }
+        },
+        {
+          "name": "经验副本队伍预设",
+          "label": "经验副本队伍预设",
+          "description": "填写经验副本需要使用的队伍预设名称",
+          "pipeline_override": {
+            "组队副本8_copy1": {
+              "custom_action_param": {
+                "team_name": "{value}"
+              }
+            }
+          }
+        },
+        {
+          "name": "启用100%经验加成",
+          "label": "启用100%经验加成",
+          "description": "挑战经验副本时，是否自动开启100%经验加成Buff",
+          "pipeline_override": {
+            "组队副本4_copy2": {
+              "custom_action_param": {
+                "exp_100%": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "启用50%经验加成",
+          "label": "启用50%经验加成",
+          "description": "挑战经验副本时，是否自动开启50%经验加成Buff",
+          "pipeline_override": {
+            "组队副本4_copy2": {
+              "custom_action_param": {
+                "exp_50%": "{boole}"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "金币副本设置": {
+      "type": "select",
+      "label": "金币副本设置",
+      "default_case": "金币副本分组预设",
+      "cases": [
+        {
+          "name": "金币副本分组预设",
+          "label": "金币副本分组预设",
+          "description": "填写金币副本需要使用的分组预设名称",
+          "pipeline_override": {
+            "组队副本8": {
+              "custom_action_param": {
+                "group_name": "{value}"
+              }
+            }
+          }
+        },
+        {
+          "name": "金币副本队伍预设",
+          "label": "金币副本队伍预设",
+          "description": "填写金币副本需要使用的队伍预设名称",
+          "pipeline_override": {
+            "组队副本8": {
+              "custom_action_param": {
+                "team_name": "{value}"
+              }
+            }
+          }
+        },
+        {
+          "name": "启用100%金币加成",
+          "label": "启用100%金币加成",
+          "pipeline_override": {
+            "组队副本4": {
+              "custom_action_param": {
+                "gold_100%": "{boole}"
+              }
+            }
+          }
+        },
+        {
+          "name": "启用50%金币加成",
+          "label": "启用50%金币加成",
+          "pipeline_override": {
+            "组队副本4": {
+              "custom_action_param": {
+                "gold_50%": "{boole}"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "御灵点击策略设置": {
+      "type": "input",
+      "label": "御灵点击策略设置",
+      "description": "自定义御灵副本中的点击权重分布与随机等待时间范围",
+      "inputs": [
+        {
+          "name": "double_w",
+          "label": "双击权重",
+          "description": "执行双击动作的权重",
+          "default": "50",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "single_w",
+          "label": "单击权重",
+          "description": "执行单击动作的权重",
+          "default": "50",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "short_w",
+          "label": "短等待权重",
+          "description": "执行短时间等待的权重",
+          "default": "95",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "long_w",
+          "label": "长等待权重",
+          "description": "执行长时间等待的权重",
+          "default": "5",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "short_min",
+          "label": "短等待最少(秒)",
+          "default": "1",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "short_max",
+          "label": "短等待最多(秒)",
+          "default": "20",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "long_min",
+          "label": "长等待最少(秒)",
+          "default": "100",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "long_max",
+          "label": "长等待最多(秒)",
+          "default": "200",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "御灵_点击屏幕继续": {
+          "custom_action_param": {
+            "double_click_weight": "{double_w}",
+            "single_click_weight": "{single_w}",
+            "short_wait_weight": "{short_w}",
+            "long_wait_weight": "{long_w}",
+            "short_wait_min": "{short_min}",
+            "short_wait_max": "{short_max}",
+            "long_wait_min": "{long_min}",
+            "long_wait_max": "{long_max}"
+          }
+        }
+      }
+    },
+    "活动爬塔-梦魇挑战-开始前随机等待时间": {
+      "type": "input",
+      "label": "活动爬塔-梦魇挑战-开始前随机等待时间",
+      "inputs": [
+        {
+          "name": "最短时间",
+          "label": "最短时间",
+          "description": "填写随机等待最短时间（秒）",
+          "default": "1",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "最长时间",
+          "label": "最长时间",
+          "description": "填写随机等待最长时间（秒）",
+          "default": "5",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "活动爬塔-梦魇挑战-识别挑战": {
+          "custom_action_param": {
+            "min": "{最短时间}",
+            "max": "{value}"
+          }
+        }
+      }
+    },
+    "活动爬塔-梦魇挑战-打完一局后随机等待时间": {
+      "type": "input",
+      "label": "活动爬塔-梦魇挑战-打完一句后随机等待时间",
+      "default": "1",
+      "inputs": [
+        {
+          "name": "最短时间",
+          "label": "最短时间",
+          "description": "填写随机等待的最短时间（秒）",
+          "default": "1",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "最长时间",
+          "label": "最长时间",
+          "description": "填写随机等待的最长时间（秒）",
+          "default": "10",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "活动爬塔-梦魇挑战-点击屏幕继续": {
+          "custom_action_param": {
+            "min": "{最短时间}",
+            "max": "{最长时间}"
+          }
+        }
+      }
+    },
+    "每日执行一次奖励领取": {
+      "type": "switch",
+      "label": "每日执行一次奖励领取",
+      "description": "每天仅执行一次部分奖励,如签到,送友情点,商店每日黑碎,每日免费一抽",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "日常_任务列表": {
+          "custom_action_param": {
+            "日常-开始庭院事务": {
+              "once_per_day": true
+            },
+            "领取奖励_商店每日奖励": {
+              "once_per_day": true
+            }
+          }
+        }
+      }
+    },
+    "委派_弥助的画": {
+      "type": "switch",
+      "label": "委派-弥助的画",
+      "description": "是否自动接取 弥助的画 (300体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "弥助的画": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_寻找耳环": {
+      "type": "switch",
+      "label": "委派-寻找耳环",
+      "description": "是否自动接取 寻找耳环 (300体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "寻找耳环": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_猫老大": {
+      "type": "switch",
+      "label": "委派-猫老大",
+      "description": "是否自动接取 猫老大 (300体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "猫老大": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_捡到的宝石": {
+      "type": "switch",
+      "label": "委派-捡到的宝石",
+      "description": "是否自动接取 捡到的宝石 (200体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "捡到的宝石": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_以鱼为礼": {
+      "type": "switch",
+      "label": "委派-以鱼为礼",
+      "description": "是否自动接取 以鱼为礼 (200体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "以鱼为礼": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_帮忙搬运": {
+      "type": "switch",
+      "label": "委派-帮忙搬运",
+      "description": "是否自动接取 帮忙搬运 (200体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "帮忙搬运": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_樱饼配方": {
+      "type": "switch",
+      "label": "委派-樱饼配方",
+      "description": "是否自动接取 樱饼配方 (50体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "樱饼配方": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_奇怪的痕迹": {
+      "type": "switch",
+      "label": "委派-奇怪的痕迹",
+      "description": "是否自动接取 奇怪的痕迹 (100体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "奇怪的痕迹": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_接送弥助": {
+      "type": "switch",
+      "label": "委派-接送弥助",
+      "description": "是否自动接取 接送弥助 (100体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "接送弥助": "{boole}"
+          }
+        }
+      }
+    },
+    "委派_伊吹的藤球": {
+      "type": "switch",
+      "label": "委派-伊吹的藤球",
+      "description": "是否自动接取 伊吹的藤球 (100体) 任务",
+      "cases": [
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
+      ],
+      "pipeline_override": {
+        "式神委派7": {
+          "custom_action_param": {
+            "伊吹的藤球": "{boole}"
+          }
+        }
+      }
+    }
+  }
+}

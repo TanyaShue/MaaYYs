@@ -118,17 +118,6 @@
       ]
     },
     {
-      "task_name": "组队寮30(自动同心队拉队友)(超级不稳定)",
-      "task_entry": "寮30",
-      "option": [
-        "寮30目标副本",
-        "寮30是否为队长",
-        "寮30是否启用加成",
-        "寮30分组预设",
-        "寮30分队预设"
-      ]
-    },
-    {
       "task_name": "自动悬赏",
       "task_entry": "自动悬赏封印",
       "option": [
@@ -209,6 +198,14 @@
         "御灵_短等待最大值",
         "御灵_长等待最小值",
         "御灵_长等待最大值"
+      ]
+    },
+    {
+      "task_name": "英杰试炼",
+      "task_entry": "英杰试炼",
+      "option": [
+        "英杰试炼分组预设",
+        "英杰试炼队伍预设"
       ]
     },
     {
@@ -738,6 +735,32 @@
       "doc": "填写绘卷探索需要使用的队伍预设名称",
       "pipeline_override": {
         "kun288": {
+          "custom_action_param": {
+            "team_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "英杰试炼分组预设",
+      "type": "input",
+      "default": "默认分组",
+      "doc": "填写英杰试炼需要使用的分组预设名称",
+      "pipeline_override": {
+        "英杰试炼-确保位于式神录-装备御魂": {
+          "custom_action_param": {
+            "group_name": "{value}"
+          }
+        }
+      }
+    },
+    {
+      "name": "英杰试炼队伍预设",
+      "type": "input",
+      "default": "默认队伍",
+      "doc": "填写英杰试炼需要使用的队伍预设名称",
+      "pipeline_override": {
+        "英杰试炼-确保位于式神录-装备御魂": {
           "custom_action_param": {
             "team_name": "{value}"
           }

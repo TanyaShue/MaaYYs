@@ -104,7 +104,14 @@
         "on_error": [
             "跳过"
         ],
-        "recognition": "DirectHit"
+        "recognition": "OCR",
+        "roi": [
+            9,
+            630,
+            551,
+            90
+        ],
+        "expected": "闲庭|图鉴|珍旅居|纳物库"
     },
     "点击探索_识别探索界面": {
         "action": "Click",
