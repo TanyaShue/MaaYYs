@@ -1,0 +1,339 @@
+{
+    "兵藏秘境-点击目标祝福": {
+        "action": "Click",
+        "expected": "万刃",
+        "next": [
+            "兵藏秘境-祝福-点击确定"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            53,
+            348,
+            1154,
+            72
+        ]
+    },
+    "兵藏秘境-确保重置": {
+        "expected": "确认重置",
+        "inverse": true,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            671,
+            405,
+            173,
+            57
+        ]
+    },
+    "兵藏秘境-确定重置": {
+        "action": "Click",
+        "expected": "确认重置",
+        "next": [
+            "兵藏秘境-确保重置",
+            "[JumpBack]兵藏秘境-确定重置1"
+        ],
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            671,
+            405,
+            173,
+            57
+        ]
+    },
+    "兵藏秘境-确定重置1": {
+        "action": "Click",
+        "expected": "确认重置",
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            671,
+            405,
+            173,
+            57
+        ]
+    },
+    "兵藏秘境-祝福-点击确定": {
+        "action": "Click",
+        "expected": "确定",
+        "recognition": "OCR",
+        "roi": [
+            571,
+            625,
+            131,
+            53
+        ]
+    },
+    "兵藏秘境-识别挑战失败": {
+        "expected": "再次挑战|提升式神|提上阴阳师",
+        "next": [
+            "英杰试炼-返回兵藏秘境",
+            "[JumpBack]英杰试炼-战斗后点击屏幕继续"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            256,
+            537,
+            766,
+            69
+        ]
+    },
+    "兵藏秘境-选中第一个祝福": {
+        "action": "Click",
+        "expected": "请选择奖励",
+        "next": [
+            "兵藏秘境-祝福-点击确定"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            518,
+            36,
+            235,
+            69
+        ],
+        "target": [
+            67,
+            424,
+            246,
+            162
+        ]
+    },
+    "兵藏秘境-重置进度": {
+        "action": "Click",
+        "expected": "重置",
+        "recognition": "OCR",
+        "roi": [
+            1153,
+            78,
+            59,
+            30
+        ]
+    },
+    "英杰试炼": {
+        "next": [
+            "英杰试炼-确保位于英杰试炼",
+            "[JumpBack]英杰试炼-点击英杰试炼",
+            "[JumpBack]点击探索"
+        ],
+        "recognition": "DirectHit"
+    },
+    "英杰试炼-刷完试炼卷": {
+        "expected": "^0{1,2}/50$",
+        "next": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            709,
+            22,
+            131,
+            39
+        ]
+    },
+    "英杰试炼-战斗后点击屏幕继续": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [
+            504,
+            663,
+            275,
+            53
+        ]
+    },
+    "英杰试炼-点击从式神录返回": {
+        "action": "Click",
+        "expected": "式神录",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            80,
+            1,
+            138,
+            56
+        ],
+        "target": [
+            23,
+            11,
+            39,
+            40
+        ]
+    },
+    "英杰试炼-点击兵藏秘境": {
+        "action": "Click",
+        "expected": "兵藏秘境",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            1082,
+            332,
+            51,
+            170
+        ]
+    },
+    "英杰试炼-点击准备": {
+        "action": "Click",
+        "expected": "准备",
+        "recognition": "OCR",
+        "roi": [
+            1123,
+            546,
+            108,
+            81
+        ]
+    },
+    "英杰试炼-点击式神录": {
+        "action": "Click",
+        "expected": "式神录",
+        "recognition": "OCR",
+        "roi": [
+            974,
+            598,
+            80,
+            34
+        ]
+    },
+    "英杰试炼-点击挑战": {
+        "action": "Click",
+        "expected": "挑战",
+        "recognition": "OCR",
+        "roi": [
+            1111,
+            589,
+            131,
+            67
+        ]
+    },
+    "英杰试炼-点击英杰试炼": {
+        "action": "Click",
+        "expected": "英杰试炼",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            811,
+            656,
+            103,
+            51
+        ]
+    },
+    "英杰试炼-确保位于兵藏秘境": {
+        "expected": "兵藏秘境",
+        "next": [
+            "英杰试炼-确保试炼卷数量大于0"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            71,
+            4,
+            172,
+            69
+        ],
+        "timeout": 5000
+    },
+    "英杰试炼-确保位于式神录-装备御魂": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "默认分组",
+            "team_name": "默认队伍"
+        },
+        "expected": "式神录",
+        "next": [
+            "英杰试炼-确保返回兵藏秘境",
+            "[JumpBack]英杰试炼-点击从式神录返回"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            86,
+            2,
+            119,
+            53
+        ]
+    },
+    "英杰试炼-确保位于英杰试炼": {
+        "expected": "英杰试炼",
+        "next": [
+            "英杰试炼-确保位于兵藏秘境",
+            "[JumpBack]英杰试炼-点击兵藏秘境"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            75,
+            8,
+            151,
+            73
+        ]
+    },
+    "英杰试炼-确保试炼卷数量大于0": {
+        "expected": "^(?:[1-9]|[1-9]\\d)/50$",
+        "next": [
+            "英杰试炼-确保位于式神录-装备御魂",
+            "[JumpBack]英杰试炼-点击式神录"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            709,
+            22,
+            131,
+            39
+        ]
+    },
+    "英杰试炼-确保返回兵藏秘境": {
+        "expected": "兵藏秘境",
+        "next": [
+            "英杰试炼-刷完试炼卷",
+            "[JumpBack]英杰试炼-点击挑战",
+            "[JumpBack]英杰试炼-点击准备",
+            "[JumpBack]英杰试炼-选择祝福",
+            "[JumpBack]兵藏秘境-识别挑战失败",
+            "[JumpBack]英杰试炼-战斗后点击屏幕继续"
+        ],
+        "rate_limit": 3000,
+        "recognition": "OCR",
+        "roi": [
+            71,
+            4,
+            172,
+            69
+        ],
+        "timeout": 2000000
+    },
+    "英杰试炼-返回兵藏秘境": {
+        "expected": "兵藏秘境",
+        "next": [
+            "兵藏秘境-确定重置",
+            "[JumpBack]兵藏秘境-重置进度"
+        ],
+        "rate_limit": 3000,
+        "recognition": "OCR",
+        "roi": [
+            71,
+            4,
+            172,
+            69
+        ],
+        "timeout": 2000000
+    },
+    "英杰试炼-选择祝福": {
+        "expected": "请选择奖励",
+        "next": [
+            "兵藏秘境-点击目标祝福"
+        ],
+        "on_error": [
+            "兵藏秘境-选中第一个祝福"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            522,
+            39,
+            247,
+            67
+        ],
+        "timeout": 5000
+    }
+}
