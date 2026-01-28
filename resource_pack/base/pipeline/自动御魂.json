@@ -454,7 +454,9 @@
         "action": "Click",
         "expected": "取消",
         "next": [
-            "自动御魂2_copy2"
+            "自动御魂2_copy2",
+            "[JumpBack]自动御魂16",
+            "[JumpBack]自动御魂-点击取消自动"
         ],
         "post_delay": 1000,
         "pre_delay": 1000,
@@ -643,6 +645,19 @@
             0,
             262,
             78
+        ]
+    },
+    "自动御魂-点击取消自动": {
+        "action": "Click",
+        "expected": "取消",
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            432,
+            403,
+            172,
+            56
         ]
     }
 }
