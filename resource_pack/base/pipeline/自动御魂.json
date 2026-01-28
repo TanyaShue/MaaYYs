@@ -20,6 +20,37 @@
             "自动御魂\\寮3026_copy1.png"
         ]
     },
+    "N-1769565728203": {
+        "action": "Click",
+        "post_delay": 10000,
+        "rate_limit": 3000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            620,
+            546,
+            225,
+            63
+        ],
+        "template": [
+            "自动御魂\\自动御魂5_1.png",
+            "自动御魂\\自动御魂5_2.png",
+            "自动御魂\\自动御魂5_3.png"
+        ],
+        "timeout": 2000000
+    },
+    "N-1769565732641": {
+        "action": "Click",
+        "expected": "自动|自动挑战",
+        "post_delay": 10000,
+        "recognition": "OCR",
+        "roi": [
+            647,
+            550,
+            240,
+            66
+        ],
+        "timeout": 2000000
+    },
     "寮3015_copy1": {
         "action": "Click",
         "post_delay": 2000,
@@ -72,6 +103,21 @@
             "自动御魂\\寮3026_copy1.png"
         ]
     },
+    "御魂-确保处于御魂界面": {
+        "expected": "御魂",
+        "next": [
+            "自动御魂9",
+            "N-1769565728203",
+            "N-1769565732641"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            157,
+            13,
+            79,
+            53
+        ]
+    },
     "自动御魂": {
         "next": [
             "自动御魂_点击御魂",
@@ -81,6 +127,19 @@
             "返回庭院"
         ],
         "recognition": "DirectHit"
+    },
+    "自动御魂-点击取消自动": {
+        "action": "Click",
+        "expected": "取消",
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            432,
+            403,
+            172,
+            56
+        ]
     },
     "自动御魂-确保关闭加成": {
         "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
@@ -121,11 +180,12 @@
         "expected": "自动|自动挑战",
         "next": [
             "自动御魂6",
-            "[JumpBack]自动御魂9",
             "[JumpBack]自动御魂11",
             "[JumpBack]自动御魂16",
-            "[JumpBack]自动御魂19"
+            "[JumpBack]自动御魂19",
+            "[JumpBack]御魂-确保处于御魂界面"
         ],
+        "post_delay": 10000,
         "recognition": "OCR",
         "roi": [
             647,
@@ -414,10 +474,10 @@
         "action": "Click",
         "next": [
             "自动御魂6",
-            "[JumpBack]自动御魂9",
             "[JumpBack]自动御魂11",
             "[JumpBack]自动御魂16",
-            "[JumpBack]自动御魂19"
+            "[JumpBack]自动御魂19",
+            "[JumpBack]御魂-确保处于御魂界面"
         ],
         "rate_limit": 3000,
         "recognition": "TemplateMatch",
@@ -645,19 +705,6 @@
             0,
             262,
             78
-        ]
-    },
-    "自动御魂-点击取消自动": {
-        "action": "Click",
-        "expected": "取消",
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            432,
-            403,
-            172,
-            56
         ]
     }
 }
