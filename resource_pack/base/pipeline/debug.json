@@ -2,12 +2,12 @@
     "ReStart": {
         "action": "Custom",
         "custom_action": "ReStartGame",
-        "next": "StopTask",
-        "recognition": "DirectHit",
         "focus": {
-            "Node.Recognition.Starting": "[error]出现异常了!!! 这是预期流程之外的超时,请反馈给开发者",
-            "Node.Action.Failed": "[error]重启失败,检查游戏区服是否正确"
-        }
+            "Node.Action.Failed": "[error]重启失败,检查游戏区服是否正确",
+            "Node.Recognition.Starting": "[error]出现异常了!!! 这是预期流程之外的超时,请反馈给开发者"
+        },
+        "next": "StopTask",
+        "recognition": "DirectHit"
     },
     "StopTask": {
         "action": "StopTask",
@@ -59,7 +59,7 @@
         "on_error": [
             "ReStart"
         ],
-        "timeout": 3000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 3000
     }
 }

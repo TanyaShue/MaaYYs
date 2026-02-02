@@ -1,5 +1,21 @@
 {
     "麒麟": {
+        "action": "Custom",
+        "custom_action": "TimeCheck",
+        "custom_action_param": {
+            "date_rule": {
+                "type": "week",
+                "value": [
+                    1,
+                    2,
+                    3,
+                    4
+                ]
+            },
+            "end": "23:00",
+            "mode": "in",
+            "start": "06:00"
+        },
         "next": [
             "麒麟-确保位于阴阳寮内",
             "[JumpBack]麒麟1",
@@ -12,23 +28,7 @@
         "pre_delay": 1000,
         "rate_limit": 5000,
         "recognition": "DirectHit",
-        "timeout": 10000,
-        "action": "Custom",
-        "custom_action": "TimeCheck",
-        "custom_action_param": {
-            "end": "23:00",
-            "start": "06:00",
-            "mode": "in",
-            "date_rule": {
-                "type": "week",
-                "value": [
-                    1,
-                    2,
-                    3,
-                    4
-                ]
-            }
-        }
+        "timeout": 10000
     },
     "麒麟-打开寮信息面板": {
         "action": "Click",
@@ -239,6 +239,7 @@
         "next": [
             "麒麟9",
             "麒麟14",
+            "N-1770039464983",
             "[JumpBack]麒麟13"
         ],
         "rate_limit": 3000,
@@ -269,6 +270,26 @@
             623,
             481,
             96
+        ]
+    },
+    "N-1770039464983": {
+        "recognition": "OCR",
+        "action": "Click",
+        "target": [
+            347,
+            591,
+            501,
+            128
+        ],
+        "expected": "失败|成功|胜利",
+        "roi": [
+            659,
+            104,
+            365,
+            210
+        ],
+        "next": [
+            "麒麟10"
         ]
     }
 }
