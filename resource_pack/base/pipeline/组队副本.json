@@ -189,19 +189,9 @@
         ]
     },
     "组队副本14": {
-        "action": "Custom",
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "tasks": {
-                "组队副本_经验副本": {
-                    "enabled": true
-                },
-                "组队副本_金币副本": {
-                    "enabled": true
-                }
-            }
-        },
         "next": [
+            "[JumpBack]组队副本_经验副本",
+            "[JumpBack]组队副本_金币副本",
             "组队副本16"
         ],
         "recognition": "DirectHit"
@@ -673,6 +663,7 @@
         "recognition": "DirectHit"
     },
     "组队副本_经验副本": {
+        "max_hit": 1,
         "action": "Click",
         "next": [
             "组队副本4_copy2"
@@ -697,6 +688,7 @@
     },
     "组队副本_金币副本": {
         "action": "Click",
+        "max_hit": 1,
         "next": [
             "组队副本4"
         ],

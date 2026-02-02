@@ -1,12 +1,4 @@
 {
-    "日常-开始庭院事务": {
-        "next": [
-            "日常-确保位于事务界面",
-            "[JumpBack]N-1769738083110",
-            "[JumpBack]N-1769738026013"
-        ],
-        "recognition": "DirectHit"
-    },
     "N-1769738026013": {
         "action": "Click",
         "recognition": "TemplateMatch",
@@ -33,6 +25,12 @@
             "日常\\N-1769738026013_1.png"
         ]
     },
+    "N-1770039777489": {
+        "focus": {
+            "Node.Recognition.Starting": "日常奖励结束"
+        },
+        "recognition": "DirectHit"
+    },
     "日常": {
         "action": "Click",
         "expected": "召唤",
@@ -48,7 +46,10 @@
         ]
     },
     "日常-事务-确保返回事务界面": {
-        "expected": "庭院|事务",
+        "expected": "庭院事务",
+        "focus": {
+            "Node.Recognition.Succeeded": "庭院事务执行完毕,返回庭院"
+        },
         "next": [
             "返回庭院"
         ],
@@ -62,15 +63,15 @@
     },
     "日常-事务-领取成功": {
         "action": "Click",
-        "expected": "领取|成功",
-        "post_delay": 1000,
+        "expected": "领取成功",
+        "post_delay": 2000,
         "pre_delay": 2000,
         "recognition": "OCR",
         "roi": [
-            291,
+            287,
             23,
-            239,
-            337
+            220,
+            72
         ],
         "target": [
             1196,
@@ -88,6 +89,7 @@
         "on_error": [
             "跳过"
         ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             382,
@@ -113,7 +115,7 @@
     },
     "日常-关闭签到页面-确认关闭-特征匹配": {
         "action": "Click",
-        "recognition": "TemplateMatch",
+        "recognition": "FeatureMatch",
         "roi": [
             821,
             77,
@@ -125,6 +127,18 @@
             "日常\\日常-关闭签到页面-确认关闭-模板匹配_2.png"
         ]
     },
+    "日常-开始庭院事务": {
+        "focus": {
+            "Node.Recognition.Starting": "开始执行日常庭院事务"
+        },
+        "max_hit": 1,
+        "next": [
+            "日常-确保位于事务界面",
+            "[JumpBack]N-1769738083110",
+            "[JumpBack]N-1769738026013"
+        ],
+        "recognition": "DirectHit"
+    },
     "日常-开始庭院事务-废弃": {
         "next": [
             "日常-确保位于事务界面",
@@ -135,6 +149,21 @@
         ],
         "recognition": "DirectHit",
         "timeout": 60000
+    },
+    "日常-活动卡片": {
+        "action": "Click",
+        "expected": "跳过",
+        "next": [
+            "日常-关闭签到页面-确认关闭-模板匹配",
+            "日常-关闭签到页面-确认关闭-特征匹配"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1165,
+            36,
+            65,
+            30
+        ]
     },
     "日常-满结界经验领取": {
         "expected": "您在|结界中放置的式神|已满|是否领取",
@@ -156,6 +185,7 @@
     "日常-满结界经验领取-确认领取": {
         "action": "Click",
         "expected": "确认",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             680,
@@ -170,7 +200,10 @@
         "next": [
             "[JumpBack]日常-关闭签到页面",
             "[JumpBack]日常-满结界经验领取",
+            "[JumpBack]日常-活动卡片",
             "[JumpBack]日常-事务-领取成功",
+            "[JumpBack]日常-领取每日6星御魂",
+            "[JumpBack]日常-获取6星御魂",
             "日常-事务-确保返回事务界面"
         ],
         "post_delay": 3000,
@@ -266,6 +299,30 @@
             89
         ]
     },
+    "日常-获取6星御魂": {
+        "action": "Click",
+        "expected": "选择",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            184,
+            564,
+            910,
+            49
+        ]
+    },
+    "日常-领取每日6星御魂": {
+        "action": "Click",
+        "expected": "选择",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            205,
+            431,
+            877,
+            65
+        ]
+    },
     "日常1": {
         "action": "Click",
         "expected": "跳过",
@@ -350,26 +407,15 @@
         ]
     },
     "日常_任务列表": {
-        "action": "Custom",
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "tasks": {
-                "日常-开始庭院事务": {
-                    "enabled": true,
-                    "once_per_day": true
-                },
-                "领取奖励_商店每日奖励": {
-                    "enabled": true,
-                    "once_per_day": true
-                },
-                "领取奖励_花合战奖励": {
-                    "enabled": true
-                },
-                "领取奖励_邮件": {
-                    "enabled": true
-                }
-            }
+        "focus": {
+            "Node.Recognition.Starting": "开始执行日常任务列表"
         },
+        "next": [
+            "[JumpBack]日常-开始庭院事务",
+            "[JumpBack]领取奖励_商店每日奖励",
+            "[JumpBack]领取奖励_花合战奖励",
+            "[JumpBack]领取奖励_邮件"
+        ],
         "on_error": [
             "返回庭院"
         ],

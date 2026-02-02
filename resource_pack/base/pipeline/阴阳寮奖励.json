@@ -267,6 +267,7 @@
         ]
     },
     "阴阳寮奖励24_挂结界卡": {
+        "max_hit": 1,
         "next": [
             "阴阳寮奖励领取_识别结界特征_copy1"
         ],
@@ -440,6 +441,7 @@
         "recognition": "NeuralNetworkDetect"
     },
     "阴阳寮奖励33_寄养": {
+        "max_hit": 1,
         "next": [
             "阴阳寮奖励领取_识别结界特征_copy2"
         ],
@@ -459,6 +461,7 @@
         ]
     },
     "阴阳寮奖励34_领取体力和经验": {
+        "max_hit": 1,
         "next": [
             "阴阳寮奖励领取_识别结界特征_copy2_copy1"
         ],
@@ -1043,22 +1046,10 @@
         ]
     },
     "阴阳寮奖励领取_识别结界特征": {
-        "action": "Custom",
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "tasks": {
-                "阴阳寮奖励24_挂结界卡": {
-                    "enabled": true
-                },
-                "阴阳寮奖励33_寄养": {
-                    "enabled": true
-                },
-                "阴阳寮奖励34_领取体力和经验": {
-                    "enabled": true
-                }
-            }
-        },
         "next": [
+            "[JumpBack]阴阳寮奖励24_挂结界卡",
+            "[JumpBack]阴阳寮奖励33_寄养",
+            "[JumpBack]阴阳寮奖励34_领取体力和经验",
             "返回庭院"
         ],
         "post_delay": 500,
