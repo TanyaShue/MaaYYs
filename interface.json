@@ -103,7 +103,6 @@
       "option": [
         "地鬼挑战次数",
         "地鬼阵容预设",
-        "每日仅执行一次",
         "地鬼_锁定阵容"
       ]
     },
@@ -170,8 +169,7 @@
         "领取奖励_商店每日奖励",
         "领取奖励_庭院事务",
         "领取奖励_花合战奖励",
-        "领取奖励_邮件",
-        "每日执行一次奖励领取"
+        "领取奖励_邮件"
       ]
     },
     {
@@ -462,14 +460,8 @@
         }
       ],
       "pipeline_override": {
-        "阴阳寮奖励领取_识别结界特征": {
-          "custom_action_param": {
-            "tasks": {
-              "阴阳寮奖励24_挂结界卡": {
-                "enabled": true
-              }
-            }
-          }
+        "阴阳寮奖励24_挂结界卡": {
+          "enabled": true
         }
       }
     },
@@ -1005,115 +997,6 @@
         }
       }
     },
-    "是否使用御魂加成": {
-      "type": "switch",
-      "label": "是否使用御魂加成",
-      "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
-      "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
-      ],
-      "pipeline_override": {
-        "寮3026_copy1": {
-          "enabled": true
-        }
-      }
-    },
-    "是否在战斗中投喂宠物": {
-      "type": "switch",
-      "label": "是否在战斗中投喂宠物",
-      "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
-      "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
-      ],
-      "pipeline_override": {
-        "自动御魂11": {
-          "enabled": true
-        }
-      }
-    },
-    "每日仅执行一次": {
-      "type": "switch",
-      "label": "每日仅执行一次",
-      "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
-      ],
-      "default_case ": "No",
-      "pipeline_override": {
-        "开始自动挑战鬼王": {
-          "custom_action_param": {
-            "daily_once": true
-          }
-        }
-      }
-    },
-    "地鬼_锁定阵容": {
-      "type": "switch",
-      "label": "地鬼_锁定阵容",
-      "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
-      ],
-      "default_case ": "Yes",
-      "pipeline_override": {
-        "开始自动挑战鬼王": {
-          "custom_action_param": {
-            "lock_squad": true
-          }
-        },
-        "自动地鬼3_锁定阵容": {
-          "enable": true
-        }
-      }
-    },
-    "自动挑战次数": {
-      "type": "input",
-      "label": "自动挑战次数",
-      "description": "设置自动挑战御魂的次数，到达指定次数后任务将自动停止",
-      "default": "10",
-      "inputs": [
-        {
-          "name": "挑战次数",
-          "label": "挑战次数",
-          "description": "填写挑战次数",
-          "default": "10",
-          "pipeline_type": "string"
-        }
-      ],
-      "pipeline_override": {
-        "自动御魂3": {
-          "custom_action_param": {
-            "expected_number": "{挑战次数}"
-          }
-        }
-      }
-    },
     "逢魔首领阵容预设": {
       "type": "input",
       "label": "逢魔首领阵容预设",
@@ -1180,23 +1063,88 @@
         }
       }
     },
-    "上供目标": {
+    "是否使用御魂加成": {
+      "type": "switch",
+      "label": "是否使用御魂加成",
+      "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "寮3026_copy1": {
+          "enabled": true
+        }
+      }
+    },
+    "是否在战斗中投喂宠物": {
+      "type": "switch",
+      "label": "是否在战斗中投喂宠物",
+      "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "pipeline_override": {
+        "自动御魂11": {
+          "enabled": true
+        }
+      }
+    },
+    "地鬼_锁定阵容": {
+      "type": "switch",
+      "label": "地鬼_锁定阵容",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是"
+        },
+        {
+          "name": "No",
+          "label": "否"
+        }
+      ],
+      "default_case ": "Yes",
+      "pipeline_override": {
+        "自动地鬼3_锁定阵容": {
+          "enable": true
+        },
+        "自动地鬼12_装备预设": {
+          "enabled": true
+        }
+      }
+    },
+    "自动挑战次数": {
       "type": "input",
-      "label": "上供目标",
-      "description": "超鬼王上供目标",
-      "default": "好友名称",
+      "label": "自动挑战次数",
+      "description": "设置自动挑战御魂的次数，到达指定次数后任务将自动停止",
+      "default": "10",
       "inputs": [
         {
-          "name": "value",
-          "label": "上供目标",
-          "description": "填写上供目标",
-          "default": "好友名称",
+          "name": "挑战次数",
+          "label": "挑战次数",
+          "description": "填写挑战次数",
+          "default": "10",
           "pipeline_type": "string"
         }
       ],
       "pipeline_override": {
-        "超鬼王13": {
-          "expected": "{value}"
+        "自动御魂3": {
+          "custom_action_param": {
+            "expected_number": "{挑战次数}"
+          }
         }
       }
     },
@@ -1215,17 +1163,11 @@
         }
       ],
       "pipeline_override": {
-        "日常_任务列表": {
-          "custom_action_param": {
-            "tasks": {
-              "领取奖励_商店每日奖励": {
-                "enabled": true
-              }
-            }
+          "领取奖励_商店每日奖励": {
+            "enabled": true
           }
         }
-      }
-    },
+      },
     "领取奖励_庭院事务": {
       "type": "switch",
       "label": "领取奖励_庭院事务",
@@ -1241,14 +1183,8 @@
         }
       ],
       "pipeline_override": {
-        "日常_任务列表": {
-          "custom_action_param": {
-            "tasks": {
-              "日常-开始庭院事务": {
-                "enabled": true
-              }
-            }
-          }
+        "日常-开始庭院事务": {
+          "enabled": true
         }
       }
     },
@@ -1267,14 +1203,8 @@
         }
       ],
       "pipeline_override": {
-        "日常_任务列表": {
-          "custom_action_param": {
-            "tasks": {
-              "领取奖励_花合战奖励": {
-                "enabled": true
-              }
-            }
-          }
+        "领取奖励_花合战奖励": {
+          "enabled": true
         }
       }
     },
@@ -1293,14 +1223,8 @@
         }
       ],
       "pipeline_override": {
-        "日常_任务列表": {
-          "custom_action_param": {
-            "tasks": {
-              "领取奖励_邮件": {
-                "enabled": true
-              }
-            }
-          }
+        "领取奖励_邮件": {
+          "enabled": true
         }
       }
     },
@@ -1539,33 +1463,6 @@
           "custom_action_param": {
             "min": "{最短时间}",
             "max": "{最长时间}"
-          }
-        }
-      }
-    },
-    "每日执行一次奖励领取": {
-      "type": "switch",
-      "label": "每日执行一次奖励领取",
-      "description": "每天仅执行一次部分奖励,如签到,送友情点,商店每日黑碎,每日免费一抽",
-      "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
-      ],
-      "pipeline_override": {
-        "日常_任务列表": {
-          "custom_action_param": {
-            "日常-开始庭院事务": {
-              "once_per_day": true
-            },
-            "领取奖励_商店每日奖励": {
-              "once_per_day": true
-            }
           }
         }
       }

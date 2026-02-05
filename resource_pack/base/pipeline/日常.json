@@ -137,7 +137,10 @@
             "[JumpBack]N-1769738083110",
             "[JumpBack]N-1769738026013"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "跳过"
+        ]
     },
     "日常-开始庭院事务-废弃": {
         "next": [

@@ -24,17 +24,6 @@ class ChallengeDungeonBoss(CustomAction):
         """
         json_data = json.loads(argv.custom_action_param)
 
-        # 新增逻辑：检查是否需要每日只执行一次
-        daily_once = json_data.get("daily_once", False)
-        lock_squad = json_data.get("lock_squad", True)
-        task_name = "ChallengeDungeonBoss"  # 定义当前任务的唯一名称
-
-        if daily_once:
-            tracker = DailyTaskTracker()
-            # 调用封装好的方法来检查今天是否已执行
-            if tracker.has_executed_today(task_name):
-                return True  # 返回True，表示任务“成功”跳过
-
         print("开始执行自定义动作: 自动挑战地鬼")
 
         # 从参数中获取挑战次数，默认为1
@@ -51,22 +40,7 @@ class ChallengeDungeonBoss(CustomAction):
                 return False
             print("点击挑战")
 
-            # 开始挑战
-            if lock_squad:
-                context.run_task("自动地鬼3",{"自动地鬼12_装备预设": {"enabled": False}})
-
-            else:
-                context.run_task("自动地鬼3", {"自动地鬼12": {
-                    "custom_action_param": {"group_name": json_data["group_name"],
-                                            "team_name": json_data["team_name"]}},
-                                                        "自动地鬼12_装备预设": {"enabled": True}})
-
         print("自动地鬼挑战完成")
-
-        # 如果需要每日只执行一次，并且执行成功，则更新记录文件
-        if daily_once:
-            # 调用封装好的方法来记录执行
-            tracker.record_execution(task_name)
 
         return True
 
