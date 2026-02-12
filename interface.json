@@ -67,9 +67,9 @@
     }
   ],
   "agent": {
-    "child_exec": "python",
+    "child_exec": ".\\runtime\\python3.11\\envs\\venv_1148f3a3f29155fc\\Scripts\\python.exe",
     "child_args": [
-      "./MaaAgent.py"
+      "MaaAgent.py"
     ]
   },
   "task": [
