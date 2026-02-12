@@ -5,7 +5,7 @@
         "recognition": "OCR"
     },
     "N-1768667020999": {
-        "expected": "梦魔挑战",
+        "expected": "影域精锐",
         "recognition": "OCR",
         "roi": [
             136,
@@ -17,7 +17,7 @@
         "timeout": 200000
     },
     "活动爬塔-梦魇挑战": {
-        "expected": "梦魔挑战",
+        "expected": "影域精銳",
         "next": [
             "爬塔-梦魇挑战-活动票花光",
             "[JumpBack]活动爬塔-梦魇挑战-识别挑战",
