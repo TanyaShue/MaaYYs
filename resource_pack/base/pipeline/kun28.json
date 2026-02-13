@@ -1,4 +1,27 @@
 {
+    "N-kun281": {
+        "focus": {
+            "Node.Recognition.Succeeded": "[debug]返回到探索界面"
+        },
+        "next": [
+            "kun2817",
+            "kun2822",
+            "kun2823",
+            "kun28-确保关闭章节面板",
+            "kun282",
+            "[JumpBack]kun283"
+        ],
+        "recognition": "TemplateMatch",
+        "roi": [
+            1089,
+            90,
+            145,
+            112
+        ],
+        "template": [
+            "kun28\\N-1768450130083_1.png"
+        ]
+    },
     "kun28-确保关闭章节面板": {
         "expected": "第二十八章",
         "recognition": "OCR",
@@ -18,6 +41,10 @@
             "kun2822",
             "kun2823",
             "kun28-确保关闭章节面板"
+        ],
+        "on_error": [
+            "[JumpBack]N-1770966223659",
+            "[JumpBack]N-1770966323291"
         ],
         "recognition": "TemplateMatch",
         "roi": [
@@ -599,27 +626,32 @@
             59
         ]
     },
-    "N-kun281": {
-        "focus": {
-            "Node.Recognition.Succeeded": "[debug]返回到探索界面"
-        },
-        "next": [
-            "kun2817",
-            "kun2822",
-            "kun2823",
-            "kun28-确保关闭章节面板",
-            "kun282",
-            "[JumpBack]kun283"
-        ],
+    "N-1770966223659": {
+        "action": "Click",
         "recognition": "TemplateMatch",
         "roi": [
-            1089,
-            90,
-            145,
-            112
+            1022,
+            0,
+            258,
+            196
         ],
         "template": [
-            "kun28\\N-1768450130083_1.png"
+            "kun28\\N-1770966223659_1.png",
+            "kun28\\N-1770966223659_2.png"
+        ]
+    },
+    "N-1770966323291": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1022,
+            0,
+            258,
+            196
+        ],
+        "template": [
+            "kun28\\N-1770966223659_1.png",
+            "kun28\\N-1770966223659_2.png"
         ]
     }
 }
