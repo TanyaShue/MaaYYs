@@ -1,5 +1,5 @@
 {
-    "ReStart": {
+    "重启游戏": {
         "action": "Custom",
         "custom_action": "ReStartGame",
         "focus": {
@@ -19,7 +19,7 @@
             "悬赏封印_拒绝邀请"
         ],
         "on_error": [
-            "ReStart"
+            "重启游戏"
         ],
         "recognition": "OCR",
         "roi": [
@@ -57,7 +57,7 @@
             "悬赏封印_协助战斗"
         ],
         "on_error": [
-            "ReStart"
+            "重启游戏"
         ],
         "recognition": "DirectHit",
         "timeout": 3000
