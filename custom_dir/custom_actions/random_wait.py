@@ -20,8 +20,6 @@ class RandomWait(CustomAction):
                      {"min": "2", "max": "5"}  -> 支持字符串
                      {"min": 2, "max": 5}      -> 支持数字
         """
-        print("开始执行自定义动作：随机等待")
-
         # 定义一个安全的转换函数，处理字符串、None、空值等情况
         def safe_float(value, default=0.0):
             if value is None:
@@ -65,18 +63,13 @@ class RandomWait(CustomAction):
 
         # 3. 执行等待
         if max_wait <= 0:
-            print("等待时间范围为 0，跳过等待。")
             return True
 
         # 生成随机时间
         wait_time = random.uniform(min_wait, max_wait)
 
-        print(f"参数设置: {min_wait} - {max_wait} 秒")
-        print(f"实际等待: {wait_time:.2f} 秒...")
-
         time.sleep(wait_time)
 
-        print("等待结束")
         return True
 
     def stop(self) -> None:
