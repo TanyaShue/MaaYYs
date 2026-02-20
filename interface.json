@@ -3,11 +3,8 @@
   "name": "MaaYYs",
   "label": "阴阳师",
   "version": "v2.5.6",
-  "github": "https://github.com/TanyaShue/MaaYYs",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
-  "mirrorchyan_rid": "MaaYYs",
-  "mirrorchyan_multiplatform": true,
   "contact": "TanyaShue",
   "controller": [
     {
@@ -198,15 +195,6 @@
       "entry": "投喂宠物"
     },
     {
-      "name": "组队副本",
-      "label": "组队副本",
-      "entry": "组队副本14",
-      "option": [
-        "经验副本设置",
-        "金币副本设置"
-      ]
-    },
-    {
       "name": "自动御灵",
       "label": "自动御灵",
       "entry": "自动御灵1",
@@ -239,29 +227,19 @@
       ]
     },
     {
-      "name": "自动委派",
-      "label": "自动委派",
-      "entry": "式神委派",
-      "option": [
-        "委派_弥助的画",
-        "委派_寻找耳环",
-        "委派_猫老大",
-        "委派_捡到的宝石",
-        "委派_以鱼为礼",
-        "委派_帮忙搬运",
-        "委派_樱饼配方",
-        "委派_奇怪的痕迹",
-        "委派_接送弥助",
-        "委派_伊吹的藤球"
-      ]
-    },
-    {
       "name": "肝绘卷",
       "label": "肝绘卷(有风险,风险自付)",
       "entry": "kun2820",
       "option": [
         "绘卷结界阵容预设",
         "绘卷探索阵容预设"
+      ]
+    },
+    {
+      "name": "活动300",
+      "label": "活动爬塔,在活动界面启动",
+      "entry": "活动爬塔-归狐谣",
+      "option": [
       ]
     },
     {
