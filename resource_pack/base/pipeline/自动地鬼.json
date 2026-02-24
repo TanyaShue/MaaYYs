@@ -21,8 +21,7 @@
             "[JumpBack]地鬼-点击筛选_1",
             "[JumpBack]地鬼-点击筛选-绿色掩码",
             "[JumpBack]地鬼-点击筛选-ocr"
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "地鬼-点击筛选-ocr": {
         "action": "Click",
@@ -86,10 +85,6 @@
     },
     "地鬼-确保打开筛选界面": {
         "expected": "悬赏|热门|最新|征服|收藏",
-        "next": [
-            "地鬼-识别是否位于热门",
-            "[JumpBack]地鬼-点击热门"
-        ],
         "recognition": "OCR",
         "roi": [
             1191,
