@@ -32,13 +32,15 @@ class ChallengeDungeonBoss(CustomAction):
 
         for i in range(count):
             print(f"开始挑战第 {i + 1} 只地鬼")
-
-            # 筛选模板容易出现分数不够的情况
-            r=context.run_task("点击筛选",{
-                "识别挑战位置": {"index": i}})
+            r=context.run_task("地鬼-点击筛选",{
+                "地鬼-识别挑战位置": {"index": i}})
             if r is None:
                 return False
-            print("点击挑战")
+
+            r=context.run_task("自动地鬼3")
+            if r is None:
+                return False
+
 
         print("自动地鬼挑战完成")
 

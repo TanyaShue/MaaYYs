@@ -322,7 +322,6 @@
         {
           "name": "1个",
           "label": "1个",
-          "value": "1",
           "pipeline_override": {
             "开始自动挑战鬼王": {
               "custom_action_param": {
@@ -334,7 +333,6 @@
         {
           "name": "2个",
           "label": "2个",
-          "value": "2",
           "pipeline_override": {
             "开始自动挑战鬼王": {
               "custom_action_param": {
@@ -346,7 +344,6 @@
         {
           "name": "3个",
           "label": "3个",
-          "value": "3",
           "pipeline_override": {
             "开始自动挑战鬼王": {
               "custom_action_param": {
@@ -366,7 +363,6 @@
         {
           "name": "魂土",
           "label": "魂土",
-          "value": "魂土",
           "pipeline_override": {
             "自动御魂_点击目标层数": {
               "expected": "悲鸣"
@@ -376,7 +372,6 @@
         {
           "name": "魂十",
           "label": "魂十",
-          "value": "魂十",
           "pipeline_override": {
             "自动御魂_点击目标层数": {
               "expected": "拾层"
@@ -386,7 +381,6 @@
         {
           "name": "魂王",
           "label": "魂王",
-          "value": "魂王",
           "pipeline_override": {
             "自动御魂_点击目标层数": {
               "expected": "神罚"
@@ -404,7 +398,6 @@
         {
           "name": "探索",
           "label": "只打探索",
-          "value": "探索",
           "pipeline_override": {
             "悬赏封印2": {
               "enable": false
@@ -414,7 +407,6 @@
         {
           "name": "挑战",
           "label": "挑战优先",
-          "value": "挑战",
           "pipeline_override": {
             "悬赏封印2": {
               "enable": true
@@ -472,7 +464,6 @@
         {
           "name": "太鼓",
           "label": "太鼓",
-          "value": "太鼓",
           "pipeline_override": {
             "阴阳寮奖励27": {
               "expected": "太鼓"
@@ -485,7 +476,6 @@
         {
           "name": "斗鱼",
           "label": "斗鱼",
-          "value": "斗鱼",
           "pipeline_override": {
             "阴阳寮奖励27": {
               "expected": "斗鱼"
@@ -506,7 +496,6 @@
         {
           "name": "6星及以下",
           "label": "6星及以下",
-          "value": "6星及以下",
           "pipeline_override": {
             "阴阳寮奖励28": {
               "expected": [
@@ -523,7 +512,6 @@
         {
           "name": "5星及以下",
           "label": "5星及以下",
-          "value": "5星及以下",
           "pipeline_override": {
             "阴阳寮奖励28": {
               "expected": [
@@ -539,7 +527,6 @@
         {
           "name": "4星及以下",
           "label": "4星及以下",
-          "value": "4星及以下",
           "pipeline_override": {
             "阴阳寮奖励28": {
               "expected": [
@@ -554,7 +541,6 @@
         {
           "name": "3星及以下",
           "label": "3星及以下",
-          "value": "3星及以下",
           "pipeline_override": {
             "阴阳寮奖励28": {
               "expected": [
