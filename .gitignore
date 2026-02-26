@@ -468,3 +468,5 @@ tools/ImageCropper/**/*.png
 /screencap.png
 /screencap.png
 /screencap_error.png
+/assets/ocr-v4/
+/assets/ocr-v5/
