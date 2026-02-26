@@ -28,8 +28,6 @@ class RandomWait(CustomAction):
                 # float() 可以处理 "5", "5.2", 5, 5.2 等情况
                 return float(value)
             except (ValueError, TypeError):
-                # 如果遇到无法转换的字符（如 "" 或 "abc"），返回默认值
-                print(f"警告: 无法将参数 '{value}' 转换为数字，使用默认值 {default}")
                 return default
 
         # 1. 参数解析
@@ -37,7 +35,6 @@ class RandomWait(CustomAction):
             param_str = argv.custom_action_param
             # 如果参数为空字符串，直接跳过
             if not param_str or not param_str.strip():
-                print("未检测到参数，跳过等待。")
                 return True
 
             params = json.loads(param_str)
@@ -48,17 +45,14 @@ class RandomWait(CustomAction):
             max_wait = safe_float(params.get("max"), 0.0)
 
         except json.JSONDecodeError as e:
-            print(f"参数解析失败，请确保是有效的JSON格式: {e}")
             return False
 
         # 2. 逻辑校验与修正
         if min_wait < 0 or max_wait < 0:
-            print("错误：等待时间不能为负数")
             return False
 
         # 自动交换大小值（防止用户填反）
         if min_wait > max_wait:
-            print(f"提示：min({min_wait}) > max({max_wait})，已自动交换范围。")
             min_wait, max_wait = max_wait, min_wait
 
         # 3. 执行等待
