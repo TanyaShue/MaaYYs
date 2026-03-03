@@ -23,7 +23,7 @@ class ChallengeDungeonBoss(CustomAction):
         :return: 是否执行成功。
         """
         json_data = json.loads(argv.custom_action_param)
-
+        print(json_data)
         print("开始执行自定义动作: 自动挑战地鬼")
 
         # 从参数中获取挑战次数，默认为1

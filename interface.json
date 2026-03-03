@@ -802,12 +802,6 @@
             "group_name": "{预设分组}",
             "team_name": "{预设队伍}"
           }
-        },
-        "开始自动挑战鬼王": {
-          "custom_action_param": {
-            "group_name": "{预设分组}",
-            "team_name": "{预设队伍}"
-          }
         }
       }
     },
