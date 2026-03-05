@@ -530,7 +530,7 @@
           "pipeline_override": {
             "阴阳寮奖励28": {
               "expected": [
-                0,
+                0, 
                 1,
                 2,
                 3
