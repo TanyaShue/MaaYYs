@@ -237,15 +237,7 @@ jobs:
 
           # Find asset matching the pattern
           PATTERN="${{ matrix.mxu_pattern }}"
-          DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "
-import sys, json, fnmatch
-data = json.load(sys.stdin)
-pattern = '$PATTERN'
-for asset in data.get('assets', []):
-    if fnmatch.fnmatch(asset['name'], pattern):
-        print(asset['browser_download_url'])
-        break
-" | head -n1)
+          DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "import sys, json, fnmatch; data = json.load(sys.stdin); pattern = '$PATTERN'; print([asset['browser_download_url'] for asset in data.get('assets', []) if fnmatch.fnmatch(asset['name'], pattern)][0])" 2>/dev/null | head -n1)
 
           if [ -z "$DOWNLOAD_URL" ]; then
             echo "::error::Could not find asset matching pattern: $PATTERN"
@@ -398,15 +390,7 @@ for asset in data.get('assets', []):
 
           # Find asset matching the pattern
           PATTERN="${{ matrix.maafw_pattern }}"
-          DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "
-import sys, json, fnmatch
-data = json.load(sys.stdin)
-pattern = '$PATTERN'
-for asset in data.get('assets', []):
-    if fnmatch.fnmatch(asset['name'], pattern):
-        print(asset['browser_download_url'])
-        break
-" | head -n1)
+          DOWNLOAD_URL=$(echo "$RELEASE_JSON" | python3 -c "import sys, json, fnmatch; data = json.load(sys.stdin); pattern = '$PATTERN'; print([asset['browser_download_url'] for asset in data.get('assets', []) if fnmatch.fnmatch(asset['name'], pattern)][0])" 2>/dev/null | head -n1)
 
           if [ -z "$DOWNLOAD_URL" ]; then
             echo "::error::Could not find asset matching pattern: $PATTERN"
