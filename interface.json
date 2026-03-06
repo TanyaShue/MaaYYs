@@ -5,7 +5,11 @@
   "version": "v2.5.6",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
+  "welcome": "README.md",
   "contact": "TanyaShue",
+  "github": "https://github.com/TanyaShue/MaaYYs",
+  "mirrorchyan_rid": "MaaYYs",
+  "mirrorchyan_multiplatform": true,
   "controller": [
     {
       "name": "Android",
