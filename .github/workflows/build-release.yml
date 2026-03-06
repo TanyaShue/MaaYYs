@@ -526,11 +526,6 @@ jobs:
             }
           }
 
-          # Create resource_config.json if it exists
-          if (Test-Path -Path "source/resource_config.json") {
-            Copy-Item -Path "source/resource_config.json" -Destination "package/resource_config.json" -Force
-            Write-Host "Copied resource_config.json"
-          }
 
           Write-Host "Package directory prepared successfully"
           Get-ChildItem -Path "package" -Recurse | Select-Object FullName
@@ -573,7 +568,7 @@ jobs:
           echo "Copied maafw directory"
 
           # Copy resource files
-          INCLUDE_LIST="assets resource_pack interface.json LICENSE README.md resource_config.json"
+          INCLUDE_LIST="assets resource_pack interface.json LICENSE README.md"
           for item in $INCLUDE_LIST; do
             if [ -e "source/$item" ]; then
               cp -r "source/$item" "package/$item"
