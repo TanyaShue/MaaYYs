@@ -90,7 +90,7 @@
             "[JumpBack]启动游戏3"
         ],
         "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2",
-        "rate_limit": 2000,
+        "rate_limit": 3000,
         "recognition": "DirectHit",
         "timeout": 60000
     },
@@ -127,7 +127,8 @@
             21,
             42,
             45
-        ]
+        ],
+        "post_delay":2000
     },
     "启动游戏4": {
         "action": "Click",

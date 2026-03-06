@@ -1,0 +1,17 @@
+{
+  "test": {
+    "recognition": "NeuralNetworkDetect",
+    "model": "best.onnx",
+    "labels": [
+      "white_dog",
+      "white_cat",
+      "black_dog",
+      "black_cat"
+    ],
+    "expected": 2
+  },
+  "MyCustomEntry": {
+    "action": "custom",
+    "custom_action": "MyCustomAction"
+  }
+}

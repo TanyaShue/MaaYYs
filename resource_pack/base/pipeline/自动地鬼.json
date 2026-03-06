@@ -1,5 +1,79 @@
 {
-    "地鬼=确保处于可挑战界面": {
+    "地鬼-点击热门": {
+        "action": "Click",
+        "expected": "热门|热|门",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            1180,
+            222,
+            69,
+            229
+        ],
+        "timeout": 500
+    },
+    "地鬼-点击筛选": {
+        "focus": {
+            "Node.Recognition.Starting": "开始点击筛选"
+        },
+        "next": [
+            "地鬼-确保打开筛选界面",
+            "[JumpBack]地鬼-点击筛选_1",
+            "[JumpBack]地鬼-点击筛选-绿色掩码",
+            "[JumpBack]地鬼-点击筛选-ocr"
+        ]
+    },
+    "地鬼-点击筛选-ocr": {
+        "action": "Click",
+        "expected": "筛选",
+        "recognition": "OCR",
+        "roi": [
+            1096,
+            57,
+            71,
+            40
+        ]
+    },
+    "地鬼-点击筛选-绿色掩码": {
+        "action": "Click",
+        "green_mask": true,
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1077,
+            2,
+            99,
+            121
+        ],
+        "target": [
+            1102,
+            17,
+            58,
+            73
+        ],
+        "template": [
+            "自动地鬼\\点击筛选-绿色掩码_1.png"
+        ]
+    },
+    "地鬼-点击筛选_1": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1077,
+            2,
+            99,
+            121
+        ],
+        "target": [
+            1102,
+            17,
+            58,
+            73
+        ],
+        "template": "地域鬼王/地域鬼王_筛选.png"
+    },
+    "地鬼-确保处于可挑战界面": {
         "expected": "挑战",
         "recognition": "OCR",
         "roi": [
@@ -7,6 +81,47 @@
             506,
             151,
             76
+        ]
+    },
+    "地鬼-确保打开筛选界面": {
+        "expected": "悬赏|热门|最新|征服|收藏",
+        "recognition": "OCR",
+        "roi": [1176,100,68,604],
+        "next": [
+            "地鬼-识别是否位于热门",
+            "[JumpBack]地鬼-点击热门"
+        ]
+    },
+    "地鬼-识别挑战位置": {
+        "action": "Click",
+        "focus": {
+            "Node.Recognition.Starting": "点击挑战"
+        },
+        "index": 2,
+        "order_by": "Vertical",
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            1035,
+            192,
+            135,
+            504
+        ],
+        "template": "地域鬼王/地鬼_挑战.png",
+        "timeout": 500
+    },
+    "地鬼-识别是否位于热门": {
+        "expected": "击杀数最多|最多|击杀",
+        "next": [
+            "地鬼-确保处于可挑战界面",
+            "[JumpBack]地鬼-识别挑战位置"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            907,
+            107,
+            232,
+            81
         ]
     },
     "地鬼_御魂_返回": {
@@ -82,11 +197,10 @@
         "action": "Custom",
         "custom_action": "ChallengeDungeonBoss",
         "custom_action_param": {
-            "count": 1,
-            "daily_once": true,
-            "group_name": "地鬼",
-            "lock_squad": true,
-            "team_name": "地域鬼王"
+            "count": 3
+        },
+        "focus": {
+            "Node.Recognition.Starting": "开始挑战地鬼"
         },
         "next": [
             "返回庭院"
@@ -135,92 +249,6 @@
             "自动地鬼\\点击地域鬼王_1.png",
             "自动地鬼\\点击地域鬼王_4.png",
             "自动地鬼\\点击地域鬼王_5.png"
-        ]
-    },
-    "点击热门": {
-        "action": "Click",
-        "expected": "热门|热|门",
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            1180,
-            222,
-            69,
-            229
-        ],
-        "timeout": 500
-    },
-    "点击筛选": {
-        "next": [
-            "确保打开筛选界面",
-            "[JumpBack]点击筛选_1",
-            "[JumpBack]点击筛选-绿色掩码",
-            "[JumpBack]点击筛选-ocr"
-        ],
-        "recognition": "DirectHit"
-    },
-    "点击筛选-ocr": {
-        "action": "Click",
-        "expected": "筛选",
-        "recognition": "OCR",
-        "roi": [
-            1096,
-            57,
-            71,
-            40
-        ]
-    },
-    "点击筛选-绿色掩码": {
-        "action": "Click",
-        "green_mask": true,
-        "post_delay": 2000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            1077,
-            2,
-            99,
-            121
-        ],
-        "target": [
-            1102,
-            17,
-            58,
-            73
-        ],
-        "template": [
-            "自动地鬼\\点击筛选-绿色掩码_1.png"
-        ]
-    },
-    "点击筛选_1": {
-        "action": "Click",
-        "post_delay": 2000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            1077,
-            2,
-            99,
-            121
-        ],
-        "target": [
-            1102,
-            17,
-            58,
-            73
-        ],
-        "template": "地域鬼王/地域鬼王_筛选.png"
-    },
-    "确保打开筛选界面": {
-        "expected": "悬赏|热门|最新|征服|收藏",
-        "next": [
-            "识别是否位于热门",
-            "[JumpBack]点击热门"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1191,
-            116,
-            50,
-            580
         ]
     },
     "自动地鬼": {
@@ -569,34 +597,6 @@
             535,
             127,
             65
-        ]
-    },
-    "识别挑战位置": {
-        "action": "Click",
-        "order_by": "Vertical",
-        "post_delay": 2000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            1035,
-            192,
-            135,
-            504
-        ],
-        "template": "地域鬼王/地鬼_挑战.png",
-        "timeout": 500
-    },
-    "识别是否位于热门": {
-        "expected": "击杀数最多|最多|击杀",
-        "next": [
-            "地鬼=确保处于可挑战界面",
-            "[JumpBack]识别挑战位置"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            907,
-            107,
-            232,
-            81
         ]
     }
 }

@@ -432,6 +432,7 @@
         "recognition": "DirectHit"
     },
     "自动逢魔11_1": {
+        "max_hit": 1,
         "next": [
             "自动逢魔1",
             "自动逢魔3",
@@ -456,6 +457,7 @@
         "timeout": 2000
     },
     "自动逢魔11_2_copy1": {
+        "max_hit": 1,
         "next": [
             "自动逢魔1_copy1_copy1",
             "自动逢魔3_copy1_copy1",
@@ -468,6 +470,7 @@
         "timeout": 2000
     },
     "自动逢魔11_2_copy2": {
+        "max_hit": 1,
         "next": [
             "自动逢魔1_copy1_copy2",
             "自动逢魔3_copy1_copy2",
@@ -951,25 +954,10 @@
         ]
     },
     "自动逢魔9": {
-        "action": "Custom",
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "tasks": {
-                "自动逢魔11_1": {
-                    "enabled": true,
-                    "once_per_day": false
-                },
-                "自动逢魔11_2_copy1": {
-                    "enabled": true,
-                    "once_per_day": false
-                },
-                "自动逢魔11_2_copy2": {
-                    "enabled": true,
-                    "once_per_day": false
-                }
-            }
-        },
         "next": [
+            "[JumpBack]自动逢魔11_1",
+            "[JumpBack]自动逢魔11_2_copy1",
+            "[JumpBack]自动逢魔11_2_copy2",
             "识别集结挑战",
             "[JumpBack]现世逢魔_点击首领"
         ],

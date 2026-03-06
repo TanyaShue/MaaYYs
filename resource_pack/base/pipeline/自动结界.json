@@ -55,7 +55,8 @@
             96
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第七个结界": {
         "action": "Click",
@@ -74,7 +75,8 @@
             105
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第三个结界": {
         "action": "Click",
@@ -93,7 +95,8 @@
             94
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第九个结界": {
         "action": "Click",
@@ -119,7 +122,8 @@
             109
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第二个结界": {
         "action": "Click",
@@ -138,7 +142,8 @@
             91
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第五个结界": {
         "action": "Click",
@@ -157,7 +162,8 @@
             104
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第八个结界": {
         "action": "Click",
@@ -176,7 +182,8 @@
             99
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第六个结界": {
         "action": "Click",
@@ -195,7 +202,8 @@
             103
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "挑战第四个结界": {
         "action": "Click",
@@ -214,7 +222,8 @@
             91
         ],
         "template": "自动结界/突破_击破.png",
-        "timeout": 2000
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "探索_突破_御魂_返回": {
         "action": "Click",
@@ -694,7 +703,9 @@
             386,
             171,
             76
-        ]
+        ],
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "自动结界9_copy1": {
         "action": "Click",
@@ -705,7 +716,9 @@
             386,
             171,
             76
-        ]
+        ],
+        "timeout": 5000,
+        "post_delay": 1000
     },
     "装备突破预设": {
         "action": "Custom",

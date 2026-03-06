@@ -22,9 +22,8 @@ jobs:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: MAA_YYS_FULL_${{ matrix.os }}-${{ matrix.arch }}.*
+          filename: "MAA_YYS_${{ matrix.os }}-${{ matrix.arch }}_v*"
           mirrorchyan_rid: MaaYYs
-
           github_token: ${{ secrets.GITHUB_TOKEN }}
           owner: TanyaShue
           repo: MaaYYs
@@ -39,9 +38,8 @@ jobs:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: "MAA_YYS_FULL_windows-x64.zip"
+          filename: "MAA_YYS_windows-x64_v*"
           mirrorchyan_rid: MaaYYs
-
           github_token: ${{ secrets.GITHUB_TOKEN }}
           owner: TanyaShue
           repo: MaaYYs

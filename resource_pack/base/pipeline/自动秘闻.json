@@ -18,19 +18,6 @@
         ]
     },
     "自动秘闻": {
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "tasks": {
-                "点击探索": {
-                    "enabled": true,
-                    "once_per_day": false
-                },
-                "自动秘闻_step_1": {
-                    "enabled": true,
-                    "once_per_day": false
-                }
-            }
-        },
         "next": [
             "自动秘闻4",
             "自动秘闻7",

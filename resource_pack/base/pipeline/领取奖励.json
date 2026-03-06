@@ -407,7 +407,8 @@
             "[JumpBack]领取奖励-打开商店-ocr",
             "[JumpBack]打开底部菜单"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "max_hit": 1
     },
     "领取奖励_商店每日奖励_点击推荐_OCR": {
         "action": "Click",
@@ -703,7 +704,8 @@
         "on_error": [
             "跳过"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "max_hit": 1
     },
     "领取奖励_识别日常奖励": {
         "inverse": true,
@@ -752,7 +754,8 @@
             "庭院/邮箱.png",
             "庭院/邮箱_红点.png"
         ],
-        "timeout": 3000
+        "timeout": 3000,
+        "max_hit": 1
     },
     "领取奖励_领取签到小垃圾": {
         "action": "Click",
