@@ -219,10 +219,14 @@ jobs:
           retry_delay=5
           for i in $(seq 1 $retry_count); do
             echo "Download attempt $i of $retry_count..."
-            curl -L --fail -o "mxu-download/mxu.tar.gz" "$DOWNLOAD_URL"
-            if [ $? -eq 0 ]; then
+            if curl -L --fail -o "mxu-download/mxu.tar.gz" "$DOWNLOAD_URL"; then
               echo "Download successful."
-              break
+              # Verify file is not empty
+              if [ -s "mxu-download/mxu.tar.gz" ]; then
+                break
+              else
+                echo "::warning::Downloaded file is empty, retrying..."
+              fi
             fi
             if [ $i -lt $retry_count ]; then
               echo "::warning::Download failed. Retrying in $retry_delay seconds..."
@@ -235,19 +239,27 @@ jobs:
 
           # Extract and find executable in subfolder
           mkdir -p mxu-extracted
-          tar -xzf "mxu-download/mxu.tar.gz" -C mxu-extracted
+          echo "Extracting MXU archive..."
+          if ! tar -xzf "mxu-download/mxu.tar.gz" -C mxu-extracted; then
+            echo "::error::Failed to extract MXU archive"
+            ls -la mxu-download/
+            exit 1
+          fi
+
+          echo "Extracted contents:"
+          ls -laR mxu-extracted/
 
           # Find executable file recursively (not in bin or lib folders, looking for the main binary)
           MXU_FILE=$(find mxu-extracted -type f -executable -name "mxu*" ! -path "*/bin/*" ! -path "*/lib/*" 2>/dev/null | head -n1)
 
           # If not found by name, look for any executable in the root of extracted folders
           if [ -z "$MXU_FILE" ]; then
+            echo "No mxu* executable found, looking for any executable..."
             MXU_FILE=$(find mxu-extracted -maxdepth 2 -type f -executable 2>/dev/null | head -n1)
           fi
 
           if [ -z "$MXU_FILE" ]; then
             echo "::error::No executable file found in MXU package"
-            ls -laR mxu-extracted/
             exit 1
           fi
 
@@ -255,17 +267,41 @@ jobs:
           cp "$MXU_FILE" mxu
           chmod +x mxu
           echo "MXU extracted successfully as mxu"
+          ls -la mxu
 
       # ================== Compile Go Agent ==================
       - name: Compile Go Agent (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          Write-Host "Current directory: $(Get-Location)"
+          Write-Host "Checking source/agent directory..."
+          if (-not (Test-Path -Path "source/agent")) {
+            Write-Host "::error::source/agent directory not found!"
+            Get-ChildItem -Path "source" -ErrorAction SilentlyContinue
+            exit 1
+          }
+
           cd source/agent
+          Write-Host "Building agent in: $(Get-Location)"
+          Write-Host "Go files present:"
+          Get-ChildItem -Path "." -Filter "*.go"
+
           $env:CGO_ENABLED = "0"
           $version = "${{ github.ref_name }}"
+
+          Write-Host "Running go build..."
           go build -ldflags "-s -w -X main.Version=$version" -o agent.exe .
-          Write-Host "Go agent compiled successfully"
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "::error::Go build failed with exit code $LASTEXITCODE"
+            exit 1
+          }
+
+          if (-not (Test-Path -Path "agent.exe")) {
+            Write-Host "::error::agent.exe was not created!"
+            exit 1
+          }
+          Write-Host "Go agent compiled successfully: $(Get-Item agent.exe).Length bytes"
 
           # Clean up source files, keep only the executable
           Remove-Item -Path "*.go", "go.mod", "go.sum" -Force -ErrorAction SilentlyContinue
@@ -275,13 +311,42 @@ jobs:
           New-Item -Path "../agent" -ItemType Directory -Force
           Move-Item -Path "agent.exe" -Destination "../agent/agent.exe" -Force
 
+          Write-Host "Verifying agent directory was created..."
+          if (Test-Path -Path "../agent/agent.exe") {
+            Write-Host "Agent successfully moved to: $((Get-Item '../agent/agent.exe').FullName)"
+          } else {
+            Write-Host "::error::Failed to move agent.exe to ../agent/"
+            exit 1
+          }
+
       - name: Compile Go Agent (Unix)
         if: runner.os != 'Windows'
         shell: bash
         run: |
+          echo "Current directory: $(pwd)"
+          echo "Checking source/agent directory..."
+          if [ ! -d "source/agent" ]; then
+            echo "::error::source/agent directory not found!"
+            ls -la source/ 2>/dev/null || true
+            exit 1
+          fi
+
           cd source/agent
+          echo "Building agent in: $(pwd)"
+          echo "Go files present:"
+          ls -la *.go 2>/dev/null || true
+
           CGO_ENABLED=0 go build -ldflags "-s -w -X main.Version=${{ github.ref_name }}" -o agent .
-          echo "Go agent compiled successfully"
+          if [ $? -ne 0 ]; then
+            echo "::error::Go build failed!"
+            exit 1
+          fi
+
+          if [ ! -f "agent" ]; then
+            echo "::error::agent binary was not created!"
+            exit 1
+          fi
+          echo "Go agent compiled successfully: $(ls -la agent)"
 
           # Clean up source files, keep only the executable
           rm -f *.go go.mod go.sum 2>/dev/null || true
@@ -290,6 +355,14 @@ jobs:
           # Move agent to parent directory for packaging
           mkdir -p ../agent
           mv agent ../agent/agent
+
+          echo "Verifying agent directory was created..."
+          if [ -f "../agent/agent" ]; then
+            echo "Agent successfully moved to: $(ls -la ../agent/agent)"
+          else
+            echo "::error::Failed to move agent to ../agent/"
+            exit 1
+          fi
 
       # ================== Download MaaFramework Release ==================
       - name: Download MaaFramework release (Windows)
@@ -405,16 +478,36 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          Write-Host "Current directory: $(Get-Location)"
+          Write-Host "Directory contents:"
+          Get-ChildItem -Path "." -ErrorAction SilentlyContinue
+
           New-Item -Path "package" -ItemType Directory -Force
 
-          # Copy mxu.exe
+          # Verify and copy mxu.exe
+          if (-not (Test-Path -Path "mxu.exe")) {
+            Write-Host "::error::mxu.exe not found!"
+            exit 1
+          }
           Copy-Item -Path "mxu.exe" -Destination "package/mxu.exe" -Force
+          Write-Host "Copied mxu.exe"
 
-          # Copy agent
+          # Verify and copy agent
+          if (-not (Test-Path -Path "agent")) {
+            Write-Host "::error::agent directory not found! Checking if agent.exe exists elsewhere..."
+            Get-ChildItem -Path "." -Recurse -Filter "agent.exe" -ErrorAction SilentlyContinue
+            exit 1
+          }
           Copy-Item -Path "agent" -Destination "package/agent" -Recurse -Force
+          Write-Host "Copied agent directory"
 
-          # Copy maafw
+          # Verify and copy maafw
+          if (-not (Test-Path -Path "maafw")) {
+            Write-Host "::error::maafw directory not found!"
+            exit 1
+          }
           Copy-Item -Path "maafw" -Destination "package/maafw" -Recurse -Force
+          Write-Host "Copied maafw directory"
 
           # Copy resource files
           $includeList = @('assets', 'resource_pack', 'interface.json', 'LICENSE', 'README.md')
@@ -426,12 +519,16 @@ jobs:
               } else {
                 Copy-Item -Path $sourcePath -Destination "package/$item" -Force
               }
+              Write-Host "Copied $item"
+            } else {
+              Write-Host "::warning::$item not found at $sourcePath"
             }
           }
 
           # Create resource_config.json if it exists
           if (Test-Path -Path "source/resource_config.json") {
             Copy-Item -Path "source/resource_config.json" -Destination "package/resource_config.json" -Force
+            Write-Host "Copied resource_config.json"
           }
 
           Write-Host "Package directory prepared successfully"
@@ -441,24 +538,47 @@ jobs:
         if: runner.os != 'Windows'
         shell: bash
         run: |
+          echo "Current directory: $(pwd)"
+          echo "Directory contents:"
+          ls -la
+
           mkdir -p package
 
-          # Copy mxu
+          # Verify and copy mxu
+          if [ ! -f "mxu" ]; then
+            echo "::error::mxu not found!"
+            exit 1
+          fi
           cp mxu package/mxu
           chmod +x package/mxu
+          echo "Copied mxu"
 
-          # Copy agent
+          # Verify and copy agent
+          if [ ! -d "agent" ]; then
+            echo "::error::agent directory not found! Checking if agent binary exists elsewhere..."
+            find . -name "agent" -type f 2>/dev/null || true
+            exit 1
+          fi
           cp -r agent package/agent
           chmod +x package/agent/agent
+          echo "Copied agent directory"
 
-          # Copy maafw
+          # Verify and copy maafw
+          if [ ! -d "maafw" ]; then
+            echo "::error::maafw directory not found!"
+            exit 1
+          fi
           cp -r maafw package/maafw
+          echo "Copied maafw directory"
 
           # Copy resource files
           INCLUDE_LIST="assets resource_pack interface.json LICENSE README.md resource_config.json"
           for item in $INCLUDE_LIST; do
             if [ -e "source/$item" ]; then
               cp -r "source/$item" "package/$item"
+              echo "Copied $item"
+            else
+              echo "::warning::$item not found at source/$item"
             fi
           done
 
