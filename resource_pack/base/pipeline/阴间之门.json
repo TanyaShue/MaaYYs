@@ -5,11 +5,11 @@
             "[JumpBack]阴间之门1",
             "[JumpBack]打开底部菜单"
         ],
-        "rate_limit": 4000,
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "rate_limit": 4000,
+        "recognition": "DirectHit"
     },
     "阴间之门1": {
         "action": "Click",
@@ -20,7 +20,8 @@
             635,
             236,
             66
-        ]
+        ],
+        "post_delay": 4000
     },
     "阴间之门10": {
         "action": "Click",
@@ -94,7 +95,8 @@
         ],
         "template": [
             "阴间之门\\阴间之门14.png"
-        ]
+        ],
+        "post_delay": 4000
     },
     "阴间之门15": {
         "expected": "阴界之门",
@@ -182,7 +184,9 @@
         "expected": "协战队伍",
         "next": [
             "阴间之门22",
-            "[JumpBack]阴间之门21"
+            "[JumpBack]阴间之门21",
+            "[JumpBack]阴界之门-点击开始挑战-模板匹配",
+            "[JumpBack]阴界之门-点击开始挑战-特征匹配"
         ],
         "recognition": "OCR",
         "roi": [
@@ -314,10 +318,11 @@
         "recognition": "OCR",
         "roi": [
             1141,
-            649,
-            116,
-            70
-        ]
+            641,
+            139,
+            79
+        ],
+        "post_delay": 2000
     },
     "阴间之门5": {
         "expected": "阴界之门|集体任务",
@@ -344,10 +349,10 @@
         "expected": "神社",
         "recognition": "OCR",
         "roi": [
-            1175,
-            130,
-            54,
-            447
+            1137,
+            99,
+            121,
+            511
         ]
     },
     "阴间之门7": {
@@ -391,5 +396,31 @@
             172,
             60
         ]
+    },
+    "阴界之门-点击开始挑战-模板匹配": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            1124,
+            543,
+            151,
+            162
+        ],
+        "template": [
+            "阴间之门\\N-1772895473660_1.png"
+        ],
+        "action": "Click"
+    },
+    "阴界之门-点击开始挑战-特征匹配": {
+        "recognition": "FeatureMatch",
+        "roi": [
+            1124,
+            543,
+            151,
+            162
+        ],
+        "template": [
+            "阴间之门\\N-1772895473660_1.png"
+        ],
+        "action": "Click"
     }
 }
