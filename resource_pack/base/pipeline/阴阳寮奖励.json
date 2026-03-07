@@ -657,7 +657,10 @@
         "post_delay": 1000,
         "pre_delay": 1000,
         "rate_limit": 5000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
     },
     "阴阳寮奖励领取-确保进入阴阳寮": {
         "expected": "神社|寮信息|结界|祈愿",

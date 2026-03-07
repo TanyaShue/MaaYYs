@@ -21,7 +21,10 @@
             "寮突1",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
     },
     "寮突-点击结界突破": {
         "action": "Click",

@@ -21,7 +21,8 @@
             "[JumpBack]地鬼-点击筛选_1",
             "[JumpBack]地鬼-点击筛选-绿色掩码",
             "[JumpBack]地鬼-点击筛选-ocr"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "地鬼-点击筛选-ocr": {
         "action": "Click",
@@ -85,11 +86,16 @@
     },
     "地鬼-确保打开筛选界面": {
         "expected": "悬赏|热门|最新|征服|收藏",
-        "recognition": "OCR",
-        "roi": [1176,100,68,604],
         "next": [
             "地鬼-识别是否位于热门",
             "[JumpBack]地鬼-点击热门"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            1176,
+            100,
+            68,
+            604
         ]
     },
     "地鬼-识别挑战位置": {
@@ -257,10 +263,10 @@
             "自动地鬼2",
             "[JumpBack]点击探索"
         ],
+        "recognition": "DirectHit",
         "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "DirectHit"
+            "[JumpBack]确保位于庭院"
+        ]
     },
     "自动地鬼-准备战斗": {
         "action": "Click",
@@ -379,6 +385,7 @@
         "on_error": [
             "返回庭院"
         ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             587,

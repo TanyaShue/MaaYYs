@@ -84,13 +84,13 @@
     },
     "寮3012": {
         "action": "Click",
+        "recognition": "DirectHit",
         "target": [
             1215,
             627,
             31,
             48
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "寮3013": {
         "action": "Click",
@@ -135,13 +135,13 @@
         ],
         "post_delay": 2000,
         "pre_delay": 2000,
+        "recognition": "DirectHit",
         "target": [
             471,
             462,
             477,
             99
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "寮3016": {
         "action": "Click",
@@ -497,8 +497,8 @@
             "寮3035",
             "[JumpBack]寮3032"
         ],
-        "timeout": 40000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "timeout": 40000
     },
     "寮3035": {
         "next": [
@@ -872,28 +872,6 @@
             "寮30\\寮3049.png"
         ]
     },
-    "寮305": {
-        "action": "Click",
-        "next": [
-            "寮306"
-        ],
-        "recognition": "FeatureMatch",
-        "roi": [
-            1078,
-            575,
-            112,
-            133
-        ],
-        "target": [
-            1113,
-            635,
-            35,
-            44
-        ],
-        "template": [
-            "寮30/寮305_1.png"
-        ]
-    },
     "寮3050": {
         "next": [
             "寮3049"
@@ -1033,20 +1011,13 @@
     },
     "寮3057": {
         "action": "Click",
+        "recognition": "DirectHit",
         "target": [
             1194,
             615,
             38,
             81
-        ],
-        "recognition": "DirectHit"
-    },
-    "寮3058": {
-        "next": [
-            "寮301",
-            "[JumpBack]寮3057"
-        ],
-        "recognition": "DirectHit"
+        ]
     },
     "寮3059": {
         "action": "Click",
@@ -1061,28 +1032,6 @@
             "寮30\\寮3059.png"
         ]
     },
-    "寮306": {
-        "action": "Custom",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "觉醒",
-            "team_name": "队伍1"
-        },
-        "expected": "预设",
-        "next": [
-            "寮307"
-        ],
-        "on_error": [
-            "超时_切换御魂失败"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            329,
-            68,
-            98,
-            52
-        ]
-    },
     "寮3060": {
         "expected": "领取奖励",
         "inverse": true,
@@ -1093,15 +1042,15 @@
             "[JumpBack]寮3048",
             "[JumpBack]寮3059"
         ],
+        "on_error": [
+            "返回庭院"
+        ],
         "recognition": "OCR",
         "roi": [
             154,
             451,
             975,
             101
-        ],
-        "on_error": [
-            "返回庭院"
         ]
     },
     "寮307": {
@@ -1126,12 +1075,6 @@
             "寮30/寮307.png"
         ]
     },
-    "寮308": {
-        "recognition": "DirectHit"
-    },
-    "寮309": {
-        "recognition": "DirectHit"
-    },
     "寮30_提交材料": {
         "expected": "提交低级觉醒材料",
         "next": [
@@ -1143,6 +1086,60 @@
             183,
             283,
             124
+        ]
+    },
+    "寮三十-开始任务": {
+        "next": [
+            "寮301",
+            "[JumpBack]寮3057"
+        ],
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
+    },
+    "组队寮30-点击式神录": {
+        "action": "Click",
+        "next": [
+            "组队寮30-装备御魂"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            1078,
+            575,
+            112,
+            133
+        ],
+        "target": [
+            1113,
+            635,
+            35,
+            44
+        ],
+        "template": [
+            "寮30/寮305_1.png"
+        ]
+    },
+    "组队寮30-装备御魂": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "觉醒",
+            "team_name": "队伍1"
+        },
+        "expected": "预设",
+        "next": [
+            "寮307"
+        ],
+        "on_error": [
+            "超时_切换御魂失败"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            329,
+            68,
+            98,
+            52
         ]
     }
 }

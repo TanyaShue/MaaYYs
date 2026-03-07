@@ -1,4 +1,15 @@
 {
+    "兵藏秘境-开始挑战": {
+        "action": "Click",
+        "expected": "开始挑战",
+        "recognition": "OCR",
+        "roi": [
+            677,
+            405,
+            165,
+            52
+        ]
+    },
     "兵藏秘境-点击目标祝福": {
         "action": "Click",
         "expected": "万刃",
@@ -117,7 +128,10 @@
             "[JumpBack]英杰试炼-点击英杰试炼",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
     },
     "英杰试炼-刷完试炼卷": {
         "expected": "^0{1,2}/50$",
@@ -336,16 +350,5 @@
             67
         ],
         "timeout": 5000
-    },
-    "兵藏秘境-开始挑战": {
-        "recognition": "OCR",
-        "roi": [
-            677,
-            405,
-            165,
-            52
-        ],
-        "expected": "开始挑战",
-        "action": "Click"
     }
 }

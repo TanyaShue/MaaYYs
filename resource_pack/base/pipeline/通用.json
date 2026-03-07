@@ -94,6 +94,7 @@
         ]
     },
     "点击探索": {
+        "expected": "闲庭|图鉴|珍旅居|纳物库",
         "next": [
             "点击探索_识别是否位于探索界面",
             "点击探索_识别是否位于探索界面_OCR",
@@ -110,8 +111,7 @@
             630,
             551,
             90
-        ],
-        "expected": "闲庭|图鉴|珍旅居|纳物库"
+        ]
     },
     "点击探索_识别探索界面": {
         "action": "Click",
@@ -122,7 +122,8 @@
             99,
             984,
             185
-        ]
+        ],
+        "post_delay": 2000
     },
     "点击探索_识别是否位于探索界面": {
         "recognition": "TemplateMatch",
@@ -147,7 +148,8 @@
             "通用\\点击探索_识别是否位于探索界面_4.png",
             "通用\\点击探索_识别是否位于探索界面_5.png",
             "通用\\点击探索_识别是否位于探索界面_6.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "点击探索_识别是否位于探索界面_OCR": {
         "expected": "觉醒材料|御魂|结界突破|御灵",
@@ -157,13 +159,11 @@
             608,
             1201,
             111
-        ]
+        ],
+        "post_delay": 2000
     },
     "设置挑战次数_点击数字编辑": {
         "action": "Click",
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "DirectHit",
         "target": [
             324,
@@ -175,9 +175,6 @@
     },
     "设置挑战次数_点击目标数字": {
         "action": "Click",
-        "on_error": [
-            "跳过"
-        ],
         "post_delay": 2000,
         "pre_delay": 1000,
         "recognition": "OCR",
@@ -191,9 +188,6 @@
     "设置挑战次数_点击确定": {
         "action": "Click",
         "expected": "确定",
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "OCR",
         "roi": [
             563,
@@ -213,9 +207,6 @@
         ]
     },
     "识别探索特征": {
-        "on_error": [
-            "跳过"
-        ],
         "post_delay": 1000,
         "recognition": "TemplateMatch",
         "roi": [
@@ -311,6 +302,9 @@
             "[JumpBack]识别黄色返回_模板识别",
             "[JumpBack]返回庭院_识别叉"
         ],
+        "on_error": [
+            "[JumpBack]重启游戏"
+        ],
         "rate_limit": 100,
         "recognition": "DirectHit",
         "timeout": 60000
@@ -374,19 +368,6 @@
             "通用\\通用-快捷返回庭院_1.png"
         ]
     },
-    "通用1": {
-        "expected": "首页|精灵百科",
-        "next": [
-            "通用2"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            212,
-            0,
-            606,
-            70
-        ]
-    },
     "通用10": {
         "expected": "珍旅居|纳物库|组队|阴阳寮",
         "recognition": "OCR",
@@ -421,24 +402,12 @@
         ],
         "model": "Courtyard.onnx",
         "recognition": "NeuralNetworkDetect",
-        "threshold": 0.7
-    },
-    "通用2": {
-        "action": "Click",
-        "next": [
-            "通用_切换御魂_开始_1"
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "通用\\通用2.png"
-        ]
+        "threshold": 0.7,
+        "post_delay": 2000
     },
     "通用3": {
         "action": "Click",
         "expected": "确定",
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "OCR",
         "roi": [
             400,
@@ -498,7 +467,7 @@
     "通用8": {
         "action": "Click",
         "next": [
-            "通用_切换御魂_开始_1"
+            "通用_切换御魂_取保所处界面位于式神录界面"
         ],
         "recognition": "TemplateMatch",
         "roi": [
@@ -543,9 +512,6 @@
             130,
             0
         ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "ColorMatch",
         "roi": "通用_识别加成",
         "roi_offset": [
@@ -564,9 +530,6 @@
     "通用_出战队伍": {
         "action": "Click",
         "expected": "出战",
-        "on_error": [
-            "跳过"
-        ],
         "post_delay": 1000,
         "recognition": "OCR",
         "roi": [
@@ -577,19 +540,8 @@
         ],
         "timeout": 10000
     },
-    "通用_切换御魂_开始": {
-        "next": [
-            "通用_切换御魂_开始_1",
-            "通用1",
-            "通用7"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "DirectHit"
-    },
-    "通用_切换御魂_开始_1": {
-        "expected": "式神录|首页|精灵百科",
+    "通用_切换御魂_取保所处界面位于式神录界面": {
+        "expected": "式神录",
         "next": [
             "通用_切换御魂_识别是否位于预设界面",
             "[JumpBack]通用_切换御魂_识别预设"
@@ -600,6 +552,30 @@
             0,
             178,
             64
+        ]
+    },
+    "通用_切换御魂_开始": {
+        "next": [
+            "通用_切换御魂_取保所处界面位于式神录界面",
+            "通用_切换御魂_识别是否位于攻略界面",
+            "通用7"
+        ],
+        "on_error": [
+            "跳过"
+        ],
+        "recognition": "DirectHit"
+    },
+    "通用_切换御魂_识别是否位于攻略界面": {
+        "expected": "首页|精灵百科",
+        "next": [
+            "通用_切换御魂_退出攻略界面"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            212,
+            0,
+            606,
+            70
         ]
     },
     "通用_切换御魂_识别是否位于预设界面": {
@@ -625,6 +601,17 @@
         ],
         "timeout": 2000
     },
+    "通用_切换御魂_退出攻略界面": {
+        "action": "Click",
+        "next": [
+            "通用_切换御魂_取保所处界面位于式神录界面"
+        ],
+        "post_delay": 3000,
+        "recognition": "TemplateMatch",
+        "template": [
+            "通用\\通用2.png"
+        ]
+    },
     "通用_取消设置挑战次数": {
         "action": "Click",
         "count": 300,
@@ -634,9 +621,6 @@
             103
         ],
         "method": 40,
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "ColorMatch",
         "roi": [
             252,
@@ -660,9 +644,6 @@
             10
         ],
         "method": 40,
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "ColorMatch",
         "roi": [
             253,
@@ -684,9 +665,6 @@
             175,
             10,
             31
-        ],
-        "on_error": [
-            "跳过"
         ],
         "recognition": "ColorMatch",
         "roi": "通用_识别加成",
@@ -820,9 +798,6 @@
     },
     "通用_识别加成": {
         "expected": "识别加成",
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "OCR",
         "roi": [
             426,
@@ -833,9 +808,6 @@
         "timeout": 5000
     },
     "通用_识别挑战次数": {
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "OCR",
         "roi": [
             309,
@@ -843,5 +815,15 @@
             78,
             35
         ]
+    },
+    "确保位于庭院": {
+        "recognition": "DirectHit",
+        "next": [
+            "识别庭院特征"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "timeout":5000
     }
 }

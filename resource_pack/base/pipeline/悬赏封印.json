@@ -674,7 +674,10 @@
             "[JumpBack]悬赏封印11",
             "[JumpBack]悬赏封印"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
     },
     "装备日常清杂预设": {
         "action": "Custom",

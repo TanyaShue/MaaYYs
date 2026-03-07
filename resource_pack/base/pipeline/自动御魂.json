@@ -110,15 +110,15 @@
             "N-1769565728203",
             "N-1769565732641"
         ],
+        "on_error": [
+            "跳过"
+        ],
         "recognition": "OCR",
         "roi": [
             157,
             13,
             79,
             53
-        ],
-        "on_error": [
-            "跳过"
         ]
     },
     "自动御魂": {
@@ -127,7 +127,7 @@
             "[JumpBack]点击探索"
         ],
         "on_error": [
-            "返回庭院"
+            "[JumpBack]确保位于庭院"
         ],
         "recognition": "DirectHit"
     },

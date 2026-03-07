@@ -755,7 +755,10 @@
             "[JumpBack]现世逢魔_点击式神录",
             "[JumpBack]打开底部菜单"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
     },
     "自动逢魔21": {
         "expected": "悬赏封印",

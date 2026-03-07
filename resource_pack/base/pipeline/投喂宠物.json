@@ -34,7 +34,8 @@
         "next": [
             "投喂宠物-确保进入宠物小屋",
             "[JumpBack]投喂宠物_1",
-            "[JumpBack]投喂宠物17"
+            "[JumpBack]投喂宠物17",
+            "[JumpBack]确保位于庭院"
         ],
         "on_error": [
             "跳过"
@@ -72,14 +73,14 @@
     "投喂宠物-点击快速喂养": {
         "action": "Click",
         "expected": "快速喂养",
+        "post_delay": 1000,
         "recognition": "OCR",
         "roi": [
             821,
             658,
             137,
             50
-        ],
-        "post_delay": 1000
+        ]
     },
     "投喂宠物-确保进入宠物小屋": {
         "expected": "宠物小屋",
@@ -215,9 +216,6 @@
             "神龛"
         ],
         "model": "Courtyard.onnx",
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "NeuralNetworkDetect",
         "threshold": 0.8
     },
@@ -390,9 +388,6 @@
     },
     "投喂宠物_1": {
         "action": "Click",
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "TemplateMatch",
         "roi": [
             712,

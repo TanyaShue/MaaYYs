@@ -1,5 +1,21 @@
 {
     "麒麟": {
+        "next": [
+            "麒麟-确保位于阴阳寮内",
+            "[JumpBack]麒麟1",
+            "[JumpBack]麒麟-点击阴阳寮",
+            "[JumpBack]打开底部菜单"
+        ],
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "rate_limit": 5000,
+        "recognition": "DirectHit",
+        "timeout": 10000
+    },
+    "麒麟-开始时间检查": {
         "action": "Custom",
         "custom_action": "TimeCheck",
         "custom_action_param": {
@@ -17,12 +33,10 @@
             "start": "06:00"
         },
         "next": [
-            "麒麟-确保位于阴阳寮内",
-            "[JumpBack]麒麟1",
-            "[JumpBack]麒麟-点击阴阳寮"
+            "麒麟"
         ],
         "on_error": [
-            "[JumpBack]打开底部菜单"
+            "返回庭院"
         ],
         "post_delay": 1000,
         "pre_delay": 1000,
@@ -65,6 +79,26 @@
             658,
             127,
             62
+        ]
+    },
+    "麒麟-识别是否战斗结束": {
+        "action": "Click",
+        "expected": "失败|成功|胜利",
+        "next": [
+            "麒麟10"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            659,
+            104,
+            365,
+            210
+        ],
+        "target": [
+            347,
+            591,
+            501,
+            128
         ]
     },
     "麒麟1": {
@@ -239,7 +273,7 @@
         "next": [
             "麒麟9",
             "麒麟14",
-            "N-1770039464983",
+            "麒麟-识别是否战斗结束",
             "[JumpBack]麒麟13"
         ],
         "rate_limit": 3000,
@@ -270,26 +304,6 @@
             623,
             481,
             96
-        ]
-    },
-    "N-1770039464983": {
-        "recognition": "OCR",
-        "action": "Click",
-        "target": [
-            347,
-            591,
-            501,
-            128
-        ],
-        "expected": "失败|成功|胜利",
-        "roi": [
-            659,
-            104,
-            365,
-            210
-        ],
-        "next": [
-            "麒麟10"
         ]
     }
 }

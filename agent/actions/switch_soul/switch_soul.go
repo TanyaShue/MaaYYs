@@ -65,8 +65,8 @@ func (a *SwitchSoul) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 
 func (a *SwitchSoul) clickPreset(ctx *maa.Context) bool {
 	fmt.Println("尝试点击预设按钮")
-	_, _ = ctx.RunTask("通用_切换御魂_识别预设", nil)
-	time.Sleep(500 * time.Millisecond)
+	_, _ = ctx.RunTask("通用_切换御魂_开始", nil)
+	time.Sleep(1000 * time.Millisecond)
 	return true
 }
 

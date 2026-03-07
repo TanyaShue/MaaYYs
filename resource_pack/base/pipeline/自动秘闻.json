@@ -23,7 +23,20 @@
             "自动秘闻7",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
+    },
+    "自动秘闻-战斗准备": {
+        "expected": "准备",
+        "recognition": "OCR",
+        "roi": [
+            1123,
+            544,
+            114,
+            86
+        ]
     },
     "自动秘闻1": {
         "expected": "\\b([0-9]|[1-5][0-9]):[0-5][0-9]\\b",
@@ -424,15 +437,5 @@
             336,
             45
         ]
-    },
-    "自动秘闻-战斗准备": {
-        "recognition": "OCR",
-        "roi": [
-            1123,
-            544,
-            114,
-            86
-        ],
-        "expected": "准备"
     }
 }

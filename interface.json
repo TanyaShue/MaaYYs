@@ -76,12 +76,15 @@
     {
       "name": "打开游戏",
       "label": "打开游戏",
-      "entry": "启动游戏"
+      "entry": "启动游戏",
+      "option": [
+        "任务失败后重启游戏"
+      ]
     },
     {
       "name": "寮三十捐材料",
       "label": "寮三十捐材料",
-      "entry": "寮3058",
+      "entry": "寮三十-开始任务",
       "option": [
         "捐材料"
       ]
@@ -111,7 +114,7 @@
     {
       "name": "自动麒麟",
       "label": "自动麒麟",
-      "entry": "麒麟",
+      "entry": "麒麟-开始时间检查",
       "option": [
         "麒麟阵容预设"
       ]
@@ -154,7 +157,7 @@
     {
       "name": "日常奖励领取",
       "label": "日常奖励领取",
-      "entry": "日常_任务列表",
+      "entry": "日常-开始执行日常任务",
       "option": [
         "领取奖励_商店每日奖励",
         "领取奖励_庭院事务",
@@ -1046,6 +1049,31 @@
           "enabled": true
         }
       }
+    },
+    "任务失败后重启游戏": {
+      "type": "switch",
+      "label": "地鬼_锁定阵容",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "pipeline_override": {
+            "重启游戏": {
+              "enable": true
+            }
+          }
+        },
+        {
+          "name": "No",
+          "label": "否",
+          "pipeline_override": {
+            "重启游戏": {
+              "enable": false
+            }
+          }
+        }
+      ],
+      "default_case ": "Yes"
     },
     "地鬼_锁定阵容": {
       "type": "switch",

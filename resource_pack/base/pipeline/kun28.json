@@ -1,4 +1,32 @@
 {
+    "N-1770966223659": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1022,
+            0,
+            258,
+            196
+        ],
+        "template": [
+            "kun28\\N-1770966223659_1.png",
+            "kun28\\N-1770966223659_2.png"
+        ]
+    },
+    "N-1770966323291": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1022,
+            0,
+            258,
+            196
+        ],
+        "template": [
+            "kun28\\N-1770966223659_1.png",
+            "kun28\\N-1770966223659_2.png"
+        ]
+    },
     "N-kun281": {
         "focus": {
             "Node.Recognition.Succeeded": "[debug]返回到探索界面"
@@ -626,32 +654,13 @@
             59
         ]
     },
-    "N-1770966223659": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            1022,
-            0,
-            258,
-            196
+    "开始肝绘卷": {
+        "recognition": "DirectHit",
+        "next": [
+            "kun2820"
         ],
-        "template": [
-            "kun28\\N-1770966223659_1.png",
-            "kun28\\N-1770966223659_2.png"
-        ]
-    },
-    "N-1770966323291": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            1022,
-            0,
-            258,
-            196
-        ],
-        "template": [
-            "kun28\\N-1770966223659_1.png",
-            "kun28\\N-1770966223659_2.png"
+        "on_error": [
+            "[JumpBack]确保位于庭院"
         ]
     }
 }

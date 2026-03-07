@@ -6,7 +6,10 @@
             "[JumpBack]打开底部菜单"
         ],
         "rate_limit": 4000,
-        "recognition": "DirectHit"
+        "recognition": "DirectHit",
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ]
     },
     "阴间之门1": {
         "action": "Click",
