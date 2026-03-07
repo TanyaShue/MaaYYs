@@ -29,6 +29,37 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Update version in interface.json
+        run: |
+          VERSION="${{ github.ref_name }}"
+          echo "Updating version to: $VERSION"
+
+          python3 << EOF
+          import json
+
+          with open('interface.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+
+          data['version'] = '$VERSION'
+
+          with open('interface.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+
+          print(f"Updated version to: $VERSION")
+          EOF
+
+      - name: Commit and push changes
+        id: commit_push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add interface.json
+          git commit -m "ci: Update version to ${{ github.ref_name }}" || echo "No changes to commit"
+          git push origin HEAD:${{ github.ref_name }}
+
+          # Output the commit SHA for downstream jobs
+          echo "commit_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
 
   build:
     name: Build ${{ matrix.platform }}
