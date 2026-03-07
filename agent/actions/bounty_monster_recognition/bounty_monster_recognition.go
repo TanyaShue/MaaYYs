@@ -23,7 +23,7 @@ func (a *BountyMonsterRecognition) Run(ctx *maa.Context, arg *maa.CustomActionAr
 	}
 
 	for attempts < 3 {
-		_, _ = ctx.RunTask("悬赏封印_识别宝箱", nil)
+		_, _ = ctx.RunTask("悬赏封印_开始领取宝箱奖励", nil)
 		_, _ = ctx.RunTask("悬赏封印_关闭章节界面", nil)
 
 		// 先截图
