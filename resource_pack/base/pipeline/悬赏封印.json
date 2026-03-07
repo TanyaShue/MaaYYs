@@ -576,7 +576,8 @@
             644,
             150,
             52
-        ]
+        ],
+        "timeout": 300000
     },
     "探索_悬赏_自动轮换": {
         "action": "Click",
@@ -674,10 +675,10 @@
             "[JumpBack]悬赏封印11",
             "[JumpBack]悬赏封印"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "装备日常清杂预设": {
         "action": "Custom",
