@@ -2,7 +2,7 @@
   "interface_version": 2,
   "name": "MaaYYs",
   "label": "阴阳师",
-  "version": "main",
+  "version": "v3.0.5",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
   "welcome": "README.md",
@@ -69,7 +69,8 @@
   ],
   "agent": {
     "child_exec": ".\\agent\\agent.exe",
-    "child_args": []
+    "child_args": [
+    ]
   },
   "task": [
     {
@@ -518,7 +519,7 @@
           "pipeline_override": {
             "阴阳寮奖励28": {
               "expected": [
-                0,
+                0, 
                 1,
                 2,
                 3
@@ -1135,11 +1136,11 @@
         }
       ],
       "pipeline_override": {
-        "领取奖励_商店每日奖励": {
-          "enabled": true
+          "领取奖励_商店每日奖励": {
+            "enabled": true
+          }
         }
-      }
-    },
+      },
     "领取奖励_庭院事务": {
       "type": "switch",
       "label": "领取奖励_庭院事务",
@@ -1444,14 +1445,8 @@
       "label": "委派-弥助的画",
       "description": "是否自动接取 弥助的画 (300体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1466,14 +1461,8 @@
       "label": "委派-寻找耳环",
       "description": "是否自动接取 寻找耳环 (300体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1488,14 +1477,8 @@
       "label": "委派-猫老大",
       "description": "是否自动接取 猫老大 (300体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1510,14 +1493,8 @@
       "label": "委派-捡到的宝石",
       "description": "是否自动接取 捡到的宝石 (200体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1532,14 +1509,8 @@
       "label": "委派-以鱼为礼",
       "description": "是否自动接取 以鱼为礼 (200体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1554,14 +1525,8 @@
       "label": "委派-帮忙搬运",
       "description": "是否自动接取 帮忙搬运 (200体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1576,14 +1541,8 @@
       "label": "委派-樱饼配方",
       "description": "是否自动接取 樱饼配方 (50体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1598,14 +1557,8 @@
       "label": "委派-奇怪的痕迹",
       "description": "是否自动接取 奇怪的痕迹 (100体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1620,14 +1573,8 @@
       "label": "委派-接送弥助",
       "description": "是否自动接取 接送弥助 (100体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
@@ -1642,14 +1589,8 @@
       "label": "委派-伊吹的藤球",
       "description": "是否自动接取 伊吹的藤球 (100体) 任务",
       "cases": [
-        {
-          "name": "Yes",
-          "label": "是"
-        },
-        {
-          "name": "No",
-          "label": "否"
-        }
+        { "name": "Yes", "label": "是" },
+        { "name": "No", "label": "否" }
       ],
       "pipeline_override": {
         "式神委派7": {
