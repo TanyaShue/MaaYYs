@@ -18,9 +18,6 @@
     },
     "寮301": {
         "action": "Click",
-        "next": [
-            "寮302"
-        ],
         "post_delay": 2000,
         "recognition": "FeatureMatch",
         "target": [
@@ -217,9 +214,7 @@
     },
     "寮302": {
         "action": "Click",
-        "next": [
-            "寮303"
-        ],
+        "next": [],
         "recognition": "FeatureMatch",
         "roi": [
             1123,
@@ -235,7 +230,8 @@
         ],
         "template": [
             "寮30/寮302.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "寮3020": {
         "action": "Click",
@@ -416,7 +412,8 @@
         "action": "Click",
         "expected": "神社",
         "next": [
-            "寮304"
+            "寮3040",
+            "[JumpBack]寮304"
         ],
         "recognition": "OCR",
         "roi": [
@@ -430,7 +427,8 @@
             386,
             24,
             60
-        ]
+        ],
+        "post_delay": 2000
     },
     "寮3030": {
         "action": "Click",
@@ -685,9 +683,7 @@
     },
     "寮304": {
         "action": "Click",
-        "next": [
-            "寮3040"
-        ],
+        "next": [],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -854,7 +850,8 @@
             472,
             79,
             85
-        ]
+        ],
+        "post_delay": 1000
     },
     "寮3049": {
         "action": "Swipe",
@@ -1030,7 +1027,8 @@
         ],
         "template": [
             "寮30\\寮3059.png"
-        ]
+        ],
+        "post_delay": 1000
     },
     "寮3060": {
         "expected": "领取奖励",
@@ -1090,13 +1088,14 @@
     },
     "寮三十-开始任务": {
         "next": [
-            "寮301",
+            "寮30-确保进入阴阳寮",
+            "[JumpBack]寮301",
             "[JumpBack]寮3057"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "组队寮30-点击式神录": {
         "action": "Click",
@@ -1140,6 +1139,30 @@
             68,
             98,
             52
+        ]
+    },
+    "寮30-确保进入阴阳寮": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1123,
+            561,
+            155,
+            156
+        ],
+        "target": [
+            1189,
+            635,
+            41,
+            58
+        ],
+        "template": [
+            "寮30/寮302.png"
+        ],
+        "post_delay": 2000,
+        "next": [
+            "寮303",
+            "[JumpBack]寮302"
         ]
     }
 }
