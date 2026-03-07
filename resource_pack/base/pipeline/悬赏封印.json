@@ -448,9 +448,6 @@
         "next": [
             "悬赏封印_领取宝箱奖励"
         ],
-        "on_error": [
-            "跳过"
-        ],
         "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -478,12 +475,7 @@
     },
     "悬赏封印_领取宝箱奖励": {
         "action": "Click",
-        "next": [
-            "悬赏封印_识别宝箱"
-        ],
-        "on_error": [
-            "跳过"
-        ],
+        "next": [],
         "post_delay": 1000,
         "recognition": "DirectHit",
         "target": [
@@ -751,5 +743,29 @@
             124,
             40
         ]
+    },
+    "悬赏封印_开始领取宝箱奖励": {
+        "recognition": "DirectHit",
+        "next": [
+            "悬赏封印-确保不存在宝箱",
+            "[JumpBack]悬赏封印_识别宝箱"
+        ]
+    },
+    "悬赏封印-确保不存在宝箱": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            2,
+            115,
+            143,
+            491
+        ],
+        "template": [
+            "悬赏封印/悬赏_宝箱.png",
+            "悬赏封印/悬赏_宝箱2.png"
+        ],
+        "timeout": 1000,
+        "inverse": true
     }
 }
