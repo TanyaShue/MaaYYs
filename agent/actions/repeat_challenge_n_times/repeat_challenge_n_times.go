@@ -21,13 +21,14 @@ func (a *RepeatChallengeNTimes) Run(ctx *maa.Context, arg *maa.CustomActionArg) 
 	if arg.CustomActionParam != "" {
 		json.Unmarshal([]byte(arg.CustomActionParam), &params)
 	}
+	fmt.Printf("params: %+v\n", params)
 
 	expectedNumber := strconv.Itoa(params.ExpectedNumber)
 	if expectedNumber == "" || expectedNumber == "0" {
 		fmt.Println("无效的参数：expected_number")
 		return false
 	}
-
+	
 	fmt.Printf("开始点击自动允许次数设置：期望数字 %s\n", expectedNumber)
 
 	if params.StartRepeat {
@@ -83,8 +84,5 @@ func (a *RepeatChallengeNTimes) inputExpectedNumber(ctx *maa.Context, expectedNu
 	}
 
 	fmt.Println("点击数字完成")
-	nu := a.recognizeNumber(ctx)
-	if nu == expectedNumber {
-		_, _ = ctx.RunTask("设置挑战次数_点击确定", nil)
-	}
+	_, _ = ctx.RunTask("设置挑战次数_点击确定", nil)
 }

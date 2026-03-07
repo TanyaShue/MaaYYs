@@ -1025,7 +1025,7 @@
         }
       ],
       "pipeline_override": {
-        "寮3026_copy1": {
+        "自动御魂-开启加成": {
           "enabled": true
         }
       }
@@ -1109,13 +1109,14 @@
           "label": "挑战次数",
           "description": "填写挑战次数",
           "default": "10",
-          "pipeline_type": "string"
+          "pipeline_type": "int"
         }
       ],
       "pipeline_override": {
-        "自动御魂3": {
+        "自动御魂-设置次数": {
           "custom_action_param": {
-            "expected_number": "{挑战次数}"
+            "expected_number": "{挑战次数}",
+            "start_repeat": true
           }
         }
       }

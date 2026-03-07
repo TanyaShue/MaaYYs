@@ -116,16 +116,17 @@
     "点击探索_识别探索界面": {
         "action": "Click",
         "expected": "探索",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             170,
             99,
             984,
             185
-        ],
-        "post_delay": 2000
+        ]
     },
     "点击探索_识别是否位于探索界面": {
+        "post_delay": 2000,
         "recognition": "TemplateMatch",
         "roi": [
             13,
@@ -148,19 +149,28 @@
             "通用\\点击探索_识别是否位于探索界面_4.png",
             "通用\\点击探索_识别是否位于探索界面_5.png",
             "通用\\点击探索_识别是否位于探索界面_6.png"
-        ],
-        "post_delay": 2000
+        ]
     },
     "点击探索_识别是否位于探索界面_OCR": {
         "expected": "觉醒材料|御魂|结界突破|御灵",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             13,
             608,
             1201,
             111
+        ]
+    },
+    "确保位于庭院": {
+        "next": [
+            "识别庭院特征"
         ],
-        "post_delay": 2000
+        "on_error": [
+            "返回庭院"
+        ],
+        "recognition": "DirectHit",
+        "timeout": 5000
     },
     "设置挑战次数_点击数字编辑": {
         "action": "Click",
@@ -194,7 +204,8 @@
             650,
             64,
             49
-        ]
+        ],
+        "post_delay": 2000
     },
     "识别庭院特征": {
         "expected": "纳物库|珍旅居|闲庭|纳物库",
@@ -401,9 +412,9 @@
             "神龛"
         ],
         "model": "Courtyard.onnx",
+        "post_delay": 2000,
         "recognition": "NeuralNetworkDetect",
-        "threshold": 0.7,
-        "post_delay": 2000
+        "threshold": 0.7
     },
     "通用3": {
         "action": "Click",
@@ -815,15 +826,5 @@
             78,
             35
         ]
-    },
-    "确保位于庭院": {
-        "recognition": "DirectHit",
-        "next": [
-            "识别庭院特征"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "timeout":5000
     }
 }

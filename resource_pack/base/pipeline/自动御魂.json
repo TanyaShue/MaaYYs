@@ -1,25 +1,4 @@
 {
-    "N-1766236011441": {
-        "action": "Click",
-        "enabled": false,
-        "recognition": "FeatureMatch",
-        "roi": [
-            269,
-            0,
-            580,
-            121
-        ],
-        "target": [
-            425,
-            40,
-            29,
-            40
-        ],
-        "template": [
-            "寮30/寮3026.png",
-            "自动御魂\\寮3026_copy1.png"
-        ]
-    },
     "N-1769565728203": {
         "action": "Click",
         "post_delay": 10000,
@@ -81,10 +60,6 @@
     "寮3026_copy1": {
         "action": "Click",
         "enabled": false,
-        "next": [
-            "自动御魂8",
-            "[JumpBack]N-1766236011441"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
             269,
@@ -119,7 +94,8 @@
             13,
             79,
             53
-        ]
+        ],
+        "timeout": 60000
     },
     "自动御魂": {
         "next": [
@@ -147,10 +123,7 @@
     "自动御魂-确保关闭加成": {
         "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
         "inverse": true,
-        "next": [
-            "自动御魂5",
-            "自动御魂10"
-        ],
+        "next": [],
         "recognition": "OCR",
         "roi": [
             354,
@@ -159,8 +132,30 @@
             346
         ]
     },
+    "自动御魂-设置次数": {
+        "action": "Custom",
+        "custom_action": "RepeatChallengeNTimes",
+        "custom_action_param": {
+            "expected_number": 2,
+            "start_repeat": true
+        },
+        "expected": "本次消耗",
+        "next": [
+            "自动御魂4"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            458,
+            424,
+            116,
+            53
+        ]
+    },
     "自动御魂1": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
             0,
@@ -223,9 +218,6 @@
     "自动御魂12": {
         "action": "Click",
         "expected": "加成",
-        "next": [
-            "自动御魂8_copy1"
-        ],
         "recognition": "OCR",
         "roi": [
             406,
@@ -236,9 +228,6 @@
     },
     "自动御魂13": {
         "action": "Click",
-        "next": [
-            "自动御魂8_copy1"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
             270,
@@ -308,6 +297,7 @@
     "自动御魂17": {
         "action": "Click",
         "expected": "式神录",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             0,
@@ -325,7 +315,8 @@
     "自动御魂18": {
         "action": "Click",
         "next": [
-            "自动御魂2"
+            "自动御魂-设置次数",
+            "[JumpBack]自动御魂2"
         ],
         "on_error": [
             "跳过"
@@ -348,9 +339,6 @@
     },
     "自动御魂2": {
         "action": "Click",
-        "next": [
-            "自动御魂3"
-        ],
         "recognition": "FeatureMatch",
         "roi": [
             794,
@@ -371,7 +359,7 @@
     "自动御魂2_copy2": {
         "action": "Click",
         "next": [
-            "自动御魂3_copy1"
+            "自动御魂3_关闭自动次数"
         ],
         "recognition": "TemplateMatch",
         "roi": [
@@ -386,30 +374,10 @@
             "自动御魂\\自动御魂2_2.png",
             "自动御魂\\自动御魂2_3.png",
             "自动御魂\\自动御魂2_4.png"
-        ]
-    },
-    "自动御魂3": {
-        "action": "Custom",
-        "custom_action": "RepeatChallengeNTimes",
-        "custom_action_param": {
-            "expected_number": 2,
-            "start_repeat": true
-        },
-        "expected": "本次消耗",
-        "next": [
-            "自动御魂4"
         ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            458,
-            424,
-            116,
-            53
-        ]
+        "post_delay": 2000
     },
-    "自动御魂3_copy1": {
+    "自动御魂3_关闭自动次数": {
         "action": "Custom",
         "custom_action": "RepeatChallengeNTimes",
         "custom_action_param": {
@@ -434,7 +402,7 @@
         "action": "Click",
         "expected": "本次消耗",
         "next": [
-            "寮3026_copy1",
+            "[JumpBack]自动御魂-开启加成",
             "自动御魂5",
             "自动御魂10"
         ],
@@ -456,8 +424,9 @@
         "action": "Click",
         "expected": "本次消耗",
         "next": [
-            "自动御魂12",
-            "自动御魂13"
+            "自动御魂-关闭加成",
+            "[JumpBack]自动御魂12",
+            "[JumpBack]自动御魂13"
         ],
         "recognition": "OCR",
         "roi": [
@@ -471,6 +440,10 @@
             629,
             261,
             72
+        ],
+        "post_delay": 2000,
+        "on_error": [
+            "返回庭院"
         ]
     },
     "自动御魂5": {
@@ -521,7 +494,7 @@
             "[JumpBack]自动御魂16",
             "[JumpBack]自动御魂-点击取消自动"
         ],
-        "post_delay": 1000,
+        "post_delay": 2000,
         "pre_delay": 1000,
         "recognition": "OCR",
         "roi": [
@@ -550,7 +523,7 @@
             346
         ]
     },
-    "自动御魂8_copy1": {
+    "自动御魂-关闭加成": {
         "action": "Custom",
         "custom_action": "BonusToggleAction",
         "custom_action_param": {
@@ -559,7 +532,14 @@
         "next": [
             "寮3015_copy1_copy1"
         ],
-        "recognition": "DirectHit"
+        "recognition": "OCR",
+        "roi": [
+            424,
+            131,
+            343,
+            317
+        ],
+        "expected": "觉醒材料|金币加成|八岐大蛇"
     },
     "自动御魂9": {
         "expected": "当前进度",
@@ -700,7 +680,8 @@
         "expected": "御魂",
         "next": [
             "自动御魂18",
-            "自动御魂2"
+            "自动御魂-设置次数",
+            "[JumpBack]自动御魂2"
         ],
         "recognition": "OCR",
         "roi": [
@@ -708,6 +689,26 @@
             0,
             262,
             78
+        ]
+    },
+    "自动御魂-开启加成": {
+        "recognition": "DirectHit",
+        "next": [
+            "自动御魂8",
+            "[JumpBack]寮3026_copy1",
+            "[JumpBack]自动御魂-识别加成"
+        ],
+        "max_hit": 1
+    },
+    "自动御魂-识别加成": {
+        "action": "Click",
+        "expected": "加成",
+        "recognition": "OCR",
+        "roi": [
+            406,
+            9,
+            54,
+            77
         ]
     }
 }
