@@ -57,7 +57,7 @@
             255
         ]
     },
-    "寮3026_copy1": {
+    "自动御魂-识别加成-特征匹配": {
         "action": "Click",
         "enabled": false,
         "recognition": "FeatureMatch",
@@ -75,7 +75,8 @@
         ],
         "template": [
             "寮30/寮3026.png",
-            "自动御魂\\寮3026_copy1.png"
+            "自动御魂\\寮3026_copy1.png",
+            "自动御魂\\自动御魂-识别加成-特征匹配_1.png"
         ]
     },
     "御魂-确保处于御魂界面": {
@@ -123,7 +124,6 @@
     "自动御魂-确保关闭加成": {
         "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
         "inverse": true,
-        "next": [],
         "recognition": "OCR",
         "roi": [
             354,
@@ -689,13 +689,14 @@
             0,
             262,
             78
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动御魂-开启加成": {
         "recognition": "DirectHit",
         "next": [
             "自动御魂8",
-            "[JumpBack]寮3026_copy1",
+            "[JumpBack]自动御魂-识别加成-特征匹配",
             "[JumpBack]自动御魂-识别加成"
         ],
         "max_hit": 1
@@ -705,10 +706,10 @@
         "expected": "加成",
         "recognition": "OCR",
         "roi": [
-            406,
-            9,
-            54,
-            77
+            396,
+            13,
+            75,
+            88
         ]
     }
 }
