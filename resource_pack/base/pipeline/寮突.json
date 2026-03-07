@@ -1,63 +1,14 @@
 {
-    "N-1768623524914": {
-        "action": "Click",
-        "expected": "结界突破|结界",
-        "recognition": "OCR",
-        "roi": [
-            229,
-            668,
-            101,
-            40
-        ],
-        "target": [
-            260,
-            639,
-            38,
-            45
-        ]
-    },
     "寮突": {
         "next": [
-            "寮突1",
+            "寮突2",
+            "[JumpBack]结界突破_点击结界突破",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
-    },
-    "寮突-点击结界突破": {
-        "action": "Click",
-        "expected": "结|界|突破",
-        "recognition": "OCR",
-        "roi": [
-            213,
-            677,
-            121,
-            42
         ],
-        "target": [
-            268,
-            640,
-            40,
-            41
-        ]
-    },
-    "寮突1": {
-        "expected": "结界突破|结界",
-        "next": [
-            "寮突2",
-            "[JumpBack]寮突3",
-            "[JumpBack]寮突-点击结界突破",
-            "[JumpBack]N-1768623524914"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            229,
-            668,
-            101,
-            40
-        ]
+        "recognition": "DirectHit"
     },
     "寮突10": {
         "action": "Click",
@@ -399,9 +350,7 @@
         "expected": "结界突破",
         "next": [
             "寮突2_copy1",
-            "[JumpBack]寮突3",
-            "[JumpBack]寮突-点击结界突破",
-            "[JumpBack]N-1768623524914"
+            "[JumpBack]结界突破_点击结界突破"
         ],
         "recognition": "OCR",
         "roi": [
@@ -545,23 +494,6 @@
             41,
             235,
             84
-        ]
-    },
-    "寮突3": {
-        "action": "Click",
-        "expected": "结界|突破",
-        "recognition": "OCR",
-        "roi": [
-            225,
-            669,
-            107,
-            35
-        ],
-        "target": [
-            263,
-            656,
-            32,
-            26
         ]
     },
     "寮突4": {

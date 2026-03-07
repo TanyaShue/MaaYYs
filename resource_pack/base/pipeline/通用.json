@@ -163,6 +163,7 @@
         ]
     },
     "确保位于庭院": {
+        "max_hit": 1,
         "next": [
             "识别庭院特征"
         ],
@@ -421,12 +422,13 @@
         "expected": "确定",
         "recognition": "OCR",
         "roi": [
-            400,
-            350,
-            475,
-            175
+            401,
+            354,
+            467,
+            135
         ],
-        "timeout": 2000
+        "timeout": 2000,
+        "post_delay": 2000
     },
     "通用4": {
         "recognition": "TemplateMatch",
@@ -603,6 +605,7 @@
     "通用_切换御魂_识别预设": {
         "action": "Click",
         "expected": "预设",
+        "post_delay": 1000,
         "recognition": "OCR",
         "roi": [
             214,
@@ -610,8 +613,7 @@
             292,
             76
         ],
-        "timeout": 2000,
-        "post_delay": 1000
+        "timeout": 2000
     },
     "通用_切换御魂_退出攻略界面": {
         "action": "Click",
@@ -693,18 +695,6 @@
             48
         ]
     },
-    "通用_测试挑战次数": {
-        "action": "Custom",
-        "custom_action": "RepeatChallengeNTimes",
-        "custom_action_param": {
-            "expected_number": 53,
-            "start_repeat": false
-        },
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "DirectHit"
-    },
     "通用_点击预设": {
         "next": [
             "通用_点击预设_1",
@@ -739,9 +729,6 @@
             "通用_装备御魂-模板匹配",
             "通用_装备御魂-特征匹配"
         ],
-        "on_error": [
-            "跳过"
-        ],
         "recognition": "OCR",
         "roi": [
             78,
@@ -753,11 +740,8 @@
     "通用_装备御魂-模板匹配": {
         "action": "Click",
         "next": [
-            "通用_装备御魂_点击确定",
-            "通用3"
-        ],
-        "on_error": [
-            "跳过"
+            "通用_装备御魂_确保没有确定按钮",
+            "[JumpBack]通用3"
         ],
         "post_delay": 1000,
         "recognition": "TemplateMatch",
@@ -772,11 +756,8 @@
     },
     "通用_装备御魂-特征匹配": {
         "next": [
-            "通用_装备御魂_点击确定",
-            "通用3"
-        ],
-        "on_error": [
-            "跳过"
+            "通用_装备御魂_确保没有确定按钮",
+            "[JumpBack]通用3"
         ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
@@ -789,24 +770,18 @@
         ],
         "timeout": 5000
     },
-    "通用_装备御魂_点击确定": {
-        "action": "Click",
+    "通用_装备御魂_确保没有确定按钮": {
         "expected": "确定",
-        "next": [
-            "通用3"
-        ],
-        "on_error": [
-            "跳过"
-        ],
         "pre_delay": 1000,
         "recognition": "OCR",
         "roi": [
-            400,
-            350,
-            475,
-            175
+            404,
+            354,
+            476,
+            149
         ],
-        "timeout": 2000
+        "timeout": 2000,
+        "inverse": true
     },
     "通用_识别加成": {
         "expected": "识别加成",

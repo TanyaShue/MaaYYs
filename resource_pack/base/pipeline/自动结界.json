@@ -557,7 +557,10 @@
             1193,
             120
         ],
-        "template": "探索/探索_结界突破.png"
+        "template": [
+            "探索/探索_结界突破.png",
+            "自动结界\\结界突破_点击结界突破_1.png"
+        ]
     },
     "结界突破_确保位于式神录界面": {
         "expected": "式神录",
@@ -578,10 +581,10 @@
             "[JumpBack]结界突破_点击结界突破",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "自动结界1": {
         "action": "Click",
