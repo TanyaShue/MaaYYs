@@ -2,7 +2,7 @@
   "interface_version": 2,
   "name": "MaaYYs",
   "label": "阴阳师",
-  "version": "v3.0.6",
+  "version": "v3.0.7",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
   "welcome": "README.md",
@@ -171,7 +171,6 @@
       "option": [
         "组队副本-挑战经验副本",
         "组队副本-挑战金币副本"
-
       ]
     },
     {
