@@ -127,6 +127,15 @@
         "recognition": "DirectHit",
         "timeout": 60000
     },
+    "日常-开始执行日常任务": {
+        "next": [
+            "日常_任务列表"
+        ],
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ],
+        "recognition": "DirectHit"
+    },
     "日常-活动卡片": {
         "action": "Click",
         "expected": "跳过",
@@ -417,7 +426,8 @@
             "[JumpBack]日常-开始庭院事务",
             "[JumpBack]领取奖励_商店每日奖励",
             "[JumpBack]领取奖励_花合战奖励",
-            "[JumpBack]领取奖励_邮件"
+            "[JumpBack]领取奖励_邮件",
+            "返回庭院"
         ],
         "recognition": "DirectHit"
     },
@@ -720,15 +730,6 @@
             90,
             189,
             53
-        ]
-    },
-    "日常-开始执行日常任务": {
-        "recognition": "DirectHit",
-        "next": [
-            "日常_任务列表"
-        ],
-        "on_error": [
-            "[JumpBack]确保位于庭院"
         ]
     }
 }
