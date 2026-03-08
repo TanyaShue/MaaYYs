@@ -74,7 +74,6 @@ func (a *BountyMonsterRecognition) Run(ctx *maa.Context, arg *maa.CustomActionAr
 
 				_, _ = ctx.RunTask("悬赏_开始识别探索", nil)
 				attempts = 0
-				break
 			}
 		} else {
 			fmt.Println("未识别到妖怪")
