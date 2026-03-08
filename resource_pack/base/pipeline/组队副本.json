@@ -1,4 +1,15 @@
 {
+    "组队副本": {
+        "next": [
+            "[JumpBack]组队副本-经验副本-打开加成",
+            "[JumpBack]组队副本-开始挑战经验妖怪",
+            "[JumpBack]组队副本-经验副本-关闭加成",
+            "[JumpBack]组队副本-金币副本-打开加成",
+            "[JumpBack]组队副本-开始挑战金币妖怪",
+            "组队副本-收尾-关闭所有加成"
+        ],
+        "recognition": "DirectHit"
+    },
     "组队副本-开始挑战经验妖怪": {
         "max_hit": 2,
         "next": [
@@ -112,6 +123,102 @@
             "组队副本\\组队副本.png"
         ]
     },
+    "组队副本-经验副本-打开加成": {
+        "action": "Click",
+        "max_hit": 1,
+        "next": [
+            "组队副本4_copy2"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            267,
+            0,
+            263,
+            137
+        ],
+        "target": [
+            377,
+            45,
+            10,
+            23
+        ],
+        "template": [
+            "组队副本\\组队副本3.png",
+            "组队副本\\组队副本.png"
+        ]
+    },
+    "组队副本-装备经验副本预设": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "组队",
+            "team_name": "经验副本"
+        },
+        "expected": "式神录",
+        "next": [
+            "组队副本9",
+            "组队副本9_返回庭院"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            296,
+            105
+        ]
+    },
+    "组队副本-装备金币副本预设": {
+        "action": "Custom",
+        "custom_action": "SwitchSoul",
+        "custom_action_param": {
+            "group_name": "组队",
+            "team_name": "金币副本"
+        },
+        "expected": "式神录",
+        "next": [
+            "组队副本9",
+            "组队副本9_返回庭院"
+        ],
+        "on_error": [
+            "返回庭院"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            296,
+            105
+        ]
+    },
+    "组队副本-金币副本-打开加成": {
+        "action": "Click",
+        "max_hit": 1,
+        "next": [
+            "组队副本4"
+        ],
+        "recognition": "FeatureMatch",
+        "roi": [
+            267,
+            0,
+            263,
+            137
+        ],
+        "target": [
+            377,
+            45,
+            10,
+            23
+        ],
+        "template": [
+            "组队副本\\组队副本3.png",
+            "组队副本\\组队副本.png"
+        ]
+    },
     "组队副本1": {
         "next": [
             "组队副本2",
@@ -206,8 +313,7 @@
             "[JumpBack]组队副本20",
             "识别庭院特征"
         ],
-        "post_delay": 10000,
-        "pre_delay": 10000,
+        "post_delay": 5000,
         "recognition": "OCR",
         "roi": [
             1099,
@@ -215,7 +321,8 @@
             169,
             141
         ],
-        "timeout": 200000
+        "timeout": 200000,
+        "pre_delay": 4000
     },
     "组队副本13_copy1": {
         "action": "Click",
@@ -229,17 +336,6 @@
             366,
             51
         ]
-    },
-    "组队副本": {
-        "next": [
-            "[JumpBack]组队副本-经验副本-打开加成",
-            "[JumpBack]组队副本-开始挑战经验妖怪",
-            "[JumpBack]组队副本-经验副本-关闭加成",
-            "[JumpBack]组队副本-金币副本-打开加成",
-            "[JumpBack]组队副本-开始挑战金币妖怪",
-            "组队副本-收尾-关闭所有加成"
-        ],
-        "recognition": "DirectHit"
     },
     "组队副本15": {
         "action": "Custom",
@@ -257,6 +353,9 @@
     },
     "组队副本17": {
         "action": "Click",
+        "next": [
+            "返回庭院"
+        ],
         "post_delay": 2000,
         "recognition": "DirectHit",
         "target": [
@@ -264,9 +363,6 @@
             216,
             90,
             263
-        ],
-        "next": [
-            "返回庭院"
         ]
     },
     "组队副本19": {
@@ -497,6 +593,7 @@
     },
     "组队副本6": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "FeatureMatch",
         "template": [
             "组队副本\\组队副本6.png"
@@ -505,6 +602,7 @@
     "组队副本7_copy2": {
         "action": "Click",
         "expected": "式神录",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             721,
@@ -513,73 +611,9 @@
             43
         ]
     },
-    "组队副本-装备金币副本预设": {
-        "action": "Custom",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "组队",
-            "team_name": "金币副本"
-        },
-        "expected": "式神录",
-        "next": [
-            "组队副本9",
-            "组队副本9_返回庭院"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            0,
-            0,
-            296,
-            105
-        ]
-    },
-    "组队副本-装备经验副本预设": {
-        "action": "Custom",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "组队",
-            "team_name": "经验副本"
-        },
-        "expected": "式神录",
-        "next": [
-            "组队副本9_copy1",
-            "组队副本9_返回庭院_copy1"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            0,
-            0,
-            296,
-            105
-        ]
-    },
     "组队副本9": {
         "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            0,
-            0,
-            113,
-            73
-        ],
-        "target": [
-            36,
-            18,
-            13,
-            22
-        ],
-        "template": [
-            "组队副本\\组队副本9.png"
-        ]
-    },
-    "组队副本9_copy1": {
-        "action": "Click",
+        "post_delay": 2000,
         "recognition": "TemplateMatch",
         "roi": [
             0,
@@ -600,6 +634,7 @@
     "组队副本9_返回庭院": {
         "action": "Click",
         "expected": "式神录",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             0,
@@ -612,71 +647,6 @@
             9,
             33,
             40
-        ]
-    },
-    "组队副本9_返回庭院_copy1": {
-        "action": "Click",
-        "expected": "式神录",
-        "recognition": "OCR",
-        "roi": [
-            0,
-            0,
-            258,
-            64
-        ],
-        "target": [
-            27,
-            9,
-            33,
-            40
-        ]
-    },
-    "组队副本-经验副本-打开加成": {
-        "action": "Click",
-        "max_hit": 1,
-        "next": [
-            "组队副本4_copy2"
-        ],
-        "recognition": "FeatureMatch",
-        "roi": [
-            267,
-            0,
-            263,
-            137
-        ],
-        "target": [
-            377,
-            45,
-            10,
-            23
-        ],
-        "template": [
-            "组队副本\\组队副本3.png",
-            "组队副本\\组队副本.png"
-        ]
-    },
-    "组队副本-金币副本-打开加成": {
-        "action": "Click",
-        "max_hit": 1,
-        "next": [
-            "组队副本4"
-        ],
-        "recognition": "FeatureMatch",
-        "roi": [
-            267,
-            0,
-            263,
-            137
-        ],
-        "target": [
-            377,
-            45,
-            10,
-            23
-        ],
-        "template": [
-            "组队副本\\组队副本3.png",
-            "组队副本\\组队副本.png"
         ]
     }
 }
