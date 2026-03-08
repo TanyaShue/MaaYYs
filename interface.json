@@ -165,6 +165,20 @@
       ]
     },
     {
+      "name": "组队副本",
+      "label": "组队副本",
+      "entry": "组队副本",
+      "option": [
+        "组队副本-挑战经验副本",
+        "组队副本-是否启用经验加成",
+        "组队副本-经验副本阵容预设",
+        "组队副本-挑战金币副本",
+        "组队副本-是否启用金币加成",
+        "组队副本-金币副本阵容预设"
+
+      ]
+    },
+    {
       "name": "自动秘闻",
       "label": "自动秘闻",
       "entry": "自动秘闻",
@@ -575,6 +589,166 @@
           }
         }
       ]
+    },
+    "组队副本-挑战金币副本": {
+      "type": "switch",
+      "label": "组队副本-金币副本",
+      "description": "是否在挑战金币副本",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "pipeline_override": {
+            "组队副本-开始挑战金币妖怪": {
+              "enabled": true
+            }
+          }
+        },
+        {
+          "name": "No",
+          "label": "否",
+          "pipeline_override": {
+            "组队副本-开始挑战金币妖怪": {
+              "enabled": false
+            }
+          }
+        }
+      ]
+    },
+    "组队副本-挑战经验副本": {
+      "type": "switch",
+      "label": "组队副本-经验副本",
+      "description": "是否在挑战经验副本",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "pipeline_override": {
+            "组队副本-开始挑战经验妖怪": {
+              "enabled": true
+            }
+          }
+        },
+        {
+          "name": "No",
+          "label": "否",
+          "pipeline_override": {
+            "组队副本-开始挑战经验妖怪": {
+              "enabled": false
+            }
+          }
+        }
+      ]
+    },
+    "组队副本-是否启用金币加成": {
+      "type": "switch",
+      "label": "组队副本-是否启用金币加成",
+      "description": "是否启用金币加成",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "pipeline_override": {
+            "组队副本-金币副本-打开加成": {
+              "enabled": true
+            }
+          }
+        },
+        {
+          "name": "No",
+          "label": "否",
+          "pipeline_override": {
+            "组队副本-金币副本-打开加成": {
+              "enabled": false
+            }
+          }
+        }
+      ]
+    },
+    "组队副本-是否启用经验加成": {
+      "type": "switch",
+      "label": "组队副本-是否启用经验加成",
+      "description": "是否启用经验加成",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "pipeline_override": {
+            "组队副本-经验副本-打开加成": {
+              "enabled": true
+            }
+          }
+        },
+        {
+          "name": "No",
+          "label": "否",
+          "pipeline_override": {
+            "组队副本-经验副本-打开加成": {
+              "enabled": false
+            }
+          }
+        }
+      ]
+    },
+    "组队副本-金币副本阵容预设": {
+      "type": "input",
+      "label": "金币副本阵容预设",
+      "description": "填写金币副本需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "组队副本-装备金币副本预设": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "组队副本-经验副本阵容预设": {
+      "type": "input",
+      "label": "经验副本阵容预设",
+      "description": "填写经验副本需要使用的分组和队伍预设名称",
+      "default": "默认分组",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认分组",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "组队副本-装备经验副本预设": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
     },
     "逢魔答题同步题目": {
       "type": "switch",
@@ -1256,115 +1430,6 @@
           "pipeline_override": {
             "领取奖励_邮件": {
               "enabled": false
-            }
-          }
-        }
-      ]
-    },
-    "经验副本设置": {
-      "type": "select",
-      "label": "经验副本设置",
-      "description": "设置组队经验副本的相关参数，包括预设和加成",
-      "default_case": "经验副本分组预设",
-      "cases": [
-        {
-          "name": "经验副本分组预设",
-          "label": "经验副本分组预设",
-          "description": "填写经验副本需要使用的分组预设名称",
-          "pipeline_override": {
-            "组队副本8_copy1": {
-              "custom_action_param": {
-                "group_name": "{value}"
-              }
-            }
-          }
-        },
-        {
-          "name": "经验副本队伍预设",
-          "label": "经验副本队伍预设",
-          "description": "填写经验副本需要使用的队伍预设名称",
-          "pipeline_override": {
-            "组队副本8_copy1": {
-              "custom_action_param": {
-                "team_name": "{value}"
-              }
-            }
-          }
-        },
-        {
-          "name": "启用100%经验加成",
-          "label": "启用100%经验加成",
-          "description": "挑战经验副本时，是否自动开启100%经验加成Buff",
-          "pipeline_override": {
-            "组队副本4_copy2": {
-              "custom_action_param": {
-                "exp_100%": "{boole}"
-              }
-            }
-          }
-        },
-        {
-          "name": "启用50%经验加成",
-          "label": "启用50%经验加成",
-          "description": "挑战经验副本时，是否自动开启50%经验加成Buff",
-          "pipeline_override": {
-            "组队副本4_copy2": {
-              "custom_action_param": {
-                "exp_50%": "{boole}"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "金币副本设置": {
-      "type": "select",
-      "label": "金币副本设置",
-      "default_case": "金币副本分组预设",
-      "cases": [
-        {
-          "name": "金币副本分组预设",
-          "label": "金币副本分组预设",
-          "description": "填写金币副本需要使用的分组预设名称",
-          "pipeline_override": {
-            "组队副本8": {
-              "custom_action_param": {
-                "group_name": "{value}"
-              }
-            }
-          }
-        },
-        {
-          "name": "金币副本队伍预设",
-          "label": "金币副本队伍预设",
-          "description": "填写金币副本需要使用的队伍预设名称",
-          "pipeline_override": {
-            "组队副本8": {
-              "custom_action_param": {
-                "team_name": "{value}"
-              }
-            }
-          }
-        },
-        {
-          "name": "启用100%金币加成",
-          "label": "启用100%金币加成",
-          "pipeline_override": {
-            "组队副本4": {
-              "custom_action_param": {
-                "gold_100%": "{boole}"
-              }
-            }
-          }
-        },
-        {
-          "name": "启用50%金币加成",
-          "label": "启用50%金币加成",
-          "pipeline_override": {
-            "组队副本4": {
-              "custom_action_param": {
-                "gold_50%": "{boole}"
-              }
             }
           }
         }
