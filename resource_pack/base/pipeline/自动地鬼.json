@@ -82,7 +82,8 @@
             506,
             151,
             76
-        ]
+        ],
+        "post_delay": 2000
     },
     "地鬼-确保打开筛选界面": {
         "expected": "悬赏|热门|最新|征服|收藏",
@@ -128,17 +129,12 @@
             107,
             232,
             81
-        ]
+        ],
+        "post_delay": 2000
     },
     "地鬼_御魂_返回": {
         "action": "Click",
         "expected": "式神录",
-        "next": [
-            "开始自动挑战鬼王"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
         "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
@@ -157,12 +153,6 @@
     "地鬼_点击式神录": {
         "action": "Click",
         "expected": "式神录",
-        "next": [
-            "装备地狱鬼王预设"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
         "post_delay": 3000,
         "pre_delay": 1000,
         "recognition": "OCR",
@@ -229,12 +219,6 @@
     },
     "点击地域鬼王": {
         "action": "Click",
-        "next": [
-            "地鬼_点击式神录"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
         "post_delay": 2000,
         "recognition": "TemplateMatch",
         "roi": [
@@ -259,14 +243,15 @@
     },
     "自动地鬼": {
         "next": [
-            "点击地域鬼王",
-            "自动地鬼2",
+            "地鬼-识别是否位于地域鬼王界面",
+            "[JumpBack]点击地域鬼王",
+            "[JumpBack]自动地鬼2",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "自动地鬼-准备战斗": {
         "action": "Click",
@@ -344,7 +329,8 @@
         ],
         "template": [
             "自动地鬼\\自动地鬼14.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动地鬼16": {
         "expected": "^(世界排名|小组排名|本次评分)$",
@@ -379,12 +365,6 @@
     "自动地鬼2": {
         "action": "Click",
         "expected": "地域鬼王",
-        "next": [
-            "地鬼_点击式神录"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
         "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
@@ -547,7 +527,8 @@
             656,
             387,
             63
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动地鬼8": {
         "expected": "^(世界|小组|评分)$",
@@ -577,7 +558,8 @@
         ],
         "template": [
             "自动地鬼\\自动地鬼9.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "装备地狱鬼王预设": {
         "action": "Custom",
@@ -588,7 +570,8 @@
         },
         "expected": "式神录",
         "next": [
-            "地鬼_御魂_返回"
+            "地鬼-识别是否返回地鬼界面",
+            "[JumpBack]地鬼_御魂_返回"
         ],
         "on_error": "超时_切换御魂失败",
         "post_delay": 2000,
@@ -604,6 +587,63 @@
             535,
             127,
             65
+        ]
+    },
+    "地鬼-识别是否位于地域鬼王界面": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            403,
+            163,
+            191
+        ],
+        "expected": "今日挑战|地域最强",
+        "next": [
+            "装备地狱鬼王预设",
+            "[JumpBack]地鬼_点击式神录",
+            "[JumpBack]地鬼_点击式神录-模板匹配",
+            "[JumpBack]地鬼_点击式神录-特征匹配"
+        ],
+        "post_delay": 2000
+    },
+    "地鬼-识别是否返回地鬼界面": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            403,
+            163,
+            191
+        ],
+        "expected": "今日挑战|地域最强",
+        "post_delay": 2000,
+        "next": [
+            "开始自动挑战鬼王"
+        ]
+    },
+    "地鬼_点击式神录-模板匹配": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            1127,
+            464,
+            151,
+            137
+        ],
+        "template": [
+            "自动地鬼\\地鬼_点击式神录-模板匹配_1.png"
+        ]
+    },
+    "地鬼_点击式神录-特征匹配": {
+        "recognition": "TemplateMatch",
+        "action": "Click",
+        "roi": [
+            1127,
+            464,
+            151,
+            137
+        ],
+        "template": [
+            "自动地鬼\\地鬼_点击式神录-模板匹配_1.png"
         ]
     }
 }

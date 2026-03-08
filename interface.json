@@ -1119,7 +1119,7 @@
               "enable": true
             },
             "自动地鬼12_装备预设": {
-              "enabled": true
+              "enabled": false
             }
           }
         },
@@ -1131,7 +1131,7 @@
               "enable": false
             },
             "自动地鬼12_装备预设": {
-              "enabled": false
+              "enabled": true
             }
           }
         }
