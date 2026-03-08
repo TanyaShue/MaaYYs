@@ -3,7 +3,7 @@
         "action": "Click",
         "expected": "食|喂",
         "next": [
-            "投喂宠物11",
+            "投喂宠物-识别是否进入后院",
             "[JumpBack]投喂宠物15_copy1",
             "[JumpBack]投喂宠物4",
             "[JumpBack]投喂宠物-识别是否位于宠物小屋"
@@ -14,7 +14,8 @@
             503,
             96,
             84
-        ]
+        ],
+        "post_delay": 2000
     },
     "喂宠物-确保位于快速喂养界面": {
         "expected": "快速喂养",
@@ -28,7 +29,8 @@
             88,
             153,
             61
-        ]
+        ],
+        "post_delay": 2000
     },
     "投喂宠物": {
         "next": [
@@ -103,7 +105,7 @@
     "投喂宠物-识别是否位于宠物小屋": {
         "expected": "宠物小屋",
         "next": [
-            "投喂宠物5"
+            "投喂宠物-点击进入后院"
         ],
         "recognition": "OCR",
         "roi": [
@@ -111,7 +113,8 @@
             7,
             157,
             69
-        ]
+        ],
+        "post_delay": 2000
     },
     "投喂宠物1": {
         "action": "Click",
@@ -147,7 +150,7 @@
             133
         ]
     },
-    "投喂宠物11": {
+    "投喂宠物-识别是否进入后院": {
         "expected": "宠物后院",
         "next": [
             "投喂宠物7_copy1",
@@ -217,7 +220,8 @@
         ],
         "model": "Courtyard.onnx",
         "recognition": "NeuralNetworkDetect",
-        "threshold": 0.8
+        "threshold": 0.8,
+        "post_delay": 2000
     },
     "投喂宠物18": {
         "action": "Click",
@@ -236,7 +240,8 @@
             658,
             137,
             50
-        ]
+        ],
+        "post_delay": 2000
     },
     "投喂宠物2": {
         "action": "Click",
@@ -250,12 +255,13 @@
         "template": [
             "投喂宠物/投喂宠物2.png",
             "投喂宠物/投喂宠物2_1.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "投喂宠物3": {
         "action": "Click",
         "next": [
-            "投喂宠物11",
+            "投喂宠物-识别是否进入后院",
             "[JumpBack]投喂宠物15_copy1",
             "[JumpBack]投喂宠物4",
             "[JumpBack]投喂宠物-识别是否位于宠物小屋"
@@ -269,7 +275,8 @@
         ],
         "template": [
             "投喂宠物\\投喂宠物3.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "投喂宠物4": {
         "action": "Click",
@@ -286,9 +293,10 @@
             329,
             58,
             145
-        ]
+        ],
+        "post_delay": 2000
     },
-    "投喂宠物5": {
+    "投喂宠物-点击进入后院": {
         "action": "Click",
         "recognition": "TemplateMatch",
         "roi": [
@@ -305,7 +313,8 @@
         ],
         "template": [
             "投喂宠物\\投喂宠物5.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "投喂宠物6": {
         "action": "Click",
@@ -415,6 +424,7 @@
             "投喂宠物\\投喂宠物_16.png",
             "投喂宠物\\投喂宠物_17.png",
             "投喂宠物\\投喂宠物_1_1.png"
-        ]
+        ],
+        "post_delay": 2000
     }
 }
