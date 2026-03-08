@@ -314,6 +314,7 @@
             "识别庭院特征"
         ],
         "post_delay": 5000,
+        "pre_delay": 4000,
         "recognition": "OCR",
         "roi": [
             1099,
@@ -321,8 +322,7 @@
             169,
             141
         ],
-        "timeout": 200000,
-        "pre_delay": 4000
+        "timeout": 200000
     },
     "组队副本13_copy1": {
         "action": "Click",
@@ -597,6 +597,12 @@
         "recognition": "FeatureMatch",
         "template": [
             "组队副本\\组队副本6.png"
+        ],
+        "roi": [
+            959,
+            572,
+            321,
+            135
         ]
     },
     "组队副本7_copy2": {
@@ -605,10 +611,10 @@
         "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
-            721,
-            648,
-            468,
-            43
+            1069,
+            646,
+            133,
+            58
         ]
     },
     "组队副本9": {
