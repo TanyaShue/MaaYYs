@@ -410,18 +410,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "阴阳寮奖励24_挂结界卡": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "阴阳寮奖励24_挂结界卡": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "阴阳寮奖励24_挂结界卡": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "是否领取寄养奖励": {
       "type": "switch",
@@ -430,18 +435,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "阴阳寮奖励37": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "阴阳寮奖励37": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "阴阳寮奖励37": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "自动挂卡类型设置": {
       "type": "select",
@@ -548,18 +558,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "探索_悬赏_自动轮换": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "探索_悬赏_自动轮换": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "探索_悬赏_自动轮换": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "逢魔答题同步题目": {
       "type": "switch",
@@ -568,21 +583,29 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "自动逢魔2": {
+              "custom_action_param": {
+                "upload": true,
+                "sync": true
+              }
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
-        }
-      ],
-      "pipeline_override": {
-        "自动逢魔2": {
-          "custom_action_param": {
-            "upload": true,
-            "sync": true
+          "label": "否",
+          "pipeline_override": {
+            "自动逢魔2": {
+              "custom_action_param": {
+                "upload": false,
+                "sync": false
+              }
+            }
           }
         }
-      }
+      ]
     },
     "悬赏封印阵容预设": {
       "type": "input",
@@ -1016,18 +1039,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "自动御魂-开启加成": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "自动御魂-开启加成": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "自动御魂-开启加成": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "是否在战斗中投喂宠物": {
       "type": "switch",
@@ -1036,18 +1064,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "自动御魂11": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "自动御魂11": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "自动御魂11": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "任务失败后重启游戏": {
       "type": "switch",
@@ -1080,22 +1113,30 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "自动地鬼3_锁定阵容": {
+              "enable": true
+            },
+            "自动地鬼12_装备预设": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "自动地鬼3_锁定阵容": {
+              "enable": false
+            },
+            "自动地鬼12_装备预设": {
+              "enabled": false
+            }
+          }
         }
       ],
-      "default_case ": "Yes",
-      "pipeline_override": {
-        "自动地鬼3_锁定阵容": {
-          "enable": true
-        },
-        "自动地鬼12_装备预设": {
-          "enabled": true
-        }
-      }
+      "default_case ": "Yes"
     },
     "自动挑战次数": {
       "type": "input",
@@ -1127,18 +1168,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "领取奖励_商店每日奖励": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "领取奖励_商店每日奖励": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "领取奖励_商店每日奖励": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "领取奖励_庭院事务": {
       "type": "switch",
@@ -1147,18 +1193,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "日常-开始庭院事务": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "日常-开始庭院事务": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "日常-开始庭院事务": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "领取奖励_花合战奖励": {
       "type": "switch",
@@ -1167,17 +1218,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "领取奖励_花合战奖励": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "领取奖励_花合战奖励": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "领取奖励_花合战奖励": {
-          "enabled": true
-        }
+      ]
       }
     },
     "领取奖励_邮件": {
@@ -1187,18 +1244,23 @@
       "cases": [
         {
           "name": "Yes",
-          "label": "是"
+          "label": "是",
+          "pipeline_override": {
+            "领取奖励_邮件": {
+              "enabled": true
+            }
+          }
         },
         {
           "name": "No",
-          "label": "否"
+          "label": "否",
+          "pipeline_override": {
+            "领取奖励_邮件": {
+              "enabled": false
+            }
+          }
         }
-      ],
-      "pipeline_override": {
-        "领取奖励_邮件": {
-          "enabled": true
-        }
-      }
+      ]
     },
     "经验副本设置": {
       "type": "select",
