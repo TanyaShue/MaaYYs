@@ -553,10 +553,10 @@
         "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
-            0,
-            599,
-            1193,
-            120
+            204,
+            607,
+            151,
+            113
         ],
         "template": [
             "探索/探索_结界突破.png",
@@ -606,14 +606,14 @@
     "自动结界2": {
         "action": "Click",
         "expected": "式神录",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             1157,
             575,
             122,
             142
-        ],
-        "post_delay": 2000
+        ]
     },
     "自动结界2_战斗准备": {
         "action": "Click",
