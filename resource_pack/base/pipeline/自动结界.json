@@ -538,7 +538,7 @@
     },
     "结界突破_点击式神录": {
         "action": "Click",
-        "post_delay": 1000,
+        "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
             1184,
@@ -550,6 +550,7 @@
     },
     "结界突破_点击结界突破": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
             0,
@@ -611,7 +612,8 @@
             575,
             122,
             142
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动结界2_战斗准备": {
         "action": "Click",

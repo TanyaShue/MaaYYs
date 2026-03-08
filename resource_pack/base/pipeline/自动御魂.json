@@ -72,6 +72,9 @@
             "[JumpBack]自动御魂16",
             "[JumpBack]自动御魂19"
         ],
+        "on_error": [
+            "[JumpBack]跳过"
+        ],
         "post_delay": 10000,
         "recognition": "OCR",
         "roi": [
@@ -80,10 +83,7 @@
             240,
             66
         ],
-        "timeout": 2000000,
-        "on_error": [
-            "[JumpBack]跳过"
-        ]
+        "timeout": 2000000
     },
     "自动御魂-点击取消自动": {
         "action": "Click",
@@ -139,7 +139,8 @@
             13,
             75,
             88
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动御魂-识别加成-特征匹配": {
         "action": "Click",
@@ -160,7 +161,8 @@
             "寮30/寮3026.png",
             "自动御魂\\寮3026_copy1.png",
             "自动御魂\\自动御魂-识别加成-特征匹配_1.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动御魂1": {
         "action": "Click",
@@ -207,17 +209,18 @@
     "自动御魂12": {
         "action": "Click",
         "expected": "加成",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             406,
             9,
             54,
             77
-        ],
-        "post_delay": 2000
+        ]
     },
     "自动御魂13": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
             270,
@@ -228,8 +231,7 @@
         "template": [
             "自动御魂\\自动御魂13.png",
             "自动御魂\\自动御魂13_1.png"
-        ],
-        "post_delay": 2000
+        ]
     },
     "自动御魂14": {
         "action": "Click",
@@ -320,14 +322,14 @@
     "自动御魂19": {
         "action": "Click",
         "expected": "准备",
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             1124,
             533,
             125,
             110
-        ],
-        "max_hit": 1
+        ]
     },
     "自动御魂2": {
         "action": "Click",
@@ -446,6 +448,9 @@
             "[JumpBack]自动御魂16",
             "[JumpBack]自动御魂19"
         ],
+        "on_error": [
+            "[JumpBack]跳过"
+        ],
         "rate_limit": 3000,
         "recognition": "TemplateMatch",
         "roi": [
@@ -459,10 +464,7 @@
             "自动御魂\\自动御魂5_2.png",
             "自动御魂\\自动御魂5_3.png"
         ],
-        "timeout": 2000000,
-        "on_error": [
-            "[JumpBack]跳过"
-        ]
+        "timeout": 2000000
     },
     "自动御魂6": {
         "expected": "已完成",
