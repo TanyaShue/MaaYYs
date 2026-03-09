@@ -1,4 +1,34 @@
 {
+    "阴界之门-打开阴阳寮-模板匹配": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            502,
+            554,
+            151,
+            157
+        ],
+        "template": [
+            "阴间之门\\阴界之门-打开阴阳寮_1.png",
+            "阴间之门\\阴界之门-打开阴阳寮_2.png"
+        ],
+        "post_delay": 4000
+    },
+    "阴界之门-打开阴阳寮-特征匹配": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            502,
+            554,
+            151,
+            157
+        ],
+        "template": [
+            "阴间之门\\阴界之门-打开阴阳寮_1.png",
+            "阴间之门\\阴界之门-打开阴阳寮_2.png"
+        ],
+        "post_delay": 4000
+    },
     "阴界之门-点击开始挑战-模板匹配": {
         "action": "Click",
         "recognition": "TemplateMatch",
@@ -425,32 +455,32 @@
             60
         ]
     },
-    "阴界之门-打开阴阳寮-模板匹配": {
-        "recognition": "TemplateMatch",
-        "roi": [
-            502,
-            554,
-            151,
-            157
+    "阴界之门-时间检查": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "TimeCheck",
+        "custom_action_param": {
+            "date_rule": {
+                "type": "week",
+                "value": [
+                    5,
+                    6,
+                    7
+                ]
+            },
+            "end": "23:00",
+            "mode": "in",
+            "start": "18:00"
+        },
+        "next": [
+            "阴间之门"
         ],
-        "template": [
-            "阴间之门\\阴界之门-打开阴阳寮_1.png",
-            "阴间之门\\阴界之门-打开阴阳寮_2.png"
+        "on_error": [
+            "返回庭院"
         ],
-        "action": "Click"
-    },
-    "阴界之门-打开阴阳寮-特征匹配": {
-        "recognition": "TemplateMatch",
-        "roi": [
-            502,
-            554,
-            151,
-            157
-        ],
-        "template": [
-            "阴间之门\\阴界之门-打开阴阳寮_1.png",
-            "阴间之门\\阴界之门-打开阴阳寮_2.png"
-        ],
-        "action": "Click"
+        "focus": {
+            "Node.Action.Starting": "阴界之门-开始检查时间",
+            "Node.Action.Failed": "不处于阴界之门开启时间,任务结束"
+        }
     }
 }
