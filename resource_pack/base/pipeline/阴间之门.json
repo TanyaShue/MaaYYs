@@ -1,8 +1,36 @@
 {
+    "阴界之门-点击开始挑战-模板匹配": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            1124,
+            543,
+            151,
+            162
+        ],
+        "template": [
+            "阴间之门\\N-1772895473660_1.png"
+        ]
+    },
+    "阴界之门-点击开始挑战-特征匹配": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            1124,
+            543,
+            151,
+            162
+        ],
+        "template": [
+            "阴间之门\\N-1772895473660_1.png"
+        ]
+    },
     "阴间之门": {
         "next": [
             "阴间之门2",
             "[JumpBack]阴间之门1",
+            "[JumpBack]阴界之门-打开阴阳寮-模板匹配",
+            "[JumpBack]阴界之门-打开阴阳寮-特征匹配",
             "[JumpBack]打开底部菜单"
         ],
         "on_error": [
@@ -14,14 +42,14 @@
     "阴间之门1": {
         "action": "Click",
         "expected": "阴阳寮",
+        "post_delay": 4000,
         "recognition": "OCR",
         "roi": [
-            493,
-            635,
-            236,
-            66
-        ],
-        "post_delay": 4000
+            511,
+            648,
+            135,
+            52
+        ]
     },
     "阴间之门10": {
         "action": "Click",
@@ -86,6 +114,7 @@
     },
     "阴间之门14": {
         "action": "Click",
+        "post_delay": 4000,
         "recognition": "TemplateMatch",
         "roi": [
             0,
@@ -95,8 +124,7 @@
         ],
         "template": [
             "阴间之门\\阴间之门14.png"
-        ],
-        "post_delay": 4000
+        ]
     },
     "阴间之门15": {
         "expected": "阴界之门",
@@ -315,14 +343,14 @@
     "阴间之门4": {
         "action": "Click",
         "expected": "寮信息",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             1141,
             641,
             139,
             79
-        ],
-        "post_delay": 2000
+        ]
     },
     "阴间之门5": {
         "expected": "阴界之门|集体任务",
@@ -397,29 +425,31 @@
             60
         ]
     },
-    "阴界之门-点击开始挑战-模板匹配": {
+    "阴界之门-打开阴阳寮-模板匹配": {
         "recognition": "TemplateMatch",
         "roi": [
-            1124,
-            543,
+            502,
+            554,
             151,
-            162
+            157
         ],
         "template": [
-            "阴间之门\\N-1772895473660_1.png"
+            "阴间之门\\阴界之门-打开阴阳寮_1.png",
+            "阴间之门\\阴界之门-打开阴阳寮_2.png"
         ],
         "action": "Click"
     },
-    "阴界之门-点击开始挑战-特征匹配": {
-        "recognition": "FeatureMatch",
+    "阴界之门-打开阴阳寮-特征匹配": {
+        "recognition": "TemplateMatch",
         "roi": [
-            1124,
-            543,
+            502,
+            554,
             151,
-            162
+            157
         ],
         "template": [
-            "阴间之门\\N-1772895473660_1.png"
+            "阴间之门\\阴界之门-打开阴阳寮_1.png",
+            "阴间之门\\阴界之门-打开阴阳寮_2.png"
         ],
         "action": "Click"
     }
