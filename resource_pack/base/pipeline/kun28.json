@@ -39,9 +39,6 @@
         "timeout": 10000
     },
     "N-kun281": {
-        "focus": {
-            "Node.Recognition.Succeeded": "返回到探索界面"
-        },
         "next": [
             "kun282",
             "[JumpBack]kun283"
@@ -107,9 +104,7 @@
         ]
     },
     "kun28-识别探索界面的妖字": {
-        "focus": {
-            "Node.Recognition.Succeeded": "返回到探索界面"
-        },
+
         "next": [
             "[JumpBack]kun2817",
             "[JumpBack]kun2822",
@@ -131,9 +126,6 @@
         ]
     },
     "kun28-识别是否返回到探索界面": {
-        "focus": {
-            "Node.Recognition.Succeeded": "返回到探索界面"
-        },
         "recognition": "TemplateMatch",
         "roi": [
             1089,
@@ -591,13 +583,13 @@
     },
     "kun28_开始点击妖怪": {
         "next": [
+            "N-1773250636443",
+            "kun28-识别是否返回到探索界面",
             "[JumpBack]kun28_copy1",
             "[JumpBack]kun28_copy1_copy1",
             "[JumpBack]kun2818",
             "[JumpBack]kun2814",
-            "[JumpBack]kun2821",
-            "N-1773250636443",
-            "kun28-识别是否返回到探索界面"
+            "[JumpBack]kun2821"
         ],
         "recognition": "DirectHit",
         "timeout": 60000
