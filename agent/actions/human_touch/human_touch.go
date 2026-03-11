@@ -54,7 +54,6 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		h := toInt(params.ROI1[3])
 		xMax = xMin + w
 		yMax = yMin + h
-		fmt.Printf("成功加载ROI参数: x范围(%d, %d), y范围(%d, %d)\n", xMin, xMax, yMin, yMax)
 	} else {
 		fmt.Printf("使用默认点击区域: x范围(%d, %d), y范围(%d, %d)\n", xMin, xMax, yMin, yMax)
 	}
