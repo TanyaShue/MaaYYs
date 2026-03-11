@@ -1465,8 +1465,9 @@
     },
     "自定义御灵点击策略设置": {
       "type": "switch",
-      "label": "领取奖励_邮件",
-      "description": "是否自动领取邮件奖励",
+      "label": "是否自定义点击策略",
+      "description": "是否自定义点击策略",
+      "default_case":"No",
       "cases": [
         {
           "name": "Yes",
