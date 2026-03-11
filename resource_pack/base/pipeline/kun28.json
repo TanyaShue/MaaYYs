@@ -29,7 +29,7 @@
     },
     "N-kun281": {
         "focus": {
-            "Node.Recognition.Succeeded": "[debug]返回到探索界面"
+            "Node.Recognition.Succeeded": "返回到探索界面"
         },
         "next": [
             "kun2817",
@@ -51,18 +51,18 @@
         ]
     },
     "kun28-确保关闭章节面板": {
-        "expected": "第二十八章",
+        "expected": "第二十|八章",
         "recognition": "OCR",
         "roi": [
-            1058,
-            193,
-            210,
-            380
+            1056,
+            448,
+            207,
+            98
         ]
     },
     "kun28-识别探索界面的妖字": {
         "focus": {
-            "Node.Recognition.Succeeded": "[debug]返回到探索界面"
+            "Node.Recognition.Succeeded": "返回到探索界面"
         },
         "next": [
             "kun2817",
@@ -655,12 +655,12 @@
         ]
     },
     "开始肝绘卷": {
-        "recognition": "DirectHit",
         "next": [
             "kun2820"
         ],
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     }
 }
