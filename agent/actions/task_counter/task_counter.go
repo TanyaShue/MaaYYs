@@ -56,16 +56,15 @@ func (a *TaskCounter) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	a.taskCounts[taskID] = currentCount
 	a.mu.Unlock()
 
-	fmt.Printf("TaskCounter: TaskID=%d, 当前计数=%d, 目标=%d\n", taskID, currentCount, params.TargetCount)
 
 	// 达到 5 的倍数时打印提示
 	if currentCount%5 == 0 {
-		fmt.Printf("TaskCounter: TaskID=%d 已完成 %d 次\n", taskID, currentCount)
+		fmt.Printf("已完成 %d 次\n", currentCount)
 	}
 
 	// 判断是否达到目标
 	if currentCount >= params.TargetCount {
-		fmt.Printf("TaskCounter: TaskID=%d 已达到目标次数 %d，返回 false\n", taskID, params.TargetCount)
+		fmt.Printf("已达到目标次数 %d，返回 false\n", params.TargetCount)
 		// 达到目标后清除计数，以便下次重新开始
 		a.mu.Lock()
 		delete(a.taskCounts, taskID)

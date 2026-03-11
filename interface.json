@@ -203,8 +203,9 @@
       "label": "自动御灵",
       "entry": "自动御灵1",
       "option": [
+        "御灵-设置挑战次数",
         "御灵阵容预设",
-        "御灵点击策略设置"
+        "自定义御灵点击策略设置"
       ]
     },
     {
@@ -695,6 +696,27 @@
           }
         }
       ]
+    },
+    "御灵-设置挑战次数": {
+      "type": "input",
+      "label": "挑战次数",
+      "description": "设置御灵的挑战次数",
+      "inputs": [
+        {
+          "name": "挑战次数",
+          "label": "挑战次数",
+          "description": "填写挑战御灵的次数",
+          "default": "999",
+          "pipeline_type": "int"
+        }
+      ],
+      "pipeline_override": {
+        "御灵-判断是否达到对应次数": {
+          "custom_recognition_param": {
+            "target_count": "{挑战次数}"
+          }
+        }
+      }
     },
     "组队副本-金币副本阵容预设": {
       "type": "input",
@@ -1438,6 +1460,22 @@
               "enabled": false
             }
           }
+        }
+      ]
+    },
+    "自定义御灵点击策略设置": {
+      "type": "switch",
+      "label": "领取奖励_邮件",
+      "description": "是否自动领取邮件奖励",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "option":["御灵点击策略设置"]
+        },
+        {
+          "name": "No",
+          "label": "否"
         }
       ]
     },

@@ -316,7 +316,10 @@
         "custom_recognition_param": {
             "target_count": 10
         },
-        "inverse": true
+        "inverse": true,
+        "next": [
+            "返回庭院"
+        ]
     },
     "御灵-判断是否返回御灵界面": {
         "expected": "御灵",
