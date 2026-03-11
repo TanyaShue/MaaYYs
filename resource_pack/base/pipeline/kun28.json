@@ -27,15 +27,22 @@
             "kun28\\N-1770966223659_2.png"
         ]
     },
+    "N-1773250636443": {
+        "expected": "探索",
+        "recognition": "OCR",
+        "roi": [
+            1061,
+            236,
+            59,
+            105
+        ],
+        "timeout": 10000
+    },
     "N-kun281": {
         "focus": {
             "Node.Recognition.Succeeded": "返回到探索界面"
         },
         "next": [
-            "kun2817",
-            "kun2822",
-            "kun2823",
-            "kun28-确保关闭章节面板",
             "kun282",
             "[JumpBack]kun283"
         ],
@@ -50,8 +57,17 @@
             "kun28\\N-1768450130083_1.png"
         ]
     },
+    "kun28-从探索开始打kun28": {
+        "next": [
+            "kun281",
+            "N-kun281",
+            "[JumpBack]点击探索"
+        ],
+        "recognition": "DirectHit"
+    },
     "kun28-确保关闭章节面板": {
         "expected": "第二十|八章",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             1056,
@@ -60,19 +76,48 @@
             98
         ]
     },
+    "kun28-装备探索御魂": {
+        "next": [
+            "kun2811",
+            "[JumpBack]打开底部菜单"
+        ],
+        "recognition": "DirectHit"
+    },
+    "kun28-识别探索特征": {
+        "expected": "觉醒|材料|御魂|结界突破|御灵|式神委派",
+        "next": [
+            "[JumpBack]kun2820"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            21,
+            656,
+            605,
+            64
+        ]
+    },
+    "kun28-识别探索特征-进入探索": {
+        "expected": "觉醒|材料|御魂|结界突破|御灵|式神委派",
+        "recognition": "OCR",
+        "roi": [
+            21,
+            656,
+            605,
+            64
+        ]
+    },
     "kun28-识别探索界面的妖字": {
         "focus": {
             "Node.Recognition.Succeeded": "返回到探索界面"
         },
         "next": [
-            "kun2817",
-            "kun2822",
+            "[JumpBack]kun2817",
+            "[JumpBack]kun2822",
             "kun2823",
             "kun28-确保关闭章节面板"
         ],
         "on_error": [
-            "[JumpBack]N-1770966223659",
-            "[JumpBack]N-1770966323291"
+            "跳过"
         ],
         "recognition": "TemplateMatch",
         "roi": [
@@ -84,6 +129,28 @@
         "template": [
             "kun28\\N-1768450130083_1.png"
         ]
+    },
+    "kun28-识别是否返回到探索界面": {
+        "focus": {
+            "Node.Recognition.Succeeded": "返回到探索界面"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            1089,
+            90,
+            145,
+            112
+        ],
+        "template": [
+            "kun28\\N-1768450130083_1.png"
+        ]
+    },
+    "kun28-进入探索": {
+        "next": [
+            "kun28-识别探索特征-进入探索",
+            "[JumpBack]点击探索"
+        ],
+        "recognition": "DirectHit"
     },
     "kun281": {
         "expected": "妖",
@@ -97,19 +164,6 @@
             122,
             68,
             50
-        ]
-    },
-    "kun2810": {
-        "recognition": "TemplateMatch",
-        "roi": [
-            649,
-            2,
-            105,
-            54
-        ],
-        "template": [
-            "kun28\\kun2810.png",
-            "kun28\\kun2810_1.png"
         ]
     },
     "kun2811": {
@@ -126,21 +180,9 @@
             36
         ]
     },
-    "kun2812": {
-        "next": [
-            "kun2811",
-            "[JumpBack]打开底部菜单"
-        ],
-        "recognition": "DirectHit"
-    },
     "kun2813": {
         "action": "Click",
-        "next": [
-            "kun281",
-            "N-kun281",
-            "kun287",
-            "[JumpBack]点击探索"
-        ],
+        "post_delay": 2000,
         "recognition": "TemplateMatch",
         "template": [
             "kun28\\kun2813.png"
@@ -173,6 +215,7 @@
         "on_error": [
             "跳过"
         ],
+        "post_delay": 2000,
         "recognition": "TemplateMatch",
         "roi": [
             8,
@@ -187,6 +230,7 @@
     },
     "kun2818": {
         "action": "Click",
+        "post_delay": 1000,
         "recognition": "TemplateMatch",
         "template": [
             "kun28\\kun2817.png",
@@ -364,6 +408,7 @@
         "on_error": [
             "跳过"
         ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             11,
@@ -393,6 +438,7 @@
     },
     "kun2824": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "TemplateMatch",
         "roi": [
             944,
@@ -404,10 +450,6 @@
             "kun28\\kun2824.png",
             "kun28\\kun2824_1.png"
         ]
-    },
-    "kun2825": {
-        "recognition": "TemplateMatch",
-        "template": []
     },
     "kun282_copy1": {
         "action": "Click",
@@ -478,20 +520,6 @@
             59
         ]
     },
-    "kun287": {
-        "expected": "第|章",
-        "next": [
-            "kun282",
-            "[JumpBack]kun283"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1057,
-            188,
-            192,
-            384
-        ]
-    },
     "kun288": {
         "action": "Custom",
         "custom_action": "SwitchSoul",
@@ -501,7 +529,8 @@
         },
         "expected": "预设",
         "next": [
-            "kun2813"
+            "识别庭院特征",
+            "[JumpBack]kun2813"
         ],
         "on_error": [
             "超时_切换御魂失败"
@@ -514,17 +543,9 @@
             48
         ]
     },
-    "kun289": {
-        "next": [
-            "kun2810",
-            "识别探索特征",
-            "[JumpBack]点击探索"
-        ],
-        "recognition": "DirectHit"
-    },
     "kun28_copy1": {
         "action": "Click",
-        "post_delay": 0,
+        "post_delay": 1000,
         "pre_delay": 0,
         "recognition": "TemplateMatch",
         "roi": [
@@ -535,17 +556,15 @@
         ],
         "template": [
             "kun28\\kun28.png",
-            "kun28\\kun28_1.png",
             "kun28\\kun28_2.png",
             "kun28\\kun28_copy1.png",
-            "kun28\\kun28_copy1_1.png",
             "kun28\\kun2825.png"
         ],
         "timeout": 10000
     },
     "kun28_copy1_copy1": {
         "action": "Click",
-        "post_delay": 0,
+        "post_delay": 1000,
         "pre_delay": 0,
         "recognition": "FeatureMatch",
         "roi": [
@@ -556,10 +575,8 @@
         ],
         "template": [
             "kun28\\kun28.png",
-            "kun28\\kun28_1.png",
             "kun28\\kun28_2.png",
             "kun28\\kun28_copy1.png",
-            "kun28\\kun28_copy1_1.png",
             "kun28\\kun2825.png"
         ],
         "timeout": 10000
@@ -574,13 +591,13 @@
     },
     "kun28_开始点击妖怪": {
         "next": [
-            "kun2823",
-            "kun28-识别探索界面的妖字",
             "[JumpBack]kun28_copy1",
             "[JumpBack]kun28_copy1_copy1",
             "[JumpBack]kun2818",
             "[JumpBack]kun2814",
-            "[JumpBack]kun2821"
+            "[JumpBack]kun2821",
+            "N-1773250636443",
+            "kun28-识别是否返回到探索界面"
         ],
         "recognition": "DirectHit",
         "timeout": 60000
@@ -588,6 +605,7 @@
     "kun28_点击屏幕继续": {
         "action": "Click",
         "expected": "点击屏幕继续",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             276,
@@ -655,7 +673,7 @@
     },
     "开始肝绘卷": {
         "next": [
-            "kun2820"
+            "kun28-识别探索特征"
         ],
         "on_error": [
             "[JumpBack]确保位于庭院"
