@@ -39,7 +39,6 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		SingleClickWeight: 50,
 		DoubleClickWeight: 50,
 	}
-
 	if arg.CustomActionParam != "" {
 		if err := json.Unmarshal([]byte(arg.CustomActionParam), &params); err != nil {
 			fmt.Printf("警告: 解析JSON参数失败。将使用默认值。错误: %v\n", err)

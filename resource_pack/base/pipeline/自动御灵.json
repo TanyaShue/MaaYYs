@@ -9,13 +9,14 @@
                 569,
                 92
             ],
-            "double_click_prob": 0.45,
+            "double_click_weight": 45,
             "long_wait_max": 100,
             "long_wait_min": 60,
-            "long_wait_prob": 0.05,
+            "long_wait_weight": 5,
             "short_wait_max": 10,
             "short_wait_min": 1,
-            "single_click_prob": 0.5
+            "short_wait_weight": 95,
+            "single_click_weight": 55
         },
         "expected": "点击屏幕继续",
         "post_delay": 2000,
@@ -43,7 +44,8 @@
             605,
             73,
             72
-        ]
+        ],
+        "next": []
     },
     "自动御灵": {
         "expected": "御灵",
@@ -54,10 +56,10 @@
         "rate_limit": 3000,
         "recognition": "OCR",
         "roi": [
-            8,
-            0,
-            226,
-            83
+            156,
+            10,
+            77,
+            61
         ],
         "timeout": 2000000
     },
@@ -67,10 +69,10 @@
             "自动御灵3",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "自动御灵10": {
         "action": "Custom",
@@ -105,7 +107,8 @@
         ],
         "template": [
             "自动御灵\\自动御灵11.png"
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动御灵12": {
         "action": "Click",
@@ -122,7 +125,8 @@
             8,
             45,
             31
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动御灵2": {
         "action": "Click",
