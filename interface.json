@@ -2,7 +2,7 @@
   "interface_version": 2,
   "name": "MaaYYs",
   "label": "阴阳师",
-  "version": "v3.1.1",
+  "version": "v3.1.2",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
   "welcome": "README.md",
@@ -1467,7 +1467,7 @@
       "type": "switch",
       "label": "是否自定义点击策略",
       "description": "是否自定义点击策略",
-      "default_case":"No",
+      "default_case": "No",
       "cases": [
         {
           "name": "Yes",
