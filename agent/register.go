@@ -21,10 +21,12 @@ import (
 	"maa-yys-agent/actions/restart"
 	"maa-yys-agent/actions/restartgame"
 	"maa-yys-agent/actions/switch_soul"
+	"maa-yys-agent/actions/task_counter"
 	"maa-yys-agent/actions/task_list"
 	"maa-yys-agent/actions/team_builder"
 	"maa-yys-agent/actions/time_check"
 	"maa-yys-agent/recognition/my_recognizer"
+	"maa-yys-agent/recognition/task_counter_recognition"
 
 	"github.com/rs/zerolog/log"
 )
@@ -40,6 +42,7 @@ func registerAll() {
 	// 流程控制类
 	count_action.Register()
 	loop_action.Register()
+	task_counter.Register()
 	task_list.Register()
 	restart.Register()
 	restartgame.Register()
@@ -61,6 +64,7 @@ func registerAll() {
 
 	// Custom Recognition
 	my_recognizer.Register()
+	task_counter_recognition.Register()
 
 	log.Info().Msg("All custom actions and recognitions registered successfully")
 }
