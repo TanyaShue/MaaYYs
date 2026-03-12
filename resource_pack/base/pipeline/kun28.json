@@ -104,7 +104,6 @@
         ]
     },
     "kun28-识别探索界面的妖字": {
-
         "next": [
             "[JumpBack]kun2817",
             "[JumpBack]kun2822",
@@ -665,7 +664,8 @@
     },
     "开始肝绘卷": {
         "next": [
-            "kun28-识别探索特征"
+            "kun28-识别探索特征",
+            "[JumpBack]点击探索"
         ],
         "on_error": [
             "[JumpBack]确保位于庭院"
