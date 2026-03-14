@@ -2,7 +2,7 @@
   "interface_version": 2,
   "name": "MaaYYs",
   "label": "阴阳师",
-  "version": "v3.1.5",
+  "version": "v3.1.6",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
   "welcome": "README.md",
@@ -460,12 +460,15 @@
       "type": "switch",
       "label": "自定义爬塔随机等待",
       "description": "是否自定义爬塔随机等待时间",
-      "default_case":"No",
+      "default_case": "No",
       "cases": [
         {
           "name": "Yes",
           "label": "是",
-          "option":["活动爬塔-诡夜百戏-开始前随机等待时间","活动爬塔-诡夜百戏-打完一局后随机等待时间"]
+          "option": [
+            "活动爬塔-诡夜百戏-开始前随机等待时间",
+            "活动爬塔-诡夜百戏-打完一局后随机等待时间"
+          ]
         },
         {
           "name": "No",
