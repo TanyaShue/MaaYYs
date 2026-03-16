@@ -1,0 +1,254 @@
+{
+    "task": [],
+    "option": {
+        "活动爬塔-梦魇挑战-打完一局后随机等待时间": {
+            "type": "input",
+            "label": "活动爬塔-梦魇挑战-打完一句后随机等待时间",
+            "default": "1",
+            "inputs": [
+                {
+                    "name": "最短时间",
+                    "label": "最短时间",
+                    "description": "填写随机等待的最短时间（秒）",
+                    "default": "1",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "最长时间",
+                    "label": "最长时间",
+                    "description": "填写随机等待的最长时间（秒）",
+                    "default": "10",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "活动爬塔-梦魇挑战-点击屏幕继续": {
+                    "custom_action_param": {
+                        "min": "{最短时间}",
+                        "max": "{最长时间}"
+                    }
+                }
+            }
+        },
+        "委派_弥助的画": {
+            "type": "switch",
+            "label": "委派-弥助的画",
+            "description": "是否自动接取 弥助的画 (300体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "弥助的画": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_寻找耳环": {
+            "type": "switch",
+            "label": "委派-寻找耳环",
+            "description": "是否自动接取 寻找耳环 (300体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "寻找耳环": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_猫老大": {
+            "type": "switch",
+            "label": "委派-猫老大",
+            "description": "是否自动接取 猫老大 (300体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "猫老大": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_捡到的宝石": {
+            "type": "switch",
+            "label": "委派-捡到的宝石",
+            "description": "是否自动接取 捡到的宝石 (200体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "捡到的宝石": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_以鱼为礼": {
+            "type": "switch",
+            "label": "委派-以鱼为礼",
+            "description": "是否自动接取 以鱼为礼 (200体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "以鱼为礼": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_帮忙搬运": {
+            "type": "switch",
+            "label": "委派-帮忙搬运",
+            "description": "是否自动接取 帮忙搬运 (200体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "帮忙搬运": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_樱饼配方": {
+            "type": "switch",
+            "label": "委派-樱饼配方",
+            "description": "是否自动接取 樱饼配方 (50体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "樱饼配方": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_奇怪的痕迹": {
+            "type": "switch",
+            "label": "委派-奇怪的痕迹",
+            "description": "是否自动接取 奇怪的痕迹 (100体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "奇怪的痕迹": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_接送弥助": {
+            "type": "switch",
+            "label": "委派-接送弥助",
+            "description": "是否自动接取 接送弥助 (100体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "接送弥助": "{boole}"
+                    }
+                }
+            }
+        },
+        "委派_伊吹的藤球": {
+            "type": "switch",
+            "label": "委派-伊吹的藤球",
+            "description": "是否自动接取 伊吹的藤球 (100体) 任务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是"
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ],
+            "pipeline_override": {
+                "式神委派7": {
+                    "custom_action_param": {
+                        "伊吹的藤球": "{boole}"
+                    }
+                }
+            }
+        }
+    }
+}

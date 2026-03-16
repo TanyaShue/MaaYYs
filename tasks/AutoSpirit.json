@@ -1,0 +1,159 @@
+{
+    "task": [
+        {
+            "name": "自动御灵",
+            "label": "自动御灵",
+            "entry": "自动御灵1",
+            "option": [
+                "御灵-设置挑战次数",
+                "御灵阵容预设",
+                "自定义御灵点击策略设置"
+            ]
+        }
+    ],
+    "option": {
+        "御灵-设置挑战次数": {
+            "type": "input",
+            "label": "挑战次数",
+            "description": "设置御灵的挑战次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "description": "填写挑战御灵的次数",
+                    "default": "999",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "御灵-判断是否达到对应次数": {
+                    "custom_recognition_param": {
+                        "target_count": "{挑战次数}"
+                    }
+                }
+            }
+        },
+        "御灵阵容预设": {
+            "type": "input",
+            "label": "御灵阵容预设",
+            "description": "填写自动御灵时需要使用的分组和队伍名称",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "自动御灵10": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        },
+        "自定义御灵点击策略设置": {
+            "type": "switch",
+            "label": "是否自定义点击策略",
+            "description": "是否自定义点击策略",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "option": [
+                        "御灵点击策略设置"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ]
+        },
+        "御灵点击策略设置": {
+            "type": "input",
+            "label": "御灵点击策略设置",
+            "description": "自定义御灵副本中的点击权重分布与随机等待时间范围",
+            "inputs": [
+                {
+                    "name": "double_w",
+                    "label": "双击权重",
+                    "description": "执行双击动作的权重",
+                    "default": "50",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "single_w",
+                    "label": "单击权重",
+                    "description": "执行单击动作的权重",
+                    "default": "50",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "short_w",
+                    "label": "短等待权重",
+                    "description": "执行短时间等待的权重",
+                    "default": "95",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "long_w",
+                    "label": "长等待权重",
+                    "description": "执行长时间等待的权重",
+                    "default": "5",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "short_min",
+                    "label": "短等待最少(秒)",
+                    "default": "1",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "short_max",
+                    "label": "短等待最多(秒)",
+                    "default": "20",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "long_min",
+                    "label": "长等待最少(秒)",
+                    "default": "100",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "long_max",
+                    "label": "长等待最多(秒)",
+                    "default": "200",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "御灵_点击屏幕继续": {
+                    "custom_action_param": {
+                        "double_click_weight": "{double_w}",
+                        "single_click_weight": "{single_w}",
+                        "short_wait_weight": "{short_w}",
+                        "long_wait_weight": "{long_w}",
+                        "short_wait_min": "{short_min}",
+                        "short_wait_max": "{short_max}",
+                        "long_wait_min": "{long_min}",
+                        "long_wait_max": "{long_max}"
+                    }
+                }
+            }
+        }
+    }
+}

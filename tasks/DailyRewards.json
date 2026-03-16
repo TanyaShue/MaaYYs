@@ -1,0 +1,117 @@
+{
+    "task": [
+        {
+            "name": "日常奖励领取",
+            "label": "日常奖励领取",
+            "entry": "日常-开始执行日常任务",
+            "option": [
+                "领取奖励_商店每日奖励",
+                "领取奖励_庭院事务",
+                "领取奖励_花合战奖励",
+                "领取奖励_邮件"
+            ]
+        }
+    ],
+    "option": {
+        "领取奖励_商店每日奖励": {
+            "type": "switch",
+            "label": "领取奖励_商店每日奖励",
+            "description": "是否自动领取商店中的每日免费奖励",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "领取奖励_商店每日奖励": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "领取奖励_商店每日奖励": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "领取奖励_庭院事务": {
+            "type": "switch",
+            "label": "领取奖励_庭院事务",
+            "description": "是否自动领取庭院事务",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "日常-开始庭院事务": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "日常-开始庭院事务": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "领取奖励_花合战奖励": {
+            "type": "switch",
+            "label": "领取奖励_花合战奖励",
+            "description": "是否自动领取花合战中已解锁的奖励",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "领取奖励_花合战奖励": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "领取奖励_花合战奖励": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "领取奖励_邮件": {
+            "type": "switch",
+            "label": "领取奖励_邮件",
+            "description": "是否自动领取邮件奖励",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "领取奖励_邮件": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "领取奖励_邮件": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

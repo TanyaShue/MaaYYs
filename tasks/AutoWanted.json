@@ -1,0 +1,97 @@
+{
+    "task": [
+        {
+            "name": "自动悬赏",
+            "label": "自动悬赏",
+            "entry": "自动悬赏封印",
+            "option": [
+                "悬赏目标",
+                "悬赏封印阵容预设",
+                "是否启动自动轮换"
+            ]
+        }
+    ],
+    "option": {
+        "悬赏目标": {
+            "type": "select",
+            "label": "悬赏目标",
+            "description": "选择自动悬赏时优先打探索副本还是式神挑战券。注意：部分情况可能两者都没有，会导致任务卡住",
+            "default_case": "探索",
+            "cases": [
+                {
+                    "name": "探索",
+                    "label": "只打探索",
+                    "pipeline_override": {
+                        "悬赏封印2": {
+                            "enable": false
+                        }
+                    }
+                },
+                {
+                    "name": "挑战",
+                    "label": "挑战优先",
+                    "pipeline_override": {
+                        "悬赏封印2": {
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        },
+        "悬赏封印阵容预设": {
+            "type": "input",
+            "label": "悬赏封印阵容预设",
+            "description": "填写需要挑战悬赏封印的分组和队伍预设名称",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "装备日常清杂预设": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        },
+        "是否启动自动轮换": {
+            "type": "switch",
+            "label": "是否启动自动轮换",
+            "description": "是否在悬赏封印时启用自动轮换队员功能，启动前需确保已在游戏中设置好轮换式神",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "探索_悬赏_自动轮换": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "探索_悬赏_自动轮换": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,196 @@
+{
+    "task": [
+        {
+            "name": "结界奖励领取",
+            "label": "结界奖励领取",
+            "entry": "阴阳寮奖励领取",
+            "option": [
+                "寄养设置",
+                "是否领取寄养奖励",
+                "是否启用自动挂卡",
+                "自动挂卡类型设置",
+                "挂卡星级设置"
+            ]
+        }
+    ],
+    "option": {
+        "寄养设置": {
+            "type": "select",
+            "label": "寄养设置",
+            "description": "选择自动寄养时优先考虑的收益类型，是优先体力还是勾玉",
+            "default_case": "勾玉优先",
+            "cases": [
+                {
+                    "name": "勾玉优先",
+                    "label": "勾玉优先",
+                    "pipeline_override": {
+                        "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+                            "custom_action_param": {
+                                "FosterTarget": 1
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "体力优先",
+                    "label": "体力优先",
+                    "pipeline_override": {
+                        "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+                            "custom_action_param": {
+                                "FosterTarget": 2
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "是否领取寄养奖励": {
+            "type": "switch",
+            "label": "是否领取寄养奖励",
+            "description": "是否领取寄养奖励",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "阴阳寮奖励37": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "阴阳寮奖励37": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "是否启用自动挂卡": {
+            "type": "switch",
+            "label": "是否启用自动挂卡",
+            "description": "是否启用自动挂卡",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "阴阳寮奖励24_挂结界卡": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "阴阳寮奖励24_挂结界卡": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "自动挂卡类型设置": {
+            "type": "select",
+            "label": "自动挂卡类型设置",
+            "description": "选择自动挂结界卡的种类",
+            "default_case": "太鼓",
+            "cases": [
+                {
+                    "name": "太鼓",
+                    "label": "太鼓",
+                    "pipeline_override": {
+                        "阴阳寮奖励27": {
+                            "expected": "太鼓"
+                        },
+                        "阴阳寮奖励29": {
+                            "expected": "太鼓"
+                        }
+                    }
+                },
+                {
+                    "name": "斗鱼",
+                    "label": "斗鱼",
+                    "pipeline_override": {
+                        "阴阳寮奖励27": {
+                            "expected": "斗鱼"
+                        },
+                        "阴阳寮奖励29": {
+                            "expected": "斗鱼"
+                        }
+                    }
+                }
+            ]
+        },
+        "挂卡星级设置": {
+            "type": "select",
+            "label": "挂卡星级设置",
+            "description": "选择自动挂结界卡的星级",
+            "default_case": "5星及以下",
+            "cases": [
+                {
+                    "name": "6星及以下",
+                    "label": "6星及以下",
+                    "pipeline_override": {
+                        "阴阳寮奖励28": {
+                            "expected": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "5星及以下",
+                    "label": "5星及以下",
+                    "pipeline_override": {
+                        "阴阳寮奖励28": {
+                            "expected": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "4星及以下",
+                    "label": "4星及以下",
+                    "pipeline_override": {
+                        "阴阳寮奖励28": {
+                            "expected": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "3星及以下",
+                    "label": "3星及以下",
+                    "pipeline_override": {
+                        "阴阳寮奖励28": {
+                            "expected": [
+                                0,
+                                1,
+                                2
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

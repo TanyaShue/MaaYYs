@@ -1,0 +1,76 @@
+{
+    "task": [
+        {
+            "name": "自动逢魔",
+            "label": "自动逢魔",
+            "entry": "开始逢魔-检查时间",
+            "option": [
+                "逢魔答题同步题目",
+                "逢魔首领阵容预设"
+            ]
+        }
+    ],
+    "option": {
+        "逢魔答题同步题目": {
+            "type": "switch",
+            "label": "逢魔答题同步题目",
+            "description": "执行逢魔任务时，是否自动从网络获取最新的题目和答案库",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动逢魔2": {
+                            "custom_action_param": {
+                                "upload": true,
+                                "sync": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动逢魔2": {
+                            "custom_action_param": {
+                                "upload": false,
+                                "sync": false
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "逢魔首领阵容预设": {
+            "type": "input",
+            "label": "逢魔首领阵容预设",
+            "description": "填写挑战逢魔首领需要的分组和队伍预设名称",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "现世逢魔_装备式神预设": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}

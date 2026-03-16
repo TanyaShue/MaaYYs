@@ -1,0 +1,165 @@
+{
+    "task": [
+        {
+            "name": "自动御魂",
+            "label": "自动御魂",
+            "entry": "自动御魂",
+            "option": [
+                "御魂挑战目标",
+                "御魂阵容预设",
+                "是否使用御魂加成",
+                "是否在战斗中投喂宠物",
+                "自动挑战次数"
+            ]
+        }
+    ],
+    "option": {
+        "御魂挑战目标": {
+            "type": "select",
+            "label": "御魂挑战目标",
+            "description": "根据你当前的地鬼分数选择需要挑战的地鬼个数",
+            "default_case": "魂土",
+            "cases": [
+                {
+                    "name": "魂土",
+                    "label": "魂土",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "悲鸣"
+                        }
+                    }
+                },
+                {
+                    "name": "魂十",
+                    "label": "魂十",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "拾层"
+                        }
+                    }
+                },
+                {
+                    "name": "魂王",
+                    "label": "魂王",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "神罚"
+                        }
+                    }
+                },
+                {
+                    "name": "虚无",
+                    "label": "虚无",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "虚无"
+                        }
+                    }
+                }
+            ]
+        },
+        "御魂阵容预设": {
+            "type": "input",
+            "label": "御魂阵容预设",
+            "description": "填写自动御魂需要使用的分组和队伍预设名称",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "自动御魂_装备挑战御魂副本御魂": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        },
+        "是否使用御魂加成": {
+            "type": "switch",
+            "label": "是否使用御魂加成",
+            "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动御魂-开启加成": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动御魂-开启加成": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "是否在战斗中投喂宠物": {
+            "type": "switch",
+            "label": "是否在战斗中投喂宠物",
+            "description": "在自动御魂任务开始时，是否自动检查并开启御魂加成Buff",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动御魂11": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动御魂11": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "自动挑战次数": {
+            "type": "input",
+            "label": "自动挑战次数",
+            "description": "设置自动挑战御魂的次数，到达指定次数后任务将自动停止",
+            "default": "10",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "description": "填写挑战次数",
+                    "default": "10",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "自动御魂-设置次数": {
+                    "custom_action_param": {
+                        "expected_number": "{挑战次数}",
+                        "start_repeat": true
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "task": [
+        {
+            "name": "打开游戏",
+            "label": "打开游戏",
+            "entry": "启动游戏",
+            "option": [
+                "任务失败后重启游戏"
+            ]
+        }
+    ],
+    "option": {
+        "任务失败后重启游戏": {
+            "type": "switch",
+            "label": "是否在任务失败后重启游戏",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "重启游戏": {
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "重启游戏": {
+                            "enable": false
+                        }
+                    }
+                }
+            ],
+            "default_case ": "Yes"
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "task": [
+        {
+            "name": "自动麒麟",
+            "label": "自动麒麟",
+            "entry": "麒麟-开始时间检查",
+            "option": [
+                "麒麟阵容预设"
+            ]
+        }
+    ],
+    "option": {
+        "麒麟阵容预设": {
+            "type": "input",
+            "label": "麒麟阵容预设",
+            "description": "填写狩猎站攻打麒麟时需要使用的分组和队伍名称",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "麒麟6": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}

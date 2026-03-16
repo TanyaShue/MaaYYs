@@ -1,0 +1,48 @@
+{
+    "task": [
+        {
+            "name": "寮三十捐材料",
+            "label": "寮三十捐材料",
+            "entry": "寮三十-开始任务",
+            "option": [
+                "捐材料"
+            ]
+        }
+    ],
+    "option": {
+        "捐材料": {
+            "type": "select",
+            "label": "捐材料",
+            "default_case": "低级觉醒材料",
+            "cases": [
+                {
+                    "name": "低级觉醒材料",
+                    "label": "低级觉醒材料",
+                    "pipeline_override": {
+                        "寮30_提交材料": {
+                            "expected": "提交低级觉醒材料"
+                        }
+                    }
+                },
+                {
+                    "name": "中级觉醒材料",
+                    "label": "中级觉醒材料",
+                    "pipeline_override": {
+                        "寮30_提交材料": {
+                            "expected": "提交中级觉醒材料"
+                        }
+                    }
+                },
+                {
+                    "name": "高级觉醒材料",
+                    "label": "高级觉醒材料",
+                    "pipeline_override": {
+                        "寮30_提交材料": {
+                            "expected": "提交高级觉醒材料"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

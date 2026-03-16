@@ -1,0 +1,116 @@
+{
+    "task": [
+        {
+            "name": "自动地鬼",
+            "label": "自动地鬼",
+            "entry": "开始地鬼-检查时间",
+            "option": [
+                "地鬼挑战次数",
+                "地鬼阵容预设",
+                "地鬼_锁定阵容"
+            ]
+        }
+    ],
+    "option": {
+        "地鬼挑战次数": {
+            "type": "select",
+            "label": "地鬼挑战次数",
+            "default_case": "1个",
+            "cases": [
+                {
+                    "name": "1个",
+                    "label": "1个",
+                    "pipeline_override": {
+                        "开始自动挑战鬼王": {
+                            "custom_action_param": {
+                                "count": 1
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "2个",
+                    "label": "2个",
+                    "pipeline_override": {
+                        "开始自动挑战鬼王": {
+                            "custom_action_param": {
+                                "count": 2
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "3个",
+                    "label": "3个",
+                    "pipeline_override": {
+                        "开始自动挑战鬼王": {
+                            "custom_action_param": {
+                                "count": 3
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "地鬼阵容预设": {
+            "type": "input",
+            "label": "地鬼阵容预设",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "预设分组",
+                    "label": "分组名称",
+                    "description": "填写预设的分组名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "预设队伍",
+                    "label": "队伍名称",
+                    "description": "填写预设的队伍名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "装备地狱鬼王预设": {
+                    "custom_action_param": {
+                        "group_name": "{预设分组}",
+                        "team_name": "{预设队伍}"
+                    }
+                }
+            }
+        },
+        "地鬼_锁定阵容": {
+            "type": "switch",
+            "label": "地鬼_锁定阵容",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动地鬼3_锁定阵容": {
+                            "enable": true
+                        },
+                        "自动地鬼12_装备预设": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动地鬼3_锁定阵容": {
+                            "enable": false
+                        },
+                        "自动地鬼12_装备预设": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ],
+            "default_case ": "Yes"
+        }
+    }
+}

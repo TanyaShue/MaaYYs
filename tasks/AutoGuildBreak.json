@@ -1,0 +1,44 @@
+{
+    "task": [
+        {
+            "name": "自动道馆突破",
+            "label": "自动道馆突破",
+            "entry": "自动道馆",
+            "option": [
+                "道馆阵容预设"
+            ]
+        }
+    ],
+    "option": {
+        "道馆阵容预设": {
+            "type": "input",
+            "label": "道馆阵容预设",
+            "description": "填写道馆需要使用的分组和队伍预设名称",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "自动道馆10": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}
