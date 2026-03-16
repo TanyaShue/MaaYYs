@@ -544,7 +544,7 @@ jobs:
           Write-Host "Copied maafw directory"
 
           # Copy resource files
-          $includeList = @('assets', 'resource_pack', 'interface.json', 'LICENSE', 'README.md')
+          $includeList = @('assets', 'resource_pack','tasks', 'interface.json', 'LICENSE', 'README.md')
           foreach ($item in $includeList) {
             $sourcePath = "source/$item"
             if (Test-Path -Path $sourcePath) {
@@ -601,7 +601,7 @@ jobs:
           echo "Copied maafw directory"
 
           # Copy resource files
-          INCLUDE_LIST="assets resource_pack interface.json LICENSE README.md"
+          INCLUDE_LIST="assets resource_pack tasks interface.json LICENSE README.md"
           for item in $INCLUDE_LIST; do
             if [ -e "source/$item" ]; then
               cp -r "source/$item" "package/$item"
