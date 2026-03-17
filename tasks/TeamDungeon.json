@@ -20,6 +20,9 @@
                     "name": "Yes",
                     "label": "是",
                     "pipeline_override": {
+                        "组队副本-金币副本-打开加成":{
+                            "enabled": true
+                        },
                         "组队副本-开始挑战金币妖怪": {
                             "enabled": true
                         }
@@ -33,6 +36,9 @@
                     "name": "No",
                     "label": "否",
                     "pipeline_override": {
+                        "组队副本-金币副本-打开加成":{
+                            "enabled": false
+                        },
                         "组队副本-开始挑战金币妖怪": {
                             "enabled": false
                         }
@@ -49,6 +55,9 @@
                     "name": "Yes",
                     "label": "是",
                     "pipeline_override": {
+                        "组队副本-经验副本-打开加成":{
+                            "enabled": true
+                        },
                         "组队副本-开始挑战经验妖怪": {
                             "enabled": true
                         }
@@ -62,6 +71,9 @@
                     "name": "No",
                     "label": "否",
                     "pipeline_override": {
+                        "组队副本-经验副本-打开加成":{
+                            "enabled": false
+                        },
                         "组队副本-开始挑战经验妖怪": {
                             "enabled": false
                         }
