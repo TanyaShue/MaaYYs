@@ -9,8 +9,8 @@
             196
         ],
         "template": [
-            "kun28\\N-1770966223659_1.png",
-            "kun28\\N-1770966223659_2.png"
+            "kun28/N-1770966223659_1.png",
+            "kun28/N-1770966223659_2.png"
         ]
     },
     "N-1770966323291": {
@@ -23,8 +23,8 @@
             196
         ],
         "template": [
-            "kun28\\N-1770966223659_1.png",
-            "kun28\\N-1770966223659_2.png"
+            "kun28/N-1770966223659_1.png",
+            "kun28/N-1770966223659_2.png"
         ]
     },
     "N-1773250636443": {
@@ -51,7 +51,7 @@
             112
         ],
         "template": [
-            "kun28\\N-1768450130083_1.png"
+            "kun28/N-1768450130083_1.png"
         ]
     },
     "kun28-从探索开始打kun28": {
@@ -121,7 +121,7 @@
             112
         ],
         "template": [
-            "kun28\\N-1768450130083_1.png"
+            "kun28/N-1768450130083_1.png"
         ]
     },
     "kun28-识别是否返回到探索界面": {
@@ -133,7 +133,7 @@
             112
         ],
         "template": [
-            "kun28\\N-1768450130083_1.png"
+            "kun28/N-1768450130083_1.png"
         ]
     },
     "kun28-进入探索": {
@@ -176,7 +176,7 @@
         "post_delay": 2000,
         "recognition": "TemplateMatch",
         "template": [
-            "kun28\\kun2813.png"
+            "kun28/kun2813.png"
         ]
     },
     "kun2814": {
@@ -215,7 +215,7 @@
             501
         ],
         "template": [
-            "kun28\\kun2817_3.png"
+            "kun28/kun2817_3.png"
         ],
         "timeout": 1000
     },
@@ -224,9 +224,9 @@
         "post_delay": 1000,
         "recognition": "TemplateMatch",
         "template": [
-            "kun28\\kun2817.png",
-            "kun28\\kun2817_1.png",
-            "kun28\\kun2817_2.png"
+            "kun28/kun2817.png",
+            "kun28/kun2817_1.png",
+            "kun28/kun2817_2.png"
         ],
         "threshold": 0.79,
         "timeout": 5000
@@ -438,8 +438,8 @@
             108
         ],
         "template": [
-            "kun28\\kun2824.png",
-            "kun28\\kun2824_1.png"
+            "kun28/kun2824.png",
+            "kun28/kun2824_1.png"
         ]
     },
     "kun282_copy1": {
@@ -546,10 +546,10 @@
             530
         ],
         "template": [
-            "kun28\\kun28.png",
-            "kun28\\kun28_2.png",
-            "kun28\\kun28_copy1.png",
-            "kun28\\kun2825.png"
+            "kun28/kun28.png",
+            "kun28/kun28_2.png",
+            "kun28/kun28_copy1.png",
+            "kun28/kun2825.png"
         ],
         "timeout": 10000
     },
@@ -565,10 +565,10 @@
             530
         ],
         "template": [
-            "kun28\\kun28.png",
-            "kun28\\kun28_2.png",
-            "kun28\\kun28_copy1.png",
-            "kun28\\kun2825.png"
+            "kun28/kun28.png",
+            "kun28/kun28_2.png",
+            "kun28/kun28_copy1.png",
+            "kun28/kun2825.png"
         ],
         "timeout": 10000
     },
