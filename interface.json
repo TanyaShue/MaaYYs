@@ -75,6 +75,7 @@
   "import": [
     "tasks/OpenGame.json",
     "tasks/ActivityClimbTower.json",
+    "tasks/AutoCommission.json",
     "tasks/GuildDonation.json",
     "tasks/AutoUnderground.json",
     "tasks/AutoSoul.json",
@@ -93,7 +94,6 @@
     "tasks/AutoGuildRaid.json",
     "tasks/AutoUnderworldGate.json",
     "tasks/ScrollFarming.json",
-    "tasks/CloseGame.json",
-    "tasks/MiscOptions.json"
+    "tasks/CloseGame.json"
   ]
 }

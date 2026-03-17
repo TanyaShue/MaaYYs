@@ -7,7 +7,6 @@ import (
 	"maa-yys-agent/actions/bounty_monster_recognition"
 	"maa-yys-agent/actions/challenge_dungeon_boss"
 	"maa-yys-agent/actions/count_action"
-	"maa-yys-agent/actions/custom_appointment"
 	"maa-yys-agent/actions/guess"
 	"maa-yys-agent/actions/human_touch"
 	"maa-yys-agent/actions/kun28"
@@ -59,7 +58,6 @@ func registerAll() {
 	bonus_toggle.Register()
 	question_matcher.Register()
 	guess.Register()
-	custom_appointment.Register()
 	time_check.Register()
 
 	// Custom Recognition
