@@ -69,7 +69,6 @@
         "next": [
             "自动御魂6",
             "[JumpBack]自动御魂11",
-            "[JumpBack]自动御魂16",
             "[JumpBack]自动御魂19"
         ],
         "on_error": [
@@ -133,17 +132,18 @@
     "自动御魂-识别加成": {
         "action": "Click",
         "expected": "加成",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             396,
             13,
             75,
             88
-        ],
-        "post_delay": 2000
+        ]
     },
     "自动御魂-识别加成-特征匹配": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
             269,
@@ -161,8 +161,7 @@
             "寮30/寮3026.png",
             "自动御魂/寮3026_copy1.png",
             "自动御魂/自动御魂-识别加成-特征匹配_1.png"
-        ],
-        "post_delay": 2000
+        ]
     },
     "自动御魂1": {
         "action": "Click",
@@ -271,7 +270,6 @@
         "timeout": 3000
     },
     "自动御魂16": {
-        "action": "Click",
         "expected": "获得宝藏|发现宝藏",
         "recognition": "OCR",
         "roi": [
@@ -285,7 +283,8 @@
             635,
             174,
             71
-        ]
+        ],
+        "action": "Click"
     },
     "自动御魂17": {
         "action": "Click",
@@ -309,7 +308,8 @@
         "action": "Click",
         "next": [
             "自动御魂-设置次数",
-            "[JumpBack]自动御魂2"
+            "[JumpBack]自动御魂-识别小纸人",
+            "[JumpBack]自动御魂-识别小纸人-花车"
         ],
         "on_error": [
             "跳过"
@@ -331,7 +331,7 @@
             110
         ]
     },
-    "自动御魂2": {
+    "自动御魂-识别小纸人": {
         "action": "Click",
         "recognition": "FeatureMatch",
         "roi": [
@@ -348,27 +348,6 @@
             "自动御魂/自动御魂2_4.png",
             "自动御魂/自动御魂2_5.png",
             "自动御魂/自动御魂2_6.png"
-        ]
-    },
-    "自动御魂2_copy2": {
-        "action": "Click",
-        "next": [
-            "自动御魂3_关闭自动次数"
-        ],
-        "post_delay": 2000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            804,
-            520,
-            147,
-            108
-        ],
-        "template": [
-            "自动御魂/自动御魂2.png",
-            "自动御魂/自动御魂2_1.png",
-            "自动御魂/自动御魂2_2.png",
-            "自动御魂/自动御魂2_3.png",
-            "自动御魂/自动御魂2_4.png"
         ]
     },
     "自动御魂3_关闭自动次数": {
@@ -445,7 +424,6 @@
         "next": [
             "自动御魂6",
             "[JumpBack]自动御魂11",
-            "[JumpBack]自动御魂16",
             "[JumpBack]自动御魂19"
         ],
         "on_error": [
@@ -486,7 +464,9 @@
         "action": "Click",
         "expected": "取消",
         "next": [
-            "自动御魂2_copy2",
+            "自动御魂3_关闭自动次数",
+            "[JumpBack]自动御魂-识别小纸人",
+            "[JumpBack]自动御魂-识别小纸人-花车",
             "[JumpBack]自动御魂16",
             "[JumpBack]自动御魂-点击取消自动"
         ],
@@ -649,7 +629,8 @@
         "next": [
             "自动御魂18",
             "自动御魂-设置次数",
-            "[JumpBack]自动御魂2"
+            "[JumpBack]自动御魂-识别小纸人",
+            "[JumpBack]自动御魂-识别小纸人-花车"
         ],
         "post_delay": 2000,
         "recognition": "OCR",
@@ -658,6 +639,25 @@
             0,
             262,
             78
+        ]
+    },
+    "自动御魂-识别小纸人-花车": {
+        "action": "Click",
+        "recognition": "FeatureMatch",
+        "roi": [
+            794,
+            533,
+            98,
+            86
+        ],
+        "template": [
+            "自动御魂/自动御魂2.png",
+            "自动御魂/自动御魂2_1.png",
+            "自动御魂/自动御魂2_2.png",
+            "自动御魂/自动御魂2_3.png",
+            "自动御魂/自动御魂2_4.png",
+            "自动御魂/自动御魂2_5.png",
+            "自动御魂/自动御魂2_6.png"
         ]
     }
 }
