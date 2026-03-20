@@ -566,7 +566,7 @@
             "[JumpBack]寮突8",
             "[JumpBack]寮突10"
         ],
-        "post_delay": 1000,
+        "post_delay": 5000,
         "pre_delay": 1000,
         "rate_limit": 2000,
         "recognition": "OCR",
