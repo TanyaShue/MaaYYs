@@ -1,4 +1,27 @@
 {
+    "御灵-判断是否达到对应次数": {
+        "custom_recognition": "TaskCounterRecognition",
+        "custom_recognition_param": {
+            "target_count": 10
+        },
+        "inverse": true,
+        "next": [
+            "返回庭院"
+        ],
+        "recognition": "Custom"
+    },
+    "御灵-判断是否返回御灵界面": {
+        "expected": "御灵",
+        "rate_limit": 3000,
+        "recognition": "OCR",
+        "roi": [
+            156,
+            10,
+            77,
+            61
+        ],
+        "timeout": 2000000
+    },
     "御灵_点击屏幕继续": {
         "action": "Custom",
         "custom_action": "HumanTouch",
@@ -31,6 +54,10 @@
     "御灵_点击挑战": {
         "action": "Click",
         "expected": "挑战",
+        "next": [
+            "御灵-判断是否返回御灵界面",
+            "[JumpBack]御灵_点击屏幕继续"
+        ],
         "post_delay": 5000,
         "recognition": "OCR",
         "roi": [
@@ -44,10 +71,6 @@
             605,
             73,
             72
-        ],
-        "next": [
-            "御灵-判断是否返回御灵界面",
-            "[JumpBack]御灵_点击屏幕继续"
         ],
         "timeout": 200000
     },
@@ -67,10 +90,52 @@
         ],
         "timeout": 2000000
     },
+    "自动御灵-点击御灵": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            244,
+            601,
+            378,
+            112
+        ],
+        "template": [
+            "自动御灵/自动御灵3.png"
+        ]
+    },
+    "自动御灵-点击御灵-ocr": {
+        "action": "Click",
+        "expected": "御灵",
+        "recognition": "OCR",
+        "roi": [
+            216,
+            601,
+            403,
+            111
+        ]
+    },
+    "自动御灵-确保进入御灵界面": {
+        "expected": "御灵之境",
+        "next": [
+            "自动御灵6",
+            "[JumpBack]自动御灵5",
+            "[JumpBack]自动御灵5_copy1",
+            "[JumpBack]自动御灵5_copy2",
+            "[JumpBack]自动御灵5_copy3"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            48,
+            8,
+            260,
+            62
+        ]
+    },
     "自动御灵1": {
         "next": [
-            "自动御灵2",
-            "自动御灵3",
+            "自动御灵-确保进入御灵界面",
+            "[JumpBack]自动御灵-点击御灵-ocr",
+            "[JumpBack]自动御灵-点击御灵",
             "[JumpBack]点击探索"
         ],
         "on_error": [
@@ -130,53 +195,6 @@
             8,
             45,
             31
-        ]
-    },
-    "自动御灵2": {
-        "action": "Click",
-        "expected": "御灵",
-        "next": [
-            "自动御灵4"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            313,
-            602,
-            122,
-            110
-        ]
-    },
-    "自动御灵3": {
-        "action": "Click",
-        "next": [
-            "自动御灵4"
-        ],
-        "recognition": "TemplateMatch",
-        "roi": [
-            294,
-            613,
-            249,
-            98
-        ],
-        "template": [
-            "自动御灵/自动御灵3.png"
-        ]
-    },
-    "自动御灵4": {
-        "expected": "御灵之境",
-        "next": [
-            "自动御灵6",
-            "[JumpBack]自动御灵5",
-            "[JumpBack]自动御灵5_copy1",
-            "[JumpBack]自动御灵5_copy2",
-            "[JumpBack]自动御灵5_copy3"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            48,
-            8,
-            260,
-            62
         ]
     },
     "自动御灵5": {
@@ -309,28 +327,5 @@
         "template": [
             "自动御灵/自动御灵9.png"
         ]
-    },
-    "御灵-判断是否达到对应次数": {
-        "recognition": "Custom",
-        "custom_recognition": "TaskCounterRecognition",
-        "custom_recognition_param": {
-            "target_count": 10
-        },
-        "inverse": true,
-        "next": [
-            "返回庭院"
-        ]
-    },
-    "御灵-判断是否返回御灵界面": {
-        "expected": "御灵",
-        "rate_limit": 3000,
-        "recognition": "OCR",
-        "roi": [
-            156,
-            10,
-            77,
-            61
-        ],
-        "timeout": 2000000
     }
 }

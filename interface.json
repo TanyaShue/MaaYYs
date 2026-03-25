@@ -71,7 +71,7 @@
     "child_exec": ".\\agent\\agent.exe",
     "child_args": []
   },
-  "task": [],
+  "task": [], 
   "import": [
     "tasks/OpenGame.json",
     "tasks/ActivityClimbTower.json",

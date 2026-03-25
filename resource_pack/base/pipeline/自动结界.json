@@ -553,10 +553,25 @@
         "post_delay": 2000,
         "recognition": "FeatureMatch",
         "roi": [
-            204,
-            607,
-            151,
-            113
+            215,
+            601,
+            217,
+            114
+        ],
+        "template": [
+            "探索/探索_结界突破.png",
+            "自动结界/结界突破_点击结界突破_1.png"
+        ]
+    },
+    "结界突破_点击结界突破-体验服": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "roi": [
+            229,
+            588,
+            214,
+            132
         ],
         "template": [
             "探索/探索_结界突破.png",
@@ -580,6 +595,7 @@
         "next": [
             "识别结界突破界面",
             "[JumpBack]结界突破_点击结界突破",
+            "[JumpBack]结界突破_点击结界突破-体验服",
             "[JumpBack]点击探索"
         ],
         "on_error": [
