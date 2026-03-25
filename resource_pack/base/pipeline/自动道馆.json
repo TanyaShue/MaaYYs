@@ -49,10 +49,10 @@
             "[JumpBack]自动道馆3",
             "[JumpBack]打开底部菜单"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "自动道馆1": {
         "action": "Click",
@@ -102,7 +102,9 @@
         "next": [
             "自动道馆14",
             "自动道馆20",
-            "[JumpBack]自动道馆15"
+            "[JumpBack]道馆-识别是否开战",
+            "[JumpBack]自动道馆15",
+            "[JumpBack]自动道馆18"
         ],
         "on_error": [
             "返回庭院"
@@ -119,6 +121,7 @@
     },
     "自动道馆13": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "TemplateMatch",
         "template": [
             "自动道馆/自动道馆13.png"
@@ -345,6 +348,16 @@
         ],
         "template": [
             "自动道馆/自动道馆9.png"
+        ]
+    },
+    "道馆-识别是否开战": {
+        "expected": "开战",
+        "recognition": "OCR",
+        "roi": [
+            550,
+            62,
+            189,
+            67
         ]
     },
     "道馆突破-点击阴阳寮": {
