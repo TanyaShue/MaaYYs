@@ -229,18 +229,18 @@
     "式神委派13": {
         "expected": "式神委派",
         "next": [
-            "式神委派16",
             "[JumpBack]式神委派2",
-            "[JumpBack]式神委派4"
+            "[JumpBack]式神委派4",
+            "式神委派16"
         ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             28,
             7,
             262,
             106
-        ],
-        "post_delay": 2000
+        ]
     },
     "式神委派14": {
         "expected": "完成任务",
@@ -318,6 +318,7 @@
             "[JumpBack]式神委派4"
         ],
         "order_by": "Vertical",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             963,
@@ -331,7 +332,7 @@
             -38,
             -50
         ],
-        "post_delay": 2000
+        "target": "式神委派13"
     },
     "式神委派3": {
         "action": "Click",

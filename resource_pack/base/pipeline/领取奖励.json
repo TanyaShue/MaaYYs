@@ -83,12 +83,12 @@
     },
     "邮件_领取奖励_点击关闭": {
         "action": "Click",
-        "post_delay": 2000,
-        "recognition": "FeatureMatch",
-        "template": "通用图标/关闭.png",
         "focus": {
             "Node.Action.Succeeded": "邮件领取结束"
-        }
+        },
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "template": "通用图标/关闭.png"
     },
     "邮件_领取奖励_点击底部关闭奖励界面": {
         "action": "Click",
@@ -172,7 +172,8 @@
             308,
             53,
             102
-        ]
+        ],
+        "post_delay": 2000
     },
     "领取奖励1": {
         "action": "Click",
@@ -216,7 +217,8 @@
             590,
             196,
             129
-        ]
+        ],
+        "post_delay": 2000
     },
     "领取奖励12": {
         "action": "Click",
@@ -403,6 +405,9 @@
         "timeout": 3000
     },
     "领取奖励_商店每日奖励": {
+        "focus": {
+            "Node.Recognition.Starting": "开始领取商店每日奖励"
+        },
         "max_hit": 1,
         "next": [
             "确保位于商店界面",
@@ -410,10 +415,7 @@
             "[JumpBack]领取奖励-打开商店-ocr",
             "[JumpBack]打开底部菜单"
         ],
-        "recognition": "DirectHit",
-        "focus": {
-            "Node.Recognition.Starting": "开始领取商店每日奖励"
-        }
+        "recognition": "DirectHit"
     },
     "领取奖励_商店每日奖励_点击推荐_OCR": {
         "action": "Click",
@@ -424,6 +426,7 @@
         "on_error": [
             "返回庭院"
         ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             1163,
@@ -431,7 +434,6 @@
             95,
             549
         ],
-        "post_delay": 2000,
         "timeout": 10000
     },
     "领取奖励_商店每日奖励_点击礼包屋": {
@@ -465,20 +467,20 @@
     },
     "领取奖励_商店每日奖励_领取每日免费礼包_返回": {
         "action": "Click",
+        "focus": {
+            "Node.Action.Succeeded": "黑碎领取完毕"
+        },
         "next": [
             "返回庭院"
         ],
+        "post_delay": 2000,
         "recognition": "DirectHit",
         "target": [
             16,
             5,
             46,
             45
-        ],
-        "post_delay": 2000,
-        "focus": {
-            "Node.Action.Succeeded": "黑碎领取完毕"
-        }
+        ]
     },
     "领取奖励_打开商店": {
         "action": "Click",
@@ -704,6 +706,9 @@
         "timeout": 10000
     },
     "领取奖励_花合战奖励": {
+        "focus": {
+            "Node.Action.Starting": "开始领取花合战奖励"
+        },
         "max_hit": 1,
         "next": [
             "领取奖励-确保位于花合战界面",
@@ -714,10 +719,7 @@
         "on_error": [
             "跳过"
         ],
-        "recognition": "DirectHit",
-        "focus": {
-            "Node.Action.Starting": "开始领取花合战奖励"
-        }
+        "recognition": "DirectHit"
     },
     "领取奖励_识别日常奖励": {
         "inverse": true,
@@ -748,6 +750,9 @@
     },
     "领取奖励_邮件": {
         "action": "Click",
+        "focus": {
+            "Node.Action.Starting": "开始领取邮件奖励"
+        },
         "max_hit": 1,
         "next": [
             "领取奖励9"
@@ -767,10 +772,7 @@
             "庭院/邮箱.png",
             "庭院/邮箱_红点.png"
         ],
-        "timeout": 3000,
-        "focus": {
-            "Node.Action.Starting": "开始领取邮件奖励"
-        }
+        "timeout": 3000
     },
     "领取奖励_领取签到小垃圾": {
         "action": "Click",
@@ -793,12 +795,12 @@
         ]
     },
     "领取花合战奖励结束": {
-        "recognition": "DirectHit",
+        "focus": {
+            "Node.Recognition.Succeeded": "花合战奖励领取完成"
+        },
         "next": [
             "返回庭院"
         ],
-        "focus": {
-            "Node.Recognition.Succeeded": "花合战奖励领取完成"
-        }
+        "recognition": "DirectHit"
     }
 }
