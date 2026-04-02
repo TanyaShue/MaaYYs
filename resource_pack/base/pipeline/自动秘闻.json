@@ -19,14 +19,16 @@
     },
     "自动秘闻": {
         "next": [
-            "自动秘闻4",
-            "自动秘闻7",
+            "自动秘闻3",
+            "[JumpBack]自动秘闻4",
+            "[JumpBack]自动秘闻7",
+            "[JumpBack]自动秘闻_step_1",
             "[JumpBack]点击探索"
         ],
-        "recognition": "DirectHit",
         "on_error": [
             "[JumpBack]确保位于庭院"
-        ]
+        ],
+        "recognition": "DirectHit"
     },
     "自动秘闻-战斗准备": {
         "expected": "准备",
@@ -70,7 +72,6 @@
         "expected": "秘闻副本",
         "next": [
             "自动秘闻_step_2",
-            "自动秘闻5",
             "[JumpBack]秘闻-关闭海报"
         ],
         "recognition": "OCR",
@@ -85,37 +86,18 @@
             293,
             124,
             118
-        ]
+        ],
+        "post_delay": 2000
     },
     "自动秘闻4": {
         "action": "Click",
         "expected": "秘闻副本",
-        "next": [
-            "自动秘闻3"
-        ],
         "recognition": "OCR",
         "roi": [
             525,
             606,
             102,
             113
-        ]
-    },
-    "自动秘闻5": {
-        "expected": "秘闻副本",
-        "next": [
-            "自动秘闻_step_3",
-            "自动秘闻6",
-            "自动秘闻_点击进入"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            83,
-            7,
-            168,
-            89
         ]
     },
     "自动秘闻6": {
@@ -134,9 +116,6 @@
     "自动秘闻7": {
         "action": "Click",
         "expected": "秘闻|副本",
-        "next": [
-            "自动秘闻3"
-        ],
         "recognition": "OCR",
         "roi": [
             525,
@@ -168,6 +147,12 @@
         ],
         "template": [
             "template/screenshot_20250313_160102.png"
+        ],
+        "roi": [
+            433,
+            601,
+            300,
+            114
         ]
     },
     "自动秘闻_step_2": {
