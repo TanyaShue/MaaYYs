@@ -2,7 +2,7 @@
   "interface_version": 2,
   "name": "MaaYYs",
   "label": "阴阳师",
-  "version": "v3.2.0",
+  "version": "v3.2.1",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
   "welcome": "README.md",
@@ -71,7 +71,7 @@
     "child_exec": ".\\agent\\agent.exe",
     "child_args": []
   },
-  "task": [], 
+  "task": [],
   "import": [
     "tasks/OpenGame.json",
     "tasks/ActivityClimbTower.json",
