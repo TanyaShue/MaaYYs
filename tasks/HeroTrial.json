@@ -76,13 +76,13 @@
         "局内祝福选择": {
             "type": "input",
             "label": "局内祝福选择",
-            "description": "填写在局内出现祝福时的选择,不填写默认选第一个",
+            "description": "填写在局内出现祝福时的选择",
             "default": "目标祝福",
             "inputs": [
                 {
                     "name": "目标祝福",
                     "label": "目标祝福",
-                    "description": "填写格式为正则,如 万刃|弥天 表示有万刃或者弥天则选择",
+                    "description": "填写格式为正则,如 万刃|弥天 表示有万刃或者弥天则选择, 填写 万刃 则只选择万刃,没有则选第一个",
                     "default": "万刃|弥天",
                     "pipeline_type": "string"
                 }
