@@ -1,127 +1,4 @@
 {
-    "兵藏秘境-开始挑战": {
-        "action": "Click",
-        "expected": "开始挑战",
-        "recognition": "OCR",
-        "roi": [
-            677,
-            405,
-            165,
-            52
-        ]
-    },
-    "兵藏秘境-点击目标祝福": {
-        "action": "Click",
-        "expected": "万刃",
-        "next": [
-            "兵藏秘境-祝福-点击确定"
-        ],
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            53,
-            348,
-            1154,
-            72
-        ]
-    },
-    "兵藏秘境-确保重置": {
-        "expected": "确认重置",
-        "inverse": true,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            671,
-            405,
-            173,
-            57
-        ]
-    },
-    "兵藏秘境-确定重置": {
-        "action": "Click",
-        "expected": "确认重置",
-        "next": [
-            "兵藏秘境-确保重置",
-            "[JumpBack]兵藏秘境-确定重置1"
-        ],
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            671,
-            405,
-            173,
-            57
-        ]
-    },
-    "兵藏秘境-确定重置1": {
-        "action": "Click",
-        "expected": "确认重置",
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            671,
-            405,
-            173,
-            57
-        ]
-    },
-    "兵藏秘境-祝福-点击确定": {
-        "action": "Click",
-        "expected": "确定",
-        "recognition": "OCR",
-        "roi": [
-            571,
-            625,
-            131,
-            53
-        ]
-    },
-    "兵藏秘境-识别挑战失败": {
-        "expected": "再次挑战|提升式神|提上阴阳师",
-        "next": [
-            "英杰试炼-返回兵藏秘境",
-            "[JumpBack]英杰试炼-战斗后点击屏幕继续"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            256,
-            537,
-            766,
-            69
-        ]
-    },
-    "兵藏秘境-选中第一个祝福": {
-        "action": "Click",
-        "expected": "请选择奖励",
-        "next": [
-            "兵藏秘境-祝福-点击确定"
-        ],
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            518,
-            36,
-            235,
-            69
-        ],
-        "target": [
-            67,
-            424,
-            246,
-            162
-        ]
-    },
-    "兵藏秘境-重置进度": {
-        "action": "Click",
-        "expected": "重置",
-        "recognition": "OCR",
-        "roi": [
-            1153,
-            78,
-            59,
-            30
-        ]
-    },
     "英杰试炼": {
         "next": [
             "英杰试炼-确保位于英杰试炼",
@@ -145,6 +22,17 @@
             22,
             131,
             39
+        ]
+    },
+    "英杰试炼-开始挑战": {
+        "action": "Click",
+        "expected": "开始挑战",
+        "recognition": "OCR",
+        "roi": [
+            677,
+            405,
+            165,
+            52
         ]
     },
     "英杰试炼-战斗后点击屏幕继续": {
@@ -199,6 +87,20 @@
             81
         ]
     },
+    "英杰试炼-点击切换英杰": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [
+            2,
+            74,
+            177,
+            157
+        ],
+        "template": [
+            "英杰试炼/英杰试炼-点击切换英杰_1.png",
+            "英杰试炼/英杰试炼-点击切换英杰_2.png"
+        ]
+    },
     "英杰试炼-点击式神录": {
         "action": "Click",
         "expected": "式神录",
@@ -221,6 +123,46 @@
             67
         ]
     },
+    "英杰试炼-点击梦墟秘境": {
+        "action": "Click",
+        "expected": "梦墟秘境",
+        "recognition": "OCR",
+        "roi": [
+            1055,
+            276,
+            74,
+            254
+        ]
+    },
+    "英杰试炼-点击源赖光": {
+        "action": "Click",
+        "enabled": false,
+        "recognition": "TemplateMatch",
+        "roi": [
+            105,
+            59,
+            385,
+            643
+        ],
+        "template": [
+            "英杰试炼/英杰试炼-点击源赖光_1.png"
+        ]
+    },
+    "英杰试炼-点击目标祝福": {
+        "action": "Click",
+        "expected": "万刃",
+        "next": [
+            "英杰试炼-祝福-点击确定"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            53,
+            348,
+            1154,
+            72
+        ]
+    },
     "英杰试炼-点击英杰试炼": {
         "action": "Click",
         "expected": "英杰试炼",
@@ -231,6 +173,33 @@
             658,
             118,
             62
+        ]
+    },
+    "英杰试炼-点击英杰试炼-体验服": {
+        "action": "Click",
+        "expected": "英杰试炼",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            813,
+            668,
+            111,
+            52
+        ]
+    },
+    "英杰试炼-点击藤原道长": {
+        "action": "Click",
+        "enabled": false,
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [
+            443,
+            16,
+            374,
+            697
+        ],
+        "template": [
+            "英杰试炼/英杰试炼-点击藤原道长_1.png"
         ]
     },
     "英杰试炼-确保位于兵藏秘境": {
@@ -260,7 +229,8 @@
         "expected": "式神录",
         "next": [
             "英杰试炼-确保返回兵藏秘境",
-            "[JumpBack]英杰试炼-点击从式神录返回"
+            "[JumpBack]英杰试炼-点击从式神录返回",
+            "英杰试炼-确保返回梦墟秘境"
         ],
         "recognition": "OCR",
         "roi": [
@@ -270,18 +240,57 @@
             53
         ]
     },
+    "英杰试炼-确保位于梦墟秘境": {
+        "expected": "梦墟秘境",
+        "next": [
+            "英杰试炼-确保试炼卷数量大于0"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            142,
+            8,
+            147,
+            55
+        ],
+        "timeout": 5000
+    },
     "英杰试炼-确保位于英杰试炼": {
         "expected": "英杰试炼",
         "next": [
-            "英杰试炼-确保位于兵藏秘境",
-            "[JumpBack]英杰试炼-点击兵藏秘境"
+            "英杰试炼-确保位于选择英杰界面",
+            "[JumpBack]英杰试炼-点击切换英杰"
         ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             151,
             16,
             135,
             45
+        ]
+    },
+    "英杰试炼-确保位于选择英杰界面": {
+        "expected": "选择英杰",
+        "next": [
+            "英杰试炼-选中源赖光",
+            "[JumpBack]英杰试炼-点击源赖光",
+            "英杰试炼-选中藤原道长",
+            "[JumpBack]英杰试炼-点击藤原道长"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "replace": [
+            [
+                "傑",
+                "杰"
+            ]
+        ],
+        "roi": [
+            135,
+            0,
+            191,
+            84
         ]
     },
     "英杰试炼-确保试炼卷数量大于0": {
@@ -302,11 +311,11 @@
         "expected": "兵藏秘境",
         "next": [
             "英杰试炼-刷完试炼卷",
-            "[JumpBack]兵藏秘境-开始挑战",
+            "[JumpBack]英杰试炼-开始挑战",
             "[JumpBack]英杰试炼-点击挑战",
             "[JumpBack]英杰试炼-点击准备",
             "[JumpBack]英杰试炼-选择祝福",
-            "[JumpBack]兵藏秘境-识别挑战失败",
+            "[JumpBack]英杰试炼-识别挑战失败",
             "[JumpBack]英杰试炼-战斗后点击屏幕继续"
         ],
         "rate_limit": 3000,
@@ -319,11 +328,98 @@
         ],
         "timeout": 2000000
     },
-    "英杰试炼-返回兵藏秘境": {
-        "expected": "兵藏秘境",
+    "英杰试炼-确保返回梦墟秘境": {
+        "expected": "梦墟秘境",
         "next": [
-            "兵藏秘境-确定重置",
-            "[JumpBack]兵藏秘境-重置进度"
+            "英杰试炼-刷完试炼卷",
+            "[JumpBack]英杰试炼-开始挑战",
+            "[JumpBack]英杰试炼-点击挑战",
+            "[JumpBack]英杰试炼-点击准备",
+            "[JumpBack]英杰试炼-选择祝福",
+            "[JumpBack]英杰试炼-识别挑战失败",
+            "[JumpBack]英杰试炼-战斗后点击屏幕继续"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            142,
+            8,
+            147,
+            55
+        ],
+        "timeout": 2000000
+    },
+    "英杰试炼-确保重置": {
+        "expected": "确认重置",
+        "inverse": true,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            671,
+            405,
+            173,
+            57
+        ]
+    },
+    "英杰试炼-确定重置": {
+        "action": "Click",
+        "expected": "确认重置",
+        "next": [
+            "英杰试炼-确保重置",
+            "[JumpBack]英杰试炼-确定重置1"
+        ],
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            671,
+            405,
+            173,
+            57
+        ]
+    },
+    "英杰试炼-确定重置1": {
+        "action": "Click",
+        "expected": "确认重置",
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            671,
+            405,
+            173,
+            57
+        ]
+    },
+    "英杰试炼-祝福-点击确定": {
+        "action": "Click",
+        "expected": "确定",
+        "recognition": "OCR",
+        "roi": [
+            571,
+            625,
+            131,
+            53
+        ],
+        "post_delay": 2000
+    },
+    "英杰试炼-识别挑战失败": {
+        "expected": "再次挑战|提升式神|提上阴阳师",
+        "next": [
+            "英杰试炼-返回秘境",
+            "[JumpBack]英杰试炼-战斗后点击屏幕继续"
+        ],
+        "recognition": "OCR",
+        "roi": [
+            256,
+            537,
+            766,
+            69
+        ]
+    },
+    "英杰试炼-返回秘境": {
+        "expected": "兵藏秘境|梦墟秘境",
+        "next": [
+            "英杰试炼-确定重置",
+            "[JumpBack]英杰试炼-重置进度"
         ],
         "rate_limit": 3000,
         "recognition": "OCR",
@@ -335,13 +431,66 @@
         ],
         "timeout": 2000000
     },
+    "英杰试炼-选中源赖光": {
+        "enabled": false,
+        "expected": "武道精进",
+        "next": [
+            "英杰试炼-确保位于兵藏秘境",
+            "[JumpBack]英杰试炼-点击兵藏秘境"
+        ],
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [
+            1056,
+            606,
+            222,
+            114
+        ]
+    },
+    "英杰试炼-选中第一个祝福": {
+        "action": "Click",
+        "expected": "请选择奖励",
+        "next": [
+            "英杰试炼-祝福-点击确定"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            518,
+            36,
+            235,
+            69
+        ],
+        "target": [
+            67,
+            424,
+            246,
+            162
+        ]
+    },
+    "英杰试炼-选中藤原道长": {
+        "enabled": false,
+        "expected": "音律精进",
+        "next": [
+            "英杰试炼-确保位于梦墟秘境",
+            "[JumpBack]英杰试炼-点击梦墟秘境"
+        ],
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [
+            1108,
+            631,
+            165,
+            89
+        ]
+    },
     "英杰试炼-选择祝福": {
         "expected": "请选择奖励",
         "next": [
-            "兵藏秘境-点击目标祝福"
+            "英杰试炼-点击目标祝福"
         ],
         "on_error": [
-            "兵藏秘境-选中第一个祝福"
+            "英杰试炼-选中第一个祝福"
         ],
         "recognition": "OCR",
         "roi": [
@@ -352,16 +501,15 @@
         ],
         "timeout": 5000
     },
-    "英杰试炼-点击英杰试炼-体验服": {
+    "英杰试炼-重置进度": {
         "action": "Click",
-        "expected": "英杰试炼",
-        "post_delay": 2000,
+        "expected": "重置",
         "recognition": "OCR",
         "roi": [
-            813,
-            668,
-            111,
-            52
+            1153,
+            78,
+            59,
+            30
         ]
     }
 }

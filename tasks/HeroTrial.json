@@ -5,11 +5,44 @@
             "label": "英杰试炼",
             "entry": "英杰试炼",
             "option": [
-                "英杰试炼阵容预设"
+                "选择试炼英杰",
+                "英杰试炼阵容预设",
+                "局内祝福选择"
             ]
         }
     ],
     "option": {
+        "选择试炼英杰":{
+            "type": "select",
+            "label": "选择需要试炼英杰",
+            "default_case": "源赖光",
+            "cases": [
+                {
+                    "name": "源赖光",
+                    "label": "源赖光",
+                    "pipeline_override": {
+                        "英杰试炼-选中源赖光": {
+                            "enable":true
+                        },
+                       "英杰试炼-点击源赖光": {
+                            "enable":true
+                        }
+                    }
+                },
+                {
+                    "name": "藤原道长",
+                    "label": "藤原道长",
+                    "pipeline_override": {
+                        "英杰试炼-选中藤原道长": {
+                            "enable":true
+                        },
+                       "英杰试炼-点击藤原道长": {
+                            "enable":true
+                        }
+                    }
+                }
+            ]
+        },
         "英杰试炼阵容预设": {
             "type": "input",
             "label": "英杰试炼阵容预设",
@@ -37,6 +70,26 @@
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"
                     }
+                }
+            }
+        },
+        "局内祝福选择": {
+            "type": "input",
+            "label": "局内祝福选择",
+            "description": "填写在局内出现祝福时的选择,不填写默认选第一个",
+            "default": "目标祝福",
+            "inputs": [
+                {
+                    "name": "目标祝福",
+                    "label": "目标祝福",
+                    "description": "填写格式为正则,如 万刃|弥天 表示有万刃或者弥天则选择",
+                    "default": "万刃|弥天",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "英杰试炼-点击目标祝福": {
+                    "expected": "{目标祝福}"
                 }
             }
         }
