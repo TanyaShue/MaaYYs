@@ -599,6 +599,7 @@
             "[JumpBack]点击探索"
         ],
         "on_error": [
+            "[JumpBack]自动结界-判断是否位于御魂界面",
             "[JumpBack]确保位于庭院"
         ],
         "recognition": "DirectHit"
@@ -830,6 +831,19 @@
             359,
             194,
             113
+        ]
+    },
+    "自动结界-判断是否位于御魂界面": {
+        "recognition": "OCR",
+        "roi": [
+            144,
+            3,
+            114,
+            81
+        ],
+        "expected": "御魂",
+        "next": [
+            "返回庭院"
         ]
     }
 }

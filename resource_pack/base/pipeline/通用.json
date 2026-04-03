@@ -24,7 +24,7 @@
     },
     "庭院_点击探索": {
         "action": "Click",
-        "post_delay": 2000,
+        "post_delay": 3000,
         "recognition": "TemplateMatch",
         "roi": [
             23,
@@ -116,7 +116,7 @@
     "点击探索_识别探索界面": {
         "action": "Click",
         "expected": "探索",
-        "post_delay": 2000,
+        "post_delay": 3000,
         "recognition": "OCR",
         "roi": [
             170,
@@ -413,13 +413,14 @@
             "神龛"
         ],
         "model": "Courtyard.onnx",
-        "post_delay": 2000,
+        "post_delay": 3000,
         "recognition": "NeuralNetworkDetect",
         "threshold": 0.7
     },
     "通用3": {
         "action": "Click",
         "expected": "确定",
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             401,
@@ -427,8 +428,7 @@
             467,
             135
         ],
-        "timeout": 2000,
-        "post_delay": 2000
+        "timeout": 2000
     },
     "通用4": {
         "recognition": "TemplateMatch",
@@ -772,6 +772,7 @@
     },
     "通用_装备御魂_确保没有确定按钮": {
         "expected": "确定",
+        "inverse": true,
         "pre_delay": 1000,
         "recognition": "OCR",
         "roi": [
@@ -780,8 +781,7 @@
             476,
             149
         ],
-        "timeout": 2000,
-        "inverse": true
+        "timeout": 2000
     },
     "通用_识别加成": {
         "expected": "识别加成",
