@@ -1,32 +1,4 @@
 {
-    "N-1770966223659": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            1022,
-            0,
-            258,
-            196
-        ],
-        "template": [
-            "kun28/N-1770966223659_1.png",
-            "kun28/N-1770966223659_2.png"
-        ]
-    },
-    "N-1770966323291": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            1022,
-            0,
-            258,
-            196
-        ],
-        "template": [
-            "kun28/N-1770966223659_1.png",
-            "kun28/N-1770966223659_2.png"
-        ]
-    },
     "N-1773250636443": {
         "expected": "探索",
         "recognition": "OCR",
@@ -413,7 +385,8 @@
         "expected": "探索",
         "next": [
             "[JumpBack]kun2824",
-            "kun28-确保关闭章节面板"
+            "kun28-确保关闭章节面板",
+            "[JumpBack]kun28-关闭章节界面-亲友式神助战"
         ],
         "on_error": [
             "跳过"
@@ -671,5 +644,23 @@
             "[JumpBack]确保位于庭院"
         ],
         "recognition": "DirectHit"
+    },
+    "kun28-关闭章节界面-亲友式神助战": {
+        "recognition": "OCR",
+        "roi": [
+            107,
+            170,
+            163,
+            43
+        ],
+        "expected": "亲友式神协战",
+        "action": "Click",
+        "target": [
+            1012,
+            111,
+            90,
+            53
+        ],
+        "post_delay": 2000
     }
 }
