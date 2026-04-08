@@ -94,6 +94,7 @@
     "tasks/AutoGuildRaid.json",
     "tasks/AutoUnderworldGate.json",
     "tasks/ScrollFarming.json",
-    "tasks/CloseGame.json"
+    "tasks/CloseGame.json",
+    "tasks/AutoYogenbi.json"
   ]
 }

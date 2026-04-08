@@ -1,0 +1,102 @@
+{
+    "task": [
+        {
+            "name": "自动业原火",
+            "label": "自动业原火",
+            "entry": "业原火-开始业原火",
+            "option": [
+                "业原火-设置挑战目标",
+                "业原火-设置挑战次数",
+                "业原火-阵容预设"
+            ]
+        }
+    ],
+    "option": {
+        "业原火-设置挑战目标": {
+            "type": "select",
+            "label": "目标副本",
+            "description": "设置业原火的目标副本",
+            "default_case":"痴之阵",
+            "cases": [
+                {
+                    "name": "贪之阵",
+                    "label": "贪之阵",
+                    "pipeline_override": {
+                        "业原火-点击目标副本": {
+                            "expected": "贪之阵"
+                        }
+                    }
+                },
+                {
+                    "name": "嗔之阵",
+                    "label": "嗔之阵",
+                    "pipeline_override": {
+                        "业原火-点击目标副本": {
+                            "expected": "嗔之阵"
+                        }
+                    }
+                },
+                {
+                    "name": "痴之阵",
+                    "label": "痴之阵",
+                    "pipeline_override": {
+                        "业原火-点击目标副本": {
+                            "expected": "痴之阵"
+                        }
+                    }
+                }
+            ]
+        },
+        "业原火-设置挑战次数": {
+            "type": "input",
+            "label": "挑战次数",
+            "description": "设置业原火的挑战次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "description": "填写挑战业原火的次数",
+                    "default": "5",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "业原火-识别次数": {
+                    "custom_recognition_param": {
+                        "target_count": "{挑战次数}"
+                    }
+                }
+            }
+        },
+        "业原火-阵容预设": {
+            "type": "input",
+            "label": "业原火阵容预设",
+            "description": "填写挑战业原火时需要使用的分组和队伍名称",
+            "default": "默认分组",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "业原火-确保位于装备御魂界面": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}
