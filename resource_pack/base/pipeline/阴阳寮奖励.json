@@ -341,7 +341,8 @@
         ],
         "model": "BarrierCard.onnx",
         "recognition": "NeuralNetworkDetect",
-        "threshold": 0.8
+        "threshold": 0.8,
+        "post_delay": 500
     },
     "阴阳寮奖励29": {
         "action": "Swipe",
@@ -365,7 +366,8 @@
             102,
             134,
             46
-        ]
+        ],
+        "post_delay": 500
     },
     "阴阳寮奖励3": {
         "action": "Click",
@@ -403,7 +405,8 @@
             234,
             230,
             141
-        ]
+        ],
+        "post_delay": 1000
     },
     "阴阳寮奖励31": {
         "action": "Click",
@@ -654,13 +657,13 @@
             "[JumpBack]阴阳寮奖励36",
             "[JumpBack]打开底部菜单"
         ],
+        "on_error": [
+            "[JumpBack]确保位于庭院"
+        ],
         "post_delay": 1000,
         "pre_delay": 1000,
         "rate_limit": 5000,
-        "recognition": "DirectHit",
-        "on_error": [
-            "[JumpBack]确保位于庭院"
-        ]
+        "recognition": "DirectHit"
     },
     "阴阳寮奖励领取-确保进入阴阳寮": {
         "expected": "神社|寮信息|结界|祈愿",
