@@ -160,20 +160,21 @@
         "action": "Click",
         "expected": "任务",
         "next": [
-            "领取奖励11",
-            "领取奖励_花合战_全部领取"
+            "领取奖励12",
+            "[JumpBack]领取奖励11",
+            "[JumpBack]领取奖励_花合战_全部领取"
         ],
         "on_error": [
             "返回庭院"
         ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             1192,
             308,
             53,
             102
-        ],
-        "post_delay": 2000
+        ]
     },
     "领取奖励1": {
         "action": "Click",
@@ -208,17 +209,14 @@
     "领取奖励11": {
         "action": "Click",
         "expected": "全部|领取|全部领取",
-        "next": [
-            "领取奖励12"
-        ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
-            868,
-            590,
-            196,
-            129
-        ],
-        "post_delay": 2000
+            856,
+            558,
+            191,
+            157
+        ]
     },
     "领取奖励12": {
         "action": "Click",
@@ -232,7 +230,8 @@
             617,
             83,
             72
-        ]
+        ],
+        "post_delay": 1000
     },
     "领取奖励13": {
         "action": "Click",
@@ -667,9 +666,6 @@
     },
     "领取奖励_花合战_全部领取": {
         "action": "Click",
-        "next": [
-            "领取奖励12"
-        ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -685,8 +681,9 @@
     "领取奖励_花合战_点击任务": {
         "action": "Click",
         "next": [
-            "领取奖励_花合战_全部领取",
-            "领取奖励11"
+            "领取奖励12",
+            "[JumpBack]领取奖励_花合战_全部领取",
+            "[JumpBack]领取奖励11"
         ],
         "on_error": [
             "领取花合战奖励结束"
