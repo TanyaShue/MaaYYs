@@ -22,14 +22,29 @@
             }
         },
         "next": [
-            "自动斗技-不处于斗技时间段",
-            "自动斗技-胜利",
-            "自动斗技-失败",
+            "自动斗技-等待战斗结束",
             "[JumpBack]自动斗技-点击自动上阵",
-            "[JumpBack]自动斗技-点击自动作战",
+            "[JumpBack]自动斗技-点击匹配",
             "[JumpBack]自动斗技-匹配中",
             "[JumpBack]空任务"
         ]
+    },
+    "自动斗技-等待战斗结束":{
+        "recognition": {
+            "type": "OCR",
+            "param": {"roi": [0, 605, 130, 115],
+            "expected":[
+                ".*动"
+            ]
+            }
+        },
+        "next": [
+            "自动斗技-胜利",
+            "自动斗技-失败",
+            "[JumpBack]自动斗技-点击自动作战",
+            "自动斗技-等待战斗结束"
+        ]
+
     },
     "自动斗技-不处于斗技时间段": {
         "recognition": {
@@ -48,6 +63,26 @@
         },
         "focus": {
             "Node.Recognition.Succeeded": "当前不处于可斗技时间段"
+        }
+    },
+    "自动斗技-点击匹配":{
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1063,
+                    480,
+                    217,
+                    240
+                ],
+                "expected": [
+                    "战",
+                    "练"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
         }
     },
     "自动斗技-匹配中": {
@@ -75,20 +110,15 @@
     },
     "自动斗技-点击自动作战": {
         "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    0,
-                    53,
-                    170,
-                    198
-                ],
-                "template": [
-                    "斗技/点击自动上阵.png"
-                ]
+            "type": "OCR",
+            "param": {"roi": [0, 605, 130, 115],
+            "expected":[
+                "手动"
+            ]
             }
         },
         "action": "Click",
+        "pre_delay": 1500,
         "post_delay": 2000
     },
     "自动斗技-胜利":{
@@ -108,7 +138,12 @@
         },
         "focus": {
             "Node.Recognition.Succeeded": "赢咯(喜)"
-        }
+        },
+        "next":[
+            "自动斗技-已处于斗技段位界面",
+            "自动斗技-胜利",
+            "[JumpBack]自动斗技-式神高光处理"
+        ]
     },
     "自动斗技-失败":{
         "recognition":{
@@ -127,7 +162,12 @@
         },
         "focus": {
             "Node.Recognition.Succeeded": "输力(悲)"
-        }
+        },
+        "next":[
+            "自动斗技-已处于斗技段位界面",
+            "自动斗技-失败",
+            "[JumpBack]自动斗技-式神高光处理"
+        ]
     },
     "自动斗技-式神高光处理":{
         "recognition":{
