@@ -31,13 +31,6 @@
       44
     ]
   },
-  "自动斗技-任务开始层": {
-    "next": [
-      "自动斗技-总任务层",
-      "[JumpBack]启动游戏"
-    ],
-    "recognition": "DirectHit"
-  },
   "自动斗技-匹配中": {
     "recognition": "DirectHit"
   },
@@ -95,6 +88,22 @@
     ],
     "recognition": "DirectHit"
   },
+  "自动斗技-开始时间检查": {
+    "action": "Custom",
+    "custom_action": "TimeCheck",
+    "custom_action_param": {
+      "end": "23:00",
+      "mode": "in",
+      "start": "12:00"
+    },
+    "next": [
+      "自动斗技-开始斗技"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "DirectHit"
+  },
   "自动斗技-式神高光处理": {
     "action": "Click",
     "recognition": "TemplateMatch",
@@ -113,9 +122,6 @@
     "template": [
       "斗技/式神高光.png"
     ]
-  },
-  "自动斗技-总任务层": {
-    "recognition": "DirectHit"
   },
   "自动斗技-晋升界面处理": {
     "action": "Click",
