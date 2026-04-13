@@ -95,6 +95,7 @@
     "tasks/AutoUnderworldGate.json",
     "tasks/ScrollFarming.json",
     "tasks/CloseGame.json",
-    "tasks/AutoYogenbi.json"
+    "tasks/AutoYogenbi.json",
+    "tasks/douji.json"
   ]
 }
