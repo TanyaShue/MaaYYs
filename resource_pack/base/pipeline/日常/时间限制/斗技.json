@@ -144,6 +144,7 @@
         "next":[
             "自动斗技-已处于斗技段位界面",
             "自动斗技-胜利",
+            "[JumpBack]自动斗技-晋升界面处理",
             "[JumpBack]自动斗技-式神高光处理"
         ]
     },
@@ -185,6 +186,23 @@
             "type": "Click",
             "param":{
                 "target": [350, 254, 493, 237]
+            }
+        }
+    },
+    "自动斗技-晋升界面处理":{
+        "recognition":{
+            "type":"TemplateMatch",
+            "param":{
+                "roi": [494, 21, 297, 96],
+                "template":[
+                    "斗技/晋升.png"
+                ]
+            }
+        },
+        "action":{
+            "type": "Click",
+            "param":{
+                "target": [1181, 34, 46, 44]
             }
         }
     }
