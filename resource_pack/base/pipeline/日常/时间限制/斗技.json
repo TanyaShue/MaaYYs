@@ -1,0 +1,191 @@
+{
+    "自动斗技-任务开始层": {
+        "next":[
+            "自动斗技-总任务层",
+            "[JumpBack]启动游戏"
+        ]
+    },
+    "自动斗技-总任务层": {},
+    "自动斗技-已处于斗技段位界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    115,
+                    0,
+                    144,
+                    97
+                ],
+                "template": [
+                    "斗技/正处于斗技界面.png"
+                ]
+            }
+        },
+        "next": [
+            "自动斗技-不处于斗技时间段",
+            "自动斗技-等待战斗结束",
+            "[JumpBack]自动斗技-点击自动上阵",
+            "[JumpBack]自动斗技-点击匹配",
+            "自动斗技-胜利",
+            "[JumpBack]自动斗技-匹配中",
+            "[JumpBack]空任务"
+        ]
+    },
+    "自动斗技-等待战斗结束":{
+        "recognition": {
+            "type": "OCR",
+            "param": {"roi": [0, 605, 130, 115],
+            "expected":[
+                ".*动"
+            ]
+            }
+        },
+        "next": [
+            "自动斗技-胜利",
+            "自动斗技-失败",
+            "[JumpBack]自动斗技-点击自动作战",
+            "自动斗技-等待战斗结束"
+        ]
+
+    },
+    "自动斗技-不处于斗技时间段": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1063,
+                    480,
+                    217,
+                    240
+                ],
+                "expected": [
+                    "练"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "当前不处于可斗技时间段"
+        }
+    },
+    "自动斗技-点击匹配":{
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1063,
+                    480,
+                    217,
+                    240
+                ],
+                "expected": [
+                    "战",
+                    "练"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    },
+    "自动斗技-匹配中": {
+        "recognition": {
+            "type": "DirectHit"
+        }
+    },
+    "自动斗技-点击自动上阵": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    53,
+                    170,
+                    198
+                ],
+                "template": [
+                    "斗技/点击自动上阵.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "post_delay": 2000
+    },
+    "自动斗技-点击自动作战": {
+        "recognition": {
+            "type": "OCR",
+            "param": {"roi": [0, 605, 130, 115],
+            "expected":[
+                "手动"
+            ]
+            }
+        },
+        "action": "Click",
+        "pre_delay": 1500,
+        "post_delay": 2000
+    },
+    "自动斗技-胜利":{
+        "recognition":{
+            "type":"TemplateMatch",
+            "param":{
+                "target": [209, 0, 574, 277],
+                "template":[
+                    "斗技/胜利.png"
+                ]
+            }
+        },
+        "action":{
+            "type": "Click",
+            "param":{"target": [499, 647, 284, 42]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "赢咯(喜)"
+        },
+        "next":[
+            "自动斗技-已处于斗技段位界面",
+            "自动斗技-胜利",
+            "[JumpBack]自动斗技-式神高光处理"
+        ]
+    },
+    "自动斗技-失败":{
+        "recognition":{
+            "type":"TemplateMatch",
+            "param":{
+                "target": [209, 0, 574, 277],
+                "template":[
+                    "斗技/失败.png"
+                ]
+            }
+        },
+        "action":{
+            "type": "Click",
+            "param":{"target": [499, 647, 284, 42]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "输力(悲)"
+        },
+        "next":[
+            "自动斗技-已处于斗技段位界面",
+            "自动斗技-失败",
+            "[JumpBack]自动斗技-式神高光处理"
+        ]
+    },
+    "自动斗技-式神高光处理":{
+        "recognition":{
+            "type":"TemplateMatch",
+            "param":{
+                "roi": [1067, 548, 213, 172],
+                "template":[
+                    "斗技/式神高光.png"
+                ]
+            }
+        },
+        "action":{
+            "type": "Click",
+            "param":{
+                "target": [350, 254, 493, 237]
+            }
+        }
+    }
+}
