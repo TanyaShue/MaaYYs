@@ -171,9 +171,7 @@
         "next": [
             "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
         ],
-        "on_error": [
-            "返回庭院"
-        ],
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [
             531,
@@ -196,7 +194,8 @@
             229,
             311,
             78
-        ]
+        ],
+        "post_delay": 2000
     },
     "阴阳寮奖励19": {
         "action": "Click",
@@ -340,9 +339,9 @@
             4
         ],
         "model": "BarrierCard.onnx",
+        "post_delay": 500,
         "recognition": "NeuralNetworkDetect",
-        "threshold": 0.8,
-        "post_delay": 500
+        "threshold": 0.8
     },
     "阴阳寮奖励29": {
         "action": "Swipe",
@@ -360,14 +359,14 @@
             42
         ],
         "expected": "太鼓",
+        "post_delay": 500,
         "recognition": "OCR",
         "roi": [
             356,
             102,
             134,
             46
-        ],
-        "post_delay": 500
+        ]
     },
     "阴阳寮奖励3": {
         "action": "Click",
@@ -399,17 +398,18 @@
             "阴阳寮奖励5",
             "阴阳寮奖励32"
         ],
+        "post_delay": 1000,
         "recognition": "OCR",
         "roi": [
             787,
             234,
             230,
             141
-        ],
-        "post_delay": 1000
+        ]
     },
     "阴阳寮奖励31": {
         "action": "Click",
+        "post_delay": 2000,
         "recognition": "TemplateMatch",
         "roi": [
             1060,
@@ -573,9 +573,6 @@
         "next": [
             "阴阳寮奖励领取_结界奖励领取_领取体力_取出",
             "阴阳寮奖励17"
-        ],
-        "on_error": [
-            "返回庭院"
         ],
         "recognition": "OCR",
         "roi": [
@@ -842,10 +839,7 @@
             "阴阳寮奖励18",
             "[JumpBack]阴阳寮奖励领取_结界奖励领取_点击经验酒壶"
         ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
+        "post_delay": 2000,
         "recognition": "DirectHit",
         "target": [
             825,
@@ -856,9 +850,6 @@
     },
     "阴阳寮奖励领取_结界奖励领取_点击经验酒壶": {
         "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
         "post_delay": 1000,
         "recognition": "TemplateMatch",
         "roi": [
@@ -923,9 +914,6 @@
         "next": [
             "阴阳寮奖励领取_结界奖励领取_点击一下屏幕"
         ],
-        "on_error": [
-            "返回庭院"
-        ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
         "roi": [
@@ -955,9 +943,6 @@
             "阴阳寮奖励领取_识别结界特征_2_copy1",
             "[JumpBack]阴阳寮奖励领取_结界奖励领取_领取溢出经验",
             "[JumpBack]阴阳寮奖励领取_结界奖励领取_关闭食盒界面"
-        ],
-        "on_error": [
-            "返回庭院"
         ],
         "post_delay": 1000,
         "recognition": "FeatureMatch",
