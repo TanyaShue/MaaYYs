@@ -96,6 +96,6 @@
     "tasks/ScrollFarming.json",
     "tasks/CloseGame.json",
     "tasks/AutoYogenbi.json",
-    "tasks/douji.json"
+    "tasks/AutoPVP.json"
   ]
 }

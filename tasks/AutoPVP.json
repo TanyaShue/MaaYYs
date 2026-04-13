@@ -1,0 +1,44 @@
+{
+    "task": [
+        {
+            "name": "自动斗技",
+            "label": "自动斗技",
+            "entry": "自动斗技-开始斗技",
+            "option": [
+                "自动斗技预设"
+            ]
+        }
+    ],
+    "option": {
+        "自动斗技预设": {
+            "type": "input",
+            "label": "斗技阵容预设",
+            "description": "填写斗技需要的分组和队伍预设名称",
+            "default": "默认队伍",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "自动斗技-确保打开式神录并切换御魂": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}
