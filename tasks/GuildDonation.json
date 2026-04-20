@@ -41,6 +41,33 @@
                             "expected": "提交高级觉醒材料"
                         }
                     }
+                },
+                                {
+                    "name": "低级御灵材料",
+                    "label": "低级御灵材料",
+                    "pipeline_override": {
+                        "寮30_提交材料": {
+                            "expected": "提交低级御灵材料"
+                        }
+                    }
+                },
+                {
+                    "name": "中级御灵材料",
+                    "label": "中级御灵材料",
+                    "pipeline_override": {
+                        "寮30_提交材料": {
+                            "expected": "提交中级御灵材料"
+                        }
+                    }
+                },
+                {
+                    "name": "高级御灵材料",
+                    "label": "高级御灵材料",
+                    "pipeline_override": {
+                        "寮30_提交材料": {
+                            "expected": "提交高级御灵材料"
+                        }
+                    }
                 }
             ]
         }
