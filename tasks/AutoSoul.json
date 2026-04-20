@@ -9,6 +9,7 @@
                 "御魂阵容预设",
                 "是否使用御魂加成",
                 "是否在战斗中投喂宠物",
+                "挑战方式",
                 "自动挑战次数"
             ]
         }
@@ -17,7 +18,6 @@
         "御魂挑战目标": {
             "type": "select",
             "label": "御魂挑战目标",
-            "description": "根据你当前的地鬼分数选择需要挑战的地鬼个数",
             "default_case": "魂土",
             "cases": [
                 {
@@ -53,6 +53,31 @@
                     "pipeline_override": {
                         "自动御魂_点击目标层数": {
                             "expected": "虚无"
+                        }
+                    }
+                }
+            ]
+        },
+        "挑战方式": {
+            "type": "select",
+            "label": "自动挑战方式",
+            "default_case": "挂樱饼",
+            "cases": [
+                {
+                    "name": "挂樱饼",
+                    "label": "挂樱饼",
+                    "pipeline_override": {
+                        "自动御魂-开始挂樱饼挑战": {
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "全自动",
+                    "label": "全自动",
+                    "pipeline_override": {
+                        "自动御魂-开始全自动挑战": {
+                            "enable": true
                         }
                     }
                 }
@@ -157,6 +182,11 @@
                     "custom_action_param": {
                         "expected_number": "{挑战次数}",
                         "start_repeat": true
+                    }
+                },
+                "自动御魂-识别次数":{
+                    "custom_recognition_param":{
+                        "target_count":"{挑战次数}"
                     }
                 }
             }

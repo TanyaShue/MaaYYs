@@ -1,16 +1,4 @@
 {
-  "寮3015_copy1": {
-    "action": "Click",
-    "post_delay": 2000,
-    "pre_delay": 2000,
-    "recognition": "DirectHit",
-    "target": [
-      1032,
-      239,
-      78,
-      255
-    ]
-  },
   "寮3015_copy1_copy1": {
     "action": "Click",
     "next": [
@@ -36,6 +24,38 @@
     ],
     "recognition": "DirectHit"
   },
+  "自动御魂-全自动挑战-点击准备": {
+    "action": "Click",
+    "expected": "准备",
+    "recognition": "OCR",
+    "roi": [
+      1116,
+      540,
+      125,
+      87
+    ]
+  },
+  "自动御魂-全自动挑战-点击屏幕继续": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "recognition": "OCR",
+    "roi": [
+      517,
+      634,
+      268,
+      86
+    ]
+  },
+  "自动御魂-全自动挑战-返回御魂界面": {
+    "expected": "御魂",
+    "recognition": "OCR",
+    "roi": [
+      144,
+      7,
+      101,
+      73
+    ]
+  },
   "自动御魂-关闭加成": {
     "action": "Custom",
     "custom_action": "BonusToggleAction",
@@ -54,6 +74,35 @@
       317
     ]
   },
+  "自动御魂-关闭加成界面": {
+    "action": "Click",
+    "post_delay": 2000,
+    "pre_delay": 2000,
+    "recognition": "DirectHit",
+    "target": [
+      1032,
+      239,
+      78,
+      255
+    ]
+  },
+  "自动御魂-出现本次通关时间界面": {
+    "action": "Click",
+    "expected": "本次通关时间",
+    "recognition": "OCR",
+    "roi": [
+      518,
+      543,
+      186,
+      114
+    ],
+    "target": [
+      608,
+      641,
+      201,
+      79
+    ]
+  },
   "自动御魂-开启加成": {
     "max_hit": 1,
     "next": [
@@ -62,6 +111,59 @@
       "[JumpBack]自动御魂-识别加成"
     ],
     "recognition": "DirectHit"
+  },
+  "自动御魂-开始全自动挑战": {
+    "enabled": false,
+    "next": [
+      "[JumpBack]自动御魂-锁定阵容",
+      "[JumpBack]自动御魂-开启加成",
+      "自动御魂-识别次数",
+      "[JumpBack]自动御魂-开始挑战"
+    ],
+    "post_delay": 1000,
+    "recognition": "DirectHit"
+  },
+  "自动御魂-开始关闭加成": {
+    "next": [
+      "自动御魂-关闭加成",
+      "[JumpBack]自动御魂12",
+      "[JumpBack]自动御魂13"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "DirectHit"
+  },
+  "自动御魂-开始挂樱饼挑战": {
+    "enabled": false,
+    "next": [
+      "[JumpBack]自动御魂-锁定阵容",
+      "[JumpBack]自动御魂-开启加成",
+      "自动御魂-设置次数",
+      "[JumpBack]自动御魂-识别小纸人",
+      "[JumpBack]自动御魂-识别小纸人-花车"
+    ],
+    "recognition": "DirectHit"
+  },
+  "自动御魂-开始挑战": {
+    "action": "Click",
+    "expected": "挑战",
+    "next": [
+      "自动御魂-全自动挑战-返回御魂界面",
+      "[JumpBack]自动御魂11",
+      "[JumpBack]自动御魂-全自动挑战-点击屏幕继续",
+      "[JumpBack]自动御魂-全自动挑战-点击准备",
+      "[JumpBack]自动御魂-出现本次通关时间界面"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      1079,
+      575,
+      149,
+      117
+    ],
+    "timeout": 200000
   },
   "自动御魂-开始自动挑战": {
     "action": "Click",
@@ -165,7 +267,7 @@
   },
   "自动御魂-识别小纸人": {
     "action": "Click",
-    "recognition": "FeatureMatch",
+    "recognition": "TemplateMatch",
     "roi": [
       794,
       533,
@@ -199,6 +301,34 @@
       "自动御魂/自动御魂2_4.png",
       "自动御魂/自动御魂2_5.png",
       "自动御魂/自动御魂2_6.png"
+    ]
+  },
+  "自动御魂-识别次数": {
+    "custom_recognition": "TaskCounterRecognition",
+    "custom_recognition_param": {
+      "target_count": 10
+    },
+    "focus": {
+      "Node.Recognition.Failed": "111111111"
+    },
+    "inverse": true,
+    "next": [
+      "自动御魂-开始关闭加成"
+    ],
+    "recognition": "Custom"
+  },
+  "自动御魂-锁定阵容": {
+    "action": "Click",
+    "max_hit": 1,
+    "recognition": "TemplateMatch",
+    "roi": [
+      531,
+      543,
+      93,
+      72
+    ],
+    "template": [
+      "自动御魂/自动御魂18.png"
     ]
   },
   "自动御魂1": {
@@ -342,21 +472,6 @@
       40
     ]
   },
-  "自动御魂18": {
-    "action": "Click",
-    "next": [
-      "自动御魂-设置次数",
-      "[JumpBack]自动御魂-识别小纸人",
-      "[JumpBack]自动御魂-识别小纸人-花车"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "TemplateMatch",
-    "template": [
-      "自动御魂/自动御魂18.png"
-    ]
-  },
   "自动御魂19": {
     "action": "Click",
     "expected": "准备",
@@ -394,7 +509,6 @@
     "action": "Click",
     "expected": "本次消耗",
     "next": [
-      "[JumpBack]自动御魂-开启加成",
       "自动御魂5",
       "自动御魂-开始自动挑战"
     ],
@@ -416,12 +530,7 @@
     "action": "Click",
     "expected": "本次消耗",
     "next": [
-      "自动御魂-关闭加成",
-      "[JumpBack]自动御魂12",
-      "[JumpBack]自动御魂13"
-    ],
-    "on_error": [
-      "返回庭院"
+      "自动御魂-开始关闭加成"
     ],
     "post_delay": 2000,
     "recognition": "OCR",
@@ -508,7 +617,7 @@
     "expected": "获得的经验|掉落|八岐大蛇|战斗胜利|金币|御魂",
     "next": [
       "自动御魂-确保关闭加成",
-      "[JumpBack]寮3015_copy1"
+      "[JumpBack]自动御魂-关闭加成界面"
     ],
     "recognition": "OCR",
     "roi": [
@@ -646,10 +755,8 @@
   "自动御魂_返回副本界面": {
     "expected": "御魂",
     "next": [
-      "自动御魂18",
-      "自动御魂-设置次数",
-      "[JumpBack]自动御魂-识别小纸人",
-      "[JumpBack]自动御魂-识别小纸人-花车"
+      "自动御魂-开始全自动挑战",
+      "自动御魂-开始挂樱饼挑战"
     ],
     "post_delay": 2000,
     "recognition": "OCR",
