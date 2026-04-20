@@ -363,10 +363,6 @@ func (a *AutoFoster) getSortedRewards(allRewards []RewardInfo, prioritizedType s
 
 // findAndSelectBestOnTab 在当前标签页查找并选择第一个匹配最佳奖励的目标
 func (a *AutoFoster) findAndSelectBestOnTab(ctx *maa.Context, bestReward RewardInfo) bool {
-	controller := ctx.GetTasker().GetController()
-	if controller == nil {
-		return false
-	}
 
 	pageCount := 0
 
@@ -377,7 +373,11 @@ func (a *AutoFoster) findAndSelectBestOnTab(ctx *maa.Context, bestReward RewardI
 		if !a.isRunning() {
 			return false
 		}
-
+		controller := ctx.GetTasker().GetController()
+		if controller == nil {
+			return false
+		}
+		// 添加短暂等待，确保界面稳定
 		controller.PostScreencap().Wait()
 		img, err := controller.CacheImage()
 		if err != nil {
