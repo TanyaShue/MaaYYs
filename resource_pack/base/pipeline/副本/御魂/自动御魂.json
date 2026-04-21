@@ -308,9 +308,6 @@
     "custom_recognition_param": {
       "target_count": 10
     },
-    "focus": {
-      "Node.Recognition.Failed": "111111111"
-    },
     "inverse": true,
     "next": [
       "自动御魂-开始关闭加成"

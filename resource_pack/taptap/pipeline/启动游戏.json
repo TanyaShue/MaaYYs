@@ -1,0 +1,10 @@
+{
+    "关闭阴阳师": {
+        "package": "com.netease.onmyoji",
+        "recognition": "DirectHit"
+    },
+    "启动游戏": {
+        "package": "com.netease.onmyoji/com.netease.onmyoji.tag0",
+        "recognition": "DirectHit"
+    }
+}

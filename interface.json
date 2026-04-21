@@ -35,6 +35,14 @@
       ]
     },
     {
+      "name": "官服3(taptap直接下载的选这个)",
+      "label": "官服3",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/taptap"
+      ]
+    },
+    {
       "name": "bilibili服",
       "label": "B站服",
       "path": [
