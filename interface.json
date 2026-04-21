@@ -28,15 +28,15 @@
       ]
     },
     {
-      "name": "官服2(mumu和雷电下载的不要选这个,选第二个)",
-      "label": "官服2",
+      "name": "官服2",
+      "label": "官服2(mumu和雷电下载的不要选这个,选第二个)",
       "path": [
         "./resource_pack/base"
       ]
     },
     {
-      "name": "官服3(taptap直接下载的选这个)",
-      "label": "官服3",
+      "name": "官服3",
+      "label": "官服3(taptap直接下载的选这个)",
       "path": [
         "./resource_pack/base",
         "./resource_pack/taptap"
