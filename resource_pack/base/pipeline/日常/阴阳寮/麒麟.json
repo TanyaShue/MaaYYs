@@ -84,6 +84,7 @@
   "麒麟-识别是否战斗结束": {
     "action": "Click",
     "expected": "失败|成功|胜利",
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       659,
@@ -154,6 +155,7 @@
   "麒麟13": {
     "action": "Click",
     "expected": "准备",
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       1108,
@@ -165,6 +167,7 @@
   "麒麟14": {
     "action": "Click",
     "expected": "点击屏幕继续",
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       347,
@@ -285,6 +288,7 @@
   "麒麟9": {
     "action": "Click",
     "expected": "本次伤害",
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       302,
@@ -293,10 +297,10 @@
       90
     ],
     "target": [
-      322,
+      523,
       623,
-      481,
-      96
+      304,
+      97
     ]
   }
 }
