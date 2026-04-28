@@ -1,735 +1,735 @@
 {
-    "N-1770039777489": {
-        "focus": {
-            "Node.Recognition.Starting": "日常奖励结束"
-        },
-        "recognition": "DirectHit"
+  "N-1770039777489": {
+    "focus": {
+      "Node.Recognition.Starting": "日常奖励结束"
     },
-    "日常": {
-        "action": "Click",
-        "expected": "召唤",
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            309,
-            103,
-            832,
-            328
-        ]
+    "recognition": "DirectHit"
+  },
+  "日常": {
+    "action": "Click",
+    "expected": "召唤",
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      309,
+      103,
+      832,
+      328
+    ]
+  },
+  "日常-事务-确保返回事务界面": {
+    "expected": "庭院事务",
+    "focus": {
+      "Node.Recognition.Succeeded": "庭院事务执行完毕,返回庭院"
     },
-    "日常-事务-确保返回事务界面": {
-        "expected": "庭院事务",
-        "focus": {
-            "Node.Recognition.Succeeded": "庭院事务执行完毕,返回庭院"
-        },
-        "next": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            246,
-            30,
-            218,
-            89
-        ]
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      246,
+      30,
+      218,
+      89
+    ]
+  },
+  "日常-事务-领取成功": {
+    "action": "Click",
+    "expected": "领取成功",
+    "post_delay": 2000,
+    "pre_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      287,
+      23,
+      220,
+      72
+    ],
+    "target": [
+      1196,
+      415,
+      60,
+      77
+    ]
+  },
+  "日常-关闭签到页面": {
+    "expected": "第|签",
+    "next": [
+      "日常-关闭签到页面-确认关闭-模板匹配",
+      "日常-关闭签到页面-确认关闭-特征匹配"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      368,
+      57,
+      558,
+      119
+    ],
+    "timeout": 10000
+  },
+  "日常-关闭签到页面-确认关闭-模板匹配": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      805,
+      20,
+      330,
+      179
+    ],
+    "template": [
+      "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
+      "日常/日常-关闭签到页面-确认关闭-模板匹配_2.png"
+    ]
+  },
+  "日常-关闭签到页面-确认关闭-特征匹配": {
+    "action": "Click",
+    "recognition": "FeatureMatch",
+    "roi": [
+      817,
+      29,
+      321,
+      164
+    ],
+    "template": [
+      "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
+      "日常/日常-关闭签到页面-确认关闭-模板匹配_2.png"
+    ]
+  },
+  "日常-开始庭院事务": {
+    "focus": {
+      "Node.Recognition.Starting": "开始执行日常庭院事务"
     },
-    "日常-事务-领取成功": {
-        "action": "Click",
-        "expected": "领取成功",
-        "post_delay": 2000,
-        "pre_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            287,
-            23,
-            220,
-            72
-        ],
-        "target": [
-            1196,
-            415,
-            60,
-            77
-        ]
+    "max_hit": 1,
+    "next": [
+      "日常-确保位于事务界面",
+      "[JumpBack]日常-点击日常事务-特征匹配",
+      "[JumpBack]日常-点击日常事务-模板匹配"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "DirectHit"
+  },
+  "日常-开始庭院事务-废弃": {
+    "next": [
+      "日常-确保位于事务界面",
+      "[JumpBack]日常-点击庭院事务-模板匹配",
+      "[JumpBack]日常-点击庭院事务-特征匹配",
+      "[JumpBack]日常-点击切换-模板匹配",
+      "[JumpBack]日常-点击切换-特征匹配"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 60000
+  },
+  "日常-开始执行日常任务": {
+    "next": [
+      "日常_任务列表"
+    ],
+    "on_error": [
+      "[JumpBack]确保位于庭院"
+    ],
+    "recognition": "DirectHit"
+  },
+  "日常-活动卡片": {
+    "action": "Click",
+    "expected": "跳过",
+    "next": [
+      "日常-关闭签到页面-确认关闭-模板匹配",
+      "日常-关闭签到页面-确认关闭-特征匹配"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1165,
+      36,
+      65,
+      30
+    ]
+  },
+  "日常-满结界经验领取": {
+    "expected": "您在|结界中放置的式神|已满|是否领取",
+    "next": [
+      "日常-满结界经验领取-确认领取"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      442,
+      262,
+      397,
+      110
+    ],
+    "timeout": 10000
+  },
+  "日常-满结界经验领取-确认领取": {
+    "action": "Click",
+    "expected": "确认",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      680,
+      396,
+      127,
+      58
+    ]
+  },
+  "日常-点击一键完成": {
+    "action": "Click",
+    "expected": "一键|完成",
+    "next": [
+      "[JumpBack]日常-关闭签到页面",
+      "[JumpBack]日常-满结界经验领取",
+      "[JumpBack]日常-活动卡片",
+      "[JumpBack]日常-事务-领取成功",
+      "[JumpBack]日常-领取每日6星御魂",
+      "[JumpBack]日常-获取6星御魂",
+      "日常-事务-确保返回事务界面"
+    ],
+    "post_delay": 3000,
+    "pre_delay": 3000,
+    "recognition": "OCR",
+    "roi": [
+      1098,
+      585,
+      124,
+      107
+    ]
+  },
+  "日常-点击切换-模板匹配": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1163,
+      121,
+      93,
+      459
+    ],
+    "template": [
+      "日常/日常-点击切换-模板匹配_1.png",
+      "日常/日常-点击切换-模板匹配_2.png",
+      "日常/日常-点击切换_1.png"
+    ]
+  },
+  "日常-点击切换-特征匹配": {
+    "action": "Click",
+    "recognition": "FeatureMatch",
+    "roi": [
+      1163,
+      121,
+      93,
+      459
+    ],
+    "template": [
+      "日常/日常-点击切换-模板匹配_1.png",
+      "日常/日常-点击切换-模板匹配_2.png",
+      "日常/日常-点击切换_1.png"
+    ]
+  },
+  "日常-点击庭院事务-模板匹配": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1163,
+      124,
+      93,
+      394
+    ],
+    "template": [
+      "日常/日常-点击庭院事务_1.png"
+    ]
+  },
+  "日常-点击庭院事务-特征匹配": {
+    "action": "Click",
+    "recognition": "FeatureMatch",
+    "roi": [
+      1163,
+      124,
+      93,
+      394
+    ],
+    "template": [
+      "日常/日常-点击庭院事务_1.png"
+    ]
+  },
+  "日常-点击日常事务-模板匹配": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      3,
+      254,
+      1277,
+      343
+    ],
+    "template": [
+      "日常/N-1769738026013_1.png"
+    ]
+  },
+  "日常-点击日常事务-特征匹配": {
+    "action": "Click",
+    "recognition": "FeatureMatch",
+    "roi": [
+      3,
+      254,
+      1277,
+      343
+    ],
+    "template": [
+      "日常/N-1769738026013_1.png"
+    ]
+  },
+  "日常-点击日常标签": {
+    "action": "Click",
+    "expected": "日常",
+    "recognition": "OCR",
+    "roi": [
+      1129,
+      124,
+      101,
+      67
+    ]
+  },
+  "日常-确保位于事务界面": {
+    "expected": "庭院|事务",
+    "next": [
+      "日常-点击一键完成",
+      "[JumpBack]日常-点击日常标签"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      246,
+      30,
+      218,
+      89
+    ]
+  },
+  "日常-获取6星御魂": {
+    "action": "Click",
+    "expected": "选择",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      184,
+      564,
+      910,
+      49
+    ]
+  },
+  "日常-领取每日6星御魂": {
+    "action": "Click",
+    "expected": "选择",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      205,
+      431,
+      877,
+      65
+    ]
+  },
+  "日常1": {
+    "action": "Click",
+    "expected": "跳过",
+    "recognition": "OCR",
+    "roi": [
+      998,
+      18,
+      281,
+      144
+    ]
+  },
+  "日常2": {
+    "action": "Custom",
+    "custom_action": "LoopAction",
+    "custom_action_param": {
+      "action_list": [
+        "日常_每日免费一抽_向左滑一下"
+      ],
+      "loop_times": 3
     },
-    "日常-关闭签到页面": {
-        "expected": "第|签",
-        "next": [
-            "日常-关闭签到页面-确认关闭-模板匹配",
-            "日常-关闭签到页面-确认关闭-特征匹配"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            382,
-            78,
-            434,
-            112
-        ],
-        "timeout": 10000
+    "next": [
+      "日常8",
+      "[JumpBack]日常5",
+      "[JumpBack]日常_每日免费一抽_开始_点击灯笼",
+      "[JumpBack]日常"
+    ],
+    "recognition": "DirectHit"
+  },
+  "日常3": {
+    "expected": "好友",
+    "recognition": "OCR",
+    "roi": [
+      593,
+      50,
+      88,
+      46
+    ]
+  },
+  "日常5": {
+    "action": "Click",
+    "expected": 0,
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "探索",
+      "神龛"
+    ],
+    "model": "Courtyard.onnx",
+    "recognition": "NeuralNetworkDetect",
+    "threshold": 0.7
+  },
+  "日常6": {
+    "action": "Click",
+    "expected": "好友",
+    "recognition": "OCR",
+    "roi": [
+      893,
+      656,
+      49,
+      32
+    ]
+  },
+  "日常7": {
+    "recognition": "DirectHit"
+  },
+  "日常8": {
+    "expected": "召唤",
+    "next": [
+      "日常_每日免费一抽_点击免费一抽"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      83,
+      0,
+      162,
+      85
+    ]
+  },
+  "日常_任务列表": {
+    "focus": {
+      "Node.Recognition.Starting": "开始执行日常任务列表"
     },
-    "日常-关闭签到页面-确认关闭-模板匹配": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            821,
-            77,
-            98,
-            68
-        ],
-        "template": [
-            "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
-            "日常/日常-关闭签到页面-确认关闭-模板匹配_2.png"
-        ]
+    "next": [
+      "[JumpBack]日常-开始庭院事务",
+      "[JumpBack]领取奖励_商店每日奖励",
+      "[JumpBack]领取奖励_花合战奖励",
+      "[JumpBack]领取奖励_邮件",
+      "返回庭院"
+    ],
+    "recognition": "DirectHit"
+  },
+  "日常_关闭好友界面": {
+    "action": "Click",
+    "next": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      1085,
+      43,
+      184,
+      134
+    ],
+    "template": [
+      "通用图标/关闭.png",
+      "通用图标/关闭_2.png"
+    ]
+  },
+  "日常_好友_点击一键收取": {
+    "action": "Click",
+    "next": [
+      "日常_点击一下屏幕底部"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      8,
+      555,
+      307,
+      150
+    ],
+    "template": "庭院/好友_一键收取.png"
+  },
+  "日常_好友_点击友情点": {
+    "action": "Click",
+    "expected": "好友",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      1182,
+      150,
+      83,
+      118
+    ],
+    "target": [
+      81,
+      630,
+      88,
+      68
+    ]
+  },
+  "日常_每免费一抽_完成抽卡_点击确定": {
+    "action": "Click",
+    "expected": "确定",
+    "next": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      383,
+      589,
+      225,
+      99
+    ]
+  },
+  "日常_每免费一抽_画符": {
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "delay": 200,
+      "end_roi": [
+        813,
+        229,
+        46,
+        286
+      ],
+      "start_roi": [
+        407,
+        160,
+        37,
+        295
+      ]
     },
-    "日常-关闭签到页面-确认关闭-特征匹配": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            821,
-            77,
-            98,
-            68
-        ],
-        "template": [
-            "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
-            "日常/日常-关闭签到页面-确认关闭-模板匹配_2.png"
-        ]
+    "next": [
+      "日常_每免费一抽_完成抽卡_点击确定"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 5000,
+    "recognition": "DirectHit",
+    "timeout": 10000
+  },
+  "日常_每日免费一抽": {
+    "next": [
+      "日常2"
+    ],
+    "recognition": "DirectHit"
+  },
+  "日常_每日免费一抽_向左滑一下": {
+    "action": "Custom",
+    "custom_action": "RandomSwipe",
+    "custom_action_param": {
+      "delay": 200,
+      "end_roi": [
+        382,
+        254,
+        102,
+        310
+      ],
+      "start_roi": [
+        797,
+        300,
+        99,
+        309
+      ]
     },
-    "日常-开始庭院事务": {
-        "focus": {
-            "Node.Recognition.Starting": "开始执行日常庭院事务"
-        },
-        "max_hit": 1,
-        "next": [
-            "日常-确保位于事务界面",
-            "[JumpBack]日常-点击日常事务-特征匹配",
-            "[JumpBack]日常-点击日常事务-模板匹配"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "DirectHit"
-    },
-    "日常-开始庭院事务-废弃": {
-        "next": [
-            "日常-确保位于事务界面",
-            "[JumpBack]日常-点击庭院事务-模板匹配",
-            "[JumpBack]日常-点击庭院事务-特征匹配",
-            "[JumpBack]日常-点击切换-模板匹配",
-            "[JumpBack]日常-点击切换-特征匹配"
-        ],
-        "recognition": "DirectHit",
-        "timeout": 60000
-    },
-    "日常-开始执行日常任务": {
-        "next": [
-            "日常_任务列表"
-        ],
-        "on_error": [
-            "[JumpBack]确保位于庭院"
-        ],
-        "recognition": "DirectHit"
-    },
-    "日常-活动卡片": {
-        "action": "Click",
-        "expected": "跳过",
-        "next": [
-            "日常-关闭签到页面-确认关闭-模板匹配",
-            "日常-关闭签到页面-确认关闭-特征匹配"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1165,
-            36,
-            65,
-            30
-        ]
-    },
-    "日常-满结界经验领取": {
-        "expected": "您在|结界中放置的式神|已满|是否领取",
-        "next": [
-            "日常-满结界经验领取-确认领取"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            442,
-            262,
-            397,
-            110
-        ],
-        "timeout": 10000
-    },
-    "日常-满结界经验领取-确认领取": {
-        "action": "Click",
-        "expected": "确认",
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            680,
-            396,
-            127,
-            58
-        ]
-    },
-    "日常-点击一键完成": {
-        "action": "Click",
-        "expected": "一键|完成",
-        "next": [
-            "[JumpBack]日常-关闭签到页面",
-            "[JumpBack]日常-满结界经验领取",
-            "[JumpBack]日常-活动卡片",
-            "[JumpBack]日常-事务-领取成功",
-            "[JumpBack]日常-领取每日6星御魂",
-            "[JumpBack]日常-获取6星御魂",
-            "日常-事务-确保返回事务界面"
-        ],
-        "post_delay": 3000,
-        "pre_delay": 3000,
-        "recognition": "OCR",
-        "roi": [
-            1098,
-            585,
-            124,
-            107
-        ]
-    },
-    "日常-点击切换-模板匹配": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            1163,
-            121,
-            93,
-            459
-        ],
-        "template": [
-            "日常/日常-点击切换-模板匹配_1.png",
-            "日常/日常-点击切换-模板匹配_2.png",
-            "日常/日常-点击切换_1.png"
-        ]
-    },
-    "日常-点击切换-特征匹配": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            1163,
-            121,
-            93,
-            459
-        ],
-        "template": [
-            "日常/日常-点击切换-模板匹配_1.png",
-            "日常/日常-点击切换-模板匹配_2.png",
-            "日常/日常-点击切换_1.png"
-        ]
-    },
-    "日常-点击庭院事务-模板匹配": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            1163,
-            124,
-            93,
-            394
-        ],
-        "template": [
-            "日常/日常-点击庭院事务_1.png"
-        ]
-    },
-    "日常-点击庭院事务-特征匹配": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            1163,
-            124,
-            93,
-            394
-        ],
-        "template": [
-            "日常/日常-点击庭院事务_1.png"
-        ]
-    },
-    "日常-点击日常事务-模板匹配": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            3,
-            254,
-            1277,
-            343
-        ],
-        "template": [
-            "日常/N-1769738026013_1.png"
-        ]
-    },
-    "日常-点击日常事务-特征匹配": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            3,
-            254,
-            1277,
-            343
-        ],
-        "template": [
-            "日常/N-1769738026013_1.png"
-        ]
-    },
-    "日常-点击日常标签": {
-        "action": "Click",
-        "expected": "日常",
-        "recognition": "OCR",
-        "roi": [
-            1129,
-            124,
-            101,
-            67
-        ]
-    },
-    "日常-确保位于事务界面": {
-        "expected": "庭院|事务",
-        "next": [
-            "日常-点击一键完成",
-            "[JumpBack]日常-点击日常标签"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            246,
-            30,
-            218,
-            89
-        ]
-    },
-    "日常-获取6星御魂": {
-        "action": "Click",
-        "expected": "选择",
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            184,
-            564,
-            910,
-            49
-        ]
-    },
-    "日常-领取每日6星御魂": {
-        "action": "Click",
-        "expected": "选择",
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            205,
-            431,
-            877,
-            65
-        ]
-    },
-    "日常1": {
-        "action": "Click",
-        "expected": "跳过",
-        "recognition": "OCR",
-        "roi": [
-            998,
-            18,
-            281,
-            144
-        ]
-    },
-    "日常2": {
-        "action": "Custom",
-        "custom_action": "LoopAction",
-        "custom_action_param": {
-            "action_list": [
-                "日常_每日免费一抽_向左滑一下"
-            ],
-            "loop_times": 3
-        },
-        "next": [
-            "日常8",
-            "[JumpBack]日常5",
-            "[JumpBack]日常_每日免费一抽_开始_点击灯笼",
-            "[JumpBack]日常"
-        ],
-        "recognition": "DirectHit"
-    },
-    "日常3": {
-        "expected": "好友",
-        "recognition": "OCR",
-        "roi": [
-            593,
-            50,
-            88,
-            46
-        ]
-    },
-    "日常5": {
-        "action": "Click",
-        "expected": 0,
-        "labels": [
-            "召唤",
-            "宠物小屋",
-            "探索",
-            "神龛"
-        ],
-        "model": "Courtyard.onnx",
-        "recognition": "NeuralNetworkDetect",
-        "threshold": 0.7
-    },
-    "日常6": {
-        "action": "Click",
-        "expected": "好友",
-        "recognition": "OCR",
-        "roi": [
-            893,
-            656,
-            49,
-            32
-        ]
-    },
-    "日常7": {
-        "recognition": "DirectHit"
-    },
-    "日常8": {
-        "expected": "召唤",
-        "next": [
-            "日常_每日免费一抽_点击免费一抽"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            83,
-            0,
-            162,
-            85
-        ]
-    },
-    "日常_任务列表": {
-        "focus": {
-            "Node.Recognition.Starting": "开始执行日常任务列表"
-        },
-        "next": [
-            "[JumpBack]日常-开始庭院事务",
-            "[JumpBack]领取奖励_商店每日奖励",
-            "[JumpBack]领取奖励_花合战奖励",
-            "[JumpBack]领取奖励_邮件",
-            "返回庭院"
-        ],
-        "recognition": "DirectHit"
-    },
-    "日常_关闭好友界面": {
-        "action": "Click",
-        "next": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            1085,
-            43,
-            184,
-            134
-        ],
-        "template": [
-            "通用图标/关闭.png",
-            "通用图标/关闭_2.png"
-        ]
-    },
-    "日常_好友_点击一键收取": {
-        "action": "Click",
-        "next": [
-            "日常_点击一下屏幕底部"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            8,
-            555,
-            307,
-            150
-        ],
-        "template": "庭院/好友_一键收取.png"
-    },
-    "日常_好友_点击友情点": {
-        "action": "Click",
-        "expected": "好友",
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            1182,
-            150,
-            83,
-            118
-        ],
-        "target": [
-            81,
-            630,
-            88,
-            68
-        ]
-    },
-    "日常_每免费一抽_完成抽卡_点击确定": {
-        "action": "Click",
-        "expected": "确定",
-        "next": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            383,
-            589,
-            225,
-            99
-        ]
-    },
-    "日常_每免费一抽_画符": {
-        "action": "Custom",
-        "custom_action": "RandomSwipe",
-        "custom_action_param": {
-            "delay": 200,
-            "end_roi": [
-                813,
-                229,
-                46,
-                286
-            ],
-            "start_roi": [
-                407,
-                160,
-                37,
-                295
-            ]
-        },
-        "next": [
-            "日常_每免费一抽_完成抽卡_点击确定"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 5000,
-        "recognition": "DirectHit",
-        "timeout": 10000
-    },
-    "日常_每日免费一抽": {
-        "next": [
-            "日常2"
-        ],
-        "recognition": "DirectHit"
-    },
-    "日常_每日免费一抽_向左滑一下": {
-        "action": "Custom",
-        "custom_action": "RandomSwipe",
-        "custom_action_param": {
-            "delay": 200,
-            "end_roi": [
-                382,
-                254,
-                102,
-                310
-            ],
-            "start_roi": [
-                797,
-                300,
-                99,
-                309
-            ]
-        },
-        "post_delay": 500,
-        "recognition": "DirectHit"
-    },
-    "日常_每日免费一抽_开始_点击灯笼": {
-        "action": "Click",
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            309,
-            103,
-            832,
-            328
-        ],
-        "template": [
-            "庭院/庭院_召唤灯笼_1__1077_171_53_72__1027_121_153_172.png",
-            "庭院/庭院_召唤灯笼_2__1072_170_60_80__1022_120_160_180.png",
-            "庭院/庭院_召唤灯笼_3__1070_167_65_76__1020_117_165_176.png",
-            "日常/日常_每日免费一抽_开始_点击灯笼.png",
-            "日常/日常_每日免费一抽_开始_点击灯笼_1.png",
-            "日常/日常_每日免费一抽_开始_点击灯笼_2.png",
-            "日常/日常_每日免费一抽_开始_点击灯笼_3.png"
-        ]
-    },
-    "日常_每日免费一抽_点击免费一抽": {
-        "action": "Click",
-        "expected": "免费",
-        "next": [
-            "日常_每日免费一抽_点击单抽",
-            "日常_每日免费一抽_点击单抽_小樱",
-            "[JumpBack]日常1"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            441,
-            671,
-            536,
-            48
-        ],
-        "target": [
-            618,
-            682,
-            100,
-            38
-        ],
-        "target_offset": [
-            3,
-            -85,
-            -7,
-            15
-        ],
-        "timeout": 10000
-    },
-    "日常_每日免费一抽_点击单抽": {
-        "action": "Click",
-        "expected": "(免费|单抽)",
-        "next": [
-            "日常_每免费一抽_画符"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            317,
-            546,
-            299,
-            173
-        ],
-        "target": [
-            399,
-            589,
-            59,
-            92
-        ],
-        "timeout": 5000
-    },
-    "日常_每日免费一抽_点击单抽_小樱": {
-        "action": "Click",
-        "next": [
-            "日常_每免费一抽_画符"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "TemplateMatch",
-        "roi": [
-            347,
-            526,
-            217,
-            171
-        ],
-        "template": [
-            "日常/日常_每日免费一抽_点击单抽_小樱.png"
-        ]
-    },
-    "日常_点击一下屏幕底部": {
-        "action": "Click",
-        "next": [
-            "日常_关闭好友界面"
-        ],
-        "post_delay": 1000,
-        "recognition": "DirectHit",
-        "target": [
-            493,
-            560,
-            392,
-            114
-        ]
-    },
-    "日常_点击好友": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "template": "庭院/庭院_好友.png"
-    },
-    "日常_点击好友选项卡": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "template": "庭院/庭院_好友选项卡.png",
-        "timeout": 3000
-    },
-    "日常_送友情点": {
-        "next": [
-            "送友情点-确保位于好友选项卡中",
-            "[JumpBack]日常_点击好友选项卡",
-            "[JumpBack]日常3",
-            "[JumpBack]日常_点击好友",
-            "[JumpBack]日常6",
-            "[JumpBack]打开底部菜单"
-        ],
-        "recognition": "DirectHit"
-    },
-    "识别是否位于友情点界面": {
-        "next": [
-            "日常_好友_点击一键收取"
-        ],
-        "on_error": [
-            "日常_关闭好友界面",
-            "返回庭院"
-        ],
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            410,
-            196,
-            93,
-            381
-        ],
-        "template": [
-            "庭院/好友_送友情点_1.png",
-            "庭院/好友_送友情点_2.png",
-            "日常/识别是否位于友情点界面_1.png"
-        ],
-        "timeout": 1000
-    },
-    "送友情点-确保位于好友选项卡中": {
-        "expected": "好友|最近",
-        "next": [
-            "识别是否位于友情点界面",
-            "[JumpBack]日常_好友_点击友情点"
-        ],
-        "on_error": [
-            "日常_关闭好友界面",
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            148,
-            90,
-            189,
-            53
-        ]
-    }
+    "post_delay": 500,
+    "recognition": "DirectHit"
+  },
+  "日常_每日免费一抽_开始_点击灯笼": {
+    "action": "Click",
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      309,
+      103,
+      832,
+      328
+    ],
+    "template": [
+      "庭院/庭院_召唤灯笼_1__1077_171_53_72__1027_121_153_172.png",
+      "庭院/庭院_召唤灯笼_2__1072_170_60_80__1022_120_160_180.png",
+      "庭院/庭院_召唤灯笼_3__1070_167_65_76__1020_117_165_176.png",
+      "日常/日常_每日免费一抽_开始_点击灯笼.png",
+      "日常/日常_每日免费一抽_开始_点击灯笼_1.png",
+      "日常/日常_每日免费一抽_开始_点击灯笼_2.png",
+      "日常/日常_每日免费一抽_开始_点击灯笼_3.png"
+    ]
+  },
+  "日常_每日免费一抽_点击免费一抽": {
+    "action": "Click",
+    "expected": "免费",
+    "next": [
+      "日常_每日免费一抽_点击单抽",
+      "日常_每日免费一抽_点击单抽_小樱",
+      "[JumpBack]日常1"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      441,
+      671,
+      536,
+      48
+    ],
+    "target": [
+      618,
+      682,
+      100,
+      38
+    ],
+    "target_offset": [
+      3,
+      -85,
+      -7,
+      15
+    ],
+    "timeout": 10000
+  },
+  "日常_每日免费一抽_点击单抽": {
+    "action": "Click",
+    "expected": "(免费|单抽)",
+    "next": [
+      "日常_每免费一抽_画符"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      317,
+      546,
+      299,
+      173
+    ],
+    "target": [
+      399,
+      589,
+      59,
+      92
+    ],
+    "timeout": 5000
+  },
+  "日常_每日免费一抽_点击单抽_小樱": {
+    "action": "Click",
+    "next": [
+      "日常_每免费一抽_画符"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      347,
+      526,
+      217,
+      171
+    ],
+    "template": [
+      "日常/日常_每日免费一抽_点击单抽_小樱.png"
+    ]
+  },
+  "日常_点击一下屏幕底部": {
+    "action": "Click",
+    "next": [
+      "日常_关闭好友界面"
+    ],
+    "post_delay": 1000,
+    "recognition": "DirectHit",
+    "target": [
+      493,
+      560,
+      392,
+      114
+    ]
+  },
+  "日常_点击好友": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "template": "庭院/庭院_好友.png"
+  },
+  "日常_点击好友选项卡": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "template": "庭院/庭院_好友选项卡.png",
+    "timeout": 3000
+  },
+  "日常_送友情点": {
+    "next": [
+      "送友情点-确保位于好友选项卡中",
+      "[JumpBack]日常_点击好友选项卡",
+      "[JumpBack]日常3",
+      "[JumpBack]日常_点击好友",
+      "[JumpBack]日常6",
+      "[JumpBack]打开底部菜单"
+    ],
+    "recognition": "DirectHit"
+  },
+  "识别是否位于友情点界面": {
+    "next": [
+      "日常_好友_点击一键收取"
+    ],
+    "on_error": [
+      "日常_关闭好友界面",
+      "返回庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      410,
+      196,
+      93,
+      381
+    ],
+    "template": [
+      "庭院/好友_送友情点_1.png",
+      "庭院/好友_送友情点_2.png",
+      "日常/识别是否位于友情点界面_1.png"
+    ],
+    "timeout": 1000
+  },
+  "送友情点-确保位于好友选项卡中": {
+    "expected": "好友|最近",
+    "next": [
+      "识别是否位于友情点界面",
+      "[JumpBack]日常_好友_点击友情点"
+    ],
+    "on_error": [
+      "日常_关闭好友界面",
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      148,
+      90,
+      189,
+      53
+    ]
+  }
 }
