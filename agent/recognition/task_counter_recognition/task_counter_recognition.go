@@ -50,16 +50,10 @@ func (r *TaskCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecognitio
 	}
 	r.mu.Unlock()
 
-	// 获取当前计数并加一
-	r.mu.Lock()
-	currentCount := r.taskCounts[taskID] + 1
-	r.taskCounts[taskID] = currentCount
-	r.mu.Unlock()
-
-	// 达到 5 的倍数时打印提示
-	if currentCount%5 == 0 {
-		fmt.Printf("已完成 %d 次\n",  currentCount)
-	}
+	// 获取当前计数
+	r.mu.RLock()
+	currentCount := r.taskCounts[taskID]
+	r.mu.RUnlock()
 
 	// 判断是否达到目标
 	if currentCount >= params.TargetCount {
@@ -69,6 +63,16 @@ func (r *TaskCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecognitio
 		delete(r.taskCounts, taskID)
 		r.mu.Unlock()
 		return nil, false
+	}
+
+	// 未达到目标，计数加一
+	r.mu.Lock()
+	r.taskCounts[taskID] = currentCount + 1
+	r.mu.Unlock()
+
+	// 达到 5 的倍数时打印提示
+	if (currentCount + 1)%5 == 0 {
+		fmt.Printf("已完成 %d 次\n", currentCount+1)
 	}
 
 	// 返回一个空的结果，表示识别成功但没有具体的边界框
