@@ -1,0 +1,187 @@
+{
+  "导航-六道之门": {
+    "recognition": "DirectHit"
+  },
+  "导航-地域鬼王": {
+    "recognition": "DirectHit"
+  },
+  "导航-契灵之境": {
+    "recognition": "DirectHit"
+  },
+  "导航-妖气探索": {
+    "recognition": "DirectHit"
+  },
+  "导航-庭院": {
+    "next": [
+      "导航-庭院-识别是否位于庭院",
+      "[JumpBack]导航-庭院-关闭当前弹窗",
+      "[JumpBack]导航-庭院-点击快捷返回庭院按钮"
+    ],
+    "on_error": [
+      "[JumpBack]重启游戏"
+    ],
+    "recognition": "DirectHit"
+  },
+  "导航-庭院-关闭当前弹窗": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      939,
+      4,
+      341,
+      241
+    ],
+    "template": [
+      "导航/导航-庭院-关闭当前弹窗_1.png",
+      "导航/导航-庭院-关闭当前弹窗_2.png"
+    ]
+  },
+  "导航-庭院-点击快捷返回庭院按钮": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      0,
+      315,
+      94
+    ],
+    "template": [
+      "导航/导航-庭院-点击快捷返回庭院按钮_1.png"
+    ]
+  },
+  "导航-庭院-识别是否位于庭院": {
+    "expected": "^(图鉴|珍旅居|纳物库|组队|阴阳寮|闲庭)",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      564,
+      1280,
+      156
+    ]
+  },
+  "导航-式神委派": {
+    "recognition": "DirectHit"
+  },
+  "导航-御灵": {
+    "recognition": "DirectHit"
+  },
+  "导航-御魂": {
+    "recognition": "DirectHit"
+  },
+  "导航-探索界面": {
+    "next": [
+      "导航-探索界面-识别是否位于探索界面",
+      "[JumpBack]导航-探索界面-识别探索灯笼",
+      "[JumpBack]导航-庭院"
+    ],
+    "recognition": "DirectHit"
+  },
+  "导航-探索界面-展开所有导航入口": {
+    "action": "Click",
+    "post_delay": 500,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      615,
+      1280,
+      105
+    ],
+    "template": [
+      "导航/导航-探索界面-展开所有导航入口_1.png"
+    ]
+  },
+  "导航-探索界面-所有导航入口已展开": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      615,
+      1280,
+      105
+    ],
+    "template": [
+      "导航/导航-探索界面-所有导航入口已展开_1.png"
+    ]
+  },
+  "导航-探索界面-识别探索灯笼": {
+    "action": "Click",
+    "expected": 2,
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "探索",
+      "神龛"
+    ],
+    "model": "Courtyard.onnx",
+    "post_delay": 5000,
+    "recognition": "NeuralNetworkDetect",
+    "threshold": 0.7
+  },
+  "导航-探索界面-识别是否位于探索界面": {
+    "expected": "觉醒材料|结界突破|御灵|式神委派|秘闻副本|地域鬼王|契灵之境|英杰试炼|六道之门|妖气探索",
+    "next": [
+      "导航-探索界面-展开所有导航入口",
+      "导航-探索界面-所有导航入口已展开",
+      "导航-探索界面-跳过"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      5,
+      614,
+      1208,
+      106
+    ]
+  },
+  "导航-探索界面-跳过": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      1,
+      601,
+      1279,
+      119
+    ],
+    "template": [
+      "导航/导航-探索界面-跳过_1.png"
+    ]
+  },
+  "导航-秘闻副本": {
+    "recognition": "DirectHit"
+  },
+  "导航-结界突破": {
+    "recognition": "DirectHit"
+  },
+  "导航-英杰试炼": {
+    "recognition": "DirectHit"
+  },
+  "导航-觉醒之塔-点击觉醒材料": {
+    "action": "Click",
+    "expected": "觉醒材料",
+    "recognition": "OCR",
+    "roi": [
+      1,
+      618,
+      1279,
+      102
+    ]
+  },
+  "导航-觉醒之塔-识别是否位于觉醒之塔": {
+    "expected": "觉醒之塔",
+    "recognition": "OCR",
+    "roi": [
+      140,
+      7,
+      162,
+      58
+    ]
+  },
+  "导航-觉醒材料": {
+    "next": [
+      "导航-觉醒之塔-识别是否位于觉醒之塔",
+      "[JumpBack]导航-觉醒之塔-点击觉醒材料",
+      "[JumpBack]导航-探索界面"
+    ],
+    "recognition": "DirectHit"
+  }
+}

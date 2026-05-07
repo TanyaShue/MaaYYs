@@ -102,9 +102,7 @@
       "[JumpBack]通用12",
       "[JumpBack]点击探索_识别探索界面"
     ],
-    "on_error": [
-      "跳过"
-    ],
+    "on_error": [],
     "recognition": "OCR",
     "roi": [
       9,
@@ -381,6 +379,20 @@
     ],
     "template": [
       "通用/通用-快捷返回庭院_1.png"
+    ]
+  },
+  "通用-误触了左边聊天框": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      611,
+      316,
+      97,
+      148
+    ],
+    "template": [
+      "通用/误触处理/打开了侧边聊天框.png"
     ]
   },
   "通用10": {
@@ -808,19 +820,5 @@
       78,
       35
     ]
-  },
-  "通用-误触了左边聊天框": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      611,
-      316,
-      97,
-      148
-    ],
-    "template": [
-      "通用/误触处理/打开了侧边聊天框.png"
-    ],
-    "action": "Click",
-    "post_delay": 1000
   }
 }
