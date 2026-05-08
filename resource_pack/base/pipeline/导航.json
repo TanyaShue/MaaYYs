@@ -153,7 +153,34 @@
     "recognition": "DirectHit"
   },
   "导航-英杰试炼": {
+    "next": [
+      "导航-英杰试炼-识别是否位于英杰试炼界面",
+      "[JumpBack]导航-英杰试炼-点击英杰试炼",
+      "[JumpBack]导航-探索界面"
+    ],
     "recognition": "DirectHit"
+  },
+  "导航-英杰试炼-点击英杰试炼": {
+    "action": "Click",
+    "expected": "英杰试炼",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      5,
+      642,
+      1275,
+      78
+    ]
+  },
+  "导航-英杰试炼-识别是否位于英杰试炼界面": {
+    "expected": "英杰试炼",
+    "recognition": "OCR",
+    "roi": [
+      3,
+      0,
+      301,
+      79
+    ]
   },
   "导航-觉醒之塔-点击觉醒材料": {
     "action": "Click",
