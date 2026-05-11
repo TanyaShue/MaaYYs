@@ -80,12 +80,7 @@
   "自动斗技-开始斗技": {
     "next": [
       "自动斗技-确保打开式神录并切换御魂",
-      "[JumpBack]自动斗技-点击式神录",
-      "[JumpBack]自动斗技-点击式神录-模板匹配",
-      "[JumpBack]打开底部菜单"
-    ],
-    "on_error": [
-      "[JumpBack]确保位于庭院"
+      "[JumpBack]导航-式神录"
     ],
     "recognition": "DirectHit"
   },
@@ -101,7 +96,7 @@
       "自动斗技-开始斗技"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "DirectHit"
   },
@@ -175,32 +170,6 @@
       480,
       217,
       240
-    ]
-  },
-  "自动斗技-点击式神录": {
-    "action": "Click",
-    "expected": "式神录",
-    "post_delay": 2000,
-    "recognition": "OCR",
-    "roi": [
-      1080,
-      649,
-      114,
-      50
-    ]
-  },
-  "自动斗技-点击式神录-模板匹配": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      1057,
-      568,
-      157,
-      148
-    ],
-    "template": [
-      "日常/时间限制/斗技/自动斗技-点击式神录-模板匹配_1.png"
     ]
   },
   "自动斗技-点击斗技": {

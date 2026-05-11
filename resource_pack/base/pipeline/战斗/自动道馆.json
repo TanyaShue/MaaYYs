@@ -1,376 +1,359 @@
 {
-    "N-1768312988212": {
-        "action": "Click",
-        "expected": "胜利",
-        "next": [
-            "返回庭院"
-        ],
-        "pre_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            609,
-            21,
-            229,
-            119
-        ],
-        "target": [
-            1168,
-            382,
-            79,
-            93
-        ],
-        "timeout": 1200000
+  "N-1768312988212": {
+    "action": "Click",
+    "expected": "胜利",
+    "next": [
+      "返回庭院"
+    ],
+    "pre_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      609,
+      21,
+      229,
+      119
+    ],
+    "target": [
+      1168,
+      382,
+      79,
+      93
+    ],
+    "timeout": 1200000
+  },
+  "N-1768313000871": {
+    "action": "Click",
+    "expected": "失败",
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      386,
+      49,
+      472,
+      190
+    ],
+    "target": [
+      1098,
+      455,
+      136,
+      93
+    ]
+  },
+  "自动道馆": {
+    "next": [
+      "自动道馆2",
+      "[JumpBack]自动道馆1",
+      "[JumpBack]自动道馆3",
+      "[JumpBack]导航-阴阳寮"
+    ],
+    "recognition": "DirectHit"
+  },
+  "自动道馆1": {
+    "action": "Click",
+    "expected": "阴阳寮",
+    "recognition": "OCR",
+    "roi": [
+      257,
+      551,
+      666,
+      146
+    ]
+  },
+  "自动道馆10": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "道馆分组预设",
+      "team_name": "道馆队伍预设"
     },
-    "N-1768313000871": {
-        "action": "Click",
-        "expected": "失败",
-        "next": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            386,
-            49,
-            472,
-            190
-        ],
-        "target": [
-            1098,
-            455,
-            136,
-            93
-        ]
-    },
-    "自动道馆": {
-        "next": [
-            "自动道馆2",
-            "[JumpBack]自动道馆1",
-            "[JumpBack]道馆突破-点击阴阳寮",
-            "[JumpBack]自动道馆3",
-            "[JumpBack]打开底部菜单"
-        ],
-        "on_error": [
-            "[JumpBack]确保位于庭院"
-        ],
-        "recognition": "DirectHit"
-    },
-    "自动道馆1": {
-        "action": "Click",
-        "expected": "阴阳寮",
-        "recognition": "OCR",
-        "roi": [
-            257,
-            551,
-            666,
-            146
-        ]
-    },
-    "自动道馆10": {
-        "action": "Custom",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "道馆分组预设",
-            "team_name": "道馆队伍预设"
-        },
-        "expected": "式神录",
-        "next": [
-            "自动道馆12",
-            "[JumpBack]自动道馆13"
-        ],
-        "on_error": "超时_切换御魂失败",
-        "recognition": "OCR",
-        "roi": [
-            1,
-            0,
-            206,
-            70
-        ]
-    },
-    "自动道馆11": {
-        "action": "Click",
-        "expected": "式神录",
-        "recognition": "OCR",
-        "roi": [
-            534,
-            572,
-            745,
-            147
-        ]
-    },
-    "自动道馆12": {
-        "expected": "道馆突破",
-        "next": [
-            "自动道馆14",
-            "自动道馆20",
-            "[JumpBack]道馆-识别是否开战",
-            "[JumpBack]自动道馆15",
-            "[JumpBack]自动道馆18"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "rate_limit": 5000,
-        "recognition": "OCR",
-        "roi": [
-            510,
-            0,
-            240,
-            73
-        ],
-        "timeout": 1200000
-    },
-    "自动道馆13": {
-        "action": "Click",
-        "post_delay": 2000,
-        "recognition": "TemplateMatch",
-        "template": [
-            "自动道馆/自动道馆13.png"
-        ]
-    },
-    "自动道馆14": {
-        "action": "Click",
-        "expected": "胜利",
-        "next": [
-            "返回庭院"
-        ],
-        "pre_delay": 2000,
-        "rate_limit": 5000,
-        "recognition": "OCR",
-        "roi": [
-            609,
-            21,
-            229,
-            119
-        ],
-        "target": [
-            18,
-            637,
-            230,
-            80
-        ],
-        "timeout": 1200000
-    },
-    "自动道馆15": {
-        "action": "Click",
-        "expected": "1/2|2/2",
-        "next": [
-            "自动道馆18"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1127,
-            611,
-            99,
-            75
-        ]
-    },
-    "自动道馆16": {
-        "action": "Click",
-        "expected": "准备",
-        "recognition": "OCR",
-        "roi": [
-            1099,
-            541,
-            134,
-            99
-        ]
-    },
-    "自动道馆17": {
-        "action": "Click",
-        "expected": "点击屏幕继续",
-        "recognition": "OCR",
-        "roi": [
-            336,
-            618,
-            510,
-            101
-        ]
-    },
-    "自动道馆18": {
-        "expected": "战报",
-        "next": [
-            "自动道馆19",
-            "[JumpBack]自动道馆16",
-            "[JumpBack]自动道馆17",
-            "[JumpBack]N-1768312988212",
-            "[JumpBack]N-1768313000871"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            0,
-            13,
-            225,
-            173
-        ],
-        "timeout": 2000000
-    },
-    "自动道馆19": {
-        "expected": "道馆突破",
-        "recognition": "OCR",
-        "roi": [
-            505,
-            0,
-            276,
-            80
-        ]
-    },
-    "自动道馆2": {
-        "expected": "信息|祈愿|神社|顺位",
-        "next": [
-            "自动道馆4",
-            "[JumpBack]自动道馆5"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1145,
-            111,
-            94,
-            503
-        ]
-    },
-    "自动道馆20": {
-        "action": "Click",
-        "expected": "失败",
-        "next": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            386,
-            49,
-            472,
-            190
-        ],
-        "target": [
-            18,
-            637,
-            230,
-            80
-        ]
-    },
-    "自动道馆3": {
-        "action": "Click",
-        "expected": "寮信息",
-        "recognition": "OCR",
-        "roi": [
-            857,
-            556,
-            422,
-            163
-        ]
-    },
-    "自动道馆4": {
-        "expected": "^(?:集体任务|道馆|首领退治|阴阳寮宴会|狩猎战)$",
-        "next": [
-            "自动道馆6",
-            "[JumpBack]自动道馆7"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            89,
-            79,
-            1051,
-            541
-        ]
-    },
-    "自动道馆5": {
-        "action": "Click",
-        "expected": "神社",
-        "recognition": "OCR",
-        "roi": [
-            1156,
-            188,
-            72,
-            403
-        ]
-    },
-    "自动道馆6": {
-        "expected": "道馆突破",
-        "next": [
-            "自动道馆8",
-            "[JumpBack]自动道馆9"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            138,
-            0,
-            205,
-            80
-        ],
-        "timeout": 10000
-    },
-    "自动道馆7": {
-        "action": "Click",
-        "expected": "道馆",
-        "recognition": "OCR",
-        "roi": [
-            104,
-            89,
-            1046,
-            536
-        ]
-    },
-    "自动道馆8": {
-        "action": "Click",
-        "expected": "道馆突破",
-        "next": [
-            "自动道馆10",
-            "[JumpBack]自动道馆11"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            388,
-            0,
-            383,
-            97
-        ]
-    },
-    "自动道馆9": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            18,
-            85,
-            1211,
-            558
-        ],
-        "target_offset": [
-            69,
-            -117,
-            1,
-            14
-        ],
-        "template": [
-            "自动道馆/自动道馆9.png"
-        ]
-    },
-    "道馆-识别是否开战": {
-        "expected": "开战",
-        "recognition": "OCR",
-        "roi": [
-            550,
-            62,
-            189,
-            67
-        ]
-    },
-    "道馆突破-点击阴阳寮": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            515,
-            588,
-            127,
-            113
-        ],
-        "template": [
-            "自动道馆/道馆突破-点击阴阳寮_1.png"
-        ]
-    }
+    "expected": "式神录",
+    "next": [
+      "自动道馆12",
+      "[JumpBack]自动道馆13"
+    ],
+    "on_error": "超时_切换御魂失败",
+    "recognition": "OCR",
+    "roi": [
+      1,
+      0,
+      206,
+      70
+    ]
+  },
+  "自动道馆11": {
+    "action": "Click",
+    "expected": "式神录",
+    "recognition": "OCR",
+    "roi": [
+      534,
+      572,
+      745,
+      147
+    ]
+  },
+  "自动道馆12": {
+    "expected": "道馆突破",
+    "next": [
+      "自动道馆14",
+      "自动道馆20",
+      "[JumpBack]道馆-识别是否开战",
+      "[JumpBack]自动道馆15",
+      "[JumpBack]自动道馆18"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "rate_limit": 5000,
+    "recognition": "OCR",
+    "roi": [
+      510,
+      0,
+      240,
+      73
+    ],
+    "timeout": 1200000
+  },
+  "自动道馆13": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "template": [
+      "自动道馆/自动道馆13.png"
+    ]
+  },
+  "自动道馆14": {
+    "action": "Click",
+    "expected": "胜利",
+    "next": [
+      "返回庭院"
+    ],
+    "pre_delay": 2000,
+    "rate_limit": 5000,
+    "recognition": "OCR",
+    "roi": [
+      609,
+      21,
+      229,
+      119
+    ],
+    "target": [
+      18,
+      637,
+      230,
+      80
+    ],
+    "timeout": 1200000
+  },
+  "自动道馆15": {
+    "action": "Click",
+    "expected": "1/2|2/2",
+    "next": [
+      "自动道馆18"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1127,
+      611,
+      99,
+      75
+    ]
+  },
+  "自动道馆16": {
+    "action": "Click",
+    "expected": "准备",
+    "recognition": "OCR",
+    "roi": [
+      1099,
+      541,
+      134,
+      99
+    ]
+  },
+  "自动道馆17": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "recognition": "OCR",
+    "roi": [
+      336,
+      618,
+      510,
+      101
+    ]
+  },
+  "自动道馆18": {
+    "expected": "战报",
+    "next": [
+      "自动道馆19",
+      "[JumpBack]自动道馆16",
+      "[JumpBack]自动道馆17",
+      "[JumpBack]N-1768312988212",
+      "[JumpBack]N-1768313000871"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      13,
+      225,
+      173
+    ],
+    "timeout": 2000000
+  },
+  "自动道馆19": {
+    "expected": "道馆突破",
+    "recognition": "OCR",
+    "roi": [
+      505,
+      0,
+      276,
+      80
+    ]
+  },
+  "自动道馆2": {
+    "expected": "信息|祈愿|神社|顺位",
+    "next": [
+      "自动道馆4",
+      "[JumpBack]自动道馆5"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1145,
+      111,
+      94,
+      503
+    ]
+  },
+  "自动道馆20": {
+    "action": "Click",
+    "expected": "失败",
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      386,
+      49,
+      472,
+      190
+    ],
+    "target": [
+      18,
+      637,
+      230,
+      80
+    ]
+  },
+  "自动道馆3": {
+    "action": "Click",
+    "expected": "寮信息",
+    "recognition": "OCR",
+    "roi": [
+      857,
+      556,
+      422,
+      163
+    ]
+  },
+  "自动道馆4": {
+    "expected": "^(?:集体任务|道馆|首领退治|阴阳寮宴会|狩猎战)$",
+    "next": [
+      "自动道馆6",
+      "[JumpBack]自动道馆7"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      89,
+      79,
+      1051,
+      541
+    ]
+  },
+  "自动道馆5": {
+    "action": "Click",
+    "expected": "神社",
+    "recognition": "OCR",
+    "roi": [
+      1156,
+      188,
+      72,
+      403
+    ]
+  },
+  "自动道馆6": {
+    "expected": "道馆突破",
+    "next": [
+      "自动道馆8",
+      "[JumpBack]自动道馆9"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      138,
+      0,
+      205,
+      80
+    ],
+    "timeout": 10000
+  },
+  "自动道馆7": {
+    "action": "Click",
+    "expected": "道馆",
+    "recognition": "OCR",
+    "roi": [
+      104,
+      89,
+      1046,
+      536
+    ]
+  },
+  "自动道馆8": {
+    "action": "Click",
+    "expected": "道馆突破",
+    "next": [
+      "自动道馆10",
+      "[JumpBack]自动道馆11"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      388,
+      0,
+      383,
+      97
+    ]
+  },
+  "自动道馆9": {
+    "action": "Click",
+    "recognition": "FeatureMatch",
+    "roi": [
+      18,
+      85,
+      1211,
+      558
+    ],
+    "target_offset": [
+      69,
+      -117,
+      1,
+      14
+    ],
+    "template": [
+      "自动道馆/自动道馆9.png"
+    ]
+  },
+  "道馆-识别是否开战": {
+    "expected": "开战",
+    "recognition": "OCR",
+    "roi": [
+      550,
+      62,
+      189,
+      67
+    ]
+  }
 }

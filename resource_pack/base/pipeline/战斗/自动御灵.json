@@ -90,30 +90,6 @@
     ],
     "timeout": 2000000
   },
-  "自动御灵-点击御灵": {
-    "action": "Click",
-    "recognition": "TemplateMatch",
-    "roi": [
-      244,
-      601,
-      378,
-      112
-    ],
-    "template": [
-      "自动御灵/自动御灵3.png"
-    ]
-  },
-  "自动御灵-点击御灵-ocr": {
-    "action": "Click",
-    "expected": "御灵",
-    "recognition": "OCR",
-    "roi": [
-      216,
-      601,
-      403,
-      111
-    ]
-  },
   "自动御灵-点击目标御灵": {
     "action": "Click",
     "expected": "暗神龙",
@@ -160,12 +136,7 @@
   "自动御灵1": {
     "next": [
       "自动御灵-确保进入御灵界面",
-      "[JumpBack]自动御灵-点击御灵-ocr",
-      "[JumpBack]自动御灵-点击御灵",
-      "[JumpBack]点击探索"
-    ],
-    "on_error": [
-      "[JumpBack]确保位于庭院"
+      "[JumpBack]导航-御灵"
     ],
     "recognition": "DirectHit"
   },

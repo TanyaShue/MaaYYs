@@ -17,10 +17,7 @@
   "自动御魂": {
     "next": [
       "自动御魂_点击御魂",
-      "[JumpBack]点击探索"
-    ],
-    "on_error": [
-      "[JumpBack]确保位于庭院"
+      "[JumpBack]导航-御魂"
     ],
     "recognition": "DirectHit"
   },

@@ -1,421 +1,381 @@
 {
-    "委派-以鱼为礼": {
-        "action": "Click",
-        "expected": "以鱼为礼",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-伊吹的藤球": {
-        "action": "Click",
-        "expected": "伊吹的藤球",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-奇怪的痕迹": {
-        "action": "Click",
-        "expected": "奇怪的痕迹",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-寻找耳环": {
-        "action": "Click",
-        "expected": "寻找耳环",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-帮忙搬运": {
-        "action": "Click",
-        "expected": "帮忙搬运",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-弥助的画": {
-        "action": "Click",
-        "expected": "弥助的画",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-捡到的宝石": {
-        "action": "Click",
-        "expected": "捡到的宝石",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-接送弥助": {
-        "action": "Click",
-        "expected": "接送弥助",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-樱饼配方": {
-        "action": "Click",
-        "expected": "樱饼配方",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "委派-猫老大": {
-        "action": "Click",
-        "expected": "猫老大",
-        "max_hit": 1,
-        "next": [
-            "式神委派8"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            1095,
-            126,
-            167,
-            487
-        ]
-    },
-    "式神委派": {
-        "next": [
-            "式神委派1",
-            "[JumpBack]点击探索"
-        ],
-        "recognition": "DirectHit"
-    },
-    "式神委派1": {
-        "action": "Click",
-        "next": [
-            "式神委派17",
-            "[JumpBack]式神委派18"
-        ],
-        "recognition": "FeatureMatch",
-        "roi": [
-            404,
-            598,
-            132,
-            122
-        ],
-        "target": [
-            467,
-            653,
-            22,
-            27
-        ],
-        "template": [
-            "式神委派/式神委派1.png",
-            "式神委派/式神委派1_1.png"
-        ]
-    },
-    "式神委派10": {
-        "action": "Click",
-        "expected": "委派式神",
-        "next": [
-            "式神委派11"
-        ],
-        "post_delay": 4000,
-        "pre_delay": 500,
-        "recognition": "OCR",
-        "roi": [
-            917,
-            247,
-            238,
-            256
-        ]
-    },
-    "式神委派11": {
-        "action": "Click",
-        "expected": "一键选择",
-        "next": [
-            "式神委派12"
-        ],
-        "pre_delay": 500,
-        "recognition": "OCR",
-        "roi": [
-            1017,
-            379,
-            230,
-            115
-        ]
-    },
-    "式神委派12": {
-        "action": "Click",
-        "expected": "出发",
-        "next": [
-            "式神委派6"
-        ],
-        "pre_delay": 500,
-        "recognition": "OCR",
-        "roi": [
-            1060,
-            527,
-            182,
-            128
-        ]
-    },
-    "式神委派13": {
-        "expected": "式神委派",
-        "next": [
-            "[JumpBack]式神委派2",
-            "[JumpBack]式神委派4",
-            "式神委派16"
-        ],
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            28,
-            7,
-            262,
-            106
-        ]
-    },
-    "式神委派14": {
-        "expected": "完成任务",
-        "next": [
-            "式神委派15"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            381,
-            405,
-            390,
-            91
-        ]
-    },
-    "式神委派15": {
-        "action": "Click",
-        "expected": "返回",
-        "next": [
-            "式神委派6"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            903,
-            237,
-            243,
-            283
-        ]
-    },
-    "式神委派16": {
-        "expected": "完成",
-        "inverse": true,
-        "next": [
-            "[JumpBack]委派-弥助的画",
-            "[JumpBack]委派-樱饼配方",
-            "[JumpBack]委派-寻找耳环",
-            "[JumpBack]委派-猫老大",
-            "[JumpBack]委派-捡到的宝石",
-            "[JumpBack]委派-以鱼为礼",
-            "[JumpBack]委派-帮忙搬运",
-            "[JumpBack]委派-奇怪的痕迹",
-            "[JumpBack]委派-接送弥助",
-            "[JumpBack]委派-伊吹的藤球",
-            "返回庭院"
-        ],
-        "order_by": "Vertical",
-        "recognition": "OCR",
-        "roi": [
-            963,
-            110,
-            136,
-            526
-        ]
-    },
-    "式神委派17": {
-        "expected": "式神委派",
-        "next": [
-            "式神委派13"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            84,
-            4,
-            234,
-            124
-        ]
-    },
-    "式神委派18": {
-        "recognition": "DirectHit"
-    },
-    "式神委派2": {
-        "action": "Click",
-        "expected": "完成",
-        "next": [
-            "式神委派3",
-            "[JumpBack]式神委派4"
-        ],
-        "order_by": "Vertical",
-        "post_delay": 2000,
-        "recognition": "OCR",
-        "roi": [
-            963,
-            110,
-            136,
-            526
-        ],
-        "target_offset": [
-            165,
-            2,
-            9,
-            21
-        ]
-    },
-    "式神委派3": {
-        "action": "Click",
-        "expected": "完成任务",
-        "next": [
-            "式神委派6",
-            "[JumpBack]式神委派5"
-        ],
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            917,
-            246,
-            298,
-            151
-        ]
-    },
-    "式神委派4": {
-        "action": "Click",
-        "expected": ".*",
-        "recognition": "OCR",
-        "roi": [
-            306,
-            505,
-            596,
-            188
-        ],
-        "target": [
-            983,
-            163,
-            139,
-            73
-        ]
-    },
-    "式神委派5": {
-        "action": "Click",
-        "expected": ".*",
-        "recognition": "OCR",
-        "roi": [
-            306,
-            505,
-            596,
-            188
-        ],
-        "target": [
-            471,
-            602,
-            430,
-            60
-        ]
-    },
-    "式神委派6": {
-        "post_delay": 2000,
-        "recognition": "TemplateMatch",
-        "roi": [
-            1146,
-            129,
-            129,
-            499
-        ],
-        "template": [
-            "式神委派/式神委派6.png",
-            "式神委派/式神委派6_1.png"
-        ]
-    },
-    "式神委派8": {
-        "next": [
-            "式神委派10",
-            "式神委派14",
-            "[JumpBack]式神委派9"
-        ],
-        "recognition": "DirectHit"
-    },
-    "式神委派9": {
-        "action": "Click",
-        "expected": "跳过",
-        "pre_delay": 500,
-        "recognition": "OCR",
-        "roi": [
-            630,
-            470,
-            405,
-            121
-        ]
-    }
+  "委派-以鱼为礼": {
+    "action": "Click",
+    "expected": "以鱼为礼",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-伊吹的藤球": {
+    "action": "Click",
+    "expected": "伊吹的藤球",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-奇怪的痕迹": {
+    "action": "Click",
+    "expected": "奇怪的痕迹",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-寻找耳环": {
+    "action": "Click",
+    "expected": "寻找耳环",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-帮忙搬运": {
+    "action": "Click",
+    "expected": "帮忙搬运",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-弥助的画": {
+    "action": "Click",
+    "expected": "弥助的画",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-捡到的宝石": {
+    "action": "Click",
+    "expected": "捡到的宝石",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-接送弥助": {
+    "action": "Click",
+    "expected": "接送弥助",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-樱饼配方": {
+    "action": "Click",
+    "expected": "樱饼配方",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "委派-猫老大": {
+    "action": "Click",
+    "expected": "猫老大",
+    "max_hit": 1,
+    "next": [
+      "式神委派8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1095,
+      126,
+      167,
+      487
+    ]
+  },
+  "式神委派": {
+    "next": [
+      "式神委派13",
+      "[JumpBack]导航-式神委派"
+    ],
+    "recognition": "DirectHit"
+  },
+  "式神委派10": {
+    "action": "Click",
+    "expected": "委派式神",
+    "next": [
+      "式神委派11"
+    ],
+    "post_delay": 4000,
+    "pre_delay": 500,
+    "recognition": "OCR",
+    "roi": [
+      917,
+      247,
+      238,
+      256
+    ]
+  },
+  "式神委派11": {
+    "action": "Click",
+    "expected": "一键选择",
+    "next": [
+      "式神委派12"
+    ],
+    "pre_delay": 500,
+    "recognition": "OCR",
+    "roi": [
+      1017,
+      379,
+      230,
+      115
+    ]
+  },
+  "式神委派12": {
+    "action": "Click",
+    "expected": "出发",
+    "next": [
+      "式神委派6"
+    ],
+    "pre_delay": 500,
+    "recognition": "OCR",
+    "roi": [
+      1060,
+      527,
+      182,
+      128
+    ]
+  },
+  "式神委派13": {
+    "expected": "式神委派",
+    "next": [
+      "[JumpBack]式神委派2",
+      "[JumpBack]式神委派4",
+      "式神委派16"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      28,
+      7,
+      262,
+      106
+    ]
+  },
+  "式神委派14": {
+    "expected": "完成任务",
+    "next": [
+      "式神委派15"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      381,
+      405,
+      390,
+      91
+    ]
+  },
+  "式神委派15": {
+    "action": "Click",
+    "expected": "返回",
+    "next": [
+      "式神委派6"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      903,
+      237,
+      243,
+      283
+    ]
+  },
+  "式神委派16": {
+    "expected": "完成",
+    "inverse": true,
+    "next": [
+      "[JumpBack]委派-弥助的画",
+      "[JumpBack]委派-樱饼配方",
+      "[JumpBack]委派-寻找耳环",
+      "[JumpBack]委派-猫老大",
+      "[JumpBack]委派-捡到的宝石",
+      "[JumpBack]委派-以鱼为礼",
+      "[JumpBack]委派-帮忙搬运",
+      "[JumpBack]委派-奇怪的痕迹",
+      "[JumpBack]委派-接送弥助",
+      "[JumpBack]委派-伊吹的藤球",
+      "返回庭院"
+    ],
+    "order_by": "Vertical",
+    "recognition": "OCR",
+    "roi": [
+      963,
+      110,
+      136,
+      526
+    ]
+  },
+  "式神委派2": {
+    "action": "Click",
+    "expected": "完成",
+    "next": [
+      "式神委派3",
+      "[JumpBack]式神委派4"
+    ],
+    "order_by": "Vertical",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      963,
+      110,
+      136,
+      526
+    ],
+    "target_offset": [
+      165,
+      2,
+      9,
+      21
+    ]
+  },
+  "式神委派3": {
+    "action": "Click",
+    "expected": "完成任务",
+    "next": [
+      "式神委派6",
+      "[JumpBack]式神委派5"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      917,
+      246,
+      298,
+      151
+    ]
+  },
+  "式神委派4": {
+    "action": "Click",
+    "expected": ".*",
+    "recognition": "OCR",
+    "roi": [
+      306,
+      505,
+      596,
+      188
+    ],
+    "target": [
+      983,
+      163,
+      139,
+      73
+    ]
+  },
+  "式神委派5": {
+    "action": "Click",
+    "expected": ".*",
+    "recognition": "OCR",
+    "roi": [
+      306,
+      505,
+      596,
+      188
+    ],
+    "target": [
+      471,
+      602,
+      430,
+      60
+    ]
+  },
+  "式神委派6": {
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1146,
+      129,
+      129,
+      499
+    ],
+    "template": [
+      "式神委派/式神委派6.png",
+      "式神委派/式神委派6_1.png"
+    ]
+  },
+  "式神委派8": {
+    "next": [
+      "式神委派10",
+      "式神委派14",
+      "[JumpBack]式神委派9"
+    ],
+    "recognition": "DirectHit"
+  },
+  "式神委派9": {
+    "action": "Click",
+    "expected": "跳过",
+    "pre_delay": 500,
+    "recognition": "OCR",
+    "roi": [
+      630,
+      470,
+      405,
+      121
+    ]
+  }
 }

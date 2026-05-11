@@ -97,20 +97,6 @@
       "寮30/寮302.png"
     ]
   },
-  "寮301": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "target": [
-      565,
-      620,
-      33,
-      42
-    ],
-    "template": [
-      "寮30/寮301.png"
-    ]
-  },
   "寮3010": {
     "action": "Click",
     "expected": "探索",
@@ -1091,16 +1077,6 @@
       72
     ]
   },
-  "寮3057": {
-    "action": "Click",
-    "recognition": "DirectHit",
-    "target": [
-      1194,
-      615,
-      38,
-      81
-    ]
-  },
   "寮3059": {
     "action": "Click",
     "post_delay": 1000,
@@ -1174,11 +1150,7 @@
   "寮三十-开始任务": {
     "next": [
       "寮30-确保进入阴阳寮",
-      "[JumpBack]寮301",
-      "[JumpBack]寮3057"
-    ],
-    "on_error": [
-      "[JumpBack]确保位于庭院"
+      "[JumpBack]导航-阴阳寮"
     ],
     "recognition": "DirectHit"
   },
