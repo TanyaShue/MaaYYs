@@ -1,0 +1,219 @@
+{
+  "业原火-关闭-点击屏幕继续": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      493,
+      664,
+      300,
+      53
+    ]
+  },
+  "业原火-开始业原火": {
+    "next": [
+      "业原火-确保位于御魂界面",
+      "[JumpBack]导航-御魂"
+    ],
+    "recognition": "DirectHit"
+  },
+  "业原火-战斗-点击准备": {
+    "action": "Click",
+    "expected": "准备",
+    "recognition": "OCR",
+    "roi": [
+      1116,
+      548,
+      124,
+      79
+    ]
+  },
+  "业原火-点击业原火": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      16,
+      72,
+      747,
+      638
+    ],
+    "template": [
+      "自动业原火/业原火-点击业原火_1.png"
+    ]
+  },
+  "业原火-点击式神录": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      939,
+      626,
+      100,
+      92
+    ],
+    "template": [
+      "自动业原火/业原火-点击式神录_1.png"
+    ]
+  },
+  "业原火-点击挑战": {
+    "action": "Click",
+    "expected": "挑战",
+    "next": [
+      "[JumpBack]业原火-关闭-点击屏幕继续",
+      "[JumpBack]业原火-战斗-点击准备",
+      "[JumpBack]业原火-识别结束界面",
+      "业原火-确保战斗后返回业原火界面"
+    ],
+    "post_delay": 5000,
+    "recognition": "OCR",
+    "roi": [
+      1113,
+      587,
+      100,
+      63
+    ],
+    "timeout": 200000
+  },
+  "业原火-点击目标副本": {
+    "action": "Click",
+    "expected": "痴之阵",
+    "next": [
+      "业原火-确保位于装备御魂界面",
+      "[JumpBack]业原火-点击式神录"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      249,
+      151,
+      183,
+      398
+    ]
+  },
+  "业原火-确保位于御魂界面": {
+    "expected": "御魂",
+    "next": [
+      "业原火-识别是否位于业原火界面",
+      "[JumpBack]业原火-点击业原火"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      149,
+      8,
+      101,
+      61
+    ]
+  },
+  "业原火-确保位于装备御魂界面": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "自动业原火_默认分组",
+      "team_name": "自动业原火_默认队伍"
+    },
+    "expected": "式神录",
+    "next": [
+      "业原火-返回业原火界面",
+      "[JumpBack]业原火-退出式神录"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      77,
+      3,
+      130,
+      62
+    ]
+  },
+  "业原火-确保战斗后返回业原火界面": {
+    "expected": "贪之阵|嗔之阵|驰之阵",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      258,
+      154,
+      165,
+      381
+    ]
+  },
+  "业原火-识别是否位于业原火界面": {
+    "expected": "贪之阵|嗔之阵|驰之阵",
+    "next": [
+      "业原火-点击目标副本"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      258,
+      154,
+      165,
+      381
+    ]
+  },
+  "业原火-识别次数": {
+    "custom_recognition": "TaskCounterRecognition",
+    "custom_recognition_param": {
+      "target_count": 10
+    },
+    "inverse": true,
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "Custom"
+  },
+  "业原火-识别结束界面": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      2,
+      505,
+      1271,
+      215
+    ],
+    "target": [
+      495,
+      635,
+      233,
+      79
+    ],
+    "template": [
+      "自动业原火/N-1775636153051_1.png",
+      "自动业原火/N-1775636153051_2.png"
+    ]
+  },
+  "业原火-返回业原火界面": {
+    "expected": "贪之阵|嗔之阵|驰之阵",
+    "next": [
+      "业原火-识别次数",
+      "[JumpBack]业原火-点击挑战"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      258,
+      154,
+      165,
+      381
+    ]
+  },
+  "业原火-退出式神录": {
+    "action": "Click",
+    "expected": "式神录",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      70,
+      0,
+      153,
+      80
+    ],
+    "target": [
+      17,
+      7,
+      48,
+      43
+    ]
+  }
+}
