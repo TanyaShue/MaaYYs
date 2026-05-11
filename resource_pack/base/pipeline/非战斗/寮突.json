@@ -9,7 +9,7 @@
   "寮突-返回探索界面": {
     "max_hit": 1,
     "next": [
-      "导航-探索"
+      "导航-探索界面"
     ],
     "recognition": "DirectHit"
   },
