@@ -98,13 +98,17 @@
   },
   "英杰试炼-点击式神录": {
     "action": "Click",
-    "expected": "式神录",
-    "recognition": "OCR",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
     "roi": [
-      974,
-      598,
-      80,
-      34
+      887,
+      518,
+      218,
+      130
+    ],
+    "template": [
+      "战斗/英杰试炼/英杰试炼-点击式神录_1.png",
+      "战斗/英杰试炼/英杰试炼-点击式神录_2.png"
     ]
   },
   "英杰试炼-点击挑战": {
