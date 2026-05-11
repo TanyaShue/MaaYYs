@@ -502,7 +502,7 @@
   },
   "导航-探索界面-展开所有导航入口": {
     "action": "Click",
-    "post_delay": 500,
+    "post_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
       0,
