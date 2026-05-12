@@ -156,6 +156,47 @@
     ],
     "recognition": "DirectHit"
   },
+  "式神委派-识别神乐": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      905,
+      360,
+      375,
+      360
+    ],
+    "target": [
+      59,
+      408,
+      185,
+      228
+    ],
+    "template": [
+      "非战斗/式神委派/式神委派-识别神乐_1.png",
+      "非战斗/式神委派/式神委派-识别神乐_2.png"
+    ]
+  },
+  "式神委派-识别神乐-神乐不存在": {
+    "action": "Click",
+    "inverse": true,
+    "recognition": "TemplateMatch",
+    "roi": [
+      905,
+      360,
+      375,
+      360
+    ],
+    "target": [
+      59,
+      408,
+      185,
+      228
+    ],
+    "template": [
+      "非战斗/式神委派/式神委派-识别神乐_1.png",
+      "非战斗/式神委派/式神委派-识别神乐_2.png"
+    ]
+  },
   "式神委派10": {
     "action": "Click",
     "expected": "委派式神",
@@ -206,8 +247,8 @@
     "expected": "式神委派",
     "next": [
       "[JumpBack]式神委派2",
-      "[JumpBack]式神委派4",
-      "式神委派16"
+      "式神委派16",
+      "[JumpBack]式神委派-识别神乐"
     ],
     "post_delay": 2000,
     "recognition": "OCR",
@@ -275,7 +316,7 @@
     "expected": "完成",
     "next": [
       "式神委派3",
-      "[JumpBack]式神委派4"
+      "[JumpBack]式神委派-识别神乐"
     ],
     "order_by": "Vertical",
     "post_delay": 2000,
@@ -298,7 +339,7 @@
     "expected": "完成任务",
     "next": [
       "式神委派6",
-      "[JumpBack]式神委派5"
+      "[JumpBack]式神委派-识别神乐-神乐不存在"
     ],
     "post_delay": 1000,
     "pre_delay": 1000,
@@ -308,40 +349,6 @@
       246,
       298,
       151
-    ]
-  },
-  "式神委派4": {
-    "action": "Click",
-    "expected": ".*",
-    "recognition": "OCR",
-    "roi": [
-      306,
-      505,
-      596,
-      188
-    ],
-    "target": [
-      983,
-      163,
-      139,
-      73
-    ]
-  },
-  "式神委派5": {
-    "action": "Click",
-    "expected": ".*",
-    "recognition": "OCR",
-    "roi": [
-      306,
-      505,
-      596,
-      188
-    ],
-    "target": [
-      471,
-      602,
-      430,
-      60
     ]
   },
   "式神委派6": {

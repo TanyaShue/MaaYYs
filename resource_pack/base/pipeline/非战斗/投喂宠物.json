@@ -1,430 +1,422 @@
 {
-    "喂宠物-点击喂食": {
-        "action": "Click",
-        "expected": "食|喂",
-        "next": [
-            "投喂宠物-识别是否进入后院",
-            "[JumpBack]投喂宠物15_copy1",
-            "[JumpBack]投喂宠物4",
-            "[JumpBack]投喂宠物-识别是否位于宠物小屋"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            900,
-            503,
-            96,
-            84
-        ],
-        "post_delay": 2000
-    },
-    "喂宠物-确保位于快速喂养界面": {
-        "expected": "快速喂养",
-        "next": [
-            "投喂宠物3",
-            "喂宠物-点击喂食"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            538,
-            88,
-            153,
-            61
-        ],
-        "post_delay": 2000
-    },
-    "投喂宠物": {
-        "next": [
-            "投喂宠物-确保进入宠物小屋",
-            "[JumpBack]投喂宠物_1",
-            "[JumpBack]投喂宠物17",
-            "[JumpBack]确保位于庭院"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "DirectHit",
-        "timeout": 5000
-    },
-    "投喂宠物-关闭拜访好友界面": {
-        "action": "Click",
-        "recognition": "FeatureMatch",
-        "roi": [
-            981,
-            129,
-            59,
-            61
-        ],
-        "template": [
-            "投喂宠物/投喂宠物-关闭拜访好友界面_1.png",
-            "投喂宠物/投喂宠物-关闭拜访好友界面_2.png"
-        ]
-    },
-    "投喂宠物-判断是否位于拜访好友界面": {
-        "expected": "拜访好友",
-        "next": [
-            "投喂宠物-关闭拜访好友界面"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            509,
-            49,
-            255,
-            69
-        ]
-    },
-    "投喂宠物-点击快速喂养": {
-        "action": "Click",
-        "expected": "快速喂养",
-        "post_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            821,
-            658,
-            137,
-            50
-        ]
-    },
-    "投喂宠物-确保进入宠物小屋": {
-        "expected": "宠物小屋",
-        "next": [
-            "投喂宠物18",
-            "[JumpBack]投喂宠物2",
-            "[JumpBack]投喂宠物1"
-        ],
-        "on_error": [
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            562,
-            11,
-            159,
-            72
-        ]
-    },
-    "投喂宠物-识别是否位于宠物小屋": {
-        "expected": "宠物小屋",
-        "next": [
-            "投喂宠物-点击进入后院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            569,
-            7,
-            157,
-            69
-        ],
-        "post_delay": 2000
-    },
-    "投喂宠物1": {
-        "action": "Click",
-        "post_delay": 1000,
-        "recognition": "FeatureMatch",
-        "roi": [
-            1103,
-            580,
-            176,
-            139
-        ],
-        "target": [
-            1178,
-            644,
-            40,
-            36
-        ],
-        "template": [
-            "投喂宠物/投喂宠物1.png"
-        ]
-    },
-    "投喂宠物10": {
-        "expected": "排骨|鲜鱼",
-        "next": [
-            "投喂宠物12",
-            "[JumpBack]投喂宠物14"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            688,
-            242,
-            348,
-            133
-        ]
-    },
-    "投喂宠物-识别是否进入后院": {
-        "expected": "宠物后院",
-        "next": [
-            "投喂宠物7_copy1",
-            "[JumpBack]投喂宠物7",
-            "[JumpBack]投喂宠物6"
-        ],
-        "post_delay": 2000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            581,
-            29,
-            117,
-            38
-        ]
-    },
-    "投喂宠物12": {
-        "expected": "放置食材",
-        "inverse": true,
-        "recognition": "OCR",
-        "roi": [
-            782,
-            564,
-            156,
-            61
-        ]
-    },
-    "投喂宠物13": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "template": [
-            "投喂宠物/投喂宠物13.png"
-        ]
-    },
-    "投喂宠物14": {
-        "action": "Click",
-        "expected": "放置食材",
-        "recognition": "OCR",
-        "roi": [
-            782,
-            564,
-            156,
-            61
-        ]
-    },
-    "投喂宠物15_copy1": {
-        "action": "Click",
-        "expected": "跳过",
-        "post_delay": 1000,
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [
-            748,
-            98,
-            523,
-            223
-        ]
-    },
-    "投喂宠物17": {
-        "action": "Click",
-        "expected": 1,
-        "labels": [
-            "召唤",
-            "宠物小屋",
-            "探索",
-            "神龛"
-        ],
-        "model": "Courtyard.onnx",
-        "recognition": "NeuralNetworkDetect",
-        "threshold": 0.8,
-        "post_delay": 2000
-    },
-    "投喂宠物18": {
-        "action": "Click",
-        "expected": "快速喂养",
-        "next": [
-            "喂宠物-确保位于快速喂养界面",
-            "[JumpBack]投喂宠物-点击快速喂养"
-        ],
-        "on_error": [
-            "[JumpBack]投喂宠物-判断是否位于拜访好友界面",
-            "返回庭院"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            821,
-            658,
-            137,
-            50
-        ],
-        "post_delay": 2000
-    },
-    "投喂宠物2": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            802,
-            596,
-            151,
-            123
-        ],
-        "template": [
-            "投喂宠物/投喂宠物2.png",
-            "投喂宠物/投喂宠物2_1.png"
-        ],
-        "post_delay": 2000
-    },
-    "投喂宠物3": {
-        "action": "Click",
-        "next": [
-            "投喂宠物-识别是否进入后院",
-            "[JumpBack]投喂宠物15_copy1",
-            "[JumpBack]投喂宠物4",
-            "[JumpBack]投喂宠物-识别是否位于宠物小屋"
-        ],
-        "recognition": "TemplateMatch",
-        "roi": [
-            858,
-            467,
-            187,
-            160
-        ],
-        "template": [
-            "投喂宠物/投喂宠物3.png"
-        ],
-        "post_delay": 2000
-    },
-    "投喂宠物4": {
-        "action": "Click",
-        "expected": "获得奖励",
-        "recognition": "OCR",
-        "roi": [
-            458,
-            158,
-            361,
-            140
-        ],
-        "target": [
-            968,
-            329,
-            58,
-            145
-        ],
-        "post_delay": 2000
-    },
-    "投喂宠物-点击进入后院": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            0,
-            539,
-            156,
-            165
-        ],
-        "target": [
-            42,
-            639,
-            27,
-            31
-        ],
-        "template": [
-            "投喂宠物/投喂宠物5.png"
-        ],
-        "post_delay": 2000
-    },
-    "投喂宠物6": {
-        "action": "Click",
-        "next": [
-            "投喂宠物8"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "投喂宠物/投喂宠物6.png",
-            "投喂宠物/投喂宠物6_1.png",
-            "投喂宠物/投喂宠物6_2.png",
-            "投喂宠物/投喂宠物6_3.png",
-            "投喂宠物/投喂宠物6_4.png",
-            "投喂宠物/投喂宠物6_5.png",
-            "投喂宠物/投喂宠物6_6.png",
-            "投喂宠物/投喂宠物6_7.png",
-            "投喂宠物/投喂宠物6_8.png",
-            "投喂宠物/投喂宠物6_9.png"
-        ]
-    },
-    "投喂宠物7": {
-        "action": "Click",
-        "next": [
-            "投喂宠物9"
-        ],
-        "on_error": [
-            "跳过"
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "投喂宠物/投喂宠物7.png"
-        ]
-    },
-    "投喂宠物7_copy1": {
-        "inverse": true,
-        "next": [
-            "识别庭院特征",
-            "[JumpBack]投喂宠物13"
-        ],
-        "post_delay": 1000,
-        "recognition": "TemplateMatch",
-        "template": [
-            "投喂宠物/投喂宠物7.png",
-            "投喂宠物/投喂宠物6.png",
-            "投喂宠物/投喂宠物6_1.png",
-            "投喂宠物/投喂宠物6_2.png",
-            "投喂宠物/投喂宠物6_4.png",
-            "投喂宠物/投喂宠物6_5.png",
-            "投喂宠物/投喂宠物6_6.png",
-            "投喂宠物/投喂宠物6_7.png",
-            "投喂宠物/投喂宠物6_9.png"
-        ]
-    },
-    "投喂宠物8": {
-        "action": "Click",
-        "recognition": "DirectHit",
-        "target": [
-            349,
-            532,
-            510,
-            165
-        ]
-    },
-    "投喂宠物9": {
-        "action": "Click",
-        "expected": "排骨|鲜鱼",
-        "next": [
-            "投喂宠物10"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            179,
-            140,
-            352,
-            510
-        ]
-    },
-    "投喂宠物_1": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [
-            712,
-            161,
-            567,
-            438
-        ],
-        "template": [
-            "投喂宠物/投喂宠物.png",
-            "投喂宠物/投喂宠物_1.png",
-            "投喂宠物/投喂宠物_2.png",
-            "投喂宠物/投喂宠物_3.png",
-            "投喂宠物/投喂宠物_4.png",
-            "投喂宠物/投喂宠物_5.png",
-            "投喂宠物/投喂宠物_6.png",
-            "投喂宠物/投喂宠物_7.png",
-            "投喂宠物/投喂宠物_8.png",
-            "投喂宠物/投喂宠物_9.png",
-            "投喂宠物/投喂宠物_10.png",
-            "投喂宠物/投喂宠物_11.png",
-            "投喂宠物/投喂宠物_12.png",
-            "投喂宠物/投喂宠物_13.png",
-            "投喂宠物/投喂宠物_14.png",
-            "投喂宠物/投喂宠物_15.png",
-            "投喂宠物/投喂宠物_16.png",
-            "投喂宠物/投喂宠物_17.png",
-            "投喂宠物/投喂宠物_1_1.png"
-        ],
-        "post_delay": 2000
-    }
+  "喂宠物-点击喂食": {
+    "action": "Click",
+    "expected": "食|喂",
+    "next": [
+      "投喂宠物-识别是否进入后院",
+      "[JumpBack]投喂宠物15_copy1",
+      "[JumpBack]投喂宠物4",
+      "[JumpBack]投喂宠物-识别是否位于宠物小屋"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      900,
+      503,
+      96,
+      84
+    ]
+  },
+  "喂宠物-确保位于快速喂养界面": {
+    "expected": "快速喂养",
+    "next": [
+      "投喂宠物3",
+      "喂宠物-点击喂食"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      538,
+      88,
+      153,
+      61
+    ]
+  },
+  "投喂宠物": {
+    "next": [
+      "投喂宠物-确保进入宠物小屋",
+      "[JumpBack]投喂宠物_1",
+      "[JumpBack]投喂宠物17",
+      "[JumpBack]确保位于庭院"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 5000
+  },
+  "投喂宠物-关闭拜访好友界面": {
+    "action": "Click",
+    "recognition": "FeatureMatch",
+    "roi": [
+      981,
+      129,
+      59,
+      61
+    ],
+    "template": [
+      "投喂宠物/投喂宠物-关闭拜访好友界面_1.png",
+      "投喂宠物/投喂宠物-关闭拜访好友界面_2.png"
+    ]
+  },
+  "投喂宠物-判断是否位于拜访好友界面": {
+    "expected": "拜访好友",
+    "next": [
+      "投喂宠物-关闭拜访好友界面"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      509,
+      49,
+      255,
+      69
+    ]
+  },
+  "投喂宠物-点击快速喂养": {
+    "action": "Click",
+    "expected": "快速喂养",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      821,
+      658,
+      137,
+      50
+    ]
+  },
+  "投喂宠物-点击进入后院": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      539,
+      156,
+      165
+    ],
+    "target": [
+      42,
+      639,
+      27,
+      31
+    ],
+    "template": [
+      "投喂宠物/投喂宠物5.png"
+    ]
+  },
+  "投喂宠物-确保进入宠物小屋": {
+    "expected": "宠物小屋",
+    "next": [
+      "投喂宠物18",
+      "[JumpBack]投喂宠物2",
+      "[JumpBack]投喂宠物1"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      562,
+      11,
+      159,
+      72
+    ]
+  },
+  "投喂宠物-识别是否位于宠物小屋": {
+    "expected": "宠物小屋",
+    "next": [
+      "投喂宠物-点击进入后院"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      569,
+      7,
+      157,
+      69
+    ]
+  },
+  "投喂宠物-识别是否进入后院": {
+    "expected": "宠物后院",
+    "next": [
+      "投喂宠物7_copy1",
+      "[JumpBack]投喂宠物7",
+      "[JumpBack]投喂宠物6"
+    ],
+    "post_delay": 2000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      581,
+      29,
+      117,
+      38
+    ]
+  },
+  "投喂宠物1": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      1103,
+      580,
+      176,
+      139
+    ],
+    "target": [
+      1178,
+      644,
+      40,
+      36
+    ],
+    "template": [
+      "投喂宠物/投喂宠物1.png"
+    ]
+  },
+  "投喂宠物10": {
+    "expected": "排骨|鲜鱼",
+    "next": [
+      "投喂宠物12",
+      "[JumpBack]投喂宠物14"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      688,
+      242,
+      348,
+      133
+    ]
+  },
+  "投喂宠物12": {
+    "expected": "放置食材",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      782,
+      564,
+      156,
+      61
+    ]
+  },
+  "投喂宠物14": {
+    "action": "Click",
+    "expected": "放置食材",
+    "recognition": "OCR",
+    "roi": [
+      782,
+      564,
+      156,
+      61
+    ]
+  },
+  "投喂宠物15_copy1": {
+    "action": "Click",
+    "expected": "跳过",
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      748,
+      98,
+      523,
+      223
+    ]
+  },
+  "投喂宠物17": {
+    "action": "Click",
+    "expected": 1,
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "探索",
+      "神龛"
+    ],
+    "model": "Courtyard.onnx",
+    "post_delay": 2000,
+    "recognition": "NeuralNetworkDetect",
+    "threshold": 0.8
+  },
+  "投喂宠物18": {
+    "action": "Click",
+    "expected": "快速喂养",
+    "next": [
+      "喂宠物-确保位于快速喂养界面",
+      "[JumpBack]投喂宠物-点击快速喂养"
+    ],
+    "on_error": [
+      "[JumpBack]投喂宠物-判断是否位于拜访好友界面",
+      "返回庭院"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      821,
+      658,
+      137,
+      50
+    ]
+  },
+  "投喂宠物2": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      802,
+      596,
+      151,
+      123
+    ],
+    "template": [
+      "投喂宠物/投喂宠物2.png",
+      "投喂宠物/投喂宠物2_1.png"
+    ]
+  },
+  "投喂宠物3": {
+    "action": "Click",
+    "next": [
+      "投喂宠物-识别是否进入后院",
+      "[JumpBack]投喂宠物15_copy1",
+      "[JumpBack]投喂宠物4",
+      "[JumpBack]投喂宠物-识别是否位于宠物小屋"
+    ],
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      858,
+      467,
+      187,
+      160
+    ],
+    "template": [
+      "投喂宠物/投喂宠物3.png"
+    ]
+  },
+  "投喂宠物4": {
+    "action": "Click",
+    "expected": "获得奖励",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      458,
+      158,
+      361,
+      140
+    ],
+    "target": [
+      968,
+      329,
+      58,
+      145
+    ]
+  },
+  "投喂宠物6": {
+    "action": "Click",
+    "next": [
+      "投喂宠物8"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "TemplateMatch",
+    "template": [
+      "投喂宠物/投喂宠物6.png",
+      "投喂宠物/投喂宠物6_1.png",
+      "投喂宠物/投喂宠物6_2.png",
+      "投喂宠物/投喂宠物6_3.png",
+      "投喂宠物/投喂宠物6_4.png",
+      "投喂宠物/投喂宠物6_5.png",
+      "投喂宠物/投喂宠物6_6.png",
+      "投喂宠物/投喂宠物6_7.png",
+      "投喂宠物/投喂宠物6_8.png",
+      "投喂宠物/投喂宠物6_9.png"
+    ]
+  },
+  "投喂宠物7": {
+    "action": "Click",
+    "next": [
+      "投喂宠物9"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "TemplateMatch",
+    "template": [
+      "投喂宠物/投喂宠物7.png"
+    ]
+  },
+  "投喂宠物7_copy1": {
+    "inverse": true,
+    "next": [
+      "导航-庭院"
+    ],
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "template": [
+      "投喂宠物/投喂宠物7.png",
+      "投喂宠物/投喂宠物6.png",
+      "投喂宠物/投喂宠物6_1.png",
+      "投喂宠物/投喂宠物6_2.png",
+      "投喂宠物/投喂宠物6_4.png",
+      "投喂宠物/投喂宠物6_5.png",
+      "投喂宠物/投喂宠物6_6.png",
+      "投喂宠物/投喂宠物6_7.png",
+      "投喂宠物/投喂宠物6_9.png"
+    ]
+  },
+  "投喂宠物8": {
+    "action": "Click",
+    "recognition": "DirectHit",
+    "target": [
+      349,
+      532,
+      510,
+      165
+    ]
+  },
+  "投喂宠物9": {
+    "action": "Click",
+    "expected": "排骨|鲜鱼",
+    "next": [
+      "投喂宠物10"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      179,
+      140,
+      352,
+      510
+    ]
+  },
+  "投喂宠物_1": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      712,
+      161,
+      567,
+      438
+    ],
+    "template": [
+      "投喂宠物/投喂宠物.png",
+      "投喂宠物/投喂宠物_1.png",
+      "投喂宠物/投喂宠物_2.png",
+      "投喂宠物/投喂宠物_3.png",
+      "投喂宠物/投喂宠物_4.png",
+      "投喂宠物/投喂宠物_5.png",
+      "投喂宠物/投喂宠物_6.png",
+      "投喂宠物/投喂宠物_7.png",
+      "投喂宠物/投喂宠物_8.png",
+      "投喂宠物/投喂宠物_9.png",
+      "投喂宠物/投喂宠物_10.png",
+      "投喂宠物/投喂宠物_11.png",
+      "投喂宠物/投喂宠物_12.png",
+      "投喂宠物/投喂宠物_13.png",
+      "投喂宠物/投喂宠物_14.png",
+      "投喂宠物/投喂宠物_15.png",
+      "投喂宠物/投喂宠物_16.png",
+      "投喂宠物/投喂宠物_17.png",
+      "投喂宠物/投喂宠物_1_1.png"
+    ]
+  }
 }

@@ -1,8 +1,9 @@
 {
   "麒麟": {
     "next": [
-      "麒麟-确保位于阴阳寮内",
-      "[JumpBack]导航-阴阳寮"
+      "麒麟11",
+      "[JumpBack]麒麟4",
+      "[JumpBack]导航-阴阳寮神社"
     ],
     "post_delay": 1000,
     "pre_delay": 1000,
@@ -31,39 +32,13 @@
       "麒麟"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "post_delay": 1000,
     "pre_delay": 1000,
     "rate_limit": 5000,
     "recognition": "DirectHit",
     "timeout": 10000
-  },
-  "麒麟-打开寮信息面板": {
-    "action": "Click",
-    "expected": "寮|信息",
-    "recognition": "OCR",
-    "roi": [
-      1149,
-      658,
-      127,
-      62
-    ]
-  },
-  "麒麟-确保位于阴阳寮内": {
-    "expected": "寮|信息",
-    "next": [
-      "麒麟3",
-      "[JumpBack]麒麟2",
-      "[JumpBack]麒麟-打开寮信息面板"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      1149,
-      658,
-      127,
-      62
-    ]
   },
   "麒麟-识别是否战斗结束": {
     "action": "Click",
@@ -86,7 +61,7 @@
   "麒麟10": {
     "expected": "^\\d{2,}$",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -146,38 +121,6 @@
       501,
       128
     ]
-  },
-  "麒麟2": {
-    "action": "Click",
-    "recognition": "TemplateMatch",
-    "roi": [
-      1006,
-      570,
-      273,
-      149
-    ],
-    "template": [
-      "麒麟/麒麟2.png"
-    ]
-  },
-  "麒麟3": {
-    "action": "Click",
-    "expected": "神",
-    "next": [
-      "麒麟11",
-      "[JumpBack]麒麟4"
-    ],
-    "on_error": [
-      "返回庭院"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      1174,
-      369,
-      47,
-      92
-    ],
-    "timeout": 4000
   },
   "麒麟4": {
     "action": "Click",
