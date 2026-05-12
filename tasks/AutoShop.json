@@ -1,0 +1,367 @@
+{
+    "task": [
+        {
+            "name": "自动购物",
+            "label": "自动购物",
+            "entry": "商店购买",
+            "option": [
+                "特殊商店购买",
+                "荣誉商店购买",
+                "友情商店购买",
+                "勋章商店购买",
+                "魅力商店购买"
+            ]
+        }
+    ],
+    "option": {
+        "特殊商店购买":{
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "购买",
+                    "pipeline_override": {
+                        "商店购买-购买特殊商店物品": {
+                            "enable": true
+                        }
+                    },
+                    "option": [
+                        "购买特殊商店物品"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "不购买",
+                    "pipeline_override": {
+                        "商店购买-购买特殊商店物品": {
+                            "enable": false
+                        }
+                    }
+                }
+            ]
+        },
+        "荣誉商店购买":{
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "购买",
+                    "pipeline_override": {
+                        "商店购买-购买荣誉商店物品": {
+                            "enable": true
+                        }
+                    },
+                    "option": [
+                        "购买荣誉商店物品"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "不购买",
+                    "pipeline_override": {
+                        "商店购买-购买荣誉商店物品": {
+                            "enable": false
+                        }
+                    }
+                }
+            ]
+        },
+        "友情商店购买":{
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "购买",
+                    "pipeline_override": {
+                        "商店购买-购买友情商店物品": {
+                            "enable": true
+                        }
+                    },
+                    "option": [
+                        "购买友情商店物品"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "不购买",
+                    "pipeline_override": {
+                        "商店购买-购买友情商店物品": {
+                            "enable": false
+                        }
+                    }
+                }
+            ]
+        },
+        "勋章商店购买":{
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "购买",
+                    "pipeline_override": {
+                        "商店购买-购买勋章商店物品": {
+                            "enable": true
+                        }
+                    },
+                    "option": [
+                        "购买勋章商店物品"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "不购买",
+                    "pipeline_override": {
+                        "商店购买-购买勋章商店物品": {
+                            "enable": false
+                        }
+                    }
+                }
+            ]
+        },
+        "魅力商店购买":{
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "购买",
+                    "pipeline_override": {
+                        "商店购买-购买魅力商店物品": {
+                            "enable": true
+                        }
+                    },
+                    "option": [
+                        "购买魅力商店物品"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "不购买",
+                    "pipeline_override": {
+                        "商店购买-购买魅力商店物品": {
+                            "enable": false
+                        }
+                    }
+                }
+            ]
+        },
+        "购买特殊商店物品":{
+            "type": "checkbox",
+            "cases": [
+                {
+                    "name": "御灵之钥",
+                    "label": "御灵之钥",
+                    "pipeline_override": {
+                        "商店购买-特殊商店购买-御灵境之钥":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "百物式盘",
+                    "label": "百物式盘",
+                    "pipeline_override": {
+                        "商店购买-特殊商店购买-百物式盘":{
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        },
+        "购买荣誉商店物品":{
+            "type": "checkbox",
+            "cases": [
+                {
+                    "name": "两面佛碎片",
+                    "label": "两面佛碎片",
+                    "pipeline_override": {
+                        "商店购买-荣誉商店购买-两面佛碎片":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "神秘的符咒",
+                    "label": "神秘的符咒",
+                    "pipeline_override": {
+                        "商店购买-荣誉商店购买-神秘的符咒":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "欲行达摩碎片",
+                    "label": "欲行达摩碎片",
+                    "pipeline_override": {
+                        "商店购买-荣誉商店购买-欲行达摩碎片":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "三星奉为达摩",
+                    "label": "三星奉为达摩",
+                    "pipeline_override": {
+                        "商店购买-荣誉商店购买-三星奉为达摩":{
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        },
+        "购买友情商店物品":{
+            "type": "checkbox",
+            "cases": [
+                {
+                    "name": "奉为达摩",
+                    "label": "奉为达摩",
+                    "pipeline_override": {
+                        "商店购买-友情商店购买-奉为达摩":{
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        },
+        "购买勋章商店物品":{
+            "type": "checkbox",
+            "cases": [
+                {
+                    "name": "神秘的符咒",
+                    "label": "神秘的符咒",
+                    "pipeline_override": {
+                        "商店购买-勋章商店购买-神秘的符咒":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "御行达摩",
+                    "label": "御行达摩",
+                    "pipeline_override": {
+                        "商店购买-勋章商店购买-御行达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "随机六星御魂",
+                    "label": "随机六星御魂",
+                    "pipeline_override": {
+                        "商店购买-勋章商店购买-随机六星御魂":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "奉为达摩",
+                    "label": "奉为达摩",
+                    "pipeline_override": {
+                        "商店购买-勋章商店购买-奉为达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "式神挑战劵",
+                    "label": "式神挑战劵",
+                    "pipeline_override": {
+                        "商店购买-勋章商店购买-式神挑战劵":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "100体力",
+                    "label": "100体力",
+                    "pipeline_override": {
+                        "商店购买-勋章商店购买-100体力":{
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        },
+        "购买魅力商店物品":{
+            "type": "checkbox",
+            "cases": [
+                {
+                    "name": "招福达摩",
+                    "label": "招福达摩",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-招福达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "奉为达摩",
+                    "label": "奉为达摩",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-奉为达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "神秘的符咒",
+                    "label": "神秘的符咒",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-神秘的符咒":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "御魂礼盒",
+                    "label": "御魂礼盒",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-御魂礼盒":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "鬼火烧",
+                    "label": "鬼火烧",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-鬼火烧":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "葫芦酒",
+                    "label": "葫芦酒",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-葫芦酒":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "口水蛙",
+                    "label": "口水蛙",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-口水蛙":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "御行达摩碎片",
+                    "label": "御行达摩碎片",
+                    "pipeline_override": {
+                        "商店购买-魅力商店购买-御行达摩碎片":{
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
