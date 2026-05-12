@@ -338,18 +338,6 @@
       "通用/返回庭院_识别叉.png"
     ]
   },
-  "通用": {
-    "action": "Custom",
-    "custom_action": "BonusToggleAction",
-    "custom_action_param": {
-      "bonus_type": "exp_100%",
-      "enable": false
-    },
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "DirectHit"
-  },
   "通用-快捷返回庭院": {
     "action": "Click",
     "post_delay": 1000,

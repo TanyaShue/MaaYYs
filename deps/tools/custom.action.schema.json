@@ -4,256 +4,101 @@
     "properties": {
         "custom_action": {
             "enum": [
-                "DisableNode",
-                "NodeOverride",
-                "ResetCount",
-                "SubTask",
-                "DuringAct",
-                "DuringAnecdote",
-                "DuringRe_release",
-                "BankPurchaseRecord",
-                "ModifyBankTaskList",
-                "SwitchCombatTimes",
-                "PsychubeDoubleTimes",
-                "LucidscapeStageSelect",
-                "LucidscapeStatusDetect",
-                "TeamSelect",
-                "CombatTargetLevel",
-                "SummonlngSwipe",
-                "GoodDreamWellFishing",
-                "SOD_DifficultySelect",
-                "ActivityTargetLevel",
-                "SelectChapter",
-                "SelectCombatStage",
-                "TargetCountInit",
-                "TargetCountDetermine",
-                "TargetCountSelectTimes",
-                "TargetCountEatCandy",
-                "TargetCountProgress",
-                "TargetCountFinish",
-                "TargetCountAbort",
-                "JudgeDepthsOfMythWeekly",
-                "ResetEatCandyFlag",
-                "CombatActivityOverride",
-                "SOSShoppingList",
-                "SOSBuyItems",
-                "SOSSwitchStat",
-                "SSTaskEntryGet",
-                "SSReopenReplay",
-                "SailingRecordDiceStrategy",
-                "SailingRecordBoatSelect",
-                "CCResetData",
-                "CCChessboard",
-                "CCLevelUp",
-                "CCBuyCard",
-                "SOSSelectNoise",
-                "SOSSelectInstrument",
-                "SOSSelectNode",
-                "SOSNodeProcess",
-                "SOSSelectEncounterOption_OCR",
-                "SOSSelectEncounterOption_HSV",
-                "EatCandyStart",
-                "DropRecognition",
-                "RedeemCode",
-                "RewardHandler",
-                "RecordID",
-                "SwitchAccountSelect",
-                "CIRecordLevel",
-                "CITask",
-                "CIRecordPeopleMaxCount",
-                "CISelectResearchers",
-                "EightBitCombatMove",
-                "EightBitScoreRecord",
-                "EightBitCombatInit"
+                "AutoBattle",
+                "AutoFoster",
+                "BonusToggleAction",
+                "BountyMonsterRecognition",
+                "ChallengeDungeonBoss",
+                "CountAction",
+                "Guess",
+                "HumanTouch",
+                "Kun28",
+                "LoopAction",
+                "QuestionMatcher",
+                "RandomSwipe",
+                "RandomTask",
+                "RandomTouch",
+                "RandomWait",
+                "RepeatChallengeNTimes",
+                "ReStart",
+                "ReStartGame",
+                "SwitchSoul",
+                "TaskCounter",
+                "TaskList",
+                "TeamBuilder",
+                "TimeCheck"
             ]
         }
     },
     "anyOf": [
         {
-            "$ref": "#/$defs/DisableNode"
+            "$ref": "#/$defs/AutoBattle"
         },
         {
-            "$ref": "#/$defs/NodeOverride"
+            "$ref": "#/$defs/AutoFoster"
         },
         {
-            "$ref": "#/$defs/ResetCount"
+            "$ref": "#/$defs/BonusToggleAction"
         },
         {
-            "$ref": "#/$defs/SubTask"
+            "$ref": "#/$defs/BountyMonsterRecognition"
         },
         {
-            "$ref": "#/$defs/DuringAct"
+            "$ref": "#/$defs/ChallengeDungeonBoss"
         },
         {
-            "$ref": "#/$defs/DuringAnecdote"
+            "$ref": "#/$defs/CountAction"
         },
         {
-            "$ref": "#/$defs/DuringRe_release"
+            "$ref": "#/$defs/Guess"
         },
         {
-            "$ref": "#/$defs/BankPurchaseRecord"
+            "$ref": "#/$defs/HumanTouch"
         },
         {
-            "$ref": "#/$defs/ModifyBankTaskList"
+            "$ref": "#/$defs/Kun28"
         },
         {
-            "$ref": "#/$defs/SwitchCombatTimes"
+            "$ref": "#/$defs/LoopAction"
         },
         {
-            "$ref": "#/$defs/PsychubeDoubleTimes"
+            "$ref": "#/$defs/QuestionMatcher"
         },
         {
-            "$ref": "#/$defs/LucidscapeStageSelect"
+            "$ref": "#/$defs/RandomSwipe"
         },
         {
-            "$ref": "#/$defs/LucidscapeStatusDetect"
+            "$ref": "#/$defs/RandomTask"
         },
         {
-            "$ref": "#/$defs/TeamSelect"
+            "$ref": "#/$defs/RandomTouch"
         },
         {
-            "$ref": "#/$defs/CombatTargetLevel"
+            "$ref": "#/$defs/RandomWait"
         },
         {
-            "$ref": "#/$defs/SummonlngSwipe"
+            "$ref": "#/$defs/RepeatChallengeNTimes"
         },
         {
-            "$ref": "#/$defs/GoodDreamWellFishing"
+            "$ref": "#/$defs/ReStart"
         },
         {
-            "$ref": "#/$defs/SOD_DifficultySelect"
+            "$ref": "#/$defs/ReStartGame"
         },
         {
-            "$ref": "#/$defs/ActivityTargetLevel"
+            "$ref": "#/$defs/SwitchSoul"
         },
         {
-            "$ref": "#/$defs/SelectChapter"
+            "$ref": "#/$defs/TaskCounter"
         },
         {
-            "$ref": "#/$defs/SelectCombatStage"
+            "$ref": "#/$defs/TaskList"
         },
         {
-            "$ref": "#/$defs/TargetCountInit"
+            "$ref": "#/$defs/TeamBuilder"
         },
         {
-            "$ref": "#/$defs/TargetCountDetermine"
-        },
-        {
-            "$ref": "#/$defs/TargetCountSelectTimes"
-        },
-        {
-            "$ref": "#/$defs/TargetCountEatCandy"
-        },
-        {
-            "$ref": "#/$defs/TargetCountProgress"
-        },
-        {
-            "$ref": "#/$defs/TargetCountFinish"
-        },
-        {
-            "$ref": "#/$defs/TargetCountAbort"
-        },
-        {
-            "$ref": "#/$defs/JudgeDepthsOfMythWeekly"
-        },
-        {
-            "$ref": "#/$defs/ResetEatCandyFlag"
-        },
-        {
-            "$ref": "#/$defs/CombatActivityOverride"
-        },
-        {
-            "$ref": "#/$defs/SOSShoppingList"
-        },
-        {
-            "$ref": "#/$defs/SOSBuyItems"
-        },
-        {
-            "$ref": "#/$defs/SOSSwitchStat"
-        },
-        {
-            "$ref": "#/$defs/DataOnlyAction"
-        },
-        {
-            "$ref": "#/$defs/SSTaskEntryGet"
-        },
-        {
-            "$ref": "#/$defs/SSReopenReplay"
-        },
-        {
-            "$ref": "#/$defs/SailingRecordDiceStrategy"
-        },
-        {
-            "$ref": "#/$defs/SailingRecordBoatSelect"
-        },
-        {
-            "$ref": "#/$defs/CCResetData"
-        },
-        {
-            "$ref": "#/$defs/CCChessboard"
-        },
-        {
-            "$ref": "#/$defs/CCLevelUp"
-        },
-        {
-            "$ref": "#/$defs/CCBuyCard"
-        },
-        {
-            "$ref": "#/$defs/SOSSelectNoise"
-        },
-        {
-            "$ref": "#/$defs/SOSSelectInstrument"
-        },
-        {
-            "$ref": "#/$defs/SOSSelectNode"
-        },
-        {
-            "$ref": "#/$defs/SOSNodeProcess"
-        },
-        {
-            "$ref": "#/$defs/SOSSelectEncounterOption_OCR"
-        },
-        {
-            "$ref": "#/$defs/SOSSelectEncounterOption_HSV"
-        },
-        {
-            "$ref": "#/$defs/EatCandyStart"
-        },
-        {
-            "$ref": "#/$defs/DropRecognition"
-        },
-        {
-            "$ref": "#/$defs/RedeemCode"
-        },
-        {
-            "$ref": "#/$defs/RewardHandler"
-        },
-        {
-            "$ref": "#/$defs/RecordID"
-        },
-        {
-            "$ref": "#/$defs/SwitchAccountSelect"
-        },
-        {
-            "$ref": "#/$defs/CIRecordLevel"
-        },
-        {
-            "$ref": "#/$defs/CITask"
-        },
-        {
-            "$ref": "#/$defs/CIRecordPeopleMaxCount"
-        },
-        {
-            "$ref": "#/$defs/CISelectResearchers"
-        },
-        {
-            "$ref": "#/$defs/EightBitCombatMove"
-        },
-        {
-            "$ref": "#/$defs/EightBitScoreRecord"
-        },
-        {
-            "$ref": "#/$defs/EightBitCombatInit"
+            "$ref": "#/$defs/TimeCheck"
         }
     ],
     "$defs": {
@@ -271,19 +116,7 @@
                 }
             ]
         },
-        "DataOnlyAction": {
-            "description": "数据节点：只有custom_action_param，没有custom_action，用于存放其他action读取的数据",
-            "properties": {
-                "custom_action": false,
-                "custom_action_param": {
-                    "type": "object"
-                }
-            },
-            "required": [
-                "custom_action_param"
-            ]
-        },
-        "DisableNode": {
+        "AutoBattle": {
             "allOf": [
                 {
                     "$ref": "#/$defs/RequiredParam"
@@ -291,25 +124,26 @@
             ],
             "properties": {
                 "custom_action": {
-                    "const": "DisableNode",
-                    "description": "将特定 node 设置为 disable 状态 。"
+                    "const": "AutoBattle",
+                    "description": "自动战斗，可选配置预设分组和队伍"
                 },
                 "custom_action_param": {
                     "type": "object",
                     "properties": {
-                        "node_name": {
+                        "group_name": {
                             "type": "string",
-                            "description": "需要设置为 disable 状态的节点名称"
+                            "description": "预设分组名称"
+                        },
+                        "team_name": {
+                            "type": "string",
+                            "description": "预设队伍名称"
                         }
                     },
-                    "required": [
-                        "node_name"
-                    ],
-                    "unevaluatedProperties": false
+                    "additionalProperties": false
                 }
             }
         },
-        "NodeOverride": {
+        "AutoFoster": {
             "allOf": [
                 {
                     "$ref": "#/$defs/RequiredParam"
@@ -317,22 +151,380 @@
             ],
             "properties": {
                 "custom_action": {
-                    "const": "NodeOverride",
-                    "description": "在 node 中执行 pipeline_override 。"
+                    "const": "AutoFoster",
+                    "description": "自动寄养（结界寄养）"
                 },
                 "custom_action_param": {
                     "type": "object",
-                    "patternProperties": {
-                        "^.*$": {
-                            "type": "object",
-                            "description": "节点覆盖配置，键为节点名称，值为覆盖参数对象",
-                            "additionalProperties": true
+                    "properties": {
+                        "FosterTarget": {
+                            "type": "integer",
+                            "enum": [1, 2],
+                            "default": 1,
+                            "description": "1: 勾玉(默认), 2: 体力"
                         }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "BonusToggleAction": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "BonusToggleAction",
+                    "description": "控制各种加成的开关状态"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "exp_100%": {
+                            "type": "boolean",
+                            "description": "战斗胜利获得的经验增加100%"
+                        },
+                        "exp_50%": {
+                            "type": "boolean",
+                            "description": "战斗胜利获得的经验增加50%"
+                        },
+                        "gold_100%": {
+                            "type": "boolean",
+                            "description": "战斗胜利获得的金币增加100%"
+                        },
+                        "gold_50%": {
+                            "type": "boolean",
+                            "description": "战斗胜利获得的金币增加50%"
+                        },
+                        "drop_awake": {
+                            "type": "boolean",
+                            "description": "觉醒副本掉落额外的觉醒材料"
+                        },
+                        "drop_soul": {
+                            "type": "boolean",
+                            "description": "八岐大蛇掉落额外的御魂材料"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "BountyMonsterRecognition": {
+            "properties": {
+                "custom_action": {
+                    "const": "BountyMonsterRecognition",
+                    "description": "识别悬赏妖怪并开始探索"
+                }
+            }
+        },
+        "ChallengeDungeonBoss": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "ChallengeDungeonBoss",
+                    "description": "自动挑战地鬼"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "count": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "default": 1,
+                            "description": "挑战地鬼数量"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "CountAction": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "CountAction",
+                    "description": "计数动作，循环截图并运行指定的识别任务"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "next_task": {
+                            "type": "string",
+                            "description": "达到目标计数后执行的下一个任务名"
+                        },
+                        "count_target": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "description": "目标计数次数"
+                        },
+                        "interval": {
+                            "type": "number",
+                            "default": 1.0,
+                            "description": "每次识别之间的等待间隔（秒）"
+                        },
+                        "task_to_count": {
+                            "type": "string",
+                            "description": "要计数的识别任务名"
+                        }
+                    },
+                    "required": ["next_task", "count_target", "task_to_count"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "Guess": {
+            "properties": {
+                "custom_action": {
+                    "const": "Guess",
+                    "description": "竞猜动作，选择人数多的一方"
+                }
+            }
+        },
+        "HumanTouch": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "HumanTouch",
+                    "description": "模拟人类点击行为"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "ROI_1": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "minItems": 4,
+                            "maxItems": 4,
+                            "default": [400, 520, 800, 600],
+                            "description": "点击区域 [x, y, w, h]"
+                        },
+                        "short_wait_min": {
+                            "type": "number",
+                            "default": 1,
+                            "description": "短等待最小时间(秒)"
+                        },
+                        "short_wait_max": {
+                            "type": "number",
+                            "default": 20,
+                            "description": "短等待最大时间(秒)"
+                        },
+                        "long_wait_min": {
+                            "type": "number",
+                            "default": 100,
+                            "description": "长等待最小时间(秒)"
+                        },
+                        "long_wait_max": {
+                            "type": "number",
+                            "default": 200,
+                            "description": "长等待最大时间(秒)"
+                        },
+                        "short_wait_weight": {
+                            "type": "number",
+                            "default": 95,
+                            "description": "短等待权重"
+                        },
+                        "long_wait_weight": {
+                            "type": "number",
+                            "default": 5,
+                            "description": "长等待权重"
+                        },
+                        "single_click_weight": {
+                            "type": "number",
+                            "default": 50,
+                            "description": "单击权重"
+                        },
+                        "double_click_weight": {
+                            "type": "number",
+                            "default": 50,
+                            "description": "双击权重"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "Kun28": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "Kun28",
+                    "description": "Kun28任务，进入探索后识别突破卷数量"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "group_name": {
+                            "type": "string",
+                            "description": "预设分组名称"
+                        },
+                        "team_name": {
+                            "type": "string",
+                            "description": "预设队伍名称"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "LoopAction": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "LoopAction",
+                    "description": "循环执行一系列动作"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "action_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "minItems": 1,
+                            "description": "要循环执行的动作名列表"
+                        },
+                        "loop_times": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "description": "循环次数"
+                        },
+                        "on_error": {
+                            "type": "string",
+                            "description": "出错时的处理策略"
+                        }
+                    },
+                    "required": ["action_list", "loop_times"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "QuestionMatcher": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "QuestionMatcher",
+                    "description": "问题匹配动作，识别问题和答案"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "upload": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "是否上传"
+                        },
+                        "sync": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "是否同步"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "RandomSwipe": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "RandomSwipe",
+                    "description": "在指定区域内随机滑动"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "start_roi": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "minItems": 4,
+                            "maxItems": 4,
+                            "description": "起始区域 [x, y, w, h]"
+                        },
+                        "end_roi": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "minItems": 4,
+                            "maxItems": 4,
+                            "description": "结束区域 [x, y, w, h]"
+                        },
+                        "delay": {
+                            "type": "integer",
+                            "default": 200,
+                            "description": "滑动持续时间(毫秒)"
+                        }
+                    },
+                    "required": ["start_roi", "end_roi"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "RandomTask": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "RandomTask",
+                    "description": "根据权重随机选择并执行一个任务"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "description": "任务名到权重的映射，键为任务名称，值为权重（非负数）",
+                    "additionalProperties": {
+                        "type": "number",
+                        "minimum": 0
                     }
                 }
             }
         },
-        "ResetCount": {
+        "RandomTouch": {
+            "properties": {
+                "custom_action": {
+                    "const": "RandomTouch",
+                    "description": "在识别框区域内随机点击"
+                }
+            }
+        },
+        "RandomWait": {
             "allOf": [
                 {
                     "$ref": "#/$defs/RequiredParam"
@@ -340,108 +532,98 @@
             ],
             "properties": {
                 "custom_action": {
-                    "const": "ResetCount",
-                    "description": "重置指定节点的命中计数。"
+                    "const": "RandomWait",
+                    "description": "在指定时间范围内随机等待"
                 },
                 "custom_action_param": {
                     "type": "object",
                     "properties": {
-                        "nodes": {
-                            "type": "array",
-                            "description": "需要重置命中计数的节点名称列表",
-                            "items": {
-                                "type": "string",
-                                "minLength": 1
-                            },
-                            "minItems": 1
+                        "min": {
+                            "description": "最小等待时间(秒)"
                         },
-                        "strict": {
+                        "max": {
+                            "description": "最大等待时间(秒)"
+                        }
+                    },
+                    "required": ["min", "max"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "RepeatChallengeNTimes": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "RepeatChallengeNTimes",
+                    "description": "设置自动挑战次数"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "start_repeat": {
                             "type": "boolean",
-                            "description": "任一节点重置失败时，当前 action 是否视为失败",
-                            "default": false
-                        }
-                    },
-                    "required": [
-                        "nodes"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "SubTask": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "SubTask",
-                    "description": "按顺序执行 custom_action_param.sub 中的子任务。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "sub": {
-                            "type": "array",
-                            "description": "按顺序执行的子任务名称列表",
-                            "items": {
-                                "type": "string"
-                            },
-                            "minItems": 1
+                            "default": true,
+                            "description": "是否启动自动挑战"
                         },
-                        "continue": {
-                            "type": "boolean",
-                            "description": "任一子任务失败后是否继续执行后续子任务",
-                            "default": false
+                        "expected_number": {
+                            "type": "integer",
+                            "default": 1,
+                            "description": "期望的挑战次数"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "ReStart": {
+            "properties": {
+                "custom_action": {
+                    "const": "ReStart",
+                    "description": "超时重启动作"
+                }
+            }
+        },
+        "ReStartGame": {
+            "properties": {
+                "custom_action": {
+                    "const": "ReStartGame",
+                    "description": "重启游戏"
+                }
+            }
+        },
+        "SwitchSoul": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "SwitchSoul",
+                    "description": "切换御魂预设"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "group_name": {
+                            "type": "string",
+                            "description": "御魂预设分组名称"
                         },
-                        "strict": {
-                            "type": "boolean",
-                            "description": "任一子任务失败时，当前 action 是否视为失败",
-                            "default": true
-                        }
-                    },
-                    "required": [
-                        "sub"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "DuringAct": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "DuringAct",
-                    "description": "判断当前是否在作战开放期间。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "resource": {
+                        "team_name": {
                             "type": "string",
-                            "enum": [
-                                "cn",
-                                "en",
-                                "jp",
-                                "tw"
-                            ],
-                            "default": "cn",
-                            "description": "资源版本，决定使用的数据和时区"
+                            "description": "御魂预设队伍名称"
                         }
                     },
-                    "required": [
-                        "resource"
-                    ],
-                    "unevaluatedProperties": false
+                    "required": ["group_name", "team_name"],
+                    "additionalProperties": false
                 }
             }
         },
-        "DuringAnecdote": {
+        "TaskCounter": {
             "allOf": [
                 {
                     "$ref": "#/$defs/RequiredParam"
@@ -449,445 +631,24 @@
             ],
             "properties": {
                 "custom_action": {
-                    "const": "DuringAnecdote",
-                    "description": "判断当前是否在轶事开放期间。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "resource": {
-                            "type": "string",
-                            "enum": [
-                                "cn",
-                                "en",
-                                "jp",
-                                "tw"
-                            ],
-                            "default": "cn",
-                            "description": "资源版本，决定使用的数据和时区"
-                        }
-                    },
-                    "required": [
-                        "resource"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "DuringRe_release": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "DuringRe_release",
-                    "description": "判断当前是否在复刻开放期间。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "resource": {
-                            "type": "string",
-                            "enum": [
-                                "cn",
-                                "en",
-                                "jp",
-                                "tw"
-                            ],
-                            "default": "cn",
-                            "description": "资源版本，决定使用的数据和时区"
-                        }
-                    },
-                    "required": [
-                        "resource"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "BankPurchaseRecord": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "BankPurchaseRecord",
-                    "description": "记录在银行购买物品的时间戳。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "item": {
-                            "type": "string",
-                            "description": "物品名称"
-                        }
-                    },
-                    "required": [
-                        "item"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "ModifyBankTaskList": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "ModifyBankTaskList",
-                    "description": "根据本地记录的物品购买时间修改任务链。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "resource": {
-                            "type": "string",
-                            "enum": [
-                                "cn",
-                                "en",
-                                "jp",
-                                "tw"
-                            ],
-                            "default": "cn",
-                            "description": "资源版本，决定使用的时区"
-                        }
-                    },
-                    "required": [
-                        "resource"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "SwitchCombatTimes": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "SwitchCombatTimes",
-                    "description": "选择战斗次数。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "times": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 4,
-                            "description": "目标次数"
-                        }
-                    },
-                    "required": [
-                        "times"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "PsychubeDoubleTimes": {
-            "properties": {
-                "custom_action": {
-                    "const": "PsychubeDoubleTimes",
-                    "description": "识别加成次数，根据结果覆盖 PsychubeVictoryOverrideTask 中参数。"
-                }
-            }
-        },
-        "LucidscapeStageSelect": {
-            "properties": {
-                "custom_action": {
-                    "const": "LucidscapeStageSelect",
-                    "description": "醒梦域界面，选择最新可进入片段。"
-                }
-            }
-        },
-        "LucidscapeStatusDetect": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "LucidscapeStatusDetect",
-                    "description": "醒梦域片段界面，通过检测当前状态决定后续动作。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "stage": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 4,
-                            "description": "所处深眠片段"
-                        }
-                    },
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "TeamSelect": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "TeamSelect",
-                    "description": "选择作战队伍。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "team": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 4
-                        }
-                    },
-                    "required": [
-                        "team"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "CombatTargetLevel": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "CombatTargetLevel",
-                    "description": "选择主线作战目标难度。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "level": {
-                            "type": "string",
-                            "enum": [
-                                "童话",
-                                "故事",
-                                "厄险"
-                            ],
-                            "description": "目标难度"
-                        }
-                    },
-                    "required": [
-                        "level"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "SummonlngSwipe": {
-            "properties": {
-                "custom_action": {
-                    "const": "SummonlngSwipe",
-                    "description": "分派魔精滑动名片。"
-                }
-            }
-        },
-        "GoodDreamWellFishing": {
-            "properties": {
-                "custom_action": {
-                    "const": "GoodDreamWellFishing",
-                    "description": "好梦井打捞。"
-                }
-            }
-        },
-        "SOD_DifficultySelect": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "SOD_DifficultySelect",
-                    "description": "黄昏的音序难度选择。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "level": {
-                            "type": "string",
-                            "enum": [
-                                "5",
-                                "10",
-                                "11",
-                                "cur",
-                                "max"
-                            ],
-                            "description": "目标难度，5|10|11|cur(当前)|max(最高)"
-                        }
-                    },
-                    "required": [
-                        "level"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "ActivityTargetLevel": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "ActivityTargetLevel",
-                    "description": "选择活动作战目标难度。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "level": {
-                            "type": "string",
-                            "enum": [
-                                "故事",
-                                "意外",
-                                "艰难"
-                            ],
-                            "description": "目标难度"
-                        }
-                    },
-                    "required": [
-                        "level"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "SelectChapter": {
-            "properties": {
-                "custom_action": {
-                    "const": "SelectChapter",
-                    "description": "选择主线章节。"
-                }
-            }
-        },
-        "SelectCombatStage": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "SelectCombatStage",
-                    "description": "处理关卡和难度信息，并修改后续任务。"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "stage": {
-                            "type": "string"
-                        },
-                        "level": {
-                            "type": "string",
-                            "enum": [
-                                "Hard",
-                                "Story"
-                            ],
-                            "description": "目标难度"
-                        }
-                    },
-                    "required": [
-                        "stage",
-                        "level"
-                    ],
-                    "unevaluatedProperties": true
-                }
-            }
-        },
-        "TargetCountInit": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "TargetCountInit",
-                    "description": "初始化刷图目标次数。"
+                    "const": "TaskCounter",
+                    "description": "任务计数器"
                 },
                 "custom_action_param": {
                     "type": "object",
                     "properties": {
                         "target_count": {
                             "type": "integer",
-                            "minimum": 0,
-                            "description": "目标次数，不填或填0表示清空体力"
+                            "minimum": 1,
+                            "description": "目标次数"
                         }
                     },
-                    "unevaluatedProperties": false
+                    "required": ["target_count"],
+                    "additionalProperties": false
                 }
             }
         },
-        "TargetCountDetermine": {
-            "properties": {
-                "custom_action": {
-                    "const": "TargetCountDetermine",
-                    "description": "决定下一步动作：复现 / 吃糖 / 结束。"
-                }
-            }
-        },
-        "TargetCountSelectTimes": {
-            "properties": {
-                "custom_action": {
-                    "const": "TargetCountSelectTimes",
-                    "description": "根据状态选择复现次数。"
-                }
-            }
-        },
-        "TargetCountEatCandy": {
-            "properties": {
-                "custom_action": {
-                    "const": "TargetCountEatCandy",
-                    "description": "通过 EatCandy 流水线补体力。"
-                }
-            }
-        },
-        "TargetCountProgress": {
-            "properties": {
-                "custom_action": {
-                    "const": "TargetCountProgress",
-                    "description": "统计复现次数并决定是否继续。"
-                }
-            }
-        },
-        "TargetCountFinish": {
-            "properties": {
-                "custom_action": {
-                    "const": "TargetCountFinish",
-                    "description": "结束刷图，返回主界面。"
-                }
-            }
-        },
-        "TargetCountAbort": {
-            "properties": {
-                "custom_action": {
-                    "const": "TargetCountAbort",
-                    "description": "识别失败等异常情况下终止刷图任务。"
-                }
-            }
-        },
-        "JudgeDepthsOfMythWeekly": {
+        "TaskList": {
             "allOf": [
                 {
                     "$ref": "#/$defs/RequiredParam"
@@ -895,345 +656,110 @@
             ],
             "properties": {
                 "custom_action": {
-                    "const": "JudgeDepthsOfMythWeekly",
-                    "description": "记录在雨中悬想每周扫荡的时间戳。"
+                    "const": "TaskList",
+                    "description": "任务列表执行器"
                 },
                 "custom_action_param": {
                     "type": "object",
                     "properties": {
-                        "resource": {
-                            "type": "string",
-                            "enum": [
-                                "cn",
-                                "en",
-                                "jp",
-                                "tw"
-                            ],
-                            "default": "cn",
-                            "description": "资源版本，决定使用的时区"
+                        "tasks": {
+                            "type": "object",
+                            "description": "任务名到配置的映射",
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "是否启用该任务"
+                                    },
+                                    "once_per_day": {
+                                        "type": "boolean",
+                                        "description": "是否每天只执行一次"
+                                    }
+                                },
+                                "additionalProperties": false
+                            }
                         }
                     },
-                    "required": [
-                        "resource"
-                    ],
-                    "unevaluatedProperties": false
+                    "required": ["tasks"],
+                    "additionalProperties": false
                 }
             }
         },
-        "ResetEatCandyFlag": {
-            "properties": {
-                "custom_action": {
-                    "const": "ResetEatCandyFlag",
-                    "description": "重置吃糖标记"
+        "TeamBuilder": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
                 }
-            }
-        },
-        "CombatActivityOverride": {
+            ],
             "properties": {
                 "custom_action": {
-                    "const": "CombatActivityOverride",
-                    "description": "数据中如有override字段，则进行覆盖"
+                    "const": "TeamBuilder",
+                    "description": "组队通信，通过TCP Socket实现多机通信"
                 },
                 "custom_action_param": {
                     "type": "object",
                     "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "本机标识ID"
+                        },
+                        "port": {
+                            "type": "integer",
+                            "description": "TCP通信端口"
+                        }
+                    },
+                    "required": ["id", "port"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "TimeCheck": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_action": {
+                    "const": "TimeCheck",
+                    "description": "时间+日期范围检查"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "start": {
+                            "type": "string",
+                            "description": "开始时间，格式 \"15:04\" 或 \"15:04:05\""
+                        },
+                        "end": {
+                            "type": "string",
+                            "description": "结束时间，格式 \"15:04\" 或 \"15:04:05\""
+                        },
                         "mode": {
-                            "type": "integer",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "description": "0: 普通模式, 1: 复刻模式"
-                        }
-                    },
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "SOSShoppingList": {
-            "properties": {
-                "custom_action": {
-                    "const": "SOSShoppingList",
-                    "description": "局外演绎：无声综合征-购物列表处理"
-                }
-            }
-        },
-        "SOSBuyItems": {
-            "properties": {
-                "custom_action": {
-                    "const": "SOSBuyItems",
-                    "description": "局外演绎：无声综合征-购买物品"
-                }
-            }
-        },
-        "SOSSwitchStat": {
-            "properties": {
-                "custom_action": {
-                    "const": "SOSSwitchStat",
-                    "description": "局外演绎：无声综合征-切换待提升的属性"
-                }
-            }
-        },
-        "SSTaskEntryGet": {
-            "properties": {
-                "custom_action": {
-                    "const": "SSTaskEntryGet",
-                    "description": "获取SS任务入口"
-                }
-            }
-        },
-        "SSReopenReplay": {
-            "properties": {
-                "custom_action": {
-                    "const": "SSReopenReplay",
-                    "description": "SS复刻重玩"
-                }
-            }
-        },
-        "SailingRecordDiceStrategy": {
-            "properties": {
-                "custom_action": {
-                    "const": "SailingRecordDiceStrategy",
-                    "description": "计算骰子选择的最优策略"
-                }
-            }
-        },
-        "SailingRecordBoatSelect": {
-            "properties": {
-                "custom_action": {
-                    "const": "SailingRecordBoatSelect",
-                    "description": "选择骰子"
-                }
-            }
-        },
-        "CCResetData": {
-            "properties": {
-                "custom_action": {
-                    "const": "CCResetData",
-                    "description": "翻斗棋：重置数据"
-                }
-            }
-        },
-        "CCChessboard": {
-            "properties": {
-                "custom_action": {
-                    "const": "CCChessboard",
-                    "description": "翻斗棋：棋盘位置记录"
-                }
-            }
-        },
-        "CCLevelUp": {
-            "properties": {
-                "custom_action": {
-                    "const": "CCLevelUp",
-                    "description": "翻斗棋：粘贴处升级识别，如升级则等待"
-                }
-            }
-        },
-        "CCBuyCard": {
-            "properties": {
-                "custom_action": {
-                    "const": "CCBuyCard",
-                    "description": "翻斗棋：购买卡牌"
-                }
-            }
-        },
-        "SOSSelectNoise": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "SOSSelectNoise",
-                    "description": "局外演绎：无声综合征-选择噪声等级"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "level": {
-                            "type": "integer",
-                            "minimum": 0,
-                            "description": "噪声等级"
-                        }
-                    },
-                    "required": [
-                        "level"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "SOSSelectInstrument": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "SOSSelectInstrument",
-                    "description": "局外演绎：无声综合征-选择乐器"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "instrument": {
                             "type": "string",
-                            "description": "乐器名称"
+                            "enum": ["in", "out"],
+                            "default": "in",
+                            "description": "模式: in(在范围内返回true) 或 out(在范围外返回true)"
+                        },
+                        "date_rule": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "enum": ["none", "date", "dates", "month_day", "week"],
+                                    "description": "日期规则类型"
+                                },
+                                "value": {
+                                    "description": "规则值，根据type不同而不同"
+                                }
+                            },
+                            "required": ["type"],
+                            "additionalProperties": false
                         }
                     },
-                    "required": [
-                        "instrument"
-                    ],
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "SOSSelectNode": {
-            "properties": {
-                "custom_action": {
-                    "const": "SOSSelectNode",
-                    "description": "局外演绎：无声综合征-节点选择"
-                }
-            }
-        },
-        "SOSNodeProcess": {
-            "properties": {
-                "custom_action": {
-                    "const": "SOSNodeProcess",
-                    "description": "局外演绎：无声综合征-节点处理"
-                }
-            }
-        },
-        "SOSSelectEncounterOption_OCR": {
-            "properties": {
-                "custom_action": {
-                    "const": "SOSSelectEncounterOption_OCR",
-                    "description": "局外演绎：无声综合征-选择遭遇选项（OCR方式）"
-                }
-            }
-        },
-        "SOSSelectEncounterOption_HSV": {
-            "properties": {
-                "custom_action": {
-                    "const": "SOSSelectEncounterOption_HSV",
-                    "description": "局外演绎：无声综合征-选择遭遇选项（HSV方式）"
-                }
-            }
-        },
-        "EatCandyStart": {
-            "properties": {
-                "custom_action": {
-                    "const": "EatCandyStart",
-                    "description": "开始吃糖"
-                }
-            }
-        },
-        "DropRecognition": {
-            "properties": {
-                "custom_action": {
-                    "const": "DropRecognition",
-                    "description": "掉落识别"
-                }
-            }
-        },
-        "RedeemCode": {
-            "properties": {
-                "custom_action": {
-                    "const": "RedeemCode",
-                    "description": "Submit configured redeem codes."
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "check": {
-                            "type": "boolean",
-                            "description": "Skip codes that have already been recorded as used.",
-                            "default": true
-                        }
-                    },
-                    "unevaluatedProperties": false
-                }
-            }
-        },
-        "RewardHandler": {
-            "properties": {
-                "custom_action": {
-                    "const": "RewardHandler"
-                }
-            }
-        },       
-        "RecordID": {
-            "properties": {
-                "custom_action": {
-                    "const": "RecordID",
-                    "description": "记录当前用户名、id"
-                }
-            }
-        },
-        "SwitchAccountSelect": {
-            "properties": {
-                "custom_action": {
-                    "const": "SwitchAccountSelect",
-                    "description": "切换账号界面，选择账号登录"
-                }
-            }
-        },
-        "CIRecordLevel": {
-            "properties": {
-                "custom_action": {
-                    "const": "CIRecordLevel",
-                    "description": "完全归纳法：记录当前研究所等级"
-                }
-            }
-        },
-        "CITask": {
-            "properties": {
-                "custom_action": {
-                    "const": "CITask",
-                    "description": "完全归纳法：执行任务"
-                }
-            }
-        },
-        "CIRecordPeopleMaxCount": {
-            "properties": {
-                "custom_action": {
-                    "const": "CIRecordPeopleMaxCount",
-                    "description": "完全归纳法：记录当前最多可参与研究的人数"
-                }
-            }
-        },
-        "CISelectResearchers": {
-            "properties": {
-                "custom_action": {
-                    "const": "CISelectResearchers",
-                    "description": "完全归纳法：选择参与研究的人员"
-                }
-            }
-        },
-        "EightBitCombatMove": {
-            "properties": {
-                "custom_action": {
-                    "const": "EightBitCombatMove",
-                    "description": "8-bit 战斗界面移动逻辑"
-                }
-            }
-        },
-        "EightBitScoreRecord": {
-            "properties": {
-                "custom_action": {
-                    "const": "EightBitScoreRecord",
-                    "description": "8-bit 战斗结束后记录获得代币数量并统计效率"
-                }
-            }
-        },
-        "EightBitCombatInit": {
-            "properties": {
-                "custom_action": {
-                    "const": "EightBitCombatInit",
-                    "description": "8-bit 战斗初始化，检测是否需要开启碰壁检测"
+                    "required": ["start", "end"],
+                    "additionalProperties": false
                 }
             }
         }

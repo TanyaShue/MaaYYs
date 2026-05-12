@@ -40,24 +40,9 @@
         },
         "recognition": "DirectHit"
     },
-    "testChallengeBoss": {
-        "action": "Custom",
-        "custom_action": "ChallengeDungeonBoss",
-        "recognition": "DirectHit"
-    },
     "testOCR": {
         "expected": "AAACCC",
         "recognition": "OCR"
-    },
-    "testTaskList": {
-        "action": "Custom",
-        "custom_action": "TaskList",
-        "custom_action_param": {
-            "task_list": [
-                "领取奖励_任务列表"
-            ]
-        },
-        "recognition": "DirectHit"
     },
     "test_OCR_1": {
         "expected": ".*",
@@ -81,11 +66,6 @@
         ],
         "model": "BarrierCard.onnx",
         "recognition": "NeuralNetworkDetect"
-    },
-    "回到主页_key": {
-        "action": "key",
-        "key": 3,
-        "recognition": "DirectHit"
     },
     "打开阴阳师_key": {
         "action": "StartApp",
