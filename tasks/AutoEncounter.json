@@ -46,7 +46,6 @@
             "type": "input",
             "label": "逢魔首领阵容预设",
             "description": "填写挑战逢魔首领需要的分组和队伍预设名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",

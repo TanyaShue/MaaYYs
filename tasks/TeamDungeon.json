@@ -137,7 +137,6 @@
             "type": "input",
             "label": "金币副本阵容预设",
             "description": "填写金币副本需要使用的分组和队伍预设名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",
@@ -167,7 +166,6 @@
             "type": "input",
             "label": "经验副本阵容预设",
             "description": "填写经验副本需要使用的分组和队伍预设名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",

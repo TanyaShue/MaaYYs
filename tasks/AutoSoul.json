@@ -87,7 +87,6 @@
             "type": "input",
             "label": "御魂阵容预设",
             "description": "填写自动御魂需要使用的分组和队伍预设名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",
@@ -167,7 +166,6 @@
             "type": "input",
             "label": "自动挑战次数",
             "description": "设置自动挑战御魂的次数，到达指定次数后任务将自动停止",
-            "default": "10",
             "inputs": [
                 {
                     "name": "挑战次数",

@@ -14,7 +14,6 @@
             "type": "input",
             "label": "结界突破阵容预设",
             "description": "填写结界突破需要使用的分组和队伍预设名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",

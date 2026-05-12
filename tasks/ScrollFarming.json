@@ -15,7 +15,6 @@
             "type": "input",
             "label": "绘卷结界阵容预设",
             "description": "填写绘卷结界需要使用的分组和队伍预设名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",
@@ -45,7 +44,6 @@
             "type": "input",
             "label": "绘卷探索阵容预设",
             "description": "填写绘卷探索需要使用的分组和队伍预设名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",

@@ -47,7 +47,6 @@
             "type": "input",
             "label": "英杰试炼阵容预设",
             "description": "填写英杰试炼时需要使用的分组和队伍名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",
@@ -77,7 +76,6 @@
             "type": "input",
             "label": "局内祝福选择",
             "description": "填写在局内出现祝福时的选择",
-            "default": "目标祝福",
             "inputs": [
                 {
                     "name": "目标祝福",

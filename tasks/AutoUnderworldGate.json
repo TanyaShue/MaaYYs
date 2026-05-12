@@ -14,7 +14,6 @@
             "type": "input",
             "label": "阴界之门阵容预设",
             "description": "填写阴界之门使用的分组和队伍名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",

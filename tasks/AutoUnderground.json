@@ -55,7 +55,6 @@
         "地鬼阵容预设": {
             "type": "input",
             "label": "地鬼阵容预设",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "预设分组",
@@ -110,7 +109,7 @@
                     }
                 }
             ],
-            "default_case ": "Yes"
+            "default_case": "Yes"
         }
     }
 }

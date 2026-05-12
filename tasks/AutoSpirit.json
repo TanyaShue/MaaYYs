@@ -37,7 +37,6 @@
             "type": "input",
             "label": "御灵阵容预设",
             "description": "填写自动御灵时需要使用的分组和队伍名称",
-            "default": "默认分组",
             "inputs": [
                 {
                     "name": "group_name",
