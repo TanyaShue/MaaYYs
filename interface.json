@@ -104,8 +104,6 @@
     "tasks/AutoYogenbi.json",
     "tasks/AutoPVP.json",
     "tasks/AutoShop.json",
-    "tasks/CloseGame.json",
-
-    "preset/周常.json"
+    "tasks/CloseGame.json"
   ]
 }
