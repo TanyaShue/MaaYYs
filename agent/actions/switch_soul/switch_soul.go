@@ -293,13 +293,19 @@ func (a *SwitchSoul) tryEquipSoul(ctx *maa.Context, detail *maa.RecognitionDetai
 	var recogDetail RecognitionDetail
 	if err := json.Unmarshal([]byte(detail.DetailJson), &recogDetail); err == nil {
 		if len(recogDetail.Best.Box) >= 4 {
-			roi := []int{recogDetail.Best.Box[0] - 30, recogDetail.Best.Box[1] - 30, 500, 80}
+			// 直接使用识别到的box作为roi，格式为 [x1, y1, x2, y2]，转换为 [x, y, w, h]
+			roi := []int{
+				recogDetail.Best.Box[0],
+				recogDetail.Best.Box[1],
+				recogDetail.Best.Box[2] - recogDetail.Best.Box[0],
+				recogDetail.Best.Box[3] - recogDetail.Best.Box[1],
+			}
 			return a.equipSoulWithROI(ctx, roi, teamName, isFirstFind)
 		}
 	}
 
-	// 如果解析失败，使用 detail.Box
-	roi := []int{detail.Box.X() - 30, detail.Box.Y() - 30, 500, 80}
+	// 如果解析失败，直接使用 detail.Box
+	roi := []int{detail.Box.X(), detail.Box.Y(), detail.Box.Width(), detail.Box.Height()}
 	return a.equipSoulWithROI(ctx, roi, teamName, isFirstFind)
 }
 

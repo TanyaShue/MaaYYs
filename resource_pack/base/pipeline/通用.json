@@ -771,6 +771,12 @@
     "post_delay": 1000,
     "recognition": "TemplateMatch",
     "repeat": 2,
+    "roi_offset": [
+      175,
+      -9,
+      247,
+      13
+    ],
     "template": [
       "通用/装备御魂.png",
       "通用/装备御魂_1.png",
@@ -789,6 +795,12 @@
     "post_delay": 1000,
     "recognition": "FeatureMatch",
     "repeat": 2,
+    "roi_offset": [
+      175,
+      -9,
+      247,
+      13
+    ],
     "template": [
       "通用/装备御魂.png",
       "通用/装备御魂_1.png",
