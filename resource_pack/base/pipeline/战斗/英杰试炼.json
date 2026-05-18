@@ -243,6 +243,12 @@
     ],
     "post_delay": 2000,
     "recognition": "OCR",
+    "replace": [
+      [
+        "傑",
+        "杰"
+      ]
+    ],
     "roi": [
       151,
       16,
