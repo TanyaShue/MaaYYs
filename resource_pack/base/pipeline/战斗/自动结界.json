@@ -334,9 +334,7 @@
       "自动结界4",
       "[JumpBack]突破_结束战斗"
     ],
-    "on_error": [
-      "识别突破界面"
-    ],
+    "on_error": [],
     "post_delay": 500,
     "recognition": "FeatureMatch",
     "roi": [
@@ -650,12 +648,13 @@
     "next": [
       "自动结界8"
     ],
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
-      961,
-      561,
-      177,
-      63
+      948,
+      539,
+      210,
+      125
     ]
   },
   "自动结界5": {
