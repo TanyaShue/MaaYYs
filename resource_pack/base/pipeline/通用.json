@@ -772,10 +772,10 @@
     "recognition": "TemplateMatch",
     "repeat": 2,
     "roi_offset": [
-      175,
-      -9,
-      247,
-      13
+      177,
+      -12,
+      216,
+      24
     ],
     "template": [
       "通用/装备御魂.png",
@@ -796,10 +796,10 @@
     "recognition": "FeatureMatch",
     "repeat": 2,
     "roi_offset": [
-      175,
-      -9,
-      247,
-      13
+      177,
+      -12,
+      216,
+      24
     ],
     "template": [
       "通用/装备御魂.png",
