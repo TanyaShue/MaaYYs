@@ -1,4 +1,14 @@
 {
+  "自动麒麟-识别是否位于战斗界面": {
+    "expected": "当前成绩",
+    "recognition": "OCR",
+    "roi": [
+      45,
+      73,
+      139,
+      61
+    ]
+  },
   "麒麟": {
     "next": [
       "麒麟11",
@@ -40,6 +50,19 @@
     "recognition": "DirectHit",
     "timeout": 10000
   },
+  "麒麟-识别剩余生命值": {
+    "expected": "剩余|生命值",
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      476,
+      14,
+      376,
+      73
+    ]
+  },
   "麒麟-识别是否战斗结束": {
     "action": "Click",
     "expected": "失败|成功|胜利",
@@ -56,6 +79,19 @@
       591,
       501,
       128
+    ]
+  },
+  "麒麟-识别是否返回麒麟界面": {
+    "expected": "狩猎战",
+    "next": [
+      "麒麟8"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      339,
+      106
     ]
   },
   "麒麟10": {
@@ -155,7 +191,8 @@
       "team_name": "麒麟_默认队伍"
     },
     "next": [
-      "麒麟7"
+      "麒麟-识别是否返回麒麟界面",
+      "[JumpBack]麒麟7"
     ],
     "on_error": [
       "超时_切换御魂失败"
@@ -164,9 +201,7 @@
   },
   "麒麟7": {
     "action": "Click",
-    "next": [
-      "麒麟8"
-    ],
+    "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
       0,
@@ -183,12 +218,14 @@
     "expected": "挑战",
     "next": [
       "麒麟10",
+      "麒麟-识别剩余生命值",
       "[JumpBack]麒麟14",
       "[JumpBack]麒麟-识别是否战斗结束",
       "[JumpBack]麒麟13",
-      "[JumpBack]麒麟9"
+      "[JumpBack]麒麟9",
+      "[JumpBack]自动麒麟-识别是否位于战斗界面"
     ],
-    "post_delay": 9000,
+    "post_delay": 5000,
     "rate_limit": 3000,
     "recognition": "OCR",
     "roi": [
