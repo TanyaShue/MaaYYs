@@ -6,10 +6,40 @@
     ],
     "recognition": "DirectHit"
   },
+  "英杰试炼-关闭经验加成": {
+    "max_hit": 1,
+    "next": [
+      "英杰试炼-识别经验加成界面并关闭加成",
+      "[JumpBack]英杰试炼-点击加成"
+    ],
+    "recognition": "DirectHit"
+  },
+  "英杰试炼-关闭经验加成界面": {
+    "expected": "战斗胜利获得的经验增加",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      423,
+      129,
+      355,
+      330
+    ]
+  },
+  "英杰试炼-关闭经验加成界面-点击旁边": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "DirectHit",
+    "target": [
+      1179,
+      239,
+      97,
+      119
+    ]
+  },
   "英杰试炼-刷完试炼卷": {
     "expected": "^0{1,2}/50$",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -18,6 +48,14 @@
       131,
       39
     ]
+  },
+  "英杰试炼-开启经验加成": {
+    "max_hit": 1,
+    "next": [
+      "英杰试炼-识别经验加成界面并开启加成",
+      "[JumpBack]英杰试炼-点击加成"
+    ],
+    "recognition": "DirectHit"
   },
   "英杰试炼-开始挑战": {
     "action": "Click",
@@ -30,6 +68,24 @@
       52
     ]
   },
+  "英杰试炼-御灵-开始挑战": {
+    "action": "Click",
+    "next": [
+      "英杰试炼-确保从战斗中返回",
+      "[JumpBack]战斗-从战斗中返回"
+    ],
+    "post_delay": 5000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1018,
+      518,
+      257,
+      197
+    ],
+    "template": [
+      "战斗/英杰试炼/英杰试炼-源赖光-鬼兵演武-开始挑战_1.png"
+    ]
+  },
   "英杰试炼-战斗后点击屏幕继续": {
     "action": "Click",
     "expected": "点击屏幕继续",
@@ -40,6 +96,72 @@
       275,
       53
     ]
+  },
+  "英杰试炼-源赖光-兵藏秘境": {
+    "next": [
+      "英杰试炼-确保位于兵藏秘境",
+      "[JumpBack]英杰试炼-点击兵藏秘境"
+    ],
+    "recognition": "DirectHit"
+  },
+  "英杰试炼-源赖光-点击传承试炼": {
+    "action": "Click",
+    "expected": "传承试炼",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      273,
+      205,
+      85,
+      254
+    ]
+  },
+  "英杰试炼-源赖光-点击鬼兵演武": {
+    "action": "Click",
+    "expected": "鬼兵演武",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      47,
+      284,
+      113,
+      249
+    ]
+  },
+  "英杰试炼-源赖光-确保位于传承试炼": {
+    "expected": "传承试炼",
+    "next": [
+      "英杰试炼-确保位于式神录-装备御魂",
+      "[JumpBack]英杰试炼-点击式神录"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      396,
+      120
+    ]
+  },
+  "英杰试炼-源赖光-确保位于鬼兵演武": {
+    "expected": "鬼兵演武",
+    "next": [
+      "英杰试炼-确保位于式神录-装备御魂",
+      "[JumpBack]英杰试炼-点击式神录"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      396,
+      120
+    ]
+  },
+  "英杰试炼-源赖光-鬼兵演武": {
+    "next": [
+      "英杰试炼-源赖光-确保位于鬼兵演武",
+      "[JumpBack]英杰试炼-源赖光-点击鬼兵演武"
+    ],
+    "recognition": "DirectHit"
   },
   "英杰试炼-点击从式神录返回": {
     "action": "Click",
@@ -94,6 +216,21 @@
     "template": [
       "英杰试炼/英杰试炼-点击切换英杰_1.png",
       "英杰试炼/英杰试炼-点击切换英杰_2.png"
+    ]
+  },
+  "英杰试炼-点击加成": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      738,
+      0,
+      168,
+      106
+    ],
+    "template": [
+      "战斗/英杰试炼/英杰试炼-点击加成_1.png",
+      "战斗/英杰试炼/英杰试炼-点击加成_2.png"
     ]
   },
   "英杰试炼-点击式神录": {
@@ -177,6 +314,18 @@
       "英杰试炼/英杰试炼-点击藤原道长_1.png"
     ]
   },
+  "英杰试炼-确保从战斗中返回": {
+    "expected": "鬼兵演武|传承试炼",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      142,
+      8,
+      147,
+      55
+    ],
+    "timeout": 2000000
+  },
   "英杰试炼-确保位于兵藏秘境": {
     "expected": "兵藏秘境",
     "next": [
@@ -184,7 +333,7 @@
       "英杰试炼-识别是否刷完试炼卷"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -206,7 +355,9 @@
     "next": [
       "英杰试炼-确保返回兵藏秘境",
       "[JumpBack]英杰试炼-点击从式神录返回",
-      "英杰试炼-确保返回梦墟秘境"
+      "英杰试炼-确保返回梦墟秘境",
+      "英杰试炼-确保返回鬼兵演武",
+      "英杰试炼-确保返回传承试炼"
     ],
     "recognition": "OCR",
     "roi": [
@@ -223,7 +374,7 @@
       "英杰试炼-识别是否刷完试炼卷"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "post_delay": 1000,
     "recognition": "OCR",
@@ -293,6 +444,24 @@
       39
     ]
   },
+  "英杰试炼-确保返回传承试炼": {
+    "expected": "传承试炼",
+    "next": [
+      "英杰试炼-识别御灵等级",
+      "[JumpBack]英杰试炼-开启经验加成",
+      "[JumpBack]英杰试炼-锁定阵容",
+      "[JumpBack]英杰试炼-御灵-开始挑战"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      142,
+      8,
+      147,
+      55
+    ],
+    "timeout": 2000000
+  },
   "英杰试炼-确保返回兵藏秘境": {
     "expected": "兵藏秘境",
     "next": [
@@ -324,6 +493,24 @@
       "[JumpBack]英杰试炼-选择祝福",
       "[JumpBack]英杰试炼-识别挑战失败",
       "[JumpBack]英杰试炼-战斗后点击屏幕继续"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      142,
+      8,
+      147,
+      55
+    ],
+    "timeout": 2000000
+  },
+  "英杰试炼-确保返回鬼兵演武": {
+    "expected": "鬼兵演武",
+    "next": [
+      "英杰试炼-识别御灵等级",
+      "[JumpBack]英杰试炼-开启经验加成",
+      "[JumpBack]英杰试炼-锁定阵容",
+      "[JumpBack]英杰试炼-御灵-开始挑战"
     ],
     "post_delay": 1000,
     "recognition": "OCR",
@@ -387,6 +574,37 @@
       53
     ]
   },
+  "英杰试炼-藤原道长-传承试炼": {
+    "next": [
+      "英杰试炼-源赖光-确保位于传承试炼",
+      "[JumpBack]英杰试炼-源赖光-点击传承试炼"
+    ],
+    "recognition": "DirectHit"
+  },
+  "英杰试炼-藤原道长-梦墟秘境": {
+    "next": [
+      "英杰试炼-确保位于梦墟秘境",
+      "[JumpBack]英杰试炼-点击梦墟秘境"
+    ],
+    "recognition": "DirectHit"
+  },
+  "英杰试炼-识别御灵等级": {
+    "expected": 60,
+    "focus": {
+      "Node.Recognition.Succeeded": "达到60级! 返回庭院"
+    },
+    "next": [
+      "[JumpBack]英杰试炼-关闭经验加成",
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      100,
+      464,
+      128,
+      57
+    ]
+  },
   "英杰试炼-识别挑战失败": {
     "expected": "再次挑战|提升式神|提上阴阳师",
     "next": [
@@ -404,7 +622,7 @@
   "英杰试炼-识别是否刷完试炼卷": {
     "expected": "0/50",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -412,6 +630,46 @@
       3,
       124,
       73
+    ]
+  },
+  "英杰试炼-识别经验加成界面并关闭加成": {
+    "action": "Custom",
+    "custom_action": "BonusToggleAction",
+    "custom_action_param": {
+      "exp_100%": false,
+      "exp_50%": false
+    },
+    "expected": "战斗胜利获得的经验增加",
+    "next": [
+      "英杰试炼-关闭经验加成界面",
+      "[JumpBack]英杰试炼-关闭经验加成界面-点击旁边"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      423,
+      129,
+      355,
+      330
+    ]
+  },
+  "英杰试炼-识别经验加成界面并开启加成": {
+    "action": "Custom",
+    "custom_action": "BonusToggleAction",
+    "custom_action_param": {
+      "exp_100%": true,
+      "exp_50%": true
+    },
+    "expected": "战斗胜利获得的经验增加",
+    "next": [
+      "英杰试炼-关闭经验加成界面",
+      "[JumpBack]英杰试炼-关闭经验加成界面-点击旁边"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      423,
+      129,
+      355,
+      330
     ]
   },
   "英杰试炼-返回秘境": {
@@ -434,8 +692,8 @@
     "enabled": false,
     "expected": "武道精进",
     "next": [
-      "英杰试炼-确保位于兵藏秘境",
-      "[JumpBack]英杰试炼-点击兵藏秘境"
+      "英杰试炼-源赖光-兵藏秘境",
+      "英杰试炼-源赖光-鬼兵演武"
     ],
     "post_delay": 1000,
     "recognition": "OCR",
@@ -471,8 +729,8 @@
     "enabled": false,
     "expected": "音律精进",
     "next": [
-      "英杰试炼-确保位于梦墟秘境",
-      "[JumpBack]英杰试炼-点击梦墟秘境"
+      "英杰试炼-藤原道长-梦墟秘境",
+      "英杰试炼-藤原道长-传承试炼"
     ],
     "post_delay": 2000,
     "recognition": "OCR",
@@ -509,6 +767,21 @@
       78,
       59,
       30
+    ]
+  },
+  "英杰试炼-锁定阵容": {
+    "action": "Click",
+    "max_hit": 1,
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      775,
+      621,
+      110,
+      85
+    ],
+    "template": [
+      "战斗/英杰试炼/英杰试炼-源赖光-锁定阵容_1.png"
     ]
   }
 }
