@@ -84,7 +84,8 @@
     ],
     "template": [
       "战斗/英杰试炼/英杰试炼-源赖光-鬼兵演武-开始挑战_1.png"
-    ]
+    ],
+    "timeout": 180000
   },
   "英杰试炼-战斗后点击屏幕继续": {
     "action": "Click",
@@ -589,7 +590,7 @@
     "recognition": "DirectHit"
   },
   "英杰试炼-识别御灵等级": {
-    "expected": 60,
+    "expected": "60",
     "focus": {
       "Node.Recognition.Succeeded": "达到60级! 返回庭院"
     },

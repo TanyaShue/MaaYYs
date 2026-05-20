@@ -6,8 +6,8 @@
             "entry": "英杰试炼",
             "option": [
                 "选择试炼英杰",
-                "英杰试炼阵容预设",
-                "局内祝福选择"
+                "选择试炼目标",
+                "英杰试炼阵容预设"
             ]
         }
     ],
@@ -40,6 +40,39 @@
                             "enable":true
                         }
                     }
+                }
+            ]
+        },
+        "选择试炼目标":{
+            "type": "select",
+            "label": "试炼目标",
+            "default_case": "技能经验",
+            "cases": [
+                {
+                    "name": "御灵经验",
+                    "label": "御灵经验",
+                    "pipeline_override": {
+                        "英杰试炼-藤原道长-梦墟秘境":{
+                            "enable":false
+                        },
+                        "英杰试炼-源赖光-兵藏秘境":{
+                            "enable":false
+                        }
+                    },
+                    "option": ["英杰试炼-是否启用经验加成"]
+                },
+                {
+                    "name": "技能经验",
+                    "label": "技能经验",
+                    "pipeline_override": {
+                        "英杰试炼-藤原道长-传承试炼":{
+                            "enable":false
+                        },
+                        "英杰试炼-源赖光-鬼兵演武":{
+                            "enable":false
+                        }
+                    },
+                    "option": ["局内祝福选择"]
                 }
             ]
         },
@@ -90,6 +123,36 @@
                     "expected": "{目标祝福}"
                 }
             }
+        },
+        "英杰试炼-是否启用经验加成":{
+            "type": "switch",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "英杰试炼-关闭经验加成":{
+                            "enable":true
+                        },
+                        "英杰试炼-开启经验加成":{
+                            "enable":true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "英杰试炼-关闭经验加成":{
+                            "enable":false
+                        },
+                        "英杰试炼-开启经验加成":{
+                            "enable":false
+                        }
+                    }
+                }
+            ]
         }
     }
 }
