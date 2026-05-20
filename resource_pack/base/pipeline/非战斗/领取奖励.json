@@ -19,7 +19,7 @@
   "识别邮箱界面": {
     "expected": "邮箱",
     "next": [
-      "领取奖励10",
+      "[JumpBack]邮件_启用插画",
       "邮件_领取奖励_点击关闭"
     ],
     "recognition": "OCR",
@@ -28,6 +28,22 @@
       46,
       223,
       80
+    ]
+  },
+  "邮件_不存在奖励领取": {
+    "inverse": true,
+    "next": [
+      "邮件_领取奖励_点击关闭"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      1,
+      548,
+      180,
+      171
+    ],
+    "template": [
+      "领取奖励/领取奖励1.png"
     ]
   },
   "邮件_全部领取": {
@@ -46,11 +62,31 @@
     "template": "庭院/邮件_全部领取.png",
     "timeout": 3000
   },
+  "邮件_启用插画": {
+    "action": "Click",
+    "expected": "是否启用",
+    "post_delay": 2000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      400,
+      220,
+      473,
+      158
+    ],
+    "target": [
+      672,
+      402,
+      176,
+      55
+    ]
+  },
   "邮件_确认领取": {
     "action": "Click",
     "expected": "确定",
     "next": [
       "识别邮箱界面",
+      "[JumpBack]邮件_启用插画",
       "[JumpBack]邮件_领取奖励_点击底部关闭奖励界面"
     ],
     "post_delay": 1000,
@@ -67,8 +103,17 @@
     "focus": {
       "Node.Action.Succeeded": "邮件领取结束"
     },
+    "next": [
+      "导航-庭院"
+    ],
     "post_delay": 2000,
     "recognition": "FeatureMatch",
+    "roi": [
+      1056,
+      3,
+      224,
+      213
+    ],
     "template": "通用图标/关闭.png"
   },
   "邮件_领取奖励_点击底部关闭奖励界面": {
@@ -143,20 +188,6 @@
       "领取奖励/领取奖励1.png"
     ]
   },
-  "领取奖励10": {
-    "action": "Click",
-    "expected": "一键已读",
-    "next": [
-      "邮件_领取奖励_点击关闭"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      144,
-      596,
-      179,
-      59
-    ]
-  },
   "领取奖励11": {
     "action": "Click",
     "expected": "全部|领取|全部领取",
@@ -203,11 +234,10 @@
     "next": [
       "邮件_全部领取",
       "领取奖励1",
-      "领取奖励13"
+      "领取奖励13",
+      "邮件_不存在奖励领取"
     ],
-    "on_error": [
-      "邮件_领取奖励_点击关闭"
-    ],
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       554,
@@ -359,17 +389,18 @@
     "recognition": "DirectHit"
   },
   "领取奖励_邮件": {
+    "next": [
+      "领取奖励9",
+      "[JumpBack]领取奖励_邮件_点击邮件"
+    ],
+    "recognition": "DirectHit"
+  },
+  "领取奖励_邮件_点击邮件": {
     "action": "Click",
     "focus": {
       "Node.Action.Starting": "开始领取邮件奖励"
     },
     "max_hit": 1,
-    "next": [
-      "领取奖励9"
-    ],
-    "on_error": [
-      "邮件_领取奖励_点击关闭"
-    ],
     "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
