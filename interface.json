@@ -100,6 +100,7 @@
     "tasks/AutoGuildBreak.json",
     "tasks/AutoGuildRaid.json",
     "tasks/AutoUnderworldGate.json",
+    "tasks/AutoWanted.json",
     "tasks/ScrollFarming.json",
     "tasks/AutoYogenbi.json",
     "tasks/AutoPVP.json",
