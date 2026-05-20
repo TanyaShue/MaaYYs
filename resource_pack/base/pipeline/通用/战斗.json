@@ -1,0 +1,78 @@
+{
+  "战斗-式神碎片挑战": {
+    "next": [
+      "战斗-式神碎片挑战-开始界面"
+    ],
+    "recognition": "DirectHit"
+  },
+  "战斗-式神碎片挑战-回到开始界面": {
+    "expected": "^第[一二三四五六七八九十百千零两]+章$",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      311,
+      76
+    ]
+  },
+  "战斗-式神碎片挑战-开始界面": {
+    "expected": "^第[一二三四五六七八九十百千零两]+章$",
+    "next": [
+      "[JumpBack]战斗-式神碎片挑战-锁定阵容",
+      "战斗-式神碎片挑战-点击挑战"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      311,
+      76
+    ]
+  },
+  "战斗-式神碎片挑战-点击挑战": {
+    "action": "Click",
+    "next": [
+      "战斗-式神碎片挑战-回到开始界面",
+      "[JumpBack]战斗-式神碎片挑战-结束战斗"
+    ],
+    "post_delay": 5000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      987,
+      475,
+      293,
+      245
+    ],
+    "template": [
+      "通用/战斗/战斗-式神碎片挑战-点击挑战_1.png"
+    ],
+    "timeout": 180000
+  },
+  "战斗-式神碎片挑战-结束战斗": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      383,
+      622,
+      508,
+      98
+    ]
+  },
+  "战斗-式神碎片挑战-锁定阵容": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      945,
+      467,
+      335,
+      103
+    ],
+    "template": [
+      "通用/战斗/战斗-式神碎片挑战-锁定阵容_1.png"
+    ]
+  }
+}

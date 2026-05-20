@@ -24,6 +24,7 @@ import (
 	"maa-yys-agent/actions/task_list"
 	"maa-yys-agent/actions/team_builder"
 	"maa-yys-agent/actions/time_check"
+	"maa-yys-agent/recognition/co_battle_target_recognition"
 	"maa-yys-agent/recognition/my_recognizer"
 	"maa-yys-agent/recognition/task_counter_recognition"
 
@@ -61,6 +62,7 @@ func registerAll() {
 	time_check.Register()
 
 	// Custom Recognition
+	co_battle_target_recognition.Register()
 	my_recognizer.Register()
 	task_counter_recognition.Register()
 

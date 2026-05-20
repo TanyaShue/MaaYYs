@@ -299,7 +299,6 @@ func (a *SwitchSoul) tryEquipSoul(ctx *maa.Context, detail *maa.RecognitionDetai
 				recogDetail.Best.Box[2],
 				recogDetail.Best.Box[3],
 			}
-			fmt.Printf("从Best.Box解析roi: %v (原始box: %v)\n", roi, recogDetail.Best.Box)
 			return a.equipSoulWithROI(ctx, roi, teamName, isFirstFind)
 		}
 	}
