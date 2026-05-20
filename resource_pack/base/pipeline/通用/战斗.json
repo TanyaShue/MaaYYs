@@ -1,4 +1,11 @@
 {
+  "战斗-从战斗中返回": {
+    "next": [
+      "战斗-式神碎片挑战-结束战斗",
+      "战斗-探索副本-领取奖励-点击关闭"
+    ],
+    "recognition": "DirectHit"
+  },
   "战斗-式神碎片挑战": {
     "next": [
       "战斗-式神碎片挑战-开始界面"
@@ -73,6 +80,251 @@
     ],
     "template": [
       "通用/战斗/战斗-式神碎片挑战-锁定阵容_1.png"
+    ]
+  },
+  "战斗-探索副本": {
+    "next": [
+      "战斗-探索副本-开始挑战"
+    ],
+    "recognition": "DirectHit"
+  },
+  "战斗-探索副本-向右滑动一点": {
+    "action": "Swipe",
+    "begin": [
+      1120,
+      293,
+      85,
+      130
+    ],
+    "end": [
+      832,
+      297,
+      113,
+      124
+    ],
+    "expected": "自动轮换|设置",
+    "max_hit": 20,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      590,
+      311,
+      130
+    ]
+  },
+  "战斗-探索副本-向左返回": {
+    "action": "Swipe",
+    "begin": [
+      832,
+      297,
+      113,
+      124
+    ],
+    "end": [
+      1120,
+      293,
+      85,
+      130
+    ],
+    "expected": "自动轮换|设置",
+    "max_hit": 20,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      590,
+      311,
+      130
+    ]
+  },
+  "战斗-探索副本-开始全自动战斗": {
+    "next": [
+      "战斗-探索副本-返回章节界面",
+      "[JumpBack]战斗-探索副本-滑动到最左侧",
+      "[JumpBack]战斗-探索副本-识别宝藏-模板匹配",
+      "[JumpBack]战斗-探索副本-识别宝藏-特征匹配",
+      "[JumpBack]战斗-探索副本-识别怪物-模板匹配",
+      "[JumpBack]战斗-探索副本-识别怪物-特征匹配",
+      "[JumpBack]战斗-探索副本-向右滑动一点",
+      "[JumpBack]战斗-探索副本-向左返回"
+    ],
+    "recognition": "DirectHit"
+  },
+  "战斗-探索副本-开始挑战": {
+    "expected": "^第[一二三四五六七八九十百千零两]+章$",
+    "next": [
+      "战斗-探索副本-识别进入副本",
+      "[JumpBack]战斗-探索副本-点击进入探索"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      311,
+      76
+    ]
+  },
+  "战斗-探索副本-滑动到最左侧": {
+    "action": "Swipe",
+    "begin": [
+      132,
+      367,
+      78,
+      142
+    ],
+    "duration": 500,
+    "end": [
+      1002,
+      372,
+      96,
+      158
+    ],
+    "max_hit": 1,
+    "recognition": "DirectHit",
+    "repeat": 3
+  },
+  "战斗-探索副本-点击进入探索": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      996,
+      529,
+      263,
+      185
+    ],
+    "template": [
+      "通用/战斗/战斗-探索副本-点击进入探索_1.png"
+    ]
+  },
+  "战斗-探索副本-结束战斗": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      383,
+      622,
+      508,
+      98
+    ]
+  },
+  "战斗-探索副本-识别宝藏-模板匹配": {
+    "action": "Click",
+    "next": [
+      "战斗-探索副本-领取奖励",
+      "[JumpBack]战斗-探索副本-领取奖励-点击关闭"
+    ],
+    "recognition": "TemplateMatch",
+    "template": [
+      "通用/战斗/战斗-探索副本-识别宝藏-模板匹配_1.png",
+      "kun28/kun2817.png",
+      "kun28/kun2817_1.png",
+      "kun28/kun2817_2.png"
+    ]
+  },
+  "战斗-探索副本-识别宝藏-特征匹配": {
+    "action": "Click",
+    "next": [
+      "战斗-探索副本-领取奖励",
+      "[JumpBack]战斗-探索副本-领取奖励-点击关闭"
+    ],
+    "recognition": "FeatureMatch",
+    "template": [
+      "通用/战斗/战斗-探索副本-识别宝藏-模板匹配_1.png",
+      "kun28/kun2817.png",
+      "kun28/kun2817_1.png",
+      "kun28/kun2817_2.png"
+    ]
+  },
+  "战斗-探索副本-识别怪物-模板匹配": {
+    "action": "Click",
+    "next": [
+      "战斗-探索副本-识别返回副本",
+      "[JumpBack]战斗-探索副本-结束战斗"
+    ],
+    "recognition": "TemplateMatch",
+    "template": [
+      "通用/战斗/战斗-探索副本-识别怪物-模板匹配_1.png",
+      "kun28/kun28.png",
+      "kun28/kun28_2.png",
+      "kun28/kun28_copy1.png",
+      "kun28/kun2825.png"
+    ]
+  },
+  "战斗-探索副本-识别怪物-特征匹配": {
+    "action": "Click",
+    "next": [
+      "战斗-探索副本-识别返回副本",
+      "[JumpBack]战斗-探索副本-结束战斗"
+    ],
+    "recognition": "FeatureMatch",
+    "template": [
+      "通用/战斗/战斗-探索副本-识别怪物-模板匹配_1.png",
+      "kun28/kun28.png",
+      "kun28/kun28_2.png",
+      "kun28/kun28_copy1.png",
+      "kun28/kun2825.png"
+    ]
+  },
+  "战斗-探索副本-识别返回副本": {
+    "expected": "自动轮换|设置",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      611,
+      420,
+      109
+    ]
+  },
+  "战斗-探索副本-识别进入副本": {
+    "expected": "自动轮换|设置",
+    "next": [
+      "战斗-探索副本-开始全自动战斗"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      611,
+      420,
+      109
+    ]
+  },
+  "战斗-探索副本-返回章节界面": {
+    "expected": "^第[一二三四五六七八九十百千零两]+章$",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      311,
+      76
+    ]
+  },
+  "战斗-探索副本-领取奖励": {
+    "expected": "获得奖励",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      385,
+      121,
+      534,
+      221
+    ]
+  },
+  "战斗-探索副本-领取奖励-点击关闭": {
+    "action": "Click",
+    "expected": "获得奖励",
+    "recognition": "OCR",
+    "roi": [
+      385,
+      121,
+      534,
+      221
+    ],
+    "target": [
+      423,
+      617,
+      261,
+      97
     ]
   }
 }
