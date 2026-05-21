@@ -586,7 +586,13 @@
   "悬赏封印-清除节点计数": {
     "action": "Custom",
     "custom_action": "ClearHitCount",
-    "custom_action_param": "{\"node_names\":[\"悬赏封印-探索副本-开始准备战斗\",,\"悬赏封印-从式神碎片挑战返回探索\",\"悬赏封印-式神碎片-开始准备战斗\"]}",
+    "custom_action_param": {
+      "node_names": [
+        "悬赏封印-探索副本-开始准备战斗",
+        "悬赏封印-从式神碎片挑战返回探索",
+        "悬赏封印-式神碎片-开始准备战斗"
+      ]
+    },
     "max_hit": 1,
     "recognition": "DirectHit"
   },
