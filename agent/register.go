@@ -6,6 +6,7 @@ import (
 	"maa-yys-agent/actions/bonus_toggle"
 	"maa-yys-agent/actions/bounty_monster_recognition"
 	"maa-yys-agent/actions/challenge_dungeon_boss"
+	"maa-yys-agent/actions/clear_hit_count"
 	"maa-yys-agent/actions/count_action"
 	"maa-yys-agent/actions/guess"
 	"maa-yys-agent/actions/human_touch"
@@ -40,6 +41,7 @@ func registerAll() {
 	human_touch.Register()
 
 	// 流程控制类
+	clear_hit_count.Register()
 	count_action.Register()
 	loop_action.Register()
 	task_counter.Register()
