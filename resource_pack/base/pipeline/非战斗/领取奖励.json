@@ -20,7 +20,8 @@
     "expected": "邮箱",
     "next": [
       "[JumpBack]邮件_启用插画",
-      "邮件_领取奖励_点击关闭"
+      "[JumpBack]邮件_领取奖励_点击关闭",
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -33,7 +34,8 @@
   "邮件_不存在奖励领取": {
     "inverse": true,
     "next": [
-      "邮件_领取奖励_点击关闭"
+      "[JumpBack]邮件_领取奖励_点击关闭",
+      "导航-庭院"
     ],
     "recognition": "TemplateMatch",
     "roi": [
@@ -103,9 +105,6 @@
     "focus": {
       "Node.Action.Succeeded": "邮件领取结束"
     },
-    "next": [
-      "导航-庭院"
-    ],
     "post_delay": 2000,
     "recognition": "FeatureMatch",
     "roi": [
@@ -389,6 +388,7 @@
     "recognition": "DirectHit"
   },
   "领取奖励_邮件": {
+    "max_hit": 1,
     "next": [
       "领取奖励9",
       "[JumpBack]领取奖励_邮件_点击邮件"
