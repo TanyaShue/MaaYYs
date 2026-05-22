@@ -1,83 +1,147 @@
 {
-    "task": [
-        {
-            "name": "自动斗技",
-            "label": "自动斗技",
-            "entry": "自动斗技-开始时间检查",
-            "option": [
-                "自动斗技预设",
-                "自动斗技-战斗结算界面皮肤"
-            ]
-        }
-    ],
-    "option": {
-        "自动斗技预设": {
-            "type": "input",
-            "label": "斗技阵容预设",
-            "description": "填写斗技需要的分组和队伍预设名称",
-            "inputs": [
-                {
-                    "name": "group_name",
-                    "label": "分组预设名称",
-                    "description": "填写分组预设名称",
-                    "default": "默认队伍",
-                    "pipeline_type": "string"
-                },
-                {
-                    "name": "team_name",
-                    "label": "队伍预设名称",
-                    "description": "填写队伍预设名称",
-                    "default": "默认队伍",
-                    "pipeline_type": "string"
-                }
-            ],
-            "pipeline_override": {
-                "自动斗技-确保打开式神录并切换御魂": {
-                    "custom_action_param": {
-                        "group_name": "{group_name}",
-                        "team_name": "{team_name}"
-                    }
-                }
-            }
-        },
-        "自动斗技-战斗结算界面皮肤":{
-            "type": "select",
-            "label": "结算界面皮肤",
-            "description": "不是战斗主题皮肤，是结算界面皮肤，战斗主题皮肤不影响",
-            "default_case":"默认",
-            "cases":[
-                {
-                    "name":"默认",
-                    "pipeline_override": {
-                        "自动斗技-胜利":{
-                            "template":[
-                                "斗技/胜利.png"
-                            ]
-                        },
-                        "自动斗技-失败":{
-                            "template":[
-                                "斗技/失败.png"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name":"招财纳福",
-                    "pipeline_override":{
-                        
-                        "自动斗技-胜利":{
-                            "template":[
-                                "斗技/胜利-招财纳福.png"
-                            ]
-                        },
-                        "自动斗技-失败":{
-                            "template":[
-                                "斗技/失败-招财纳福.png"
-                            ]
-                        }
-                    }
-                }
-            ]
-        }
+  "task": [
+    {
+      "name": "自动斗技",
+      "label": "自动斗技",
+      "entry": "自动斗技-开始时间检查",
+      "option": [
+        "自动斗技-御魂预设应用方式",
+        "自动斗技预设",
+        "自动斗技-战斗结算界面皮肤"
+      ]
     }
+  ],
+  "option": {
+    "自动斗技-御魂预设应用方式": {
+      "type": "select",
+      "label": "御魂预设应用方式",
+      "description": "选择御魂预设应用方式",
+      "default_case": "斗技-去式神录切换",
+      "cases": [
+        {
+          "name": "斗技-去式神录切换",
+          "label": "去式神录切换",
+          "option": ["自动斗技预设"],
+          "pipeline_override": {
+            "自动斗技-开始斗技": {
+              "next": [
+                "自动斗技-确保打开式神录并切换御魂",
+                "[JumpBack]导航-式神录"
+              ]
+            }
+          }
+        },
+        {
+          "name": "斗技-在斗技界面应用斗技御魂切换",
+          "label": "直接应用斗技内阵容预设",
+          "pipeline_override": {
+            "自动斗技-开始斗技": {
+              "next": [
+                "自动斗技-确保从式神录返回庭院",
+                "[JumpBack]自动斗技-从式神录返回庭院",
+                "[JumpBack]导航-式神录"
+              ]
+            },
+
+            "斗技-应用预设-启动层": {
+              "enabled": true
+            }
+          }
+        },
+        {
+          "name": "斗技-不进行任何御魂应用",
+          "label": "不进行任务御魂预设应用",
+          "pipeline_override": {
+            "自动斗技-开始斗技": {
+              "next": [
+                "自动斗技-确保从式神录返回庭院",
+                "[JumpBack]自动斗技-从式神录返回庭院",
+                "[JumpBack]导航-式神录"
+              ]
+            },
+
+            "斗技-应用预设-启动层": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "斗技-通过阵容助手御魂应用",
+          "label": "我是彩蛋~~还没写~~",
+          "pipeline_override": {
+            "自动斗技-开始斗技": {
+              "next": [
+                "自动斗技-确保从式神录返回庭院",
+                "[JumpBack]自动斗技-从式神录返回庭院",
+                "[JumpBack]导航-式神录"
+              ]
+            },
+
+            "斗技-应用预设-启动层": {
+              "enabled": false
+            }
+          }
+        }
+      ]
+    },
+    "自动斗技预设": {
+      "type": "input",
+      "label": "斗技阵容预设",
+      "description": "填写斗技需要的分组和队伍预设名称",
+      "inputs": [
+        {
+          "name": "group_name",
+          "label": "分组预设名称",
+          "description": "填写分组预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        },
+        {
+          "name": "team_name",
+          "label": "队伍预设名称",
+          "description": "填写队伍预设名称",
+          "default": "默认队伍",
+          "pipeline_type": "string"
+        }
+      ],
+      "pipeline_override": {
+        "自动斗技-确保打开式神录并切换御魂": {
+          "custom_action_param": {
+            "group_name": "{group_name}",
+            "team_name": "{team_name}"
+          }
+        }
+      }
+    },
+    "自动斗技-战斗结算界面皮肤": {
+      "type": "select",
+      "label": "结算界面皮肤",
+      "description": "不是战斗主题皮肤，是结算界面皮肤，战斗主题皮肤不影响",
+      "default_case": "默认",
+      "cases": [
+        {
+          "name": "默认",
+          "pipeline_override": {
+            "自动斗技-胜利": {
+              "template": ["斗技/胜利.png"]
+            },
+            "自动斗技-失败": {
+              "template": ["斗技/失败.png"]
+            }
+          }
+        },
+        {
+          "name": "招财纳福",
+          "pipeline_override": {
+            "自动斗技-胜利": {
+              "template": ["斗技/胜利-招财纳福.png"]
+            },
+            "自动斗技-失败": {
+              "template": ["斗技/失败-招财纳福.png"]
+            }
+          }
+        }
+      ]
+    }
+  }
 }
