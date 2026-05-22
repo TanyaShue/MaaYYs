@@ -1,103 +1,31 @@
 {
-  "自动斗技-不处于斗技时间段": {
-    "expected": [
-      "练"
-    ],
-    "focus": {
-      "Node.Recognition.Succeeded": "当前不处于可斗技时间段"
-    },
-    "recognition": "OCR",
-    "roi": [
-      1063,
-      480,
-      217,
-      240
-    ]
-  },
-  "自动斗技-从式神录返回庭院": {
-    "action": "Click",
-    "expected": "式神录",
-    "recognition": "OCR",
-    "roi": [
-      56,
-      0,
-      170,
-      71
-    ],
-    "target": [
-      15,
-      6,
-      50,
-      44
-    ]
-  },
-  "自动斗技-匹配中": {
-    "recognition": "DirectHit"
-  },
-  "自动斗技-失败": {
-    "action": "Click",
-    "focus": {
-      "Node.Recognition.Succeeded": "输力(悲)"
-    },
-    "next": [
-      "自动斗技-已处于斗技段位界面",
-      "自动斗技-失败",
-      "[JumpBack]自动斗技-式神高光处理",
-      "[JumpBack]通用-误触了左边聊天框"
-    ],
-    "recognition": "TemplateMatch",
-    "target": [
-      209,
-      0,
-      574,
-      277
-    ],
-    "template": [
-      "斗技/失败.png"
-    ]
-  },
-  "自动斗技-已处于斗技段位界面": {
-    "next": [
-      "自动斗技-不处于斗技时间段",
-      "[JumpBack]自动斗技-低段位点击准备",
-      "自动斗技-等待战斗结束",
-      "[JumpBack]自动斗技-点击自动上阵",
-      "[JumpBack]自动斗技-点击匹配",
-      "自动斗技-胜利",
-      "[JumpBack]自动斗技-匹配中",
-      "[JumpBack]空任务"
-    ],
-    "recognition": "TemplateMatch",
-    "roi": [
-      115,
-      0,
-      144,
-      97
-    ],
-    "template": [
-      "斗技/正处于斗技界面.png"
-    ]
-  },
-  "自动斗技-低段位点击准备": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      1103,
-      533,
-      154,
-      114
-    ],
-    "template": [
-      "斗技/低段位专属准备.png"
-    ],
-    "action": "Click",
-    "post_delay": 500
-  },
+  //任务开始与御魂预设
   "自动斗技-开始斗技": {
     "next": [
       "自动斗技-确保打开式神录并切换御魂",
       "[JumpBack]导航-式神录"
     ],
     "recognition": "DirectHit"
+  },
+  "自动斗技-确保打开式神录并切换御魂": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "斗技分组",
+      "team_name": "斗技队伍"
+    },
+    "expected": "式神录",
+    "next": [
+      "自动斗技-确保从式神录返回庭院",
+      "[JumpBack]自动斗技-从式神录返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      59,
+      0,
+      182,
+      80
+    ]
   },
   "自动斗技-开始时间检查": {
     "action": "Custom",
@@ -115,45 +43,38 @@
     ],
     "recognition": "DirectHit"
   },
-  "自动斗技-式神高光处理": {
+  //导航部分
+  "自动斗技-从式神录返回庭院": {
     "action": "Click",
-    "recognition": "TemplateMatch",
+    "expected": "式神录",
+    "recognition": "OCR",
     "roi": [
-      1067,
-      548,
-      213,
-      172
+      56,
+      0,
+      170,
+      71
     ],
     "target": [
-      350,
-      254,
-      493,
-      237
-    ],
-    "template": [
-      "斗技/式神高光.png"
+      15,
+      6,
+      50,
+      44
     ]
   },
-  "自动斗技-晋升界面处理": {
-    "action": "Click",
-    "focus": {
-      "Node.Recognition.Succeeded": "晋升！"
-    },
-    "recognition": "TemplateMatch",
+  "自动斗技-确保从式神录返回庭院": {
+    "expected": "式神录",
+    "inverse": true,
+    "next": [
+      "自动斗技-确保位于神龛",
+      "[JumpBack]自动斗技-滑到屏幕最左侧",
+      "[JumpBack]自动斗技-点击神龛"
+    ],
+    "recognition": "OCR",
     "roi": [
-      494,
-      21,
-      297,
-      96
-    ],
-    "target": [
-      1181,
-      34,
-      46,
-      44
-    ],
-    "template": [
-      "斗技/晋升.png"
+      65,
+      0,
+      153,
+      65
     ]
   },
   "自动斗技-滑到屏幕最左侧": {
@@ -173,19 +94,6 @@
     "max_hit": 4,
     "post_delay": 2000,
     "recognition": "DirectHit"
-  },
-  "自动斗技-点击匹配": {
-    "action": "Click",
-    "expected": [
-      "战"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      1063,
-      480,
-      217,
-      240
-    ]
   },
   "自动斗技-点击斗技": {
     "action": "Click",
@@ -229,51 +137,6 @@
     "model": "Courtyard.onnx",
     "post_delay": 2000,
     "recognition": "NeuralNetworkDetect"
-  },
-  "自动斗技-点击自动上阵": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      53,
-      170,
-      198
-    ],
-    "template": [
-      "斗技/点击自动上阵.png"
-    ]
-  },
-  "自动斗技-点击自动作战": {
-    "action": "Click",
-    "expected": [
-      "手动"
-    ],
-    "post_delay": 2000,
-    "pre_delay": 1500,
-    "recognition": "OCR",
-    "roi": [
-      0,
-      605,
-      130,
-      115
-    ]
-  },
-  "自动斗技-确保从式神录返回庭院": {
-    "expected": "式神录",
-    "inverse": true,
-    "next": [
-      "自动斗技-确保位于神龛",
-      "[JumpBack]自动斗技-滑到屏幕最左侧",
-      "[JumpBack]自动斗技-点击神龛"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      65,
-      0,
-      153,
-      65
-    ]
   },
   "自动斗技-确保位于斗技界面": {
     "expected": "斗技",
@@ -319,24 +182,144 @@
       68
     ]
   },
-  "自动斗技-确保打开式神录并切换御魂": {
-    "action": "Custom",
-    "custom_action": "SwitchSoul",
-    "custom_action_param": {
-      "group_name": "斗技分组",
-      "team_name": "斗技队伍"
+  //实际执行
+  "自动斗技-不处于斗技时间段": { //都有时间检查了那这个东西存在意义好像就任务开始之后（？
+    "template": [
+      "斗技/不在时间内.png"
+    ],
+    "focus": {
+      "Node.Recognition.Succeeded": "当前不处于可斗技时间段"
     },
-    "expected": "式神录",
+    "recognition": "TemplateMatch",
+    "roi": [
+      793,
+      262,
+      80,
+      126
+    ]
+  },
+  "自动斗技-匹配中": {
+    "recognition": "DirectHit"
+  },
+  "自动斗技-已处于斗技段位界面": {
     "next": [
-      "自动斗技-确保从式神录返回庭院",
-      "[JumpBack]自动斗技-从式神录返回庭院"
+      "自动斗技-不处于斗技时间段",
+      "[JumpBack]自动斗技-低段位点击准备",
+      "自动斗技-等待战斗结束",
+      "[JumpBack]自动斗技-点击自动上阵",
+      "[JumpBack]自动斗技-点击匹配",
+      "自动斗技-胜利",
+      "[JumpBack]自动斗技-匹配中",
+      "[JumpBack]空任务"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      115,
+      0,
+      144,
+      97
+    ],
+    "template": [
+      "斗技/正处于斗技界面.png"
+    ]
+  },
+  "自动斗技-低段位点击准备": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      1103,
+      533,
+      154,
+      114
+    ],
+    "template": [
+      "斗技/低段位专属准备.png"
+    ],
+    "action": "Click",
+    "post_delay": 500
+  },
+  "自动斗技-式神高光处理": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1067,
+      548,
+      213,
+      172
+    ],
+    "target": [
+      350,
+      254,
+      493,
+      237
+    ],
+    "template": [
+      "斗技/式神高光.png"
+    ]
+  },
+  "自动斗技-晋升界面处理": {
+    "action": "Click",
+    "focus": {
+      "Node.Recognition.Succeeded": "晋升！"
+    },
+    "recognition": "TemplateMatch",
+    "roi": [
+      494,
+      21,
+      297,
+      96
+    ],
+    "target": [
+      1181,
+      34,
+      46,
+      44
+    ],
+    "pre_delay": 200,
+    "post_delay": 800,
+    "template": [
+      "斗技/晋升.png"
+    ]
+  },
+  "自动斗技-点击匹配": {
+    "action": "Click",
+    "expected": [
+      "战"
     ],
     "recognition": "OCR",
     "roi": [
-      59,
+      1063,
+      480,
+      217,
+      240
+    ]
+  },
+  "自动斗技-点击自动上阵": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
       0,
-      182,
-      80
+      53,
+      170,
+      198
+    ],
+    "template": [
+      "斗技/点击自动上阵.png"
+    ]
+  },
+  "自动斗技-点击自动作战": {
+    "action": "Click",
+    "expected": [
+      "手动"
+    ],
+    "post_delay": 2000,
+    "pre_delay": 1500,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      605,
+      130,
+      115
     ]
   },
   "自动斗技-等待战斗结束": {
@@ -357,6 +340,28 @@
       605,
       130,
       115
+    ]
+  },
+  "自动斗技-失败": {
+    "action": "Click",
+    "focus": {
+      "Node.Recognition.Succeeded": "输力(悲)"
+    },
+    "next": [
+      "自动斗技-已处于斗技段位界面",
+      "自动斗技-失败",
+      "[JumpBack]自动斗技-式神高光处理",
+      "[JumpBack]通用-误触了左边聊天框"
+    ],
+    "recognition": "TemplateMatch",
+    "target": [
+      209,
+      0,
+      574,
+      277
+    ],
+    "template": [
+      "斗技/失败.png"
     ]
   },
   "自动斗技-胜利": {
