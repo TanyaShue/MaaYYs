@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top N 预览</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="./yuhun_preview_data.js"></script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #ffffff;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      h1 {
+        margin: 0 0 12px 0;
+        font-size: 22px;
+      }
+      .section {
+        margin-top: 20px;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .control {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      select {
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid #d0d0d0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .route-card {
+        border: 1px solid #e6e6e6;
+        border-radius: 8px;
+        padding: 12px;
+        background: #fafafa;
+      }
+      .card-title {
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: bold;
+      }
+      .card-summary {
+        margin-top: 8px;
+      }
+      .route-chart {
+        width: 100%;
+        height: 260px;
+      }
+      .muted {
+        color: #666;
+        font-size: 13px;
+      }
+      .warning {
+        color: #b00020;
+        font-size: 13px;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Top N 预览</h1>
+      <div id="equipType" class="muted"></div>
+      <div class="muted">每条路线可独立筛选 2/4/6 号位主属性，并展示评分最高的前 N 条。</div>
+      <div class="section">
+        <strong>筛选</strong>
+        <div class="controls">
+          <div class="control">
+            <span>两件套属性</span>
+            <select id="twoSetSelect"></select>
+          </div>
+          <div class="control">
+            <span>御魂种类</span>
+            <select id="equipSelect"></select>
+          </div>
+        </div>
+      </div>
+      <div id="dataWarning" class="warning"></div>
+      <div id="routeGrid" class="grid"></div>
+    </div>
+    <script>
+      const data = window.TOP_N_DATA;
+      if (!data || !data.summary) {
+        throw new Error('未找到 top_n_data.js，请先运行 print_top_n_from_config.py');
+      }
+      const summary = data.summary;
+      const equipTypeEl = document.getElementById('equipType');
+      const routeGrid = document.getElementById('routeGrid');
+      const dataWarning = document.getElementById('dataWarning');
+      const twoSetSelect = document.getElementById('twoSetSelect');
+      const equipSelect = document.getElementById('equipSelect');
+      const DEFAULT_TOP_N = 3;
+      const DEFAULT_SHOW_N = 3;
+
+      function unique(list) {
+        return Array.from(new Set(list));
+      }
+
+      function buildAttrOptions(route, position) {
+        const values = unique(
+          applyGlobalFilters(summary)
+            .filter(row => row['路线'] === route && row['位置'] === position)
+            .map(row => row['主属性'])
+        ).sort();
+        return values;
+      }
+
+      function buildSelect(select, options) {
+        select.innerHTML = '';
+        const allOption = document.createElement('option');
+        allOption.value = '全部';
+        allOption.textContent = '全部';
+        select.appendChild(allOption);
+        options.forEach(value => {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = value;
+          select.appendChild(option);
+        });
+        select.value = '全部';
+      }
+
+      function buildFilterSelect(select, values) {
+        buildSelect(select, values.filter(Boolean));
+      }
+
+      function getFilterValues() {
+        return {
+          twoSet: twoSetSelect.value,
+          equipName: equipSelect.value
+        };
+      }
+
+      function getFilterStorageKey(name) {
+        return `filter:${name}`;
+      }
+
+      function loadFilterValue(name, fallback = '全部') {
+        const stored = window.localStorage.getItem(getFilterStorageKey(name));
+        return stored === null ? fallback : stored;
+      }
+
+      function saveFilterValue(name, value) {
+        window.localStorage.setItem(getFilterStorageKey(name), value);
+      }
+
+      function getEquipNamesByTwoSet(twoSet) {
+        return unique(
+          summary
+            .filter(row => twoSet === '全部' || row['两件套属性'] === twoSet)
+            .map(row => row['御魂名称'])
+        ).sort();
+      }
+
+      function updateEquipOptions() {
+        const current = equipSelect.value;
+        const options = getEquipNamesByTwoSet(twoSetSelect.value);
+        buildFilterSelect(equipSelect, options);
+        if (current && options.includes(current)) {
+          equipSelect.value = current;
+        }
+      }
+
+      function applyGlobalFilters(rows) {
+        const filters = getFilterValues();
+        return rows.filter(row => {
+          if (filters.twoSet !== '全部' && row['两件套属性'] !== filters.twoSet) {
+            return false;
+          }
+          if (filters.equipName !== '全部' && row['御魂名称'] !== filters.equipName) {
+            return false;
+          }
+          return true;
+        });
+      }
+
+      function getFilteredRows(route, selected) {
+        return applyGlobalFilters(summary).filter(row => {
+          if (row['路线'] !== route) {
+            return false;
+          }
+          if (row['位置'] === 2 || row['位置'] === 4 || row['位置'] === 6) {
+            const wanted = selected[row['位置']];
+            return wanted === '全部' || row['主属性'] === wanted;
+          }
+          return true;
+        });
+      }
+
+      function collectEntriesByPosition(rows) {
+        const grouped = new Map();
+        rows.forEach(row => {
+          const position = row['位置'];
+          const scores = Array.isArray(row.scores) ? row.scores : [];
+          if (!grouped.has(position)) {
+            grouped.set(position, []);
+          }
+          scores.forEach(score => {
+            grouped.get(position).push({
+              position: position,
+              mainAttr: row['主属性'],
+              score: Number(score)
+            });
+          });
+        });
+        grouped.forEach((items, position) => {
+          grouped.set(position, items.sort((a, b) => b.score - a.score));
+        });
+        return grouped;
+      }
+
+      function getTopNAverage(scores, limit) {
+        if (!scores || scores.length === 0) {
+          return 0;
+        }
+        const sorted = scores
+          .map(score => Number(score))
+          .filter(score => !Number.isNaN(score))
+          .sort((a, b) => b - a);
+        if (sorted.length === 0) {
+          return 0;
+        }
+        const slice = sorted.slice(0, limit);
+        const total = slice.reduce((sum, value) => sum + value, 0);
+        const average = total / slice.length;
+        return Math.round(average * 100) / 100;
+      }
+
+      function normalizeTopN(input) {
+        const raw = Number(input.value);
+        const parsed = Number.isFinite(raw) ? Math.floor(raw) : DEFAULT_TOP_N;
+        const limit = Math.max(1, parsed);
+        input.value = String(limit);
+        input.removeAttribute('max');
+        return limit;
+      }
+
+      function normalizeShowN(input) {
+        const raw = Number(input.value);
+        const parsed = Number.isFinite(raw) ? Math.floor(raw) : DEFAULT_SHOW_N;
+        const limit = Math.max(1, parsed);
+        input.value = String(limit);
+        input.removeAttribute('max');
+        return limit;
+      }
+
+      function getTopNStorageKey(route) {
+        return `topN:${route}`;
+      }
+
+      function loadTopN(route) {
+        const stored = window.localStorage.getItem(getTopNStorageKey(route));
+        if (stored === null) {
+          return DEFAULT_TOP_N;
+        }
+        const value = Number(stored);
+        return Number.isFinite(value) ? Math.floor(value) : DEFAULT_TOP_N;
+      }
+
+      function saveTopN(route, value) {
+        window.localStorage.setItem(getTopNStorageKey(route), String(value));
+      }
+
+      function getShowNStorageKey(route) {
+        return `showN:${route}`;
+      }
+
+      function loadShowN(route) {
+        const stored = window.localStorage.getItem(getShowNStorageKey(route));
+        if (stored === null) {
+          return DEFAULT_SHOW_N;
+        }
+        const value = Number(stored);
+        return Number.isFinite(value) ? Math.floor(value) : DEFAULT_SHOW_N;
+      }
+
+      function saveShowN(route, value) {
+        window.localStorage.setItem(getShowNStorageKey(route), String(value));
+      }
+
+      function buildRouteChart(card, rows, limit) {
+        const chartEl = card.querySelector('.route-chart');
+        if (!chartEl) {
+          return;
+        }
+        const scoresByPos = new Map();
+        rows.forEach(row => {
+          const position = row['位置'];
+          if (!scoresByPos.has(position)) {
+            scoresByPos.set(position, []);
+          }
+          const scores = Array.isArray(row.scores) ? row.scores : [];
+          scoresByPos.get(position).push(...scores);
+        });
+        const showInput = card.querySelector('.show-n-input');
+        if (!showInput.value) {
+          showInput.value = String(loadShowN(card.dataset.route));
+        }
+        const showLimit = normalizeShowN(showInput);
+        saveShowN(card.dataset.route, showLimit);
+
+        // 获取实际有数据的位置（从传入的 rows 中提取）
+        const availablePositions = unique(rows.map(row => row['位置'])).sort((a, b) => a - b);
+
+        const series = [];
+        for (let i = 1; i <= showLimit; i += 1) {
+          // 只对有数据的位置生成值
+          const values = availablePositions.map(pos => {
+            const scores = scoresByPos.get(pos) || [];
+            return getTopNAverage(scores, i);
+          });
+          const alpha = showLimit === 1 ? 0.8 : 0.8 - (i - 1) * (0.6 / (showLimit - 1));
+          series.push({
+            name: `Top ${i}`,
+            value: values,
+            areaStyle: {
+              color: `rgba(64, 128, 255, ${alpha.toFixed(2)})`
+            },
+            lineStyle: {
+              color: `rgba(64, 128, 255, ${Math.min(1, alpha + 0.1).toFixed(2)})`
+            }
+          });
+        }
+        const effectiveCount = rows.find(row => Number.isFinite(row['有效属性数']))?.['有效属性数'];
+        const maxValue = effectiveCount
+          ? 5 + Number(effectiveCount)
+          : Math.max(1, ...series.flatMap(item => item.value));
+        const chart = echarts.init(chartEl);
+        chart.setOption({
+          tooltip: {},
+          radar: {
+            indicator: availablePositions.map(pos => ({
+              name: `${pos}号位`,
+              max: maxValue
+            })),
+            splitNumber: 4,
+            axisName: {
+              color: '#333'
+            }
+          },
+          series: [{
+            type: 'radar',
+            data: series
+          }]
+        });
+      }
+
+      function getRouteInfo(route) {
+        // 获取该路线的所有数据行
+        const routeRows = summary.filter(row => row['路线'] === route);
+        if (routeRows.length === 0) {
+          return { effectiveAttrs: [], positions: [] };
+        }
+
+        // 获取有效属性列表（所有行应该相同，取第一个）
+        const effectiveAttrs = routeRows[0]['有效属性列表'] || [];
+
+        // 获取存在该路线的位置
+        const positions = unique(routeRows.map(row => row['位置'])).sort((a, b) => a - b);
+
+        return { effectiveAttrs, positions };
+      }
+
+      function formatRouteTitle(route) {
+        const { effectiveAttrs, positions } = getRouteInfo(route);
+        const attrsStr = effectiveAttrs.length > 0 ? effectiveAttrs.join('+') : '未知';
+        const positionStr = positions.length > 0 ? positions.join('') : '无';
+        return `${route} <span style="font-weight: normal; color: #666; font-size: 13px;">| ${attrsStr} | ${positionStr}号位</span>`;
+      }
+
+      function buildRouteCard(route) {
+        const card = document.createElement('div');
+        card.className = 'route-card';
+        card.dataset.route = route;
+        const titleHtml = formatRouteTitle(route);
+        card.innerHTML = `
+          <div class="card-title">${titleHtml}</div>
+          <div class="controls">
+            <div class="control">
+              <span>2号位</span>
+              <select class="attr-select" data-pos="2"></select>
+            </div>
+            <div class="control">
+              <span>4号位</span>
+              <select class="attr-select" data-pos="4"></select>
+            </div>
+            <div class="control">
+              <span>6号位</span>
+              <select class="attr-select" data-pos="6"></select>
+            </div>
+            <div class="control">
+              <span>Top N</span>
+              <input class="top-n-input" type="number" min="1" step="1" />
+            </div>
+            <div class="control">
+              <span>Show N</span>
+              <input class="show-n-input" type="number" min="1" step="1" />
+            </div>
+          </div>
+          <div class="card-summary muted">路线六维图</div>
+          <div class="route-chart"></div>
+        `;
+        const selects = card.querySelectorAll('.attr-select');
+        selects.forEach(select => {
+          const position = Number(select.dataset.pos);
+          const options = buildAttrOptions(route, position);
+          buildSelect(select, options);
+        });
+        return card;
+      }
+
+      function refreshCard(card) {
+        const route = card.dataset.route;
+        const selected = {};
+        card.querySelectorAll('.attr-select').forEach(select => {
+          selected[Number(select.dataset.pos)] = select.value;
+        });
+        const rows = getFilteredRows(route, selected);
+        const entriesByPosition = collectEntriesByPosition(rows);
+        const totalEntries = Array.from(entriesByPosition.values()).reduce((sum, list) => sum + list.length, 0);
+
+        // 更新标题中的位置信息（基于当前筛选后的数据）
+        const availablePositions = unique(rows.map(row => row['位置'])).sort((a, b) => a - b);
+        const titleEl = card.querySelector('.card-title');
+        if (titleEl) {
+          const { effectiveAttrs } = getRouteInfo(route);
+          const attrsStr = effectiveAttrs.length > 0 ? effectiveAttrs.join('+') : '未知';
+          const positionStr = availablePositions.length > 0 ? availablePositions.join('') : '无';
+          titleEl.innerHTML = `${route} <span style="font-weight: normal; color: #666; font-size: 13px;">| ${attrsStr} | ${positionStr}号位</span>`;
+        }
+
+        const topInput = card.querySelector('.top-n-input');
+        if (!topInput.value) {
+          topInput.value = String(loadTopN(route));
+        }
+        const limit = normalizeTopN(topInput);
+        saveTopN(route, limit);
+        const summaryEl = card.querySelector('.card-summary');
+        summaryEl.textContent = `路线六维图（Top ${limit} 平均分）`;
+        buildRouteChart(card, rows, limit);
+      }
+
+      function render() {
+        if (data.equip_type) {
+          equipTypeEl.textContent = `御魂类型：${data.equip_type}`;
+        } else {
+          equipTypeEl.textContent = '';
+        }
+        const hasScores = summary.some(row => Array.isArray(row.scores) && row.scores.length > 0);
+        if (!hasScores) {
+          dataWarning.textContent = '当前数据未包含评分列表，请重新运行 yuhun_preview.py 生成新数据。';
+        } else {
+          dataWarning.textContent = '';
+        }
+        const filters = getFilterValues();
+        const filteredSummary = applyGlobalFilters(summary);
+        routeGrid.innerHTML = '';
+
+        // 当选中特定御魂时，只收集该御魂的路线
+        let rowsForRoutes;
+        if (filters.equipName !== '全部') {
+          rowsForRoutes = filteredSummary.filter(row => row['御魂名称'] === filters.equipName);
+        } else {
+          rowsForRoutes = filteredSummary;
+        }
+        const routes = unique(rowsForRoutes.map(row => row['路线'])).sort();
+
+        routes.forEach(route => {
+          const card = buildRouteCard(route);
+          if (routes.length === 1) {
+            const titleEl = card.querySelector('.card-title');
+            if (titleEl) {
+              titleEl.style.display = 'none';
+            }
+          }
+          routeGrid.appendChild(card);
+          card.querySelectorAll('select, input').forEach(control => {
+            const eventName = control.tagName === 'INPUT' ? 'input' : 'change';
+            control.addEventListener(eventName, () => refreshCard(card));
+          });
+          refreshCard(card);
+        });
+      }
+
+      buildFilterSelect(twoSetSelect, unique(summary.map(row => row['两件套属性'])).sort());
+      updateEquipOptions();
+      twoSetSelect.value = loadFilterValue('twoSet', twoSetSelect.value);
+      updateEquipOptions();
+      equipSelect.value = loadFilterValue('equip', equipSelect.value);
+      twoSetSelect.addEventListener('change', () => {
+        saveFilterValue('twoSet', twoSetSelect.value);
+        updateEquipOptions();
+        render();
+      });
+      equipSelect.addEventListener('change', () => {
+        saveFilterValue('equip', equipSelect.value);
+        render();
+      });
+      render();
+    </script>
+  </body>
+</html>
