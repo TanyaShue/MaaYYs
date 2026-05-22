@@ -66,6 +66,9 @@
       40,
       78
     ],
+    "next": [
+      "悬赏封印-清除节点计数"
+    ],
     "post_delay": 2000,
     "recognition": "DirectHit",
     "repeat": 4
@@ -301,7 +304,6 @@
     "expected": "^第[一二三四五六七八九十百千零两]+章$",
     "next": [
       "[JumpBack]悬赏封印-探索副本-开始准备战斗",
-      "[JumpBack]悬赏封印-退出章节",
       "[JumpBack]悬赏封印-从式神碎片挑战返回探索",
       "悬赏-探索-再次滑动目标到最下方"
     ],
@@ -330,7 +332,6 @@
     "expected": "^第[一二三四五六七八九十百千零两]+章$",
     "next": [
       "[JumpBack]悬赏封印-式神碎片-开始准备战斗",
-      "[JumpBack]悬赏封印-退出章节",
       "[JumpBack]悬赏封印-从式神碎片挑战返回探索",
       "悬赏-探索-再次滑动目标到最下方"
     ],
@@ -582,6 +583,19 @@
       30
     ]
   },
+  "悬赏封印-清除节点计数": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "悬赏封印-探索副本-开始准备战斗",
+        "悬赏封印-从式神碎片挑战返回探索",
+        "悬赏封印-式神碎片-开始准备战斗"
+      ]
+    },
+    "max_hit": 1,
+    "recognition": "DirectHit"
+  },
   "悬赏封印-看看是否打卡追踪列表": {
     "expected": "发现地点",
     "next": [
@@ -685,20 +699,6 @@
       248,
       121,
       168
-    ]
-  },
-  "悬赏封印-退出章节": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      0,
-      212,
-      90
-    ],
-    "template": [
-      "非战斗/悬赏封印/悬赏封印-退出章节_1.png"
     ]
   },
   "悬赏封印1": {
