@@ -1,0 +1,47 @@
+[
+  {
+    "itemName": "yunhun11-unselect",
+    "imageName": "Yuhun_yunhun11-unselect.png",
+    "roiFront": "123,272,98,19",
+    "roiBack": "123,272,98,19",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": ""
+  },
+  {
+    "itemName": "yunhun11-select",
+    "imageName": "Yuhun_yunhun11-select.png",
+    "roiFront": "123,272,98,19",
+    "roiBack": "123,272,98,19",
+    "method": "Template matching",
+    "threshold": 0.9,
+    "description": ""
+  },
+  {
+    "itemName": "quanbuqianghua",
+    "imageName": "Yuhun_quanbuqianghua.png",
+    "roiFront": "875,616,170,39",
+    "roiBack": "875,616,170,39",
+    "method": "Template matching",
+    "threshold": 0.89,
+    "description": ""
+  },
+  {
+    "itemName": "jisuan",
+    "imageName": "Yuhun_jisuan.png",
+    "roiFront": "1186,631,60,60",
+    "roiBack": "1186,631,60,60",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": ""
+  },
+  {
+    "itemName": "qianghua",
+    "imageName": "Yuhun_qianghua.png",
+    "roiFront": "1186,631,60,60",
+    "roiBack": "1186,631,60,60",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": ""
+  }
+]
