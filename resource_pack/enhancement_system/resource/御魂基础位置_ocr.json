@@ -1,0 +1,38 @@
+[
+  {
+    "itemName": "御魂等级14",
+    "roiFront": "474,182,46,22",
+    "roiBack": "474,182,46,22",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "御魂等级11",
+    "description": "第一行第一列的御魂等级"
+  },
+  {
+    "itemName": "御魂等级44",
+    "roiFront": "474,554,46,22",
+    "roiBack": "474,554,46,22",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "御魂等级14",
+    "description": ""
+  },
+  {
+    "itemName": "御魂等级41",
+    "roiFront": "122,554,46,22",
+    "roiBack": "122,554,46,22",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "御魂等级44",
+    "description": ""
+  },
+  {
+    "itemName": "御魂等级11",
+    "roiFront": "123,183,46,23",
+    "roiBack": "123,183,46,23",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "御魂等级11",
+    "description": ""
+  }
+]
