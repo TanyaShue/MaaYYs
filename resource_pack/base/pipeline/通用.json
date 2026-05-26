@@ -768,7 +768,7 @@
       "通用_装备御魂_确保没有确定按钮",
       "[JumpBack]通用3"
     ],
-    "post_delay": 1000,
+    "post_delay": 2000,
     "recognition": "TemplateMatch",
     "repeat": 2,
     "roi_offset": [
@@ -792,7 +792,7 @@
       "通用_装备御魂_确保没有确定按钮",
       "[JumpBack]通用3"
     ],
-    "post_delay": 1000,
+    "post_delay": 2000,
     "recognition": "FeatureMatch",
     "repeat": 2,
     "roi_offset": [

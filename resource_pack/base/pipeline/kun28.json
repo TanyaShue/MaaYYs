@@ -20,6 +20,20 @@
       97
     ]
   },
+  "困28-关闭妖气封印界面": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1086,
+      49,
+      146,
+      121
+    ],
+    "template": [
+      "kun28/困28-关闭妖气封印界面_1.png"
+    ]
+  },
   "困28-关闭获取奖励页面": {
     "action": "Click",
     "post_delay": 1000,
@@ -45,7 +59,8 @@
       "困28-识别是否位于第二十八章",
       "[JumpBack]困28-识别是否展开主线面板",
       "[JumpBack]困28-展开主线面板",
-      "[JumpBack]导航-探索界面"
+      "[JumpBack]导航-探索界面",
+      "[JumpBack]困28-关闭妖气封印界面"
     ],
     "recognition": "DirectHit"
   },
@@ -66,6 +81,7 @@
   "困28-开始准备战斗": {
     "expected": "第二十八章",
     "next": [
+      "肝绘卷-识别突破卷数量是否达标",
       "[JumpBack]困28-开始前看看有没有宝箱",
       "[JumpBack]困28-开始战斗",
       "导航-庭院"
@@ -198,18 +214,57 @@
   "肝绘卷": {
     "next": [
       "[JumpBack]肝绘卷-导航到探索",
-      "[JumpBack]肝绘卷-识别突破卷是否大于20"
+      "[JumpBack]肝绘卷-识别突破卷是否大于20",
+      "[JumpBack]肝绘卷-通过探索肝20张突破卷",
+      "[JumpBack]肝绘卷-清除节点记录",
+      "导航-庭院"
     ],
     "recognition": "DirectHit"
   },
   "肝绘卷-导航到探索": {
+    "max_hit": 1,
     "next": [
       "导航-探索界面"
     ],
     "recognition": "DirectHit"
   },
+  "肝绘卷-清除节点记录": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "肝绘卷-导航到探索",
+        "肝绘卷-识别突破卷是否大于20",
+        "肝绘卷-通过探索肝20张突破卷",
+        "困28-开始装备探索御魂"
+      ]
+    },
+    "max_hit": 5,
+    "recognition": "DirectHit"
+  },
+  "肝绘卷-识别突破卷数量是否达标": {
+    "enabled": false,
+    "expected": "^(2[1-9]|30)\\/30$",
+    "focus": {
+      "Node.Recognition.Succeeded": "突破卷20张了,准备去打突破了"
+    },
+    "max_hit": 1,
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      923,
+      8,
+      125,
+      43
+    ]
+  },
   "肝绘卷-识别突破卷是否大于20": {
     "expected": "^(2[1-9]|30)\\/30$",
+    "focus": {
+      "Node.Recognition.Succeeded": "开始突破"
+    },
     "max_hit": 1,
     "next": [
       "自动结界"
@@ -221,5 +276,15 @@
       169,
       58
     ]
+  },
+  "肝绘卷-通过探索肝20张突破卷": {
+    "focus": {
+      "Node.Recognition.Succeeded": "突破卷不足,开始探索"
+    },
+    "max_hit": 1,
+    "next": [
+      "困28"
+    ],
+    "recognition": "DirectHit"
   }
 }

@@ -105,6 +105,7 @@
     "tasks/AutoYogenbi.json",
     "tasks/AutoPVP.json",
     "tasks/AutoShop.json",
+    "tasks/ScrollFarming.json",
     "tasks/CloseGame.json"
   ]
 }

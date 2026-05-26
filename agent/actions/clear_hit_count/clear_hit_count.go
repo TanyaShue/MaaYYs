@@ -42,8 +42,6 @@ func (a *ClearHitCount) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		if err := ctx.ClearHitCount(name); err != nil {
 			fmt.Printf("清除节点计数失败: %s, 错误: %v\n", name, err)
 			success = false
-		} else {
-			fmt.Printf("已清除节点计数: %s\n", name)
 		}
 	}
 
