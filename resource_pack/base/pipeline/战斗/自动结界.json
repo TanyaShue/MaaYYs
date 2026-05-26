@@ -269,24 +269,54 @@
       65
     ]
   },
+  "突破-取保进入失败页面": {
+    "next": [
+      "突破-退出了失败界面",
+      "[JumpBack]确认再次挑战",
+      "[JumpBack]突破_再次挑战-ocr",
+      "[JumpBack]突破_再次挑战"
+    ],
+    "post_delay": 500,
+    "recognition": "TemplateMatch",
+    "roi": [
+      769,
+      415,
+      225,
+      202
+    ],
+    "template": [
+      "战斗/自动结界/突破-取保进入失败页面_1.png",
+      "自动结界/突破_再次挑战.png"
+    ],
+    "timeout": 5000
+  },
   "突破-将手动改为自动": {
     "action": "Click",
     "expected": "手动",
     "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
-      0,
-      597,
-      115,
-      123
+      12,
+      632,
+      97,
+      56
     ]
   },
   "突破-改为手动": {
     "action": "Click",
     "expected": "自动",
-    "max_hit": 1,
     "pre_delay": 1,
     "recognition": "OCR"
+  },
+  "突破-清空失败计数": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破_挑战失败"
+      ]
+    },
+    "recognition": "DirectHit"
   },
   "突破-点击底部": {
     "action": "Click",
@@ -308,18 +338,6 @@
       "战斗/自动结界/突破-点击底部_1.png"
     ]
   },
-  "突破-确保没有确定按钮": {
-    "expected": "确定",
-    "inverse": true,
-    "post_delay": 500,
-    "recognition": "OCR",
-    "roi": [
-      655,
-      388,
-      192,
-      87
-    ]
-  },
   "突破-进入战斗": {
     "next": [
       "识别突破界面",
@@ -331,6 +349,22 @@
     ],
     "recognition": "DirectHit",
     "timeout": 200000
+  },
+  "突破-退出了失败界面": {
+    "inverse": true,
+    "post_delay": 500,
+    "recognition": "TemplateMatch",
+    "roi": [
+      769,
+      415,
+      225,
+      202
+    ],
+    "template": [
+      "战斗/自动结界/突破-取保进入失败页面_1.png",
+      "自动结界/突破_再次挑战.png"
+    ],
+    "timeout": 5000
   },
   "突破_再次挑战": {
     "action": "Click",
@@ -386,6 +420,13 @@
     "timeout": 5000
   },
   "突破_准备重新挑战六次": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破_开始重新挑战"
+      ]
+    },
     "next": [
       "[JumpBack]突破_开始重新挑战",
       "突破-进入战斗"
@@ -396,8 +437,9 @@
   "突破_开始重新挑战": {
     "max_hit": 6,
     "next": [
+      "突破-取保进入失败页面",
       "[JumpBack]突破-改为手动",
-      "退出战斗_确认",
+      "[JumpBack]退出战斗_确认",
       "[JumpBack]突破_重新挑战_特征匹配",
       "[JumpBack]突破_重新挑战-模板匹配"
     ],
@@ -409,7 +451,7 @@
     "focus": {
       "Node.Recognition.Succeeded": "挑战失败,重试.."
     },
-    "max_hit": 2,
+    "max_hit": 1,
     "next": [
       "确认再次挑战_copy1"
     ],
@@ -699,6 +741,9 @@
   "自动结界9": {
     "expected": "确定",
     "inverse": true,
+    "next": [
+      "突破-清空失败计数"
+    ],
     "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
@@ -776,12 +821,6 @@
   "退出战斗_确认": {
     "action": "Click",
     "expected": "确认",
-    "next": [
-      "确认再次挑战",
-      "[JumpBack]突破_再次挑战",
-      "[JumpBack]突破_再次挑战-ocr",
-      "突破-确保没有确定按钮"
-    ],
     "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
