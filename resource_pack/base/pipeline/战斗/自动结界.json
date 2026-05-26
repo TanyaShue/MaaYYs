@@ -338,6 +338,9 @@
       "战斗/自动结界/突破-点击底部_1.png"
     ]
   },
+  "突破-空节点": {
+    "recognition": "DirectHit"
+  },
   "突破-进入战斗": {
     "next": [
       "识别突破界面",
@@ -401,6 +404,9 @@
     "next": [
       "突破-先回突破界面",
       "突破-点击底部"
+    ],
+    "on_error": [
+      "突破-空节点"
     ],
     "post_delay": 500,
     "recognition": "FeatureMatch",
