@@ -82,7 +82,9 @@
     "expected": "第二十八章",
     "next": [
       "肝绘卷-识别突破卷数量是否达标",
+      "[JumpBack]困28-看看是否有为领取完的奖励",
       "[JumpBack]困28-开始前看看有没有宝箱",
+      "[JumpBack]困28-查看宝箱",
       "[JumpBack]困28-开始战斗",
       "导航-庭院"
     ],
@@ -130,6 +132,19 @@
     ],
     "recognition": "DirectHit"
   },
+  "困28-查看宝箱": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      6,
+      569,
+      500,
+      151
+    ],
+    "template": [
+      "kun28/N-1779781570541_1.png"
+    ]
+  },
   "困28-没找到28章向下滑动": {
     "action": "Swipe",
     "begin": [
@@ -163,6 +178,17 @@
       167,
       227,
       384
+    ]
+  },
+  "困28-看看是否有为领取完的奖励": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "recognition": "OCR",
+    "roi": [
+      466,
+      651,
+      381,
+      69
     ]
   },
   "困28-装备御魂": {
