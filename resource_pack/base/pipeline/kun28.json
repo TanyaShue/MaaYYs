@@ -114,9 +114,6 @@
     ]
   },
   "困28-开始战斗": {
-    "focus": {
-      "Node.Recognition.Succeeded": "次数未达标,继续战斗"
-    },
     "max_hit": 999,
     "next": [
       "困28-位于章节界面",
@@ -273,6 +270,7 @@
     "enabled": false,
     "expected": "^(2[1-9]|30)\\/30$",
     "focus": {
+      "Node.Recognition.Failed": "突破卷不足,接着探索",
       "Node.Recognition.Succeeded": "突破卷20张了,准备去打突破了"
     },
     "max_hit": 1,
@@ -281,10 +279,10 @@
     ],
     "recognition": "OCR",
     "roi": [
-      923,
-      8,
-      125,
-      43
+      678,
+      0,
+      378,
+      61
     ]
   },
   "肝绘卷-识别突破卷是否大于20": {
