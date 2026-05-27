@@ -478,7 +478,8 @@
     },
     "max_hit": 1,
     "next": [
-      "确认再次挑战_copy1"
+      "突破-退出了失败界面-ocr",
+      "[JumpBack]确认再次挑战_copy1"
     ],
     "post_delay": 2000,
     "recognition": "FeatureMatch",
