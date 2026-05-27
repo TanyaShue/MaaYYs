@@ -1,15 +1,42 @@
 {
     "task": [
         {
-            "name": "活动爬塔300次",
-            "label": "活动爬塔300次(活动界面开始,手动安装御魂)",
-            "entry": "活动爬塔-醒世达观",
+            "name": "活动爬塔-执火燎原",
+            "label": "活动爬塔",
+            "entry": "活动爬塔-执火燎原",
             "option": [
+                "刷本目标",
                 "自定义爬塔随机等待"
             ]
         }
     ],
     "option": {
+        "刷本目标": {
+            "type": "select",
+            "label": "刷本目标",
+            "description": "刷完哪种票",
+            "default_case": "体力票",
+            "cases": [
+                {
+                    "name": "体力票",
+                    "label": "体力票",
+                    "pipeline_override": {
+                        "爬塔-执火燎原-体力票花光": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "活动票",
+                    "label": "活动票",
+                    "pipeline_override": {
+                        "爬塔-执火燎原-活动票花光": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ]
+        },
         "自定义爬塔随机等待": {
             "type": "switch",
             "label": "自定义爬塔随机等待",
