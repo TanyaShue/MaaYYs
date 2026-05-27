@@ -395,5 +395,21 @@
   },
   "战斗-空节点": {
     "recognition": "DirectHit"
+  },
+  "活动-爬塔": {
+    "next": [
+      "活动-爬塔-判断是否位于爬塔界面"
+    ],
+    "recognition": "DirectHit"
+  },
+  "活动-爬塔-判断是否位于爬塔界面": {
+    "expected": "活动名称",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      354,
+      97
+    ]
   }
 }
