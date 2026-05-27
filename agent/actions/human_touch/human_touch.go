@@ -4,11 +4,38 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
+	"strconv"
 	"sync"
 	"time"
 
 	"github.com/MaaXYZ/maa-framework-go/v4"
 )
+
+// FlexibleFloat 可以接受字符串或数字类型的JSON值
+type FlexibleFloat float64
+
+func (f *FlexibleFloat) UnmarshalJSON(data []byte) error {
+	// 尝试解析为数字
+	var num float64
+	if err := json.Unmarshal(data, &num); err == nil {
+		*f = FlexibleFloat(num)
+		return nil
+	}
+
+	// 尝试解析为字符串
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return fmt.Errorf("无法将 %s 解析为 float64 或 string", string(data))
+	}
+
+	// 将字符串转换为 float64
+	val, err := strconv.ParseFloat(str, 64)
+	if err != nil {
+		return fmt.Errorf("无法将字符串 '%s' 转换为 float64: %v", str, err)
+	}
+	*f = FlexibleFloat(val)
+	return nil
+}
 
 type HumanTouch struct {
 	count int
@@ -17,14 +44,14 @@ type HumanTouch struct {
 
 type HumanTouchParams struct {
 	ROI1              []interface{} `json:"ROI_1"`
-	ShortWaitMin      float64       `json:"short_wait_min"`
-	ShortWaitMax      float64       `json:"short_wait_max"`
-	LongWaitMin       float64       `json:"long_wait_min"`
-	LongWaitMax       float64       `json:"long_wait_max"`
-	ShortWaitWeight   float64       `json:"short_wait_weight"`
-	LongWaitWeight    float64       `json:"long_wait_weight"`
-	SingleClickWeight float64       `json:"single_click_weight"`
-	DoubleClickWeight float64       `json:"double_click_weight"`
+	ShortWaitMin      FlexibleFloat `json:"short_wait_min"`
+	ShortWaitMax      FlexibleFloat `json:"short_wait_max"`
+	LongWaitMin       FlexibleFloat `json:"long_wait_min"`
+	LongWaitMax       FlexibleFloat `json:"long_wait_max"`
+	ShortWaitWeight   FlexibleFloat `json:"short_wait_weight"`
+	LongWaitWeight    FlexibleFloat `json:"long_wait_weight"`
+	SingleClickWeight FlexibleFloat `json:"single_click_weight"`
+	DoubleClickWeight FlexibleFloat `json:"double_click_weight"`
 }
 
 // Run 执行模拟人类点击
@@ -67,16 +94,16 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	}
 
 	// 等待时间决策
-	totalWaitWeight := params.ShortWaitWeight + params.LongWaitWeight
+	totalWaitWeight := float64(params.ShortWaitWeight + params.LongWaitWeight)
 	waitRandNum := rand.Float64() * totalWaitWeight
 
 	var waitTime float64
-	if waitRandNum < params.LongWaitWeight {
-		waitTime = params.LongWaitMin + rand.Float64()*(params.LongWaitMax-params.LongWaitMin)
+	if waitRandNum < float64(params.LongWaitWeight) {
+		waitTime = float64(params.LongWaitMin) + rand.Float64()*(float64(params.LongWaitMax)-float64(params.LongWaitMin))
 		fmt.Printf("开始长等待: %.2f秒\n", waitTime)
 		printToUI(ctx, fmt.Sprintf("即将开始较长等待: %.2f 秒", waitTime))
 	} else {
-		waitTime = params.ShortWaitMin + rand.Float64()*(params.ShortWaitMax-params.ShortWaitMin)
+		waitTime = float64(params.ShortWaitMin) + rand.Float64()*(float64(params.ShortWaitMax)-float64(params.ShortWaitMin))
 		fmt.Printf("开始短等待: %.2f秒\n", waitTime)
 		printToUI(ctx, fmt.Sprintf("即将开始等待: %.2f 秒", waitTime))
 	}
@@ -84,7 +111,7 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	time.Sleep(time.Duration(waitTime * float64(time.Second)))
 
 	// 点击类型决策
-	totalClickWeight := params.SingleClickWeight + params.DoubleClickWeight
+	totalClickWeight := float64(params.SingleClickWeight + params.DoubleClickWeight)
 	clickRandNum := rand.Float64() * totalClickWeight
 
 	x := rand.Intn(xMax-xMin) + xMin
@@ -96,7 +123,7 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		return false
 	}
 
-	if clickRandNum < params.DoubleClickWeight {
+	if clickRandNum < float64(params.DoubleClickWeight) {
 		// 双击
 		fmt.Printf("执行双击，位置: (%d, %d)\n", x, y)
 		controller.PostClick(int32(x), int32(y)).Wait()
