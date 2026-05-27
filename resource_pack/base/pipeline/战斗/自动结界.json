@@ -1,4 +1,7 @@
 {
+  "N-1779860275398": {
+    "recognition": "DirectHit"
+  },
   "开始自动结界": {
     "expected": "结界突破",
     "next": [
@@ -459,6 +462,9 @@
       "[JumpBack]退出战斗_确认",
       "[JumpBack]突破_重新挑战_特征匹配",
       "[JumpBack]突破_重新挑战-模板匹配"
+    ],
+    "on_error": [
+      "N-1779860275398"
     ],
     "rate_limit": 200,
     "recognition": "DirectHit"
