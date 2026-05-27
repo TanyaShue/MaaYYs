@@ -273,7 +273,6 @@
       "Node.Recognition.Failed": "突破卷不足,接着探索",
       "Node.Recognition.Succeeded": "突破卷20张了,准备去打突破了"
     },
-    "max_hit": 1,
     "next": [
       "导航-庭院"
     ],
