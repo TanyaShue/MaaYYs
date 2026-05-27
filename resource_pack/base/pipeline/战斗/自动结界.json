@@ -305,8 +305,13 @@
   "突破-改为手动": {
     "action": "Click",
     "expected": "自动",
-    "pre_delay": 1,
-    "recognition": "OCR"
+    "recognition": "OCR",
+    "roi": [
+      12,
+      632,
+      97,
+      56
+    ]
   },
   "突破-清空失败计数": {
     "action": "Custom",
