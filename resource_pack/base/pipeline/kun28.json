@@ -171,7 +171,7 @@
   },
   "困28-点击第二十八章": {
     "action": "Click",
-    "expected": "第二十八章",
+    "expected": "第二十八章|二十八",
     "post_delay": 4000,
     "recognition": "OCR",
     "roi": [
