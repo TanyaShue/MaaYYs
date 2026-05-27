@@ -279,15 +279,16 @@
     "post_delay": 500,
     "recognition": "TemplateMatch",
     "roi": [
-      769,
-      415,
-      225,
-      202
+      785,
+      428,
+      151,
+      165
     ],
     "template": [
       "战斗/自动结界/突破-取保进入失败页面_1.png",
       "自动结界/突破_再次挑战.png"
     ],
+    "threshold": 0.8,
     "timeout": 5000
   },
   "突破-将手动改为自动": {
@@ -305,6 +306,7 @@
   "突破-改为手动": {
     "action": "Click",
     "expected": "自动",
+    "max_hit": 1,
     "recognition": "OCR",
     "roi": [
       12,
@@ -377,7 +379,7 @@
   "突破_再次挑战": {
     "action": "Click",
     "post_delay": 1000,
-    "recognition": "FeatureMatch",
+    "recognition": "TemplateMatch",
     "roi": [
       769,
       415,
@@ -390,7 +392,10 @@
       45,
       51
     ],
-    "template": "自动结界/突破_再次挑战.png",
+    "template": [
+      "战斗/自动结界/突破-取保进入失败页面_1.png",
+      "自动结界/突破_再次挑战.png"
+    ],
     "timeout": 5000
   },
   "突破_再次挑战-ocr": {
@@ -435,7 +440,8 @@
     "custom_action": "ClearHitCount",
     "custom_action_param": {
       "node_names": [
-        "突破_开始重新挑战"
+        "突破_开始重新挑战",
+        "突破-改为手动"
       ]
     },
     "next": [
