@@ -239,10 +239,10 @@
     "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
-      655,
-      388,
-      192,
-      87
+      633,
+      366,
+      252,
+      155
     ]
   },
   "确认再次挑战_copy1": {
@@ -271,28 +271,6 @@
       158,
       65
     ]
-  },
-  "突破-取保进入失败页面": {
-    "next": [
-      "突破-退出了失败界面",
-      "[JumpBack]确认再次挑战",
-      "[JumpBack]突破_再次挑战-ocr",
-      "[JumpBack]突破_再次挑战"
-    ],
-    "post_delay": 500,
-    "recognition": "TemplateMatch",
-    "roi": [
-      785,
-      428,
-      151,
-      165
-    ],
-    "template": [
-      "战斗/自动结界/突破-取保进入失败页面_1.png",
-      "自动结界/突破_再次挑战.png"
-    ],
-    "threshold": 0.8,
-    "timeout": 5000
   },
   "突破-将手动改为自动": {
     "action": "Click",
@@ -348,6 +326,28 @@
       "战斗/自动结界/突破-点击底部_1.png"
     ]
   },
+  "突破-确保进入失败页面": {
+    "next": [
+      "突破-退出了失败界面-ocr",
+      "[JumpBack]确认再次挑战",
+      "[JumpBack]突破_再次挑战-ocr",
+      "[JumpBack]突破_再次挑战"
+    ],
+    "post_delay": 500,
+    "recognition": "TemplateMatch",
+    "roi": [
+      785,
+      428,
+      151,
+      165
+    ],
+    "template": [
+      "战斗/自动结界/突破-取保进入失败页面_1.png",
+      "自动结界/突破_再次挑战.png"
+    ],
+    "threshold": 0.8,
+    "timeout": 10000
+  },
   "突破-空节点": {
     "recognition": "DirectHit"
   },
@@ -363,21 +363,17 @@
     "recognition": "DirectHit",
     "timeout": 200000
   },
-  "突破-退出了失败界面": {
+  "突破-退出了失败界面-ocr": {
+    "expected": "再次挑战|提升式神|提升阴阳师",
     "inverse": true,
-    "post_delay": 500,
-    "recognition": "TemplateMatch",
+    "post_delay": 1000,
+    "recognition": "OCR",
     "roi": [
-      769,
-      415,
-      225,
-      202
-    ],
-    "template": [
-      "战斗/自动结界/突破-取保进入失败页面_1.png",
-      "自动结界/突破_再次挑战.png"
-    ],
-    "timeout": 5000
+      308,
+      532,
+      670,
+      69
+    ]
   },
   "突破_再次挑战": {
     "action": "Click",
@@ -411,6 +407,12 @@
       546,
       101,
       36
+    ],
+    "target": [
+      832,
+      491,
+      54,
+      31
     ]
   },
   "突破_再次挑战失败,准备刷新": {
@@ -457,7 +459,7 @@
   "突破_开始重新挑战": {
     "max_hit": 6,
     "next": [
-      "突破-取保进入失败页面",
+      "突破-确保进入失败页面",
       "[JumpBack]突破-改为手动",
       "[JumpBack]退出战斗_确认",
       "[JumpBack]突破_重新挑战_特征匹配",
