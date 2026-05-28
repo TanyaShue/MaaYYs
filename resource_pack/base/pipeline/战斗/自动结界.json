@@ -299,6 +299,31 @@
       60
     ]
   },
+  "突破-将手动改为自动-3": {
+    "action": "Click",
+    "max_hit": 1,
+    "post_delay": 3000,
+    "pre_delay": 1,
+    "recognition": "FeatureMatch",
+    "roi": [
+      0,
+      4,
+      77,
+      75
+    ],
+    "target": [
+      42,
+      653,
+      39,
+      19
+    ],
+    "template": [
+      "自动结界/突破_重新挑战-模板匹配_1.png",
+      "自动结界/突破_重新挑战-模板匹配_2.png",
+      "通用图标/战斗_返回.png",
+      "通用图标/战斗_返回_原版.png"
+    ]
+  },
   "突破-改为手动": {
     "action": "Click",
     "expected": "自动",
@@ -371,6 +396,7 @@
     "next": [
       "识别突破界面",
       "[JumpBack]自动结界2_战斗准备",
+      "[JumpBack]突破-将手动改为自动-3",
       "[JumpBack]突破_挑战失败",
       "[JumpBack]突破_再次挑战失败,准备刷新",
       "[JumpBack]突破_结束战斗",
@@ -458,6 +484,13 @@
     "timeout": 5000
   },
   "突破_准备重新挑战四次": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破-将手动改为自动-3"
+      ]
+    },
     "next": [
       "[JumpBack]突破_开始重新挑战",
       "突破-进入战斗"
