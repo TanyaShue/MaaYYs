@@ -290,6 +290,7 @@
   "突破-将手动改为自动-2": {
     "action": "Click",
     "expected": "手动",
+    "only_rec": true,
     "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
@@ -407,12 +408,12 @@
     "next": [
       "识别突破界面",
       "[JumpBack]自动结界2_战斗准备",
-      "[JumpBack]突破-将手动改为自动-3",
       "[JumpBack]突破_挑战失败",
       "[JumpBack]突破_再次挑战失败,准备刷新",
       "[JumpBack]突破_结束战斗",
       "[JumpBack]突破-将手动改为自动",
-      "[JumpBack]突破-将手动改为自动-2"
+      "[JumpBack]突破-将手动改为自动-2",
+      "[JumpBack]突破-将手动改为自动-3"
     ],
     "on_error": [
       "[JumpBack]突破-尝试点击自动",

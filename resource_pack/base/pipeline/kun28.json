@@ -179,6 +179,9 @@
       ]
     },
     "max_hit": 5,
+    "next": [
+      "导航-庭院"
+    ],
     "recognition": "DirectHit"
   },
   "困28-点击第二十八章": {
@@ -212,7 +215,6 @@
       "team_name": "默认队伍"
     },
     "next": [
-      "导航-庭院",
       "困28-清除计数"
     ],
     "recognition": "DirectHit"
