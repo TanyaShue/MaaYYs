@@ -192,9 +192,8 @@
       96,
       158
     ],
-    "max_hit": 1,
-    "recognition": "DirectHit",
-    "repeat": 3
+    "max_hit": 2,
+    "recognition": "DirectHit"
   },
   "战斗-探索副本-点击进入探索": {
     "action": "Click",
