@@ -324,6 +324,17 @@
       "通用图标/战斗_返回_原版.png"
     ]
   },
+  "突破-尝试点击自动": {
+    "action": "Click",
+    "max_hit": 2,
+    "recognition": "DirectHit",
+    "target": [
+      42,
+      653,
+      39,
+      19
+    ]
+  },
   "突破-改为手动": {
     "action": "Click",
     "expected": "自动",
@@ -404,6 +415,7 @@
       "[JumpBack]突破-将手动改为自动-2"
     ],
     "on_error": [
+      "[JumpBack]突破-尝试点击自动",
       "突破-空节点"
     ],
     "recognition": "DirectHit",
