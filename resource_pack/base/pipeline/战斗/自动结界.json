@@ -303,7 +303,7 @@
     "action": "Click",
     "max_hit": 1,
     "post_delay": 3000,
-    "pre_delay": 1,
+    "pre_delay": 1000,
     "recognition": "FeatureMatch",
     "roi": [
       0,
@@ -402,6 +402,9 @@
       "[JumpBack]突破_结束战斗",
       "[JumpBack]突破-将手动改为自动",
       "[JumpBack]突破-将手动改为自动-2"
+    ],
+    "on_error": [
+      "突破-空节点"
     ],
     "recognition": "DirectHit",
     "timeout": 200000
