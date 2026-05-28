@@ -1,5 +1,8 @@
 {
   "N-1779860275398": {
+    "focus": {
+      "Node.Recognition.Starting": "识别超时.等待重新开始"
+    },
     "recognition": "DirectHit"
   },
   "开始自动结界": {
@@ -284,10 +287,23 @@
       106
     ]
   },
+  "突破-将手动改为自动-2": {
+    "action": "Click",
+    "expected": "手动",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      16,
+      632,
+      97,
+      60
+    ]
+  },
   "突破-改为手动": {
     "action": "Click",
     "expected": "自动",
     "max_hit": 1,
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
       0,
@@ -358,7 +374,8 @@
       "[JumpBack]突破_挑战失败",
       "[JumpBack]突破_再次挑战失败,准备刷新",
       "[JumpBack]突破_结束战斗",
-      "[JumpBack]突破-将手动改为自动"
+      "[JumpBack]突破-将手动改为自动",
+      "[JumpBack]突破-将手动改为自动-2"
     ],
     "recognition": "DirectHit",
     "timeout": 200000
@@ -366,7 +383,7 @@
   "突破-退出了失败界面-ocr": {
     "expected": "再次挑战|提升式神|提升阴阳师",
     "inverse": true,
-    "post_delay": 1000,
+    "post_delay": 3000,
     "recognition": "OCR",
     "roi": [
       308,
@@ -377,7 +394,7 @@
   },
   "突破_再次挑战": {
     "action": "Click",
-    "post_delay": 1000,
+    "post_delay": 3000,
     "recognition": "TemplateMatch",
     "roi": [
       769,
@@ -400,7 +417,7 @@
   "突破_再次挑战-ocr": {
     "action": "Click",
     "expected": "再次挑战",
-    "post_delay": 1000,
+    "post_delay": 3000,
     "recognition": "OCR",
     "roi": [
       811,
@@ -441,14 +458,6 @@
     "timeout": 5000
   },
   "突破_准备重新挑战四次": {
-    "action": "Custom",
-    "custom_action": "ClearHitCount",
-    "custom_action_param": {
-      "node_names": [
-        "突破_开始重新挑战",
-        "突破-改为手动"
-      ]
-    },
     "next": [
       "[JumpBack]突破_开始重新挑战",
       "突破-进入战斗"
@@ -457,6 +466,9 @@
     "timeout": 2000000
   },
   "突破_开始重新挑战": {
+    "focus": {
+      "Node.Recognition.Succeeded": "开始重新挑战"
+    },
     "max_hit": 4,
     "next": [
       "突破-确保进入失败页面",
@@ -543,7 +555,7 @@
   },
   "突破_重新挑战-模板匹配": {
     "action": "Click",
-    "post_delay": 500,
+    "post_delay": 3000,
     "pre_delay": 1,
     "recognition": "TemplateMatch",
     "roi": [
@@ -567,7 +579,7 @@
   },
   "突破_重新挑战_特征匹配": {
     "action": "Click",
-    "post_delay": 500,
+    "post_delay": 3000,
     "pre_delay": 1,
     "recognition": "FeatureMatch",
     "roi": [
@@ -818,6 +830,14 @@
     ]
   },
   "识别突破界面": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破_开始重新挑战",
+        "突破-改为手动"
+      ]
+    },
     "expected": "结界突破",
     "post_delay": 1000,
     "recognition": "OCR",
