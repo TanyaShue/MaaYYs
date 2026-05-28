@@ -64,6 +64,10 @@
     ],
     "recognition": "DirectHit"
   },
+  "困28-导航去式神录": {
+    "max_hit": 1,
+    "recognition": "DirectHit"
+  },
   "困28-展开主线面板": {
     "action": "Click",
     "post_delay": 1000,
@@ -124,8 +128,8 @@
   "困28-开始装备探索御魂": {
     "max_hit": 1,
     "next": [
-      "困28-装备御魂",
-      "[JumpBack]导航-式神录"
+      "[JumpBack]困28-导航去式神录",
+      "困28-装备御魂"
     ],
     "recognition": "DirectHit"
   },
@@ -166,6 +170,17 @@
       43
     ]
   },
+  "困28-清除计数": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "困28-导航去式神录"
+      ]
+    },
+    "max_hit": 5,
+    "recognition": "DirectHit"
+  },
   "困28-点击第二十八章": {
     "action": "Click",
     "expected": "第二十八章|二十八",
@@ -196,17 +211,11 @@
       "group_name": "默认分组",
       "team_name": "默认队伍"
     },
-    "expected": "式神录|我的式神|预设",
     "next": [
-      "导航-庭院"
+      "导航-庭院",
+      "困28-清除计数"
     ],
-    "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      434,
-      129
-    ]
+    "recognition": "DirectHit"
   },
   "困28-识别是否位于第二十八章": {
     "expected": "第二十八章",
