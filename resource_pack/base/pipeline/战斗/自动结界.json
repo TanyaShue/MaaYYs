@@ -1,14 +1,28 @@
 {
-  "N-1779860275398": {
-    "focus": {
-      "Node.Recognition.Starting": "识别超时.等待重新开始"
-    },
-    "recognition": "DirectHit"
+  "判断有没有直接完成战斗": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "only_rec": true,
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      514,
+      676,
+      323,
+      38
+    ],
+    "target": [
+      242,
+      542,
+      893,
+      178
+    ]
   },
   "开始自动结界": {
     "expected": "结界突破",
     "next": [
       "结束突破",
+      "[JumpBack]结界-关闭意外打开的奖励预览",
       "[JumpBack]突破_领取奖励",
       "[JumpBack]突破_点击进攻",
       "[JumpBack]挑战第一个结界",
@@ -527,7 +541,7 @@
       "[JumpBack]突破_重新挑战-模板匹配"
     ],
     "on_error": [
-      "N-1779860275398"
+      "判断有没有直接完成战斗"
     ],
     "rate_limit": 200,
     "recognition": "DirectHit"
@@ -679,6 +693,24 @@
       0,
       208,
       66
+    ]
+  },
+  "结界-关闭意外打开的奖励预览": {
+    "action": "Click",
+    "expected": "奖励预览",
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      541,
+      181,
+      215,
+      76
+    ],
+    "target": [
+      572,
+      663,
+      149,
+      57
     ]
   },
   "结界突破_点击式神录": {

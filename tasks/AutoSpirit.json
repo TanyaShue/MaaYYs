@@ -5,6 +5,7 @@
             "label": "自动御灵",
             "entry": "自动御灵1",
             "option": [
+                "御灵-设置目标",
                 "御灵-设置挑战次数",
                 "御灵阵容预设",
                 "自定义御灵点击策略设置"
@@ -12,6 +13,48 @@
         }
     ],
     "option": {
+        "御灵-设置目标":{
+            "type": "select",
+            "default_case": "暗神龙",
+            "cases": [
+                {
+                    "name": "暗神龙",
+                    "label": "暗神龙",
+                    "pipeline_override": {
+                        "自动御灵-点击目标御灵":{
+                            "expected": "暗神龙"
+                        }
+                    }
+                },
+                {
+                    "name": "暗白藏主",
+                    "label": "暗白藏主",
+                    "pipeline_override": {
+                        "自动御灵-点击目标御灵":{
+                            "expected": "暗白藏主"
+                        }
+                    }
+                },
+                {
+                    "name": "暗黑豹",
+                    "label": "暗黑豹",
+                    "pipeline_override": {
+                        "自动御灵-点击目标御灵":{
+                            "expected": "暗黑豹"
+                        }
+                    }
+                },
+                {
+                    "name": "暗孔雀",
+                    "label": "暗孔雀",
+                    "pipeline_override": {
+                        "自动御灵-点击目标御灵":{
+                            "expected": "暗孔雀"
+                        }
+                    }
+                }
+            ]
+        },
         "御灵-设置挑战次数": {
             "type": "input",
             "label": "挑战次数",
