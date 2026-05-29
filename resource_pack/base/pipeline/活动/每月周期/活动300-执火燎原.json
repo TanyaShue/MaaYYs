@@ -90,7 +90,7 @@
     "enabled": false,
     "expected": "^0$",
     "focus": {
-      "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
+      "Node.Recognition.Succeeded": "体力票刷完了!!!,任务结束"
     },
     "recognition": "OCR",
     "roi": [
