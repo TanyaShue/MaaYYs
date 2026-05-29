@@ -198,6 +198,19 @@
       384
     ]
   },
+  "困28-点击第二十八章-仅识别": {
+    "action": "Click",
+    "expected": "第二十八章|二十八",
+    "only_rec": true,
+    "post_delay": 4000,
+    "recognition": "OCR",
+    "roi": [
+      1062,
+      451,
+      118,
+      40
+    ]
+  },
   "困28-看看是否有为领取完的奖励": {
     "action": "Click",
     "expected": "点击屏幕继续",
@@ -235,7 +248,8 @@
     "next": [
       "困28-识别是否位于第二十八章",
       "[JumpBack]困28-点击第二十八章",
-      "[JumpBack]困28-没找到28章向下滑动"
+      "[JumpBack]困28-没找到28章向下滑动",
+      "[JumpBack]困28-点击第二十八章-仅识别"
     ],
     "recognition": "TemplateMatch",
     "roi": [
