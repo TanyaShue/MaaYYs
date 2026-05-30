@@ -129,6 +129,7 @@
       "target_count": 10
     },
     "enabled": false,
+    "inverse": true,
     "next": [
       "返回庭院"
     ],
