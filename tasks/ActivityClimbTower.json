@@ -34,8 +34,37 @@
                             "enabled": true
                         }
                     }
+                },
+                {
+                    "name": "指定次数",
+                    "label": "指定次数",
+                    "pipeline_override": {
+                        "爬塔-执火燎原-识别挑战次数是否达标": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["设置爬塔次数"]
                 }
             ]
+        },
+        "设置爬塔次数":{
+            "type": "input",
+            "label": "设置挑战次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "default": "100",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "爬塔-执火燎原-识别挑战次数是否达标": {
+                    "custom_action_param": {
+                        "target_count": "{挑战次数}"
+                    }
+                }
+            }
         },
         "自定义爬塔随机等待": {
             "type": "switch",

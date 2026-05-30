@@ -5,7 +5,8 @@
       "爬塔-执火燎原-活动票花光",
       "爬塔-执火燎原-体力票花光",
       "[JumpBack]活动爬塔-执火燎原-识别挑战",
-      "[JumpBack]活动爬塔-执火燎原-点击屏幕继续"
+      "[JumpBack]活动爬塔-执火燎原-点击屏幕继续",
+      "爬塔-执火燎原-识别挑战次数是否达标"
     ],
     "recognition": "OCR",
     "roi": [
@@ -92,6 +93,9 @@
     "focus": {
       "Node.Recognition.Succeeded": "体力票刷完了!!!,任务结束"
     },
+    "next": [
+      "返回庭院"
+    ],
     "recognition": "OCR",
     "roi": [
       547,
@@ -116,5 +120,16 @@
       140,
       54
     ]
+  },
+  "爬塔-执火燎原-识别挑战次数是否达标": {
+    "custom_recognition": "TaskCounterRecognition",
+    "custom_recognition_param": {
+      "target_count": 10
+    },
+    "enabled": false,
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "Custom"
   }
 }
