@@ -18,6 +18,53 @@
         "御魂挑战目标": {
             "type": "select",
             "label": "御魂挑战目标",
+            "default_case": "八岐大蛇",
+            "cases": [
+                {
+                    "name": "八岐大蛇",
+                    "label": "八岐大蛇",
+                    "pipeline_override": {
+                        "自动御魂_点击目标副本": {
+                            "expected": "八岐大蛇"
+                        }
+                    },
+                    "option": ["大蛇挑战层数"]
+                },
+                {
+                    "name": "业原火",
+                    "label": "业原火",
+                    "pipeline_override": {
+                        "自动御魂_点击目标副本": {
+                            "expected": "业原火"
+                        }
+                    },
+                    "option": ["业原火挑战层数"]
+                },
+                {
+                    "name": "卑弥呼",
+                    "label": "卑弥呼",
+                    "pipeline_override": {
+                        "自动御魂_点击目标副本": {
+                            "expected": "卑弥呼"
+                        }
+                    },
+                    "option": ["卑弥呼挑战层数"]
+                },
+                {
+                    "name": "永生之海",
+                    "label": "永生之海",
+                    "pipeline_override": {
+                        "自动御魂_点击目标副本": {
+                            "expected": "永生之海"
+                        }
+                    },
+                    "option": ["永生之海挑战层数"]
+                }
+            ]
+        },
+        "大蛇挑战层数": {
+            "type": "select",
+            "label": "御魂挑战目标",
             "default_case": "魂土",
             "cases": [
                 {
@@ -53,6 +100,126 @@
                     "pipeline_override": {
                         "自动御魂_点击目标层数": {
                             "expected": "虚无"
+                        }
+                    }
+                }
+            ]
+        },
+        "业原火挑战层数": {
+            "type": "select",
+            "label": "御魂挑战目标",
+            "default_case": "痴之阵",
+            "cases": [
+                {
+                    "name": "痴之阵",
+                    "label": "痴之阵",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "痴之阵"
+                        }
+                    }
+                },
+                {
+                    "name": "嗔之阵",
+                    "label": "嗔之阵",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "嗔之阵"
+                        }
+                    }
+                },
+                {
+                    "name": "贪之阵",
+                    "label": "贪之阵",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "贪之阵"
+                        }
+                    }
+                }
+            ]
+        },
+        "卑弥呼挑战层数": {
+            "type": "select",
+            "label": "御魂挑战目标",
+            "default_case": "叁层",
+            "cases": [
+                {
+                    "name": "叁层",
+                    "label": "叁层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "叁层"
+                        }
+                    }
+                },
+                {
+                    "name": "贰层",
+                    "label": "贰层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "贰层"
+                        }
+                    }
+                },
+                {
+                    "name": "壹层",
+                    "label": "壹层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "壹层"
+                        }
+                    }
+                },
+                {
+                    "name": "日蚀",
+                    "label": "日蚀",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "日蚀"
+                        }
+                    }
+                }
+            ]
+        },
+        "永生之海挑战层数": {
+            "type": "select",
+            "label": "御魂挑战目标",
+            "default_case": "壹层",
+            "cases": [
+                {
+                    "name": "壹层",
+                    "label": "壹层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "壹层"
+                        }
+                    }
+                },
+                {
+                    "name": "贰层",
+                    "label": "贰层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "贰层"
+                        }
+                    }
+                },
+                {
+                    "name": "叁层",
+                    "label": "叁层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "叁层"
+                        }
+                    }
+                },
+                {
+                    "name": "肆层",
+                    "label": "肆层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "肆层"
                         }
                     }
                 }
