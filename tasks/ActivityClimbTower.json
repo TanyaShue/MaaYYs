@@ -60,7 +60,8 @@
             ],
             "pipeline_override": {
                 "爬塔-执火燎原-识别挑战次数是否达标": {
-                    "custom_action_param": {
+                    "custom_recognition": "TaskCounterRecognition",
+                    "custom_recognition_param": {
                         "target_count": "{挑战次数}"
                     }
                 }
