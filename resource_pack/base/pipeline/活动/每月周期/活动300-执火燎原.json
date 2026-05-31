@@ -35,7 +35,7 @@
       "[JumpBack]活动爬塔-执火燎原-点击屏幕继续",
       "[JumpBack]活动爬塔-执火燎原-继续点击屏幕继续"
     ],
-    "post_delay": 1000,
+    "post_delay": 5000,
     "recognition": "OCR",
     "roi": [
       1117,
