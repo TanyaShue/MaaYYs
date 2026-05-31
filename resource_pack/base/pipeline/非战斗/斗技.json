@@ -1,4 +1,11 @@
 {
+  "N-1780209863545": {
+    "max_hit": 1,
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "DirectHit"
+  },
   "斗技-从式神录装备御魂": {
     "enabled": false,
     "next": [
@@ -466,7 +473,8 @@
     "expected": "式神录",
     "next": [
       "[JumpBack]导航-庭院",
-      "自动斗技-确保从式神录返回庭院"
+      "自动斗技-确保从式神录返回庭院",
+      "[JumpBack]N-1780209863545"
     ],
     "recognition": "OCR",
     "roi": [
