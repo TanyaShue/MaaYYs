@@ -63,10 +63,10 @@
     "action": "Click",
     "recognition": "TemplateMatch",
     "roi": [
-      805,
-      20,
-      330,
-      179
+      812,
+      0,
+      468,
+      185
     ],
     "template": [
       "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
@@ -77,10 +77,10 @@
     "action": "Click",
     "recognition": "FeatureMatch",
     "roi": [
-      817,
-      29,
-      321,
-      164
+      812,
+      0,
+      468,
+      185
     ],
     "template": [
       "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
