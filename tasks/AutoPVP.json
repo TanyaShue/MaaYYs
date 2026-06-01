@@ -21,7 +21,6 @@
         {
           "name": "斗技-去式神录切换",
           "label": "去式神录切换",
-          "option": ["自动斗技预设"],
           "pipeline_override": {
             "斗技-从式神录装备御魂": {
               "enabled": true
