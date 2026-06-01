@@ -923,9 +923,6 @@
   },
   "自动逢魔9": {
     "next": [
-      "[JumpBack]自动逢魔11_1",
-      "[JumpBack]自动逢魔11_2_copy1",
-      "[JumpBack]自动逢魔11_2_copy2",
       "识别集结挑战",
       "[JumpBack]现世逢魔_点击首领"
     ],
