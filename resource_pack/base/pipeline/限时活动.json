@@ -1,0 +1,159 @@
+{
+  "导航-下一茨宾果": {
+    "next": [
+      "导航-下一茨宾果-识别任务界面",
+      "[JumpBack]导航-下一茨宾果-点击任务"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      729,
+      38,
+      551,
+      204
+    ],
+    "template": [
+      "限时活动/导航-下一茨宾果_1.png"
+    ]
+  },
+  "导航-下一茨宾果-一键领取": {
+    "inverse": true,
+    "next": [
+      "[JumpBack]导航-下一茨宾果-关闭奖励界面",
+      "导航-下一茨宾果-识别奖励"
+    ],
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1072,
+      461,
+      208,
+      246
+    ],
+    "template": [
+      "限时活动/导航-下一茨宾果-一键领取_1.png"
+    ]
+  },
+  "导航-下一茨宾果-关闭奖励界面": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      448,
+      170,
+      391,
+      130
+    ],
+    "target": [
+      481,
+      642,
+      428,
+      78
+    ],
+    "template": [
+      "限时活动/导航-下一茨宾果-识别奖励_1.png"
+    ]
+  },
+  "导航-下一茨宾果-向下滑动": {
+    "action": "Swipe",
+    "begin": [
+      66,
+      585,
+      104,
+      42
+    ],
+    "duration": 4000,
+    "end": [
+      44,
+      145,
+      97,
+      70
+    ],
+    "expected": "活动总览",
+    "max_hit": 6,
+    "recognition": "OCR",
+    "roi": [
+      118,
+      0,
+      234,
+      82
+    ]
+  },
+  "导航-下一茨宾果-点击一键领取": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1072,
+      461,
+      208,
+      246
+    ],
+    "template": [
+      "限时活动/导航-下一茨宾果-一键领取_1.png"
+    ]
+  },
+  "导航-下一茨宾果-点击任务": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1112,
+      614,
+      164,
+      96
+    ],
+    "template": [
+      "限时活动/导航-下一茨宾果-点击任务_1.png",
+      "限时活动/导航-下一茨宾果-点击任务_2.png"
+    ]
+  },
+  "导航-下一茨宾果-点击活动": {
+    "action": "Click",
+    "expected": "下一茨宾果",
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      103,
+      239,
+      597
+    ]
+  },
+  "导航-下一茨宾果-识别任务界面": {
+    "expected": "任务",
+    "next": [
+      "[JumpBack]导航-下一茨宾果-点击一键领取",
+      "导航-下一茨宾果-一键领取"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      118,
+      144,
+      65,
+      252
+    ]
+  },
+  "导航-下一茨宾果-识别奖励": {
+    "inverse": true,
+    "recognition": "TemplateMatch",
+    "roi": [
+      448,
+      170,
+      391,
+      130
+    ],
+    "template": [
+      "限时活动/导航-下一茨宾果-识别奖励_1.png"
+    ]
+  },
+  "限时活动-免费庭院皮": {
+    "next": [
+      "导航-下一茨宾果",
+      "[JumpBack]导航-下一茨宾果-点击活动",
+      "[JumpBack]导航-下一茨宾果-向下滑动",
+      "[JumpBack]导航-活动总览"
+    ],
+    "recognition": "DirectHit"
+  }
+}
