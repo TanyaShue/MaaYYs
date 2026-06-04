@@ -67,7 +67,6 @@
       78
     ],
     "max_hit": 4,
-    "next": [],
     "post_delay": 2000,
     "recognition": "DirectHit"
   },
@@ -546,6 +545,7 @@
       "悬赏封印-判断是否进入章节界面",
       "[JumpBack]悬赏封印-前往式神碎片副本"
     ],
+    "order_by": "Vertical",
     "recognition": "OCR",
     "roi": [
       521,
@@ -560,6 +560,7 @@
       "悬赏封印-判断是否进入探索章节界面",
       "[JumpBack]悬赏封印-前往探索副本"
     ],
+    "order_by": "Vertical",
     "recognition": "OCR",
     "roi": [
       521,
@@ -575,6 +576,7 @@
       "悬赏封印-判断是否进入秘闻界面",
       "[JumpBack]悬赏封印-前往秘闻副本"
     ],
+    "order_by": "Vertical",
     "recognition": "OCR",
     "roi": [
       521,
