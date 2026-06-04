@@ -105,6 +105,7 @@
     "tasks/AutoPVP.json",
     "tasks/AutoShop.json",
     "tasks/ScrollFarming.json",
+    "tasks/LimiteTimeEvent.json",
     "tasks/CloseGame.json"
   ]
 }

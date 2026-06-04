@@ -136,6 +136,9 @@
   },
   "导航-下一茨宾果-识别奖励": {
     "inverse": true,
+    "next": [
+      "导航-庭院"
+    ],
     "recognition": "TemplateMatch",
     "roi": [
       448,
