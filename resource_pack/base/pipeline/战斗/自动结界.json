@@ -1,21 +1,30 @@
 {
-  "关闭结界突破": {
+  "判断有没有直接完成战斗": {
     "action": "Click",
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
+    "expected": "点击屏幕继续",
+    "only_rec": true,
+    "post_delay": 1000,
+    "recognition": "OCR",
     "roi": [
-      1152,
-      82,
-      115,
-      116
+      514,
+      676,
+      323,
+      38
     ],
-    "template": "通用图标/结界突破_关闭.png"
+    "target": [
+      242,
+      542,
+      893,
+      178
+    ]
   },
   "开始自动结界": {
     "expected": "结界突破",
     "next": [
       "结束突破",
-      "[JumpBack]突破_结束战斗",
+      "[JumpBack]结界-关闭意外打开的奖励预览",
+      "[JumpBack]结界-关闭意外打开的好友面板",
+      "[JumpBack]结界-关闭意外打开的名片",
       "[JumpBack]突破_领取奖励",
       "[JumpBack]突破_点击进攻",
       "[JumpBack]挑战第一个结界",
@@ -246,22 +255,18 @@
   "确认再次挑战": {
     "action": "Click",
     "expected": "确定",
-    "post_delay": 500,
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
-      655,
-      388,
-      192,
-      87
+      633,
+      366,
+      252,
+      155
     ]
   },
   "确认再次挑战_copy1": {
     "action": "Click",
     "expected": "确定",
-    "next": [
-      "识别突破界面",
-      "突破_再次挑战_copy1_copy1"
-    ],
     "post_delay": 500,
     "recognition": "OCR",
     "roi": [
@@ -271,16 +276,198 @@
       87
     ]
   },
-  "突破_再次挑战": {
-    "action": "Click",
+  "突破-先回突破界面": {
+    "expected": "结界突破",
     "next": [
-      "确认再次挑战"
+      "自动结界8",
+      "[JumpBack]自动结界4"
     ],
-    "on_error": [
-      "跳过"
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      559,
+      64,
+      158,
+      65
+    ]
+  },
+  "突破-将手动改为自动": {
+    "action": "Click",
+    "expected": "手动",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      614,
+      148,
+      106
+    ]
+  },
+  "突破-将手动改为自动-2": {
+    "action": "Click",
+    "expected": "手动",
+    "only_rec": true,
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      16,
+      632,
+      97,
+      60
+    ]
+  },
+  "突破-将手动改为自动-3": {
+    "action": "Click",
+    "max_hit": 1,
+    "post_delay": 3000,
+    "pre_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      0,
+      4,
+      77,
+      75
+    ],
+    "target": [
+      42,
+      653,
+      39,
+      19
+    ],
+    "template": [
+      "自动结界/突破_重新挑战-模板匹配_1.png",
+      "自动结界/突破_重新挑战-模板匹配_2.png",
+      "通用图标/战斗_返回.png",
+      "通用图标/战斗_返回_原版.png"
+    ]
+  },
+  "突破-尝试点击自动": {
+    "action": "Click",
+    "max_hit": 2,
+    "recognition": "DirectHit",
+    "target": [
+      42,
+      653,
+      39,
+      19
+    ]
+  },
+  "突破-改为手动": {
+    "action": "Click",
+    "expected": "自动",
+    "max_hit": 1,
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      626,
+      139,
+      94
+    ]
+  },
+  "突破-清空失败计数": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破_挑战失败"
+      ]
+    },
+    "recognition": "DirectHit"
+  },
+  "突破-点击底部": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      753,
+      411,
+      316,
+      224
+    ],
+    "target": [
+      394,
+      612,
+      422,
+      108
+    ],
+    "template": [
+      "战斗/自动结界/突破-点击底部_1.png"
+    ]
+  },
+  "突破-直接结束": {
+    "recognition": "DirectHit"
+  },
+  "突破-直接结束突破": {
+    "expected": "结界突破",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      559,
+      64,
+      158,
+      65
+    ]
+  },
+  "突破-确保进入失败页面": {
+    "next": [
+      "突破-退出了失败界面-ocr",
+      "[JumpBack]确认再次挑战",
+      "[JumpBack]突破_再次挑战-ocr",
+      "[JumpBack]突破_再次挑战"
     ],
     "post_delay": 500,
-    "recognition": "FeatureMatch",
+    "recognition": "TemplateMatch",
+    "roi": [
+      785,
+      428,
+      151,
+      165
+    ],
+    "template": [
+      "战斗/自动结界/突破-取保进入失败页面_1.png",
+      "自动结界/突破_再次挑战.png"
+    ],
+    "threshold": 0.8,
+    "timeout": 10000
+  },
+  "突破-空节点": {
+    "recognition": "DirectHit"
+  },
+  "突破-进入战斗": {
+    "next": [
+      "识别突破界面",
+      "[JumpBack]自动结界2_战斗准备",
+      "[JumpBack]突破_挑战失败",
+      "[JumpBack]突破_再次挑战失败,准备刷新",
+      "[JumpBack]突破_结束战斗",
+      "[JumpBack]突破-将手动改为自动",
+      "[JumpBack]突破-将手动改为自动-2",
+      "[JumpBack]突破-将手动改为自动-3"
+    ],
+    "on_error": [
+      "[JumpBack]突破-尝试点击自动",
+      "突破-空节点"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 200000
+  },
+  "突破-退出了失败界面-ocr": {
+    "expected": "再次挑战|提升式神|提升阴阳师",
+    "inverse": true,
+    "post_delay": 3000,
+    "recognition": "OCR",
+    "roi": [
+      308,
+      532,
+      670,
+      69
+    ]
+  },
+  "突破_再次挑战": {
+    "action": "Click",
+    "post_delay": 3000,
+    "recognition": "TemplateMatch",
     "roi": [
       769,
       415,
@@ -293,48 +480,38 @@
       45,
       51
     ],
-    "template": "自动结界/突破_再次挑战.png",
+    "template": [
+      "战斗/自动结界/突破-取保进入失败页面_1.png",
+      "自动结界/突破_再次挑战.png"
+    ],
     "timeout": 5000
   },
   "突破_再次挑战-ocr": {
     "action": "Click",
     "expected": "再次挑战",
-    "next": [
-      "确认再次挑战"
-    ],
-    "on_error": [
-      "跳过"
-    ],
+    "post_delay": 3000,
     "recognition": "OCR",
     "roi": [
       811,
       546,
       101,
       36
+    ],
+    "target": [
+      832,
+      491,
+      54,
+      31
     ]
   },
-  "突破_再次挑战_copy1": {
-    "action": "Click",
+  "突破_再次挑战失败,准备刷新": {
     "next": [
-      "确认再次挑战_copy1",
-      "自动结界7"
+      "突破-先回突破界面",
+      "突破-点击底部"
     ],
-    "post_delay": 500,
-    "recognition": "FeatureMatch",
-    "roi": [
-      769,
-      415,
-      225,
-      202
+    "on_error": [
+      "突破-空节点"
     ],
-    "template": "自动结界/突破_再次挑战.png"
-  },
-  "突破_再次挑战_copy1_copy1": {
-    "next": [
-      "自动结界4",
-      "[JumpBack]突破_结束战斗"
-    ],
-    "on_error": [],
     "post_delay": 500,
     "recognition": "FeatureMatch",
     "roi": [
@@ -352,15 +529,67 @@
     "template": "自动结界/突破_再次挑战.png",
     "timeout": 5000
   },
+  "突破_准备重新挑战四次": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破-将手动改为自动-3"
+      ]
+    },
+    "next": [
+      "[JumpBack]突破_开始重新挑战",
+      "突破-进入战斗"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 2000000
+  },
+  "突破_开始重新挑战": {
+    "focus": {
+      "Node.Recognition.Succeeded": "开始重新挑战"
+    },
+    "max_hit": 4,
+    "next": [
+      "突破-确保进入失败页面",
+      "[JumpBack]突破-改为手动",
+      "[JumpBack]退出战斗_确认",
+      "[JumpBack]突破_重新挑战_特征匹配",
+      "[JumpBack]突破_重新挑战-模板匹配",
+      "突破-直接结束突破"
+    ],
+    "on_error": [
+      "判断有没有直接完成战斗",
+      "突破-直接结束"
+    ],
+    "rate_limit": 200,
+    "recognition": "DirectHit"
+  },
+  "突破_挑战失败": {
+    "action": "Click",
+    "focus": {
+      "Node.Recognition.Succeeded": "挑战失败,重试.."
+    },
+    "max_hit": 1,
+    "next": [
+      "突破-退出了失败界面-ocr",
+      "[JumpBack]确认再次挑战_copy1"
+    ],
+    "post_delay": 2000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      769,
+      415,
+      225,
+      202
+    ],
+    "template": "自动结界/突破_再次挑战.png"
+  },
   "突破_最后一个进攻": {
     "action": "Click",
     "next": [
-      "突破_重新挑战六次"
+      "突破_准备重新挑战四次"
     ],
-    "on_error": [
-      "跳过"
-    ],
-    "post_delay": 1000,
+    "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
       788,
@@ -374,10 +603,7 @@
   "突破_点击进攻": {
     "action": "Click",
     "next": [
-      "识别突破界面",
-      "突破_再次挑战_copy1",
-      "自动结界2_战斗准备",
-      "[JumpBack]突破_结束战斗"
+      "突破-进入战斗"
     ],
     "post_delay": 10000,
     "rate_limit": 2000,
@@ -388,8 +614,7 @@
       1092,
       640
     ],
-    "template": "自动结界/突破_进攻.png",
-    "timeout": 200000
+    "template": "自动结界/突破_进攻.png"
   },
   "突破_结束战斗": {
     "action": "Click",
@@ -409,34 +634,9 @@
       168
     ]
   },
-  "突破_识别探索特征_OCR": {
-    "expected": "觉醒材料|御魂|结界突破",
-    "next": [
-      "返回庭院"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      34,
-      598,
-      1084,
-      108
-    ]
-  },
-  "突破_重新挑战": {
-    "next": [
-      "退出战斗_确认",
-      "[JumpBack]突破_重新挑战_特征匹配",
-      "[JumpBack]突破_重新挑战-模板匹配"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "rate_limit": 200,
-    "recognition": "DirectHit"
-  },
   "突破_重新挑战-模板匹配": {
     "action": "Click",
-    "post_delay": 500,
+    "post_delay": 3000,
     "pre_delay": 1,
     "recognition": "TemplateMatch",
     "roi": [
@@ -460,7 +660,7 @@
   },
   "突破_重新挑战_特征匹配": {
     "action": "Click",
-    "post_delay": 500,
+    "post_delay": 3000,
     "pre_delay": 1,
     "recognition": "FeatureMatch",
     "roi": [
@@ -482,26 +682,6 @@
       "通用图标/战斗_返回_原版.png"
     ]
   },
-  "突破_重新挑战六次": {
-    "action": "Custom",
-    "custom_action": "LoopAction",
-    "custom_action_param": {
-      "action_list": [
-        "突破_重新挑战"
-      ],
-      "loop_times": 6,
-      "on_error": "跳过"
-    },
-    "next": [
-      "识别突破界面",
-      "[JumpBack]突破_结束战斗"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "recognition": "DirectHit",
-    "timeout": 2000000
-  },
   "突破_领取奖励": {
     "action": "Click",
     "expected": "点击屏幕继续",
@@ -522,8 +702,7 @@
   "结束突破": {
     "expected": "\\b0\\/30\\b",
     "next": [
-      "突破_识别探索特征_OCR",
-      "[JumpBack]关闭结界突破"
+      "导航-庭院"
     ],
     "post_delay": 2000,
     "recognition": "OCR",
@@ -532,6 +711,71 @@
       0,
       208,
       66
+    ]
+  },
+  "结界-关闭好友面板": {
+    "action": "Click",
+    "post_delay": 2000,
+    "pre_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      957,
+      0,
+      323,
+      227
+    ],
+    "template": [
+      "战斗/自动结界/结界-关闭好友面板_1.png"
+    ]
+  },
+  "结界-关闭意外打开的名片": {
+    "action": "Click",
+    "expected": "发送消息|加为好友|个人空间",
+    "post_delay": 2000,
+    "pre_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      160,
+      224,
+      147,
+      310
+    ],
+    "target": [
+      1188,
+      281,
+      81,
+      116
+    ]
+  },
+  "结界-关闭意外打开的奖励预览": {
+    "action": "Click",
+    "expected": "奖励预览",
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      541,
+      181,
+      215,
+      76
+    ],
+    "target": [
+      572,
+      663,
+      149,
+      57
+    ]
+  },
+  "结界-关闭意外打开的好友面板": {
+    "expected": "好友",
+    "next": [
+      "结界-关闭好友面板"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      507,
+      21,
+      249,
+      81
     ]
   },
   "结界突破_点击式神录": {
@@ -613,11 +857,6 @@
   "自动结界2_战斗准备": {
     "action": "Click",
     "expected": "准备",
-    "next": [
-      "突破_再次挑战_copy1",
-      "识别突破界面",
-      "[JumpBack]突破_结束战斗"
-    ],
     "post_delay": 1000,
     "pre_delay": 1000,
     "recognition": "OCR",
@@ -645,9 +884,6 @@
   "自动结界4": {
     "action": "Click",
     "expected": "刷新",
-    "next": [
-      "自动结界8"
-    ],
     "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
@@ -661,8 +897,9 @@
     "action": "Click",
     "expected": "进攻",
     "next": [
-      "突破_重新挑战六次"
+      "突破_准备重新挑战四次"
     ],
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
       788,
@@ -671,32 +908,8 @@
       457
     ]
   },
-  "自动结界6": {
-    "expected": "点击屏幕继续",
-    "inverse": true,
-    "recognition": "OCR",
-    "roi": [
-      514,
-      676,
-      323,
-      38
-    ]
-  },
-  "自动结界7": {
-    "expected": "自动",
-    "next": [
-      "突破_再次挑战_copy1_copy1"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      5,
-      630,
-      131,
-      71
-    ]
-  },
   "自动结界8": {
-    "expected": "刷新后攻破记录",
+    "expected": "刷新后攻破记录|重置",
     "next": [
       "自动结界9",
       "[JumpBack]自动结界9_copy1"
@@ -713,7 +926,7 @@
     "expected": "确定",
     "inverse": true,
     "next": [
-      "识别突破界面"
+      "突破-清空失败计数"
     ],
     "post_delay": 1000,
     "recognition": "OCR",
@@ -763,11 +976,15 @@
     ]
   },
   "识别突破界面": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破_开始重新挑战",
+        "突破-改为手动"
+      ]
+    },
     "expected": "结界突破",
-    "next": [
-      "自动结界6",
-      "[JumpBack]突破_结束战斗"
-    ],
     "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
@@ -796,14 +1013,7 @@
   "退出战斗_确认": {
     "action": "Click",
     "expected": "确认",
-    "next": [
-      "突破_再次挑战",
-      "突破_再次挑战-ocr"
-    ],
-    "on_error": [
-      "跳过"
-    ],
-    "post_delay": 500,
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
       643,

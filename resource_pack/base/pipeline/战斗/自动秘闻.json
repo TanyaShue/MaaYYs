@@ -17,22 +17,82 @@
       50
     ]
   },
+  "秘闻副本-判断是否从战斗中回到秘闻副本": {
+    "expected": "秘闻副本",
+    "recognition": "OCR",
+    "roi": [
+      92,
+      9,
+      142,
+      78
+    ]
+  },
+  "秘闻副本-识别是否返回副本界面": {
+    "expected": "秘闻副本",
+    "next": [
+      "自动秘闻1",
+      "自动秘闻_识别是否已通关",
+      "[JumpBack]秘闻副本锁定阵容",
+      "[JumpBack]自动秘闻_点击目标关卡"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      345,
+      112
+    ]
+  },
+  "秘闻副本-识别是否进入到了秘闻界面": {
+    "expected": "通关录像",
+    "next": [
+      "自动秘闻_装备式神预设",
+      "[JumpBack]自动秘闻_点击式神录"
+    ],
+    "recognition": "OCR",
+    "replace": [
+      [
+        "绿",
+        "录"
+      ]
+    ],
+    "roi": [
+      1181,
+      226,
+      99,
+      170
+    ]
+  },
+  "秘闻副本锁定阵容": {
+    "action": "Click",
+    "max_hit": 1,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1084,
+      656,
+      196,
+      64
+    ],
+    "template": [
+      "战斗/自动秘闻/秘闻副本锁定阵容_1.png"
+    ]
+  },
   "自动秘闻": {
     "next": [
       "自动秘闻3",
       "[JumpBack]导航-秘闻副本"
     ],
-    "on_error": [],
     "recognition": "DirectHit"
   },
   "自动秘闻-战斗准备": {
+    "action": "Click",
     "expected": "准备",
     "recognition": "OCR",
     "roi": [
-      1123,
-      544,
-      114,
-      86
+      1091,
+      521,
+      163,
+      184
     ]
   },
   "自动秘闻1": {
@@ -46,20 +106,6 @@
       655,
       119,
       33
-    ]
-  },
-  "自动秘闻2": {
-    "expected": "秘闻副本",
-    "next": [
-      "自动秘闻_点击目标关卡",
-      "自动秘闻_识别是否已通关"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      92,
-      9,
-      142,
-      78
     ]
   },
   "自动秘闻3": {
@@ -113,7 +159,8 @@
     "next": [
       "自动秘闻_step_3",
       "自动秘闻6",
-      "自动秘闻_点击进入"
+      "秘闻副本-识别是否进入到了秘闻界面",
+      "[JumpBack]自动秘闻_点击进入"
     ],
     "post_delay": 1000,
     "pre_delay": 1000,
@@ -135,78 +182,17 @@
       "自动秘闻/自动秘闻_step_3.png"
     ]
   },
-  "自动秘闻_出战预设队伍": {
-    "action": "Custom",
-    "custom_action": "AutoBattle",
-    "custom_action_param": {
-      "group_name": "秘闻",
-      "team_name": "队伍2"
-    },
-    "next": [
-      "自动秘闻2",
-      "[JumpBack]自动秘闻-战斗准备",
-      "[JumpBack]自动秘闻_识别战斗结束",
-      "[JumpBack]自动秘闻_识别战斗结束_copy1",
-      "[JumpBack]自动秘闻8"
-    ],
-    "post_delay": 2000,
-    "rate_limit": 2000,
-    "recognition": "DirectHit",
-    "timeout": 1000000
-  },
-  "自动秘闻_向上滑动一下": {
-    "action": "Custom",
-    "custom_action": "RandomSwipe",
-    "custom_action_param": {
-      "delay": 400,
-      "end_roi": [
-        212,
-        158,
-        340,
-        84
-      ],
-      "start_roi": [
-        201,
-        559,
-        353,
-        65
-      ]
-    },
-    "recognition": "DirectHit"
-  },
-  "自动秘闻_向下滑动一下": {
-    "action": "Custom",
-    "custom_action": "RandomSwipe",
-    "custom_action_param": {
-      "delay": 400,
-      "end_roi": [
-        201,
-        559,
-        353,
-        65
-      ],
-      "start_roi": [
-        212,
-        158,
-        340,
-        84
-      ]
-    },
-    "next": [
-      "自动秘闻_点击目标关卡"
-    ],
-    "recognition": "DirectHit"
-  },
   "自动秘闻_御魂_返回": {
     "action": "Click",
-    "next": [
-      "自动秘闻1",
-      "自动秘闻_点击目标关卡",
-      "[JumpBack]自动秘闻_识别是否为未解锁",
-      "[JumpBack]自动秘闻_向上滑动一下"
-    ],
+    "expected": "式神录",
     "post_delay": 2000,
-    "recognition": "DirectHit",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      324,
+      118
+    ],
     "target": [
       20,
       10,
@@ -216,12 +202,6 @@
   },
   "自动秘闻_点击式神录": {
     "action": "Click",
-    "next": [
-      "自动秘闻_装备式神预设"
-    ],
-    "on_error": [
-      "返回庭院"
-    ],
     "post_delay": 1000,
     "recognition": "FeatureMatch",
     "roi": [
@@ -235,9 +215,12 @@
   "自动秘闻_点击挑战": {
     "action": "Click",
     "next": [
-      "自动秘闻_出战预设队伍"
+      "秘闻副本-判断是否从战斗中回到秘闻副本",
+      "[JumpBack]自动秘闻_识别战斗结束",
+      "[JumpBack]自动秘闻8",
+      "[JumpBack]自动秘闻-战斗准备"
     ],
-    "post_delay": 1000,
+    "post_delay": 3000,
     "recognition": "FeatureMatch",
     "roi": [
       1060,
@@ -245,7 +228,11 @@
       214,
       177
     ],
-    "template": "自动秘闻/自动秘闻_挑战__1114_558_88_91__1064_508_188_191.png"
+    "template": [
+      "战斗/自动秘闻/自动秘闻_点击挑战_1.png",
+      "自动秘闻/自动秘闻_挑战__1114_558_88_91__1064_508_188_191.png"
+    ],
+    "timeout": 200000
   },
   "自动秘闻_点击目标关卡": {
     "action": "Click",
@@ -253,6 +240,7 @@
     "next": [
       "自动秘闻_点击挑战"
     ],
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       428,
@@ -263,36 +251,15 @@
   },
   "自动秘闻_点击进入": {
     "action": "Click",
-    "next": [
-      "自动秘闻_点击式神录",
-      "自动秘闻_点击进入_copy1"
-    ],
-    "recognition": "FeatureMatch",
+    "recognition": "TemplateMatch",
     "roi": [
-      1118,
-      574,
-      158,
-      145
+      1097,
+      563,
+      183,
+      149
     ],
     "template": [
-      "自动秘闻/自动秘闻_进入__1138_590_113_100__1088_540_192_180.png"
-    ]
-  },
-  "自动秘闻_点击进入_copy1": {
-    "action": "Click",
-    "next": [
-      "自动秘闻_点击式神录"
-    ],
-    "post_delay": 1000,
-    "pre_delay": 1000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      1118,
-      574,
-      158,
-      145
-    ],
-    "template": [
+      "战斗/自动秘闻/自动秘闻_点击进入_1.png",
       "自动秘闻/自动秘闻_进入__1138_590_113_100__1088_540_192_180.png"
     ]
   },
@@ -303,14 +270,22 @@
       "group_name": "秘闻",
       "team_name": "队伍2"
     },
+    "expected": "式神录",
     "next": [
-      "自动秘闻_御魂_返回"
+      "秘闻副本-识别是否返回副本界面",
+      "[JumpBack]自动秘闻_御魂_返回"
     ],
     "on_error": [
       "超时_切换御魂失败"
     ],
     "post_delay": 2000,
-    "recognition": "DirectHit"
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      248,
+      57
+    ]
   },
   "自动秘闻_识别战斗结束": {
     "action": "Click",
@@ -331,40 +306,8 @@
       216
     ]
   },
-  "自动秘闻_识别战斗结束_copy1": {
-    "action": "Click",
-    "expected": ".*(本次通关时间.*|通关式神.*)",
-    "post_delay": 2000,
-    "pre_delay": 2000,
-    "recognition": "OCR",
-    "roi": [
-      859,
-      507,
-      186,
-      82
-    ],
-    "target": [
-      949,
-      188,
-      316,
-      216
-    ]
-  },
-  "自动秘闻_识别是否为未解锁": {
-    "expected": "未解锁",
-    "next": [
-      "自动秘闻_向下滑动一下"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      425,
-      151,
-      133,
-      103
-    ]
-  },
   "自动秘闻_识别是否已通关": {
-    "expected": "^(?!尚未通关$).+$",
+    "expected": "^(?!.*尚未通关).+$",
     "next": [
       "返回庭院"
     ],

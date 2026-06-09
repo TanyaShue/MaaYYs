@@ -1,89 +1,113 @@
 {
-    "N-1766075283687": {
-        "inverse": true,
-        "recognition": "DirectHit"
+  "N-1766075283687": {
+    "inverse": true,
+    "recognition": "DirectHit"
+  },
+  "N-1766075325965": {
+    "action": "StopTask",
+    "recognition": "DirectHit"
+  },
+  "N-1766075412419": {
+    "inverse": true,
+    "recognition": "DirectHit"
+  },
+  "N-1780276917849": {
+    "action": "Swipe",
+    "begin": [
+      856,
+      423,
+      122,
+      72
+    ],
+    "duration": 400,
+    "end": [
+      278,
+      397,
+      196,
+      106
+    ],
+    "recognition": "OCR"
+  },
+  "test": {
+    "expected": 0,
+    "labels": [
+      "式神育成",
+      "结界卡",
+      "结界防守"
+    ],
+    "model": "Barrier_v1.onnx",
+    "recognition": "NeuralNetworkDetect"
+  },
+  "testAction": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "御魂",
+      "team_name": "队伍3"
     },
-    "N-1766075325965": {
-        "action": "StopTask",
-        "recognition": "DirectHit"
+    "focus": {
+      "failed": "3333333333333",
+      "level": {
+        "failed": "warning",
+        "start": "info",
+        "succeeded": "debug"
+      },
+      "start": "11111111",
+      "succeeded": "22222222"
     },
-    "N-1766075412419": {
-        "inverse": true,
-        "recognition": "DirectHit"
-    },
-    "test": {
-        "expected": 0,
-        "labels": [
-            "式神育成",
-            "结界卡",
-            "结界防守"
-        ],
-        "model": "Barrier_v1.onnx",
-        "recognition": "NeuralNetworkDetect"
-    },
-    "testAction": {
-        "action": "Custom",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "御魂",
-            "team_name": "队伍3"
-        },
-        "focus": {
-            "failed": "3333333333333",
-            "level": {
-                "failed": "warning",
-                "start": "info",
-                "succeeded": "debug"
-            },
-            "start": "11111111",
-            "succeeded": "22222222"
-        },
-        "recognition": "DirectHit"
-    },
-    "testOCR": {
-        "expected": "AAACCC",
-        "recognition": "OCR"
-    },
-    "test_OCR_1": {
-        "expected": ".*",
-        "recognition": "OCR",
-        "roi": [
-            1053,
-            535,
-            190,
-            153
-        ]
-    },
-    "test_model_BarrierCard": {
-        "expected": 0,
-        "labels": [
-            "1start",
-            "2start",
-            "3start",
-            "4start",
-            "5start",
-            "6start"
-        ],
-        "model": "BarrierCard.onnx",
-        "recognition": "NeuralNetworkDetect"
-    },
-    "打开阴阳师_key": {
-        "action": "StartApp",
-        "package": "com.netease.onmyoji/.tag0",
-        "recognition": "DirectHit"
-    },
-    "测试": {
-        "recognition": "DirectHit"
-    },
-    "测试-停止任务": {
-        "next": [
-            "[JumpBack]N-1766075283687",
-            "N-1766075412419"
-        ],
-        "on_error": [
-            "N-1766075325965"
-        ],
-        "recognition": "DirectHit",
-        "timeout": 5000
-    }
+    "recognition": "DirectHit"
+  },
+  "testOCR": {
+    "expected": "AAACCC",
+    "recognition": "OCR"
+  },
+  "test_OCR_1": {
+    "expected": ".*",
+    "recognition": "OCR",
+    "roi": [
+      1053,
+      535,
+      190,
+      153
+    ]
+  },
+  "test_model_BarrierCard": {
+    "expected": 0,
+    "labels": [
+      "1start",
+      "2start",
+      "3start",
+      "4start",
+      "5start",
+      "6start"
+    ],
+    "model": "BarrierCard.onnx",
+    "recognition": "NeuralNetworkDetect"
+  },
+  "打开阴阳师_key": {
+    "action": "StartApp",
+    "package": "com.netease.onmyoji/.tag0",
+    "recognition": "DirectHit"
+  },
+  "测试": {
+    "recognition": "DirectHit"
+  },
+  "测试-停止任务": {
+    "next": [
+      "[JumpBack]N-1766075283687",
+      "N-1766075412419"
+    ],
+    "on_error": [
+      "N-1766075325965"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 5000
+  },
+  "测试-滑动-开始": {
+    "next": [
+      "[JumpBack]N-1780276917849"
+    ],
+    "rate_limit": 3000,
+    "recognition": "DirectHit"
+  }
 }

@@ -2,7 +2,7 @@
   "interface_version": 2,
   "name": "MaaYYs",
   "label": "阴阳师",
-  "version": "v3.5.5",
+  "version": "v",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
   "welcome": "README.md",
@@ -88,6 +88,7 @@
     "tasks/AutoUnderground.json",
     "tasks/AutoSoul.json",
     "tasks/AutoKirin.json",
+    "tasks/AutoKun28.json",
     "tasks/HeroTrial.json",
     "tasks/BarrierBreak.json",
     "tasks/AutoEncounter.json",
@@ -101,10 +102,10 @@
     "tasks/AutoGuildRaid.json",
     "tasks/AutoUnderworldGate.json",
     "tasks/AutoWanted.json",
-    "tasks/ScrollFarming.json",
-    "tasks/AutoYogenbi.json",
     "tasks/AutoPVP.json",
     "tasks/AutoShop.json",
+    "tasks/ScrollFarming.json",
+    "tasks/LimiteTimeEvent.json",
     "tasks/CloseGame.json"
   ]
 }

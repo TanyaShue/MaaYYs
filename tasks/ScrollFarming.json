@@ -3,14 +3,35 @@
         {
             "name": "肝绘卷",
             "label": "肝绘卷(有风险,风险自付)",
-            "entry": "开始肝绘卷",
+            "description": "打困28和清突破卷循环",
+            "entry": "肝绘卷",
             "option": [
+                "设定绘卷轮数",
                 "绘卷结界阵容预设",
                 "绘卷探索阵容预设"
             ]
         }
     ],
     "option": {
+        "设定绘卷轮数": {
+            "type": "input",
+            "label": "设定绘卷轮数",
+            "description": "设置需要打多少轮,刷够一次20张突破卷加清空20张突破卷为一轮",
+            "inputs": [
+                {
+                    "name": "count",
+                    "label": "设定绘卷轮数",
+                    "description": "设置需要打多少轮,刷够一次20张突破卷加清空20张突破卷为一轮",
+                    "default": "999",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "肝绘卷-清除节点记录": {
+                    "max_hit": "{count}"
+                }
+            }
+        },
         "绘卷结界阵容预设": {
             "type": "input",
             "label": "绘卷结界阵容预设",
@@ -32,7 +53,7 @@
                 }
             ],
             "pipeline_override": {
-                "kun2820": {
+                "装备突破预设": {
                     "custom_action_param": {
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"
@@ -61,11 +82,14 @@
                 }
             ],
             "pipeline_override": {
-                "kun288": {
+                "困28-装备御魂": {
                     "custom_action_param": {
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"
                     }
+                },
+                "肝绘卷-识别突破卷数量是否达标":{
+                    "enable":true
                 }
             }
         }

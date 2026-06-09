@@ -1,0 +1,22 @@
+[
+  {
+    "itemName": "enhance_calc",
+    "imageName": "enhance_calc.png",
+    "sourceImage": "enhance_calc_dialog.png",
+    "roiFront": "1155,608,112,109",
+    "roiBack": "1155,608,112,109",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "计算按钮（enhance_calc_dialog）"
+  },
+  {
+    "itemName": "enhance_confirm",
+    "imageName": "enhance_confirm.png",
+    "sourceImage": "enhance_confirm.png",
+    "roiFront": "1153,612,115,99",
+    "roiBack": "1153,612,115,99",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "强化按钮（enhance_confirm）"
+  }
+]

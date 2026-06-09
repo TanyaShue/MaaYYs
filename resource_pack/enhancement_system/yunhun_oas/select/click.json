@@ -1,0 +1,98 @@
+[
+  {
+    "itemName": "slot_1",
+    "roiFront": "124,185,99,103",
+    "roiBack": "124,185,99,103",
+    "description": "点击列表第1个御魂"
+  },
+  {
+    "itemName": "slot_2",
+    "roiFront": "241,185,99,103",
+    "roiBack": "241,185,99,103",
+    "description": "点击列表第2个御魂"
+  },
+  {
+    "itemName": "slot_3",
+    "roiFront": "358,185,99,103",
+    "roiBack": "358,185,99,103",
+    "description": "点击列表第3个御魂"
+  },
+  {
+    "itemName": "slot_4",
+    "roiFront": "475,185,99,103",
+    "roiBack": "475,185,99,103",
+    "description": "点击列表第4个御魂"
+  },
+  {
+    "itemName": "slot_5",
+    "roiFront": "124,309,99,103",
+    "roiBack": "124,309,99,103",
+    "description": "点击列表第5个御魂"
+  },
+  {
+    "itemName": "slot_6",
+    "roiFront": "241,309,99,103",
+    "roiBack": "241,309,99,103",
+    "description": "点击列表第6个御魂"
+  },
+  {
+    "itemName": "slot_7",
+    "roiFront": "358,309,99,103",
+    "roiBack": "358,309,99,103",
+    "description": "点击列表第7个御魂"
+  },
+  {
+    "itemName": "slot_8",
+    "roiFront": "475,309,99,103",
+    "roiBack": "475,309,99,103",
+    "description": "点击列表第8个御魂"
+  },
+  {
+    "itemName": "slot_9",
+    "roiFront": "124,433,99,103",
+    "roiBack": "124,433,99,103",
+    "description": "点击列表第9个御魂"
+  },
+  {
+    "itemName": "slot_10",
+    "roiFront": "241,433,99,103",
+    "roiBack": "241,433,99,103",
+    "description": "点击列表第10个御魂"
+  },
+  {
+    "itemName": "slot_11",
+    "roiFront": "358,433,99,103",
+    "roiBack": "358,433,99,103",
+    "description": "点击列表第11个御魂"
+  },
+  {
+    "itemName": "slot_12",
+    "roiFront": "475,433,99,103",
+    "roiBack": "475,433,99,103",
+    "description": "点击列表第12个御魂"
+  },
+  {
+    "itemName": "slot_13",
+    "roiFront": "124,557,99,103",
+    "roiBack": "124,557,99,103",
+    "description": "点击列表第13个御魂"
+  },
+  {
+    "itemName": "slot_14",
+    "roiFront": "241,557,99,103",
+    "roiBack": "241,557,99,103",
+    "description": "点击列表第14个御魂"
+  },
+  {
+    "itemName": "slot_15",
+    "roiFront": "358,557,99,103",
+    "roiBack": "358,557,99,103",
+    "description": "点击列表第15个御魂"
+  },
+  {
+    "itemName": "slot_16",
+    "roiFront": "475,557,99,103",
+    "roiBack": "475,557,99,103",
+    "description": "点击列表第16个御魂"
+  }
+]

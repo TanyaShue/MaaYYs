@@ -1,0 +1,488 @@
+[
+  {
+    "itemName": "result_slot_1_main_attr",
+    "roiFront": "215,147,90,28",
+    "roiBack": "215,147,90,28",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂主属性名称"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_1",
+    "roiFront": "213,185,160,30",
+    "roiBack": "213,185,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性1"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_1_bonus_value",
+    "roiFront": "395,185,60,30",
+    "roiBack": "395,185,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性1强化数值"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_2",
+    "roiFront": "213,218,160,30",
+    "roiBack": "213,218,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性2"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_2_bonus_value",
+    "roiFront": "395,218,60,30",
+    "roiBack": "395,218,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性2强化数值"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_3",
+    "roiFront": "213,251,160,30",
+    "roiBack": "213,251,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性3"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_3_bonus_value",
+    "roiFront": "395,251,60,30",
+    "roiBack": "395,251,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性3强化数值"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_4",
+    "roiFront": "213,284,160,30",
+    "roiBack": "213,284,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性4"
+  },
+  {
+    "itemName": "result_slot_1_sub_attr_4_bonus_value",
+    "roiFront": "395,284,60,30",
+    "roiBack": "395,284,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第1个御魂副属性4强化数值"
+  },
+  {
+    "itemName": "result_slot_2_main_attr",
+    "roiFront": "513,147,90,28",
+    "roiBack": "513,147,90,28",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂主属性名称"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_1",
+    "roiFront": "511,185,160,30",
+    "roiBack": "511,185,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性1"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_1_bonus_value",
+    "roiFront": "693,185,60,30",
+    "roiBack": "693,185,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性1强化数值"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_2",
+    "roiFront": "511,218,160,30",
+    "roiBack": "511,218,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性2"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_2_bonus_value",
+    "roiFront": "693,218,60,30",
+    "roiBack": "693,218,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性2强化数值"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_3",
+    "roiFront": "511,251,160,30",
+    "roiBack": "511,251,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性3"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_3_bonus_value",
+    "roiFront": "693,251,60,30",
+    "roiBack": "693,251,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性3强化数值"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_4",
+    "roiFront": "511,284,160,30",
+    "roiBack": "511,284,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性4"
+  },
+  {
+    "itemName": "result_slot_2_sub_attr_4_bonus_value",
+    "roiFront": "693,284,60,30",
+    "roiBack": "693,284,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第2个御魂副属性4强化数值"
+  },
+  {
+    "itemName": "result_slot_3_main_attr",
+    "roiFront": "811,147,90,28",
+    "roiBack": "811,147,90,28",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂主属性名称"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_1",
+    "roiFront": "809,185,160,30",
+    "roiBack": "809,185,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性1"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_1_bonus_value",
+    "roiFront": "991,185,60,30",
+    "roiBack": "991,185,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性1强化数值"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_2",
+    "roiFront": "809,218,160,30",
+    "roiBack": "809,218,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性2"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_2_bonus_value",
+    "roiFront": "991,218,60,30",
+    "roiBack": "991,218,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性2强化数值"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_3",
+    "roiFront": "809,251,160,30",
+    "roiBack": "809,251,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性3"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_3_bonus_value",
+    "roiFront": "991,251,60,30",
+    "roiBack": "991,251,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性3强化数值"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_4",
+    "roiFront": "809,284,160,30",
+    "roiBack": "809,284,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性4"
+  },
+  {
+    "itemName": "result_slot_3_sub_attr_4_bonus_value",
+    "roiFront": "991,284,60,30",
+    "roiBack": "991,284,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第3个御魂副属性4强化数值"
+  },
+  {
+    "itemName": "result_slot_4_main_attr",
+    "roiFront": "215,442,90,28",
+    "roiBack": "215,442,90,28",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂主属性名称"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_1",
+    "roiFront": "213,480,160,30",
+    "roiBack": "213,480,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性1"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_1_bonus_value",
+    "roiFront": "395,480,60,30",
+    "roiBack": "395,480,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性1强化数值"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_2",
+    "roiFront": "213,513,160,30",
+    "roiBack": "213,513,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性2"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_2_bonus_value",
+    "roiFront": "395,513,60,30",
+    "roiBack": "395,513,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性2强化数值"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_3",
+    "roiFront": "213,546,160,30",
+    "roiBack": "213,546,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性3"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_3_bonus_value",
+    "roiFront": "395,546,60,30",
+    "roiBack": "395,546,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性3强化数值"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_4",
+    "roiFront": "213,579,160,30",
+    "roiBack": "213,579,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性4"
+  },
+  {
+    "itemName": "result_slot_4_sub_attr_4_bonus_value",
+    "roiFront": "395,579,60,30",
+    "roiBack": "395,579,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第4个御魂副属性4强化数值"
+  },
+  {
+    "itemName": "result_slot_5_main_attr",
+    "roiFront": "513,442,90,28",
+    "roiBack": "513,442,90,28",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂主属性名称"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_1",
+    "roiFront": "511,480,160,30",
+    "roiBack": "511,480,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性1"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_1_bonus_value",
+    "roiFront": "693,480,60,30",
+    "roiBack": "693,480,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性1强化数值"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_2",
+    "roiFront": "511,513,160,30",
+    "roiBack": "511,513,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性2"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_2_bonus_value",
+    "roiFront": "693,513,60,30",
+    "roiBack": "693,513,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性2强化数值"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_3",
+    "roiFront": "511,546,160,30",
+    "roiBack": "511,546,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性3"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_3_bonus_value",
+    "roiFront": "693,546,60,30",
+    "roiBack": "693,546,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性3强化数值"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_4",
+    "roiFront": "511,579,160,30",
+    "roiBack": "511,579,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性4"
+  },
+  {
+    "itemName": "result_slot_5_sub_attr_4_bonus_value",
+    "roiFront": "693,579,60,30",
+    "roiBack": "693,579,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第5个御魂副属性4强化数值"
+  },
+  {
+    "itemName": "result_slot_6_main_attr",
+    "roiFront": "811,442,90,28",
+    "roiBack": "811,442,90,28",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂主属性名称"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_1",
+    "roiFront": "809,480,160,30",
+    "roiBack": "809,480,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性1"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_1_bonus_value",
+    "roiFront": "991,480,60,30",
+    "roiBack": "991,480,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性1强化数值"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_2",
+    "roiFront": "809,513,160,30",
+    "roiBack": "809,513,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性2"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_2_bonus_value",
+    "roiFront": "991,513,60,30",
+    "roiBack": "991,513,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性2强化数值"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_3",
+    "roiFront": "809,546,160,30",
+    "roiBack": "809,546,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性3"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_3_bonus_value",
+    "roiFront": "991,546,60,30",
+    "roiBack": "991,546,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性3强化数值"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_4",
+    "roiFront": "809,579,160,30",
+    "roiBack": "809,579,160,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性4"
+  },
+  {
+    "itemName": "result_slot_6_sub_attr_4_bonus_value",
+    "roiFront": "991,579,60,30",
+    "roiBack": "991,579,60,30",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "结果页第6个御魂副属性4强化数值"
+  }
+]

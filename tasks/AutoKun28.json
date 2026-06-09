@@ -1,0 +1,63 @@
+{
+    "task": [
+        {
+            "name": "困28",
+            "label": "困28",
+            "entry": "困28",
+            "option": [
+                "困28挑战次数",
+                "困28阵容预设"
+            ]
+        }
+    ],
+    "option": {
+        "困28挑战次数": {
+            "type": "input",
+            "label": "困28阵容预设",
+            "description": "填写困28挑战次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "description": "填写挑战副本的次数",
+                    "default": "999",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "困28-开始战斗": {
+                    "max_hit": "{挑战次数}"
+                }
+            }
+        },
+        "困28阵容预设": {
+            "type": "input",
+            "label": "困28阵容预设",
+            "description": "填写困28使用的分组和队伍名称",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "困28-装备御魂": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}

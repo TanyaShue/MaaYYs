@@ -66,12 +66,9 @@
       40,
       78
     ],
-    "next": [
-      "悬赏封印-清除节点计数"
-    ],
+    "max_hit": 4,
     "post_delay": 2000,
-    "recognition": "DirectHit",
-    "repeat": 4
+    "recognition": "DirectHit"
   },
   "悬赏-探索-滑动目标到最下方": {
     "action": "Swipe",
@@ -88,10 +85,9 @@
       40,
       78
     ],
-    "max_hit": 1,
+    "max_hit": 3,
     "post_delay": 2000,
-    "recognition": "DirectHit",
-    "repeat": 4
+    "recognition": "DirectHit"
   },
   "悬赏-点击侧边关闭奖励": {
     "action": "Click",
@@ -301,6 +297,16 @@
     ]
   },
   "悬赏封印-判断是否进入探索章节界面": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "悬赏封印-探索副本-开始准备战斗",
+        "悬赏封印-从式神碎片挑战返回探索",
+        "悬赏封印-式神碎片-开始准备战斗",
+        "悬赏-探索-再次滑动目标到最下方"
+      ]
+    },
     "expected": "^第[一二三四五六七八九十百千零两]+章$",
     "next": [
       "[JumpBack]悬赏封印-探索副本-开始准备战斗",
@@ -329,6 +335,16 @@
     ]
   },
   "悬赏封印-判断是否进入章节界面": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "悬赏封印-探索副本-开始准备战斗",
+        "悬赏封印-从式神碎片挑战返回探索",
+        "悬赏封印-式神碎片-开始准备战斗",
+        "悬赏-探索-再次滑动目标到最下方"
+      ]
+    },
     "expected": "^第[一二三四五六七八九十百千零两]+章$",
     "next": [
       "[JumpBack]悬赏封印-式神碎片-开始准备战斗",
@@ -486,10 +502,9 @@
       104,
       128
     ],
-    "max_hit": 1,
+    "max_hit": 2,
     "post_delay": 1000,
-    "recognition": "DirectHit",
-    "repeat": 3
+    "recognition": "DirectHit"
   },
   "悬赏封印-开始调整秘闻-战斗": {
     "action": "Click",
@@ -530,6 +545,7 @@
       "悬赏封印-判断是否进入章节界面",
       "[JumpBack]悬赏封印-前往式神碎片副本"
     ],
+    "order_by": "Vertical",
     "recognition": "OCR",
     "roi": [
       521,
@@ -544,6 +560,7 @@
       "悬赏封印-判断是否进入探索章节界面",
       "[JumpBack]悬赏封印-前往探索副本"
     ],
+    "order_by": "Vertical",
     "recognition": "OCR",
     "roi": [
       521,
@@ -559,6 +576,7 @@
       "悬赏封印-判断是否进入秘闻界面",
       "[JumpBack]悬赏封印-前往秘闻副本"
     ],
+    "order_by": "Vertical",
     "recognition": "OCR",
     "roi": [
       521,
@@ -582,19 +600,6 @@
       401,
       30
     ]
-  },
-  "悬赏封印-清除节点计数": {
-    "action": "Custom",
-    "custom_action": "ClearHitCount",
-    "custom_action_param": {
-      "node_names": [
-        "悬赏封印-探索副本-开始准备战斗",
-        "悬赏封印-从式神碎片挑战返回探索",
-        "悬赏封印-式神碎片-开始准备战斗"
-      ]
-    },
-    "max_hit": 1,
-    "recognition": "DirectHit"
   },
   "悬赏封印-看看是否打卡追踪列表": {
     "expected": "发现地点",
@@ -653,7 +658,7 @@
   "悬赏封印-识别最下方第一个是不是妖怪": {
     "action": "Click",
     "expected": "悬赏封印",
-    "max_hit": 4,
+    "max_hit": 10,
     "next": [
       "悬赏封印-判断是否在追踪列表"
     ],
@@ -670,7 +675,7 @@
   "悬赏封印-识别最下方第三个是不是妖怪": {
     "action": "Click",
     "expected": "悬赏封印",
-    "max_hit": 4,
+    "max_hit": 10,
     "next": [
       "悬赏封印-判断是否在追踪列表"
     ],
@@ -687,7 +692,7 @@
   "悬赏封印-识别最下方第二个是不是妖怪": {
     "action": "Click",
     "expected": "悬赏封印",
-    "max_hit": 4,
+    "max_hit": 10,
     "next": [
       "悬赏封印-判断是否在追踪列表"
     ],

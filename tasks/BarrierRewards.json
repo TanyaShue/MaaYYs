@@ -104,6 +104,9 @@
                     "name": "太鼓",
                     "label": "太鼓",
                     "pipeline_override": {
+                        "阴阳寮奖励_筛选对应结界卡": {
+                            "expected": "太鼓"
+                        },
                         "阴阳寮奖励27": {
                             "expected": "太鼓"
                         },
@@ -116,6 +119,9 @@
                     "name": "斗鱼",
                     "label": "斗鱼",
                     "pipeline_override": {
+                        "阴阳寮奖励_筛选对应结界卡": {
+                            "expected": "斗鱼"
+                        },
                         "阴阳寮奖励27": {
                             "expected": "斗鱼"
                         },

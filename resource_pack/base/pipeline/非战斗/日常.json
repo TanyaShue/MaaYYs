@@ -21,6 +21,21 @@
       89
     ]
   },
+  "日常-事务-确保返回事务界面-1": {
+    "expected": "庭院事务",
+    "focus": {
+      "Node.Recognition.Succeeded": "庭院事务执行完毕,返回庭院"
+    },
+    "max_hit": 3,
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      246,
+      30,
+      218,
+      89
+    ]
+  },
   "日常-事务-领取成功": {
     "action": "Click",
     "expected": "领取成功",
@@ -63,10 +78,10 @@
     "action": "Click",
     "recognition": "TemplateMatch",
     "roi": [
-      805,
-      20,
-      330,
-      179
+      812,
+      0,
+      468,
+      185
     ],
     "template": [
       "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
@@ -77,10 +92,10 @@
     "action": "Click",
     "recognition": "FeatureMatch",
     "roi": [
-      817,
-      29,
-      321,
-      164
+      812,
+      0,
+      468,
+      185
     ],
     "template": [
       "日常/日常-关闭签到页面-确认关闭-模板匹配_1.png",
@@ -176,6 +191,7 @@
       "[JumpBack]日常-事务-领取成功",
       "[JumpBack]日常-领取每日6星御魂",
       "[JumpBack]日常-获取6星御魂",
+      "[JumpBack]日常-事务-确保返回事务界面-1",
       "日常-事务-确保返回事务界面"
     ],
     "post_delay": 3000,

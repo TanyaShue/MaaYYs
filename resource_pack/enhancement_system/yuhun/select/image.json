@@ -1,0 +1,165 @@
+[
+  {
+    "itemName": "select_enhance_all",
+    "imageName": "select_enhance_all.png",
+    "roiFront": "912,611,132,48",
+    "roiBack": "912,611,132,48",
+    "method": "Template matching",
+    "threshold": 0.89,
+    "description": "右下角全部强化"
+  },
+  {
+    "itemName": "select_slot_selected_template",
+    "imageName": "select_slot_selected.png",
+    "sourceImage": "select_six_ready.png",
+    "roiFront": "186,189,36,20",
+    "roiBack": "186,189,36,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "选中标记模板（从已选中的1号位裁剪）"
+  },
+  {
+    "itemName": "select_slot_1_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "198,194,30,20",
+    "roiBack": "198,194,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第1个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_2_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "315,194,30,20",
+    "roiBack": "315,194,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第2个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_3_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "432,194,30,20",
+    "roiBack": "432,194,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第3个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_4_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "549,194,30,20",
+    "roiBack": "549,194,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第4个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_5_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "198,318,30,20",
+    "roiBack": "198,318,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第5个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_6_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "315,318,30,20",
+    "roiBack": "315,318,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第6个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_7_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "432,318,30,20",
+    "roiBack": "432,318,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第7个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_8_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "549,318,30,20",
+    "roiBack": "549,318,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第8个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_9_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "198,442,30,20",
+    "roiBack": "198,442,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第9个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_10_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "315,442,30,20",
+    "roiBack": "315,442,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第10个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_11_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "432,442,30,20",
+    "roiBack": "432,442,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第11个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_12_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "549,442,30,20",
+    "roiBack": "549,442,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第12个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_13_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "198,566,30,20",
+    "roiBack": "198,566,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第13个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_14_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "315,566,30,20",
+    "roiBack": "315,566,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第14个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_15_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "432,566,30,20",
+    "roiBack": "432,566,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第15个御魂是否已选中"
+  },
+  {
+    "itemName": "select_slot_16_selected",
+    "imageName": "select_slot_selected.png",
+    "roiFront": "549,566,30,20",
+    "roiBack": "549,566,30,20",
+    "method": "Template matching",
+    "threshold": 0.4,
+    "description": "列表第16个御魂是否已选中"
+  }
+]
