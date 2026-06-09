@@ -1,0 +1,89 @@
+# 每张 asset_temp 截图要检测的 UI 元素。
+# 标定结果保存到源图同目录：<截图名>.json 和 <截图名>_标注.png
+
+select_empty:
+  image: select/select_empty.png
+  targets:
+    - 全部强化
+    - 第1个御魂等级数字
+    - 列表第1个御魂图标区域
+
+select_one_detail:
+  image: select/select_one_detail.png
+  targets:
+    - 主属性文字区域
+    - 副属性第一行
+    - 副属性第二行
+    - 副属性第三行
+    - 副属性第四行
+
+select_three_detail:
+  image: select/select_three_detail.png
+  targets:
+    - 全部强化
+    - 确认强化御魂区域减号按钮
+
+select_six_ready:
+  image: select/select_six_ready.png
+  targets:
+    - 确认强化御魂数量文字
+    - 全部强化
+    - 第1个御魂选中标记区域
+    - 第2个御魂选中标记区域
+    - 第3个御魂选中标记区域
+    - 第5个御魂选中标记区域
+    - 第7个御魂选中标记区域
+    - 第8个御魂选中标记区域
+
+enhance_calc_dialog:
+  image: enhance/enhance_calc_dialog.png
+  targets:
+    - 计算
+    - 目标等级15
+
+enhance_confirm:
+  image: enhance/enhance_confirm.png
+  targets:
+    - 强化
+    - 目标强化素材消耗区域
+
+result_enhance:
+  image: result/image.png
+  targets:
+    - 强化按钮
+
+result_calc:
+  image: result/result_continue_popup.png
+  targets:
+    - 计算按钮
+
+result_soul_detail:
+  image: result/result_overview.png
+  targets:
+    - 第1个御魂位置文字
+    - 第1个御魂主属性名称
+    - 第1个御魂副属性1名称
+    - 第1个御魂副属性1数值
+    - 第1个御魂副属性1强化标识位置
+    - 第1个御魂副属性2名称
+    - 第1个御魂副属性2数值
+    - 第1个御魂副属性2强化标识位置
+    - 第1个御魂副属性3名称
+    - 第1个御魂副属性3数值
+    - 第1个御魂副属性3强化标识位置
+    - 第1个御魂副属性4名称
+    - 第1个御魂副属性4数值
+    - 第1个御魂副属性4强化标识位置
+
+result_selected_state:
+  image: result/result_sample_02_selected.png
+  targets:
+    - 继续强化图标
+    - 弃置按钮
+    - 恢复按钮
+    - 第1个御魂选中状态高亮框局部
+
+result_discard_state:
+  image: result/result_sample_03_flagged.png
+  targets:
+    - 第4个御魂弃置标识

@@ -1,0 +1,100 @@
+[
+  {
+    "sourceImage": "select_empty.png",
+    "description": "选择页空状态和候选御魂网格",
+    "columns": 4,
+    "visible_rows": 4,
+    "grid_spec": {
+      "first_slot": [
+        124,
+        185,
+        107,
+        113
+      ],
+      "gap": [
+        18,
+        21
+      ],
+      "soul_size": [
+        99,
+        103
+      ]
+    },
+    "confirm_panel": {
+      "enhance_all_btn": [
+        912,
+        611,
+        132,
+        48
+      ]
+    }
+  },
+  {
+    "sourceImage": "select_one_detail.png",
+    "description": "选择页御魂详情弹窗 OCR 样本",
+    "detail_attr_width_shrink_level_ge_3": 30,
+    "detail_popup": {
+      "soul_type_level": [
+        680,
+        230,
+        150,
+        26
+      ],
+      "main_attr": [
+        605,
+        308,
+        120,
+        29
+      ],
+      "sub_attr_1": [
+        605,
+        340,
+        300,
+        29
+      ],
+      "sub_attr_2": [
+        605,
+        370,
+        300,
+        29
+      ],
+      "sub_attr_3": [
+        605,
+        402,
+        300,
+        29
+      ],
+      "sub_attr_4": [
+        605,
+        434,
+        300,
+        29
+      ]
+    }
+  },
+  {
+    "sourceImage": "select_three_detail.png",
+    "description": "选择页 3 个御魂已选状态参考；当前无运行时 bbox，保留给后续减号按钮等素材标注。"
+  },
+  {
+    "sourceImage": "select_six_ready.png",
+    "description": "选择页已选 6 个状态、选中标识和计数 OCR 样本",
+    "selection_box_offset": [
+      74,
+      9,
+      30,
+      20
+    ],
+    "selection_templates": [
+      "select_slot_selected.png"
+    ],
+    "confirm_panel": {
+      "counter_ocr": [
+        875,
+        116,
+        65,
+        25
+      ]
+    }
+  }
+]

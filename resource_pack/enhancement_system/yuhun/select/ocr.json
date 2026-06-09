@@ -1,0 +1,65 @@
+[
+  {
+    "itemName": "soul_type_level",
+    "roiFront": "680,230,150,26",
+    "roiBack": "680,230,150,26",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "详情弹窗御魂类型 + level"
+  },
+  {
+    "itemName": "select_confirm_count",
+    "roiFront": "875,116,65,25",
+    "roiBack": "875,116,65,25",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "确认强化御魂数量 (N/12)"
+  },
+  {
+    "itemName": "detail_main_attr",
+    "roiFront": "605,308,120,29",
+    "roiBack": "605,308,120,29",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "选中御魂后主属性"
+  },
+  {
+    "itemName": "detail_sub_attr_1",
+    "roiFront": "605,340,300,29",
+    "roiBack": "605,340,300,29",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "副属性行1"
+  },
+  {
+    "itemName": "detail_sub_attr_2",
+    "roiFront": "605,370,300,29",
+    "roiBack": "605,370,300,29",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "副属性行2"
+  },
+  {
+    "itemName": "detail_sub_attr_3",
+    "roiFront": "605,402,300,29",
+    "roiBack": "605,402,300,29",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "副属性行3"
+  },
+  {
+    "itemName": "detail_sub_attr_4",
+    "roiFront": "605,434,300,29",
+    "roiBack": "605,434,300,29",
+    "mode": "Single",
+    "method": "Default",
+    "keyword": "",
+    "description": "副属性行4"
+  }
+]

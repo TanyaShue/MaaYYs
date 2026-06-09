@@ -1,0 +1,30 @@
+[
+  {
+    "sourceImage": "enhance_calc_dialog.png",
+    "description": "未计算状态右下角「计算」按钮模板区域。",
+    "actions": {
+      "enhance_calc": {
+        "roi": [
+          1155,
+          608,
+          112,
+          109
+        ]
+      }
+    }
+  },
+  {
+    "sourceImage": "enhance_confirm.png",
+    "description": "计算完成后右下角「强化」按钮模板区域。",
+    "actions": {
+      "enhance_confirm": {
+        "roi": [
+          1153,
+          612,
+          115,
+          99
+        ]
+      }
+    }
+  }
+]
