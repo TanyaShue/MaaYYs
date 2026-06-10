@@ -89,10 +89,10 @@
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
-      617,
-      240,
-      132,
-      152
+      418,
+      270,
+      336,
+      173
     ],
     "template": [
       "寮突/寮突17.png",
@@ -105,10 +105,10 @@
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
-      615,
-      106,
-      146,
-      166
+      409,
+      118,
+      342,
+      197
     ],
     "template": [
       "寮突/寮突17.png",
@@ -121,10 +121,10 @@
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
-      936,
-      92,
-      152,
-      182
+      750,
+      115,
+      348,
+      222
     ],
     "template": [
       "寮突/寮突17.png",
@@ -137,9 +137,9 @@
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
-      952,
-      240,
-      160,
+      756,
+      288,
+      336,
       182
     ],
     "template": [
@@ -195,10 +195,10 @@
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
-      615,
-      106,
-      146,
-      166
+      618,
+      99,
+      142,
+      221
     ],
     "template": [
       "寮突/寮突18_第一个待选目标.png",
@@ -218,9 +218,9 @@
     "recognition": "TemplateMatch",
     "roi": [
       617,
-      240,
-      132,
-      152
+      212,
+      149,
+      242
     ],
     "template": [
       "寮突/寮突18_第一个待选目标.png",
@@ -240,10 +240,10 @@
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
-      936,
-      92,
-      152,
-      182
+      935,
+      90,
+      181,
+      230
     ],
     "template": [
       "寮突/寮突18_第一个待选目标.png",
@@ -263,10 +263,10 @@
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
-      952,
-      240,
+      947,
+      229,
       160,
-      182
+      269
     ],
     "template": [
       "寮突/寮突18_第一个待选目标.png",
