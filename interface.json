@@ -73,6 +73,14 @@
         "./resource_pack/base",
         "./resource_pack/OPPO"
       ]
+    },
+    {
+      "name": "VIVO渠道服",
+      "label": "VIVO服",
+      "path": [
+        "./resource_pack/base",
+        "./resource_pack/vivo"
+      ]
     }
   ],
   "agent": {
