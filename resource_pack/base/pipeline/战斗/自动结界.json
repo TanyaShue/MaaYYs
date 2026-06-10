@@ -365,16 +365,6 @@
       94
     ]
   },
-  "突破-清空失败计数": {
-    "action": "Custom",
-    "custom_action": "ClearHitCount",
-    "custom_action_param": {
-      "node_names": [
-        "突破_挑战失败"
-      ]
-    },
-    "recognition": "DirectHit"
-  },
   "突破-点击底部": {
     "action": "Click",
     "post_delay": 2000,
@@ -435,6 +425,13 @@
     "recognition": "DirectHit"
   },
   "突破-进入战斗": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "突破_挑战失败"
+      ]
+    },
     "next": [
       "识别突破界面",
       "[JumpBack]自动结界2_战斗准备",
@@ -507,7 +504,7 @@
   "突破_再次挑战失败,准备刷新": {
     "next": [
       "突破-先回突破界面",
-      "突破-点击底部"
+      "[JumpBack]突破-点击底部"
     ],
     "on_error": [
       "突破-空节点"
@@ -925,9 +922,7 @@
   "自动结界9": {
     "expected": "确定",
     "inverse": true,
-    "next": [
-      "突破-清空失败计数"
-    ],
+    "next": [],
     "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
