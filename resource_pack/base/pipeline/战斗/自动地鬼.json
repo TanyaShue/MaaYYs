@@ -1,4 +1,30 @@
 {
+  "地鬼-切换到极难度": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      224,
+      93,
+      160,
+      88
+    ],
+    "template": [
+      "战斗/自动地鬼/地鬼-切换到极难度_1.png"
+    ]
+  },
+  "地鬼-判断是否位于极难度": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      248,
+      94,
+      109,
+      81
+    ],
+    "template": [
+      "战斗/自动地鬼/地鬼-判断是否位于极难度_1.png"
+    ]
+  },
   "地鬼-匹配地鬼特征-式神录-模板": {
     "action": "Click",
     "next": [
@@ -17,6 +43,102 @@
     "template": [
       "自动地鬼/地鬼_点击式神录-模板匹配_1.png"
     ]
+  },
+  "地鬼-开始自动挑战鬼王": {
+    "action": "Custom",
+    "custom_action": "ChallengeDungeonBoss",
+    "custom_action_param": {
+      "IsReward": false,
+      "count": 3
+    },
+    "focus": {
+      "Node.Recognition.Starting": "开始挑战地鬼"
+    },
+    "next": [
+      "返回庭院"
+    ],
+    "post_delay": 2000,
+    "recognition": "DirectHit"
+  },
+  "地鬼-开始自动挑战鬼王-悬赏": {
+    "action": "Custom",
+    "custom_action": "ChallengeDungeonBoss",
+    "custom_action_param": {
+      "IsReward": true,
+      "count": 3
+    },
+    "focus": {
+      "Node.Recognition.Starting": "开始挑战地鬼"
+    },
+    "next": [
+      "返回庭院"
+    ],
+    "post_delay": 2000,
+    "recognition": "DirectHit"
+  },
+  "地鬼-挑战一次悬赏": {
+    "max_hit": 1,
+    "next": [
+      "地鬼-确保处于可挑战界面-悬赏",
+      "[JumpBack]地鬼-点击悬赏目标",
+      "[JumpBack]地鬼-滑动寻找悬赏目标"
+    ],
+    "recognition": "DirectHit"
+  },
+  "地鬼-极难度未解锁": {
+    "focus": {
+      "Node.Recognition.Succeeded": "极难度未解锁!!! 进行常规挑战"
+    },
+    "inverse": true,
+    "recognition": "TemplateMatch",
+    "roi": [
+      224,
+      85,
+      164,
+      88
+    ],
+    "template": [
+      "战斗/自动地鬼/地鬼-极难度未解锁_1.png",
+      "战斗/自动地鬼/地鬼-极难度未解锁_2.png"
+    ]
+  },
+  "地鬼-滑动寻找悬赏目标": {
+    "action": "Swipe",
+    "begin": [
+      908,
+      566,
+      134,
+      94
+    ],
+    "duration": 1000,
+    "end": [
+      908,
+      215,
+      116,
+      88
+    ],
+    "expected": "击杀数最多",
+    "recognition": "OCR",
+    "roi": [
+      928,
+      106,
+      173,
+      75
+    ]
+  },
+  "地鬼-点击悬赏目标": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1015,
+      169,
+      175,
+      551
+    ],
+    "template": [
+      "战斗/自动地鬼/地鬼-点击悬赏目标_1.png"
+    ],
+    "threshold": 0.85
   },
   "地鬼-点击热门": {
     "action": "Click",
@@ -104,6 +226,22 @@
       76
     ]
   },
+  "地鬼-确保处于可挑战界面-悬赏": {
+    "expected": "挑战",
+    "next": [
+      "地鬼-判断是否位于极难度",
+      "[JumpBack]地鬼-切换到极难度",
+      "地鬼-极难度未解锁"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      1084,
+      506,
+      151,
+      76
+    ]
+  },
   "地鬼-确保打开筛选界面": {
     "expected": "悬赏|热门|最新|征服|收藏",
     "next": [
@@ -128,12 +266,15 @@
     "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
-      1035,
-      192,
-      135,
-      504
+      1032,
+      190,
+      158,
+      530
     ],
-    "template": "地域鬼王/地鬼_挑战.png",
+    "template": [
+      "战斗/自动地鬼/地鬼-识别挑战位置_1.png"
+    ],
+    "threshold": 0.8,
     "timeout": 500
   },
   "地鬼-识别是否位于地域鬼王界面": {
@@ -156,6 +297,7 @@
   "地鬼-识别是否位于热门": {
     "expected": "击杀数最多|最多|击杀",
     "next": [
+      "地鬼-挑战一次悬赏",
       "地鬼-确保处于可挑战界面",
       "[JumpBack]地鬼-识别挑战位置"
     ],
@@ -171,7 +313,8 @@
   "地鬼-识别是否返回地鬼界面": {
     "expected": "今日挑战|地域最强",
     "next": [
-      "开始自动挑战鬼王"
+      "地鬼-开始自动挑战鬼王",
+      "地鬼-开始自动挑战鬼王-悬赏"
     ],
     "post_delay": 2000,
     "recognition": "OCR",
@@ -263,21 +406,6 @@
     "on_error": [
       "返回庭院"
     ],
-    "recognition": "DirectHit"
-  },
-  "开始自动挑战鬼王": {
-    "action": "Custom",
-    "custom_action": "ChallengeDungeonBoss",
-    "custom_action_param": {
-      "count": 3
-    },
-    "focus": {
-      "Node.Recognition.Starting": "开始挑战地鬼"
-    },
-    "next": [
-      "返回庭院"
-    ],
-    "post_delay": 2000,
     "recognition": "DirectHit"
   },
   "挑战地鬼": {
