@@ -2,45 +2,40 @@ name: mirrorchyan
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        default: ""
+        required: false
 
 jobs:
-  mirrorchyan:
-    runs-on: macos-latest
+  mirrorchyan_mxu:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - os: windows
-            arch: x64
+          - os: win
+            arch: x86_64
+          - os: win
+            arch: aarch64
           - os: macos
-            arch: x64
+            arch: x86_64
           - os: macos
-            arch: arm64
+            arch: aarch64
           - os: linux
-            arch: x64
+            arch: x86_64
     steps:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: "MAA_YYS_${{ matrix.os }}-${{ matrix.arch }}_v*"
+          filename: ${{ format('MaaYYs-{0}-{1}-*-MXU*', matrix.os, matrix.arch) }}
           mirrorchyan_rid: MaaYYs
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          owner: TanyaShue
-          repo: MaaYYs
-          upload_token: ${{ secrets.MirrorChyanUploadToken }}
+          tag: ${{ inputs.tag }}
+
           os: ${{ matrix.os }}
           arch: ${{ matrix.arch }}
 
-  # 兼容老版本升级
-  mirrorchyan_no_platform:
-    runs-on: macos-latest
-    steps:
-      - uses: MirrorChyan/uploading-action@v1
-        with:
-          filetype: latest-release
-          filename: "MAA_YYS_windows-x64_v*"
-          mirrorchyan_rid: MaaYYs
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           owner: TanyaShue
           repo: MaaYYs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           upload_token: ${{ secrets.MirrorChyanUploadToken }}
