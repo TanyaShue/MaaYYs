@@ -1,4 +1,11 @@
 {
+  "失败": {
+    "focus": {
+      "Node.Action.Succeeded": "模拟器抽风"
+    },
+    "max_hit": 5,
+    "recognition": "DirectHit"
+  },
   "将手动改为自动": {
     "action": "Click",
     "expected": "手动",
@@ -195,6 +202,9 @@
       "[JumpBack]战斗-探索副本-向右滑动一点",
       "[JumpBack]战斗-探索副本-向左返回",
       "[JumpBack]战斗-从战斗中返回"
+    ],
+    "on_error": [
+      "[JumpBack]失败"
     ],
     "recognition": "DirectHit"
   },
