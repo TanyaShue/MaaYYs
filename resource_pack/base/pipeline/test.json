@@ -28,6 +28,16 @@
     ],
     "recognition": "OCR"
   },
+  "N-1781237774424": {
+    "action": "Custom",
+    "custom_action": "BattleTeam",
+    "custom_action_param": {
+      "位置": "御魂",
+      "分组名称": "英杰试炼",
+      "队伍名称": "源赖光"
+    },
+    "recognition": "DirectHit"
+  },
   "test": {
     "expected": 0,
     "labels": [

@@ -114,6 +114,7 @@
     "tasks/AutoShop.json",
     "tasks/ScrollFarming.json",
     "tasks/LimiteTimeEvent.json",
+    "tasks/自动契灵探查.json",
     "tasks/CloseGame.json"
   ]
 }

@@ -72,7 +72,7 @@ func (r *TaskCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecognitio
 
 	// 达到 5 的倍数时打印提示
 	if (currentCount + 1)%5 == 0 {
-		fmt.Printf("已完成 %d 次\n", currentCount+1)
+		fmt.Printf("现在挑战第 %d 次.... \n", currentCount+1)
 	}
 
 	// 返回一个空的结果，表示识别成功但没有具体的边界框

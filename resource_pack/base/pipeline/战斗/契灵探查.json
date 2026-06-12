@@ -1,0 +1,336 @@
+{
+  "契灵-准备战斗": {
+    "next": [
+      "契灵-计数次数",
+      "[JumpBack]契灵-点击探查"
+    ],
+    "recognition": "DirectHit"
+  },
+  "契灵-判断是否返回契灵之境": {
+    "expected": "契灵之境",
+    "recognition": "OCR",
+    "roi": [
+      14,
+      0,
+      313,
+      94
+    ]
+  },
+  "契灵-战斗-结束战斗": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "post_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "roi": [
+      341,
+      618,
+      554,
+      102
+    ],
+    "target": [
+      429,
+      620,
+      312,
+      100
+    ]
+  },
+  "契灵-点击探查": {
+    "action": "Click",
+    "next": [
+      "契灵-判断是否返回契灵之境",
+      "[JumpBack]契灵-战斗-结束战斗"
+    ],
+    "post_delay": 8000,
+    "pre_wait_freezes": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1099,
+      546,
+      181,
+      156
+    ],
+    "template": [
+      "战斗/契灵探查/契灵-点击探查_1.png"
+    ]
+  },
+  "契灵-点击锁定阵容": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      803,
+      639,
+      67,
+      60
+    ],
+    "template": [
+      "战斗/契灵探查/契灵-点击锁定阵容_1.png"
+    ]
+  },
+  "契灵-装备出战御魂": {
+    "max_hit": 1,
+    "next": [
+      "契灵之境-识别是否打开队伍预设",
+      "[JumpBack]契灵之境-点击队伍预设",
+      "[JumpBack]契灵之境-点击队伍预设-模板匹配"
+    ],
+    "recognition": "DirectHit"
+  },
+  "契灵-计数次数": {
+    "custom_recognition": "TaskCounterRecognition",
+    "custom_recognition_param": {
+      "target_count": 1
+    },
+    "inverse": true,
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "Custom"
+  },
+  "契灵-锁定阵容": {
+    "max_hit": 1,
+    "next": [
+      "契灵-锁定阵容-识别是否锁定阵容",
+      "[JumpBack]契灵-点击锁定阵容"
+    ],
+    "recognition": "DirectHit"
+  },
+  "契灵-锁定阵容-识别是否锁定阵容": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      811,
+      639,
+      54,
+      57
+    ],
+    "template": [
+      "战斗/契灵探查/契灵-锁定阵容-识别是否锁定阵容_1.png"
+    ]
+  },
+  "契灵之境-点击队伍预设": {
+    "action": "Click",
+    "expected": "队伍预设",
+    "post_delay": 1000,
+    "pre_wait_freezes": 500,
+    "recognition": "OCR",
+    "roi": [
+      900,
+      582,
+      128,
+      54
+    ],
+    "target": [
+      948,
+      576,
+      43,
+      37
+    ]
+  },
+  "契灵之境-点击队伍预设-模板匹配": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 500,
+    "recognition": "TemplateMatch",
+    "roi": [
+      913,
+      552,
+      113,
+      77
+    ],
+    "template": [
+      "战斗/契灵探查/契灵之境-点击队伍预设-模板匹配_1.png"
+    ]
+  },
+  "契灵之境-识别是否打开队伍预设": {
+    "action": "Custom",
+    "custom_action": "BattleTeam",
+    "custom_action_param": {
+      "位置": "御魂",
+      "分组名称": "契灵",
+      "队伍名称": "探查"
+    },
+    "expected": "出战",
+    "recognition": "OCR",
+    "roi": [
+      720,
+      464,
+      437,
+      64
+    ]
+  },
+  "契灵探查": {
+    "next": [
+      "[JumpBack]契灵探查-导航到目标界面",
+      "导航-契灵之境-准备开始战斗"
+    ],
+    "recognition": "DirectHit"
+  },
+  "契灵探查-地域": {
+    "expected": "地域",
+    "recognition": "OCR",
+    "roi": [
+      38,
+      0,
+      290,
+      100
+    ]
+  },
+  "契灵探查-地域-点击地域": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      588,
+      166,
+      132
+    ],
+    "template": [
+      "战斗/契灵探查/契灵探查-地域-点击地域_1.png"
+    ]
+  },
+  "契灵探查-导航到目标界面": {
+    "max_hit": 1,
+    "next": [
+      "导航-契灵之境-平安京",
+      "导航-契灵之境-逢魔之原"
+    ],
+    "recognition": "DirectHit"
+  },
+  "导航-契灵之境-准备开始战斗": {
+    "expected": "契灵之境",
+    "next": [
+      "[JumpBack]契灵-装备出战御魂",
+      "[JumpBack]契灵-锁定阵容",
+      "契灵-准备战斗"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      14,
+      0,
+      313,
+      94
+    ]
+  },
+  "导航-契灵之境-判断是否位于契灵之境": {
+    "expected": "契灵之境",
+    "next": [
+      "导航-契灵之境-平安京-识别是否位于平安京",
+      "[JumpBack]导航-契灵之境-点击平安京",
+      "[JumpBack]导航-契灵之境-打开地域"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      14,
+      0,
+      313,
+      94
+    ]
+  },
+  "导航-契灵之境-判断是否位于契灵之境-逢魔之原": {
+    "expected": "契灵之境",
+    "next": [
+      "导航-契灵之境-平安京-识别是否位于逢魔之原",
+      "[JumpBack]导航-契灵之境-点击逢魔之原",
+      "[JumpBack]导航-契灵之境-打开地域"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      14,
+      0,
+      313,
+      94
+    ]
+  },
+  "导航-契灵之境-平安京": {
+    "enabled": false,
+    "next": [
+      "导航-契灵之境-判断是否位于契灵之境",
+      "[JumpBack]导航-契灵之境"
+    ],
+    "recognition": "DirectHit"
+  },
+  "导航-契灵之境-平安京-识别是否位于平安京": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      42,
+      406,
+      1063,
+      219
+    ],
+    "template": [
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于平安京_1.png",
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于平安京_2.png",
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于平安京_3.png",
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于平安京_4.png"
+    ]
+  },
+  "导航-契灵之境-平安京-识别是否位于逢魔之原": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      154,
+      433,
+      884,
+      168
+    ],
+    "template": [
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于逢魔之原_1.png",
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于逢魔之原_2.png",
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于逢魔之原_3.png",
+      "战斗/契灵探查/导航-契灵之境-平安京-识别是否位于逢魔之原_4.png"
+    ]
+  },
+  "导航-契灵之境-打开地域": {
+    "next": [
+      "契灵探查-地域",
+      "[JumpBack]契灵探查-地域-点击地域"
+    ],
+    "recognition": "DirectHit"
+  },
+  "导航-契灵之境-点击平安京": {
+    "action": "Click",
+    "expected": "平安京",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      453,
+      211,
+      103,
+      237
+    ],
+    "target": [
+      647,
+      324,
+      107,
+      104
+    ]
+  },
+  "导航-契灵之境-点击逢魔之原": {
+    "action": "Click",
+    "expected": "逢魔之原",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      869,
+      47,
+      75,
+      228
+    ],
+    "target": [
+      690,
+      33,
+      133,
+      112
+    ]
+  },
+  "导航-契灵之境-逢魔之原": {
+    "enabled": false,
+    "next": [
+      "导航-契灵之境-判断是否位于契灵之境-逢魔之原",
+      "[JumpBack]导航-契灵之境"
+    ],
+    "recognition": "DirectHit"
+  }
+}

@@ -1,0 +1,118 @@
+{
+    "task": [
+        {
+            "name": "契灵探查",
+            "label": "契灵探查",
+            "entry": "契灵探查",
+            "option": [
+                "探查目标",
+                "契灵探查次数",
+                "是否切换御魂"
+            ]
+        }
+    ],
+    "option": {
+        "探查目标": {
+            "type": "select",
+            "label": "探查目标",
+            "description": "探查目标",
+            "default_case": "逢魔之原",
+            "cases": [
+                {
+                    "name": "平安京",
+                    "label": "平安京",
+                    "pipeline_override": {
+                        "导航-契灵之境-平安京": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "逢魔之原",
+                    "label": "逢魔之原",
+                    "pipeline_override": {
+                        "导航-契灵之境-逢魔之原": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ]
+        },
+        "契灵探查次数":{
+            "type": "input",
+            "label": "契灵探查次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "default": "100",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "契灵-计数次数": {
+                    "custom_recognition": "TaskCounterRecognition",
+                    "custom_recognition_param": {
+                        "target_count": "{挑战次数}"
+                    }
+                }
+            }
+        },
+        "是否切换御魂": {
+            "type": "switch",
+            "label": "是否切换御魂",
+            "description": "切换御魂以及出战队伍",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "契灵-装备出战御魂": {
+                            "enable":true
+                        }
+                    },
+                    "option": ["契灵探查阵容"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "契灵-装备出战御魂": {
+                            "enable":false
+                        }
+                    }
+                }
+            ]
+        },
+        "契灵探查阵容": {
+            "type": "input",
+            "label": "契灵探查阵容",
+            "description": "填写契灵探查阵容时需要使用的分组和队伍名称",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "契灵之境-识别是否打开队伍预设": {
+                    "custom_action_param": {
+                        "位置": "契灵",
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}
