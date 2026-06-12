@@ -1,4 +1,335 @@
 {
+  "N-1781238306179": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      400,
+      150,
+      560,
+      400
+    ]
+  },
+  "出战队伍预设": {
+    "expected": "出战",
+    "next": [
+      "出战队伍预设-点击分组",
+      "[JumpBack]出战队伍预设-滑动分组到最上方",
+      "[JumpBack]出战队伍预设-向上滑动"
+    ],
+    "on_error": [
+      "出战队伍预设-分组错误"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      246,
+      323,
+      -405,
+      -336
+    ]
+  },
+  "出战队伍预设-分组错误": {
+    "focus": {
+      "Node.Recognition.Succeeded": "出战分组识别失败,分组或队伍名称尽量不要使用符号"
+    },
+    "recognition": "DirectHit"
+  },
+  "出战队伍预设-向上滑动": {
+    "action": "Swipe",
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      28,
+      326,
+      -478,
+      -370
+    ],
+    "duration": 2000,
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      26,
+      37,
+      -488,
+      -357
+    ],
+    "max_hit": 4,
+    "post_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "DirectHit"
+  },
+  "出战队伍预设-向上滑动队伍": {
+    "action": "Swipe",
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      257,
+      281,
+      -438,
+      -360
+    ],
+    "duration": 2000,
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      252,
+      39,
+      -444,
+      -360
+    ],
+    "max_hit": 4,
+    "post_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "DirectHit"
+  },
+  "出战队伍预设-滑动分组到最上方": {
+    "action": "Swipe",
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      26,
+      37,
+      -488,
+      -357
+    ],
+    "duration": 1000,
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      28,
+      326,
+      -478,
+      -370
+    ],
+    "max_hit": 3,
+    "post_delay": 1000,
+    "recognition": "DirectHit"
+  },
+  "出战队伍预设-滑动队伍到最上方": {
+    "action": "Swipe",
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      252,
+      39,
+      -444,
+      -360
+    ],
+    "duration": 1000,
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      257,
+      281,
+      -438,
+      -360
+    ],
+    "max_hit": 3,
+    "post_delay": 1000,
+    "recognition": "DirectHit"
+  },
+  "出战队伍预设-点击分组": {
+    "action": "Click",
+    "expected": "默认分组",
+    "next": [
+      "出战队伍预设-识别出战队伍",
+      "[JumpBack]出战队伍预设-滑动队伍到最上方",
+      "[JumpBack]出战队伍预设-向上滑动队伍"
+    ],
+    "on_error": [
+      "出战队伍预设-队伍错误"
+    ],
+    "post_delay": 2000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      0,
+      0,
+      -430,
+      0
+    ]
+  },
+  "出战队伍预设-识别出战队伍": {
+    "action": "Click",
+    "expected": "默认队伍",
+    "next": [
+      "出战队伍预设-识别出战队伍-装备御魂-特征匹配",
+      "出战队伍预设-识别出战队伍-装备御魂-模板匹配"
+    ],
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      130,
+      0,
+      -280,
+      0
+    ]
+  },
+  "出战队伍预设-识别出战队伍-点击出战": {
+    "action": "Click",
+    "expected": "出战",
+    "post_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      246,
+      323,
+      -405,
+      -336
+    ]
+  },
+  "出战队伍预设-识别出战队伍-点击确定": {
+    "action": "Click",
+    "expected": "确定",
+    "post_delay": 2000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "roi": [
+      401,
+      354,
+      467,
+      135
+    ],
+    "timeout": 2000
+  },
+  "出战队伍预设-识别出战队伍-确保没有出战": {
+    "expected": "出战",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      246,
+      323,
+      -405,
+      -336
+    ]
+  },
+  "出战队伍预设-识别出战队伍-确保没有确定": {
+    "expected": "确定",
+    "inverse": true,
+    "next": [
+      "出战队伍预设-识别出战队伍-确保没有出战",
+      "[JumpBack]出战队伍预设-识别出战队伍-点击出战"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "roi": [
+      404,
+      354,
+      476,
+      149
+    ],
+    "timeout": 2000
+  },
+  "出战队伍预设-识别出战队伍-装备御魂-模板匹配": {
+    "action": "Click",
+    "max_hit": 2,
+    "next": [
+      "出战队伍预设-识别出战队伍-确保没有确定",
+      "[JumpBack]出战队伍预设-识别出战队伍-点击确定"
+    ],
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": "出战队伍预设-识别出战队伍",
+    "roi_offset": [
+      177,
+      -12,
+      216,
+      24
+    ],
+    "template": [
+      "通用/出战队伍预设-识别出战队伍-装备御魂_1.png"
+    ],
+    "timeout": 5000
+  },
+  "出战队伍预设-识别出战队伍-装备御魂-特征匹配": {
+    "action": "Click",
+    "max_hit": 2,
+    "next": [
+      "出战队伍预设-识别出战队伍-确保没有确定",
+      "[JumpBack]出战队伍预设-识别出战队伍-点击确定"
+    ],
+    "post_delay": 2000,
+    "recognition": "FeatureMatch",
+    "roi": "出战队伍预设-识别出战队伍",
+    "roi_offset": [
+      177,
+      -12,
+      216,
+      24
+    ],
+    "template": [
+      "通用/出战队伍预设-识别出战队伍-装备御魂_1.png"
+    ],
+    "timeout": 5000
+  },
+  "出战队伍预设-队伍错误": {
+    "focus": {
+      "Node.Recognition.Succeeded": "出战分组识别失败,分组或队伍名称尽量不要使用符号"
+    },
+    "recognition": "DirectHit"
+  },
   "左滑一下屏幕": {
     "action": "Custom",
     "custom_action": "RandomSwipe",

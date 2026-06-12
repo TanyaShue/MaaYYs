@@ -3,6 +3,7 @@ package main
 import (
 	"maa-yys-agent/actions/auto_battle"
 	"maa-yys-agent/actions/auto_foster"
+	"maa-yys-agent/actions/battle_team"
 	"maa-yys-agent/actions/bonus_toggle"
 	"maa-yys-agent/actions/bounty_monster_recognition"
 	"maa-yys-agent/actions/challenge_dungeon_boss"
@@ -52,6 +53,7 @@ func registerAll() {
 	// 游戏功能类
 	auto_battle.Register()
 	auto_foster.Register()
+	battle_team.Register()
 	switch_soul.Register()
 	team_builder.Register()
 	bounty_monster_recognition.Register()
