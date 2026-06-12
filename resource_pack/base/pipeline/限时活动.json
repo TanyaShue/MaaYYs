@@ -4,6 +4,9 @@
       "导航-下一茨宾果-识别任务界面",
       "[JumpBack]导航-下一茨宾果-点击任务"
     ],
+    "on_error": [
+      "导航-庭院"
+    ],
     "recognition": "TemplateMatch",
     "roi": [
       729,
@@ -13,7 +16,8 @@
     ],
     "template": [
       "限时活动/导航-下一茨宾果_1.png"
-    ]
+    ],
+    "timeout": 5000
   },
   "导航-下一茨宾果-一键领取": {
     "inverse": true,
