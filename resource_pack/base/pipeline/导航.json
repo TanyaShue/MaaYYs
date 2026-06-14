@@ -420,7 +420,7 @@
   },
   "导航-庭院-识别是否需要关闭章节": {
     "action": "Click",
-    "expected": "确定",
+    "expected": "确认",
     "post_delay": 2000,
     "recognition": "OCR",
     "roi": [

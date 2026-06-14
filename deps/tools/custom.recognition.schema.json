@@ -4,12 +4,20 @@
     "properties": {
         "custom_recognition": {
             "enum": [
+                "ConfigValueCheckRecognition",
+                "ConfigValueWriteRecognition",
                 "TaskCounterRecognition",
                 "MyRecognizer"
             ]
         }
     },
     "anyOf": [
+        {
+            "$ref": "#/$defs/ConfigValueCheckRecognition"
+        },
+        {
+            "$ref": "#/$defs/ConfigValueWriteRecognition"
+        },
         {
             "$ref": "#/$defs/TaskCounterRecognition"
         },
@@ -31,6 +39,82 @@
                     ]
                 }
             ]
+        },
+        "ConfigValueCheckRecognition": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_recognition": {
+                    "const": "ConfigValueCheckRecognition",
+                    "description": "读取根目录 assets 下的 JSON，并按数值比较判断是否返回 true"
+                },
+                "custom_recognition_param": {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "description": "要检查的键名"
+                        },
+                        "value": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "number"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ],
+                            "description": "比较阈值，存储值小于它时返回 true"
+                        }
+                    },
+                    "required": ["key", "value"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "ConfigValueWriteRecognition": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/RequiredParam"
+                }
+            ],
+            "properties": {
+                "custom_recognition": {
+                    "const": "ConfigValueWriteRecognition",
+                    "description": "写入根目录 assets 下的 JSON，值统一按字符串保存"
+                },
+                "custom_recognition_param": {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "description": "要写入的键名"
+                        },
+                        "value": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "number"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ],
+                            "description": "写入值；传入 add / sub 时会在当前值基础上加一 / 减一"
+                        }
+                    },
+                    "required": ["key", "value"],
+                    "additionalProperties": false
+                }
+            }
         },
         "TaskCounterRecognition": {
             "allOf": [
