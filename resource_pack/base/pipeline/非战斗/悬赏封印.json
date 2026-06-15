@@ -256,6 +256,13 @@
     ]
   },
   "悬赏封印-判断是否在追踪列表": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "悬赏封印-判断是否是协战的目标"
+      ]
+    },
     "expected": "发现地点",
     "next": [
       "悬赏封印-判断是否是协战的目标",
@@ -277,6 +284,7 @@
     "custom_recognition_param": {
       "action": "check"
     },
+    "max_hit": 1,
     "next": [
       "悬赏封印-确保关闭追踪列表",
       "[JumpBack]悬赏封印-关闭追踪列表"
