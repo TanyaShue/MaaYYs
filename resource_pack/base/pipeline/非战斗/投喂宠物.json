@@ -231,7 +231,7 @@
       "探索",
       "神龛"
     ],
-    "model": "Courtyard.onnx",
+    "model": "Courtyard-v5.0.onnx",
     "post_delay": 2000,
     "recognition": "NeuralNetworkDetect",
     "threshold": 0.8
