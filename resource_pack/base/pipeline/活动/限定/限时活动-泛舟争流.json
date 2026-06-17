@@ -1,0 +1,440 @@
+{
+  "限时活动-泛舟争流": {
+    "next": [
+      "限时活动-泛舟争流-识别活动界面",
+      "[JumpBack]限时活动-泛舟争流-点击活动",
+      "[JumpBack]限时活动-泛舟争流-识别是否位于活动总览",
+      "[JumpBack]导航-活动总览"
+    ],
+    "recognition": "DirectHit"
+  },
+  "限时活动-泛舟争流-云华日报": {
+    "max_hit": 1,
+    "next": [
+      "限时活动-泛舟争流-云华日报-识别是否位于活动界面",
+      "[JumpBack]限时活动-泛舟争流-云华日报-点击云华日报"
+    ],
+    "recognition": "DirectHit"
+  },
+  "限时活动-泛舟争流-云华日报-点击云华日报": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 100,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      566,
+      512,
+      154
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/N-1781675986099-961_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-云华日报-点击答案": {
+    "action": "Click",
+    "expected": "推荐",
+    "next": [
+      "限时活动-泛舟争流-返回活动内",
+      "[JumpBack]限时活动-泛舟争流-云华日报-返回"
+    ],
+    "post_delay": 1001,
+    "pre_wait_freezes": 200,
+    "recognition": "OCR",
+    "roi": [
+      550,
+      314,
+      513,
+      245
+    ]
+  },
+  "限时活动-泛舟争流-云华日报-识别是否位于活动界面": {
+    "expected": "云华日报",
+    "next": [
+      "限时活动-泛舟争流-云华日报-点击答案"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      362,
+      94
+    ]
+  },
+  "限时活动-泛舟争流-云华日报-返回": {
+    "action": "Click",
+    "expected": "云华日报",
+    "post_delay": 2000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      362,
+      94
+    ],
+    "target": [
+      27,
+      24,
+      31,
+      21
+    ]
+  },
+  "限时活动-泛舟争流-同心以航": {
+    "max_hit": 1,
+    "recognition": "DirectHit"
+  },
+  "限时活动-泛舟争流-好友助力": {
+    "max_hit": 1,
+    "next": [
+      "限时活动-泛舟争流-好友助力-识别是否打开好友页面",
+      "[JumpBack]限时活动-泛舟争流-好友助力-点击好友"
+    ],
+    "recognition": "DirectHit"
+  },
+  "限时活动-泛舟争流-好友助力-点击关闭奖励弹窗": {
+    "action": "Click",
+    "post_delay": 2000,
+    "pre_wait_freezes": 200,
+    "recognition": "TemplateMatch",
+    "roi": [
+      349,
+      116,
+      572,
+      223
+    ],
+    "target": [
+      817,
+      112,
+      207,
+      66
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/N-1781676578963_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-好友助力-点击助力": {
+    "action": "Click",
+    "max_hit": 5,
+    "next": [
+      "限时活动-泛舟争流-好友助力-确保没有奖励弹窗",
+      "[JumpBack]限时活动-泛舟争流-好友助力-点击关闭奖励弹窗"
+    ],
+    "post_delay": 2000,
+    "pre_wait_freezes": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      350,
+      157,
+      681,
+      472
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/限时活动-泛舟争流-好友助力-点击助力_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-好友助力-点击好友": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 100,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      285,
+      106,
+      101
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/限时活动-泛舟争流-好友助力-点击好友_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-好友助力-确保没有奖励弹窗": {
+    "inverse": true,
+    "recognition": "TemplateMatch",
+    "roi": [
+      349,
+      116,
+      572,
+      223
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/N-1781676578963_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-好友助力-识别是否打开好友页面": {
+    "expected": "跨服好友|好友",
+    "next": [
+      "[JumpBack]限时活动-泛舟争流-好友助力-点击助力"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      360,
+      98,
+      281,
+      81
+    ]
+  },
+  "限时活动-泛舟争流-点击活动": {
+    "action": "Click",
+    "expected": "泛舟争流",
+    "post_delay": 1000,
+    "pre_wait_freezes": 500,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      229,
+      720
+    ]
+  },
+  "限时活动-泛舟争流-点击进入活动": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 200,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1002,
+      584,
+      278,
+      136
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/限时活动-泛舟争流-点击进入活动_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-点击退出": {
+    "action": "Click",
+    "expected": "龙渊试锋",
+    "post_delay": 2000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      362,
+      94
+    ],
+    "target": [
+      27,
+      24,
+      31,
+      21
+    ]
+  },
+  "限时活动-泛舟争流-识别是否位于活动内": {
+    "expected": "泛舟争流",
+    "next": [
+      "[JumpBack]限时活动-泛舟争流-龙渊试锋",
+      "[JumpBack]限时活动-泛舟争流-云华日报",
+      "[JumpBack]限时活动-泛舟争流-同心以航",
+      "[JumpBack]限时活动-泛舟争流-好友助力",
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "replace": [
+      [
+        "爭",
+        "争"
+      ]
+    ],
+    "roi": [
+      0,
+      0,
+      355,
+      102
+    ]
+  },
+  "限时活动-泛舟争流-识别是否位于活动总览": {
+    "action": "Swipe",
+    "begin": [
+      24,
+      526,
+      149,
+      70
+    ],
+    "duration": 2000,
+    "end": [
+      54,
+      133,
+      116,
+      60
+    ],
+    "expected": "活动总览",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      346,
+      85
+    ]
+  },
+  "限时活动-泛舟争流-识别活动界面": {
+    "next": [
+      "限时活动-泛舟争流-识别是否位于活动内",
+      "[JumpBack]限时活动-泛舟争流-点击进入活动"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      663,
+      290,
+      572,
+      197
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/限时活动-泛舟争流-识别活动界面_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-返回活动内": {
+    "expected": "泛舟争流",
+    "post_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "OCR",
+    "replace": [
+      [
+        "爭",
+        "争"
+      ]
+    ],
+    "roi": [
+      0,
+      0,
+      355,
+      102
+    ]
+  },
+  "限时活动-泛舟争流-龙渊试锋": {
+    "max_hit": 1,
+    "next": [
+      "限时活动-泛舟争流-龙渊试锋-识别是否位于活动界面",
+      "[JumpBack]限时活动-泛舟争流-龙渊试锋-点击活动"
+    ],
+    "recognition": "DirectHit"
+  },
+  "限时活动-泛舟争流-龙渊试锋-开始挑战": {
+    "expected": "龙渊试锋",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      362,
+      94
+    ]
+  },
+  "限时活动-泛舟争流-龙渊试锋-点击式神录": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      941,
+      506,
+      163,
+      157
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/限时活动-泛舟争流-龙渊试锋-点击式神录_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-龙渊试锋-点击挑战": {
+    "action": "Click",
+    "next": [
+      "限时活动-泛舟争流-龙渊试锋-开始挑战",
+      "[JumpBack]战斗-从战斗中返回"
+    ],
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1099,
+      548,
+      161,
+      137
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/限时活动-泛舟争流-龙渊试锋-点击挑战_1.png"
+    ],
+    "timeout": 300000
+  },
+  "限时活动-泛舟争流-龙渊试锋-点击活动": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 100,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      566,
+      512,
+      154
+    ],
+    "template": [
+      "活动/限定/限时活动-泛舟争流/限时活动-泛舟争流-龙渊试锋-点击活动_1.png"
+    ]
+  },
+  "限时活动-泛舟争流-龙渊试锋-装备御魂": {
+    "max_hit": 1,
+    "next": [
+      "限时活动-泛舟争流-龙渊试锋-识别是否位于式神录",
+      "[JumpBack]限时活动-泛舟争流-龙渊试锋-点击式神录"
+    ],
+    "recognition": "DirectHit"
+  },
+  "限时活动-泛舟争流-龙渊试锋-识别是否位于式神录": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "活",
+      "team_name": "龙渊试锋"
+    },
+    "expected": "式神录",
+    "next": [
+      "限时活动-泛舟争流-龙渊试锋-识别是否返回活动界面",
+      "[JumpBack]返回-从式神录返回"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      363,
+      91
+    ]
+  },
+  "限时活动-泛舟争流-龙渊试锋-识别是否位于活动界面": {
+    "expected": "龙渊试锋",
+    "next": [
+      "限时活动-泛舟争流-龙渊试锋-识别票数",
+      "[JumpBack]限时活动-泛舟争流-龙渊试锋-装备御魂",
+      "[JumpBack]限时活动-泛舟争流-龙渊试锋-点击挑战"
+    ],
+    "post_delay": 500,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      362,
+      94
+    ]
+  },
+  "限时活动-泛舟争流-龙渊试锋-识别是否返回活动界面": {
+    "expected": "龙渊试锋",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      362,
+      94
+    ]
+  },
+  "限时活动-泛舟争流-龙渊试锋-识别票数": {
+    "expected": "^0$",
+    "next": [
+      "限时活动-泛舟争流-返回活动内",
+      "[JumpBack]限时活动-泛舟争流-点击退出"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1110,
+      6,
+      116,
+      47
+    ]
+  }
+}
