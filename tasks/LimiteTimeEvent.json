@@ -3,8 +3,66 @@
         {
             "name": "限时活动",
             "label": "限时活动-泛舟争流",
-            "entry": "限时活动-泛舟争流"
+            "entry": "限时活动-泛舟争流",
+            "option": ["龙渊试锋-切换御魂"]
         }
     ],
-    "option": {}
+    "option": {
+        "龙渊试锋-切换御魂":{
+            "type": "switch",
+            "label": "龙渊试锋-切换御魂",
+            "description": "龙渊试锋是否切换御魂",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "限时活动-泛舟争流-龙渊试锋-装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["龙渊试锋-御魂预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "限时活动-泛舟争流-龙渊试锋-装备御魂": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "龙渊试锋-御魂预设":{
+            "type": "input",
+            "label": "龙渊试锋-御魂预设",
+            "description": "填写龙渊试锋时需要使用的分组和队伍名称",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "限时活动-泛舟争流-龙渊试锋-识别是否位于式神录": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
 }
