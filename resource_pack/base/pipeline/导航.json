@@ -1249,5 +1249,49 @@
       245,
       78
     ]
+  },
+  "返回-从式神录返回": {
+    "expected": "式神录",
+    "next": [
+      "返回-从式神录返回-模板匹配",
+      "返回-从式神录返回-特征匹配"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      273,
+      72
+    ]
+  },
+  "返回-从式神录返回-模板匹配": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 500,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      0,
+      134,
+      81
+    ],
+    "template": [
+      "导航/返回-从式神录返回模板匹配_1.png"
+    ]
+  },
+  "返回-从式神录返回-特征匹配": {
+    "action": "Click",
+    "post_delay": 1000,
+    "pre_wait_freezes": 500,
+    "recognition": "FeatureMatch",
+    "roi": [
+      0,
+      0,
+      134,
+      81
+    ],
+    "template": [
+      "导航/返回-从式神录返回模板匹配_1.png"
+    ]
   }
 }

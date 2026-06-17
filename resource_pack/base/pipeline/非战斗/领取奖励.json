@@ -254,7 +254,8 @@
     "next": [
       "确保位于商店界面",
       "[JumpBack]领取奖励_打开商店",
-      "[JumpBack]领取奖励-打开商店-ocr"
+      "[JumpBack]领取奖励-打开商店-ocr",
+      "[JumpBack]导航-商店"
     ],
     "recognition": "DirectHit"
   },
