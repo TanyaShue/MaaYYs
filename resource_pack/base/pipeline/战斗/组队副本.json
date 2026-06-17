@@ -104,6 +104,8 @@
       "组队副本15-关闭所有加成",
       "[JumpBack]组队副本-点击灯笼"
     ],
+    "post_delay": 1000,
+    "pre_wait_freezes": 200,
     "recognition": "FeatureMatch",
     "roi": [
       267,
@@ -160,6 +162,8 @@
       "组队副本4_copy1",
       "[JumpBack]组队副本-点击灯笼"
     ],
+    "post_delay": 1000,
+    "pre_wait_freezes": 200,
     "recognition": "FeatureMatch",
     "roi": [
       267,
@@ -185,6 +189,8 @@
       "组队副本4_copy2",
       "[JumpBack]组队副本-点击灯笼"
     ],
+    "post_delay": 1000,
+    "pre_wait_freezes": 200,
     "recognition": "FeatureMatch",
     "roi": [
       267,
@@ -265,6 +271,8 @@
       "组队副本4",
       "[JumpBack]组队副本-点击灯笼"
     ],
+    "post_delay": 1000,
+    "pre_wait_freezes": 200,
     "recognition": "FeatureMatch",
     "roi": [
       267,
@@ -376,16 +384,16 @@
       "gold_100%": false,
       "gold_50%": false
     },
-    "expected": "觉醒副本掉落额外的觉醒材料",
+    "expected": "觉醒材料|八岐大蛇|御魂材料|战斗胜利",
     "next": [
       "组队副本17"
     ],
     "recognition": "OCR",
     "roi": [
-      424,
-      135,
-      330,
-      39
+      414,
+      109,
+      357,
+      361
     ]
   },
   "组队副本17": {
@@ -475,7 +483,7 @@
       "gold_100%": true,
       "gold_50%": true
     },
-    "expected": "觉醒副本掉落额外的觉醒材料",
+    "expected": "觉醒材料|八岐大蛇|御魂材料|战斗胜利",
     "next": [
       "组队副本5"
     ],
@@ -483,10 +491,10 @@
     "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
-      424,
-      135,
-      330,
-      39
+      414,
+      109,
+      357,
+      361
     ]
   },
   "组队副本4_copy1": {
@@ -498,7 +506,7 @@
       "gold_100%": false,
       "gold_50%": false
     },
-    "expected": "觉醒副本掉落额外的觉醒材料",
+    "expected": "觉醒材料|八岐大蛇|御魂材料|战斗胜利",
     "next": [
       "组队副本5_copy1"
     ],
@@ -506,10 +514,10 @@
     "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
-      424,
-      135,
-      330,
-      39
+      414,
+      109,
+      357,
+      361
     ]
   },
   "组队副本4_copy2": {
@@ -519,7 +527,7 @@
       "exp_100%": true,
       "exp_50%": true
     },
-    "expected": "觉醒副本掉落额外的觉醒材料",
+    "expected": "觉醒材料|八岐大蛇|御魂材料|战斗胜利",
     "next": [
       "组队副本5_copy2"
     ],
@@ -527,10 +535,10 @@
     "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
-      424,
-      135,
-      330,
-      39
+      414,
+      109,
+      357,
+      361
     ]
   },
   "组队副本5": {
