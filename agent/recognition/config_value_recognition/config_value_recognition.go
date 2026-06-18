@@ -24,8 +24,12 @@ type ConfigValueWriteRecognition struct{}
 type ConfigValueCheckRecognition struct{}
 
 type configValueParams struct {
-	Key   string          `json:"key"`
-	Value json.RawMessage `json:"value"`
+	Key        string          `json:"key"`
+	Value      json.RawMessage `json:"value"`
+	Comparison string          `json:"comparison"`
+	Compare    string          `json:"compare"`
+	Operator   string          `json:"operator"`
+	Mode       string          `json:"mode"`
 }
 
 var _ maa.CustomRecognitionRunner = &ConfigValueWriteRecognition{}
@@ -105,13 +109,34 @@ func (r *ConfigValueCheckRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 		return nil, false
 	}
 
-	if currentNum < targetNum {
-		fmt.Printf("ConfigValueCheckRecognition: %s 当前值 %s < %s, 返回 true\n", params.Key, currentValue, formatNumber(targetNum))
+	comparison := normalizeComparison(params.comparison())
+	if comparison == "" {
+		fmt.Printf("ConfigValueCheckRecognition: 不支持的比较方式: %s\n", params.comparison())
+		return nil, false
+	}
+
+	if compareNumbers(currentNum, targetNum, comparison) {
+		fmt.Printf("ConfigValueCheckRecognition: %s 当前值 %s %s %s, 返回 true\n", params.Key, currentValue, comparison, formatNumber(targetNum))
 		return &maa.CustomRecognitionResult{Box: maa.Rect{0, 0, 0, 0}}, true
 	}
 
-	fmt.Printf("ConfigValueCheckRecognition: %s 当前值 %s >= %s, 返回 false\n", params.Key, currentValue, formatNumber(targetNum))
+	fmt.Printf("ConfigValueCheckRecognition: %s 当前值 %s 不满足 %s %s, 返回 false\n", params.Key, currentValue, comparison, formatNumber(targetNum))
 	return nil, false
+}
+
+func (p *configValueParams) comparison() string {
+	switch {
+	case p.Comparison != "":
+		return p.Comparison
+	case p.Compare != "":
+		return p.Compare
+	case p.Operator != "":
+		return p.Operator
+	case p.Mode != "":
+		return p.Mode
+	default:
+		return "<"
+	}
 }
 
 func parseParams(arg *maa.CustomRecognitionArg) (*configValueParams, error) {
@@ -246,4 +271,42 @@ func parseNumber(value string) (float64, error) {
 
 func formatNumber(value float64) string {
 	return strconv.FormatFloat(value, 'f', -1, 64)
+}
+
+func normalizeComparison(comparison string) string {
+	switch strings.ToLower(strings.TrimSpace(comparison)) {
+	case "", "<", "lt", "less", "小于":
+		return "<"
+	case ">", "gt", "greater", "大于":
+		return ">"
+	case "=", "==", "eq", "equal", "equals", "等于":
+		return "=="
+	case "<=", "=<", "le", "lte", "less_equal", "less than or equal", "小于等于", "不大于":
+		return "<="
+	case ">=", "=>", "ge", "gte", "greater_equal", "greater than or equal", "大于等于", "不小于":
+		return ">="
+	case "!=", "<>", "ne", "neq", "not_equal", "not equal", "不等于":
+		return "!="
+	default:
+		return ""
+	}
+}
+
+func compareNumbers(currentNum, targetNum float64, comparison string) bool {
+	switch comparison {
+	case "<":
+		return currentNum < targetNum
+	case ">":
+		return currentNum > targetNum
+	case "==":
+		return currentNum == targetNum
+	case "<=":
+		return currentNum <= targetNum
+	case ">=":
+		return currentNum >= targetNum
+	case "!=":
+		return currentNum != targetNum
+	default:
+		return false
+	}
 }
