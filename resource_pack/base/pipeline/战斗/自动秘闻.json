@@ -251,6 +251,7 @@
   },
   "自动秘闻_点击进入": {
     "action": "Click",
+    "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
       1097,
