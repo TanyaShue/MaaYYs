@@ -13,7 +13,7 @@
       },
       "end": "23:00",
       "mode": "in",
-      "start": "18:00"
+      "start": "17:00"
     },
     "focus": {
       "Node.Action.Failed": "不处于阴界之门开启时间,任务结束",
