@@ -23,6 +23,24 @@
     "threshold": 0.6,
     "timeout": 5000
   },
+  "阴阳寮奖励-挂卡-判断是否缺少结界卡": {
+    "expected": "未获得结界卡|可以通过",
+    "focus": {
+      "Node.Recognition.Succeeded": "结界卡不足,跳过挂卡"
+    },
+    "next": [
+      "阴阳寮奖励领取_识别结界特征_copy6",
+      "[JumpBack]阴阳寮奖励31"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      174,
+      258,
+      375,
+      167
+    ]
+  },
   "阴阳寮奖励1": {
     "action": "Click",
     "recognition": "TemplateMatch",
@@ -188,6 +206,7 @@
     "expected": "太鼓",
     "next": [
       "阴阳寮奖励30_确保选中结界卡",
+      "阴阳寮奖励-挂卡-判断是否缺少结界卡",
       "[JumpBack]阴阳寮奖励28",
       "[JumpBack]阴阳寮奖励29"
     ],
