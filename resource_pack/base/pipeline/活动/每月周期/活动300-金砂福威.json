@@ -1,0 +1,145 @@
+{
+  "活动爬塔-金砂福威": {
+    "expected": "鸣鼓擂台",
+    "next": [
+      "爬塔-金砂福威-活动票花光",
+      "爬塔-金砂福威-体力票花光",
+      "爬塔-金砂福威-识别挑战次数是否达标",
+      "[JumpBack]活动爬塔-金砂福威-识别挑战"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      136,
+      9,
+      158,
+      67
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-金砂福威-点击屏幕继续": {
+    "action": "Custom",
+    "custom_action": "RandomWait",
+    "custom_action_param": {
+      "max": 5,
+      "min": 1
+    },
+    "expected": "点击屏幕|继续",
+    "max_hit": 1,
+    "recognition": "OCR"
+  },
+  "活动爬塔-金砂福威-点击挑战": {
+    "action": "Click",
+    "expected": "挑战",
+    "next": [
+      "活动爬塔-金砂福威-识别活动界面",
+      "[JumpBack]活动爬塔-金砂福威-点击屏幕继续",
+      "[JumpBack]活动爬塔-金砂福威-继续点击屏幕继续"
+    ],
+    "post_delay": 5000,
+    "recognition": "OCR",
+    "roi": [
+      1117,
+      591,
+      136,
+      72
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-金砂福威-继续点击屏幕继续": {
+    "action": "Click",
+    "expected": "点击屏幕|继续",
+    "post_delay": 1000,
+    "recognition": "OCR"
+  },
+  "活动爬塔-金砂福威-识别挑战": {
+    "action": "Custom",
+    "custom_action": "RandomWait",
+    "custom_action_param": {
+      "max": 10,
+      "min": 1
+    },
+    "expected": "挑战",
+    "focus": {
+      "Node.Action.Starting": "[debug]开始随机等待",
+      "Node.Action.Succeeded": "[debug]随机等待结束"
+    },
+    "next": [
+      "活动爬塔-金砂福威-点击挑战"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1117,
+      591,
+      136,
+      72
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-金砂福威-识别活动界面": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "活动爬塔-金砂福威-点击屏幕继续"
+      ]
+    },
+    "expected": "鸣鼓擂台",
+    "recognition": "OCR",
+    "roi": [
+      136,
+      9,
+      158,
+      67
+    ],
+    "timeout": 200000
+  },
+  "爬塔-金砂福威-体力票花光": {
+    "enabled": false,
+    "expected": "^0$",
+    "focus": {
+      "Node.Recognition.Succeeded": "体力票刷完了!!!,任务结束"
+    },
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      578,
+      5,
+      79,
+      51
+    ]
+  },
+  "爬塔-金砂福威-活动票花光": {
+    "enabled": false,
+    "expected": "^0$",
+    "focus": {
+      "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
+    },
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      745,
+      0,
+      111,
+      70
+    ]
+  },
+  "爬塔-金砂福威-识别挑战次数是否达标": {
+    "custom_recognition": "TaskCounterRecognition",
+    "custom_recognition_param": {
+      "target_count": 10
+    },
+    "enabled": false,
+    "inverse": true,
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "Custom"
+  }
+}
