@@ -9,10 +9,6 @@
       "loop_times": 6
     },
     "expected": "式神育成",
-    "next": [
-      "阴阳寮奖励领取_结界奖励领取_识别寄养栏位",
-      "阴阳寮奖励7"
-    ],
     "recognition": "OCR",
     "roi": [
       0,
@@ -508,6 +504,30 @@
     "rate_limit": 5000,
     "recognition": "DirectHit"
   },
+  "阴阳寮奖励领取-式神育成-寄养": {
+    "expected": "式神育成",
+    "next": [
+      "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养",
+      "[JumpBack]阴阳寮奖励领取_结界奖励领取_识别寄养栏位"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      254,
+      105
+    ]
+  },
+  "阴阳寮奖励领取-式神育成-点击智能放入": {
+    "expected": "智能|放入",
+    "recognition": "OCR",
+    "roi": [
+      1111,
+      476,
+      139,
+      97
+    ]
+  },
   "阴阳寮奖励领取-确保进入阴阳寮": {
     "expected": "神社|寮信息|结界|祈愿",
     "next": [
@@ -609,18 +629,33 @@
     "custom_action_param": {
       "FosterTarget": 1
     },
+    "expected": "好友|跨区",
     "next": [
       "阴阳寮奖励领取_结界奖励领取_寄养式神_点击进入寄养结界"
     ],
-    "recognition": "DirectHit"
+    "pre_wait_freezes": 200,
+    "recognition": "OCR",
+    "roi": [
+      212,
+      85,
+      261,
+      81
+    ]
   },
   "阴阳寮奖励领取_结界奖励领取_寄养式神_选择第一个式神寄养": {
     "action": "Click",
+    "expected": "式神育成",
     "next": [
       "阴阳寮奖励领取_结界奖励领取_寄养式神_确定第一个式神寄养"
     ],
     "post_delay": 1000,
-    "recognition": "DirectHit",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      273,
+      100
+    ],
     "target": [
       153,
       497,
@@ -676,10 +711,7 @@
   },
   "阴阳寮奖励领取_结界奖励领取_识别寄养栏位": {
     "action": "Click",
-    "next": [
-      "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养"
-    ],
-    "post_delay": 1000,
+    "post_delay": 4000,
     "recognition": "FeatureMatch",
     "roi": [
       1019,
@@ -687,12 +719,20 @@
       272,
       168
     ],
+    "target": [
+      1142,
+      70,
+      73,
+      49
+    ],
     "template": "阴阳寮/阴阳寮_结界_寄养.png"
   },
   "阴阳寮奖励领取_结界奖励领取_识别是否位于寄养界面": {
     "expected": "式神育成",
     "next": [
-      "阴阳寮奖励"
+      "阴阳寮奖励领取-式神育成-点击智能放入",
+      "阴阳寮奖励7",
+      "阴阳寮奖励领取-式神育成-寄养"
     ],
     "post_delay": 1000,
     "recognition": "OCR",
