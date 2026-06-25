@@ -1085,6 +1085,9 @@
       "通用_装备御魂-模板匹配",
       "通用_装备御魂-特征匹配"
     ],
+    "on_error": [
+      "跳过"
+    ],
     "recognition": "OCR",
     "roi": [
       67,
@@ -1095,13 +1098,13 @@
   },
   "通用_装备御魂-模板匹配": {
     "action": "Click",
-    "max_hit": 2,
     "next": [
       "通用_装备御魂_确保没有确定按钮",
       "[JumpBack]通用3"
     ],
     "post_delay": 2000,
     "recognition": "TemplateMatch",
+    "repeat": 2,
     "roi_offset": [
       177,
       -12,
@@ -1119,13 +1122,13 @@
   },
   "通用_装备御魂-特征匹配": {
     "action": "Click",
-    "max_hit": 2,
     "next": [
       "通用_装备御魂_确保没有确定按钮",
       "[JumpBack]通用3"
     ],
     "post_delay": 2000,
     "recognition": "FeatureMatch",
+    "repeat": 2,
     "roi_offset": [
       177,
       -12,
