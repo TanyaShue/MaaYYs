@@ -1,24 +1,4 @@
 {
-  "阴阳寮奖励": {
-    "action": "Custom",
-    "custom_action": "LoopAction",
-    "custom_action_param": {
-      "action_list": [
-        "阴阳寮奖励2"
-      ],
-      "loop_times": 6
-    },
-    "expected": "式神育成",
-    "recognition": "OCR",
-    "roi": [
-      0,
-      8,
-      344,
-      92
-    ],
-    "threshold": 0.6,
-    "timeout": 5000
-  },
   "阴阳寮奖励-挂卡-判断是否缺少结界卡": {
     "expected": "未获得结界卡|可以通过",
     "focus": {
@@ -131,9 +111,6 @@
       "阴阳寮奖励1",
       "阴阳寮奖励3"
     ],
-    "recognition": "DirectHit"
-  },
-  "阴阳寮奖励20": {
     "recognition": "DirectHit"
   },
   "阴阳寮奖励21": {
