@@ -5,6 +5,7 @@
       "label": "自动斗技",
       "entry": "自动斗技-开始时间检查",
       "option": [
+        "自动斗技-达到名仕停止",
         "自动斗技-御魂预设应用方式",
         "自动斗技预设",
         "自动斗技-战斗结算界面皮肤"
@@ -12,6 +13,32 @@
     }
   ],
   "option": {
+    "自动斗技-达到名仕停止": {
+        "type": "switch",
+        "label": "达到名仕停止",
+        "description": "自动斗技-达到名仕停止",
+        "default_case": "Yes",
+        "cases": [
+            {
+                "name": "Yes",
+                "label": "是",
+                "pipeline_override": {
+                    "自动斗技-段位达标-返回庭院": {
+                        "enable":true
+                    }
+                }
+            },
+            {
+                "name": "No",
+                "label": "否",
+                "pipeline_override": {
+                    "自动斗技-段位达标-返回庭院": {
+                        "enable":false
+                    }
+                }
+            }
+        ]
+    },
     "自动斗技-御魂预设应用方式": {
       "type": "select",
       "label": "御魂预设应用方式",
