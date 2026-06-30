@@ -16,6 +16,23 @@
       55
     ]
   },
+  "花合战奖励领取-确保没有领取奖励的小纸人": {
+    "inverse": true,
+    "next": [
+      "领取花合战奖励结束"
+    ],
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      828,
+      494,
+      239,
+      225
+    ],
+    "template": [
+      "庭院/花合战_全部领取.png"
+    ]
+  },
   "识别邮箱界面": {
     "expected": "邮箱",
     "next": [
@@ -155,9 +172,10 @@
     "action": "Click",
     "expected": "任务",
     "next": [
-      "领取奖励12",
+      "[JumpBack]领取奖励12",
       "[JumpBack]领取奖励11",
-      "[JumpBack]领取奖励_花合战_全部领取"
+      "[JumpBack]领取奖励_花合战_全部领取",
+      "花合战奖励领取-确保没有领取奖励的小纸人"
     ],
     "on_error": [
       "导航-庭院"
@@ -203,9 +221,6 @@
   "领取奖励12": {
     "action": "Click",
     "expected": "获得奖励",
-    "next": [
-      "领取花合战奖励结束"
-    ],
     "post_delay": 1000,
     "recognition": "OCR",
     "target": [
@@ -343,7 +358,7 @@
   "领取奖励_花合战_全部领取": {
     "action": "Click",
     "post_delay": 1000,
-    "recognition": "FeatureMatch",
+    "recognition": "TemplateMatch",
     "roi": [
       828,
       494,
@@ -351,18 +366,19 @@
       225
     ],
     "template": [
-      "庭院/花合战_全部领取.png"
+      "非战斗/领取奖励/领取奖励_花合战_全部领取_1.png"
     ]
   },
   "领取奖励_花合战_点击任务": {
     "action": "Click",
     "next": [
-      "领取奖励12",
+      "[JumpBack]领取奖励12",
       "[JumpBack]领取奖励_花合战_全部领取",
-      "[JumpBack]领取奖励11"
+      "[JumpBack]领取奖励11",
+      "花合战奖励领取-确保没有领取奖励的小纸人"
     ],
     "on_error": [
-      "领取花合战奖励结束"
+      "导航-庭院"
     ],
     "post_delay": 1000,
     "recognition": "TemplateMatch",
