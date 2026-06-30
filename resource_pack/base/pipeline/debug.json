@@ -1,66 +1,80 @@
 {
-    "StopTask": {
-        "action": "StopTask",
-        "recognition": "DirectHit"
+  "StopTask": {
+    "action": "StopTask",
+    "recognition": "DirectHit"
+  },
+  "悬赏封印_协助战斗": {
+    "expected": "悬赏封印",
+    "next": [
+      "确定关闭悬赏封印协助",
+      "[JumpBack]悬赏封印_拒绝邀请"
+    ],
+    "on_error": [
+      "重启游戏"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      438,
+      117,
+      500,
+      164
+    ],
+    "timeout": 3000
+  },
+  "悬赏封印_拒绝邀请": {
+    "action": "Click",
+    "expected": "拒绝",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      799,
+      342,
+      206,
+      263
+    ]
+  },
+  "确定关闭悬赏封印协助": {
+    "expected": "拒绝",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      799,
+      342,
+      206,
+      263
+    ]
+  },
+  "超时_切换御魂失败": {
+    "action": "Custom",
+    "custom_action": "ReStartGame",
+    "focus": {
+      "level": {
+        "start": "warning"
+      },
+      "start": "当前任务切换御魂失败,请确保队伍名称或者分组正确后重试,即将重启后执行下一个任务"
     },
-    "悬赏封印_协助战斗": {
-        "expected": "悬赏封印",
-        "next": [
-            "悬赏封印_拒绝邀请"
-        ],
-        "on_error": [
-            "重启游戏"
-        ],
-        "recognition": "OCR",
-        "roi": [
-            493,
-            115,
-            305,
-            500
-        ],
-        "timeout": 3000
+    "recognition": "DirectHit"
+  },
+  "超时了_出现异常咯": {
+    "max_hit": 5,
+    "next": [
+      "悬赏封印_协助战斗"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 10000
+  },
+  "重启游戏": {
+    "action": "Custom",
+    "custom_action": "ReStartGame",
+    "focus": {
+      "Node.Action.Failed": "[error]重启失败,检查游戏区服是否正确",
+      "Node.Recognition.Starting": "[error]出现异常了!!! 这是预期流程之外的超时,请反馈给开发者"
     },
-    "悬赏封印_拒绝邀请": {
-        "action": "Click",
-        "expected": "拒绝",
-        "recognition": "OCR",
-        "roi": [
-            815,
-            367,
-            193,
-            232
-        ]
-    },
-    "超时_切换御魂失败": {
-        "action": "Custom",
-        "custom_action": "ReStartGame",
-        "focus": {
-            "level": {
-                "start": "warning"
-            },
-            "start": "当前任务切换御魂失败,请确保队伍名称或者分组正确后重试,即将重启后执行下一个任务"
-        },
-        "recognition": "DirectHit"
-    },
-    "超时了_出现异常咯": {
-        "next": [
-            "悬赏封印_协助战斗"
-        ],
-        "on_error": [
-            "重启游戏"
-        ],
-        "recognition": "DirectHit",
-        "timeout": 3000
-    },
-    "重启游戏": {
-        "action": "Custom",
-        "custom_action": "ReStartGame",
-        "focus": {
-            "Node.Action.Failed": "[error]重启失败,检查游戏区服是否正确",
-            "Node.Recognition.Starting": "[error]出现异常了!!! 这是预期流程之外的超时,请反馈给开发者"
-        },
-        "next": "StopTask",
-        "recognition": "DirectHit",
-        "max_hit": 1
-    }
+    "max_hit": 2,
+    "next": "StopTask",
+    "recognition": "DirectHit"
+  }
 }
