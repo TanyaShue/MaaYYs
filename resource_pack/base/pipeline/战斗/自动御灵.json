@@ -1,4 +1,20 @@
 {
+  "御灵-判断御灵票是否为0": {
+    "expected": "^0$",
+    "focus": {
+      "Node.Recognition.Succeeded": "御灵票用完了!!!"
+    },
+    "next": [
+      "返回庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      930,
+      3,
+      111,
+      53
+    ]
+  },
   "御灵-判断是否达到对应次数": {
     "custom_recognition": "TaskCounterRecognition",
     "custom_recognition_param": {
@@ -77,6 +93,7 @@
   "自动御灵": {
     "expected": "御灵",
     "next": [
+      "御灵-判断御灵票是否为0",
       "御灵-判断是否达到对应次数",
       "[JumpBack]御灵_点击挑战"
     ],
