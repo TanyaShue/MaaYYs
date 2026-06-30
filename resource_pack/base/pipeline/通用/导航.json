@@ -451,6 +451,52 @@
       121
     ]
   },
+  "导航-式神图鉴": {
+    "next": [
+      "导航-式神图鉴-识别是否位于式神图鉴",
+      "[JumpBack]导航-式神图鉴-点击式神图鉴",
+      "[JumpBack]导航-式神图鉴-点击式神图鉴-模板匹配",
+      "[JumpBack]导航-图鉴"
+    ],
+    "recognition": "DirectHit"
+  },
+  "导航-式神图鉴-点击式神图鉴": {
+    "action": "Click",
+    "expected": "式神",
+    "post_delay": 2000,
+    "pre_wait_freezes": 100,
+    "recognition": "OCR",
+    "roi": [
+      562,
+      623,
+      94,
+      97
+    ]
+  },
+  "导航-式神图鉴-点击式神图鉴-模板匹配": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      547,
+      618,
+      119,
+      102
+    ],
+    "template": [
+      "导航/导航-式神图鉴-点击式神图鉴-模板匹配_1.png"
+    ]
+  },
+  "导航-式神图鉴-识别是否位于式神图鉴": {
+    "expected": "式神图鉴",
+    "recognition": "OCR",
+    "roi": [
+      85,
+      2,
+      249,
+      84
+    ]
+  },
   "导航-式神委派": {
     "next": [
       "导航-式神委派-识别是否位于式神委派界面",
