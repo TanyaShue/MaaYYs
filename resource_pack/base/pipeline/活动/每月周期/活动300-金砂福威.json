@@ -64,6 +64,7 @@
       "Node.Action.Succeeded": "[debug]随机等待结束"
     },
     "next": [
+      "[JumpBack]悬赏封印_协助战斗",
       "活动爬塔-金砂福威-点击挑战"
     ],
     "on_error": [
