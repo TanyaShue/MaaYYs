@@ -5,11 +5,39 @@
             "label": "自动秘闻",
             "entry": "自动秘闻",
             "option": [
-                "秘闻阵容预设"
+                "秘闻阵容预设",
+                "秘闻分享"
             ]
         }
     ],
     "option": {
+        "秘闻分享": {
+            "type": "switch",
+            "label": "是否分享秘闻(仅支持mumu模拟器)",
+            "description": "挑战完10层后,自动分享到微信(不真正进入微信)",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动秘闻-分享": {
+                            "enable":true
+                        }
+                    },
+                    "option": ["契灵探查阵容"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动秘闻-分享": {
+                            "enable":false
+                        }
+                    }
+                }
+            ]
+        },
         "秘闻阵容预设": {
             "type": "input",
             "label": "秘闻阵容预设",

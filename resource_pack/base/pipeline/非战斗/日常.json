@@ -1,10 +1,4 @@
 {
-  "N-1770039777489": {
-    "focus": {
-      "Node.Recognition.Starting": "日常奖励结束"
-    },
-    "recognition": "DirectHit"
-  },
   "日常-事务-确保返回事务界面": {
     "expected": "庭院事务",
     "focus": {

@@ -169,7 +169,8 @@
       308,
       53,
       102
-    ]
+    ],
+    "timeout": 10000
   },
   "领取奖励1": {
     "action": "Click",
@@ -364,7 +365,7 @@
       "领取花合战奖励结束"
     ],
     "post_delay": 1000,
-    "recognition": "FeatureMatch",
+    "recognition": "TemplateMatch",
     "roi": [
       1180,
       292,
