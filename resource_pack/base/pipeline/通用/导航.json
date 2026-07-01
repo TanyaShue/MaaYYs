@@ -250,6 +250,7 @@
     "next": [
       "[JumpBack]导航-庭院-关闭意外弹窗",
       "[JumpBack]悬赏封印_协助战斗",
+      "导航-庭院-识别是否位于庭院-模型识别",
       "导航-庭院-识别是否位于庭院",
       "导航-庭院-识别是否位于庭院-模板匹配",
       "[JumpBack]导航-庭院-识别是否需要关闭章节",
@@ -424,6 +425,24 @@
       1280,
       156
     ]
+  },
+  "导航-庭院-识别是否位于庭院-模型识别": {
+    "expected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "探索",
+      "神龛"
+    ],
+    "model": "Courtyard-v5.0.onnx",
+    "post_delay": 5000,
+    "recognition": "NeuralNetworkDetect",
+    "threshold": 0.7
   },
   "导航-庭院-识别是否位于庭院-模板匹配": {
     "recognition": "TemplateMatch",
