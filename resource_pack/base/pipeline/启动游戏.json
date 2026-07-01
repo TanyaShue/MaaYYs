@@ -14,12 +14,29 @@
     "action": "Click",
     "recognition": "FeatureMatch",
     "roi": [
-      908,
-      4,
-      371,
-      370
+      808,
+      0,
+      472,
+      307
     ],
-    "template": "通用图标/广告_关闭.png"
+    "template": [
+      "启动游戏/关闭广告_1.png",
+      "通用图标/广告_关闭.png"
+    ]
+  },
+  "关闭广告-模板匹配": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      808,
+      0,
+      472,
+      307
+    ],
+    "template": [
+      "启动游戏/关闭广告_1.png",
+      "通用图标/广告_关闭.png"
+    ]
   },
   "关闭阴阳师": {
     "action": "StopApp",
@@ -84,6 +101,7 @@
       "[JumpBack]启动游戏1",
       "[JumpBack]启动任务1",
       "[JumpBack]关闭广告",
+      "[JumpBack]关闭广告-模板匹配",
       "[JumpBack]客户端更新提示处理",
       "[JumpBack]关闭公告",
       "[JumpBack]启动任务5",
