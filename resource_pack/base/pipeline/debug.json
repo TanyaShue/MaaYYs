@@ -10,7 +10,7 @@
       "[JumpBack]悬赏封印_拒绝邀请"
     ],
     "on_error": [
-      "重启游戏"
+      "跳过"
     ],
     "recognition": "OCR",
     "roi": [
