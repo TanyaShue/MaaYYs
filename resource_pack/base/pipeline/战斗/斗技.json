@@ -155,6 +155,9 @@
     "focus": {
       "Node.Recognition.Succeeded": "当前不处于可斗技时间段"
     },
+    "next": [
+      "导航-庭院"
+    ],
     "recognition": "TemplateMatch",
     "roi": [
       793,
