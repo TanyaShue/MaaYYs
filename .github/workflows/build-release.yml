@@ -33,6 +33,9 @@ permissions:
   contents: write
   actions: write
 
+env:
+  MXU_VERSION: v2.1.6
+
 jobs:
   meta:
     name: Prepare metadata
@@ -196,7 +199,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: MistEO/MXU
-          latest: true
+          tag: ${{ env.MXU_VERSION }}
           fileName: MXU-${{ matrix.mxu_platform }}*
           out-file-path: mxu-download
           extract: true
