@@ -89,6 +89,12 @@
     },
     "expected": "鸣鼓擂台",
     "recognition": "OCR",
+    "replace": [
+      [
+        "播",
+        "擂"
+      ]
+    ],
     "roi": [
       136,
       9,
