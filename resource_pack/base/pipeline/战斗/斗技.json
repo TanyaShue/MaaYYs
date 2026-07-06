@@ -254,9 +254,10 @@
       "[JumpBack]自动斗技-点击自动上阵",
       "[JumpBack]自动斗技-点击匹配",
       "[JumpBack]自动斗技-等待战斗结束",
+      "[JumpBack]自动斗技-识别战斗结束",
+      "[JumpBack]通用-误触了左边聊天框",
       "[JumpBack]自动斗技-匹配中",
-      "[JumpBack]空任务",
-      "[JumpBack]通用-误触了左边聊天框"
+      "[JumpBack]空任务"
     ],
     "recognition": "TemplateMatch",
     "roi": [
@@ -626,6 +627,30 @@
       600,
       348,
       109
+    ]
+  },
+  "自动斗技-识别战斗结束": {
+    "expected": "点击屏幕继续",
+    "next": [
+      "[JumpBack]自动斗技-晋升界面处理",
+      "斗技-识别是否回到斗技页面",
+      "[JumpBack]自动斗技-点击自动作战",
+      "[JumpBack]自动斗技-胜利-ocr识别",
+      "[JumpBack]自动斗技-失败-ocr识别",
+      "[JumpBack]自动斗技-失败",
+      "[JumpBack]自动斗技-胜利",
+      "[JumpBack]自动斗技-式神高光处理",
+      "[JumpBack]通用-误触了左边聊天框"
+    ],
+    "on_error": [
+      "[JumpBack]自动斗技-战斗超时了!!!"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      478,
+      642,
+      358,
+      78
     ]
   }
 }
