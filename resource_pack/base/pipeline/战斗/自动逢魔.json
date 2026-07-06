@@ -58,7 +58,7 @@
       "start": "17:00"
     },
     "focus": {
-      "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束",
+      "Node.Action.Failed": "[warning]不处于对应时间内,导航-庭院,任务结束",
       "Node.Action.Starting": "[info]开始检查时间..."
     },
     "next": [
@@ -329,7 +329,7 @@
     "action": "Click",
     "expected": "确认",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "post_delay": 1000,
     "recognition": "OCR",
@@ -469,7 +469,7 @@
     "action": "Click",
     "expected": "阴阳寮",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [

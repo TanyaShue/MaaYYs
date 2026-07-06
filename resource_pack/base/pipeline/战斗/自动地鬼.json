@@ -55,7 +55,7 @@
       "Node.Recognition.Starting": "开始挑战地鬼"
     },
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "post_delay": 2000,
     "recognition": "DirectHit"
@@ -71,7 +71,7 @@
       "Node.Recognition.Starting": "开始挑战地鬼"
     },
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "post_delay": 2000,
     "recognition": "DirectHit"
@@ -397,14 +397,14 @@
       "start": "6:00"
     },
     "focus": {
-      "Node.Action.Failed": "[warning]不处于对应时间内,返回庭院,任务结束",
+      "Node.Action.Failed": "[warning]不处于对应时间内,返回,任务结束",
       "Node.Action.Starting": "开始自动地鬼时间检查"
     },
     "next": [
       "自动地鬼"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "DirectHit"
   },

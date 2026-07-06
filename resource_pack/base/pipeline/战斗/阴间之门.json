@@ -23,7 +23,7 @@
       "阴间之门"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "DirectHit"
   },
@@ -293,7 +293,7 @@
   "阴间之门25": {
     "expected": "已挑战",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -306,7 +306,7 @@
   "阴间之门26": {
     "expected": "活动开放时间",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -339,7 +339,7 @@
       "[JumpBack]阴间之门6"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -371,7 +371,7 @@
       "[JumpBack]阴间之门7"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [

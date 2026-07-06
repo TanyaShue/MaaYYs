@@ -59,7 +59,7 @@ func (a *Kun28) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		} else {
 			// 首次或上次不是探索，先装备御魂再探索
 			fmt.Println("执行装备探索御魂...")
-			a.runTask(ctx, "返回庭院", nil)
+			a.runTask(ctx, "导航-庭院", nil)
 			a.runTask(ctx, "kun28-装备探索御魂", nil)
 			a.runTask(ctx, "kun28-从探索开始打kun28", nil)
 		}

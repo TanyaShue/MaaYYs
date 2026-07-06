@@ -3,7 +3,7 @@
     "action": "Click",
     "expected": "胜利",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "pre_delay": 2000,
     "recognition": "OCR",
@@ -25,7 +25,7 @@
     "action": "Click",
     "expected": "失败",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -91,7 +91,7 @@
       "[JumpBack]自动道馆18"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "rate_limit": 5000,
     "recognition": "OCR",
@@ -115,7 +115,7 @@
     "action": "Click",
     "expected": "胜利",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "pre_delay": 2000,
     "rate_limit": 5000,
@@ -180,7 +180,7 @@
       "[JumpBack]N-1768313000871"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -205,7 +205,7 @@
     "action": "Click",
     "expected": "失败",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -228,7 +228,7 @@
       "[JumpBack]自动道馆9"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [

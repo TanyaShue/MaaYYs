@@ -592,7 +592,7 @@
   "英杰试炼-识别御灵等级": {
     "expected": "60",
     "focus": {
-      "Node.Recognition.Succeeded": "达到60级! 返回庭院"
+      "Node.Recognition.Succeeded": "达到60级! 回到庭院"
     },
     "next": [
       "[JumpBack]英杰试炼-关闭经验加成",

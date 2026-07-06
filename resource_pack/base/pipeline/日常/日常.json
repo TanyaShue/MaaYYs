@@ -2,10 +2,10 @@
   "日常-事务-确保返回事务界面": {
     "expected": "庭院事务",
     "focus": {
-      "Node.Recognition.Succeeded": "庭院事务执行完毕,返回庭院"
+      "Node.Recognition.Succeeded": "庭院事务执行完毕,导航-庭院"
     },
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -18,7 +18,7 @@
   "日常-事务-确保返回事务界面-1": {
     "expected": "庭院事务",
     "focus": {
-      "Node.Recognition.Succeeded": "庭院事务执行完毕,返回庭院"
+      "Node.Recognition.Succeeded": "庭院事务执行完毕,导航-庭院"
     },
     "max_hit": 3,
     "post_delay": 1000,
@@ -343,7 +343,7 @@
       "[JumpBack]领取奖励_商店每日奖励",
       "[JumpBack]领取奖励_花合战奖励",
       "[JumpBack]领取奖励_邮件",
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "DirectHit"
   },

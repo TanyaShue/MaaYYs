@@ -114,7 +114,7 @@
       "Node.Recognition.Succeeded": "体力票刷完了!!!,任务结束"
     },
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -131,7 +131,7 @@
       "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
     },
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -149,7 +149,7 @@
     "enabled": false,
     "inverse": true,
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "Custom"
   }

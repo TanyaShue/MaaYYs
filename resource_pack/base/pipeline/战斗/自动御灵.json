@@ -5,7 +5,7 @@
       "Node.Recognition.Succeeded": "御灵票用完了!!!"
     },
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -22,7 +22,7 @@
     },
     "inverse": true,
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "Custom"
   },

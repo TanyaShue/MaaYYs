@@ -605,7 +605,7 @@
     "action": "Click",
     "expected": "确定",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -776,7 +776,7 @@
       "[JumpBack]寮3059"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
@@ -854,7 +854,7 @@
     "action": "Click",
     "expected": "确定",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "post_delay": 1000,
     "pre_delay": 1000,
@@ -1051,7 +1051,7 @@
   "寮3055": {
     "expected": "信息|祈愿|神社|顺位",
     "next": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "post_delay": 1000,
     "pre_delay": 1000,
@@ -1102,7 +1102,7 @@
       "[JumpBack]寮3059"
     ],
     "on_error": [
-      "返回庭院"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
