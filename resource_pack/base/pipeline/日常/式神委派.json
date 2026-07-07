@@ -2,6 +2,9 @@
   "委派-以鱼为礼": {
     "action": "Click",
     "expected": "以鱼为礼",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:以鱼为礼"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -17,6 +20,9 @@
   "委派-伊吹的藤球": {
     "action": "Click",
     "expected": "伊吹的藤球",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:伊吹的藤球"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -32,6 +38,9 @@
   "委派-奇怪的痕迹": {
     "action": "Click",
     "expected": "奇怪的痕迹",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:奇怪的痕迹"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -47,6 +56,9 @@
   "委派-寻找耳环": {
     "action": "Click",
     "expected": "寻找耳环",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:寻找耳环"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -62,6 +74,9 @@
   "委派-帮忙搬运": {
     "action": "Click",
     "expected": "帮忙搬运",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:帮忙搬运"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -77,6 +92,9 @@
   "委派-弥助的画": {
     "action": "Click",
     "expected": "弥助的画",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:弥助的画!!!"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -92,6 +110,9 @@
   "委派-捡到的宝石": {
     "action": "Click",
     "expected": "捡到的宝石",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:捡到的宝石"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -107,6 +128,9 @@
   "委派-接送弥助": {
     "action": "Click",
     "expected": "接送弥助",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:接送弥助!!"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -122,6 +146,9 @@
   "委派-樱饼配方": {
     "action": "Click",
     "expected": "樱饼配方",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:樱饼配方"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -137,6 +164,9 @@
   "委派-猫老大": {
     "action": "Click",
     "expected": "猫老大|貓老大",
+    "focus": {
+      "Node.Recognition.Succeeded": "找到任务:猫老大"
+    },
     "max_hit": 1,
     "next": [
       "式神委派8"
@@ -329,6 +359,9 @@
   "式神委派3": {
     "action": "Click",
     "expected": "完成任务",
+    "focus": {
+      "Node.Recognition.Succeeded": "完成委派任务!"
+    },
     "next": [
       "式神委派6",
       "[JumpBack]式神委派-识别神乐-神乐不存在"
