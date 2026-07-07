@@ -256,6 +256,7 @@
       "[JumpBack]导航-庭院-识别是否需要关闭章节",
       "[JumpBack]导航-关闭点击屏幕继续的界面",
       "[JumpBack]导航-庭院-关闭当前弹窗",
+      "[JumpBack]导航-庭院-从攻略返回",
       "[JumpBack]导航-庭院-点击快捷返回庭院按钮",
       "[JumpBack]导航-庭院-点击返回按钮-模板匹配",
       "[JumpBack]导航-庭院-点击返回按钮-特征匹配"
@@ -264,6 +265,20 @@
       "[JumpBack]重启游戏"
     ],
     "recognition": "DirectHit"
+  },
+  "导航-庭院-从攻略返回": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1148,
+      572,
+      132,
+      148
+    ],
+    "template": [
+      "通用/导航/导航-庭院-从攻略返回_1.png"
+    ]
   },
   "导航-庭院-关闭当前弹窗": {
     "action": "Click",
