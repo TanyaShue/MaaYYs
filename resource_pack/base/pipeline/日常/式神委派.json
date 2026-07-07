@@ -283,6 +283,9 @@
   },
   "式神委派14": {
     "expected": "完成任务",
+    "focus": {
+      "Node.Recognition.Succeeded": "委派进行中!"
+    },
     "next": [
       "式神委派15"
     ],
