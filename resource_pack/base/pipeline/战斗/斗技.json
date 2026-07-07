@@ -14,6 +14,9 @@
     ],
     "recognition": "DirectHit"
   },
+  "斗技-可能出现的action失败": {
+    "recognition": "DirectHit"
+  },
   "斗技-应用预设-启动层": {
     "enabled": true,
     "max_hit": 1,
@@ -210,13 +213,17 @@
     "focus": {
       "Node.Recognition.Succeeded": "输力(悲)"
     },
+    "on_error": [
+      "[JumpBack]斗技-可能出现的action失败"
+    ],
     "post_delay": 2000,
+    "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "target": [
-      373,
-      605,
-      493,
-      115
+      391,
+      609,
+      418,
+      97
     ],
     "template": [
       "战斗/斗技/自动斗技-失败_1.png",
@@ -229,7 +236,11 @@
     "focus": {
       "Node.Recognition.Succeeded": "输力(悲)"
     },
+    "on_error": [
+      "[JumpBack]斗技-可能出现的action失败"
+    ],
     "post_delay": 2000,
+    "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
       702,
@@ -238,10 +249,10 @@
       190
     ],
     "target": [
-      244,
-      612,
-      622,
-      106
+      304,
+      613,
+      531,
+      92
     ]
   },
   "自动斗技-已处于斗技段位界面": {
@@ -296,6 +307,9 @@
   },
   "自动斗技-式神高光处理": {
     "action": "Click",
+    "on_error": [
+      "[JumpBack]斗技-可能出现的action失败"
+    ],
     "recognition": "TemplateMatch",
     "roi": [
       1067,
@@ -324,6 +338,9 @@
     "focus": {
       "Node.Recognition.Succeeded": "晋升！"
     },
+    "on_error": [
+      "[JumpBack]斗技-可能出现的action失败"
+    ],
     "post_delay": 2000,
     "pre_delay": 200,
     "recognition": "TemplateMatch",
@@ -589,7 +606,11 @@
     "focus": {
       "Node.Recognition.Succeeded": "赢咯(喜)"
     },
+    "on_error": [
+      "[JumpBack]斗技-可能出现的action失败"
+    ],
     "post_delay": 2000,
+    "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
       253,
@@ -598,10 +619,10 @@
       258
     ],
     "target": [
-      373,
-      605,
-      493,
-      115
+      391,
+      609,
+      418,
+      97
     ],
     "template": [
       "战斗/斗技/自动斗技-胜利_2.png",
@@ -614,7 +635,11 @@
     "focus": {
       "Node.Recognition.Succeeded": "赢咯(喜)"
     },
+    "on_error": [
+      "[JumpBack]斗技-可能出现的action失败"
+    ],
     "post_delay": 2000,
+    "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
       702,
