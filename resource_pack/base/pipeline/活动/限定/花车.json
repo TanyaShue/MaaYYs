@@ -1,0 +1,234 @@
+{
+  "花车": {
+    "next": [
+      "花车-识别是否位于活动总览",
+      "[JumpBack]导航-活动总览"
+    ],
+    "recognition": "DirectHit"
+  },
+  "花车-查找活动-向下滑动": {
+    "action": "Swipe",
+    "begin": [
+      17,
+      599,
+      155,
+      57
+    ],
+    "duration": 2000,
+    "end": [
+      12,
+      160,
+      193,
+      76
+    ],
+    "expected": "活动总览",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      345,
+      84
+    ]
+  },
+  "花车-点击夏境巡游": {
+    "action": "Click",
+    "expected": "夏境巡游",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      84,
+      217,
+      597
+    ]
+  },
+  "花车-点击进入活动": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      984,
+      596,
+      296,
+      109
+    ],
+    "template": [
+      "活动/限定/花车/花车-点击进入活动_1.png"
+    ]
+  },
+  "花车-识别是否位于夏境巡游内": {
+    "expected": "夏境巡游",
+    "next": [
+      "[JumpBack]花车-领取放置里程"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      345,
+      84
+    ]
+  },
+  "花车-识别是否位于夏境巡游活动界面": {
+    "next": [
+      "花车-识别是否位于夏境巡游内",
+      "[JumpBack]花车-点击进入活动"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      675,
+      88,
+      605,
+      445
+    ],
+    "template": [
+      "活动/限定/花车/花车-识别是否位于夏境巡游活动界面_1.png"
+    ]
+  },
+  "花车-识别是否位于活动总览": {
+    "expected": "活动总览",
+    "next": [
+      "花车-识别是否位于夏境巡游活动界面",
+      "[JumpBack]花车-点击夏境巡游",
+      "[JumpBack]花车-查找活动-向下滑动"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      345,
+      84
+    ]
+  },
+  "花车-领取放置里程": {
+    "max_hit": 1,
+    "next": [
+      "花车-领取放置里程-识别是否位于放置里程界面",
+      "[JumpBack]花车-领取放置里程-点击放置里程-模板匹配",
+      "[JumpBack]花车-领取放置里程-点击放置里程"
+    ],
+    "recognition": "DirectHit"
+  },
+  "花车-领取放置里程-关闭弹窗": {
+    "action": "Click",
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      153,
+      53,
+      439,
+      185
+    ],
+    "target": [
+      648,
+      502,
+      134,
+      85
+    ],
+    "template": [
+      "活动/限定/花车/N-1783909982944_1.png"
+    ]
+  },
+  "花车-领取放置里程-关闭活动弹窗": {
+    "inverse": true,
+    "recognition": "TemplateMatch",
+    "roi": [
+      153,
+      53,
+      439,
+      185
+    ],
+    "template": [
+      "活动/限定/花车/N-1783909982944_1.png"
+    ]
+  },
+  "花车-领取放置里程-点击关闭弹窗": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      984,
+      50,
+      225,
+      163
+    ],
+    "template": [
+      "活动/限定/花车/花车-领取放置里程-点击关闭弹窗_1.png"
+    ]
+  },
+  "花车-领取放置里程-点击放置里程": {
+    "action": "Click",
+    "expected": "放置里程",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      76,
+      170,
+      128
+    ]
+  },
+  "花车-领取放置里程-点击放置里程-模板匹配": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      27,
+      158,
+      152
+    ],
+    "template": [
+      "活动/限定/花车/花车-领取放置里程-点击放置里程-模板匹配_1.png"
+    ]
+  },
+  "花车-领取放置里程-点击领取": {
+    "action": "Click",
+    "max_hit": 2,
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      711,
+      488,
+      379,
+      122
+    ],
+    "template": [
+      "活动/限定/花车/花车-领取放置里程-点击领取_1.png"
+    ]
+  },
+  "花车-领取放置里程-确保没有奖励弹窗": {
+    "inverse": true,
+    "next": [
+      "花车-领取放置里程-关闭活动弹窗",
+      "[JumpBack]花车-领取放置里程-点击关闭弹窗"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      412,
+      127,
+      503,
+      193
+    ],
+    "template": [
+      "活动/限定/花车/花车-领取放置里程-确保没有奖励弹窗_1.png"
+    ]
+  },
+  "花车-领取放置里程-识别是否位于放置里程界面": {
+    "next": [
+      "[JumpBack]花车-领取放置里程-点击领取",
+      "花车-领取放置里程-确保没有奖励弹窗",
+      "[JumpBack]花车-领取放置里程-关闭弹窗"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      153,
+      53,
+      439,
+      185
+    ],
+    "template": [
+      "活动/限定/花车/N-1783909982944_1.png"
+    ]
+  }
+}
