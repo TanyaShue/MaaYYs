@@ -35,6 +35,7 @@ permissions:
 
 env:
   MXU_VERSION: v2.1.6
+  MAAFW_VERSION: v5.11.1
 
 jobs:
   meta:
@@ -189,7 +190,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: MaaXYZ/MaaFramework
-          latest: true
+          tag: ${{ env.MAAFW_VERSION }}
           fileName: MAA-${{ matrix.maafw_platform }}*
           out-file-path: maafw-download
           extract: true
