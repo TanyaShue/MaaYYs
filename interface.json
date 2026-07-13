@@ -91,6 +91,7 @@
   "import": [
     "tasks/打开游戏.json",
     "tasks/活动爬塔-金砂福威.json",
+    "tasks/花车.json",
     "tasks/式神委派.json",
     "tasks/寮三十捐材料.json",
     "tasks/自动地鬼.json",

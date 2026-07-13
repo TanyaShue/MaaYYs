@@ -1,0 +1,64 @@
+{
+    "task": [
+        {
+            "name": "花车里程领取",
+            "label": "花车里程领取",
+            "entry": "花车",
+            "option": [
+                "花车挂机里程领取",
+                "花车任务里程领取"
+            ]
+        }
+    ],
+    "option": {
+        "花车挂机里程领取": {
+            "type": "switch",
+            "label": "是否领取花车挂机里程",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "花车-领取放置里程": {
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "花车-领取放置里程": {
+                            "enable": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "Yes"
+        },
+        "花车任务里程领取": {
+            "type": "switch",
+            "label": "是否领取花车任务里程",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "花车-任务领取": {
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "花车-任务领取": {
+                            "enable": false
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
