@@ -6,6 +6,147 @@
     ],
     "recognition": "DirectHit"
   },
+  "花车-任务领取": {
+    "max_hit": 1,
+    "next": [
+      "花车-任务领取-识别是否位于奖励界面",
+      "[JumpBack]花车-任务领取-点击任务"
+    ],
+    "recognition": "DirectHit"
+  },
+  "花车-任务领取-关闭弹窗": {
+    "action": "Click",
+    "expected": "奖励",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      68,
+      0,
+      246,
+      105
+    ],
+    "target": [
+      329,
+      636,
+      112,
+      76
+    ]
+  },
+  "花车-任务领取-点击一键领取": {
+    "action": "Click",
+    "max_hit": 2,
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1142,
+      535,
+      125,
+      139
+    ],
+    "template": [
+      "活动/限定/花车/花车-任务领取-点击一键领取_1.png"
+    ]
+  },
+  "花车-任务领取-点击任务": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1093,
+      506,
+      187,
+      185
+    ],
+    "template": [
+      "活动/限定/花车/花车-任务领取-点击任务_1.png"
+    ]
+  },
+  "花车-任务领取-点击任务选项": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1184,
+      299,
+      90,
+      140
+    ],
+    "template": [
+      "活动/限定/花车/花车-任务领取-点击任务选项_1.png",
+      "活动/限定/花车/花车-任务领取-点击任务选项_2.png"
+    ]
+  },
+  "花车-任务领取-点击返回": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      0,
+      226,
+      97
+    ],
+    "template": [
+      "活动/限定/花车/花车-任务领取-点击返回_1.png"
+    ]
+  },
+  "花车-任务领取-确定关闭弹窗": {
+    "inverse": true,
+    "next": [
+      "花车-任务领取-退出奖励界面",
+      "[JumpBack]花车-任务领取-点击返回"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      417,
+      151,
+      460,
+      172
+    ],
+    "template": [
+      "活动/限定/花车/花车-任务领取-确定关闭弹窗_1.png",
+      "活动/限定/花车/花车-领取放置里程-确保没有奖励弹窗_1.png"
+    ]
+  },
+  "花车-任务领取-识别是否位于任务界面": {
+    "expected": "每周|旅途",
+    "next": [
+      "[JumpBack]花车-任务领取-点击一键领取",
+      "花车-任务领取-确定关闭弹窗",
+      "[JumpBack]花车-任务领取-关闭弹窗"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      516,
+      196,
+      687,
+      86
+    ]
+  },
+  "花车-任务领取-识别是否位于奖励界面": {
+    "expected": "奖励",
+    "next": [
+      "花车-任务领取-识别是否位于任务界面",
+      "[JumpBack]花车-任务领取-点击任务选项"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      68,
+      0,
+      246,
+      105
+    ]
+  },
+  "花车-任务领取-退出奖励界面": {
+    "expected": "夏境巡游",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      345,
+      84
+    ]
+  },
   "花车-查找活动-向下滑动": {
     "action": "Swipe",
     "begin": [
@@ -59,7 +200,9 @@
   "花车-识别是否位于夏境巡游内": {
     "expected": "夏境巡游",
     "next": [
-      "[JumpBack]花车-领取放置里程"
+      "[JumpBack]花车-领取放置里程",
+      "[JumpBack]花车-任务领取",
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
