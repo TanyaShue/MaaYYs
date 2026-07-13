@@ -4,6 +4,7 @@
             "name": "自动御魂",
             "label": "自动御魂",
             "entry": "自动御魂",
+            "group": ["standalone"],
             "option": [
                 "御魂挑战目标",
                 "御魂阵容预设",

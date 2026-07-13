@@ -4,6 +4,7 @@
             "name": "困28",
             "label": "困28",
             "entry": "困28",
+            "group": ["standalone"],
             "option": [
                 "困28挑战次数",
                 "困28阵容预设"

@@ -87,6 +87,20 @@
     "child_exec": ".\\agent\\agent.exe",
     "child_args": []
   },
+  "group": [
+    {
+        "name": "promotion",
+        "label": "限时任务"
+    },
+    {
+        "name": "daily",
+        "label": "日常任务"
+    },
+    {
+        "name": "standalone",
+        "label": "独立副本"
+    }
+  ],
   "task": [],
   "import": [
     "tasks/打开游戏.json",

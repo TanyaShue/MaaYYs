@@ -4,6 +4,7 @@
             "name": "自动麒麟",
             "label": "自动麒麟",
             "entry": "麒麟-开始时间检查",
+            "group": ["standalone"],
             "option": [
                 "麒麟阵容预设"
             ]

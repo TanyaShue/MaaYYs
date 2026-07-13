@@ -6,7 +6,8 @@
             "entry": "启动游戏",
             "option": [
                 "任务失败后重启游戏"
-            ]
+            ],
+            "group": ["daily"]
         }
     ],
     "option": {

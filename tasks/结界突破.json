@@ -4,6 +4,7 @@
             "name": "结界突破",
             "label": "结界突破",
             "entry": "自动结界",
+            "group": ["standalone"],
             "option": [
                 "结界突破阵容预设"
             ]

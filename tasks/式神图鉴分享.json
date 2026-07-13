@@ -4,6 +4,7 @@
             "name": "式神图鉴分享(仅限mumu模拟器可用)",
             "label": "式神图鉴分享(仅限mumu模拟器可用)",
             "entry": "式神图鉴分享",
+            "group": ["standalone"],
             "description": "仅限mumu模拟器可用"
         }
     ]

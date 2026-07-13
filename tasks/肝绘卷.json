@@ -5,6 +5,7 @@
             "label": "肝绘卷(有风险,风险自付)",
             "description": "打困28和清突破卷循环",
             "entry": "肝绘卷",
+            "group": ["standalone"],
             "option": [
                 "设定绘卷轮数",
                 "绘卷结界阵容预设",

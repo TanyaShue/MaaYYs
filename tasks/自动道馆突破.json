@@ -4,6 +4,7 @@
             "name": "自动道馆突破",
             "label": "自动道馆突破",
             "entry": "自动道馆",
+            "group": ["standalone"],
             "option": [
                 "道馆阵容预设"
             ]

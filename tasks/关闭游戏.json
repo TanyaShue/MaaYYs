@@ -4,6 +4,7 @@
             "name": "关闭游戏",
             "label": "关闭游戏",
             "entry": "关闭阴阳师",
+            "group": ["daily"],
             "option": []
         }
     ],

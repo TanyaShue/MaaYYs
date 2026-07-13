@@ -4,6 +4,7 @@
             "name": "花车里程领取",
             "label": "花车里程领取",
             "entry": "花车",
+            "group": ["promotion"],
             "option": [
                 "花车挂机里程领取",
                 "花车任务里程领取"

@@ -4,6 +4,7 @@
             "name": "自动悬赏",
             "label": "自动悬赏",
             "entry": "自动悬赏封印",
+            "group": ["standalone"],
             "option": [
                 "悬赏目标",
                 "悬赏封印阵容预设"

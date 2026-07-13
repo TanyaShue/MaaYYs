@@ -4,6 +4,7 @@
             "name": "自动御灵",
             "label": "自动御灵",
             "entry": "自动御灵1",
+            "group": ["standalone"],
             "option": [
                 "御灵-设置目标",
                 "御灵-设置挑战次数",

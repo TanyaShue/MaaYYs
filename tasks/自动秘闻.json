@@ -4,6 +4,7 @@
             "name": "自动秘闻",
             "label": "自动秘闻",
             "entry": "自动秘闻",
+            "group": ["standalone"],
             "option": [
                 "秘闻阵容预设",
                 "秘闻分享"

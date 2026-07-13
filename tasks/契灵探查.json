@@ -4,6 +4,7 @@
             "name": "契灵探查",
             "label": "契灵探查",
             "entry": "契灵探查",
+            "group": ["standalone"],
             "option": [
                 "探查目标",
                 "契灵探查次数",
