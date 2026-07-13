@@ -231,6 +231,26 @@ jobs:
             exit 1
           fi
 
+          if [ -d "maafw-download/share/MaaAgentBinary" ]; then
+            cp -rp maafw-download/share/MaaAgentBinary package/maafw/
+          else
+            echo "::error::MaaAgentBinary was not found in the MaaFramework package."
+            find maafw-download -maxdepth 4 -type d -print
+            exit 1
+          fi
+
+          for agent_binary in \
+            package/maafw/MaaAgentBinary/maatouch/universal/maatouch \
+            package/maafw/MaaAgentBinary/minitouch/arm64-v8a/minitouch \
+            package/maafw/MaaAgentBinary/minitouch/armeabi-v7a/minitouch \
+            package/maafw/MaaAgentBinary/minitouch/x86/minitouch \
+            package/maafw/MaaAgentBinary/minitouch/x86_64/minitouch; do
+            if [ ! -f "$agent_binary" ]; then
+              echo "::error::Required MaaAgentBinary file was not packaged: $agent_binary"
+              exit 1
+            fi
+          done
+
           mxu_file=$(find mxu-download -type f -name "${{ matrix.executable }}" | head -n 1)
           if [ -z "$mxu_file" ]; then
             echo "::error::MXU executable was not found."
