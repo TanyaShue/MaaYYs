@@ -75,14 +75,16 @@
     ],
     "recognition": "OCR",
     "roi": [
-      343,
-      183,
-      590,
-      110
+      329,
+      167,
+      601,
+      216
     ]
   },
   "启动任务6": {
+    "action": "Click",
     "expected": "取消",
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       438,
