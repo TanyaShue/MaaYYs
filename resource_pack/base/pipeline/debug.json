@@ -4,7 +4,7 @@
     "recognition": "DirectHit"
   },
   "悬赏封印_协助战斗": {
-    "expected": "悬赏封印",
+    "expected": "^悬赏封印$",
     "next": [
       "确定关闭悬赏封印协助",
       "[JumpBack]悬赏封印_拒绝邀请"
