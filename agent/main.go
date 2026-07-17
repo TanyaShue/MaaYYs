@@ -76,8 +76,10 @@ func main() {
 			Msg("Toolkit config option initialized")
 	}
 
-	// 注册所有custom actions和recognitions
-	registerAll()
+	// 注册所有 custom actions 和 recognitions
+	if err := registerAll(); err != nil {
+		log.Fatal().Err(err).Msg("Failed to register custom runners")
+	}
 
 	// 启动Agent Server
 	if err := maa.AgentServerStartUp(socketID); err != nil {

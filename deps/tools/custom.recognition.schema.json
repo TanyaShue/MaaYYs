@@ -1,176 +1,153 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "properties": {
-        "custom_recognition": {
-            "enum": [
-                "ConfigValueCheckRecognition",
-                "ConfigValueWriteRecognition",
-                "TaskCounterRecognition",
-                "MyRecognizer"
-            ]
-        }
-    },
-    "anyOf": [
-        {
-            "$ref": "#/$defs/ConfigValueCheckRecognition"
-        },
-        {
-            "$ref": "#/$defs/ConfigValueWriteRecognition"
-        },
-        {
-            "$ref": "#/$defs/TaskCounterRecognition"
-        },
-        {
-            "$ref": "#/$defs/MyRecognizer"
-        }
-    ],
-    "$defs": {
-        "RequiredParam": {
-            "anyOf": [
-                {
-                    "required": [
-                        "custom_recognition_param"
-                    ]
-                },
-                {
-                    "required": [
-                        "custom_recognition_param_code"
-                    ]
-                }
-            ]
-        },
-        "ConfigValueCheckRecognition": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_recognition": {
-                    "const": "ConfigValueCheckRecognition",
-                    "description": "读取根目录 assets 下的 JSON，并按数值比较判断是否返回 true"
-                },
-                "custom_recognition_param": {
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "description": "要检查的键名"
-                        },
-                        "value": {
-                            "oneOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                },
-                                {
-                                    "type": "integer"
-                                }
-                            ],
-                            "description": "比较阈值，存储值小于它时返回 true"
-                        },
-                        "comparison": {
-                            "type": "string",
-                            "enum": [
-                                "<",
-                                ">",
-                                "=",
-                                "==",
-                                "<=",
-                                ">=",
-                                "!=",
-                                "<>",
-                                "小于",
-                                "大于",
-                                "等于",
-                                "小于等于",
-                                "大于等于",
-                                "不大于",
-                                "不小于",
-                                "不等于"
-                            ],
-                            "default": "<",
-                            "description": "比较方式；配置值满足该比较时返回 true"
-                        }
-                    },
-                    "required": ["key", "value"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "ConfigValueWriteRecognition": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_recognition": {
-                    "const": "ConfigValueWriteRecognition",
-                    "description": "写入根目录 assets 下的 JSON，值统一按字符串保存"
-                },
-                "custom_recognition_param": {
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "description": "要写入的键名"
-                        },
-                        "value": {
-                            "oneOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                },
-                                {
-                                    "type": "integer"
-                                }
-                            ],
-                            "description": "写入值；传入 add / sub 时会在当前值基础上加一 / 减一"
-                        }
-                    },
-                    "required": ["key", "value"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "TaskCounterRecognition": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_recognition": {
-                    "const": "TaskCounterRecognition",
-                    "description": "任务计数识别器，每次调用计数加一"
-                },
-                "custom_recognition_param": {
-                    "type": "object",
-                    "properties": {
-                        "target_count": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "description": "目标次数"
-                        }
-                    },
-                    "required": ["target_count"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "MyRecognizer": {
-            "properties": {
-                "custom_recognition": {
-                    "const": "MyRecognizer",
-                    "description": "占位/测试识别器"
-                }
-            }
-        }
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maa-yys.local/schema/custom.recognition.schema.json",
+  "title": "MaaYYs Custom Recognitions",
+  "description": "maa-yys-agent 注册的自定义识别器及 custom_recognition_param 参数约束。custom_recognition_param_code 由 MaaFramework 在运行时提供，使用它时不校验静态参数。",
+  "type": "object",
+  "properties": {
+    "custom_recognition": {
+      "type": "string",
+      "enum": [
+        "ConfigValueWriteRecognition",
+        "ConfigValueCheckRecognition",
+        "CoBattleTargetRecognition",
+        "MyRecognizer",
+        "TaskCounterRecognition"
+      ]
     }
+  },
+  "if": { "required": ["custom_recognition"] },
+  "then": {
+    "oneOf": [
+      { "$ref": "#/$defs/ConfigValueWriteRecognition" },
+      { "$ref": "#/$defs/ConfigValueCheckRecognition" },
+      { "$ref": "#/$defs/CoBattleTargetRecognition" },
+      { "$ref": "#/$defs/MyRecognizer" },
+      { "$ref": "#/$defs/TaskCounterRecognition" }
+    ]
+  },
+  "$defs": {
+    "RequiredParam": {
+      "anyOf": [
+        { "required": ["custom_recognition_param"] },
+        { "required": ["custom_recognition_param_code"] }
+      ]
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ConfigValueWriteRecognition": {
+      "title": "写入状态值",
+      "description": "将值写入 assets/recognition_state.json，或执行加一、减一。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "ConfigValueWriteRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "key": { "$ref": "#/$defs/NonEmptyString", "description": "状态存储键" },
+            "value": {
+              "type": ["string", "number", "boolean", "null"],
+              "default": null,
+              "description": "写入值；add/+ /++/+1/inc/increase/plus 表示加 1，sub/-/--/-1/dec/decrease/minus 表示减 1"
+            }
+          },
+          "required": ["key"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_recognition"]
+    },
+    "ConfigValueCheckRecognition": {
+      "title": "检查状态值",
+      "description": "把已存储的当前值与数字阈值比较；不存在的键按 0 处理。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "ConfigValueCheckRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "key": { "$ref": "#/$defs/NonEmptyString", "description": "状态存储键" },
+            "value": {
+              "oneOf": [
+                { "type": "number" },
+                { "type": "string", "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)$" }
+              ],
+              "description": "用于比较的数字阈值"
+            },
+            "comparison": { "$ref": "#/$defs/Comparison", "description": "首选比较参数名" },
+            "compare": { "$ref": "#/$defs/Comparison", "description": "comparison 的兼容别名" },
+            "operator": { "$ref": "#/$defs/Comparison", "description": "comparison 的兼容别名" },
+            "mode": { "$ref": "#/$defs/Comparison", "description": "comparison 的兼容别名" }
+          },
+          "required": ["key", "value"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_recognition"]
+    },
+    "Comparison": {
+      "type": "string",
+      "default": "<",
+      "enum": [
+        "<", "lt", "less", "小于",
+        ">", "gt", "greater", "大于",
+        "=", "==", "eq", "equal", "equals", "等于",
+        "<=", "=<", "le", "lte", "less_equal", "less than or equal", "小于等于", "不大于",
+        ">=", "=>", "ge", "gte", "greater_equal", "greater than or equal", "大于等于", "不小于",
+        "!=", "<>", "ne", "neq", "not_equal", "not equal", "不等于"
+      ]
+    },
+    "CoBattleTargetRecognition": {
+      "title": "协战目标识别",
+      "description": "维护进程内协战目标列表，或检查当前 OCR 目标是否在列表中。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "CoBattleTargetRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": ["add", "check"],
+              "description": "add：识别并加入目标；check：识别并检查目标"
+            }
+          },
+          "required": ["action"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_recognition"]
+    },
+    "MyRecognizer": {
+      "title": "占位识别器",
+      "description": "不读取 custom_recognition_param，固定返回未识别。",
+      "properties": { "custom_recognition": { "const": "MyRecognizer" } },
+      "required": ["custom_recognition"]
+    },
+    "TaskCounterRecognition": {
+      "title": "识别调用计数器",
+      "description": "按 TaskID 计数，达到目标后返回识别失败并清零。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "TaskCounterRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "target_count": {
+              "oneOf": [
+                { "type": "integer", "minimum": 1 },
+                { "type": "string", "pattern": "^\\{[^{}]+\\}$" }
+              ],
+              "description": "目标识别次数；interface pipeline_override 中也可使用 {变量名} 占位符"
+            }
+          },
+          "required": ["target_count"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_recognition"]
+    }
+  }
 }

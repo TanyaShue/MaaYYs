@@ -48,7 +48,7 @@
     "action": "Custom",
     "custom_action": "ChallengeDungeonBoss",
     "custom_action_param": {
-      "IsReward": false,
+      "isReward": false,
       "count": 3
     },
     "focus": {
@@ -64,7 +64,7 @@
     "action": "Custom",
     "custom_action": "ChallengeDungeonBoss",
     "custom_action_param": {
-      "IsReward": true,
+      "isReward": true,
       "count": 3
     },
     "focus": {

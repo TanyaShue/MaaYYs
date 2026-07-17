@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"maa-yys-agent/actions/auto_battle"
 	"maa-yys-agent/actions/auto_foster"
 	"maa-yys-agent/actions/battle_team"
@@ -26,51 +28,72 @@ import (
 	"maa-yys-agent/actions/task_list"
 	"maa-yys-agent/actions/team_builder"
 	"maa-yys-agent/actions/time_check"
-	"maa-yys-agent/recognition/config_value_recognition"
 	"maa-yys-agent/recognition/co_battle_target_recognition"
+	"maa-yys-agent/recognition/config_value_recognition"
 	"maa-yys-agent/recognition/my_recognizer"
 	"maa-yys-agent/recognition/task_counter_recognition"
 
+	maa "github.com/MaaXYZ/maa-framework-go/v4"
 	"github.com/rs/zerolog/log"
 )
 
-func registerAll() {
-	// 基础操作类
-	random_touch.Register()
-	random_swipe.Register()
-	random_task.Register()
-	random_wait.Register()
-	human_touch.Register()
+var customActions = []struct {
+	name   string
+	runner maa.CustomActionRunner
+}{
+	{"RandomTouch", &random_touch.RandomTouch{}},
+	{"RandomSwipe", &random_swipe.RandomSwipe{}},
+	{"RandomTask", &random_task.RandomTask{}},
+	{"RandomWait", &random_wait.RandomWait{}},
+	{"HumanTouch", &human_touch.HumanTouch{}},
+	{"ClearHitCount", &clear_hit_count.ClearHitCount{}},
+	{"CountAction", &count_action.CountAction{}},
+	{"LoopAction", &loop_action.LoopAction{}},
+	{"TaskCounter", &task_counter.TaskCounter{}},
+	{"TaskList", &task_list.TaskList{}},
+	{"ReStart", &restart.ReStart{}},
+	{"ReStartGame", &restartgame.ReStartGame{}},
+	{"AutoBattle", &auto_battle.AutoBattle{}},
+	{"AutoFoster", &auto_foster.AutoFoster{}},
+	{"BattleTeam", &battle_team.BattleTeam{}},
+	{"SwitchSoul", &switch_soul.SwitchSoul{}},
+	{"TeamBuilder", &team_builder.TeamBuilder{}},
+	{"BountyMonsterRecognition", &bounty_monster_recognition.BountyMonsterRecognition{}},
+	{"ChallengeDungeonBoss", &challenge_dungeon_boss.ChallengeDungeonBoss{}},
+	{"RepeatChallengeNTimes", &repeat_challenge_n_times.RepeatChallengeNTimes{}},
+	{"Kun28", &kun28.Kun28{}},
+	{"BonusToggleAction", &bonus_toggle.BonusToggleAction{}},
+	{"QuestionMatcher", &question_matcher.QuestionMatcher{}},
+	{"Guess", &guess.Guess{}},
+	{"TimeCheck", &time_check.TimeCheck{}},
+}
 
-	// 流程控制类
-	clear_hit_count.Register()
-	count_action.Register()
-	loop_action.Register()
-	task_counter.Register()
-	task_list.Register()
-	restart.Register()
-	restartgame.Register()
+var customRecognitions = []struct {
+	name   string
+	runner maa.CustomRecognitionRunner
+}{
+	{"ConfigValueWriteRecognition", &config_value_recognition.ConfigValueWriteRecognition{}},
+	{"ConfigValueCheckRecognition", &config_value_recognition.ConfigValueCheckRecognition{}},
+	{"CoBattleTargetRecognition", &co_battle_target_recognition.CoBattleTargetRecognition{}},
+	{"MyRecognizer", &my_recognizer.MyRecognizer{}},
+	{"TaskCounterRecognition", &task_counter_recognition.TaskCounterRecognition{}},
+}
 
-	// 游戏功能类
-	auto_battle.Register()
-	auto_foster.Register()
-	battle_team.Register()
-	switch_soul.Register()
-	team_builder.Register()
-	bounty_monster_recognition.Register()
-	challenge_dungeon_boss.Register()
-	repeat_challenge_n_times.Register()
-	kun28.Register()
-	bonus_toggle.Register()
-	question_matcher.Register()
-	guess.Register()
-	time_check.Register()
+func registerAll() error {
+	for _, action := range customActions {
+		if err := maa.AgentServerRegisterCustomAction(action.name, action.runner); err != nil {
+			return fmt.Errorf("register custom action %q: %w", action.name, err)
+		}
+	}
+	for _, recognition := range customRecognitions {
+		if err := maa.AgentServerRegisterCustomRecognition(recognition.name, recognition.runner); err != nil {
+			return fmt.Errorf("register custom recognition %q: %w", recognition.name, err)
+		}
+	}
 
-	// Custom Recognition
-	config_value_recognition.Register()
-	co_battle_target_recognition.Register()
-	my_recognizer.Register()
-	task_counter_recognition.Register()
-
-	log.Info().Msg("All custom actions and recognitions registered successfully")
+	log.Info().
+		Int("actions", len(customActions)).
+		Int("recognitions", len(customRecognitions)).
+		Msg("Custom runners registered")
+	return nil
 }

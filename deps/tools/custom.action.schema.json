@@ -1,767 +1,526 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "properties": {
-        "custom_action": {
-            "enum": [
-                "AutoBattle",
-                "AutoFoster",
-                "BonusToggleAction",
-                "BountyMonsterRecognition",
-                "ChallengeDungeonBoss",
-                "CountAction",
-                "Guess",
-                "HumanTouch",
-                "Kun28",
-                "LoopAction",
-                "QuestionMatcher",
-                "RandomSwipe",
-                "RandomTask",
-                "RandomTouch",
-                "RandomWait",
-                "RepeatChallengeNTimes",
-                "ReStart",
-                "ReStartGame",
-                "SwitchSoul",
-                "TaskCounter",
-                "TaskList",
-                "TeamBuilder",
-                "TimeCheck"
-            ]
-        }
-    },
-    "anyOf": [
-        {
-            "$ref": "#/$defs/AutoBattle"
-        },
-        {
-            "$ref": "#/$defs/AutoFoster"
-        },
-        {
-            "$ref": "#/$defs/BonusToggleAction"
-        },
-        {
-            "$ref": "#/$defs/BountyMonsterRecognition"
-        },
-        {
-            "$ref": "#/$defs/ChallengeDungeonBoss"
-        },
-        {
-            "$ref": "#/$defs/CountAction"
-        },
-        {
-            "$ref": "#/$defs/Guess"
-        },
-        {
-            "$ref": "#/$defs/HumanTouch"
-        },
-        {
-            "$ref": "#/$defs/Kun28"
-        },
-        {
-            "$ref": "#/$defs/LoopAction"
-        },
-        {
-            "$ref": "#/$defs/QuestionMatcher"
-        },
-        {
-            "$ref": "#/$defs/RandomSwipe"
-        },
-        {
-            "$ref": "#/$defs/RandomTask"
-        },
-        {
-            "$ref": "#/$defs/RandomTouch"
-        },
-        {
-            "$ref": "#/$defs/RandomWait"
-        },
-        {
-            "$ref": "#/$defs/RepeatChallengeNTimes"
-        },
-        {
-            "$ref": "#/$defs/ReStart"
-        },
-        {
-            "$ref": "#/$defs/ReStartGame"
-        },
-        {
-            "$ref": "#/$defs/SwitchSoul"
-        },
-        {
-            "$ref": "#/$defs/TaskCounter"
-        },
-        {
-            "$ref": "#/$defs/TaskList"
-        },
-        {
-            "$ref": "#/$defs/TeamBuilder"
-        },
-        {
-            "$ref": "#/$defs/TimeCheck"
-        }
-    ],
-    "$defs": {
-        "RequiredParam": {
-            "anyOf": [
-                {
-                    "required": [
-                        "custom_action_param"
-                    ]
-                },
-                {
-                    "required": [
-                        "custom_action_param_code"
-                    ]
-                }
-            ]
-        },
-        "AutoBattle": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "AutoBattle",
-                    "description": "自动战斗，可选配置预设分组和队伍"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "group_name": {
-                            "type": "string",
-                            "description": "预设分组名称"
-                        },
-                        "team_name": {
-                            "type": "string",
-                            "description": "预设队伍名称"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "AutoFoster": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "AutoFoster",
-                    "description": "自动寄养（结界寄养）"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "FosterTarget": {
-                            "type": "integer",
-                            "enum": [1, 2],
-                            "default": 1,
-                            "description": "1: 勾玉(默认), 2: 体力"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "BonusToggleAction": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "BonusToggleAction",
-                    "description": "控制各种加成的开关状态"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "exp_100%": {
-                            "type": "boolean",
-                            "description": "战斗胜利获得的经验增加100%"
-                        },
-                        "exp_50%": {
-                            "type": "boolean",
-                            "description": "战斗胜利获得的经验增加50%"
-                        },
-                        "gold_100%": {
-                            "type": "boolean",
-                            "description": "战斗胜利获得的金币增加100%"
-                        },
-                        "gold_50%": {
-                            "type": "boolean",
-                            "description": "战斗胜利获得的金币增加50%"
-                        },
-                        "drop_awake": {
-                            "type": "boolean",
-                            "description": "觉醒副本掉落额外的觉醒材料"
-                        },
-                        "drop_soul": {
-                            "type": "boolean",
-                            "description": "八岐大蛇掉落额外的御魂材料"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "BountyMonsterRecognition": {
-            "properties": {
-                "custom_action": {
-                    "const": "BountyMonsterRecognition",
-                    "description": "识别悬赏妖怪并开始探索"
-                }
-            }
-        },
-        "ChallengeDungeonBoss": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "ChallengeDungeonBoss",
-                    "description": "自动挑战地鬼"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "count": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "default": 1,
-                            "description": "挑战地鬼数量"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "CountAction": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "CountAction",
-                    "description": "计数动作，循环截图并运行指定的识别任务"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "next_task": {
-                            "type": "string",
-                            "description": "达到目标计数后执行的下一个任务名"
-                        },
-                        "count_target": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "description": "目标计数次数"
-                        },
-                        "interval": {
-                            "type": "number",
-                            "default": 1.0,
-                            "description": "每次识别之间的等待间隔（秒）"
-                        },
-                        "task_to_count": {
-                            "type": "string",
-                            "description": "要计数的识别任务名"
-                        }
-                    },
-                    "required": ["next_task", "count_target", "task_to_count"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "Guess": {
-            "properties": {
-                "custom_action": {
-                    "const": "Guess",
-                    "description": "竞猜动作，选择人数多的一方"
-                }
-            }
-        },
-        "HumanTouch": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "HumanTouch",
-                    "description": "模拟人类点击行为"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "ROI_1": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            },
-                            "minItems": 4,
-                            "maxItems": 4,
-                            "default": [400, 520, 800, 600],
-                            "description": "点击区域 [x, y, w, h]"
-                        },
-                        "short_wait_min": {
-                            "type": "number",
-                            "default": 1,
-                            "description": "短等待最小时间(秒)"
-                        },
-                        "short_wait_max": {
-                            "type": "number",
-                            "default": 20,
-                            "description": "短等待最大时间(秒)"
-                        },
-                        "long_wait_min": {
-                            "type": "number",
-                            "default": 100,
-                            "description": "长等待最小时间(秒)"
-                        },
-                        "long_wait_max": {
-                            "type": "number",
-                            "default": 200,
-                            "description": "长等待最大时间(秒)"
-                        },
-                        "short_wait_weight": {
-                            "type": "number",
-                            "default": 95,
-                            "description": "短等待权重"
-                        },
-                        "long_wait_weight": {
-                            "type": "number",
-                            "default": 5,
-                            "description": "长等待权重"
-                        },
-                        "single_click_weight": {
-                            "type": "number",
-                            "default": 50,
-                            "description": "单击权重"
-                        },
-                        "double_click_weight": {
-                            "type": "number",
-                            "default": 50,
-                            "description": "双击权重"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "Kun28": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "Kun28",
-                    "description": "Kun28任务，进入探索后识别突破卷数量"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "group_name": {
-                            "type": "string",
-                            "description": "预设分组名称"
-                        },
-                        "team_name": {
-                            "type": "string",
-                            "description": "预设队伍名称"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "LoopAction": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "LoopAction",
-                    "description": "循环执行一系列动作"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "action_list": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "minItems": 1,
-                            "description": "要循环执行的动作名列表"
-                        },
-                        "loop_times": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "description": "循环次数"
-                        },
-                        "on_error": {
-                            "type": "string",
-                            "description": "出错时的处理策略"
-                        }
-                    },
-                    "required": ["action_list", "loop_times"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "QuestionMatcher": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "QuestionMatcher",
-                    "description": "问题匹配动作，识别问题和答案"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "upload": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "是否上传"
-                        },
-                        "sync": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "是否同步"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "RandomSwipe": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "RandomSwipe",
-                    "description": "在指定区域内随机滑动"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "start_roi": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            },
-                            "minItems": 4,
-                            "maxItems": 4,
-                            "description": "起始区域 [x, y, w, h]"
-                        },
-                        "end_roi": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            },
-                            "minItems": 4,
-                            "maxItems": 4,
-                            "description": "结束区域 [x, y, w, h]"
-                        },
-                        "delay": {
-                            "type": "integer",
-                            "default": 200,
-                            "description": "滑动持续时间(毫秒)"
-                        }
-                    },
-                    "required": ["start_roi", "end_roi"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "RandomTask": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "RandomTask",
-                    "description": "根据权重随机选择并执行一个任务"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "description": "任务名到权重的映射，键为任务名称，值为权重（非负数）",
-                    "additionalProperties": {
-                        "type": "number",
-                        "minimum": 0
-                    }
-                }
-            }
-        },
-        "RandomTouch": {
-            "properties": {
-                "custom_action": {
-                    "const": "RandomTouch",
-                    "description": "在识别框区域内随机点击"
-                }
-            }
-        },
-        "RandomWait": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "RandomWait",
-                    "description": "在指定时间范围内随机等待"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "min": {
-                            "description": "最小等待时间(秒)"
-                        },
-                        "max": {
-                            "description": "最大等待时间(秒)"
-                        }
-                    },
-                    "required": ["min", "max"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "RepeatChallengeNTimes": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "RepeatChallengeNTimes",
-                    "description": "设置自动挑战次数"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "start_repeat": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "是否启动自动挑战"
-                        },
-                        "expected_number": {
-                            "type": "integer",
-                            "default": 1,
-                            "description": "期望的挑战次数"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            }
-        },
-        "ReStart": {
-            "properties": {
-                "custom_action": {
-                    "const": "ReStart",
-                    "description": "超时重启动作"
-                }
-            }
-        },
-        "ReStartGame": {
-            "properties": {
-                "custom_action": {
-                    "const": "ReStartGame",
-                    "description": "重启游戏"
-                }
-            }
-        },
-        "SwitchSoul": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "SwitchSoul",
-                    "description": "切换御魂预设"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "group_name": {
-                            "type": "string",
-                            "description": "御魂预设分组名称"
-                        },
-                        "team_name": {
-                            "type": "string",
-                            "description": "御魂预设队伍名称"
-                        }
-                    },
-                    "required": ["group_name", "team_name"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "TaskCounter": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "TaskCounter",
-                    "description": "任务计数器"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "target_count": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "description": "目标次数"
-                        }
-                    },
-                    "required": ["target_count"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "TaskList": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "TaskList",
-                    "description": "任务列表执行器"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "tasks": {
-                            "type": "object",
-                            "description": "任务名到配置的映射",
-                            "additionalProperties": {
-                                "type": "object",
-                                "properties": {
-                                    "enabled": {
-                                        "type": "boolean",
-                                        "description": "是否启用该任务"
-                                    },
-                                    "once_per_day": {
-                                        "type": "boolean",
-                                        "description": "是否每天只执行一次"
-                                    }
-                                },
-                                "additionalProperties": false
-                            }
-                        }
-                    },
-                    "required": ["tasks"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "TeamBuilder": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "TeamBuilder",
-                    "description": "组队通信，通过TCP Socket实现多机通信"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string",
-                            "description": "本机标识ID"
-                        },
-                        "port": {
-                            "type": "integer",
-                            "description": "TCP通信端口"
-                        }
-                    },
-                    "required": ["id", "port"],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "TimeCheck": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_action": {
-                    "const": "TimeCheck",
-                    "description": "时间+日期范围检查"
-                },
-                "custom_action_param": {
-                    "type": "object",
-                    "properties": {
-                        "start": {
-                            "type": "string",
-                            "description": "开始时间，格式 \"15:04\" 或 \"15:04:05\""
-                        },
-                        "end": {
-                            "type": "string",
-                            "description": "结束时间，格式 \"15:04\" 或 \"15:04:05\""
-                        },
-                        "mode": {
-                            "type": "string",
-                            "enum": ["in", "out"],
-                            "default": "in",
-                            "description": "模式: in(在范围内返回true) 或 out(在范围外返回true)"
-                        },
-                        "date_rule": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "enum": ["none", "date", "dates", "month_day", "week"],
-                                    "description": "日期规则类型"
-                                },
-                                "value": {
-                                    "description": "规则值，根据type不同而不同"
-                                }
-                            },
-                            "required": ["type"],
-                            "additionalProperties": false
-                        }
-                    },
-                    "required": ["start", "end"],
-                    "additionalProperties": false
-                }
-            }
-        }
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maa-yys.local/schema/custom.action.schema.json",
+  "title": "MaaYYs Custom Actions",
+  "description": "maa-yys-agent 注册的自定义动作及 custom_action_param 参数约束。custom_action_param_code 由 MaaFramework 在运行时提供，使用它时不校验静态参数。",
+  "type": "object",
+  "properties": {
+    "custom_action": {
+      "type": "string",
+      "enum": [
+        "RandomTouch",
+        "RandomSwipe",
+        "RandomTask",
+        "RandomWait",
+        "HumanTouch",
+        "ClearHitCount",
+        "CountAction",
+        "LoopAction",
+        "TaskCounter",
+        "TaskList",
+        "ReStart",
+        "ReStartGame",
+        "AutoBattle",
+        "AutoFoster",
+        "BattleTeam",
+        "SwitchSoul",
+        "TeamBuilder",
+        "BountyMonsterRecognition",
+        "ChallengeDungeonBoss",
+        "RepeatChallengeNTimes",
+        "Kun28",
+        "BonusToggleAction",
+        "QuestionMatcher",
+        "Guess",
+        "TimeCheck"
+      ]
     }
+  },
+  "if": { "required": ["custom_action"] },
+  "then": {
+    "oneOf": [
+      { "$ref": "#/$defs/RandomTouch" },
+      { "$ref": "#/$defs/RandomSwipe" },
+      { "$ref": "#/$defs/RandomTask" },
+      { "$ref": "#/$defs/RandomWait" },
+      { "$ref": "#/$defs/HumanTouch" },
+      { "$ref": "#/$defs/ClearHitCount" },
+      { "$ref": "#/$defs/CountAction" },
+      { "$ref": "#/$defs/LoopAction" },
+      { "$ref": "#/$defs/TaskCounter" },
+      { "$ref": "#/$defs/TaskList" },
+      { "$ref": "#/$defs/ReStart" },
+      { "$ref": "#/$defs/ReStartGame" },
+      { "$ref": "#/$defs/AutoBattle" },
+      { "$ref": "#/$defs/AutoFoster" },
+      { "$ref": "#/$defs/BattleTeam" },
+      { "$ref": "#/$defs/SwitchSoul" },
+      { "$ref": "#/$defs/TeamBuilder" },
+      { "$ref": "#/$defs/BountyMonsterRecognition" },
+      { "$ref": "#/$defs/ChallengeDungeonBoss" },
+      { "$ref": "#/$defs/RepeatChallengeNTimes" },
+      { "$ref": "#/$defs/Kun28" },
+      { "$ref": "#/$defs/BonusToggleAction" },
+      { "$ref": "#/$defs/QuestionMatcher" },
+      { "$ref": "#/$defs/Guess" },
+      { "$ref": "#/$defs/TimeCheck" }
+    ]
+  },
+  "$defs": {
+    "RequiredParam": {
+      "anyOf": [
+        { "required": ["custom_action_param"] },
+        { "required": ["custom_action_param_code"] }
+      ]
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ROI": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "矩形区域 [x, y, width, height]"
+    },
+    "FlexibleNumber": {
+      "oneOf": [
+        { "type": "number" },
+        { "type": "string", "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)$" }
+      ]
+    },
+    "RandomTouch": {
+      "title": "随机点击",
+      "description": "在 CustomActionArg.Box 指定区域内随机点击，不读取 custom_action_param。",
+      "properties": { "custom_action": { "const": "RandomTouch" } },
+      "required": ["custom_action"]
+    },
+    "RandomSwipe": {
+      "title": "随机滑动",
+      "description": "在起点和终点 ROI 中分别随机取点并滑动。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "RandomSwipe" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "start_roi": { "$ref": "#/$defs/ROI", "description": "随机滑动起点区域 [x, y, width, height]" },
+            "end_roi": { "$ref": "#/$defs/ROI", "description": "随机滑动终点区域 [x, y, width, height]" },
+            "delay": { "type": "integer", "minimum": 0, "default": 200, "description": "滑动持续时间，单位毫秒" }
+          },
+          "required": ["start_roi", "end_roi"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "RandomTask": {
+      "title": "随机任务",
+      "description": "按非负权重随机选择一个任务；权重总和必须大于 0（该条件由运行时校验）。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "RandomTask" },
+        "custom_action_param": {
+          "type": "object",
+          "description": "任务名到权重的映射",
+          "minProperties": 1,
+          "additionalProperties": { "type": "number", "minimum": 0 }
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "RandomWait": {
+      "title": "随机等待",
+      "description": "在 min 与 max 之间随机等待；空参数直接成功，min 大于 max 时运行时自动交换。",
+      "properties": {
+        "custom_action": { "const": "RandomWait" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "min": { "$ref": "#/$defs/FlexibleNumber", "default": 0, "description": "最短等待秒数，可使用数字或数字字符串" },
+            "max": { "$ref": "#/$defs/FlexibleNumber", "default": 0, "description": "最长等待秒数，可使用数字或数字字符串" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "HumanTouch": {
+      "title": "拟人点击",
+      "description": "按等待与点击权重模拟人类点击。所有数值参数均兼容数字字符串。",
+      "properties": {
+        "custom_action": { "const": "HumanTouch" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "ROI_1": { "$ref": "#/$defs/ROI", "default": [400, 520, 400, 80], "description": "点击区域 [x, y, width, height]" },
+            "short_wait_min": { "$ref": "#/$defs/FlexibleNumber", "default": 1, "description": "短等待最小秒数" },
+            "short_wait_max": { "$ref": "#/$defs/FlexibleNumber", "default": 20, "description": "短等待最大秒数" },
+            "long_wait_min": { "$ref": "#/$defs/FlexibleNumber", "default": 100, "description": "长等待最小秒数" },
+            "long_wait_max": { "$ref": "#/$defs/FlexibleNumber", "default": 200, "description": "长等待最大秒数" },
+            "short_wait_weight": { "$ref": "#/$defs/FlexibleNumber", "default": 95, "description": "短等待权重" },
+            "long_wait_weight": { "$ref": "#/$defs/FlexibleNumber", "default": 5, "description": "长等待权重" },
+            "single_click_weight": { "$ref": "#/$defs/FlexibleNumber", "default": 50, "description": "单击权重" },
+            "double_click_weight": { "$ref": "#/$defs/FlexibleNumber", "default": 50, "description": "双击权重" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "ClearHitCount": {
+      "title": "清除命中计数",
+      "description": "清除一个或多个 pipeline 节点的命中计数。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "ClearHitCount" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "node_name": { "$ref": "#/$defs/NonEmptyString", "description": "单个节点名" },
+            "node_names": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/NonEmptyString" },
+              "minItems": 1,
+              "description": "多个节点名"
+            }
+          },
+          "anyOf": [{ "required": ["node_name"] }, { "required": ["node_names"] }],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "CountAction": {
+      "title": "循环识别计数",
+      "description": "重复运行识别任务，达到目标计数后执行下一个任务。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "CountAction" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "next_task": { "$ref": "#/$defs/NonEmptyString", "description": "达到目标后执行的任务名" },
+            "task_to_count": { "$ref": "#/$defs/NonEmptyString", "description": "每轮运行的识别任务名" },
+            "count_target": { "type": "integer", "minimum": 1, "default": 1, "description": "目标计数" },
+            "interval": { "type": "number", "exclusiveMinimum": 0, "default": 1.0, "description": "两次识别之间的间隔秒数" }
+          },
+          "required": ["next_task", "task_to_count"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "LoopAction": {
+      "title": "循环动作列表",
+      "description": "按顺序循环执行任务列表。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "LoopAction" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "action_list": { "type": "array", "items": { "$ref": "#/$defs/NonEmptyString" }, "minItems": 1, "description": "每轮依次执行的任务名" },
+            "loop_times": { "type": "integer", "minimum": 1, "description": "循环次数" },
+            "on_error": { "type": "string", "description": "注入临时节点的 on_error 任务名" }
+          },
+          "required": ["action_list", "loop_times"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "TaskCounter": {
+      "title": "动作调用计数器",
+      "description": "按 TaskID 计数，达到目标时返回 false 并清零。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "TaskCounter" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": { "target_count": { "type": "integer", "minimum": 1, "description": "目标调用次数" } },
+          "required": ["target_count"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "TaskList": {
+      "title": "任务列表",
+      "description": "执行已启用的任务，支持每日一次记录。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "TaskList" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "tasks": {
+              "type": "object",
+              "minProperties": 1,
+              "description": "任务名到任务配置的映射",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "enabled": { "type": "boolean", "default": false, "description": "是否执行该任务" },
+                  "once_per_day": { "type": "boolean", "default": false, "description": "是否每天最多执行一次" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["tasks"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "ReStart": {
+      "title": "超时标记",
+      "description": "超时触发动作，不读取 custom_action_param。",
+      "properties": { "custom_action": { "const": "ReStart" } },
+      "required": ["custom_action"]
+    },
+    "ReStartGame": {
+      "title": "重启游戏",
+      "description": "关闭并重新启动游戏，不读取 custom_action_param。",
+      "properties": { "custom_action": { "const": "ReStartGame" } },
+      "required": ["custom_action"]
+    },
+    "AutoBattle": {
+      "title": "自动战斗",
+      "description": "可选择预设分组和队伍，然后点击准备。",
+      "properties": {
+        "custom_action": { "const": "AutoBattle" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "group_name": { "type": "string", "description": "预设分组名；为空时跳过预设选择" },
+            "team_name": { "type": "string", "description": "预设队伍名，仅在 group_name 非空时使用" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "AutoFoster": {
+      "title": "自动寄养",
+      "description": "自动选择结界寄养目标。",
+      "properties": {
+        "custom_action": { "const": "AutoFoster" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "FosterTarget": { "type": "integer", "enum": [1, 2], "default": 1, "description": "1 优先勾玉，2 优先体力" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "BattleTeam": {
+      "title": "选择出战队伍",
+      "description": "按场景区域选择指定的预设分组和队伍；同时兼容中文参数名与英文别名，中文参数优先。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "BattleTeam" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "位置": { "type": "string", "enum": ["御魂", "契灵", "麒麟"], "default": "御魂", "description": "场景位置" },
+            "分组名称": { "type": "string", "minLength": 1, "description": "预设分组名" },
+            "队伍名称": { "type": "string", "minLength": 1, "description": "预设队伍名" },
+            "position": { "type": "string", "enum": ["御魂", "契灵", "麒麟"], "description": "位置的英文别名" },
+            "group_name": { "type": "string", "minLength": 1, "description": "分组名称的英文别名" },
+            "team_name": { "type": "string", "minLength": 1, "description": "队伍名称的英文别名" }
+          },
+          "allOf": [
+            { "anyOf": [{ "required": ["分组名称"] }, { "required": ["group_name"] }] },
+            { "anyOf": [{ "required": ["队伍名称"] }, { "required": ["team_name"] }] }
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "SwitchSoul": {
+      "title": "切换御魂",
+      "description": "查找指定分组和队伍并装备御魂。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "SwitchSoul" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "group_name": { "$ref": "#/$defs/NonEmptyString", "description": "御魂预设分组名" },
+            "team_name": { "$ref": "#/$defs/NonEmptyString", "description": "御魂预设队伍名" }
+          },
+          "required": ["group_name", "team_name"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "TeamBuilder": {
+      "title": "组队通信",
+      "description": "通过 localhost TCP 完成简单组队通信。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "TeamBuilder" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "id": { "$ref": "#/$defs/NonEmptyString", "description": "通信参与者 ID" },
+            "port": { "type": "integer", "minimum": 1, "maximum": 65535, "description": "本地 TCP 端口" }
+          },
+          "required": ["id", "port"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "BountyMonsterRecognition": {
+      "title": "识别悬赏妖怪",
+      "description": "执行悬赏妖怪识别流程，不读取 custom_action_param。",
+      "properties": { "custom_action": { "const": "BountyMonsterRecognition" } },
+      "required": ["custom_action"]
+    },
+    "ChallengeDungeonBoss": {
+      "title": "挑战地鬼",
+      "description": "按数量自动挑战地鬼。",
+      "properties": {
+        "custom_action": { "const": "ChallengeDungeonBoss" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "count": { "type": "integer", "minimum": 1, "default": 1, "description": "挑战数量" },
+            "isReward": { "type": "boolean", "default": false, "description": "是否使用悬赏挑战索引逻辑" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "RepeatChallengeNTimes": {
+      "title": "设置挑战次数",
+      "description": "启停自动挑战并设置挑战次数。",
+      "properties": {
+        "custom_action": { "const": "RepeatChallengeNTimes" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "start_repeat": { "type": "boolean", "default": true, "description": "true 启动，false 关闭自动挑战" },
+            "expected_number": { "type": "integer", "minimum": 1, "default": 1, "description": "期望挑战次数" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "Kun28": {
+      "title": "困 28 与结界突破",
+      "description": "根据突破卷数量切换探索或自动结界流程。",
+      "properties": {
+        "custom_action": { "const": "Kun28" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "group_name": { "type": "string", "description": "突破预设分组名" },
+            "team_name": { "type": "string", "description": "突破预设队伍名" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "BonusToggleAction": {
+      "title": "加成开关",
+      "description": "批量启用或关闭指定加成。",
+      "properties": {
+        "custom_action": { "const": "BonusToggleAction" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "exp_100%": { "type": "boolean", "description": "经验增加 100%" },
+            "exp_50%": { "type": "boolean", "description": "经验增加 50%" },
+            "gold_100%": { "type": "boolean", "description": "金币增加 100%" },
+            "gold_50%": { "type": "boolean", "description": "金币增加 50%" },
+            "drop_awake": { "type": "boolean", "description": "觉醒材料额外掉落" },
+            "drop_soul": { "type": "boolean", "description": "御魂材料额外掉落" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "QuestionMatcher": {
+      "title": "问题匹配",
+      "description": "识别问题和答案并点击第一个答案；upload 与 sync 当前仅被记录。",
+      "properties": {
+        "custom_action": { "const": "QuestionMatcher" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "upload": { "type": "boolean", "default": true, "description": "是否上传（当前实现仅记录）" },
+            "sync": { "type": "boolean", "default": true, "description": "是否同步（当前实现仅记录）" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "Guess": {
+      "title": "竞猜",
+      "description": "识别双方人数并选择一侧，不读取 custom_action_param。",
+      "properties": { "custom_action": { "const": "Guess" } },
+      "required": ["custom_action"]
+    },
+    "TimeCheck": {
+      "title": "日期时间检查",
+      "description": "检查当前日期和时间是否满足指定范围。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "TimeCheck" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "start": { "type": "string", "pattern": "^(?:[0-9]|[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$", "description": "开始时间，H:mm、HH:mm、H:mm:ss 或 HH:mm:ss" },
+            "end": { "type": "string", "pattern": "^(?:[0-9]|[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$", "description": "结束时间，H:mm、HH:mm、H:mm:ss 或 HH:mm:ss；允许跨天" },
+            "mode": { "type": "string", "enum": ["in", "out"], "default": "in", "description": "判断当前时间在范围内或范围外" },
+            "date_rule": { "$ref": "#/$defs/DateRule" }
+          },
+          "required": ["start", "end"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "DateRule": {
+      "type": "object",
+      "description": "可选日期过滤规则；省略或 type=none 时不过滤日期。",
+      "properties": {
+        "type": { "type": "string", "enum": ["none", "date", "dates", "month_day", "week"], "default": "none" },
+        "value": {}
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "date" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "string", "format": "date" } }, "required": ["value"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "dates" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "array", "items": { "type": "string", "format": "date" }, "minItems": 1 } }, "required": ["value"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "month_day" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 31 }, "minItems": 1, "uniqueItems": true } }, "required": ["value"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "week" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 7 }, "minItems": 1, "uniqueItems": true } }, "required": ["value"] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
 }
