@@ -35,7 +35,7 @@ permissions:
 
 env:
   MXU_VERSION: v2.1.6
-  MAAFW_VERSION: v5.11.1
+  MAAFW_VERSION: v5.12.1
 
 jobs:
   meta:
