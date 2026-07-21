@@ -4,7 +4,7 @@
             "name": "英杰试炼",
             "label": "英杰试炼",
             "entry": "英杰试炼",
-            "group": ["promotion"],
+            "group": ["standalone"],
             "option": [
                 "选择试炼英杰",
                 "选择试炼目标",
