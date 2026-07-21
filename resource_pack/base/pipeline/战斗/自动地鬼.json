@@ -48,8 +48,8 @@
     "action": "Custom",
     "custom_action": "ChallengeDungeonBoss",
     "custom_action_param": {
-      "isReward": false,
-      "count": 3
+      "count": 3,
+      "isReward": false
     },
     "focus": {
       "Node.Recognition.Starting": "开始挑战地鬼"
@@ -64,8 +64,8 @@
     "action": "Custom",
     "custom_action": "ChallengeDungeonBoss",
     "custom_action_param": {
-      "isReward": true,
-      "count": 3
+      "count": 3,
+      "isReward": true
     },
     "focus": {
       "Node.Recognition.Starting": "开始挑战地鬼"
@@ -168,6 +168,7 @@
   "地鬼-点击筛选-ocr": {
     "action": "Click",
     "expected": "筛选",
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
       1096,
