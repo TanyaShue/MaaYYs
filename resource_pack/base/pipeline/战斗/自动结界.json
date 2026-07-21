@@ -823,11 +823,44 @@
       81
     ]
   },
+  "自动结界-确定锁定了阵容": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      801,
+      558,
+      136,
+      77
+    ],
+    "template": [
+      "战斗/自动结界/自动结界-699010_1.png"
+    ]
+  },
+  "自动结界-装备御魂": {
+    "max_hit": 1,
+    "next": [
+      "结界突破_确保位于式神录界面",
+      "[JumpBack]自动结界2",
+      "[JumpBack]结界突破_点击式神录"
+    ],
+    "recognition": "DirectHit"
+  },
+  "自动结界-锁定阵容": {
+    "expected": "结界突破",
+    "max_hit": 1,
+    "next": [
+      "自动结界1",
+      "自动结界-确定锁定了阵容"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      518,
+      52,
+      227,
+      79
+    ]
+  },
   "自动结界1": {
     "action": "Click",
-    "next": [
-      "开始自动结界"
-    ],
     "recognition": "TemplateMatch",
     "roi": [
       812,
@@ -866,10 +899,7 @@
   },
   "自动结界3": {
     "expected": "结界突破",
-    "next": [
-      "自动结界1",
-      "开始自动结界"
-    ],
+    "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
       524,
@@ -922,7 +952,6 @@
   "自动结界9": {
     "expected": "确定",
     "inverse": true,
-    "next": [],
     "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
@@ -993,9 +1022,9 @@
     "expected": "结界突破",
     "next": [
       "结束突破",
-      "结界突破_确保位于式神录界面",
-      "[JumpBack]结界突破_点击式神录",
-      "[JumpBack]自动结界2"
+      "[JumpBack]自动结界-装备御魂",
+      "[JumpBack]自动结界-锁定阵容",
+      "开始自动结界"
     ],
     "recognition": "OCR",
     "roi": [
