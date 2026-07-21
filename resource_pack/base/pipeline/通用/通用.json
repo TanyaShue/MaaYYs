@@ -1,13 +1,4 @@
 {
-  "N-1781238306179": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      400,
-      150,
-      560,
-      400
-    ]
-  },
   "出战队伍预设": {
     "expected": "出战",
     "next": [

@@ -6,11 +6,37 @@
             "entry": "自动结界",
             "group": ["standalone"],
             "option": [
-                "结界突破阵容预设"
+                "结界突破是否装备御魂"
             ]
         }
     ],
     "option": {
+        "结界突破是否装备御魂": {
+            "type": "switch",
+            "label": "结界突破是否装备御魂",
+            "description": "结界突破是否装备御魂",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动结界-装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["结界突破阵容预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动结界-装备御魂": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "结界突破阵容预设": {
             "type": "input",
             "label": "结界突破阵容预设",
