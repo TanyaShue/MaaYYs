@@ -1019,6 +1019,11 @@
     ]
   },
   "识别结界突破界面": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_name": "自动结界-装备御魂"
+    },
     "expected": "结界突破",
     "next": [
       "结束突破",
