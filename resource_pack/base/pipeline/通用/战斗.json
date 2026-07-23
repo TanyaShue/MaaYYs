@@ -18,12 +18,13 @@
     ]
   },
   "战斗-从战斗中返回": {
+    "expected": "点击屏幕继续|获得奖励",
     "next": [
       "战斗-式神碎片挑战-结束战斗",
       "战斗-探索副本-领取奖励-点击关闭",
       "战斗-空节点"
     ],
-    "recognition": "DirectHit"
+    "recognition": "OCR"
   },
   "战斗-式神碎片挑战": {
     "next": [
@@ -258,7 +259,7 @@
   "战斗-探索副本-结束战斗": {
     "action": "Click",
     "expected": "点击屏幕继续",
-    "post_delay": 1000,
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
       383,
@@ -273,7 +274,7 @@
       "战斗-探索副本-领取奖励",
       "[JumpBack]战斗-探索副本-领取奖励-点击关闭"
     ],
-    "post_delay": 1000,
+    "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
       0,
@@ -295,7 +296,7 @@
       "战斗-探索副本-领取奖励",
       "[JumpBack]战斗-探索副本-领取奖励-点击关闭"
     ],
-    "post_delay": 1000,
+    "post_delay": 2000,
     "recognition": "FeatureMatch",
     "roi": [
       0,
@@ -429,6 +430,8 @@
   "战斗-探索副本-领取奖励": {
     "expected": "获得奖励",
     "inverse": true,
+    "post_delay": 2000,
+    "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
       385,
@@ -450,10 +453,10 @@
       221
     ],
     "target": [
-      423,
-      617,
-      261,
-      97
+      192,
+      8,
+      192,
+      71
     ]
   },
   "战斗-清空探索副本战斗计数": {
