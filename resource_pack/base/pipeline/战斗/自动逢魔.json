@@ -233,8 +233,8 @@
     },
     "expected": "式神录",
     "next": [
-      "自动逢魔15",
-      "[JumpBack]导航-庭院"
+      "[JumpBack]自动逢魔-返回庭院",
+      "自动逢魔"
     ],
     "on_error": [
       "超时_切换御魂失败"
@@ -346,10 +346,47 @@
       "[JumpBack]点击逢魔",
       "[JumpBack]自动逢魔14",
       "[JumpBack]自动逢魔21",
-      "[JumpBack]点击石像神龛"
+      "[JumpBack]点击石像神龛",
+      "[JumpBack]自动逢魔-向左滑动"
     ],
     "on_error": [
       "自动逢魔12"
+    ],
+    "recognition": "DirectHit"
+  },
+  "自动逢魔-向左滑动": {
+    "action": "Swipe",
+    "begin": [
+      102,
+      297,
+      160,
+      176
+    ],
+    "end": [
+      950,
+      312,
+      143,
+      181
+    ],
+    "expected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "探索",
+      "神龛"
+    ],
+    "model": "Courtyard-v5.0.onnx",
+    "recognition": "NeuralNetworkDetect"
+  },
+  "自动逢魔-返回庭院": {
+    "max_hit": 1,
+    "next": [
+      "导航-庭院"
     ],
     "recognition": "DirectHit"
   },
@@ -494,31 +531,6 @@
       522,
       52,
       38
-    ]
-  },
-  "自动逢魔15": {
-    "action": "Custom",
-    "custom_action": "LoopAction",
-    "custom_action_param": {
-      "action_list": [
-        "向右滑一下"
-      ],
-      "loop_times": 4
-    },
-    "next": [
-      "自动逢魔"
-    ],
-    "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      468,
-      428,
-      232
-    ],
-    "template": [
-      "自动逢魔/自动逢魔15.png",
-      "自动逢魔/自动逢魔15_1.png",
-      "自动逢魔/自动逢魔15_2.png"
     ]
   },
   "自动逢魔16": {
