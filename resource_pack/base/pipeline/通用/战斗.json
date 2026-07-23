@@ -231,9 +231,6 @@
     "recognition": {
       "type": "OCR",
       "param": { "roi": [674, 352, 218, 111], "expected": ["确认"] }
-    },
-    "action": {
-      "type": "Click"
     }
   },
   "战斗-探索副本-识别怪物-模板匹配": {
