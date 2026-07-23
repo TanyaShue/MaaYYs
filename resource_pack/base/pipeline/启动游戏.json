@@ -119,14 +119,14 @@
   },
   "启动游戏1": {
     "action": "Click",
-    "expected": "进入游戏",
+    "expected": "进入游戏|点击屏幕进入游戏",
     "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
-      481,
-      563,
-      310,
-      64
+      397,
+      503,
+      507,
+      173
     ]
   },
   "启动游戏2": {
@@ -145,13 +145,23 @@
   },
   "启动游戏3": {
     "action": "Click",
+    "inverse": true,
     "post_delay": 2000,
-    "recognition": "DirectHit",
+    "recognition": "TemplateMatch",
+    "roi": [
+      0,
+      0,
+      255,
+      189
+    ],
     "target": [
       22,
       21,
       42,
       45
+    ],
+    "template": [
+      "启动游戏/启动游戏3_1.png"
     ]
   },
   "启动游戏4": {
