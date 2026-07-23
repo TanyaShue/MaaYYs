@@ -11,21 +11,6 @@
     ],
     "template": "通用图标/踏雪寻踪_公告_关闭.png"
   },
-  "关闭广告": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      808,
-      0,
-      472,
-      307
-    ],
-    "template": [
-      "启动游戏/关闭广告_1.png",
-      "通用图标/广告_关闭.png"
-    ]
-  },
   "关闭广告-模板匹配": {
     "action": "Click",
     "post_delay": 2000,
@@ -105,7 +90,6 @@
       "启动游戏2",
       "[JumpBack]启动游戏1",
       "[JumpBack]启动任务1",
-      "[JumpBack]关闭广告",
       "[JumpBack]关闭广告-模板匹配",
       "[JumpBack]客户端更新提示处理",
       "[JumpBack]关闭公告",
