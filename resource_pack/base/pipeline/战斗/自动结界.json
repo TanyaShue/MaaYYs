@@ -27,6 +27,8 @@
       "[JumpBack]结界-关闭意外打开的名片",
       "[JumpBack]突破_领取奖励",
       "[JumpBack]突破_点击进攻",
+      "[JumpBack]自动结界-点击进攻2",
+      "[JumpBack]自动结界-先不打最后一个进攻",
       "[JumpBack]挑战第一个结界",
       "[JumpBack]挑战第二个结界",
       "[JumpBack]挑战第三个结界",
@@ -589,10 +591,10 @@
     "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
-      788,
-      262,
+      787,
+      409,
       396,
-      457
+      311
     ],
     "template": "自动结界/突破_进攻.png",
     "timeout": 4000000
@@ -606,10 +608,10 @@
     "rate_limit": 2000,
     "recognition": "TemplateMatch",
     "roi": [
-      93,
-      79,
-      1092,
-      640
+      109,
+      33,
+      1060,
+      539
     ],
     "template": "自动结界/突破_进攻.png"
   },
@@ -810,6 +812,25 @@
     ],
     "recognition": "DirectHit"
   },
+  "自动结界-先不打最后一个进攻": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      787,
+      409,
+      396,
+      311
+    ],
+    "target": [
+      373,
+      0,
+      615,
+      51
+    ],
+    "template": "自动结界/突破_进攻.png",
+    "timeout": 4000000
+  },
   "自动结界-判断是否位于御魂界面": {
     "expected": "御魂",
     "next": [
@@ -822,6 +843,22 @@
       114,
       81
     ]
+  },
+  "自动结界-点击进攻2": {
+    "action": "Click",
+    "next": [
+      "突破-进入战斗"
+    ],
+    "post_delay": 10000,
+    "rate_limit": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      105,
+      375,
+      763,
+      345
+    ],
+    "template": "自动结界/突破_进攻.png"
   },
   "自动结界-确定锁定了阵容": {
     "recognition": "TemplateMatch",
