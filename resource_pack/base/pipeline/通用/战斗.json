@@ -289,7 +289,10 @@
     },
     "next": [
       "战斗-探索副本-识别是否打开退出弹窗",
-      "[JumpBack]战斗-探索副本-点击退出按钮"
+      "[JumpBack]战斗-确认位于副本内"
+    ],
+    "on_error": [
+      "战斗-空节点"
     ],
     "post_delay": 2000,
     "recognition": "TemplateMatch",
@@ -307,13 +310,16 @@
     "threshold": 0.9
   },
   "战斗-探索副本-识别宝藏-特征匹配": {
-    "count": 8,
+    "count": 15,
     "focus": {
       "Node.Recognition.Succeeded": "诶？宝藏！"
     },
     "next": [
       "战斗-探索副本-识别是否打开退出弹窗",
-      "[JumpBack]战斗-探索副本-点击退出按钮"
+      "[JumpBack]战斗-确认位于副本内"
+    ],
+    "on_error": [
+      "战斗-空节点"
     ],
     "post_delay": 2000,
     "recognition": "FeatureMatch",
@@ -334,6 +340,10 @@
       "确认"
     ],
     "inverse": true,
+    "next": [
+      "战斗-探索副本-识别是否回到了章节界面",
+      "导航-探索界面-识别是否位于探索界面"
+    ],
     "recognition": "OCR",
     "roi": [
       674,
@@ -568,6 +578,19 @@
       572,
       442,
       69
+    ]
+  },
+  "战斗-确认位于副本内": {
+    "expected": "自动轮换|设置",
+    "next": [
+      "战斗-探索副本-点击退出按钮"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      590,
+      311,
+      130
     ]
   },
   "战斗-空节点": {
