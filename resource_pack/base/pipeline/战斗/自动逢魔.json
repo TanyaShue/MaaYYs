@@ -217,10 +217,10 @@
     "post_delay": 1000,
     "recognition": "FeatureMatch",
     "roi": [
-      691,
-      538,
-      414,
-      181
+      932,
+      564,
+      169,
+      156
     ],
     "template": "自动逢魔/现世逢魔_首领.png"
   },
@@ -382,6 +382,21 @@
     ],
     "model": "Courtyard-v5.0.onnx",
     "recognition": "NeuralNetworkDetect"
+  },
+  "自动逢魔-点击首领-模板匹配": {
+    "action": "Click",
+    "next": [
+      "现世逢魔_点击具体首领"
+    ],
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      932,
+      564,
+      169,
+      156
+    ],
+    "template": "自动逢魔/现世逢魔_首领.png"
   },
   "自动逢魔-返回庭院": {
     "max_hit": 1,
@@ -936,7 +951,8 @@
   "自动逢魔9": {
     "next": [
       "识别集结挑战",
-      "[JumpBack]现世逢魔_点击首领"
+      "[JumpBack]现世逢魔_点击首领",
+      "[JumpBack]自动逢魔-点击首领-模板匹配"
     ],
     "recognition": "DirectHit"
   },
