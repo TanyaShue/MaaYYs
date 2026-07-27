@@ -396,6 +396,7 @@
   },
   "自动斗技-点击匹配": {
     "action": "Click",
+    "enabled": false,
     "expected": [
       "战"
     ],
