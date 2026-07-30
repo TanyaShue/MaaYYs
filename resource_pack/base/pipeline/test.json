@@ -84,6 +84,107 @@
     "model": "BarrierCard.onnx",
     "recognition": "NeuralNetworkDetect"
   },
+  "御魂-截图-单件属性": {
+    "recognition": "TemplateMatch"
+  },
+  "御魂-截图-攻击加成": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      317,
+      124,
+      93,
+      79
+    ],
+    "template": [
+      "test/御魂-截图-攻击加成_兵主部.png",
+      "test/御魂-截图-攻击加成_尘冢.png",
+      "test/御魂-截图-攻击加成_心眼.png",
+      "test/御魂-截图-攻击加成_狂骨.png",
+      "test/御魂-截图-攻击加成_狰.png",
+      "test/御魂-截图-攻击加成_蝠翼.png",
+      "test/御魂-截图-攻击加成_贝吹坊.png",
+      "test/御魂-截图-攻击加成_轮入道.png",
+      "test/御魂-截图-攻击加成_阴摩罗.png",
+      "test/御魂-截图-攻击加成_隐念.png",
+      "test/御魂-截图-攻击加成_鸣屋.png"
+    ]
+  },
+  "御魂-截图-效果命中": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "test/御魂-截图-效果命中_元兴寺.png",
+      "test/御魂-截图-效果命中_油赤子.png",
+      "test/御魂-截图-效果命中_火灵.png",
+      "test/御魂-截图-效果命中_蚌精.png",
+      "test/御魂-截图-效果命中_遗念火.png",
+      "test/御魂-截图-效果命中_飞缘魔.png"
+    ]
+  },
+  "御魂-截图-效果抵抗": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "test/御魂-截图-效果抵抗_共潜.png",
+      "test/御魂-截图-效果抵抗_夜送犬.png",
+      "test/御魂-截图-效果抵抗_幽谷响.png",
+      "test/御魂-截图-效果抵抗_返魂香.png",
+      "test/御魂-截图-效果抵抗_钓瓶火.png",
+      "test/御魂-截图-效果抵抗_骰子鬼.png",
+      "test/御魂-截图-效果抵抗_魍魉之匣.png"
+    ]
+  },
+  "御魂-截图-暴击": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "test/御魂-截图-暴击_三味.png",
+      "test/御魂-截图-暴击_伤魂鸟.png",
+      "test/御魂-截图-暴击_应声虫.png",
+      "test/御魂-截图-暴击_海月火玉.png",
+      "test/御魂-截图-暴击_片叶之苇.png",
+      "test/御魂-截图-暴击_破势.png",
+      "test/御魂-截图-暴击_网切.png",
+      "test/御魂-截图-暴击_针女.png",
+      "test/御魂-截图-暴击_镇墓兽.png",
+      "test/御魂-截图-暴击_青女房.png"
+    ]
+  },
+  "御魂-截图-暴击伤害": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "test/御魂-截图-暴击伤害_无刀取.png"
+    ]
+  },
+  "御魂-截图-生命加成": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "test/御魂-截图-生命加成_叠叩.png",
+      "test/御魂-截图-生命加成_地藏像.png",
+      "test/御魂-截图-生命加成_夜啼石.png",
+      "test/御魂-截图-生命加成_恶楼.png",
+      "test/御魂-截图-生命加成_树妖.png",
+      "test/御魂-截图-生命加成_涂佛.png",
+      "test/御魂-截图-生命加成_涅槃之火.png",
+      "test/御魂-截图-生命加成_薙魂.png",
+      "test/御魂-截图-生命加成_被服.png",
+      "test/御魂-截图-生命加成_钟灵.png",
+      "test/御魂-截图-生命加成_镜姬.png"
+    ]
+  },
+  "御魂-截图-防御加成": {
+    "recognition": "TemplateMatch",
+    "template": [
+      "test/御魂-截图-防御加成_出世螺.png",
+      "test/御魂-截图-防御加成_反枕.png",
+      "test/御魂-截图-防御加成_奉海图.png",
+      "test/御魂-截图-防御加成_招财猫.png",
+      "test/御魂-截图-防御加成_日女巳时.png",
+      "test/御魂-截图-防御加成_木魅.png",
+      "test/御魂-截图-防御加成_火之车.png",
+      "test/御魂-截图-防御加成_珍珠.png",
+      "test/御魂-截图-防御加成_雨降.png",
+      "test/御魂-截图-防御加成_雪幽魂.png",
+      "test/御魂-截图-防御加成_魅妖.png"
+    ]
+  },
   "打开阴阳师_key": {
     "action": "StartApp",
     "package": "com.netease.onmyoji/.tag0",
