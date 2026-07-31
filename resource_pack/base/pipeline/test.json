@@ -85,7 +85,22 @@
     "recognition": "NeuralNetworkDetect"
   },
   "御魂-截图-单件属性": {
-    "recognition": "TemplateMatch"
+    "recognition": "TemplateMatch",
+    "template": [
+      "test/御魂-截图-单件属性_八咫镜.png",
+      "test/御魂-截图-单件属性_土蜘蛛.png",
+      "test/御魂-截图-单件属性_地震鲶.png",
+      "test/御魂-截图-单件属性_夜荒魂.png",
+      "test/御魂-截图-单件属性_天羽羽斩.png",
+      "test/御魂-截图-单件属性_月之石.png",
+      "test/御魂-截图-单件属性_稻荷穗箭.png",
+      "test/御魂-截图-单件属性_纺缘锤.png",
+      "test/御魂-截图-单件属性_胧车.png",
+      "test/御魂-截图-单件属性_荒骷髅.png",
+      "test/御魂-截图-单件属性_蜃气楼.png",
+      "test/御魂-截图-单件属性_预言星盘.png",
+      "test/御魂-截图-单件属性_鬼灵歌伎.png"
+    ]
   },
   "御魂-截图-攻击加成": {
     "recognition": "TemplateMatch",
