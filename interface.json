@@ -16,6 +16,16 @@
       "label": "安卓设备",
       "type": "Adb",
       "description": "通过ADB连接的安卓设备"
+    },
+    {
+      "name": "PlayCover",
+      "label": "PlayCover（macOS）",
+      "type": "PlayCover",
+      "description": "通过支持 MaaTools 的 PlayCover 控制 iOS 版阴阳师",
+      "display_short_side": 720,
+      "playcover": {
+        "uuid": "com.netease.onmyoji"
+      }
     }
   ],
   "resource": [

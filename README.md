@@ -47,10 +47,17 @@ MaaYYs 是一个面向《阴阳师》模拟器环境的自动化项目，项目�
 
 1. 下载并解压 `MaaYYs-平台-架构-版本-MXU` 全量包。
 2. Windows 双击运行 `mxu.exe`；macOS / Linux 运行解压目录中的 `mxu`。
-3. 打开安卓模拟器，并确保模拟器已开启 ADB 调试。
-4. 在 MXU 中添加设备，选择自动搜索到的模拟器，或手动填写 ADB 路径和地址。
-5. 选择对应资源：官服、B 站服、华为服、应用宝服、OPPO 服、VIVO 服等。
-6. 勾选并配置要运行的任务，通常请从庭院界面启动；`打开游戏`、`关闭游戏` 等任务除外。
+
+### Android / ADB
+
+1. 打开安卓模拟器并启用 ADB 调试，在 MXU 中添加设备，选择自动搜索到的模拟器，或手动填写 ADB 路径和地址。
+2. 选择对应资源和任务，通常请从庭院界面启动；`打开游戏`、`关闭游戏` 等任务除外。
+
+### macOS / PlayCover
+
+1. 使用 Apple Silicon Mac，安装支持 MaaTools 的 fork 版 PlayCover。MaaYYs 的 macOS PlayCover/MaaTools 接入思路参考了 MAA（明日方舟）macOS 版方案；安装与设置可参考 [MAA 官方中文 macOS 使用手册](https://docs.maa.plus/zh-cn/manual/device/macos.html)。在其中安装 iOS 版阴阳师（Bundle ID：`com.netease.onmyoji`）并启用 MaaTools。
+2. 启动游戏，在 MXU 中添加设备并选择 `PlayCover`，填写 MaaTools 的实际监听地址；`127.0.0.1:1718` 仅为示例，不应写死，`1717` 也可能已被 MAA 占用。
+3. 保持横屏即可。`controller` 的 `display_short_side: 720` 是截图与识别的内部缩放基准，不要求 PlayCover 游戏窗口实际设置为 1280×720；可参考 MAA 手册按需调整分辨率，若识别异常可尝试 1080P。然后选择资源并配置任务。
 
 更详细的图文教程见 [doc/使用指南.md](doc/使用指南.md)。
 
@@ -180,6 +187,8 @@ chmod +x agent
 ```
 
 所以 Windows 本地调试时，编译出的 `agent.exe` 需要放在 `agent/agent.exe`。如果要在 macOS / Linux 本地调试，需要按对应平台调整 `child_exec`，或使用 CI 打出的对应平台包。
+
+源文件保留 Windows 默认路径；CI 生成 macOS / Linux 包时只修改包内 `interface.json` 副本，将 `child_exec` 调整为 `./agent/agent`。
 
 ### 启动完整 UI 调试
 
