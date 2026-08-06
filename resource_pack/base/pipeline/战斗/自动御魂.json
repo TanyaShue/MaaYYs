@@ -21,6 +21,31 @@
     ],
     "recognition": "DirectHit"
   },
+  "自动御魂-先滑动到最上方": {
+    "action": "Swipe",
+    "begin": [
+      108,
+      147,
+      99,
+      52
+    ],
+    "duration": 1000,
+    "end": [
+      99,
+      523,
+      90,
+      82
+    ],
+    "max_hit": 5,
+    "post_delay": 1000,
+    "recognition": "DirectHit",
+    "roi": [
+      219,
+      170,
+      178,
+      39
+    ]
+  },
   "自动御魂-全自动挑战-点击准备": {
     "action": "Click",
     "expected": "准备",
@@ -715,17 +740,17 @@
   "自动御魂_下滑查找目标层数": {
     "action": "Swipe",
     "begin": [
-      212,
-      524,
-      262,
-      26
+      88,
+      535,
+      109,
+      61
     ],
     "duration": 1000,
     "end": [
-      219,
-      170,
-      178,
-      39
+      100,
+      132,
+      93,
+      88
     ],
     "recognition": "DirectHit",
     "roi": [
@@ -772,6 +797,7 @@
     "expected": "八岐大蛇|大蛇|八岐",
     "next": [
       "自动御魂_点击目标层数",
+      "[JumpBack]自动御魂-先滑动到最上方",
       "[JumpBack]自动御魂_下滑查找目标层数"
     ],
     "post_delay": 1000,
