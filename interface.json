@@ -10,6 +10,14 @@
   "github": "https://github.com/TanyaShue/MaaYYs",
   "mirrorchyan_rid": "MaaYYs",
   "mirrorchyan_multiplatform": true,
+  "telemetry": {
+    "sentry": {
+      "dsn": "https://4300024a59a9fd38c9b84c713a222fc2@o4511861435465728.ingest.us.sentry.io/4511861444182016",
+      "tracing": true,
+      "environment": "maayys",
+      "traces_sample_rate": 1
+    }
+  },
   "controller": [
     {
       "name": "Android",

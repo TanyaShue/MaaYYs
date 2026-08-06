@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "MaaFramework Project Interface V2",
-    "description": "MaaFramework 项目接口配置文件 V2 版本的 JSON Schema。💡 v2.5.0：Client 启动 agent 子进程时应按文档约定注入 PI_* 环境变量（见 Project Interface 文档 Agent 子进程环境变量 / Agent subprocess environment variables 章节）",
+    "description": "MaaFramework 项目接口配置文件 V2 版本的 JSON Schema。",
     "type": "object",
     "definitions": {
         "i18nString": {
@@ -107,6 +107,36 @@
             ],
             "additionalProperties": false
         },
+        "hotkeyItem": {
+            "type": "object",
+            "title": "快捷键字段",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "快捷键字段唯一标识符",
+                    "description": "用作快捷键字段 ID"
+                },
+                "label": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "显示名称",
+                    "description": "用于在用户界面中展示，支持国际化。如果未设置，则显示 name 字段的值"
+                },
+                "description": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "详细描述",
+                    "description": "帮助用户理解该快捷键的用途。支持文件路径、URL 或直接文本，内容支持 Markdown 格式"
+                },
+                "default": {
+                    "type": "string",
+                    "title": "默认值",
+                    "description": "💡 v2.8.0 人类可读的快捷键字符串，如 \"E\"、\"1\"、\"ALT+A\"，无需填写虚拟按键码"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "additionalProperties": false
+        },
         "optionControllerResource": {
             "type": "object",
             "properties": {
@@ -188,6 +218,66 @@
                     "required": [
                         "type",
                         "inputs"
+                    ],
+                    "additionalProperties": false
+                },
+                {
+                    "title": "hotkeyOption",
+                    "type": "object",
+                    "description": "💡 v2.8.0 快捷键捕获框，允许用户通过按键捕获快捷键",
+                    "properties": {
+                        "type": {
+                            "const": "hotkey",
+                            "description": "💡 v2.8.0 快捷键捕获框，允许用户通过按键捕获快捷键"
+                        },
+                        "label": {
+                            "$ref": "#/definitions/i18nString",
+                            "title": "显示标签",
+                            "description": "用于在用户界面中展示，支持国际化"
+                        },
+                        "description": {
+                            "$ref": "#/definitions/i18nString",
+                            "title": "详细描述",
+                            "description": "帮助用户理解配置项的作用。支持文件路径、URL 或直接文本，内容支持 Markdown 格式"
+                        },
+                        "icon": {
+                            "$ref": "#/definitions/i18nString",
+                            "title": "图标路径",
+                            "description": "配置项图标文件路径，相对于项目根目录"
+                        },
+                        "controller": {
+                            "type": "array",
+                            "title": "适用的控制器",
+                            "description": "💡 v2.3.0 可选。指定该配置项适用的控制器类型列表",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "resource": {
+                            "type": "array",
+                            "title": "适用的资源包",
+                            "description": "💡 v2.3.0 可选。指定该配置项适用的资源包列表",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "hotkeys": {
+                            "type": "array",
+                            "title": "快捷键配置",
+                            "description": "定义用户可捕获的快捷键字段；持久化值为人类可读字符串，pipeline_override 替换时映射为虚拟按键码整数",
+                            "items": {
+                                "$ref": "#/definitions/hotkeyItem"
+                            }
+                        },
+                        "pipeline_override": {
+                            "$ref": "#/definitions/pipelineOverride",
+                            "title": "Pipeline 覆盖模板",
+                            "description": "支持使用 {名称}、{名称}.primary、{名称}.modifier1 等占位符引用快捷键字段，替换结果为整数（虚拟按键码）"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "hotkeys"
                     ],
                     "additionalProperties": false
                 },
@@ -406,7 +496,7 @@
                         "MacOS",
                         "PlayCover",
                         "Gamepad",
-                        "WlRoots"
+                        "Linux"
                     ]
                 },
                 "display_short_side": {
@@ -481,7 +571,8 @@
                                 "SendMessageWithCursorPos",
                                 "PostMessageWithCursorPos",
                                 "SendMessageWithWindowPos",
-                                "PostMessageWithWindowPos"
+                                "PostMessageWithWindowPos",
+                                "Interception"
                             ]
                         },
                         "keyboard": {
@@ -605,15 +696,29 @@
                     },
                     "additionalProperties": false
                 },
-                "wlroots": {
+                "linux": {
                     "type": "object",
-                    "title": "WlRoots 控制器配置",
-                    "description": "WlRoots 控制器的具体配置（仅 Linux）",
+                    "title": "Linux 控制器配置",
+                    "description": "Linux 控制器的具体配置",
                     "properties": {
-                        "wlr_socket_path": {
+                        "input": {
                             "type": "string",
-                            "title": "Wayland Socket 路径",
-                            "description": "可选。Wayland Socket 路径，不提供则使用默认"
+                            "title": "输入控制方式",
+                            "description": "可选。Linux 控制器的输入控制方式，不提供则使用默认",
+                            "enum": [
+                                "Wlr",
+                                "UInput"
+                            ]
+                        },
+                        "screencap": {
+                            "type": "string",
+                            "title": "截图方式",
+                            "description": "可选。Linux 控制器的截图方式，不提供则使用默认",
+                            "enum": [
+                                "Wlr",
+                                "ExtImage",
+                                "PipeWire"
+                            ]
                         },
                         "use_win32_vk_code": {
                             "type": "boolean",
@@ -720,6 +825,50 @@
                     "type": "boolean",
                     "title": "默认展开",
                     "description": "💡 v2.4.0 可选。该分组在 Client 中是否默认展开",
+                    "default": true
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "additionalProperties": false
+        },
+        "settingSection": {
+            "type": "object",
+            "title": "任务设置页分区",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "分区唯一标识符",
+                    "description": "用作分区锚点与内部键"
+                },
+                "label": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "显示名称",
+                    "description": "用于在用户界面中展示，支持国际化。如果未设置，则显示 name 字段的值"
+                },
+                "description": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "详细描述",
+                    "description": "帮助用户理解该设置分区的用途。支持文件路径、URL 或直接文本，内容支持 Markdown 格式"
+                },
+                "icon": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "图标路径",
+                    "description": "分区图标文件路径，相对于项目根目录"
+                },
+                "option": {
+                    "type": "array",
+                    "title": "关联 option 键名",
+                    "description": "来自顶层 option 配置的有序 option 键名列表",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "default_expand": {
+                    "type": "boolean",
+                    "title": "默认展开",
+                    "description": "💡 v2.8.0 可选。该分区在 Client 中是否默认展开",
                     "default": true
                 }
             },
@@ -837,6 +986,74 @@
             ],
             "additionalProperties": false
         },
+        "pretaskConfig": {
+            "type": "object",
+            "title": "预任务配置",
+            "description": "💡 v2.7.0 Controller 启动前执行的自定义程序配置。Client 应在创建或连接 Controller 前运行该程序；若配置 option，则将 option 取值序列化为紧凑 JSON 字符串并追加为最后一个参数",
+            "properties": {
+                "resource": {
+                    "type": "array",
+                    "title": "支持的资源包",
+                    "description": "💡 v2.8.1 可选。指定该预任务支持的资源包列表。数组元素应与 resource 配置中的 name 字段对应。若不指定，则表示该预任务在所有资源包中都可用",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "controller": {
+                    "type": "array",
+                    "title": "支持的控制器",
+                    "description": "💡 v2.8.1 可选。指定该预任务支持的控制器类型列表。数组元素应与 controller 配置中的 name 字段对应。若不指定，则表示该预任务在所有控制器类型中都可用",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "exec": {
+                    "type": "string",
+                    "title": "预任务程序路径",
+                    "description": "要执行的程序路径，可以是系统 PATH 中的可执行文件。CWD 为 interface.json 所在目录"
+                },
+                "args": {
+                    "type": "array",
+                    "title": "预任务参数",
+                    "description": "可选。固定参数数组，按顺序传递给 exec",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "title": "预任务唯一标识",
+                    "description": "可选。建议项目内不重复，便于 Client 在配置文件、日志中区分不同预任务；缺省时 Client 可回退到 exec"
+                },
+                "label": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "预任务显示名称",
+                    "description": "可选。Client UI 中展示的名称，支持国际化字符串。缺省时 Client 可回退到 name 或 exec"
+                },
+                "description": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "预任务详细描述",
+                    "description": "可选。Client UI 中的提示/Tooltip。支持国际化字符串、文件路径或 URL，内容支持 Markdown"
+                },
+                "icon": {
+                    "$ref": "#/definitions/i18nString",
+                    "title": "预任务图标路径",
+                    "description": "可选。Client UI 中显示的图标路径，相对于 interface.json 所在目录，支持国际化字符串"
+                },
+                "option": {
+                    "type": "array",
+                    "title": "预任务选项配置",
+                    "description": "可选。数组元素应与外层 option 配置中的键名对应。Client 会收集这些 option 的当前取值并序列化为紧凑 JSON 字符串，追加为最后一个参数；该 option 不参与 pipeline_override 合并",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "exec"
+            ],
+            "additionalProperties": false
+        },
         "agentConfig": {
             "type": "object",
             "title": "代理配置",
@@ -949,6 +1166,47 @@
             "title": "项目描述",
             "description": "显示在「关于」页面。支持文件路径、URL 或直接文本，内容支持 Markdown 格式"
         },
+        "telemetry": {
+            "type": "object",
+            "title": "匿名遥测配置",
+            "description": "💡 v2.9.0 可选。匿名遥测（数据埋点）配置容器，用于向资源作者自己的遥测平台上报崩溃与任务运行统计。并非所有 Client 都会支持。未配置时不进行任何遥测",
+            "properties": {
+                "sentry": {
+                    "type": "object",
+                    "title": "Sentry 遥测配置",
+                    "description": "基于 Sentry 的遥测配置",
+                    "properties": {
+                        "dsn": {
+                            "type": "string",
+                            "title": "Sentry DSN",
+                            "description": "Sentry 项目的 DSN。必填；缺省或为空字符串时不启用 Sentry 遥测"
+                        },
+                        "tracing": {
+                            "type": "boolean",
+                            "title": "是否启用性能 / 事务上报",
+                            "description": "任务开始、结束及各子任务结果以事务 / Span 形式上报。默认 true。关闭后仅上报崩溃 / 错误"
+                        },
+                        "traces_sample_rate": {
+                            "type": "number",
+                            "title": "事务采样率",
+                            "description": "取值 0~1，默认 1.0。用户量较大时可调低以控制 Sentry 配额，但统计将变为抽样",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "environment": {
+                            "type": "string",
+                            "title": "环境标签",
+                            "description": "如 production、beta，用于在 Sentry 中区分。缺省由 Client 决定"
+                        }
+                    },
+                    "required": [
+                        "dsn"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
         "controller": {
             "type": "array",
             "title": "控制器配置",
@@ -972,6 +1230,22 @@
             "items": {
                 "$ref": "#/definitions/groupItem"
             }
+        },
+        "pretask": {
+            "description": "💡 v2.7.0 可选。Controller 启动前执行的预任务配置。若配置 option，Client 应将 option 取值序列化为最后一个参数",
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/pretaskConfig"
+                },
+                {
+                    "type": "array",
+                    "title": "预任务配置数组",
+                    "description": "多个预任务配置。Client 应在 Controller 启动前按数组顺序执行",
+                    "items": {
+                        "$ref": "#/definitions/pretaskConfig"
+                    }
+                }
+            ]
         },
         "agent": {
             "description": "💡 v2.5.0：启动各子进程时 Client 应注入 PI_* 环境变量，详见 Project Interface 文档",
@@ -1013,10 +1287,18 @@
                 "type": "string"
             }
         },
+        "setting": {
+            "type": "array",
+            "title": "任务设置页 UI 声明",
+            "description": "💡 v2.8.0 可选。任务设置页 UI 声明，供 Client 渲染全局任务配置专用设置区域。Client 应将其视为展示层元数据",
+            "items": {
+                "$ref": "#/definitions/settingSection"
+            }
+        },
         "import": {
             "type": "array",
             "title": "导入其他 PI 文件",
-            "description": "可选。导入其他 PI 文件的路径数组。文件相对路径为 interface.json 同目录下的相对路径。支持导入这些文件中的 task、option、preset（💡 v2.3.0）字段",
+            "description": "可选。导入其他 PI 文件的路径数组。文件相对路径为 interface.json 同目录下的相对路径。支持导入这些文件中的 task、option、preset（💡 v2.3.0）、group（💡 v2.4.0）、pretask（💡 v2.7.0）、global_option 与 setting（💡 v2.8.0）字段",
             "items": {
                 "type": "string"
             }
