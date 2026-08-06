@@ -47,7 +47,7 @@
       161
     ],
     "template": "自动逢魔/现世封魔_准备.png",
-    "timeout": 350000
+    "timeout": 500000
   },
   "开始逢魔-检查时间": {
     "action": "Custom",
