@@ -48,6 +48,10 @@
     "model": "Barrier_v1.onnx",
     "recognition": "NeuralNetworkDetect"
   },
+  "test-490627": {
+    "model": "special-icon-v0.1.0.onnx",
+    "recognition": "NeuralNetworkDetect"
+  },
   "testAction": {
     "action": "Custom",
     "custom_action": "SwitchSoul",
