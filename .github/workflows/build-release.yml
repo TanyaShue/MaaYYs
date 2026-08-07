@@ -34,8 +34,8 @@ permissions:
   actions: write
 
 env:
-  MXU_VERSION: v2.1.6
-  MAAFW_VERSION: v5.12.1
+  MXU_VERSION: v1.2.0
+  MAAFW_VERSION: v5.12.3
 
 jobs:
   meta:
@@ -199,7 +199,7 @@ jobs:
       - name: Download MXU
         uses: robinraju/release-downloader@v1
         with:
-          repository: MistEO/MXU
+          repository: TanyaShue/MXU
           tag: ${{ env.MXU_VERSION }}
           fileName: MXU-${{ matrix.mxu_platform }}*
           out-file-path: mxu-download
@@ -268,6 +268,18 @@ jobs:
               echo "::warning::$item was not found."
             fi
           done
+
+          if [ "${{ matrix.os }}" != "win" ]; then
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("package/interface.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          data["agent"]["child_exec"] = "./agent/agent"
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+          fi
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4

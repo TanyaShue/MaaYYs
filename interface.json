@@ -2,20 +2,39 @@
   "interface_version": 2,
   "name": "MaaYYs",
   "label": "阴阳师",
-  "version": "v3.12.4",
+  "version": "v3.13.0-beta.1",
   "description": "阴阳师自动化脚本",
   "icon": "/assets/logo/logo.png",
   "welcome": "README.md",
-  "contact": "TanyaShue",
+  "license": "./LICENSE",
+  "contact": "邮箱 :disjoint7@163.com    qq群:645818258",
   "github": "https://github.com/TanyaShue/MaaYYs",
   "mirrorchyan_rid": "MaaYYs",
   "mirrorchyan_multiplatform": true,
+  "telemetry": {
+    "sentry": {
+      "dsn": "https://4300024a59a9fd38c9b84c713a222fc2@o4511861435465728.ingest.us.sentry.io/4511861444182016",
+      "tracing": true,
+      "environment": "maayys",
+      "traces_sample_rate": 1
+    }
+  },
   "controller": [
     {
       "name": "Android",
       "label": "安卓设备",
       "type": "Adb",
       "description": "通过ADB连接的安卓设备"
+    },
+    {
+      "name": "PlayCover",
+      "label": "PlayCover（macOS）",
+      "type": "PlayCover",
+      "description": "通过支持 MaaTools 的 PlayCover 控制 iOS 版阴阳师",
+      "display_short_side": 720,
+      "playcover": {
+        "uuid": "com.netease.onmyoji"
+      }
     }
   ],
   "resource": [

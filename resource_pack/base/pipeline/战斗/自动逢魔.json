@@ -47,7 +47,7 @@
       161
     ],
     "template": "自动逢魔/现世封魔_准备.png",
-    "timeout": 350000
+    "timeout": 500000
   },
   "开始逢魔-检查时间": {
     "action": "Custom",
@@ -217,10 +217,16 @@
     "post_delay": 1000,
     "recognition": "FeatureMatch",
     "roi": [
-      691,
-      538,
-      414,
-      181
+      932,
+      564,
+      169,
+      156
+    ],
+    "target": [
+      1011,
+      659,
+      23,
+      35
     ],
     "template": "自动逢魔/现世逢魔_首领.png"
   },
@@ -299,7 +305,7 @@
     "next": [
       "现世逢魔_点击一下屏幕下方"
     ],
-    "post_delay": 1000,
+    "post_delay": 2000,
     "recognition": "FeatureMatch",
     "roi": [
       1141,
@@ -382,6 +388,30 @@
     ],
     "model": "Courtyard-v5.0.onnx",
     "recognition": "NeuralNetworkDetect"
+  },
+  "自动逢魔-点击首领-模板匹配": {
+    "action": "Click",
+    "next": [
+      "现世逢魔_点击具体首领"
+    ],
+    "post_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      932,
+      564,
+      169,
+      156
+    ],
+    "target": [
+      1010,
+      653,
+      22,
+      38
+    ],
+    "template": [
+      "战斗/自动逢魔/自动逢魔-点击首领-模板匹配_1.png",
+      "自动逢魔/现世逢魔_首领.png"
+    ]
   },
   "自动逢魔-返回庭院": {
     "max_hit": 1,
@@ -936,7 +966,8 @@
   "自动逢魔9": {
     "next": [
       "识别集结挑战",
-      "[JumpBack]现世逢魔_点击首领"
+      "[JumpBack]现世逢魔_点击首领",
+      "[JumpBack]自动逢魔-点击首领-模板匹配"
     ],
     "recognition": "DirectHit"
   },

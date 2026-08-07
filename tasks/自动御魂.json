@@ -7,7 +7,7 @@
             "group": ["standalone"],
             "option": [
                 "御魂挑战目标",
-                "御魂阵容预设",
+                "是否切换御魂阵容",
                 "是否使用御魂加成",
                 "是否在战斗中投喂宠物",
                 "挑战方式",
@@ -66,11 +66,11 @@
         "大蛇挑战层数": {
             "type": "select",
             "label": "御魂挑战目标",
-            "default_case": "魂土",
+            "default_case": "悲鸣",
             "cases": [
                 {
-                    "name": "魂土",
-                    "label": "魂土",
+                    "name": "悲鸣",
+                    "label": "悲鸣",
                     "pipeline_override": {
                         "自动御魂_点击目标层数": {
                             "expected": "悲鸣"
@@ -78,8 +78,8 @@
                     }
                 },
                 {
-                    "name": "魂十",
-                    "label": "魂十",
+                    "name": "拾层",
+                    "label": "拾层",
                     "pipeline_override": {
                         "自动御魂_点击目标层数": {
                             "expected": "拾层"
@@ -87,8 +87,8 @@
                     }
                 },
                 {
-                    "name": "魂王",
-                    "label": "魂王",
+                    "name": "神罚",
+                    "label": "神罚",
                     "pipeline_override": {
                         "自动御魂_点击目标层数": {
                             "expected": "神罚"
@@ -101,6 +101,87 @@
                     "pipeline_override": {
                         "自动御魂_点击目标层数": {
                             "expected": "虚无"
+                        }
+                    }
+                },
+                {
+                    "name": "壹层",
+                    "label": "壹层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "壹层"
+                        }
+                    }
+                },
+                {
+                    "name": "贰层",
+                    "label": "贰层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "贰层"
+                        }
+                    }
+                },
+                {
+                    "name": "叁层",
+                    "label": "叁层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "叁层"
+                        }
+                    }
+                },
+                {
+                    "name": "肆层",
+                    "label": "肆层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "肆层"
+                        }
+                    }
+                },
+                {
+                    "name": "伍层",
+                    "label": "伍层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "伍层"
+                        }
+                    }
+                },
+                {
+                    "name": "陆层",
+                    "label": "陆层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "陆层"
+                        }
+                    }
+                },
+                {
+                    "name": "柒层",
+                    "label": "柒层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "柒层"
+                        }
+                    }
+                },
+                {
+                    "name": "捌层",
+                    "label": "捌层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "捌层"
+                        }
+                    }
+                },
+                {
+                    "name": "玖层",
+                    "label": "玖层",
+                    "pipeline_override": {
+                        "自动御魂_点击目标层数": {
+                            "expected": "玖层"
                         }
                     }
                 }
@@ -246,6 +327,32 @@
                     "pipeline_override": {
                         "自动御魂-开始全自动挑战": {
                             "enable": true
+                        }
+                    }
+                }
+            ]
+        },
+        "是否切换御魂阵容": {
+            "type": "switch",
+            "label": "是否切换御魂阵容",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动御魂-开始装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["御魂阵容预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动御魂-开始装备御魂": {
+                            "enabled": false
                         }
                     }
                 }
