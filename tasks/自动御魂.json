@@ -7,7 +7,7 @@
             "group": ["standalone"],
             "option": [
                 "御魂挑战目标",
-                "御魂阵容预设",
+                "是否切换御魂阵容",
                 "是否使用御魂加成",
                 "是否在战斗中投喂宠物",
                 "挑战方式",
@@ -327,6 +327,32 @@
                     "pipeline_override": {
                         "自动御魂-开始全自动挑战": {
                             "enable": true
+                        }
+                    }
+                }
+            ]
+        },
+        "是否切换御魂阵容": {
+            "type": "switch",
+            "label": "是否切换御魂阵容",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动御魂-开始装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["御魂阵容预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动御魂-开始装备御魂": {
+                            "enabled": false
                         }
                     }
                 }
