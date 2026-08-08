@@ -170,6 +170,9 @@
         "template": ["斗技/斗技段位赛通知.png"]
       }
     },
+    "focus": {
+      "Node.Recognition.Succeeded": "恭喜您获得段级赛资格,后三场战斗将助您快速升段"
+    },
     "action": {
       "type": "Click",
       "param": { "target": [586, 493, 101, 41] }
