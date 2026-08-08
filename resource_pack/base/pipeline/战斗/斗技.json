@@ -48,8 +48,8 @@
       "[JumpBack]斗技-应用预设-点击导入预设"
     ],
     "recognition": "TemplateMatch",
-    "roi": [784, 255, 95, 160],
-    "template": ["斗技/御魂预设/点击阵容.png"]
+    "roi": [1051, 54, 101, 99],
+    "template": ["斗技/御魂预设/点击应用.png"]
   },
   "斗技-应用预设-换过了": {
     "action": "Click",
