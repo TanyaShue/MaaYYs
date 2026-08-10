@@ -225,13 +225,8 @@
   "投喂宠物17": {
     "action": "Click",
     "expected": 1,
-    "labels": [
-      "召唤",
-      "宠物小屋",
-      "探索",
-      "神龛"
-    ],
-    "model": "Courtyard-v5.0.onnx",
+    "labels": ["召唤", "宠物小屋","悬赏封印","探索","町中", "神龛"],
+    "model": "Courtyard-v6.0.onnx",
     "post_delay": 2000,
     "recognition": "NeuralNetworkDetect",
     "threshold": 0.8
