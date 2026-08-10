@@ -443,19 +443,11 @@
     "recognition": "Custom"
   },
   "自动御魂-锁定阵容": {
-    "action": "Click",
     "max_hit": 1,
-    "recognition": "TemplateMatch",
-    "roi": [
-      629,
-      644,
-      61,
-      60
+    "next": [
+      "通用-锁定阵容"
     ],
-    "template": [
-      "战斗/自动御魂/自动御魂-锁定阵容_1.png",
-      "自动御魂/自动御魂18.png"
-    ]
+    "recognition": "DirectHit"
   },
   "自动御魂1": {
     "action": "Click",

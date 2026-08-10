@@ -462,6 +462,37 @@
       "战斗/自动地鬼/自动地鬼-匹配挑战图片_1.png.png"
     ]
   },
+  "自动地鬼-点击解锁图标": {
+    "action": "Click",
+    "expected": 2,
+    "model": "special-icon-v0.1.0.onnx",
+    "post_delay": 1000,
+    "recognition": "NeuralNetworkDetect"
+  },
+  "自动地鬼-点击锁定图标来解锁": {
+    "action": "Click",
+    "expected": 3,
+    "model": "special-icon-v0.1.0.onnx",
+    "post_delay": 1000,
+    "recognition": "NeuralNetworkDetect"
+  },
+  "自动地鬼-识别解锁图标": {
+    "expected": 2,
+    "model": "special-icon-v0.1.0.onnx",
+    "next": [
+      "挑战地鬼"
+    ],
+    "post_delay": 1000,
+    "recognition": "NeuralNetworkDetect"
+  },
+  "自动地鬼-识别锁定图标": {
+    "expected": 3,
+    "model": "special-icon-v0.1.0.onnx",
+    "next": [
+      "挑战地鬼"
+    ],
+    "recognition": "NeuralNetworkDetect"
+  },
   "自动地鬼10": {
     "expected": "今日|挑战|地域|最强",
     "recognition": "OCR",
@@ -574,96 +605,21 @@
     ],
     "recognition": "DirectHit"
   },
-  "自动地鬼3_点击解锁": {
-    "action": "Click",
-    "recognition": "TemplateMatch",
-    "roi": [
-      1093,
-      646,
-      63,
-      54
-    ],
-    "target": [
-      1120,
-      659,
-      22,
-      27
-    ],
-    "template": [
-      "自动地鬼/自动地鬼3_解锁阵容.png",
-      "自动地鬼/自动地鬼3_解锁阵容_1.png"
-    ],
-    "timeout": 1000
-  },
-  "自动地鬼3_点击锁定": {
-    "action": "Click",
-    "recognition": "TemplateMatch",
-    "roi": [
-      1108,
-      651,
-      44,
-      52
-    ],
-    "target": [
-      1117,
-      659,
-      21,
-      24
-    ],
-    "template": [
-      "自动地鬼/自动地鬼3_点击锁定.png"
-    ],
-    "timeout": 1000
-  },
   "自动地鬼3_解除锁定阵容": {
     "next": [
-      "自动地鬼3_识别解锁阵容",
-      "[JumpBack]自动地鬼3_点击解锁"
+      "自动地鬼-识别解锁图标",
+      "[JumpBack]自动地鬼-点击锁定图标来解锁"
     ],
     "on_error": [
       "挑战地鬼"
     ],
     "recognition": "DirectHit"
   },
-  "自动地鬼3_识别解锁阵容": {
-    "next": [
-      "挑战地鬼"
-    ],
-    "recognition": "TemplateMatch",
-    "roi": [
-      1108,
-      651,
-      44,
-      52
-    ],
-    "template": [
-      "自动地鬼/自动地鬼3_点击锁定.png"
-    ],
-    "timeout": 1000
-  },
-  "自动地鬼3_识别锁定阵容": {
-    "next": [
-      "挑战地鬼"
-    ],
-    "recognition": "TemplateMatch",
-    "roi": [
-      1093,
-      646,
-      63,
-      54
-    ],
-    "template": [
-      "战斗/自动地鬼/自动地鬼3_识别锁定阵容_1.png",
-      "自动地鬼/自动地鬼3_解锁阵容.png",
-      "自动地鬼/自动地鬼3_解锁阵容_1.png"
-    ],
-    "timeout": 1000
-  },
   "自动地鬼3_锁定阵容": {
     "enabled": false,
     "next": [
-      "自动地鬼3_识别锁定阵容",
-      "[JumpBack]自动地鬼3_点击锁定"
+      "自动地鬼-识别锁定图标",
+      "[JumpBack]自动地鬼-点击解锁图标"
     ],
     "on_error": [
       "挑战地鬼"
