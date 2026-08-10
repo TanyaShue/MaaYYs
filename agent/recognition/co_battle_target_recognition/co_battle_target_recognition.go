@@ -173,12 +173,11 @@ func (r *CoBattleTargetRecognition) handleCheckAction(ctx *maa.Context, controll
 	r.mu.RUnlock()
 
 	if isTarget {
-		fmt.Printf("CoBattleTargetRecognition: 目标 '%s' 是协战目标\n", targetName)
+		fmt.Printf("CoBattleTargetRecognition: 目标 '%s' 是协战目标 跳过战斗\n", targetName)
 		return &maa.CustomRecognitionResult{
 			Box: detail.Box,
 		}, true
 	} else {
-		fmt.Printf("CoBattleTargetRecognition: 目标 '%s' 不是协战目标\n", targetName)
 		return nil, false
 	}
 }
