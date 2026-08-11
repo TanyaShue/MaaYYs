@@ -706,13 +706,13 @@
   "通用-解锁阵容-点击解锁图标": {
     "action": "Click",
     "expected": 3,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "post_delay": 1000,
     "recognition": "NeuralNetworkDetect"
   },
   "通用-解锁阵容-识别是否解锁图标": {
     "expected": 2,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "post_delay": 1000,
     "recognition": "NeuralNetworkDetect"
   },
@@ -740,13 +740,13 @@
   "通用-锁定阵容-点击解锁图标": {
     "action": "Click",
     "expected": 2,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "post_delay": 1000,
     "recognition": "NeuralNetworkDetect"
   },
   "通用-锁定阵容-识别是否锁定阵容": {
     "expected": 3,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "recognition": "NeuralNetworkDetect"
   },
   "通用10": {

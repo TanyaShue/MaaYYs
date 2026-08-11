@@ -128,6 +128,7 @@
   },
   "地鬼-点击悬赏目标": {
     "action": "Click",
+    "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": [
       1015,
@@ -465,20 +466,20 @@
   "自动地鬼-点击解锁图标": {
     "action": "Click",
     "expected": 2,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "post_delay": 1000,
     "recognition": "NeuralNetworkDetect"
   },
   "自动地鬼-点击锁定图标来解锁": {
     "action": "Click",
     "expected": 3,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "post_delay": 1000,
     "recognition": "NeuralNetworkDetect"
   },
   "自动地鬼-识别解锁图标": {
     "expected": 2,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "next": [
       "挑战地鬼"
     ],
@@ -487,7 +488,7 @@
   },
   "自动地鬼-识别锁定图标": {
     "expected": 3,
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "next": [
       "挑战地鬼"
     ],

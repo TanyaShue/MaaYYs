@@ -53,7 +53,7 @@
     "recognition": "NeuralNetworkDetect"
   },
   "test-490627": {
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "recognition": "NeuralNetworkDetect"
   },
   "testAction": {
