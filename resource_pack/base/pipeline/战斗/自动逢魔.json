@@ -86,14 +86,9 @@
   },
   "点击石像神龛": {
     "action": "Click",
-    "expected": 3,
-    "labels": [
-      "召唤",
-      "宠物小屋",
-      "探索",
-      "神龛"
-    ],
-    "model": "Courtyard-v5.0.onnx",
+    "expected": 5,
+    "labels": ["召唤", "宠物小屋","悬赏封印","探索","町中", "神龛"],
+    "model": "Courtyard-v6.0.onnx",
     "recognition": "NeuralNetworkDetect"
   },
   "点击逢魔": {
@@ -272,10 +267,10 @@
       53
     ],
     "target": [
-      587,
-      590,
-      289,
-      107
+      472,
+      563,
+      315,
+      144
     ],
     "timeout": 350000
   },
@@ -293,10 +288,10 @@
       53
     ],
     "target": [
-      587,
-      590,
-      289,
-      107
+      434,
+      592,
+      352,
+      125
     ],
     "timeout": 1000
   },
@@ -378,15 +373,12 @@
       0,
       1,
       2,
-      3
+      3,
+      4,
+      5
     ],
-    "labels": [
-      "召唤",
-      "宠物小屋",
-      "探索",
-      "神龛"
-    ],
-    "model": "Courtyard-v5.0.onnx",
+    "labels": ["召唤", "宠物小屋","悬赏封印","探索","町中", "神龛"],
+    "model": "Courtyard-v6.0.onnx",
     "recognition": "NeuralNetworkDetect"
   },
   "自动逢魔-点击首领-模板匹配": {

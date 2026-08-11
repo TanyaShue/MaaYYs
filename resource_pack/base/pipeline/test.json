@@ -48,8 +48,12 @@
     "model": "Barrier_v1.onnx",
     "recognition": "NeuralNetworkDetect"
   },
+  "test-284164": {
+    "model": "tt-Courtyard-v6.0.onnx",
+    "recognition": "NeuralNetworkDetect"
+  },
   "test-490627": {
-    "model": "special-icon-v0.1.0.onnx",
+    "model": "special-icon-v0.1.1.onnx",
     "recognition": "NeuralNetworkDetect"
   },
   "testAction": {
