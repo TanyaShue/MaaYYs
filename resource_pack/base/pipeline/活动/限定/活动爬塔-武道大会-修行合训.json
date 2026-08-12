@@ -1,0 +1,244 @@
+{
+  "活动爬塔-武道大会-修行合训": {
+    "expected": "修行合训",
+    "focus": {
+      "Node.Recognition.Failed": "活动爬塔-武道大会-修行合训-活动界面识别失败"
+    },
+    "next": [
+      "爬塔-武道大会-修行合训-活动票花光",
+      "爬塔-武道大会-修行合训-体力票花光",
+      "爬塔-武道大会-修行合训-识别挑战次数是否达标",
+      "[JumpBack]活动爬塔-武道大会-修行合训-锁定阵容",
+      "[JumpBack]活动爬塔-武道大会-修行合训-判断是否有自己发现的御灵",
+      "[JumpBack]活动爬塔-武道大会-修行合训-识别挑战"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      136,
+      9,
+      158,
+      67
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-武道大会-修行合训-判断是否有自己发现的御灵": {
+    "action": "Click",
+    "green_mask": true,
+    "next": [
+      "活动爬塔-武道大会-修行合训-识别是否打开收服御灵界面"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      147,
+      39,
+      170,
+      630
+    ],
+    "template": [
+      "活动/限定/活动爬塔-武道大会-修行合训/活动爬塔-武道大会-修行合训-判断是否有自己发现的御灵_1.png",
+      "活动/限定/活动爬塔-武道大会-修行合训/活动爬塔-武道大会-修行合训-判断是否有自己发现的御灵_2.png"
+    ],
+    "timeout": 5000
+  },
+  "活动爬塔-武道大会-修行合训-点击准备": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1048,
+      482,
+      232,
+      237
+    ],
+    "template": [
+      "活动/限定/活动爬塔-武道大会-修行合训/活动爬塔-武道大会-修行合训-点击准备_1.png"
+    ]
+  },
+  "活动爬塔-武道大会-修行合训-点击屏幕继续": {
+    "action": "Custom",
+    "custom_action": "RandomWait",
+    "custom_action_param": {
+      "max": 5,
+      "min": 1
+    },
+    "expected": "点击屏幕|继续",
+    "max_hit": 1,
+    "recognition": "OCR"
+  },
+  "活动爬塔-武道大会-修行合训-点击开始挑战": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1027,
+      453,
+      253,
+      254
+    ],
+    "template": [
+      "活动/限定/活动爬塔-武道大会-修行合训/活动爬塔-武道大会-修行合训-点击开始挑战_1.png"
+    ]
+  },
+  "活动爬塔-武道大会-修行合训-点击挑战": {
+    "action": "Click",
+    "expected": "搜寻",
+    "post_delay": 5000,
+    "recognition": "OCR",
+    "roi": [
+      1026,
+      579,
+      225,
+      85
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-武道大会-修行合训-确保开启挑战": {
+    "expected": "收服御灵",
+    "inverse": true,
+    "next": [
+      "活动爬塔-武道大会-修行合训-识别活动界面",
+      "[JumpBack]活动爬塔-武道大会-修行合训-继续点击屏幕继续",
+      "[JumpBack]活动爬塔-武道大会-修行合训-点击屏幕继续",
+      "[JumpBack]活动爬塔-武道大会-修行合训-点击准备"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      490,
+      29,
+      297,
+      118
+    ],
+    "timeout": 620000
+  },
+  "活动爬塔-武道大会-修行合训-继续点击屏幕继续": {
+    "action": "Click",
+    "expected": "点击屏幕|继续",
+    "post_delay": 1000,
+    "recognition": "OCR"
+  },
+  "活动爬塔-武道大会-修行合训-识别挑战": {
+    "action": "Custom",
+    "custom_action": "RandomWait",
+    "custom_action_param": {
+      "max": 10,
+      "min": 1
+    },
+    "expected": "搜寻",
+    "focus": {
+      "Node.Action.Starting": "[debug]开始随机等待",
+      "Node.Action.Succeeded": "[debug]随机等待结束"
+    },
+    "next": [
+      "活动爬塔-武道大会-修行合训-识别是否打开收服御灵界面",
+      "[JumpBack]活动爬塔-武道大会-修行合训-点击挑战"
+    ],
+    "on_error": [
+      "跳过"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1085,
+      584,
+      173,
+      79
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-武道大会-修行合训-识别是否打开收服御灵界面": {
+    "expected": "收服御灵",
+    "next": [
+      "活动爬塔-武道大会-修行合训-确保开启挑战",
+      "[JumpBack]活动爬塔-武道大会-修行合训-点击开始挑战"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      490,
+      29,
+      297,
+      118
+    ]
+  },
+  "活动爬塔-武道大会-修行合训-识别活动界面": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_names": [
+        "活动爬塔-武道大会-修行合训-点击屏幕继续"
+      ]
+    },
+    "expected": "修行合训",
+    "recognition": "OCR",
+    "replace": [
+      [
+        "播",
+        "擂"
+      ],
+      [
+        "鸣鼓播台",
+        "修行合训"
+      ]
+    ],
+    "roi": [
+      136,
+      9,
+      158,
+      67
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-武道大会-修行合训-锁定阵容": {
+    "enabled": false,
+    "max_hit": 1,
+    "next": [
+      "通用-锁定阵容"
+    ],
+    "recognition": "DirectHit"
+  },
+  "爬塔-武道大会-修行合训-体力票花光": {
+    "enabled": false,
+    "expected": "^0$",
+    "focus": {
+      "Node.Recognition.Succeeded": "体力票刷完了!!!,任务结束"
+    },
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1129,
+      8,
+      128,
+      54
+    ]
+  },
+  "爬塔-武道大会-修行合训-活动票花光": {
+    "enabled": false,
+    "expected": "^0$",
+    "focus": {
+      "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
+    },
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      929,
+      10,
+      90,
+      52
+    ]
+  },
+  "爬塔-武道大会-修行合训-识别挑战次数是否达标": {
+    "custom_recognition": "TaskCounterRecognition",
+    "custom_recognition_param": {
+      "target_count": 10
+    },
+    "enabled": false,
+    "inverse": true,
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "Custom"
+  }
+}
