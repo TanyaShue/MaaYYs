@@ -685,6 +685,7 @@
     ]
   },
   "通用-拒绝下载": {
+    "action": "Click",
     "recognition": "TemplateMatch",
     "roi": [
       307,
@@ -1280,16 +1281,11 @@
   },
   "通用_识别挑战次数": {
     "recognition": "OCR",
-    "roi": [309, 478, 78, 35]
-  },
-  "通用-拒绝下载": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "roi": [307, 292, 410, 346],
-        "template": ["通用/通用/通用-拒绝下载.png"]
-      }
-    },
-    "action": "Click"
+    "roi": [
+      309,
+      478,
+      78,
+      35
+    ]
   }
 }
