@@ -3,15 +3,8 @@
     "action": "StopTask",
     "recognition": "DirectHit"
   },
-  "悬赏封印_协助战斗": {
+  "悬赏封印_协助战斗1": {
     "expected": "^协?悬赏封印$",
-    "next": [
-      "确定关闭悬赏封印协助",
-      "[JumpBack]悬赏封印_拒绝邀请"
-    ],
-    "on_error": [
-      "跳过"
-    ],
     "recognition": "OCR",
     "roi": [
       490,
@@ -57,9 +50,6 @@
   },
   "超时了_出现异常咯": {
     "max_hit": 5,
-    "next": [
-      "悬赏封印_协助战斗"
-    ],
     "on_error": [
       "跳过"
     ],
