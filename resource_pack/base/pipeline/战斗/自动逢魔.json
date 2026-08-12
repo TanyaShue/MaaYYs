@@ -87,7 +87,14 @@
   "点击石像神龛": {
     "action": "Click",
     "expected": 5,
-    "labels": ["召唤", "宠物小屋","悬赏封印","探索","町中", "神龛"],
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "悬赏封印",
+      "探索",
+      "町中",
+      "神龛"
+    ],
     "model": "Courtyard-v6.0.onnx",
     "recognition": "NeuralNetworkDetect"
   },
@@ -140,9 +147,6 @@
   "现世逢魔_点击一下屏幕下方": {
     "action": "Click",
     "expected": "获得奖励",
-    "next": [
-      "自动逢魔9"
-    ],
     "post_delay": 1000,
     "recognition": "OCR",
     "roi": [
@@ -297,8 +301,12 @@
   },
   "现世逢魔_领取奖励": {
     "action": "Click",
+    "max_hit": 1,
     "next": [
       "现世逢魔_点击一下屏幕下方"
+    ],
+    "on_error": [
+      "跳过"
     ],
     "post_delay": 2000,
     "recognition": "FeatureMatch",
@@ -309,7 +317,7 @@
       98
     ],
     "template": "自动逢魔/现世逢魔_奖励达摩.png",
-    "timeout": 1000
+    "timeout": 2000
   },
   "现世逢魔_首领_返回": {
     "action": "Click",
@@ -377,7 +385,14 @@
       4,
       5
     ],
-    "labels": ["召唤", "宠物小屋","悬赏封印","探索","町中", "神龛"],
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "悬赏封印",
+      "探索",
+      "町中",
+      "神龛"
+    ],
     "model": "Courtyard-v6.0.onnx",
     "recognition": "NeuralNetworkDetect"
   },
@@ -1026,9 +1041,12 @@
     "action": "Click",
     "expected": "0/4",
     "next": [
-      "现世逢魔_领取奖励",
+      "[JumpBack]现世逢魔_领取奖励",
       "自动逢魔9",
       "[JumpBack]现世逢魔"
+    ],
+    "on_error": [
+      "跳过"
     ],
     "post_delay": 1000,
     "recognition": "OCR",
