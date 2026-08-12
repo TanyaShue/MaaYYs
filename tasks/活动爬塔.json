@@ -3,7 +3,7 @@
         {
             "name": "活动爬塔-武道大会",
             "label": "活动爬塔-武道大会-日常训练",
-            "description": "在爬塔界面开始,手动装备御魂",
+            "description": "在爬塔界面开始,手动装备御魂,锁定阵容",
             "entry": "活动爬塔-武道大会",
             "group": ["promotion"],
             "option": [
