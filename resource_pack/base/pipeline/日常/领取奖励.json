@@ -6,17 +6,33 @@
       "[JumpBack]通用-拒绝下载",
       "[JumpBack]领取奖励_商店每日奖励_点击礼包屋"
     ],
-    "on_error": ["导航-庭院"],
+    "on_error": [
+      "导航-庭院"
+    ],
     "recognition": "OCR",
-    "roi": [712, 665, 520, 55]
+    "roi": [
+      712,
+      665,
+      520,
+      55
+    ]
   },
   "花合战奖励领取-确保没有领取奖励的小纸人": {
     "inverse": true,
-    "next": ["领取花合战奖励结束"],
+    "next": [
+      "领取花合战奖励结束"
+    ],
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [828, 494, 239, 225],
-    "template": ["庭院/花合战_全部领取.png"]
+    "roi": [
+      828,
+      494,
+      239,
+      225
+    ],
+    "template": [
+      "庭院/花合战_全部领取.png"
+    ]
   },
   "识别邮箱界面": {
     "expected": "邮箱",
@@ -26,21 +42,43 @@
       "导航-庭院"
     ],
     "recognition": "OCR",
-    "roi": [554, 46, 223, 80]
+    "roi": [
+      554,
+      46,
+      223,
+      80
+    ]
   },
   "邮件_不存在奖励领取": {
     "inverse": true,
-    "next": ["[JumpBack]邮件_领取奖励_点击关闭", "导航-庭院"],
+    "next": [
+      "[JumpBack]邮件_领取奖励_点击关闭",
+      "导航-庭院"
+    ],
     "recognition": "TemplateMatch",
-    "roi": [1, 548, 180, 171],
-    "template": ["领取奖励/领取奖励1.png"]
+    "roi": [
+      1,
+      548,
+      180,
+      171
+    ],
+    "template": [
+      "领取奖励/领取奖励1.png"
+    ]
   },
   "邮件_全部领取": {
     "action": "Click",
-    "next": ["邮件_确认领取"],
+    "next": [
+      "邮件_确认领取"
+    ],
     "post_delay": 1000,
     "recognition": "FeatureMatch",
-    "roi": [54, 579, 191, 132],
+    "roi": [
+      54,
+      579,
+      191,
+      132
+    ],
     "template": "庭院/邮件_全部领取.png",
     "timeout": 3000
   },
@@ -50,8 +88,18 @@
     "post_delay": 2000,
     "pre_delay": 1000,
     "recognition": "OCR",
-    "roi": [400, 220, 473, 158],
-    "target": [672, 402, 176, 55]
+    "roi": [
+      400,
+      220,
+      473,
+      158
+    ],
+    "target": [
+      672,
+      402,
+      176,
+      55
+    ]
   },
   "邮件_确认领取": {
     "action": "Click",
@@ -63,7 +111,12 @@
     ],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [695, 543, 146, 59]
+    "roi": [
+      695,
+      543,
+      146,
+      59
+    ]
   },
   "邮件_领取奖励_点击关闭": {
     "action": "Click",
@@ -72,76 +125,167 @@
     },
     "post_delay": 2000,
     "recognition": "FeatureMatch",
-    "roi": [1056, 3, 224, 213],
+    "roi": [
+      1056,
+      3,
+      224,
+      213
+    ],
     "template": "通用图标/关闭.png"
   },
   "邮件_领取奖励_点击底部关闭奖励界面": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "DirectHit",
-    "target": [414, 517, 445, 135]
+    "target": [
+      414,
+      517,
+      445,
+      135
+    ]
   },
   "领取奖励-打开商店-ocr": {
     "action": "Click",
     "expected": "商店",
     "recognition": "OCR",
-    "roi": [533, 642, 363, 52]
+    "roi": [
+      533,
+      642,
+      363,
+      52
+    ]
+  },
+  "领取奖励-点击任务-特征匹配": {
+    "action": "Click",
+    "count": 8,
+    "next": [
+      "[JumpBack]领取奖励12",
+      "[JumpBack]领取奖励_花合战_全部领取",
+      "[JumpBack]领取奖励11",
+      "花合战奖励领取-确保没有领取奖励的小纸人"
+    ],
+    "post_delay": 1000,
+    "recognition": "FeatureMatch",
+    "roi": [
+      1180,
+      292,
+      90,
+      143
+    ],
+    "template": [
+      "庭院/花合战_任务.png",
+      "庭院/花合战_任务_红点.png",
+      "日常/领取奖励/领取奖励_花合战_点击任务_1.png"
+    ],
+    "timeout": 10000
   },
   "领取奖励-确保位于花合战界面": {
     "expected": "花合战",
-    "next": ["领取奖励_花合战_点击任务", "领取奖励-花合战-点击任务"],
+    "next": [
+      "领取奖励_花合战_点击任务",
+      "领取奖励-花合战-点击任务",
+      "领取奖励-点击任务-特征匹配"
+    ],
     "recognition": "OCR",
-    "roi": [74, 9, 142, 64]
+    "roi": [
+      74,
+      9,
+      142,
+      64
+    ]
   },
   "领取奖励-花合战-点击任务": {
     "action": "Click",
-    "expected": "任务",
+    "expected": "任|务",
     "next": [
       "[JumpBack]领取奖励12",
       "[JumpBack]领取奖励11",
       "[JumpBack]领取奖励_花合战_全部领取",
       "花合战奖励领取-确保没有领取奖励的小纸人"
     ],
-    "on_error": ["导航-庭院"],
+    "on_error": [
+      "导航-庭院"
+    ],
     "post_delay": 2000,
     "recognition": "OCR",
-    "roi": [1192, 308, 53, 102],
+    "roi": [
+      1192,
+      308,
+      53,
+      102
+    ],
     "timeout": 10000
   },
   "领取奖励1": {
     "action": "Click",
-    "next": ["邮件_确认领取"],
+    "next": [
+      "邮件_确认领取"
+    ],
     "recognition": "TemplateMatch",
-    "roi": [1, 548, 180, 171],
-    "template": ["领取奖励/领取奖励1.png"]
+    "roi": [
+      1,
+      548,
+      180,
+      171
+    ],
+    "template": [
+      "领取奖励/领取奖励1.png"
+    ]
   },
   "领取奖励11": {
     "action": "Click",
     "expected": "全部|领取|全部领取",
     "post_delay": 2000,
     "recognition": "OCR",
-    "roi": [856, 558, 191, 157]
+    "roi": [
+      856,
+      558,
+      191,
+      157
+    ]
   },
   "领取奖励12": {
     "action": "Click",
     "expected": "获得奖励",
     "post_delay": 1000,
     "recognition": "OCR",
-    "target": [597, 617, 83, 72]
+    "target": [
+      597,
+      617,
+      83,
+      72
+    ]
   },
   "领取奖励13": {
     "action": "Click",
     "expected": "一键|领取",
-    "next": ["邮件_确认领取"],
+    "next": [
+      "邮件_确认领取"
+    ],
     "recognition": "OCR",
-    "roi": [54, 567, 101, 96]
+    "roi": [
+      54,
+      567,
+      101,
+      96
+    ]
   },
   "领取奖励9": {
     "expected": "邮箱",
-    "next": ["邮件_全部领取", "领取奖励1", "领取奖励13", "邮件_不存在奖励领取"],
+    "next": [
+      "邮件_全部领取",
+      "领取奖励1",
+      "领取奖励13",
+      "邮件_不存在奖励领取"
+    ],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [554, 46, 223, 80],
+    "roi": [
+      554,
+      46,
+      223,
+      80
+    ],
     "timeout": 3000
   },
   "领取奖励_商店每日奖励": {
@@ -160,28 +304,49 @@
   "领取奖励_商店每日奖励_点击推荐_OCR": {
     "action": "Click",
     "expected": "日常",
-    "next": ["领取奖励_商店每日奖励_领取每日免费礼包"],
-    "on_error": ["导航-庭院"],
+    "next": [
+      "领取奖励_商店每日奖励_领取每日免费礼包"
+    ],
+    "on_error": [
+      "导航-庭院"
+    ],
     "post_delay": 2000,
     "recognition": "OCR",
-    "roi": [1163, 71, 95, 549],
+    "roi": [
+      1163,
+      71,
+      95,
+      549
+    ],
     "timeout": 10000
   },
   "领取奖励_商店每日奖励_点击礼包屋": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "FeatureMatch",
-    "roi": [1082, 577, 197, 142],
+    "roi": [
+      1082,
+      577,
+      197,
+      142
+    ],
     "template": "庭院/商店_礼包屋.png",
     "timeout": 5000
   },
   "领取奖励_商店每日奖励_领取每日免费礼包": {
     "action": "Click",
     "expected": "免费",
-    "next": ["领取奖励_商店每日奖励_领取每日免费礼包_返回"],
+    "next": [
+      "领取奖励_商店每日奖励_领取每日免费礼包_返回"
+    ],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [221, 285, 309, 67],
+    "roi": [
+      221,
+      285,
+      309,
+      67
+    ],
     "timeout": 1000
   },
   "领取奖励_商店每日奖励_领取每日免费礼包_返回": {
@@ -189,24 +354,46 @@
     "focus": {
       "Node.Action.Succeeded": "黑碎领取完毕"
     },
-    "next": ["导航-庭院"],
+    "next": [
+      "导航-庭院"
+    ],
     "post_delay": 2000,
     "recognition": "DirectHit",
-    "target": [16, 5, 46, 45]
+    "target": [
+      16,
+      5,
+      46,
+      45
+    ]
   },
   "领取奖励_打开商店": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "FeatureMatch",
-    "roi": [620, 578, 131, 118],
-    "template": ["庭院/庭院_商店.png", "庭院/庭院_商店_红点.png"]
+    "roi": [
+      620,
+      578,
+      131,
+      118
+    ],
+    "template": [
+      "庭院/庭院_商店.png",
+      "庭院/庭院_商店_红点.png"
+    ]
   },
   "领取奖励_花合战_全部领取": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [828, 494, 239, 225],
-    "template": ["非战斗/领取奖励/领取奖励_花合战_全部领取_1.png"]
+    "roi": [
+      828,
+      494,
+      239,
+      225
+    ],
+    "template": [
+      "非战斗/领取奖励/领取奖励_花合战_全部领取_1.png"
+    ]
   },
   "领取奖励_花合战_点击任务": {
     "action": "Click",
@@ -216,11 +403,22 @@
       "[JumpBack]领取奖励11",
       "花合战奖励领取-确保没有领取奖励的小纸人"
     ],
-    "on_error": ["导航-庭院"],
+    "on_error": [
+      "导航-庭院"
+    ],
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [1180, 292, 90, 143],
-    "template": ["庭院/花合战_任务.png", "庭院/花合战_任务_红点.png"],
+    "roi": [
+      1180,
+      292,
+      90,
+      143
+    ],
+    "template": [
+      "庭院/花合战_任务.png",
+      "庭院/花合战_任务_红点.png",
+      "日常/领取奖励/领取奖励_花合战_点击任务_1.png"
+    ],
     "timeout": 10000
   },
   "领取奖励_花合战奖励": {
@@ -228,12 +426,18 @@
       "Node.Action.Starting": "开始领取花合战奖励"
     },
     "max_hit": 1,
-    "next": ["领取奖励-确保位于花合战界面", "[JumpBack]导航-花合战"],
+    "next": [
+      "领取奖励-确保位于花合战界面",
+      "[JumpBack]导航-花合战"
+    ],
     "recognition": "DirectHit"
   },
   "领取奖励_邮件": {
     "max_hit": 1,
-    "next": ["领取奖励9", "[JumpBack]领取奖励_邮件_点击邮件"],
+    "next": [
+      "领取奖励9",
+      "[JumpBack]领取奖励_邮件_点击邮件"
+    ],
     "recognition": "DirectHit"
   },
   "领取奖励_邮件_点击邮件": {
@@ -244,15 +448,25 @@
     "max_hit": 1,
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [1117, 0, 75, 98],
-    "template": ["庭院/邮箱.png", "庭院/邮箱_红点.png"],
+    "roi": [
+      1117,
+      0,
+      75,
+      98
+    ],
+    "template": [
+      "庭院/邮箱.png",
+      "庭院/邮箱_红点.png"
+    ],
     "timeout": 3000
   },
   "领取花合战奖励结束": {
     "focus": {
       "Node.Recognition.Succeeded": "花合战奖励领取完成"
     },
-    "next": ["导航-庭院"],
+    "next": [
+      "导航-庭院"
+    ],
     "recognition": "DirectHit"
   }
 }
