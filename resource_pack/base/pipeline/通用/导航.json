@@ -453,7 +453,7 @@
     "model": "Courtyard-v6.0.onnx",
     "post_delay": 2000,
     "recognition": "NeuralNetworkDetect",
-    "threshold": 0.7
+    "threshold": 0.8
   },
   "导航-庭院-识别是否位于庭院-模板匹配": {
     "recognition": "TemplateMatch",
