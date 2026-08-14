@@ -1,0 +1,50 @@
+{
+  "阴阳寮商店购买": {
+    "next": [
+      "阴阳寮商店购买-确保位于阴阳寮商店",
+      "[JumpBack]阴阳寮商店购买-导航-功勋商店"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮商店购买-导航-功勋商店": {
+    "next": [
+      "阴阳寮商店购买-识别是否位于阴阳寮商店",
+      "[JumpBack]阴阳寮商店购买-点击功勋商店",
+      "[JumpBack]导航-阴阳寮神社"
+    ],
+    "recognition": "DirectHit"
+  },
+  "阴阳寮商店购买-点击功勋商店": {
+    "action": "Click",
+    "expected": "功勋商店",
+    "recognition": "OCR",
+    "roi": [
+      129,
+      115,
+      1028,
+      496
+    ]
+  },
+  "阴阳寮商店购买-确保位于阴阳寮商店": {
+    "expected": "功勋商店",
+    "recognition": "OCR",
+    "roi": [
+      369,
+      9,
+      458,
+      148
+    ],
+    "threshold": 0.4
+  },
+  "阴阳寮商店购买-识别是否位于阴阳寮商店": {
+    "expected": "功勋商店",
+    "recognition": "OCR",
+    "roi": [
+      369,
+      9,
+      458,
+      148
+    ],
+    "threshold": 0.4
+  }
+}
