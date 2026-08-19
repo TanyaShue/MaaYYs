@@ -2,7 +2,7 @@
   "真蛇": {
     "next": [
       "[JumpBack]真蛇-导航到探索界面",
-      "真蛇-识别是否有真蛇",
+      "[JumpBack]真蛇-识别是否有真蛇",
       "[JumpBack]真蛇-空节点",
       "真蛇-未识别到真蛇"
     ],
@@ -61,6 +61,9 @@
     "focus": {
       "Node.Recognition.Succeeded": "没有真蛇挑战次数,任务结束"
     },
+    "next": [
+      "导航-庭院"
+    ],
     "recognition": "DirectHit"
   },
   "真蛇-点击准备": {
