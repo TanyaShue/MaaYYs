@@ -32,11 +32,89 @@
       639
     ]
   },
+  "活动爬塔-云华依言歌-回到式神录": {
+    "max_hit": 1,
+    "next": [
+      "导航-式神录"
+    ],
+    "recognition": "DirectHit"
+  },
+  "活动爬塔-云华依言歌-大富翁-判断是否自动开始": {
+    "expected": "自动开始",
+    "inverse": true,
+    "max_hit": 1,
+    "next": [
+      "活动爬塔-云华依言歌-大富翁-点击自动"
+    ],
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      854,
+      572,
+      209,
+      75
+    ]
+  },
+  "活动爬塔-云华依言歌-大富翁-判断是否该结束任务": {
+    "expected": "限购|70次",
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      685,
+      188,
+      361,
+      48
+    ]
+  },
+  "活动爬塔-云华依言歌-大富翁-点击自动": {
+    "action": "Click",
+    "expected": "自动",
+    "recognition": "OCR",
+    "roi": [
+      928,
+      647,
+      71,
+      59
+    ]
+  },
+  "活动爬塔-云华依言歌-大富翁-识别次数": {
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      1079,
+      523,
+      201,
+      197
+    ],
+    "template": [
+      "活动/每月周期/活动爬塔-云华依言歌/活动爬塔-云华依言歌-大富翁-识别次数_1.png"
+    ]
+  },
+  "活动爬塔-云华依言歌-大富翁-锁定阵容": {
+    "max_hit": 1,
+    "next": [
+      "通用-锁定阵容"
+    ],
+    "recognition": "DirectHit"
+  },
   "活动爬塔-云华依言歌-导航-云华依言歌": {
     "next": [
       "活动爬塔-云华依言歌-识别是否位于活动界面",
       "[JumpBack]活动爬塔-云华依言歌-判断是否存在版本活动",
       "[JumpBack]导航-活动总览"
+    ],
+    "recognition": "DirectHit"
+  },
+  "活动爬塔-云华依言歌-开始活动大富翁": {
+    "next": [
+      "[JumpBack]活动爬塔-云华依言歌-开始装备大富翁御魂",
+      "活动爬塔-云华依言歌-识别是否位于大富翁界面",
+      "[JumpBack]活动爬塔-云华依言歌-点击大富翁",
+      "[JumpBack]活动爬塔-云华依言歌-导航-云华依言歌"
     ],
     "recognition": "DirectHit"
   },
@@ -47,6 +125,27 @@
       "[JumpBack]活动爬塔-云华依言歌-导航-云华依言歌"
     ],
     "recognition": "DirectHit"
+  },
+  "活动爬塔-云华依言歌-开始装备大富翁御魂": {
+    "max_hit": 1,
+    "next": [
+      "[JumpBack]活动爬塔-云华依言歌-回到式神录",
+      "活动爬塔-云华依言歌-装备大富翁御魂"
+    ],
+    "recognition": "DirectHit"
+  },
+  "活动爬塔-云华依言歌-点击大富翁": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      882,
+      91,
+      398,
+      355
+    ],
+    "template": [
+      "活动/每月周期/活动爬塔-云华依言歌/活动爬塔-云华依言歌-点击大富翁_1.png"
+    ]
   },
   "活动爬塔-云华依言歌-点击屏幕继续": {
     "action": "Custom",
@@ -137,6 +236,26 @@
     "post_delay": 1000,
     "recognition": "OCR"
   },
+  "活动爬塔-云华依言歌-装备大富翁御魂": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "默认分组",
+      "team_name": "默认队伍"
+    },
+    "expected": "式神录",
+    "max_hit": 1,
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      296,
+      78
+    ]
+  },
   "活动爬塔-云华依言歌-装备御魂": {
     "max_hit": 1,
     "next": [
@@ -173,6 +292,24 @@
     ],
     "timeout": 200000
   },
+  "活动爬塔-云华依言歌-识别是否位于大富翁界面": {
+    "expected": "出巡仪式",
+    "next": [
+      "[JumpBack]活动爬塔-云华依言歌-大富翁-锁定阵容",
+      "[JumpBack]活动爬塔-云华依言歌-大富翁-判断是否自动开始",
+      "[JumpBack]活动爬塔-云华依言歌-识别自动开始",
+      "活动爬塔-云华依言歌-大富翁-判断是否该结束任务",
+      "活动爬塔-云华依言歌-识别是否只剩0张票"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      323,
+      75
+    ],
+    "timeout": 600000
+  },
   "活动爬塔-云华依言歌-识别是否位于式神录": {
     "action": "Custom",
     "custom_action": "SwitchSoul",
@@ -201,6 +338,19 @@
       0,
       246,
       99
+    ]
+  },
+  "活动爬塔-云华依言歌-识别是否只剩0张票": {
+    "expected": "^[0Oo]$",
+    "next": [
+      "活动爬塔-云华依言歌-大富翁-识别次数"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1125,
+      671,
+      77,
+      33
     ]
   },
   "活动爬塔-云华依言歌-识别是否返回活动界面": {
@@ -250,6 +400,16 @@
     ],
     "timeout": 200000
   },
+  "活动爬塔-云华依言歌-识别自动开始": {
+    "expected": "自动开始",
+    "recognition": "OCR",
+    "roi": [
+      854,
+      572,
+      209,
+      75
+    ]
+  },
   "活动爬塔-云华依言歌-返回活动界面": {
     "action": "Click",
     "expected": "式神录",
@@ -284,7 +444,7 @@
       "Node.Recognition.Succeeded": "体力票刷完了!!!,任务结束"
     },
     "next": [
-      "导航-庭院"
+      "导航-式神录"
     ],
     "recognition": "OCR",
     "roi": [
@@ -301,7 +461,7 @@
       "Node.Recognition.Succeeded": "活动票刷完了!!!,任务结束"
     },
     "next": [
-      "导航-庭院"
+      "导航-式神录"
     ],
     "recognition": "OCR",
     "roi": [
@@ -319,7 +479,7 @@
     "enabled": false,
     "inverse": true,
     "next": [
-      "导航-庭院"
+      "导航-式神录"
     ],
     "recognition": "Custom"
   }

@@ -1,0 +1,71 @@
+{
+    "task": [
+        {
+            "name": "活动爬塔-云华依言歌-活动大富翁",
+            "label": "活动爬塔-云华依言歌-开始活动大富翁",
+            "description": "ooo",
+            "entry": "活动爬塔-云华依言歌-开始活动大富翁",
+            "group": ["promotion"],
+            "option": [
+                "云华依言歌-是否切换大富翁御魂"
+            ]
+        }
+    ],
+    "option": {
+        "云华依言歌-是否切换大富翁御魂": {
+            "type": "switch",
+            "label": "是否切换御魂",
+            "description": "切换爬塔御魂以及出战队伍",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "活动爬塔-云华依言歌-开始装备大富翁御魂": {
+                            "enable":true
+                        }
+                    },
+                    "option": ["云华依言歌-大富翁-设置爬塔御魂"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "活动爬塔-云华依言歌-开始装备大富翁御魂": {
+                            "enable":false
+                        }
+                    }
+                }
+            ]
+        },
+        "云华依言歌-大富翁-设置爬塔御魂": {
+            "type": "input",
+            "label": "爬塔阵容配置",
+            "description": "填写爬塔时需要使用的分组和队伍名称",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "活动爬塔-云华依言歌-装备大富翁御魂": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        }
+    }
+}
