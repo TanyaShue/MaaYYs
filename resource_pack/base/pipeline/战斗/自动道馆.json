@@ -2,9 +2,7 @@
   "N-1768312988212": {
     "action": "Click",
     "expected": "胜利",
-    "next": [
-      "导航-庭院"
-    ],
+    "next": [],
     "pre_delay": 2000,
     "recognition": "OCR",
     "roi": [
@@ -24,9 +22,7 @@
   "N-1768313000871": {
     "action": "Click",
     "expected": "失败",
-    "next": [
-      "导航-庭院"
-    ],
+    "next": [],
     "recognition": "OCR",
     "roi": [
       386,
