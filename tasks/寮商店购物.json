@@ -1,0 +1,110 @@
+{
+    "task": [
+        {
+            "name": "寮商店购物",
+            "label": "寮商店购物",
+            "entry": "阴阳寮商店购物",
+            "group": ["daily"],
+            "option": [
+                "购买阴阳寮商店物品"
+            ]
+        }
+    ],
+    "option": {
+        "购买阴阳寮商店物品":{
+            "type": "checkbox",
+            "cases": [
+                {
+                    "name": "神秘的符咒",
+                    "label": "神秘的符咒",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-神秘符咒":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "随机六星御魂",
+                    "label": "随机六星御魂",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-随机六星御魂":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "功勋礼包",
+                    "label": "功勋礼包",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-功勋礼包":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "胧车燃料",
+                    "label": "胧车燃料",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-胧车燃料":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "樱饼",
+                    "label": "樱饼",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-樱饼":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "风铃",
+                    "label": "风铃",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-风铃":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "经验手札.中",
+                    "label": "经验手札.中",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-经验手札中":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "奉为达摩",
+                    "label": "奉为达摩",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-奉为达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "御行碎片礼包",
+                    "label": "御行碎片礼包",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-御行碎片礼包":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "皮肤卷",
+                    "label": "皮肤卷",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-购买-皮肤卷":{
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
