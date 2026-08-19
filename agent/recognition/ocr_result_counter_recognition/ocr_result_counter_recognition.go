@@ -39,20 +39,6 @@ type resultDetail struct {
 	TargetCount     int    `json:"target_count"`
 }
 
-type countUpdate struct {
-	PreviousNode  string
-	PreviousText  string
-	PreviousCount int
-	Count         int
-	Consecutive   bool
-}
-
-type counterState struct {
-	Node  string
-	Text  string
-	Count int
-}
-
 var _ maa.CustomRecognitionRunner = &OCRResultCounterRecognition{}
 
 // Run 使用当前自定义识别节点收到的图片运行指定 OCR 节点，并统计 best 文本。
@@ -67,81 +53,41 @@ func (r *OCRResultCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 		fmt.Printf("OCRResultCounterRecognition: 解析参数失败: %v\n", err)
 		return nil, false
 	}
-	fmt.Printf(
-		"OCRResultCounterRecognition[DEBUG]: 开始识别 task_id=%d current_task=%q recognition_node=%q target_count=%d roi=%v\n",
-		arg.TaskID,
-		arg.CurrentTaskName,
-		recognitionNode,
-		targetCount,
-		arg.Roi,
-	)
 	if arg.Img == nil {
 		fmt.Println("OCRResultCounterRecognition: 当前识别图片为空")
-		r.resetConsecutiveCountWithDebug("当前识别图片为空")
+		r.resetConsecutiveCount()
 		return nil, false
 	}
 
 	detail, err := ctx.RunRecognition(recognitionNode, arg.Img, nil)
 	if err != nil {
 		fmt.Printf("OCRResultCounterRecognition: 运行识别节点 %q 失败: %v\n", recognitionNode, err)
-		r.resetConsecutiveCountWithDebug("识别 API 调用失败")
+		r.resetConsecutiveCount()
 		return nil, false
-	}
-	if detail != nil {
-		fmt.Printf(
-			"OCRResultCounterRecognition[DEBUG]: 识别 API 返回 node=%q algorithm=%q hit=%t box=%v detail_json=%q\n",
-			recognitionNode,
-			detail.Algorithm,
-			detail.Hit,
-			detail.Box,
-			detail.DetailJson,
-		)
-	} else {
-		fmt.Printf("OCRResultCounterRecognition[DEBUG]: 识别 API 返回 node=%q detail=nil\n", recognitionNode)
 	}
 	if detail == nil || !detail.Hit {
 		fmt.Printf("OCRResultCounterRecognition: 识别节点 %q 未命中\n", recognitionNode)
-		r.resetConsecutiveCountWithDebug("识别节点未命中")
+		r.resetConsecutiveCount()
 		return nil, false
 	}
 
 	text, box, ok := bestOCRResult(detail)
 	if !ok {
 		fmt.Printf("OCRResultCounterRecognition: 识别节点 %q 没有有效的 OCR best 结果\n", recognitionNode)
-		r.resetConsecutiveCountWithDebug("没有有效的 OCR best 结果")
+		r.resetConsecutiveCount()
 		return nil, false
 	}
-	fmt.Printf(
-		"OCRResultCounterRecognition[DEBUG]: 当前 OCR best 结果 node=%q text=%q box=%v target_count=%d\n",
-		recognitionNode,
-		text,
-		box,
-		targetCount,
-	)
 
-	update := r.updateConsecutiveCount(recognitionNode, text)
-	reached := update.Count >= targetCount
-	fmt.Printf(
-		"OCRResultCounterRecognition[DEBUG]: 更新连续计数 previous_node=%q previous_text=%q previous_count=%d current_node=%q current_text=%q consecutive=%t current_count=%d target_count=%d reached=%t\n",
-		update.PreviousNode,
-		update.PreviousText,
-		update.PreviousCount,
-		recognitionNode,
-		text,
-		update.Consecutive,
-		update.Count,
-		targetCount,
-		reached,
-	)
-	if !reached {
-		fmt.Printf("OCRResultCounterRecognition: 节点 %q 的结果 %q 连续出现 %d/%d 次，返回 false\n", recognitionNode, text, update.Count, targetCount)
+	count := r.updateConsecutiveCount(recognitionNode, text)
+	if count < targetCount {
+		fmt.Printf("OCRResultCounterRecognition: 节点 %q 的结果 %q 出现 %d/%d 次，返回 false\n", recognitionNode, text, count, targetCount)
 		return nil, false
 	}
 
 	detailJSON, err := json.Marshal(resultDetail{
 		RecognitionNode: recognitionNode,
 		Text:            text,
-		Count:           update.Count,
+		Count:           count,
 		TargetCount:     targetCount,
 	})
 	if err != nil {
@@ -149,7 +95,7 @@ func (r *OCRResultCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 		return nil, false
 	}
 
-	fmt.Printf("OCRResultCounterRecognition: 节点 %q 的结果 %q 连续出现 %d/%d 次，返回 true\n", recognitionNode, text, update.Count, targetCount)
+	fmt.Printf("OCRResultCounterRecognition: 节点 %q 的结果 %q 出现 %d/%d 次，返回 true\n", recognitionNode, text, count, targetCount)
 	return &maa.CustomRecognitionResult{
 		Box:    box,
 		Detail: string(detailJSON),
@@ -237,51 +183,26 @@ func bestOCRResult(detail *maa.RecognitionDetail) (string, maa.Rect, bool) {
 	return text, raw.Best.Box, true
 }
 
-func (r *OCRResultCounterRecognition) updateConsecutiveCount(node, text string) countUpdate {
+func (r *OCRResultCounterRecognition) updateConsecutiveCount(node, text string) int {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	update := countUpdate{
-		PreviousNode:  r.lastNode,
-		PreviousText:  r.lastText,
-		PreviousCount: r.count,
-		Consecutive:   r.lastNode == node && r.lastText == text,
-	}
-	if update.Consecutive {
+	if r.lastNode == node && r.lastText == text {
 		r.count++
-		update.Count = r.count
-		return update
+		return r.count
 	}
 
 	r.lastNode = node
 	r.lastText = text
 	r.count = 1
-	update.Count = r.count
-	return update
+	return r.count
 }
 
-func (r *OCRResultCounterRecognition) resetConsecutiveCount() counterState {
+func (r *OCRResultCounterRecognition) resetConsecutiveCount() {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	previous := counterState{
-		Node:  r.lastNode,
-		Text:  r.lastText,
-		Count: r.count,
-	}
 	r.lastNode = ""
 	r.lastText = ""
 	r.count = 0
-	return previous
-}
-
-func (r *OCRResultCounterRecognition) resetConsecutiveCountWithDebug(reason string) {
-	previous := r.resetConsecutiveCount()
-	fmt.Printf(
-		"OCRResultCounterRecognition[DEBUG]: 连续计数已清零 reason=%q previous_node=%q previous_text=%q previous_count=%d\n",
-		reason,
-		previous.Node,
-		previous.Text,
-		previous.Count,
-	)
 }
