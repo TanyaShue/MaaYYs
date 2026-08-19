@@ -1,17 +1,17 @@
 {
     "task": [
         {
-            "name": "自动寮突破",
-            "label": "自动寮突破",
-            "entry": "寮突",
+            "name": "真蛇",
+            "label": "真蛇",
+            "entry": "真蛇",
             "group": ["standalone"],
             "option": [
-                "寮突-是否切换御魂阵容"
+                "真蛇-是否切换御魂阵容"
             ]
         }
     ],
     "option": {
-        "寮突-是否切换御魂阵容": {
+        "真蛇-是否切换御魂阵容": {
             "type": "switch",
             "label": "是否切换御魂阵容",
             "default_case": "Yes",
@@ -20,27 +20,27 @@
                     "name": "Yes",
                     "label": "是",
                     "pipeline_override": {
-                        "寮突-开始装备御魂": {
+                        "真蛇-开始装备御魂": {
                             "enabled": true
                         }
                     },
-                    "option": ["寮突阵容预设"]
+                    "option": ["真蛇-御魂阵容预设"]
                 },
                 {
                     "name": "No",
                     "label": "否",
                     "pipeline_override": {
-                        "寮突-开始装备御魂": {
+                        "真蛇-开始装备御魂": {
                             "enabled": false
                         }
                     }
                 }
             ]
         },
-        "寮突阵容预设": {
+        "真蛇-御魂阵容预设": {
             "type": "input",
-            "label": "寮突阵容预设",
-            "description": "填写阴阳寮突破需要使用的分组和队伍预设名称",
+            "label": "御魂阵容预设",
+            "description": "填写自动御魂需要使用的分组和队伍预设名称",
             "inputs": [
                 {
                     "name": "group_name",
@@ -58,7 +58,7 @@
                 }
             ],
             "pipeline_override": {
-                "寮突19": {
+                "真蛇-在式神录装备御魂": {
                     "custom_action_param": {
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"

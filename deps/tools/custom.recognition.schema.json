@@ -12,6 +12,7 @@
         "ConfigValueCheckRecognition",
         "CoBattleTargetRecognition",
         "MyRecognizer",
+        "OCRResultCounterRecognition",
         "TaskCounterRecognition"
       ]
     }
@@ -23,6 +24,7 @@
       { "$ref": "#/$defs/ConfigValueCheckRecognition" },
       { "$ref": "#/$defs/CoBattleTargetRecognition" },
       { "$ref": "#/$defs/MyRecognizer" },
+      { "$ref": "#/$defs/OCRResultCounterRecognition" },
       { "$ref": "#/$defs/TaskCounterRecognition" }
     ]
   },
@@ -124,6 +126,33 @@
       "title": "占位识别器",
       "description": "不读取 custom_recognition_param，固定返回未识别。",
       "properties": { "custom_recognition": { "const": "MyRecognizer" } },
+      "required": ["custom_recognition"]
+    },
+    "OCRResultCounterRecognition": {
+      "title": "OCR best 结果计数器",
+      "description": "运行指定 OCR 节点，统计 best 文本连续出现的次数；文本或节点变化时重新从 1 计数，达到目标次数后返回识别成功。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "OCRResultCounterRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "recognition_node": {
+              "$ref": "#/$defs/NonEmptyString",
+              "description": "要通过 context 运行的 OCR 识别节点名称"
+            },
+            "target_count": {
+              "oneOf": [
+                { "type": "integer", "minimum": 1 },
+                { "type": "string", "pattern": "^[1-9][0-9]*$" }
+              ],
+              "description": "同一个 best 文本需要连续出现的次数，支持整数或数字字符串"
+            }
+          },
+          "required": ["recognition_node", "target_count"],
+          "additionalProperties": false
+        }
+      },
       "required": ["custom_recognition"]
     },
     "TaskCounterRecognition": {

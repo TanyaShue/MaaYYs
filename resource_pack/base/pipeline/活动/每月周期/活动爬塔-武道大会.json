@@ -1,14 +1,15 @@
 {
-  "活动爬塔-金砂福威": {
-    "expected": "鸣鼓擂台",
+  "活动爬塔-武道大会": {
+    "expected": "日常训练",
     "focus": {
-      "Node.Recognition.Failed": "活动爬塔-金砂福威-活动界面识别失败"
+      "Node.Recognition.Failed": "活动爬塔-武道大会-活动界面识别失败"
     },
     "next": [
-      "爬塔-金砂福威-活动票花光",
-      "爬塔-金砂福威-体力票花光",
-      "爬塔-金砂福威-识别挑战次数是否达标",
-      "[JumpBack]活动爬塔-金砂福威-识别挑战"
+      "爬塔-武道大会-活动票花光",
+      "爬塔-武道大会-体力票花光",
+      "爬塔-武道大会-识别挑战次数是否达标",
+      "[JumpBack]活动爬塔-武道大会-锁定阵容",
+      "[JumpBack]活动爬塔-武道大会-识别挑战"
     ],
     "recognition": "OCR",
     "roi": [
@@ -19,7 +20,7 @@
     ],
     "timeout": 200000
   },
-  "活动爬塔-金砂福威-点击屏幕继续": {
+  "活动爬塔-武道大会-点击屏幕继续": {
     "action": "Custom",
     "custom_action": "RandomWait",
     "custom_action_param": {
@@ -30,13 +31,13 @@
     "max_hit": 1,
     "recognition": "OCR"
   },
-  "活动爬塔-金砂福威-点击挑战": {
+  "活动爬塔-武道大会-点击挑战": {
     "action": "Click",
     "expected": "挑战",
     "next": [
-      "活动爬塔-金砂福威-识别活动界面",
-      "[JumpBack]活动爬塔-金砂福威-点击屏幕继续",
-      "[JumpBack]活动爬塔-金砂福威-继续点击屏幕继续"
+      "活动爬塔-武道大会-识别活动界面",
+      "[JumpBack]活动爬塔-武道大会-点击屏幕继续",
+      "[JumpBack]活动爬塔-武道大会-继续点击屏幕继续"
     ],
     "post_delay": 5000,
     "recognition": "OCR",
@@ -48,13 +49,13 @@
     ],
     "timeout": 200000
   },
-  "活动爬塔-金砂福威-继续点击屏幕继续": {
+  "活动爬塔-武道大会-继续点击屏幕继续": {
     "action": "Click",
     "expected": "点击屏幕|继续",
     "post_delay": 1000,
     "recognition": "OCR"
   },
-  "活动爬塔-金砂福威-识别挑战": {
+  "活动爬塔-武道大会-识别挑战": {
     "action": "Custom",
     "custom_action": "RandomWait",
     "custom_action_param": {
@@ -67,29 +68,29 @@
       "Node.Action.Succeeded": "[debug]随机等待结束"
     },
     "next": [
-      "活动爬塔-金砂福威-点击挑战"
+      "活动爬塔-武道大会-点击挑战"
     ],
     "on_error": [
       "跳过"
     ],
     "recognition": "OCR",
     "roi": [
-      1117,
-      591,
-      136,
-      72
+      1085,
+      584,
+      173,
+      79
     ],
     "timeout": 200000
   },
-  "活动爬塔-金砂福威-识别活动界面": {
+  "活动爬塔-武道大会-识别活动界面": {
     "action": "Custom",
     "custom_action": "ClearHitCount",
     "custom_action_param": {
       "node_names": [
-        "活动爬塔-金砂福威-点击屏幕继续"
+        "活动爬塔-武道大会-点击屏幕继续"
       ]
     },
-    "expected": "鸣鼓擂台",
+    "expected": "日常训练",
     "recognition": "OCR",
     "replace": [
       [
@@ -98,7 +99,7 @@
       ],
       [
         "鸣鼓播台",
-        "鸣鼓擂台"
+        "日常训练"
       ]
     ],
     "roi": [
@@ -109,7 +110,15 @@
     ],
     "timeout": 200000
   },
-  "爬塔-金砂福威-体力票花光": {
+  "活动爬塔-武道大会-锁定阵容": {
+    "enabled": false,
+    "max_hit": 1,
+    "next": [
+      "通用-锁定阵容"
+    ],
+    "recognition": "DirectHit"
+  },
+  "爬塔-武道大会-体力票花光": {
     "enabled": false,
     "expected": "^0$",
     "focus": {
@@ -120,13 +129,13 @@
     ],
     "recognition": "OCR",
     "roi": [
-      759,
-      3,
-      93,
-      52
+      1129,
+      8,
+      128,
+      54
     ]
   },
-  "爬塔-金砂福威-活动票花光": {
+  "爬塔-武道大会-活动票花光": {
     "enabled": false,
     "expected": "^0$",
     "focus": {
@@ -137,13 +146,13 @@
     ],
     "recognition": "OCR",
     "roi": [
-      745,
-      0,
-      111,
-      70
+      1137,
+      11,
+      136,
+      46
     ]
   },
-  "爬塔-金砂福威-识别挑战次数是否达标": {
+  "爬塔-武道大会-识别挑战次数是否达标": {
     "custom_recognition": "TaskCounterRecognition",
     "custom_recognition_param": {
       "target_count": 10

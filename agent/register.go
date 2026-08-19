@@ -31,6 +31,7 @@ import (
 	"maa-yys-agent/recognition/co_battle_target_recognition"
 	"maa-yys-agent/recognition/config_value_recognition"
 	"maa-yys-agent/recognition/my_recognizer"
+	"maa-yys-agent/recognition/ocr_result_counter_recognition"
 	"maa-yys-agent/recognition/task_counter_recognition"
 
 	maa "github.com/MaaXYZ/maa-framework-go/v4"
@@ -76,6 +77,7 @@ var customRecognitions = []struct {
 	{"ConfigValueCheckRecognition", &config_value_recognition.ConfigValueCheckRecognition{}},
 	{"CoBattleTargetRecognition", &co_battle_target_recognition.CoBattleTargetRecognition{}},
 	{"MyRecognizer", &my_recognizer.MyRecognizer{}},
+	{"OCRResultCounterRecognition", &ocr_result_counter_recognition.OCRResultCounterRecognition{}},
 	{"TaskCounterRecognition", &task_counter_recognition.TaskCounterRecognition{}},
 }
 

@@ -1,0 +1,140 @@
+{
+    "task": [
+        {
+            "name": "活动爬塔-武道大会",
+            "label": "活动爬塔-武道大会-日常训练",
+            "description": "在爬塔界面开始,手动装备御魂,锁定阵容",
+            "entry": "活动爬塔-武道大会",
+            "group": ["promotion"],
+            "option": [
+                "武道大会-刷本目标",
+                "武道大会-自定义爬塔随机等待"
+            ]
+        }
+    ],
+    "option": {
+        "武道大会-刷本目标": {
+            "type": "select",
+            "label": "刷本目标",
+            "description": "刷完哪种票",
+            "default_case": "活动票",
+            "cases": [
+                {
+                    "name": "活动票",
+                    "label": "活动票",
+                    "pipeline_override": {
+                        "爬塔-武道大会-活动票花光": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "指定次数",
+                    "label": "指定次数",
+                    "pipeline_override": {
+                        "爬塔-武道大会-识别挑战次数是否达标": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["武道大会-设置爬塔次数"]
+                }
+            ]
+        },
+        "武道大会-设置爬塔次数":{
+            "type": "input",
+            "label": "设置挑战次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "default": "100",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "爬塔-武道大会-识别挑战次数是否达标": {
+                    "custom_recognition": "TaskCounterRecognition",
+                    "custom_recognition_param": {
+                        "target_count": "{挑战次数}"
+                    }
+                }
+            }
+        },
+        "武道大会-自定义爬塔随机等待": {
+            "type": "switch",
+            "label": "自定义爬塔随机等待",
+            "description": "是否自定义爬塔随机等待时间",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "option": [
+                        "活动爬塔-武道大会-开始前随机等待时间",
+                        "活动爬塔-武道大会-打完一局后随机等待时间"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ]
+        },
+        "活动爬塔-武道大会-开始前随机等待时间": {
+            "type": "input",
+            "label": "活动爬塔-武道大会-开始前随机等待时间",
+            "inputs": [
+                {
+                    "name": "最短时间",
+                    "label": "最短时间",
+                    "description": "填写随机等待最短时间（秒）",
+                    "default": "1",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "最长时间",
+                    "label": "最长时间",
+                    "description": "填写随机等待最长时间（秒）",
+                    "default": "5",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "活动爬塔-武道大会-识别挑战": {
+                    "custom_action_param": {
+                        "min": "{最短时间}",
+                        "max": "{最长时间}"
+                    }
+                }
+            }
+        },
+        "活动爬塔-武道大会-打完一局后随机等待时间": {
+            "type": "input",
+            "label": "活动爬塔-武道大会-打完一句后随机等待时间",
+            "inputs": [
+                {
+                    "name": "最短时间",
+                    "label": "最短时间",
+                    "description": "填写随机等待的最短时间（秒）",
+                    "default": "1",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "最长时间",
+                    "label": "最长时间",
+                    "description": "填写随机等待的最长时间（秒）",
+                    "default": "10",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "活动爬塔-武道大会-点击屏幕继续": {
+                    "custom_action_param": {
+                        "min": "{最短时间}",
+                        "max": "{最长时间}"
+                    }
+                }
+            }
+        }
+    }
+}

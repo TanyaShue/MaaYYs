@@ -1,0 +1,119 @@
+{
+    "task": [
+        {
+            "name": "珍旅居商店购物",
+            "label": "珍旅居商店购物",
+            "entry": "珍旅居商店购买",
+            "group": ["daily"],
+            "option": [
+                "购买珍旅居商店物品"
+            ]
+        }
+    ],
+    "option": {
+        "购买珍旅居商店物品":{
+            "type": "checkbox",
+            "cases": [
+                {
+                    "name": "神秘的符咒",
+                    "label": "神秘的符咒",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-神秘的符咒":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "义手携心头像框",
+                    "label": "义手携心头像框",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-义手携心头像框":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "御行达摩",
+                    "label": "御行达摩",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-御行达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "体力",
+                    "label": "体力",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-体力":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "樱饼",
+                    "label": "樱饼",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-樱饼":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "吉运达摩",
+                    "label": "吉运达摩",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-吉运达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "花笺",
+                    "label": "花笺",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-花笺":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "经验手札",
+                    "label": "经验手札",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-经验手札":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "大吉达摩",
+                    "label": "大吉达摩",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-大吉达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "奉为达摩",
+                    "label": "奉为达摩",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-奉为达摩":{
+                            "enable": true
+                        }
+                    }
+                },
+                {
+                    "name": "招福达摩",
+                    "label": "招福达摩",
+                    "pipeline_override": {
+                        "珍旅居商店购买-购买-招福达摩":{
+                            "enable": true
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

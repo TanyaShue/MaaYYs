@@ -1,37 +1,39 @@
 {
     "task": [
         {
-            "name": "活动爬塔-洪狐天运",
-            "label": "活动爬塔-洪狐天运(在爬塔界面开始)",
-            "entry": "活动爬塔-洪狐天运",
+            "name": "活动爬塔-云华依言歌",
+            "label": "活动爬塔-云华依言歌-神威破障",
+            "description": "ooo",
+            "entry": "活动爬塔-云华依言歌-开始活动爬塔任务",
             "group": ["promotion"],
             "option": [
-                "刷本目标",
-                "自定义爬塔随机等待"
+                "云华依言歌-刷本目标",
+                "云华依言歌-是否切换爬塔御魂",
+                "云华依言歌-自定义爬塔随机等待"
             ]
         }
     ],
     "option": {
-        "刷本目标": {
+        "云华依言歌-刷本目标": {
             "type": "select",
             "label": "刷本目标",
             "description": "刷完哪种票",
-            "default_case": "体力票",
+            "default_case": "活动票",
             "cases": [
                 {
-                    "name": "体力票",
-                    "label": "体力票",
+                    "name": "活动票",
+                    "label": "活动票",
                     "pipeline_override": {
-                        "爬塔-洪狐天运-体力票花光": {
+                        "爬塔-云华依言歌-活动票花光": {
                             "enabled": true
                         }
                     }
                 },
                 {
-                    "name": "活动票",
-                    "label": "活动票",
+                    "name": "体力票",
+                    "label": "体力票",
                     "pipeline_override": {
-                        "爬塔-洪狐天运-活动票花光": {
+                        "爬塔-云华依言歌-体力票花光": {
                             "enabled": true
                         }
                     }
@@ -40,15 +42,70 @@
                     "name": "指定次数",
                     "label": "指定次数",
                     "pipeline_override": {
-                        "爬塔-洪狐天运-识别挑战次数是否达标": {
+                        "爬塔-云华依言歌-识别挑战次数是否达标": {
                             "enabled": true
                         }
                     },
-                    "option": ["设置爬塔次数"]
+                    "option": ["云华依言歌-设置爬塔次数"]
                 }
             ]
         },
-        "设置爬塔次数":{
+        "云华依言歌-是否切换爬塔御魂": {
+            "type": "switch",
+            "label": "是否切换御魂",
+            "description": "切换爬塔御魂以及出战队伍",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "活动爬塔-云华依言歌-装备御魂": {
+                            "enable":true
+                        }
+                    },
+                    "option": ["云华依言歌-设置爬塔御魂"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "活动爬塔-云华依言歌-装备御魂": {
+                            "enable":false
+                        }
+                    }
+                }
+            ]
+        },
+        "云华依言歌-设置爬塔御魂": {
+            "type": "input",
+            "label": "爬塔阵容配置",
+            "description": "填写爬塔时需要使用的分组和队伍名称",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "活动爬塔-云华依言歌-识别是否位于式神录": {
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        },
+        "云华依言歌-设置爬塔次数":{
             "type": "input",
             "label": "设置挑战次数",
             "inputs": [
@@ -60,7 +117,7 @@
                 }
             ],
             "pipeline_override": {
-                "爬塔-洪狐天运-识别挑战次数是否达标": {
+                "爬塔-云华依言歌-识别挑战次数是否达标": {
                     "custom_recognition": "TaskCounterRecognition",
                     "custom_recognition_param": {
                         "target_count": "{挑战次数}"
@@ -68,7 +125,7 @@
                 }
             }
         },
-        "自定义爬塔随机等待": {
+        "云华依言歌-自定义爬塔随机等待": {
             "type": "switch",
             "label": "自定义爬塔随机等待",
             "description": "是否自定义爬塔随机等待时间",
@@ -78,8 +135,8 @@
                     "name": "Yes",
                     "label": "是",
                     "option": [
-                        "活动爬塔-洪狐天运-开始前随机等待时间",
-                        "活动爬塔-洪狐天运-打完一局后随机等待时间"
+                        "活动爬塔-云华依言歌-开始前随机等待时间",
+                        "活动爬塔-云华依言歌-打完一局后随机等待时间"
                     ]
                 },
                 {
@@ -88,9 +145,9 @@
                 }
             ]
         },
-        "活动爬塔-洪狐天运-开始前随机等待时间": {
+        "活动爬塔-云华依言歌-开始前随机等待时间": {
             "type": "input",
-            "label": "活动爬塔-洪狐天运-开始前随机等待时间",
+            "label": "活动爬塔-云华依言歌-开始前随机等待时间",
             "inputs": [
                 {
                     "name": "最短时间",
@@ -108,7 +165,7 @@
                 }
             ],
             "pipeline_override": {
-                "活动爬塔-洪狐天运-识别挑战": {
+                "活动爬塔-云华依言歌-识别挑战": {
                     "custom_action_param": {
                         "min": "{最短时间}",
                         "max": "{最长时间}"
@@ -116,9 +173,9 @@
                 }
             }
         },
-        "活动爬塔-洪狐天运-打完一局后随机等待时间": {
+        "活动爬塔-云华依言歌-打完一局后随机等待时间": {
             "type": "input",
-            "label": "活动爬塔-洪狐天运-打完一句后随机等待时间",
+            "label": "活动爬塔-云华依言歌-打完一句后随机等待时间",
             "inputs": [
                 {
                     "name": "最短时间",
@@ -136,7 +193,7 @@
                 }
             ],
             "pipeline_override": {
-                "活动爬塔-洪狐天运-点击屏幕继续": {
+                "活动爬塔-云华依言歌-点击屏幕继续": {
                     "custom_action_param": {
                         "min": "{最短时间}",
                         "max": "{最长时间}"

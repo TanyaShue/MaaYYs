@@ -2,9 +2,7 @@
   "N-1768312988212": {
     "action": "Click",
     "expected": "胜利",
-    "next": [
-      "导航-庭院"
-    ],
+    "next": [],
     "pre_delay": 2000,
     "recognition": "OCR",
     "roi": [
@@ -24,9 +22,7 @@
   "N-1768313000871": {
     "action": "Click",
     "expected": "失败",
-    "next": [
-      "导航-庭院"
-    ],
+    "next": [],
     "recognition": "OCR",
     "roi": [
       386,
@@ -88,7 +84,8 @@
       "自动道馆20",
       "[JumpBack]道馆-识别是否开战",
       "[JumpBack]自动道馆15",
-      "[JumpBack]自动道馆18"
+      "[JumpBack]自动道馆18",
+      "导航-庭院-识别是否位于庭院-模型识别"
     ],
     "on_error": [
       "导航-庭院"
@@ -177,7 +174,8 @@
       "[JumpBack]自动道馆16",
       "[JumpBack]自动道馆17",
       "[JumpBack]N-1768312988212",
-      "[JumpBack]N-1768313000871"
+      "[JumpBack]N-1768313000871",
+      "导航-庭院-识别是否位于庭院-模型识别"
     ],
     "on_error": [
       "导航-庭院"
