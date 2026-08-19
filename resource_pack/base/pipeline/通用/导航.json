@@ -12,37 +12,20 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
-    "template": [
-      "导航/导航-六道之门-点击六道之门_1.png"
-    ]
+    "roi": [0, 588, 1280, 132],
+    "template": ["导航/导航-六道之门-点击六道之门_1.png"]
   },
   "导航-六道之门-识别是否位于六道之门": {
     "expected": "六道之门",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      326,
-      91
-    ]
+    "roi": [0, 0, 326, 91]
   },
   "导航-关闭点击屏幕继续的界面": {
     "action": "Click",
     "expected": "点击屏幕继续",
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [
-      393,
-      639,
-      469,
-      81
-    ]
+    "roi": [393, 639, 469, 81]
   },
   "导航-商店": {
     "next": [
@@ -57,12 +40,7 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      618,
-      562,
-      146,
-      158
-    ],
+    "roi": [618, 562, 146, 158],
     "template": [
       "导航/导航-商店-点击商店_1.png",
       "通用/导航/导航-商店-点击商店_1.png"
@@ -71,12 +49,7 @@
   "导航-商店-识别是否位于商店": {
     "expected": "周边屋|寄售屋|插画屋|杂货铺",
     "recognition": "OCR",
-    "roi": [
-      0,
-      669,
-      1280,
-      51
-    ]
+    "roi": [0, 669, 1280, 51]
   },
   "导航-图鉴": {
     "next": [
@@ -91,25 +64,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      14,
-      561,
-      182,
-      159
-    ],
-    "template": [
-      "导航/导航-图鉴-点击图鉴_1.png"
-    ]
+    "roi": [14, 561, 182, 159],
+    "template": ["导航/导航-图鉴-点击图鉴_1.png"]
   },
   "导航-图鉴-识别是否位于图鉴界面": {
     "expected": "风姿|首领|风物志|小纸人|小动物|歌舞",
     "recognition": "OCR",
-    "roi": [
-      277,
-      614,
-      1003,
-      106
-    ]
+    "roi": [277, 614, 1003, 106]
   },
   "导航-地域鬼王": {
     "next": [
@@ -124,24 +85,12 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
-    "template": [
-      "导航/导航-地域鬼王-点击地域鬼王_1.png"
-    ]
+    "roi": [0, 588, 1280, 132],
+    "template": ["导航/导航-地域鬼王-点击地域鬼王_1.png"]
   },
   "导航-地域鬼王-识别是否位于地域鬼王": {
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      318,
-      189,
-      402
-    ],
+    "roi": [0, 318, 189, 402],
     "template": [
       "导航/导航-地域鬼王-识别是否位于地域鬼王_1.png",
       "导航/导航-地域鬼王-识别是否位于地域鬼王_2.png",
@@ -161,25 +110,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
-    "template": [
-      "导航/导航-契灵之境-点击契灵之境_1.png"
-    ]
+    "roi": [0, 588, 1280, 132],
+    "template": ["导航/导航-契灵之境-点击契灵之境_1.png"]
   },
   "导航-契灵之境-识别是否位于契灵之境": {
     "expected": "契灵之境",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      326,
-      91
-    ]
+    "roi": [0, 0, 326, 91]
   },
   "导航-好友": {
     "next": [
@@ -194,25 +131,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      861,
-      583,
-      124,
-      137
-    ],
-    "template": [
-      "导航/导航-好友-点击好友_1.png"
-    ]
+    "roi": [861, 583, 124, 137],
+    "template": ["导航/导航-好友-点击好友_1.png"]
   },
   "导航-好友-识别是否位于好友界面": {
     "expected": "好友",
     "recognition": "OCR",
-    "roi": [
-      556,
-      35,
-      164,
-      63
-    ]
+    "roi": [556, 35, 164, 63]
   },
   "导航-妖气探索": {
     "next": [
@@ -227,25 +152,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
-    "template": [
-      "导航/导航-妖气探索-点击妖气探索_1.png"
-    ]
+    "roi": [0, 588, 1280, 132],
+    "template": ["导航/导航-妖气探索-点击妖气探索_1.png"]
   },
   "导航-妖气探索-识别是否位于妖气探索界面": {
     "expected": "妖气探索",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      326,
-      91
-    ]
+    "roi": [0, 0, 326, 91]
   },
   "导航-庭院": {
     "next": [
@@ -255,6 +168,7 @@
       "导航-庭院-识别是否位于庭院",
       "导航-庭院-识别是否位于庭院-模板匹配",
       "[JumpBack]导航-庭院-识别是否需要关闭章节",
+      "[JumpBack]通用-拒绝下载",
       "[JumpBack]导航-关闭点击屏幕继续的界面",
       "[JumpBack]导航-庭院-关闭当前弹窗",
       "[JumpBack]导航-庭院-从攻略返回",
@@ -262,35 +176,21 @@
       "[JumpBack]导航-庭院-点击返回按钮-模板匹配",
       "[JumpBack]导航-庭院-点击返回按钮-特征匹配"
     ],
-    "on_error": [
-      "[JumpBack]重启游戏"
-    ],
+    "on_error": ["[JumpBack]重启游戏"],
     "recognition": "DirectHit"
   },
   "导航-庭院-从攻略返回": {
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      1148,
-      572,
-      132,
-      148
-    ],
-    "template": [
-      "通用/导航/导航-庭院-从攻略返回_1.png"
-    ]
+    "roi": [1148, 572, 132, 148],
+    "template": ["通用/导航/导航-庭院-从攻略返回_1.png"]
   },
   "导航-庭院-关闭当前弹窗": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [
-      778,
-      0,
-      502,
-      266
-    ],
+    "roi": [778, 0, 502, 266],
     "template": [
       "导航/导航-庭院-关闭当前弹窗_1.png",
       "导航/导航-庭院-关闭当前弹窗_2.png",
@@ -303,16 +203,8 @@
     "post_delay": 2000,
     "pre_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      830,
-      0,
-      450,
-      217
-    ],
-    "template": [
-      "导航/关闭意外弹窗_1.png",
-      "导航/导航-庭院-关闭意外弹窗_1.png"
-    ]
+    "roi": [830, 0, 450, 217],
+    "template": ["导航/关闭意外弹窗_1.png", "导航/导航-庭院-关闭意外弹窗_1.png"]
   },
   "导航-庭院-底部菜单栏": {
     "next": [
@@ -326,47 +218,22 @@
   },
   "导航-庭院-底部菜单栏-点击底部菜单栏-模型识别": {
     "action": "Click",
-    "expected": [
-      0,
-      1,
-      2,
-      3
-    ],
-    "labels": [
-      "召唤",
-      "宠物小屋",
-      "探索",
-      "神龛"
-    ],
+    "expected": [0, 1, 2, 3],
+    "labels": ["召唤", "宠物小屋", "探索", "神龛"],
     "model": "Courtyard-v5.0.onnx",
     "post_delay": 1000,
     "recognition": "NeuralNetworkDetect",
-    "target": [
-      1205,
-      618,
-      49,
-      64
-    ],
+    "target": [1205, 618, 49, 64],
     "threshold": 0.7
   },
   "导航-庭院-底部菜单栏-识别是否打开底部菜单栏": {
     "expected": "图鉴|珍旅居|纳物库",
     "recognition": "OCR",
-    "roi": [
-      0,
-      638,
-      1280,
-      82
-    ]
+    "roi": [0, 638, 1280, 82]
   },
   "导航-庭院-底部菜单栏-识别是否打开底部菜单栏-模板匹配": {
     "recognition": "TemplateMatch",
-    "roi": [
-      6,
-      555,
-      1274,
-      165
-    ],
+    "roi": [6, 555, 1274, 165],
     "template": [
       "导航/导航-庭院-底部菜单栏-识别是否打开底部菜单栏-模板匹配_1.png",
       "导航/导航-庭院-底部菜单栏-识别是否打开底部菜单栏-模板匹配_2.png",
@@ -377,26 +244,14 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      0,
-      315,
-      94
-    ],
-    "template": [
-      "导航/导航-庭院-点击快捷返回庭院按钮_1.png"
-    ]
+    "roi": [0, 0, 315, 94],
+    "template": ["导航/导航-庭院-点击快捷返回庭院按钮_1.png"]
   },
   "导航-庭院-点击返回按钮-模板匹配": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      0,
-      211,
-      124
-    ],
+    "roi": [0, 0, 211, 124],
     "template": [
       "导航/导航-庭院-点击返回按钮-模板匹配_1.png",
       "导航/导航-庭院-点击返回按钮-模板匹配_2.png",
@@ -408,12 +263,7 @@
     "action": "Click",
     "post_delay": 1000,
     "recognition": "FeatureMatch",
-    "roi": [
-      0,
-      0,
-      211,
-      124
-    ],
+    "roi": [0, 0, 211, 124],
     "template": [
       "导航/导航-庭院-点击返回按钮-模板匹配_1.png",
       "导航/导航-庭院-点击返回按钮-模板匹配_2.png",
@@ -424,25 +274,11 @@
   "导航-庭院-识别是否位于庭院": {
     "expected": "^(图鉴|珍旅居|纳物库|闲庭)",
     "recognition": "OCR",
-    "roi": [
-      0,
-      564,
-      1280,
-      156
-    ]
+    "roi": [0, 564, 1280, 156]
   },
   "导航-庭院-识别是否位于庭院-模型识别": {
-    "expected": [
-      0,
-      1,
-      2
-    ],
-    "labels": [
-      "召唤",
-      "宠物小屋",
-      "探索",
-      "神龛"
-    ],
+    "expected": [0, 1, 2],
+    "labels": ["召唤", "宠物小屋", "探索", "神龛"],
     "model": "Courtyard-v5.0.onnx",
     "post_delay": 2000,
     "recognition": "NeuralNetworkDetect",
@@ -450,12 +286,7 @@
   },
   "导航-庭院-识别是否位于庭院-模板匹配": {
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      544,
-      1280,
-      176
-    ],
+    "roi": [0, 544, 1280, 176],
     "template": [
       "导航/导航-庭院-识别是否位于庭院-模板匹配_1.png",
       "导航/导航-庭院-识别是否位于庭院-模板匹配_2.png",
@@ -468,12 +299,7 @@
     "expected": "确|认",
     "post_delay": 2000,
     "recognition": "OCR",
-    "roi": [
-      339,
-      347,
-      597,
-      121
-    ]
+    "roi": [339, 347, 597, 121]
   },
   "导航-式神图鉴": {
     "next": [
@@ -490,36 +316,19 @@
     "post_delay": 2000,
     "pre_wait_freezes": 100,
     "recognition": "OCR",
-    "roi": [
-      360,
-      611,
-      313,
-      109
-    ]
+    "roi": [360, 611, 313, 109]
   },
   "导航-式神图鉴-点击式神图鉴-模板匹配": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [
-      368,
-      599,
-      316,
-      121
-    ],
-    "template": [
-      "导航/导航-式神图鉴-点击式神图鉴-模板匹配_1.png"
-    ]
+    "roi": [368, 599, 316, 121],
+    "template": ["导航/导航-式神图鉴-点击式神图鉴-模板匹配_1.png"]
   },
   "导航-式神图鉴-识别是否位于式神图鉴": {
     "expected": "式神图鉴",
     "recognition": "OCR",
-    "roi": [
-      85,
-      2,
-      249,
-      84
-    ]
+    "roi": [85, 2, 249, 84]
   },
   "导航-式神委派": {
     "next": [
@@ -534,23 +343,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
+    "roi": [0, 588, 1280, 132],
     "template": "导航/导航-式神委派-点击式神委派_1.png"
   },
   "导航-式神委派-识别是否位于式神委派界面": {
     "expected": "式神委派",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      326,
-      91
-    ]
+    "roi": [0, 0, 326, 91]
   },
   "导航-式神录": {
     "next": [
@@ -565,27 +364,15 @@
     "action": "Click",
     "post_delay": 3000,
     "recognition": "TemplateMatch",
-    "roi": [
-      1076,
-      590,
-      124,
-      127
-    ],
-    "template": [
-      "导航/导航-式神录-点击式神录_1.png"
-    ]
+    "roi": [1076, 590, 124, 127],
+    "template": ["导航/导航-式神录-点击式神录_1.png"]
   },
   "导航-式神录-识别是否位于式神录": {
     "expected": "式神录",
     "pre_delay": 1000,
     "pre_wait_freezes": 1000,
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      245,
-      70
-    ]
+    "roi": [0, 0, 245, 70]
   },
   "导航-御灵": {
     "next": [
@@ -600,25 +387,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
-    "template": [
-      "导航/导航-御灵-点击御灵副本_1.png"
-    ]
+    "roi": [0, 588, 1280, 132],
+    "template": ["导航/导航-御灵-点击御灵副本_1.png"]
   },
   "导航-御灵-识别是否位于御灵副本界面": {
     "expected": "御灵之境",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      326,
-      91
-    ]
+    "roi": [0, 0, 326, 91]
   },
   "导航-御魂": {
     "next": [
@@ -633,25 +408,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
-    "template": [
-      "导航/导航-御魂-点击御魂副本按钮_1.png"
-    ]
+    "roi": [0, 588, 1280, 132],
+    "template": ["导航/导航-御魂-点击御魂副本按钮_1.png"]
   },
   "导航-御魂-识别是否位于御魂界面": {
     "expected": "御魂",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      326,
-      91
-    ]
+    "roi": [0, 0, 326, 91]
   },
   "导航-悬赏封印": {
     "next": [
@@ -667,12 +430,7 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      146,
-      1178,
-      449
-    ],
+    "roi": [0, 146, 1178, 449],
     "template": [
       "导航/导航-悬赏封印-点击悬赏按钮-模板匹配_1.png",
       "悬赏封印/悬赏封印.png",
@@ -685,12 +443,7 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      146,
-      1178,
-      449
-    ],
+    "roi": [0, 146, 1178, 449],
     "template": [
       "导航/导航-悬赏封印-点击悬赏按钮-模板匹配_1.png",
       "悬赏封印/悬赏封印.png",
@@ -702,12 +455,7 @@
   "导航-悬赏封印-识别是否位于悬赏封印界面": {
     "expected": "悬赏封印",
     "recognition": "OCR",
-    "roi": [
-      535,
-      45,
-      218,
-      70
-    ]
+    "roi": [535, 45, 218, 70]
   },
   "导航-探索界面": {
     "next": [
@@ -722,27 +470,13 @@
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      615,
-      1280,
-      105
-    ],
-    "template": [
-      "导航/导航-探索界面-展开所有导航入口_1.png"
-    ]
+    "roi": [0, 615, 1280, 105],
+    "template": ["导航/导航-探索界面-展开所有导航入口_1.png"]
   },
   "导航-探索界面-所有导航入口已展开": {
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      615,
-      1280,
-      105
-    ],
-    "template": [
-      "导航/导航-探索界面-所有导航入口已展开_1.png"
-    ]
+    "roi": [0, 615, 1280, 105],
+    "template": ["导航/导航-探索界面-所有导航入口已展开_1.png"]
   },
   "导航-探索界面-空节点": {
     "recognition": "DirectHit"
@@ -750,12 +484,7 @@
   "导航-探索界面-识别探索灯笼": {
     "action": "Click",
     "expected": 2,
-    "labels": [
-      "召唤",
-      "宠物小屋",
-      "探索",
-      "神龛"
-    ],
+    "labels": ["召唤", "宠物小屋", "探索", "神龛"],
     "model": "Courtyard-v5.0.onnx",
     "post_delay": 5000,
     "recognition": "NeuralNetworkDetect",
@@ -771,25 +500,13 @@
     ],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [
-      5,
-      614,
-      1208,
-      106
-    ],
+    "roi": [5, 614, 1208, 106],
     "timeout": 5000
   },
   "导航-探索界面-跳过": {
     "recognition": "TemplateMatch",
-    "roi": [
-      1,
-      601,
-      1279,
-      119
-    ],
-    "template": [
-      "导航/导航-探索界面-跳过_1.png"
-    ]
+    "roi": [1, 601, 1279, 119],
+    "template": ["导航/导航-探索界面-跳过_1.png"]
   },
   "导航-杂货铺": {
     "next": [
@@ -803,12 +520,7 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      692,
-      589,
-      479,
-      131
-    ],
+    "roi": [692, 589, 479, 131],
     "template": [
       "导航/导航-杂货铺-点击杂货铺_1.png",
       "通用/导航/导航-杂货铺-点击杂货铺_1.png"
@@ -817,12 +529,7 @@
   "导航-杂货铺-识别是否位于杂货铺": {
     "expected": "勋章|魅力",
     "recognition": "OCR",
-    "roi": [
-      1168,
-      93,
-      78,
-      484
-    ]
+    "roi": [1168, 93, 78, 484]
   },
   "导航-活动总览": {
     "next": [
@@ -840,46 +547,22 @@
     "post_delay": 2000,
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [
-      1121,
-      81,
-      159,
-      212
-    ],
-    "target": [
-      1245,
-      95,
-      21,
-      23
-    ],
-    "template": [
-      "导航/导航-活动总览-点击活动总览_1.png"
-    ]
+    "roi": [1121, 81, 159, 212],
+    "target": [1245, 95, 21, 23],
+    "template": ["导航/导航-活动总览-点击活动总览_1.png"]
   },
   "导航-活动总览-点击活动总览": {
     "action": "Click",
     "post_delay": 2000,
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [
-      1121,
-      81,
-      159,
-      212
-    ],
-    "template": [
-      "导航/导航-活动总览-点击活动总览_1.png"
-    ]
+    "roi": [1121, 81, 159, 212],
+    "template": ["导航/导航-活动总览-点击活动总览_1.png"]
   },
   "导航-活动总览-识别是否位于活动总览": {
     "expected": "活动总览",
     "recognition": "OCR",
-    "roi": [
-      70,
-      0,
-      231,
-      70
-    ]
+    "roi": [70, 0, 231, 70]
   },
   "导航-珍旅居": {
     "next": [
@@ -894,25 +577,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      167,
-      566,
-      152,
-      154
-    ],
-    "template": [
-      "导航/导航-珍旅居-点击珍旅居_2.png"
-    ]
+    "roi": [167, 566, 152, 154],
+    "template": ["导航/导航-珍旅居-点击珍旅居_2.png"]
   },
   "导航-珍旅居-识别是否位于珍旅居": {
     "expected": "珍旅居",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      328,
-      108
-    ]
+    "roi": [0, 0, 328, 108]
   },
   "导航-礼包屋": {
     "next": [
@@ -926,12 +597,7 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      799,
-      600,
-      481,
-      120
-    ],
+    "roi": [799, 600, 481, 120],
     "template": [
       "导航/导航-礼包屋-点击礼包屋_1.png",
       "导航/导航-礼包屋-点击礼包屋_2.png"
@@ -940,12 +606,7 @@
   "导航-礼包屋-识别是否位于礼包屋": {
     "expected": "日常|特权",
     "recognition": "OCR",
-    "roi": [
-      1156,
-      73,
-      112,
-      561
-    ]
+    "roi": [1156, 73, 112, 561]
   },
   "导航-秘闻副本": {
     "next": [
@@ -960,25 +621,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      588,
-      1280,
-      132
-    ],
-    "template": [
-      "导航/导航-秘闻副本-点击秘闻副本_1.png"
-    ]
+    "roi": [0, 588, 1280, 132],
+    "template": ["导航/导航-秘闻副本-点击秘闻副本_1.png"]
   },
   "导航-秘闻副本-识别是否位于秘闻副本": {
     "expected": "秘闻副本",
     "recognition": "OCR",
-    "roi": [
-      113,
-      12,
-      211,
-      72
-    ]
+    "roi": [113, 12, 211, 72]
   },
   "导航-纳物库": {
     "next": [
@@ -993,25 +642,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      278,
-      579,
-      173,
-      141
-    ],
-    "template": [
-      "导航/导航-纳物库-点击纳物库_1.png"
-    ]
+    "roi": [278, 579, 173, 141],
+    "template": ["导航/导航-纳物库-点击纳物库_1.png"]
   },
   "导航-纳物库-识别是否位于纳物库": {
     "expected": "纳物库",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      251,
-      92
-    ]
+    "roi": [0, 0, 251, 92]
   },
   "导航-组队": {
     "next": [
@@ -1026,25 +663,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      406,
-      584,
-      121,
-      136
-    ],
-    "template": [
-      "导航/导航-组队-点击组队_1.png"
-    ]
+    "roi": [406, 584, 121, 136],
+    "template": ["导航/导航-组队-点击组队_1.png"]
   },
   "导航-组队-识别是否位于组队界面": {
     "expected": "组队",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      221,
-      86
-    ]
+    "roi": [0, 0, 221, 86]
   },
   "导航-结界突破": {
     "next": [
@@ -1059,25 +684,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      597,
-      1280,
-      123
-    ],
-    "template": [
-      "导航/导航-结界突破-点击结界突破_1.png"
-    ]
+    "roi": [0, 597, 1280, 123],
+    "template": ["导航/导航-结界突破-点击结界突破_1.png"]
   },
   "导航-结界突破-识别是否位于结界突破界面": {
     "expected": "结界突破",
     "recognition": "OCR",
-    "roi": [
-      537,
-      52,
-      200,
-      94
-    ]
+    "roi": [537, 52, 200, 94]
   },
   "导航-花合战": {
     "next": [
@@ -1092,25 +705,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      744,
-      580,
-      148,
-      140
-    ],
-    "template": [
-      "导航/导航-花合战-点击花合战_1.png"
-    ]
+    "roi": [744, 580, 148, 140],
+    "template": ["导航/导航-花合战-点击花合战_1.png"]
   },
   "导航-花合战-识别是否位于花合战": {
     "expected": "花合战",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      277,
-      90
-    ]
+    "roi": [0, 0, 277, 90]
   },
   "导航-英杰试炼": {
     "next": [
@@ -1125,55 +726,26 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      596,
-      1280,
-      124
-    ],
-    "template": [
-      "导航/导航-英杰试炼-点击英杰试炼_1.png"
-    ]
+    "roi": [0, 596, 1280, 124],
+    "template": ["导航/导航-英杰试炼-点击英杰试炼_1.png"]
   },
   "导航-英杰试炼-识别是否位于英杰试炼界面": {
     "expected": "英杰试炼",
     "recognition": "OCR",
-    "replace": [
-      [
-        "傑",
-        "杰"
-      ]
-    ],
-    "roi": [
-      3,
-      0,
-      301,
-      79
-    ]
+    "replace": [["傑", "杰"]],
+    "roi": [3, 0, 301, 79]
   },
   "导航-觉醒之塔-点击觉醒材料": {
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      618,
-      1280,
-      102
-    ],
-    "template": [
-      "导航/导航-觉醒之塔-点击觉醒材料_1.png"
-    ]
+    "roi": [0, 618, 1280, 102],
+    "template": ["导航/导航-觉醒之塔-点击觉醒材料_1.png"]
   },
   "导航-觉醒之塔-识别是否位于觉醒之塔": {
     "expected": "觉醒之塔",
     "recognition": "OCR",
-    "roi": [
-      140,
-      7,
-      162,
-      58
-    ]
+    "roi": [140, 7, 162, 58]
   },
   "导航-觉醒材料": {
     "next": [
@@ -1187,12 +759,7 @@
   "导航-识别是否位于加载过渡界面": {
     "expected": "官网|163.com",
     "recognition": "OCR",
-    "roi": [
-      382,
-      660,
-      515,
-      60
-    ]
+    "roi": [382, 660, 515, 60]
   },
   "导航-阴阳寮": {
     "next": [
@@ -1207,24 +774,12 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      511,
-      573,
-      147,
-      147
-    ],
-    "template": [
-      "导航/导航-阴阳寮-点击阴阳寮_1.png"
-    ]
+    "roi": [511, 573, 147, 147],
+    "template": ["导航/导航-阴阳寮-点击阴阳寮_1.png"]
   },
   "导航-阴阳寮-识别是否位于阴阳寮": {
     "recognition": "TemplateMatch",
-    "roi": [
-      830,
-      573,
-      450,
-      147
-    ],
+    "roi": [830, 573, 450, 147],
     "template": [
       "导航/导航-阴阳寮-识别是否位于阴阳寮_1.png",
       "导航/导航-阴阳寮-识别是否位于阴阳寮_2.png",
@@ -1244,25 +799,13 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      843,
-      591,
-      319,
-      129
-    ],
-    "template": [
-      "导航/导航-阴阳寮祈愿-点击祈愿_1.png"
-    ]
+    "roi": [843, 591, 319, 129],
+    "template": ["导航/导航-阴阳寮祈愿-点击祈愿_1.png"]
   },
   "导航-阴阳寮祈愿-识别是否位于阴阳寮祈愿界面": {
     "expected": "道具|发布|心愿|捐赠|记录",
     "recognition": "OCR",
-    "roi": [
-      785,
-      571,
-      357,
-      107
-    ]
+    "roi": [785, 571, 357, 107]
   },
   "导航-阴阳寮神社": {
     "next": [
@@ -1276,12 +819,7 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      825,
-      572,
-      235,
-      148
-    ],
+    "roi": [825, 572, 235, 148],
     "template": [
       "导航/导航-阴阳寮神社-点击神社_1.png",
       "导航/导航-阴阳寮神社-点击神社_2.png"
@@ -1289,12 +827,7 @@
   },
   "导航-阴阳寮神社-识别是否位于阴阳寮神社界面": {
     "recognition": "TemplateMatch",
-    "roi": [
-      96,
-      138,
-      1067,
-      481
-    ],
+    "roi": [96, 138, 1067, 481],
     "template": [
       "导航/导航-阴阳寮神社-识别是否位于阴阳寮神社界面_1.png",
       "导航/导航-阴阳寮神社-识别是否位于阴阳寮神社界面_2.png",
@@ -1314,12 +847,7 @@
     "action": "Click",
     "post_delay": 4000,
     "recognition": "TemplateMatch",
-    "roi": [
-      927,
-      581,
-      353,
-      139
-    ],
+    "roi": [927, 581, 353, 139],
     "template": [
       "导航/导航-阴阳寮结界-点击结界_1.png",
       "导航/导航-阴阳寮结界-点击结界_2.png"
@@ -1327,12 +855,7 @@
   },
   "导航-阴阳寮结界-识别是否位于结界": {
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      208,
-      628,
-      512
-    ],
+    "roi": [0, 208, 628, 512],
     "template": [
       "导航/导航-阴阳寮结界-识别是否位于结界_1.png",
       "导航/导航-阴阳寮结界-识别是否位于结界_2.png"
@@ -1351,68 +874,34 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [
-      966,
-      551,
-      131,
-      169
-    ],
-    "template": [
-      "导航/导航-阴阳术-点击阴阳术_1.png"
-    ]
+    "roi": [966, 551, 131, 169],
+    "template": ["导航/导航-阴阳术-点击阴阳术_1.png"]
   },
   "导航-阴阳术-识别是否位于阴阳术": {
     "expected": "阴阳术",
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      245,
-      78
-    ]
+    "roi": [0, 0, 245, 78]
   },
   "返回-从式神录返回": {
     "expected": "式神录",
-    "next": [
-      "返回-从式神录返回-模板匹配",
-      "返回-从式神录返回-特征匹配"
-    ],
+    "next": ["返回-从式神录返回-模板匹配", "返回-从式神录返回-特征匹配"],
     "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      273,
-      72
-    ]
+    "roi": [0, 0, 273, 72]
   },
   "返回-从式神录返回-模板匹配": {
     "action": "Click",
     "post_delay": 1000,
     "pre_wait_freezes": 500,
     "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      0,
-      134,
-      81
-    ],
-    "template": [
-      "导航/返回-从式神录返回模板匹配_1.png"
-    ]
+    "roi": [0, 0, 134, 81],
+    "template": ["导航/返回-从式神录返回模板匹配_1.png"]
   },
   "返回-从式神录返回-特征匹配": {
     "action": "Click",
     "post_delay": 1000,
     "pre_wait_freezes": 500,
     "recognition": "FeatureMatch",
-    "roi": [
-      0,
-      0,
-      134,
-      81
-    ],
-    "template": [
-      "导航/返回-从式神录返回模板匹配_1.png"
-    ]
+    "roi": [0, 0, 134, 81],
+    "template": ["导航/返回-从式神录返回模板匹配_1.png"]
   }
 }
