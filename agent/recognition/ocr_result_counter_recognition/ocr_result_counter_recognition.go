@@ -61,26 +61,22 @@ func (r *OCRResultCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 
 	detail, err := ctx.RunRecognition(recognitionNode, arg.Img, nil)
 	if err != nil {
-		fmt.Printf("OCRResultCounterRecognition: 运行识别节点 %q 失败: %v\n", recognitionNode, err)
 		r.resetConsecutiveCount()
 		return nil, false
 	}
 	if detail == nil || !detail.Hit {
-		fmt.Printf("OCRResultCounterRecognition: 识别节点 %q 未命中\n", recognitionNode)
 		r.resetConsecutiveCount()
 		return nil, false
 	}
 
 	text, box, ok := bestOCRResult(detail)
 	if !ok {
-		fmt.Printf("OCRResultCounterRecognition: 识别节点 %q 没有有效的 OCR best 结果\n", recognitionNode)
 		r.resetConsecutiveCount()
 		return nil, false
 	}
 
 	count := r.updateConsecutiveCount(recognitionNode, text)
 	if count < targetCount {
-		fmt.Printf("OCRResultCounterRecognition: 节点 %q 的结果 %q 出现 %d/%d 次，返回 false\n", recognitionNode, text, count, targetCount)
 		return nil, false
 	}
 
@@ -95,7 +91,6 @@ func (r *OCRResultCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 		return nil, false
 	}
 
-	fmt.Printf("OCRResultCounterRecognition: 节点 %q 的结果 %q 出现 %d/%d 次，返回 true\n", recognitionNode, text, count, targetCount)
 	return &maa.CustomRecognitionResult{
 		Box:    box,
 		Detail: string(detailJSON),
