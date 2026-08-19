@@ -71,26 +71,29 @@ func TestBestOCRResultRejectsMissingBest(t *testing.T) {
 
 func TestUpdateConsecutiveCount(t *testing.T) {
 	r := &OCRResultCounterRecognition{}
-	if got := r.updateConsecutiveCount("节点A", "文本A"); got != 1 {
-		t.Fatalf("first count = %d, want 1", got)
+	if got := r.updateConsecutiveCount("节点A", "文本A"); got.Count != 1 || got.Consecutive {
+		t.Fatalf("first update = %+v, want count 1 and non-consecutive", got)
 	}
-	if got := r.updateConsecutiveCount("节点A", "文本A"); got != 2 {
-		t.Fatalf("second count = %d, want 2", got)
+	if got := r.updateConsecutiveCount("节点A", "文本A"); got.Count != 2 || !got.Consecutive {
+		t.Fatalf("second update = %+v, want count 2 and consecutive", got)
 	}
-	if got := r.updateConsecutiveCount("节点A", "文本B"); got != 1 {
-		t.Fatalf("changed text count = %d, want 1", got)
+	if got := r.updateConsecutiveCount("节点A", "文本B"); got.Count != 1 || got.Consecutive {
+		t.Fatalf("changed text update = %+v, want count 1 and non-consecutive", got)
 	}
-	if got := r.updateConsecutiveCount("节点A", "文本A"); got != 1 {
-		t.Fatalf("previous text after interruption count = %d, want 1", got)
+	if got := r.updateConsecutiveCount("节点A", "文本A"); got.Count != 1 || got.Consecutive {
+		t.Fatalf("previous text after interruption update = %+v, want count 1 and non-consecutive", got)
 	}
-	if got := r.updateConsecutiveCount("节点B", "文本A"); got != 1 {
-		t.Fatalf("changed node count = %d, want 1", got)
+	if got := r.updateConsecutiveCount("节点B", "文本A"); got.Count != 1 || got.Consecutive {
+		t.Fatalf("changed node update = %+v, want count 1 and non-consecutive", got)
 	}
-	if got := r.updateConsecutiveCount("节点B", "文本A"); got != 2 {
-		t.Fatalf("same text on same node count = %d, want 2", got)
+	if got := r.updateConsecutiveCount("节点B", "文本A"); got.Count != 2 || !got.Consecutive {
+		t.Fatalf("same text on same node update = %+v, want count 2 and consecutive", got)
 	}
-	r.resetConsecutiveCount()
-	if got := r.updateConsecutiveCount("节点B", "文本A"); got != 1 {
-		t.Fatalf("count after failed recognition reset = %d, want 1", got)
+	previous := r.resetConsecutiveCount()
+	if previous.Node != "节点B" || previous.Text != "文本A" || previous.Count != 2 {
+		t.Fatalf("reset previous state = %+v", previous)
+	}
+	if got := r.updateConsecutiveCount("节点B", "文本A"); got.Count != 1 || got.Consecutive {
+		t.Fatalf("update after failed recognition reset = %+v, want count 1 and non-consecutive", got)
 	}
 }
