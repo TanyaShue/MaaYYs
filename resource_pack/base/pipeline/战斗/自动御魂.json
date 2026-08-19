@@ -255,7 +255,7 @@
     "max_hit": 1,
     "next": [
       "自动御魂_装备挑战御魂副本御魂",
-      "自动御魂_点击式神录"
+      "[JumpBack]自动御魂_点击式神录"
     ],
     "recognition": "DirectHit"
   },
@@ -443,19 +443,11 @@
     "recognition": "Custom"
   },
   "自动御魂-锁定阵容": {
-    "action": "Click",
     "max_hit": 1,
-    "recognition": "TemplateMatch",
-    "roi": [
-      629,
-      644,
-      61,
-      60
+    "next": [
+      "通用-锁定阵容"
     ],
-    "template": [
-      "战斗/自动御魂/自动御魂-锁定阵容_1.png",
-      "自动御魂/自动御魂18.png"
-    ]
+    "recognition": "DirectHit"
   },
   "自动御魂1": {
     "action": "Click",
@@ -548,6 +540,8 @@
   "自动御魂15": {
     "action": "Click",
     "expected": "获得奖励",
+    "post_delay": 1000,
+    "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
       420,
@@ -566,6 +560,8 @@
   "自动御魂16": {
     "action": "Click",
     "expected": "获得宝藏|发现宝藏",
+    "post_delay": 2000,
+    "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [
       420,
@@ -574,10 +570,10 @@
       150
     ],
     "target": [
-      213,
-      635,
-      174,
-      71
+      367,
+      611,
+      175,
+      109
     ]
   },
   "自动御魂17": {

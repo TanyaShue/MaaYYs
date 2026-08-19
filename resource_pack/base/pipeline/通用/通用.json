@@ -6,10 +6,22 @@
       "[JumpBack]出战队伍预设-滑动分组到最上方",
       "[JumpBack]出战队伍预设-向上滑动"
     ],
-    "on_error": ["出战队伍预设-分组错误"],
+    "on_error": [
+      "出战队伍预设-分组错误"
+    ],
     "recognition": "OCR",
-    "roi": [590, 140, 560, 400],
-    "roi_offset": [246, 323, -405, -336]
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      246,
+      323,
+      -405,
+      -336
+    ]
   },
   "出战队伍预设-分组错误": {
     "focus": {
@@ -19,11 +31,31 @@
   },
   "出战队伍预设-向上滑动": {
     "action": "Swipe",
-    "begin": [590, 140, 560, 400],
-    "begin_offset": [28, 326, -478, -370],
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      28,
+      326,
+      -478,
+      -370
+    ],
     "duration": 2000,
-    "end": [590, 140, 560, 400],
-    "end_offset": [26, 37, -488, -357],
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      26,
+      37,
+      -488,
+      -357
+    ],
     "max_hit": 4,
     "post_delay": 1000,
     "pre_wait_freezes": 1000,
@@ -31,11 +63,31 @@
   },
   "出战队伍预设-向上滑动队伍": {
     "action": "Swipe",
-    "begin": [590, 140, 560, 400],
-    "begin_offset": [257, 281, -438, -360],
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      257,
+      281,
+      -438,
+      -360
+    ],
     "duration": 2000,
-    "end": [590, 140, 560, 400],
-    "end_offset": [252, 39, -444, -360],
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      252,
+      39,
+      -444,
+      -360
+    ],
     "max_hit": 4,
     "post_delay": 1000,
     "pre_wait_freezes": 1000,
@@ -43,22 +95,62 @@
   },
   "出战队伍预设-滑动分组到最上方": {
     "action": "Swipe",
-    "begin": [590, 140, 560, 400],
-    "begin_offset": [26, 37, -488, -357],
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      26,
+      37,
+      -488,
+      -357
+    ],
     "duration": 1000,
-    "end": [590, 140, 560, 400],
-    "end_offset": [28, 326, -478, -370],
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      28,
+      326,
+      -478,
+      -370
+    ],
     "max_hit": 3,
     "post_delay": 1000,
     "recognition": "DirectHit"
   },
   "出战队伍预设-滑动队伍到最上方": {
     "action": "Swipe",
-    "begin": [590, 140, 560, 400],
-    "begin_offset": [252, 39, -444, -360],
+    "begin": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "begin_offset": [
+      252,
+      39,
+      -444,
+      -360
+    ],
     "duration": 1000,
-    "end": [590, 140, 560, 400],
-    "end_offset": [257, 281, -438, -360],
+    "end": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "end_offset": [
+      257,
+      281,
+      -438,
+      -360
+    ],
     "max_hit": 3,
     "post_delay": 1000,
     "recognition": "DirectHit"
@@ -71,12 +163,24 @@
       "[JumpBack]出战队伍预设-滑动队伍到最上方",
       "[JumpBack]出战队伍预设-向上滑动队伍"
     ],
-    "on_error": ["出战队伍预设-队伍错误"],
+    "on_error": [
+      "出战队伍预设-队伍错误"
+    ],
     "post_delay": 2000,
     "pre_wait_freezes": 1000,
     "recognition": "OCR",
-    "roi": [590, 140, 560, 400],
-    "roi_offset": [0, 0, -430, 0]
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      0,
+      0,
+      -430,
+      0
+    ]
   },
   "出战队伍预设-识别出战队伍": {
     "action": "Click",
@@ -89,8 +193,18 @@
     ],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [590, 140, 560, 400],
-    "roi_offset": [130, 0, -280, 0]
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      130,
+      0,
+      -280,
+      0
+    ]
   },
   "出战队伍预设-识别出战队伍-点击出战": {
     "action": "Click",
@@ -98,8 +212,18 @@
     "post_delay": 1000,
     "pre_wait_freezes": 1000,
     "recognition": "OCR",
-    "roi": [590, 140, 560, 400],
-    "roi_offset": [246, 323, -405, -336]
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      246,
+      323,
+      -405,
+      -336
+    ]
   },
   "出战队伍预设-识别出战队伍-点击确定": {
     "action": "Click",
@@ -107,15 +231,30 @@
     "post_delay": 2000,
     "pre_wait_freezes": 1000,
     "recognition": "OCR",
-    "roi": [401, 354, 467, 135],
+    "roi": [
+      401,
+      354,
+      467,
+      135
+    ],
     "timeout": 2000
   },
   "出战队伍预设-识别出战队伍-确保没有出战": {
     "expected": "出战",
     "inverse": true,
     "recognition": "OCR",
-    "roi": [590, 140, 560, 400],
-    "roi_offset": [246, 323, -405, -336]
+    "roi": [
+      590,
+      140,
+      560,
+      400
+    ],
+    "roi_offset": [
+      246,
+      323,
+      -405,
+      -336
+    ]
   },
   "出战队伍预设-识别出战队伍-确保没有确定": {
     "expected": "确定",
@@ -128,7 +267,12 @@
     "pre_delay": 1000,
     "pre_wait_freezes": 1000,
     "recognition": "OCR",
-    "roi": [404, 354, 476, 149],
+    "roi": [
+      404,
+      354,
+      476,
+      149
+    ],
     "timeout": 2000
   },
   "出战队伍预设-识别出战队伍-装备御魂-模板匹配": {
@@ -137,8 +281,15 @@
     "post_delay": 2000,
     "recognition": "TemplateMatch",
     "roi": "出战队伍预设-识别出战队伍",
-    "roi_offset": [177, -12, 216, 24],
-    "template": ["通用/出战队伍预设-识别出战队伍-装备御魂_1.png"],
+    "roi_offset": [
+      177,
+      -12,
+      216,
+      24
+    ],
+    "template": [
+      "通用/出战队伍预设-识别出战队伍-装备御魂_1.png"
+    ],
     "timeout": 5000
   },
   "出战队伍预设-识别出战队伍-装备御魂-特征匹配": {
@@ -147,8 +298,15 @@
     "post_delay": 2000,
     "recognition": "FeatureMatch",
     "roi": "出战队伍预设-识别出战队伍",
-    "roi_offset": [177, -12, 216, 24],
-    "template": ["通用/出战队伍预设-识别出战队伍-装备御魂_1.png"],
+    "roi_offset": [
+      177,
+      -12,
+      216,
+      24
+    ],
+    "template": [
+      "通用/出战队伍预设-识别出战队伍-装备御魂_1.png"
+    ],
     "timeout": 5000
   },
   "出战队伍预设-队伍错误": {
@@ -162,17 +320,34 @@
     "custom_action": "RandomSwipe",
     "custom_action_param": {
       "delay": 2000,
-      "end_roi": [1004, 296, 96, 218],
-      "start_roi": [322, 269, 107, 239]
+      "end_roi": [
+        1004,
+        296,
+        96,
+        218
+      ],
+      "start_roi": [
+        322,
+        269,
+        107,
+        239
+      ]
     },
-    "on_error": ["跳过"],
+    "on_error": [
+      "跳过"
+    ],
     "recognition": "DirectHit"
   },
   "庭院_点击探索": {
     "action": "Click",
     "post_delay": 3000,
     "recognition": "TemplateMatch",
-    "roi": [23, 98, 1144, 249],
+    "roi": [
+      23,
+      98,
+      1144,
+      249
+    ],
     "template": [
       "庭院/庭院_探索_望月幽庭.png",
       "庭院/庭院_探索_织梦莲庭.png",
@@ -183,16 +358,31 @@
   },
   "打开底部菜单": {
     "expected": "闲|庭|闲庭",
-    "next": ["通用6", "通用11", "通用4", "通用10"],
+    "next": [
+      "通用6",
+      "通用11",
+      "通用4",
+      "通用10"
+    ],
     "recognition": "OCR",
-    "roi": [33, 651, 72, 43],
+    "roi": [
+      33,
+      651,
+      72,
+      43
+    ],
     "timeout": 60000
   },
   "打开底部菜单_匹配": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "FeatureMatch",
-    "roi": [1063, 528, 216, 191],
+    "roi": [
+      1063,
+      528,
+      216,
+      191
+    ],
     "template": [
       "庭院/庭院_卷轴.png",
       "庭院/庭院_卷轴_鬼金羊.png",
@@ -203,9 +393,21 @@
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [0, 445, 209, 269],
-    "target": [1177, 578, 63, 92],
-    "template": ["通用/点击底部菜单位置.png"]
+    "roi": [
+      0,
+      445,
+      209,
+      269
+    ],
+    "target": [
+      1177,
+      578,
+      63,
+      92
+    ],
+    "template": [
+      "通用/点击底部菜单位置.png"
+    ]
   },
   "点击探索": {
     "expected": "闲庭|图鉴|珍旅居|纳物库",
@@ -217,19 +419,34 @@
       "[JumpBack]点击探索_识别探索界面"
     ],
     "recognition": "OCR",
-    "roi": [9, 630, 551, 90]
+    "roi": [
+      9,
+      630,
+      551,
+      90
+    ]
   },
   "点击探索_识别探索界面": {
     "action": "Click",
     "expected": "探索",
     "post_delay": 3000,
     "recognition": "OCR",
-    "roi": [170, 99, 984, 185]
+    "roi": [
+      170,
+      99,
+      984,
+      185
+    ]
   },
   "点击探索_识别是否位于探索界面": {
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [13, 608, 1201, 111],
+    "roi": [
+      13,
+      608,
+      1201,
+      111
+    ],
     "template": [
       "通用/点击探索_识别探索界面.png",
       "通用/点击探索_识别探索界面_1.png",
@@ -251,12 +468,21 @@
     "expected": "觉醒材料|御魂|结界突破|御灵",
     "post_delay": 2000,
     "recognition": "OCR",
-    "roi": [13, 608, 1201, 111]
+    "roi": [
+      13,
+      608,
+      1201,
+      111
+    ]
   },
   "确保位于庭院": {
     "max_hit": 1,
-    "next": ["识别庭院特征"],
-    "on_error": ["返回庭院"],
+    "next": [
+      "识别庭院特征"
+    ],
+    "on_error": [
+      "返回庭院"
+    ],
     "recognition": "DirectHit",
     "timeout": 5000
   },
@@ -266,7 +492,12 @@
   "设置挑战次数_点击数字编辑": {
     "action": "Click",
     "recognition": "DirectHit",
-    "target": [324, 484, 38, 21],
+    "target": [
+      324,
+      484,
+      38,
+      21
+    ],
     "timeout": 2000
   },
   "设置挑战次数_点击目标数字": {
@@ -274,24 +505,44 @@
     "post_delay": 2000,
     "pre_delay": 1000,
     "recognition": "OCR",
-    "roi": [324, 527, 307, 178]
+    "roi": [
+      324,
+      527,
+      307,
+      178
+    ]
   },
   "设置挑战次数_点击确定": {
     "action": "Click",
     "expected": "确定",
     "post_delay": 2000,
     "recognition": "OCR",
-    "roi": [563, 650, 64, 49]
+    "roi": [
+      563,
+      650,
+      64,
+      49
+    ]
   },
   "识别庭院特征": {
     "expected": "纳物库|珍旅居|闲庭|纳物库",
     "recognition": "OCR",
-    "roi": [1, 612, 755, 108]
+    "roi": [
+      1,
+      612,
+      755,
+      108
+    ]
   },
   "识别探索特征": {
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [9, 575, 1137, 144],
+    "roi": [
+      9,
+      575,
+      1137,
+      144
+    ],
     "template": [
       "探索/探索_六道之门.png",
       "探索/探索_地域鬼王.png",
@@ -303,30 +554,67 @@
     "action": "Click",
     "post_delay": 1000,
     "recognition": "FeatureMatch",
-    "roi": [0, 0, 116, 94],
-    "template": ["通用图标/返回_蓝色.png", "通用图标/返回_蓝色_2.png"]
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "template": [
+      "通用图标/返回_蓝色.png",
+      "通用图标/返回_蓝色_2.png"
+    ]
   },
   "识别蓝色返回_模板识别": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [0, 0, 116, 94],
-    "template": ["通用图标/返回_蓝色.png", "通用图标/返回_蓝色_2.png"]
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "template": [
+      "通用图标/返回_蓝色.png",
+      "通用图标/返回_蓝色_2.png"
+    ]
   },
   "识别黄色返回": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "FeatureMatch",
-    "roi": [0, 0, 116, 94],
-    "target": [12, 5, 50, 43],
-    "template": ["通用图标/返回_黄色.png", "通用图标/返回_黄色_2.png"]
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "target": [
+      12,
+      5,
+      50,
+      43
+    ],
+    "template": [
+      "通用图标/返回_黄色.png",
+      "通用图标/返回_黄色_2.png"
+    ]
   },
   "识别黄色返回_模板识别": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [0, 0, 116, 94],
-    "template": ["通用图标/返回_黄色.png", "通用图标/返回_黄色_2.png"]
+    "roi": [
+      0,
+      0,
+      116,
+      94
+    ],
+    "template": [
+      "通用图标/返回_黄色.png",
+      "通用图标/返回_黄色_2.png"
+    ]
   },
   "跳过": {
     "recognition": "DirectHit"
@@ -342,7 +630,9 @@
       "[JumpBack]识别黄色返回_模板识别",
       "[JumpBack]返回庭院_识别叉"
     ],
-    "on_error": ["[JumpBack]重启游戏"],
+    "on_error": [
+      "[JumpBack]重启游戏"
+    ],
     "rate_limit": 100,
     "recognition": "DirectHit",
     "timeout": 60000
@@ -350,7 +640,12 @@
   "返回庭院_识别叉": {
     "action": "Click",
     "recognition": "TemplateMatch",
-    "roi": [813, 21, 453, 264],
+    "roi": [
+      813,
+      21,
+      453,
+      264
+    ],
     "template": [
       "通用图标/关闭.png",
       "通用图标/关闭_2.png",
@@ -364,40 +659,131 @@
     "post_delay": 1000,
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [0, 0, 179, 85],
-    "template": ["通用/通用-快捷返回庭院_1.png"]
+    "roi": [
+      0,
+      0,
+      179,
+      85
+    ],
+    "template": [
+      "通用/通用-快捷返回庭院_1.png"
+    ]
   },
   "通用-快捷返回庭院-特征匹配": {
     "action": "Click",
     "post_delay": 1000,
     "pre_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [0, 0, 179, 85],
-    "template": ["通用/通用-快捷返回庭院_1.png"]
+    "roi": [
+      0,
+      0,
+      179,
+      85
+    ],
+    "template": [
+      "通用/通用-快捷返回庭院_1.png"
+    ]
+  },
+  "通用-拒绝下载": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      307,
+      292,
+      410,
+      346
+    ],
+    "template": [
+      "通用/通用/通用-拒绝下载.png"
+    ]
+  },
+  "通用-解锁阵容": {
+    "next": [
+      "通用-解锁阵容-识别是否解锁图标",
+      "[JumpBack]通用-解锁阵容-点击解锁图标"
+    ],
+    "recognition": "DirectHit"
+  },
+  "通用-解锁阵容-点击解锁图标": {
+    "action": "Click",
+    "expected": 3,
+    "model": "special-icon-v0.1.1.onnx",
+    "post_delay": 1000,
+    "recognition": "NeuralNetworkDetect"
+  },
+  "通用-解锁阵容-识别是否解锁图标": {
+    "expected": 2,
+    "model": "special-icon-v0.1.1.onnx",
+    "post_delay": 1000,
+    "recognition": "NeuralNetworkDetect"
   },
   "通用-误触了左边聊天框": {
     "action": "Click",
     "post_delay": 1000,
     "recognition": "TemplateMatch",
-    "roi": [611, 316, 97, 148],
-    "template": ["通用/误触处理/打开了侧边聊天框.png"]
+    "roi": [
+      611,
+      316,
+      97,
+      148
+    ],
+    "template": [
+      "通用/误触处理/打开了侧边聊天框.png"
+    ]
+  },
+  "通用-锁定阵容": {
+    "next": [
+      "通用-锁定阵容-识别是否锁定阵容",
+      "[JumpBack]通用-锁定阵容-点击解锁图标"
+    ],
+    "recognition": "DirectHit"
+  },
+  "通用-锁定阵容-点击解锁图标": {
+    "action": "Click",
+    "expected": 2,
+    "model": "special-icon-v0.1.1.onnx",
+    "post_delay": 1000,
+    "recognition": "NeuralNetworkDetect"
+  },
+  "通用-锁定阵容-识别是否锁定阵容": {
+    "expected": 3,
+    "model": "special-icon-v0.1.1.onnx",
+    "recognition": "NeuralNetworkDetect"
   },
   "通用10": {
     "expected": "珍旅居|纳物库|组队|阴阳寮",
     "recognition": "OCR",
-    "roi": [59, 631, 578, 68]
+    "roi": [
+      59,
+      631,
+      578,
+      68
+    ]
   },
   "通用11": {
     "expected": "珍旅居|纳物库|闲庭",
-    "next": ["通用5"],
+    "next": [
+      "通用5"
+    ],
     "recognition": "OCR",
-    "roi": [7, 521, 464, 198]
+    "roi": [
+      7,
+      521,
+      464,
+      198
+    ]
   },
   "通用12": {
     "action": "Click",
-    "expected": 2,
-    "labels": ["召唤", "宠物小屋", "探索", "神龛"],
-    "model": "Courtyard-v5.0.onnx",
+    "expected": 3,
+    "labels": [
+      "召唤",
+      "宠物小屋",
+      "悬赏封印",
+      "探索",
+      "町中",
+      "神龛"
+    ],
+    "model": "Courtyard-v6.0.onnx",
     "post_delay": 3000,
     "recognition": "NeuralNetworkDetect",
     "threshold": 0.7
@@ -407,13 +793,26 @@
     "expected": "确定",
     "post_delay": 2000,
     "recognition": "OCR",
-    "roi": [401, 354, 467, 135],
+    "roi": [
+      401,
+      354,
+      467,
+      135
+    ],
     "timeout": 2000
   },
   "通用4": {
     "recognition": "TemplateMatch",
-    "roi": [7, 521, 464, 198],
-    "template": ["通用/通用4.png", "通用/通用4_1.png"]
+    "roi": [
+      7,
+      521,
+      464,
+      198
+    ],
+    "template": [
+      "通用/通用4.png",
+      "通用/通用4_1.png"
+    ]
   },
   "通用5": {
     "next": [
@@ -427,28 +826,59 @@
     "timeout": 10000
   },
   "通用6": {
-    "next": ["通用5"],
+    "next": [
+      "通用5"
+    ],
     "recognition": "TemplateMatch",
-    "template": ["通用/通用6.png", "通用/通用6_1.png"]
+    "template": [
+      "通用/通用6.png",
+      "通用/通用6_1.png"
+    ]
   },
   "通用7": {
     "expected": "情报|语音|绘卷|插画",
-    "next": ["通用8"],
+    "next": [
+      "通用8"
+    ],
     "recognition": "OCR",
-    "roi": [23, 92, 60, 487]
+    "roi": [
+      23,
+      92,
+      60,
+      487
+    ]
   },
   "通用8": {
     "action": "Click",
-    "next": ["通用_切换御魂_取保所处界面位于式神录界面"],
+    "next": [
+      "通用_切换御魂_取保所处界面位于式神录界面"
+    ],
     "recognition": "TemplateMatch",
-    "roi": [5, 0, 191, 106],
-    "template": ["通用/通用8.png"]
+    "roi": [
+      5,
+      0,
+      191,
+      106
+    ],
+    "template": [
+      "通用/通用8.png"
+    ]
   },
   "通用9": {
     "action": "Click",
     "recognition": "TemplateMatch",
-    "roi": [1039, 11, 240, 73],
-    "target": [1188, 618, 67, 81],
+    "roi": [
+      1039,
+      11,
+      240,
+      73
+    ],
+    "target": [
+      1188,
+      618,
+      67,
+      81
+    ],
     "template": [
       "通用/通用9.png",
       "通用/通用9_1.png",
@@ -461,19 +891,37 @@
   "通用_关闭加成": {
     "action": "Click",
     "count": 4,
-    "lower": [222, 130, 0],
+    "lower": [
+      222,
+      130,
+      0
+    ],
     "recognition": "ColorMatch",
     "roi": "通用_识别加成",
-    "roi_offset": [334, 0, -198, 2],
+    "roi_offset": [
+      334,
+      0,
+      -198,
+      2
+    ],
     "timeout": 2000,
-    "upper": [230, 163, 0]
+    "upper": [
+      230,
+      163,
+      0
+    ]
   },
   "通用_出战队伍": {
     "action": "Click",
     "expected": "出战",
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [181, 629, 531, 81],
+    "roi": [
+      181,
+      629,
+      531,
+      81
+    ],
     "timeout": 10000
   },
   "通用_切换御魂_取保所处界面位于式神录界面": {
@@ -486,7 +934,12 @@
       "[JumpBack]通用_切换御魂_识别预设"
     ],
     "recognition": "OCR",
-    "roi": [50, 0, 178, 64]
+    "roi": [
+      50,
+      0,
+      178,
+      64
+    ]
   },
   "通用_切换御魂_开始": {
     "next": [
@@ -494,31 +947,55 @@
       "通用_切换御魂_识别是否位于攻略界面",
       "通用7"
     ],
-    "on_error": ["跳过"],
+    "on_error": [
+      "跳过"
+    ],
     "recognition": "DirectHit"
   },
   "通用_切换御魂_识别是否位于攻略界面": {
     "expected": "首页|精灵百科",
-    "next": ["通用_切换御魂_退出攻略界面"],
+    "next": [
+      "通用_切换御魂_退出攻略界面"
+    ],
     "recognition": "OCR",
-    "roi": [212, 0, 606, 70]
+    "roi": [
+      212,
+      0,
+      606,
+      70
+    ]
   },
   "通用_切换御魂_识别是否位于预设界面": {
     "expected": "管理分组",
     "recognition": "OCR",
-    "roi": [1041, 599, 222, 121],
+    "roi": [
+      1041,
+      599,
+      222,
+      121
+    ],
     "timeout": 2000
   },
   "通用_切换御魂_识别是否位于预设界面-识别队伍预设": {
     "expected": "预设|队伍",
     "recognition": "OCR",
-    "roi": [679, 36, 212, 103],
+    "roi": [
+      679,
+      36,
+      212,
+      103
+    ],
     "timeout": 2000
   },
   "通用_切换御魂_识别是否位于预设界面-识别预设队伍": {
     "expected": "新建预设|队伍",
     "recognition": "OCR",
-    "roi": [624, 622, 396, 79],
+    "roi": [
+      624,
+      622,
+      396,
+      79
+    ],
     "timeout": 2000
   },
   "通用_切换御魂_识别预设": {
@@ -526,60 +1003,126 @@
     "expected": "预设",
     "post_delay": 3000,
     "recognition": "OCR",
-    "roi": [214, 58, 292, 76]
+    "roi": [
+      214,
+      58,
+      292,
+      76
+    ]
   },
   "通用_切换御魂_退出攻略界面": {
     "action": "Click",
-    "next": ["通用_切换御魂_取保所处界面位于式神录界面"],
+    "next": [
+      "通用_切换御魂_取保所处界面位于式神录界面"
+    ],
     "post_delay": 3000,
     "recognition": "TemplateMatch",
-    "roi": [1102, 344, 178, 376],
-    "template": ["通用/通用2.png"]
+    "roi": [
+      1102,
+      344,
+      178,
+      376
+    ],
+    "template": [
+      "通用/通用2.png"
+    ]
   },
   "通用_取消设置挑战次数": {
     "action": "Click",
     "count": 300,
-    "lower": [12, 63, 103],
+    "lower": [
+      12,
+      63,
+      103
+    ],
     "method": 40,
     "recognition": "ColorMatch",
-    "roi": [252, 444, 43, 43],
+    "roi": [
+      252,
+      444,
+      43,
+      43
+    ],
     "timeout": 2000,
-    "upper": [22, 147, 200]
+    "upper": [
+      22,
+      147,
+      200
+    ]
   },
   "通用_启动设置挑战次数": {
     "action": "Click",
     "count": 1000,
-    "lower": [3, 24, 10],
+    "lower": [
+      3,
+      24,
+      10
+    ],
     "method": 40,
     "recognition": "ColorMatch",
-    "roi": [253, 447, 35, 35],
+    "roi": [
+      253,
+      447,
+      35,
+      35
+    ],
     "timeout": 2000,
-    "upper": [29, 193, 176]
+    "upper": [
+      29,
+      193,
+      176
+    ]
   },
   "通用_打开加成": {
     "action": "Click",
     "count": 4,
-    "lower": [175, 10, 31],
+    "lower": [
+      175,
+      10,
+      31
+    ],
     "recognition": "ColorMatch",
     "roi": "通用_识别加成",
-    "roi_offset": [334, 0, -198, 2],
+    "roi_offset": [
+      334,
+      0,
+      -198,
+      2
+    ],
     "timeout": 2000,
-    "upper": [187, 13, 48]
+    "upper": [
+      187,
+      13,
+      48
+    ]
   },
   "通用_点击预设": {
-    "next": ["通用_点击预设_1", "[JumpBack]通用_点击预设_2"],
+    "next": [
+      "通用_点击预设_1",
+      "[JumpBack]通用_点击预设_2"
+    ],
     "recognition": "DirectHit"
   },
   "通用_点击预设_1": {
     "expected": "出战",
     "recognition": "OCR",
-    "roi": [17, 588, 704, 128]
+    "roi": [
+      17,
+      588,
+      704,
+      128
+    ]
   },
   "通用_点击预设_2": {
     "action": "Click",
     "expected": "预设",
     "recognition": "OCR",
-    "roi": [25, 617, 72, 102]
+    "roi": [
+      25,
+      617,
+      72,
+      102
+    ]
   },
   "通用_装备御魂": {
     "expected": "式神录",
@@ -590,9 +1133,16 @@
       "通用_装备御魂_确保没有确定按钮",
       "[JumpBack]通用3"
     ],
-    "on_error": ["跳过"],
+    "on_error": [
+      "跳过"
+    ],
     "recognition": "OCR",
-    "roi": [67, 0, 170, 53]
+    "roi": [
+      67,
+      0,
+      170,
+      53
+    ]
   },
   "通用_装备御魂-关闭可能出现的失误点击": {
     "next": [
@@ -601,7 +1151,12 @@
       "[JumpBack]通用_装备御魂-点击关闭队伍详情-特征匹配"
     ],
     "recognition": "TemplateMatch",
-    "roi": [943, 591, 204, 75],
+    "roi": [
+      943,
+      591,
+      204,
+      75
+    ],
     "template": [
       "通用/通用/通用_装备御魂-模板匹配-关闭可能出现的失误点击_1.png",
       "通用/通用/通用_装备御魂-模板匹配-关闭可能出现的失误点击_2.png",
@@ -614,7 +1169,12 @@
     "post_delay": 2000,
     "pre_wait_freezes": 100,
     "recognition": "TemplateMatch",
-    "roi_offset": [177, -12, 216, 24],
+    "roi_offset": [
+      177,
+      -12,
+      216,
+      24
+    ],
     "template": [
       "通用/装备御魂.png",
       "通用/装备御魂_1.png",
@@ -631,15 +1191,29 @@
     "action": "Click",
     "post_delay": 2000,
     "recognition": "TemplateMatch",
-    "roi": [1057, 0, 223, 150],
-    "template": ["通用/通用/通用_装备御魂-点击关闭队伍详情_1.png"]
+    "roi": [
+      1057,
+      0,
+      223,
+      150
+    ],
+    "template": [
+      "通用/通用/通用_装备御魂-点击关闭队伍详情_1.png"
+    ]
   },
   "通用_装备御魂-点击关闭队伍详情-特征匹配": {
     "action": "Click",
     "post_delay": 2000,
     "recognition": "FeatureMatch",
-    "roi": [1057, 0, 223, 150],
-    "template": ["通用/通用/通用_装备御魂-点击关闭队伍详情_1.png"]
+    "roi": [
+      1057,
+      0,
+      223,
+      150
+    ],
+    "template": [
+      "通用/通用/通用_装备御魂-点击关闭队伍详情_1.png"
+    ]
   },
   "通用_装备御魂-特征匹配": {
     "action": "Click",
@@ -647,7 +1221,12 @@
     "post_delay": 2000,
     "pre_wait_freezes": 100,
     "recognition": "FeatureMatch",
-    "roi_offset": [177, -12, 216, 24],
+    "roi_offset": [
+      177,
+      -12,
+      216,
+      24
+    ],
     "template": [
       "通用/装备御魂.png",
       "通用/装备御魂_1.png",
@@ -663,7 +1242,12 @@
   "通用_装备御魂-确保关闭队伍详情界面": {
     "inverse": true,
     "recognition": "TemplateMatch",
-    "roi": [943, 591, 204, 75],
+    "roi": [
+      943,
+      591,
+      204,
+      75
+    ],
     "template": [
       "通用/通用/通用_装备御魂-模板匹配-关闭可能出现的失误点击_1.png",
       "通用/通用/通用_装备御魂-模板匹配-关闭可能出现的失误点击_2.png",
@@ -675,13 +1259,23 @@
     "inverse": true,
     "pre_delay": 1000,
     "recognition": "OCR",
-    "roi": [404, 354, 476, 149],
+    "roi": [
+      404,
+      354,
+      476,
+      149
+    ],
     "timeout": 2000
   },
   "通用_识别加成": {
     "expected": "识别加成",
     "recognition": "OCR",
-    "roi": [426, 128, 334, 325],
+    "roi": [
+      426,
+      128,
+      334,
+      325
+    ],
     "timeout": 5000
   },
   "通用_识别挑战次数": {
