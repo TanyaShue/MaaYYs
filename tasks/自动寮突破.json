@@ -6,11 +6,37 @@
             "entry": "寮突",
             "group": ["standalone"],
             "option": [
-                "寮突阵容预设"
+                "寮突-是否切换御魂阵容"
             ]
         }
     ],
     "option": {
+        "寮突-是否切换御魂阵容": {
+            "type": "switch",
+            "label": "是否切换御魂阵容",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "寮突-开始装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["寮突阵容预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "寮突-开始装备御魂": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "寮突阵容预设": {
             "type": "input",
             "label": "寮突阵容预设",
