@@ -20,6 +20,37 @@
     ],
     "timeout": 200000
   },
+  "活动爬塔-云华依言歌-判断是否存在版本活动": {
+    "action": "Click",
+    "expected": "版本活动",
+    "next": [
+      "活动爬塔-云华依言歌-点击进入版本活动"
+    ],
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      3,
+      81,
+      209,
+      639
+    ]
+  },
+  "活动爬塔-云华依言歌-导航-云华依言歌": {
+    "next": [
+      "活动爬塔-云华依言歌-识别是否位于活动界面",
+      "[JumpBack]活动爬塔-云华依言歌-判断是否存在版本活动",
+      "[JumpBack]导航-活动总览"
+    ],
+    "recognition": "DirectHit"
+  },
+  "活动爬塔-云华依言歌-开始活动爬塔任务": {
+    "next": [
+      "活动爬塔-云华依言歌-识别是否进入活动界面",
+      "[JumpBack]活动爬塔-云华依言歌-点击进入爬塔活动",
+      "[JumpBack]活动爬塔-云华依言歌-导航-云华依言歌"
+    ],
+    "recognition": "DirectHit"
+  },
   "活动爬塔-云华依言歌-点击屏幕继续": {
     "action": "Custom",
     "custom_action": "RandomWait",
@@ -30,6 +61,36 @@
     "expected": "点击屏幕|继续",
     "max_hit": 1,
     "recognition": "OCR"
+  },
+  "活动爬塔-云华依言歌-点击式神录": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      950,
+      524,
+      158,
+      121
+    ],
+    "template": [
+      "活动/每月周期/活动爬塔-云华依言歌/活动爬塔-云华依言歌-点击式神录_1.png"
+    ]
+  },
+  "活动爬塔-云华依言歌-点击式神录-ocr": {
+    "action": "Click",
+    "expected": "式神录",
+    "recognition": "OCR",
+    "roi": [
+      959,
+      509,
+      122,
+      134
+    ],
+    "target": [
+      11,
+      0,
+      63,
+      55
+    ]
   },
   "活动爬塔-云华依言歌-点击挑战": {
     "action": "Click",
@@ -49,11 +110,50 @@
     ],
     "timeout": 200000
   },
+  "活动爬塔-云华依言歌-点击进入爬塔活动": {
+    "action": "Click",
+    "post_delay": 2000,
+    "pre_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      350,
+      226,
+      455,
+      494
+    ],
+    "template": [
+      "活动/每月周期/活动爬塔-云华依言歌/活动爬塔-云华依言歌-点击进入爬塔活动_1.png"
+    ]
+  },
+  "活动爬塔-云华依言歌-点击进入版本活动": {
+    "action": "Click",
+    "post_delay": 3000,
+    "pre_delay": 1000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      970,
+      544,
+      310,
+      172
+    ],
+    "template": [
+      "活动/每月周期/活动爬塔-云华依言歌/活动爬塔-云华依言歌-点击进入活动_1.png"
+    ]
+  },
   "活动爬塔-云华依言歌-继续点击屏幕继续": {
     "action": "Click",
     "expected": "点击屏幕|继续",
     "post_delay": 1000,
     "recognition": "OCR"
+  },
+  "活动爬塔-云华依言歌-装备御魂": {
+    "max_hit": 1,
+    "next": [
+      "活动爬塔-云华依言歌-识别是否位于式神录",
+      "[JumpBack]活动爬塔-云华依言歌-点击式神录",
+      "[JumpBack]活动爬塔-云华依言歌-点击式神录-ocr"
+    ],
+    "recognition": "DirectHit"
   },
   "活动爬塔-云华依言歌-识别挑战": {
     "action": "Custom",
@@ -82,6 +182,68 @@
     ],
     "timeout": 200000
   },
+  "活动爬塔-云华依言歌-识别是否位于式神录": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "默认分组",
+      "team_name": "默认队伍"
+    },
+    "expected": "式神录",
+    "next": [
+      "活动爬塔-云华依言歌-识别是否返回活动界面",
+      "[JumpBack]活动爬塔-云华依言歌-返回活动界面"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      18,
+      0,
+      255,
+      69
+    ]
+  },
+  "活动爬塔-云华依言歌-识别是否位于活动界面": {
+    "expected": "云华依言歌",
+    "recognition": "OCR",
+    "roi": [
+      130,
+      0,
+      246,
+      99
+    ]
+  },
+  "活动爬塔-云华依言歌-识别是否返回活动界面": {
+    "expected": "神威破障",
+    "focus": {
+      "Node.Recognition.Failed": "活动爬塔-云华依言歌-活动界面识别失败"
+    },
+    "recognition": "OCR",
+    "roi": [
+      136,
+      9,
+      158,
+      67
+    ],
+    "timeout": 200000
+  },
+  "活动爬塔-云华依言歌-识别是否进入活动界面": {
+    "expected": "神威破障",
+    "focus": {
+      "Node.Recognition.Failed": "活动爬塔-云华依言歌-活动界面识别失败"
+    },
+    "next": [
+      "[JumpBack]活动爬塔-云华依言歌-装备御魂",
+      "活动爬塔-云华依言歌"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      136,
+      9,
+      158,
+      67
+    ],
+    "timeout": 200000
+  },
   "活动爬塔-云华依言歌-识别活动界面": {
     "action": "Custom",
     "custom_action": "ClearHitCount",
@@ -99,6 +261,19 @@
       67
     ],
     "timeout": 200000
+  },
+  "活动爬塔-云华依言歌-返回活动界面": {
+    "action": "Click",
+    "expected": "式神录",
+    "post_delay": 2000,
+    "pre_delay": 100,
+    "recognition": "OCR",
+    "roi": [
+      18,
+      0,
+      228,
+      64
+    ]
   },
   "活动爬塔-云华依言歌-锁定阵容": {
     "enabled": false,
