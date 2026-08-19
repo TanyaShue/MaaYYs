@@ -1,0 +1,290 @@
+{
+  "真蛇": {
+    "next": [
+      "[JumpBack]真蛇-导航到探索界面",
+      "真蛇-识别是否有真蛇",
+      "[JumpBack]真蛇-空节点",
+      "真蛇-未识别到真蛇"
+    ],
+    "recognition": "DirectHit"
+  },
+  "真蛇-创建队伍": {
+    "expected": "创建队伍",
+    "next": [
+      "真蛇-识别是否进入队伍界面",
+      "[JumpBack]真蛇-点击创建队伍"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      512,
+      135,
+      272,
+      103
+    ]
+  },
+  "真蛇-在式神录装备御魂": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "默认分组",
+      "team_name": "默认队伍"
+    },
+    "expected": "式神录",
+    "next": [
+      "真蛇-返回真蛇界面",
+      "[JumpBack]真蛇-点击返回"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      335,
+      94
+    ]
+  },
+  "真蛇-导航到探索界面": {
+    "max_hit": 1,
+    "next": [
+      "导航-探索界面"
+    ],
+    "recognition": "DirectHit"
+  },
+  "真蛇-开始装备御魂": {
+    "enabled": false,
+    "next": [
+      "真蛇-在式神录装备御魂",
+      "[JumpBack]真蛇-点击式神录"
+    ],
+    "recognition": "DirectHit"
+  },
+  "真蛇-未识别到真蛇": {
+    "focus": {
+      "Node.Recognition.Succeeded": "没有真蛇挑战次数,任务结束"
+    },
+    "recognition": "DirectHit"
+  },
+  "真蛇-点击准备": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      995,
+      491,
+      285,
+      229
+    ],
+    "template": [
+      "战斗/真蛇/真蛇-点击准备_1.png",
+      "战斗/真蛇/真蛇-点击准备_1.png"
+    ]
+  },
+  "真蛇-点击创建队伍": {
+    "action": "Click",
+    "expected": "创建",
+    "recognition": "OCR",
+    "roi": [
+      508,
+      473,
+      285,
+      90
+    ]
+  },
+  "真蛇-点击开始挑战": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1097,
+      535,
+      183,
+      185
+    ],
+    "template": [
+      "战斗/真蛇/真蛇-点击开始挑战_1.png"
+    ]
+  },
+  "真蛇-点击式神录": {
+    "action": "Click",
+    "post_delay": 2000,
+    "pre_delay": 100,
+    "recognition": "TemplateMatch",
+    "roi": [
+      814,
+      506,
+      106,
+      101
+    ],
+    "template": [
+      "战斗/真蛇/真蛇-点击式神录_1.png"
+    ]
+  },
+  "真蛇-点击挑战": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      863,
+      418,
+      263,
+      210
+    ],
+    "template": [
+      "战斗/真蛇/真蛇-点击挑战_1.png"
+    ]
+  },
+  "真蛇-点击真蛇": {
+    "action": "Click",
+    "expected": "真八岐大蛇",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      101,
+      134,
+      249
+    ]
+  },
+  "真蛇-点击确定开始挑战": {
+    "action": "Click",
+    "expected": "确定",
+    "recognition": "OCR",
+    "roi": [
+      639,
+      388,
+      230,
+      97
+    ]
+  },
+  "真蛇-点击自动准备": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1066,
+      447,
+      138,
+      70
+    ],
+    "template": [
+      "战斗/真蛇/真蛇-点击自动准备_1.png"
+    ]
+  },
+  "真蛇-点击返回": {
+    "action": "Click",
+    "expected": "式神录",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      335,
+      94
+    ],
+    "target": [
+      12,
+      6,
+      58,
+      51
+    ]
+  },
+  "真蛇-空节点": {
+    "max_hit": 5,
+    "recognition": "DirectHit"
+  },
+  "真蛇-识别战斗结束": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "recognition": "OCR",
+    "roi": [
+      326,
+      602,
+      454,
+      118
+    ]
+  },
+  "真蛇-识别是否位于真蛇界面": {
+    "next": [
+      "真蛇-开始装备御魂",
+      "真蛇-返回真蛇界面"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      632,
+      96,
+      424,
+      422
+    ],
+    "template": [
+      "战斗/真蛇/真蛇-识别是否位于真蛇界面_1.png"
+    ]
+  },
+  "真蛇-识别是否位探索": {
+    "expected": "觉醒材料|结界突破|御灵|式神委派|秘闻副本|地域鬼王|契灵之境|英杰试炼|六道之门|妖气探索",
+    "post_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      5,
+      614,
+      1208,
+      106
+    ],
+    "timeout": 5000
+  },
+  "真蛇-识别是否有真蛇": {
+    "expected": "真八岐大蛇",
+    "next": [
+      "真蛇-识别是否位于真蛇界面",
+      "[JumpBack]真蛇-点击真蛇"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      101,
+      134,
+      249
+    ]
+  },
+  "真蛇-识别是否点击成功挑战": {
+    "expected": "每周前2次挑战|是否进行挑战|本周剩余奖励次数",
+    "next": [
+      "真蛇-创建队伍",
+      "[JumpBack]真蛇-点击确定开始挑战"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      405,
+      244,
+      469,
+      243
+    ]
+  },
+  "真蛇-识别是否进入队伍界面": {
+    "expected": "协战队伍",
+    "next": [
+      "真蛇-识别是否位探索",
+      "[JumpBack]真蛇-识别战斗结束",
+      "[JumpBack]真蛇-点击开始挑战",
+      "[JumpBack]真蛇-点击自动准备",
+      "[JumpBack]真蛇-点击准备"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      259,
+      87
+    ],
+    "timeout": 1200000
+  },
+  "真蛇-返回真蛇界面": {
+    "next": [
+      "真蛇-识别是否点击成功挑战",
+      "[JumpBack]真蛇-点击挑战"
+    ],
+    "recognition": "TemplateMatch",
+    "roi": [
+      632,
+      96,
+      424,
+      422
+    ],
+    "template": [
+      "战斗/真蛇/真蛇-识别是否位于真蛇界面_1.png"
+    ]
+  }
+}
