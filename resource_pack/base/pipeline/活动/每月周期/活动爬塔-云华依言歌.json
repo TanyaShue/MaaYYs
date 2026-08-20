@@ -32,6 +32,7 @@
   },
   "活动爬塔-云华依言歌-关闭奖励": {
     "inverse": true,
+    "pre_delay": 1000,
     "recognition": "TemplateMatch",
     "roi": [
       1004,
@@ -362,6 +363,7 @@
       "活动爬塔-云华依言歌-关闭奖励",
       "[JumpBack]活动爬塔-云华依言歌-872160"
     ],
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
       130,
