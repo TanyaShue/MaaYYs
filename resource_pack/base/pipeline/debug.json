@@ -3,12 +3,27 @@
     "action": "StopTask",
     "recognition": "DirectHit"
   },
+  "开始识别悬赏封印委托": {
+    "focus": {
+      "Node.Recognition.Starting": "悬赏任务开始!!!!"
+    },
+    "next": [
+      "[JumpBack]悬赏封印_协助战斗1"
+    ],
+    "rate_limit": 60000,
+    "recognition": "DirectHit",
+    "timeout": -1
+  },
   "悬赏封印_协助战斗1": {
     "expected": "^协?悬赏封印$",
+    "focus": {
+      "Node.Recognition.Succeeded": "发现悬赏协助!!!"
+    },
     "next": [
       "确定关闭悬赏封印协助",
       "[JumpBack]悬赏封印_拒绝邀请"
     ],
+    "rate_limit": 6000,
     "recognition": "OCR",
     "roi": [
       490,
