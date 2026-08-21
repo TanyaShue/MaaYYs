@@ -1,0 +1,24 @@
+{
+    "tabWidth": 2,
+    "printWidth": 120,
+    "useTabs": false,
+    "bracketSameLine": false,
+    "bracketSpacing": false,
+    "endOfLine": "lf",
+    "plugins": [
+        "prettier-plugin-multiline-arrays"
+    ],
+    "multilineArraysWrapThreshold": 0,
+    "overrides": [
+        {
+            "files": [
+                "**/*.yml",
+                "**/*.yaml"
+            ],
+            "options": {
+                "parser": "yaml",
+                "tabWidth": 2
+            }
+        }
+    ]
+}
