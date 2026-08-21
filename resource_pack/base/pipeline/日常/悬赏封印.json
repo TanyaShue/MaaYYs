@@ -34,9 +34,9 @@
   },
   "悬赏-判断结束": {
     "next": [
-      "装备日常清杂预设",
       "[JumpBack]悬赏封印_点击叉叉",
-      "[JumpBack]导航-式神录"
+      "[JumpBack]悬赏封印-开始装备悬赏阵容",
+      "悬赏-开始正式探索"
     ],
     "recognition": "DirectHit"
   },
@@ -241,6 +241,10 @@
   "悬赏封印-从式神碎片挑战返回探索": {
     "max_hit": 1,
     "next": [
+      "[JumpBack]悬赏封印-从章节界面返回",
+      "导航-探索界面-识别是否位于探索界面"
+    ],
+    "on_error": [
       "导航-探索界面"
     ],
     "recognition": "DirectHit"
@@ -254,6 +258,23 @@
       640,
       623,
       80
+    ]
+  },
+  "悬赏封印-从章节界面返回": {
+    "action": "Click",
+    "expected": "^第[一二三四五六七八九十百千零两]+章$",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      361,
+      96
+    ],
+    "target": [
+      15,
+      6,
+      50,
+      47
     ]
   },
   "悬赏封印-关闭追踪列表": {
@@ -532,6 +553,15 @@
     ],
     "max_hit": 2,
     "post_delay": 1000,
+    "recognition": "DirectHit"
+  },
+  "悬赏封印-开始装备悬赏阵容": {
+    "max_hit": 1,
+    "next": [
+      "装备日常清杂预设",
+      "[JumpBack]悬赏封印_点击叉叉",
+      "[JumpBack]导航-式神录"
+    ],
     "recognition": "DirectHit"
   },
   "悬赏封印-开始调整秘闻-战斗": {
@@ -950,9 +980,6 @@
   },
   "探索_悬赏_御魂_返回": {
     "action": "Click",
-    "next": [
-      "悬赏-开始正式探索"
-    ],
     "post_delay": 2000,
     "recognition": "DirectHit",
     "target": [

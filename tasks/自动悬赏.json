@@ -7,7 +7,7 @@
             "group": ["standalone"],
             "option": [
                 "悬赏目标",
-                "悬赏封印阵容预设"
+                "悬赏-是否切换御魂阵容"
             ]
         }
     ],
@@ -28,7 +28,7 @@
                                 "悬赏封印-查找探索副本",
                                 "悬赏封印-查找式神碎片副本",
                                 "悬赏封印-查找秘闻副本",
-                                "悬赏封印-向上滑动一点"
+                                "[JumpBack]悬赏封印-向上滑动一点"
                             ]
                         }
                     }
@@ -43,8 +43,34 @@
                                 "悬赏封印-查找式神碎片副本",
                                 "悬赏封印-查找探索副本",
                                 "悬赏封印-查找秘闻副本",
-                                "悬赏封印-向上滑动一点"
+                                "[JumpBack]悬赏封印-向上滑动一点"
                             ]
+                        }
+                    }
+                }
+            ]
+        },
+        "悬赏-是否切换御魂阵容": {
+            "type": "switch",
+            "label": "是否切换御魂阵容",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "悬赏封印-开始装备悬赏阵容": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["悬赏封印阵容预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "悬赏封印-开始装备悬赏阵容": {
+                            "enabled": false
                         }
                     }
                 }
@@ -71,7 +97,7 @@
                 }
             ],
             "pipeline_override": {
-                "装备日常清杂预设": {
+                "悬赏封印-开始装备悬赏阵容": {
                     "custom_action_param": {
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"
