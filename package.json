@@ -1,0 +1,8 @@
+{
+  "name": "maayys",
+  "private": true,
+  "devDependencies": {
+    "prettier": "3.7.4",
+    "prettier-plugin-multiline-arrays": "^4.1.11"
+  }
+}
