@@ -1,4 +1,22 @@
 {
+  "阴界之门-开始装备御魂": {
+    "expected": "阴界之门",
+    "max_hit": 1,
+    "next": [
+      "阴间之门11",
+      "[JumpBack]阴间之门12",
+      "[JumpBack]阴间之门13"
+    ],
+    "post_delay": 2000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      543,
+      36,
+      172,
+      60
+    ]
+  },
   "阴界之门-时间检查": {
     "action": "Custom",
     "custom_action": "TimeCheck",
@@ -54,6 +72,16 @@
       "阴间之门/N-1772895473660_1.png"
     ]
   },
+  "阴间之门-确定返回阴界之门界面": {
+    "expected": "阴界之门",
+    "recognition": "OCR",
+    "roi": [
+      499,
+      22,
+      234,
+      92
+    ]
+  },
   "阴间之门10": {
     "action": "Click",
     "expected": "阴界之门|攻打中",
@@ -74,7 +102,7 @@
     },
     "expected": "式神录",
     "next": [
-      "阴间之门15",
+      "阴间之门-确定返回阴界之门界面",
       "阴间之门16",
       "[JumpBack]阴间之门14"
     ],
@@ -147,7 +175,7 @@
     "action": "Click",
     "expected": "阴界之门|攻打中",
     "next": [
-      "阴间之门15"
+      "阴间之门-确定返回阴界之门界面"
     ],
     "recognition": "OCR",
     "roi": [
@@ -345,7 +373,8 @@
   "阴间之门8": {
     "expected": "攻打中",
     "next": [
-      "阴间之门9",
+      "[JumpBack]阴界之门-开始装备御魂",
+      "阴间之门15",
       "[JumpBack]阴间之门10"
     ],
     "recognition": "OCR",
@@ -354,23 +383,6 @@
       589,
       217,
       116
-    ]
-  },
-  "阴间之门9": {
-    "expected": "阴界之门",
-    "next": [
-      "阴间之门11",
-      "[JumpBack]阴间之门12",
-      "[JumpBack]阴间之门13"
-    ],
-    "post_delay": 2000,
-    "pre_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      543,
-      36,
-      172,
-      60
     ]
   }
 }

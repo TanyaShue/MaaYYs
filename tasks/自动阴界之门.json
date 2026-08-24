@@ -2,15 +2,41 @@
     "task": [
         {
             "name": "自动阴界之门",
-            "label": "自动阴界之门",
+            "label": "阴界之门",
             "entry": "阴界之门-时间检查",
             "group": ["standalone"],
             "option": [
-                "阴界之门阵容预设"
+                "阴界之门-是否切换御魂阵容"
             ]
         }
     ],
     "option": {
+        "阴界之门-是否切换御魂阵容": {
+            "type": "switch",
+            "label": "是否切换御魂阵容",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "阴界之门-开始装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["阴界之门阵容预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "阴界之门-开始装备御魂": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "阴界之门阵容预设": {
             "type": "input",
             "label": "阴界之门阵容预设",
