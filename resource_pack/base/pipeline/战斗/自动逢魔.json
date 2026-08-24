@@ -62,7 +62,8 @@
       "Node.Action.Starting": "[info]开始检查时间..."
     },
     "next": [
-      "自动逢魔20"
+      "[JumpBack]自动逢魔-开始装备御魂",
+      "自动逢魔"
     ],
     "on_error": [
       "导航-庭院"
@@ -238,8 +239,7 @@
     },
     "expected": "式神录",
     "next": [
-      "[JumpBack]自动逢魔-返回庭院",
-      "自动逢魔"
+      "自动逢魔-返回庭院"
     ],
     "on_error": [
       "超时_切换御魂失败"
@@ -395,6 +395,14 @@
     ],
     "model": "Courtyard-v6.0.onnx",
     "recognition": "NeuralNetworkDetect"
+  },
+  "自动逢魔-开始装备御魂": {
+    "max_hit": 1,
+    "next": [
+      "现世逢魔_装备式神预设",
+      "[JumpBack]导航-式神录"
+    ],
+    "recognition": "DirectHit"
   },
   "自动逢魔-点击首领-模板匹配": {
     "action": "Click",
@@ -766,13 +774,6 @@
       342,
       68
     ]
-  },
-  "自动逢魔20": {
-    "next": [
-      "现世逢魔_装备式神预设",
-      "[JumpBack]导航-式神录"
-    ],
-    "recognition": "DirectHit"
   },
   "自动逢魔21": {
     "expected": "悬赏封印",

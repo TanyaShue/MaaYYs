@@ -6,8 +6,7 @@
             "entry": "开始逢魔-检查时间",
             "group": ["standalone"],
             "option": [
-                "逢魔答题同步题目",
-                "逢魔首领阵容预设"
+                "逢魔-切换御魂阵容"
             ]
         }
     ],
@@ -38,6 +37,32 @@
                                 "upload": false,
                                 "sync": false
                             }
+                        }
+                    }
+                }
+            ]
+        },
+        "逢魔-切换御魂阵容": {
+            "type": "switch",
+            "label": "是否切换御魂阵容",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动逢魔-开始装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["逢魔首领阵容预设"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动逢魔-开始装备御魂": {
+                            "enabled": false
                         }
                     }
                 }
