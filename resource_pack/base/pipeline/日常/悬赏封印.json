@@ -558,7 +558,7 @@
   "悬赏封印-开始装备悬赏阵容": {
     "max_hit": 1,
     "next": [
-      "装备日常清杂预设",
+      "悬赏封印-装备悬赏预设",
       "[JumpBack]悬赏封印_点击叉叉",
       "[JumpBack]导航-式神录"
     ],
@@ -688,6 +688,29 @@
   },
   "悬赏封印-空节点": {
     "recognition": "DirectHit"
+  },
+  "悬赏封印-装备悬赏预设": {
+    "action": "Custom",
+    "custom_action": "SwitchSoul",
+    "custom_action_param": {
+      "group_name": "日常",
+      "team_name": "清杂"
+    },
+    "expected": "式神录",
+    "next": [
+      "探索_悬赏_御魂_返回"
+    ],
+    "on_error": [
+      "超时_切换御魂失败"
+    ],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      221,
+      76
+    ]
   },
   "悬赏封印-识别协战目标名称": {
     "recognition": "OCR",
@@ -1104,29 +1127,6 @@
       "[JumpBack]导航-悬赏封印"
     ],
     "recognition": "DirectHit"
-  },
-  "装备日常清杂预设": {
-    "action": "Custom",
-    "custom_action": "SwitchSoul",
-    "custom_action_param": {
-      "group_name": "日常",
-      "team_name": "清杂"
-    },
-    "expected": "式神录",
-    "next": [
-      "探索_悬赏_御魂_返回"
-    ],
-    "on_error": [
-      "超时_切换御魂失败"
-    ],
-    "post_delay": 2000,
-    "recognition": "OCR",
-    "roi": [
-      0,
-      0,
-      221,
-      76
-    ]
   },
   "识别探索目标": {
     "action": "Click",

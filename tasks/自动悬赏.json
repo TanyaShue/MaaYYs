@@ -97,7 +97,7 @@
                 }
             ],
             "pipeline_override": {
-                "悬赏封印-开始装备悬赏阵容": {
+                "悬赏封印-装备悬赏预设": {
                     "custom_action_param": {
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"
