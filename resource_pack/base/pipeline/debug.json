@@ -5,7 +5,7 @@
   },
   "开始识别悬赏封印委托": {
     "focus": {
-      "Node.Recognition.Starting": "悬赏任务开始!!!!"
+      "Node.Recognition.Starting": "后台悬赏监控开始!!!"
     },
     "next": [
       "[JumpBack]悬赏封印_协助战斗1"
