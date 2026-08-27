@@ -164,6 +164,19 @@
       "战斗/自动秘闻/自动秘闻-点击微信-模板匹配_1.png"
     ]
   },
+  "自动秘闻-点击锁定图标": {
+    "action": "Click",
+    "recognition": "TemplateMatch",
+    "roi": [
+      1063,
+      656,
+      179,
+      64
+    ],
+    "template": [
+      "战斗/自动秘闻/自动秘闻-点击锁定图标_1.png"
+    ]
+  },
   "自动秘闻-确定关闭分享界面": {
     "inverse": true,
     "recognition": "TemplateMatch",
@@ -211,6 +224,7 @@
   "自动秘闻-锁定阵容": {
     "max_hit": 1,
     "next": [
+      "[JumpBack]自动秘闻-点击锁定图标",
       "通用-锁定阵容"
     ],
     "recognition": "DirectHit"

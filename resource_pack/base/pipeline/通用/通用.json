@@ -702,7 +702,11 @@
       "通用-解锁阵容-识别是否解锁图标",
       "[JumpBack]通用-解锁阵容-点击解锁图标"
     ],
-    "recognition": "DirectHit"
+    "on_error": [
+      "通用-阵容解锁失败"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 5000
   },
   "通用-解锁阵容-点击解锁图标": {
     "action": "Click",
@@ -736,7 +740,11 @@
       "通用-锁定阵容-识别是否锁定阵容",
       "[JumpBack]通用-锁定阵容-点击解锁图标"
     ],
-    "recognition": "DirectHit"
+    "on_error": [
+      "通用-阵容锁定失败"
+    ],
+    "recognition": "DirectHit",
+    "timeout": 5000
   },
   "通用-锁定阵容-点击解锁图标": {
     "action": "Click",
@@ -749,6 +757,12 @@
     "expected": 3,
     "model": "special-icon-v0.1.1.onnx",
     "recognition": "NeuralNetworkDetect"
+  },
+  "通用-阵容解锁失败": {
+    "recognition": "DirectHit"
+  },
+  "通用-阵容锁定失败": {
+    "recognition": "DirectHit"
   },
   "通用10": {
     "expected": "珍旅居|纳物库|组队|阴阳寮",
