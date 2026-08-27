@@ -6,6 +6,12 @@
     ],
     "recognition": "DirectHit"
   },
+  "寮突-810059": {
+    "next": [
+      "[JumpBack]寮突-识别进攻按钮"
+    ],
+    "recognition": "DirectHit"
+  },
   "寮突-开始战斗": {
     "expected": "击败次数",
     "next": [
@@ -44,7 +50,7 @@
     "custom_recognition": "OCRResultCounterRecognition",
     "custom_recognition_param": {
       "recognition_node": "寮突-识别最末尾结界的名称",
-      "target_count": 5
+      "target_count": 3
     },
     "next": [
       "[JumpBack]寮突-返回探索界面",
@@ -73,6 +79,29 @@
     "template": [
       "非战斗/寮突/寮突-点击式神录_1.png"
     ]
+  },
+  "寮突-点击进攻": {
+    "action": "Click",
+    "expected": "进攻",
+    "post_delay": 3000,
+    "pre_delay": 1000,
+    "rate_limit": 2000,
+    "recognition": "OCR",
+    "roi": [
+      375,
+      102,
+      722,
+      617
+    ],
+    "timeout": 2000000
+  },
+  "寮突-记录最后一个名字并进攻": {
+    "max_hit": 1,
+    "next": [
+      "寮突-当前结界已被攻破",
+      "寮突-点击进攻"
+    ],
+    "recognition": "DirectHit"
   },
   "寮突-识别是否已经攻破": {
     "enabled": false,
@@ -159,6 +188,26 @@
     "template": [
       "寮突/寮突12.png"
     ]
+  },
+  "寮突-识别进攻按钮": {
+    "expected": "进攻",
+    "next": [
+      "[JumpBack]寮突-记录最后一个名字并进攻",
+      "[JumpBack]寮突8",
+      "[JumpBack]寮突10",
+      "寮突9"
+    ],
+    "post_delay": 2000,
+    "pre_delay": 1000,
+    "rate_limit": 2000,
+    "recognition": "OCR",
+    "roi": [
+      375,
+      102,
+      722,
+      617
+    ],
+    "timeout": 2000000
   },
   "寮突-跳过": {
     "recognition": "DirectHit"
@@ -358,7 +407,7 @@
     },
     "inverse": true,
     "next": [
-      "寮突7",
+      "寮突-识别进攻按钮",
       "[JumpBack]寮突17_copy1"
     ],
     "post_delay": 1000,
@@ -386,7 +435,7 @@
     },
     "inverse": true,
     "next": [
-      "寮突7",
+      "寮突-识别进攻按钮",
       "[JumpBack]寮突17",
       "寮突-跳过"
     ],
@@ -414,7 +463,7 @@
     },
     "inverse": true,
     "next": [
-      "寮突7",
+      "寮突-识别进攻按钮",
       "[JumpBack]寮突17_copy2",
       "寮突-跳过"
     ],
@@ -443,7 +492,7 @@
     },
     "inverse": true,
     "next": [
-      "寮突7",
+      "寮突-识别进攻按钮",
       "[JumpBack]寮突17_copy3",
       "寮突-跳过"
     ],
@@ -648,27 +697,6 @@
       54
     ]
   },
-  "寮突7": {
-    "action": "Click",
-    "expected": "进攻",
-    "next": [
-      "[JumpBack]寮突-当前结界已被攻破",
-      "[JumpBack]寮突8",
-      "[JumpBack]寮突10",
-      "寮突9"
-    ],
-    "post_delay": 5000,
-    "pre_delay": 1000,
-    "rate_limit": 2000,
-    "recognition": "OCR",
-    "roi": [
-      375,
-      102,
-      722,
-      617
-    ],
-    "timeout": 2000000
-  },
   "寮突8": {
     "action": "Click",
     "expected": "失败",
@@ -683,6 +711,11 @@
     ]
   },
   "寮突9": {
+    "action": "Custom",
+    "custom_action": "ClearHitCount",
+    "custom_action_param": {
+      "node_name": "寮突-记录最后一个名字并进攻"
+    },
     "expected": "击败次数",
     "post_delay": 1000,
     "pre_delay": 1000,

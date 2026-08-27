@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -12,12 +13,11 @@ import (
 	maa "github.com/MaaXYZ/maa-framework-go/v4"
 )
 
-// OCRResultCounterRecognition 统计指定 OCR 节点的 best 文本连续出现次数。
+// OCRResultCounterRecognition 统计指定 OCR 节点 OCR 结果的出现次数。
 type OCRResultCounterRecognition struct {
 	mu       sync.Mutex
 	lastNode string
-	lastText string
-	count    int
+	counts   map[string]int
 }
 
 type params struct {
@@ -26,10 +26,15 @@ type params struct {
 }
 
 type ocrDetail struct {
-	Best *struct {
-		Box  maa.Rect `json:"box"`
-		Text string   `json:"text"`
-	} `json:"best"`
+	All      []ocrResult `json:"all"`
+	Filtered []ocrResult `json:"filtered"`
+	Best     *ocrResult  `json:"best"`
+}
+
+type ocrResult struct {
+	Box   maa.Rect `json:"box"`
+	Text  string   `json:"text"`
+	Score float64  `json:"score"`
 }
 
 type resultDetail struct {
@@ -41,7 +46,7 @@ type resultDetail struct {
 
 var _ maa.CustomRecognitionRunner = &OCRResultCounterRecognition{}
 
-// Run 使用当前自定义识别节点收到的图片运行指定 OCR 节点，并统计 best 文本。
+// Run 使用当前自定义识别节点收到的图片运行指定 OCR 节点，并统计评分前三的文本。
 func (r *OCRResultCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecognitionArg) (*maa.CustomRecognitionResult, bool) {
 	if ctx == nil || arg == nil {
 		fmt.Println("OCRResultCounterRecognition: context 或参数为空")
@@ -55,28 +60,28 @@ func (r *OCRResultCounterRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 	}
 	if arg.Img == nil {
 		fmt.Println("OCRResultCounterRecognition: 当前识别图片为空")
-		r.resetConsecutiveCount()
+		r.resetCounts()
 		return nil, false
 	}
 
 	detail, err := ctx.RunRecognition(recognitionNode, arg.Img, nil)
 	if err != nil {
-		r.resetConsecutiveCount()
+		r.resetCounts()
 		return nil, false
 	}
 	if detail == nil || !detail.Hit {
-		r.resetConsecutiveCount()
+		r.resetCounts()
 		return nil, false
 	}
 
-	text, box, ok := bestOCRResult(detail)
+	results := top3OCRResults(detail)
+	if len(results) == 0 {
+		r.resetCounts()
+		return nil, false
+	}
+
+	text, box, count, ok := r.updateCounts(recognitionNode, results, targetCount)
 	if !ok {
-		r.resetConsecutiveCount()
-		return nil, false
-	}
-
-	count := r.updateConsecutiveCount(recognitionNode, text)
-	if count < targetCount {
 		return nil, false
 	}
 
@@ -152,52 +157,93 @@ func parsePositiveInt(raw json.RawMessage) (int, error) {
 	return int(number), nil
 }
 
-func bestOCRResult(detail *maa.RecognitionDetail) (string, maa.Rect, bool) {
+func top3OCRResults(detail *maa.RecognitionDetail) []ocrResult {
 	if detail == nil {
-		return "", maa.Rect{}, false
+		return nil
 	}
 
-	if detail.Results != nil && detail.Results.Best != nil {
-		if best, ok := detail.Results.Best.AsOCR(); ok && best != nil {
-			text := strings.TrimSpace(best.Text)
-			if text != "" {
-				return text, best.Box, true
+	results := make([]ocrResult, 0)
+	if detail.Results != nil {
+		for _, item := range detail.Results.All {
+			if item == nil {
+				continue
+			}
+			if result, ok := item.AsOCR(); ok && result != nil && strings.TrimSpace(result.Text) != "" {
+				results = append(results, ocrResult{Box: result.Box, Text: strings.TrimSpace(result.Text), Score: result.Score})
+			}
+		}
+		if len(results) == 0 && detail.Results.Best != nil {
+			if best, ok := detail.Results.Best.AsOCR(); ok && best != nil && strings.TrimSpace(best.Text) != "" {
+				results = append(results, ocrResult{Box: best.Box, Text: strings.TrimSpace(best.Text), Score: best.Score})
 			}
 		}
 	}
 
 	// 兼容未提供结构化 Results、但仍提供 DetailJson 的 MaaFramework 版本。
 	var raw ocrDetail
-	if err := json.Unmarshal([]byte(detail.DetailJson), &raw); err != nil || raw.Best == nil {
-		return "", maa.Rect{}, false
+	if len(results) == 0 {
+		if err := json.Unmarshal([]byte(detail.DetailJson), &raw); err != nil {
+			return nil
+		}
+		results = raw.All
+		if len(results) == 0 {
+			results = raw.Filtered
+		}
+		if len(results) == 0 && raw.Best != nil {
+			results = []ocrResult{*raw.Best}
+		}
 	}
-	text := strings.TrimSpace(raw.Best.Text)
-	if text == "" {
-		return "", maa.Rect{}, false
+	for i := range results {
+		results[i].Text = strings.TrimSpace(results[i].Text)
 	}
-	return text, raw.Best.Box, true
+	results = slicesWithoutEmptyText(results)
+	sort.SliceStable(results, func(i, j int) bool { return results[i].Score > results[j].Score })
+	if len(results) > 3 {
+		results = results[:3]
+	}
+	return results
 }
 
-func (r *OCRResultCounterRecognition) updateConsecutiveCount(node, text string) int {
+func slicesWithoutEmptyText(results []ocrResult) []ocrResult {
+	filtered := results[:0]
+	for _, result := range results {
+		if result.Text != "" {
+			filtered = append(filtered, result)
+		}
+	}
+	return filtered
+}
+
+func (r *OCRResultCounterRecognition) updateCounts(node string, results []ocrResult, targetCount int) (string, maa.Rect, int, bool) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	if r.lastNode == node && r.lastText == text {
-		r.count++
-		return r.count
+	if r.lastNode != node || r.counts == nil {
+		r.lastNode = node
+		r.counts = make(map[string]int)
 	}
-
-	r.lastNode = node
-	r.lastText = text
-	r.count = 1
-	return r.count
+	var matched *ocrResult
+	for i := range results {
+		result := &results[i]
+		r.counts[result.Text]++
+		if matched == nil && r.counts[result.Text] > targetCount {
+			matched = result
+		}
+	}
+	if matched != nil {
+		count := r.counts[matched.Text]
+		// 命中后清空本轮累计，下一次识别重新开始计数。
+		r.lastNode = ""
+		r.counts = nil
+		return matched.Text, matched.Box, count, true
+	}
+	return "", maa.Rect{}, 0, false
 }
 
-func (r *OCRResultCounterRecognition) resetConsecutiveCount() {
+func (r *OCRResultCounterRecognition) resetCounts() {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
 	r.lastNode = ""
-	r.lastText = ""
-	r.count = 0
+	r.counts = nil
 }
