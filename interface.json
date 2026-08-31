@@ -122,6 +122,7 @@
   ],
   "task": [],
   "import": [
+    "preset/一键日常.json",
     "tasks/打开游戏.json",
     "tasks/活动爬塔.json",
     "tasks/活动大富翁.json",

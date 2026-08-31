@@ -11,6 +11,7 @@ on:
       - ".github/cliff.toml"
       - "agent/**"
       - "assets/**"
+      - "preset/**"
       - "resource_pack/**"
       - "tasks/**"
       - "interface.json"
@@ -23,6 +24,7 @@ on:
       - ".github/cliff.toml"
       - "agent/**"
       - "assets/**"
+      - "preset/**"
       - "resource_pack/**"
       - "tasks/**"
       - "interface.json"
@@ -261,7 +263,7 @@ jobs:
           cp "$mxu_file" "package/${{ matrix.executable }}"
           chmod +x "package/${{ matrix.executable }}" 2>/dev/null || true
 
-          for item in assets resource_pack tasks interface.json LICENSE README.md; do
+          for item in assets preset resource_pack tasks interface.json LICENSE README.md; do
             if [ -e "$item" ]; then
               cp -rp "$item" package/
             else

@@ -248,7 +248,7 @@ powershell -NoProfile -Command "Get-Content -Raw interface.json | ConvertFrom-Js
 - 推送形如 `v1.2.3`、`v1.2.3-beta.1` 的 tag 会触发正式发布。
 - 发布时会把 `interface.json` 中的 `version` 更新为 tag。
 - CI 会编译 Go agent，并下载固定版本 MaaFramework（v5.11.1）与 MXU。
-- 打包内容包括 `maafw/`、`mxu` 或 `mxu.exe`、`agent/`、`assets/`、`resource_pack/`、`tasks/`、`interface.json`、`LICENSE`、`README.md`。
+- 打包内容包括 `maafw/`、`mxu` 或 `mxu.exe`、`agent/`、`assets/`、`preset/`、`resource_pack/`、`tasks/`、`interface.json`、`LICENSE`、`README.md`。
 - Windows 产物发布为 `.zip`，macOS / Linux 产物发布为 `.tar.gz`。
 - Release note 由 `git-cliff` 和 `.github/cliff.toml` 生成。
 - Release 创建后会触发 Mirror 酱上传与 release note 同步。

@@ -1,0 +1,1668 @@
+{
+  "version": "1.0",
+  "instances": [
+    {
+      "id": "ijod0rs",
+      "name": "配置 1",
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "MuMu安卓设备-MuMuPlayer v5+"
+      },
+      "tasks": [
+        {
+          "id": "ro5b2bh",
+          "taskName": "打开游戏",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "任务失败后重启游戏": {
+              "type": "switch",
+              "value": false
+            }
+          }
+        },
+        {
+          "id": "nzzrp14",
+          "taskName": "__MXU_RANDOM_START__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "xak9rz5",
+          "taskName": "自动地鬼",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "地鬼_是否挑战悬赏": {
+              "type": "switch",
+              "value": true
+            },
+            "地鬼挑战次数": {
+              "type": "select",
+              "caseName": "3个"
+            },
+            "地鬼阵容预设": {
+              "type": "input",
+              "values": {
+                "预设分组": "地鬼",
+                "预设队伍": "地鬼"
+              }
+            },
+            "地鬼_锁定阵容": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "1fggz3y",
+          "taskName": "自动御魂",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "御魂挑战目标": {
+              "type": "select",
+              "caseName": "八岐大蛇"
+            },
+            "大蛇挑战层数": {
+              "type": "select",
+              "caseName": "悲鸣"
+            },
+            "是否切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "御魂阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "御魂",
+                "team_name": "魂土"
+              }
+            },
+            "是否使用御魂加成": {
+              "type": "switch",
+              "value": true
+            },
+            "是否在战斗中投喂宠物": {
+              "type": "switch",
+              "value": true
+            },
+            "挑战方式": {
+              "caseName": "全自动",
+              "type": "select"
+            },
+            "自动挑战次数": {
+              "type": "input",
+              "values": {
+                "挑战次数": "2"
+              }
+            },
+            "业原火挑战层数": {
+              "type": "select",
+              "caseName": "痴之阵"
+            }
+          }
+        },
+        {
+          "id": "6zrlt28",
+          "taskName": "真蛇",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "真蛇-是否切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "真蛇-御魂阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "御魂",
+                "team_name": "真蛇"
+              }
+            }
+          }
+        },
+        {
+          "id": "y0og3cd",
+          "taskName": "契灵探查",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "探查目标": {
+              "type": "select",
+              "caseName": "逢魔之原"
+            },
+            "契灵探查次数": {
+              "type": "input",
+              "values": {
+                "挑战次数": "1"
+              }
+            },
+            "是否切换御魂": {
+              "type": "switch",
+              "value": true
+            },
+            "契灵探查阵容": {
+              "type": "input",
+              "values": {
+                "group_name": "契灵",
+                "team_name": "探查"
+              }
+            }
+          }
+        },
+        {
+          "id": "pjy9ri2",
+          "taskName": "自动麒麟",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "麒麟阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "僚活动",
+                "team_name": "狩猎战"
+              }
+            }
+          }
+        },
+        {
+          "id": "hk0nzwx",
+          "taskName": "投喂宠物",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "7lqy4vj",
+          "taskName": "自动道馆突破",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "道馆阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "斗技",
+                "team_name": "突破"
+              }
+            }
+          }
+        },
+        {
+          "id": "ki57hm0",
+          "taskName": "结界突破",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "结界突破是否装备御魂": {
+              "type": "switch",
+              "value": true
+            },
+            "结界突破阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "斗技",
+                "team_name": "突破"
+              }
+            }
+          }
+        },
+        {
+          "id": "jumdx44",
+          "taskName": "自动秘闻",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "秘闻阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "秘闻",
+                "team_name": "队伍2"
+              }
+            },
+            "秘闻分享": {
+              "type": "switch",
+              "value": true
+            },
+            "契灵探查阵容": {
+              "type": "input",
+              "values": {
+                "group_name": "默认分组",
+                "team_name": "默认队伍"
+              }
+            }
+          }
+        },
+        {
+          "id": "j71cx0m",
+          "taskName": "自动阴界之门",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "阴界之门-是否切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "阴界之门阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "僚活动",
+                "team_name": "阴间之门"
+              }
+            }
+          }
+        },
+        {
+          "id": "f805kcu",
+          "taskName": "自动悬赏",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "悬赏目标": {
+              "type": "select",
+              "caseName": "挑战优先"
+            },
+            "悬赏-是否切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "悬赏封印阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "日常",
+                "team_name": "困28"
+              }
+            }
+          }
+        },
+        {
+          "id": "x4esh6h",
+          "taskName": "组队副本",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "组队副本-挑战经验副本": {
+              "type": "switch",
+              "value": true
+            },
+            "组队副本-是否启用经验加成": {
+              "type": "switch",
+              "value": true
+            },
+            "组队副本-经验副本阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "组队",
+                "team_name": "经验副本"
+              }
+            },
+            "组队副本-挑战金币副本": {
+              "type": "switch",
+              "value": true
+            },
+            "组队副本-是否启用金币加成": {
+              "type": "switch",
+              "value": true
+            },
+            "组队副本-金币副本阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "组队",
+                "team_name": "金币副本"
+              }
+            }
+          }
+        },
+        {
+          "id": "5nzat2f",
+          "taskName": "自动寮突破",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "寮突-是否切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "寮突阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "斗技",
+                "team_name": "突破"
+              }
+            }
+          }
+        },
+        {
+          "id": "sw1g00z",
+          "taskName": "自动逢魔",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "逢魔-切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "逢魔首领阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "逢魔",
+                "team_name": "逢魔通用"
+              }
+            }
+          }
+        },
+        {
+          "id": "r66y2ql",
+          "taskName": "式神委派",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "委派_弥助的画": {
+              "type": "switch",
+              "value": true
+            },
+            "委派_寻找耳环": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_猫老大": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_捡到的宝石": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_以鱼为礼": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_帮忙搬运": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_樱饼配方": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_奇怪的痕迹": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_接送弥助": {
+              "type": "switch",
+              "value": true
+            },
+            "委派_伊吹的藤球": {
+              "type": "switch",
+              "value": false
+            }
+          }
+        },
+        {
+          "id": "q98jleo",
+          "taskName": "__MXU_RANDOM_END__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "dppcjer",
+          "taskName": "__MXU_RANDOM_START__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "uw70elw",
+          "taskName": "自动购物",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "特殊商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "荣誉商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "友情商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "勋章商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "魅力商店购买": {
+              "type": "switch",
+              "value": false
+            },
+            "购买特殊商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "御灵之钥",
+                "百物式盘"
+              ]
+            },
+            "购买荣誉商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "神秘的符咒"
+              ]
+            },
+            "购买友情商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "奉为达摩"
+              ]
+            },
+            "购买勋章商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "神秘的符咒",
+                "随机六星御魂",
+                "100体力",
+                "式神挑战劵",
+                "御行达摩"
+              ]
+            },
+            "购买魅力商店物品": {
+              "type": "checkbox",
+              "caseNames": []
+            }
+          }
+        },
+        {
+          "id": "3ieodtu",
+          "taskName": "寮商店购物",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "购买阴阳寮商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "神秘的符咒",
+                "御行碎片礼包"
+              ]
+            }
+          }
+        },
+        {
+          "id": "4sd9ilm",
+          "taskName": "珍旅居商店购物",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "购买珍旅居商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "神秘的符咒",
+                "御行达摩"
+              ]
+            }
+          }
+        },
+        {
+          "id": "0izwm6u",
+          "taskName": "花车里程领取",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "花车挂机里程领取": {
+              "type": "switch",
+              "value": true
+            },
+            "花车任务里程领取": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "vpt2434",
+          "taskName": "日常奖励领取",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "领取奖励_商店每日奖励": {
+              "type": "switch",
+              "value": true
+            },
+            "领取奖励_庭院事务": {
+              "type": "switch",
+              "value": true
+            },
+            "领取奖励_花合战奖励": {
+              "type": "switch",
+              "value": true
+            },
+            "领取奖励_邮件": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "9f9hesz",
+          "taskName": "结界奖励领取",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "寄养设置": {
+              "caseName": "勾玉优先",
+              "type": "select"
+            },
+            "是否领取寄养奖励": {
+              "type": "switch",
+              "value": true
+            },
+            "是否启用自动挂卡": {
+              "type": "switch",
+              "value": true
+            },
+            "自动挂卡类型设置": {
+              "type": "select",
+              "caseName": "太鼓"
+            },
+            "挂卡星级设置": {
+              "caseName": "5星及以下",
+              "type": "select"
+            }
+          }
+        },
+        {
+          "id": "j7cyoiv",
+          "taskName": "__MXU_RANDOM_END__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "3uapora",
+          "taskName": "关闭游戏",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        }
+      ],
+      "schedulePolicies": [
+        {
+          "id": "ogr98a4",
+          "name": "策略 1",
+          "enabled": false,
+          "weekdays": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "times": [],
+          "mode": "random",
+          "startTime": "09:00",
+          "endTime": "14:00",
+          "randomRanges": [
+            {
+              "startTime": "09:00",
+              "endTime": "14:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e4wbvqn",
+      "name": "配置 2",
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "MuMu安卓设备-MuMuPlayer v5+"
+      },
+      "tasks": [
+        {
+          "id": "yc3rpub",
+          "taskName": "式神委派",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "委派_弥助的画": {
+              "type": "switch",
+              "value": true
+            },
+            "委派_寻找耳环": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_猫老大": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_捡到的宝石": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_以鱼为礼": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_帮忙搬运": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_樱饼配方": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_奇怪的痕迹": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_接送弥助": {
+              "type": "switch",
+              "value": true
+            },
+            "委派_伊吹的藤球": {
+              "type": "switch",
+              "value": false
+            }
+          }
+        },
+        {
+          "id": "nypr68m",
+          "taskName": "自动道馆突破",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "道馆阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "斗技",
+                "team_name": "突破"
+              }
+            }
+          }
+        },
+        {
+          "id": "5146p95",
+          "taskName": "打开游戏",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "任务失败后重启游戏": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "nyezios",
+          "taskName": "__MXU_RANDOM_START__",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "6avenbt",
+          "taskName": "英杰试炼",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "选择试炼英杰": {
+              "caseName": "藤原道长",
+              "type": "select"
+            },
+            "选择试炼目标": {
+              "type": "select",
+              "caseName": "技能经验"
+            },
+            "局内祝福选择": {
+              "type": "input",
+              "values": {
+                "目标祝福": "万刃|弥天"
+              }
+            },
+            "英杰试炼阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "英杰试炼",
+                "team_name": "藤原道长"
+              }
+            },
+            "英杰试炼-是否启用经验加成": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "tl1ived",
+          "taskName": "英杰试炼",
+          "customName": "英杰试炼（副本）",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "选择试炼英杰": {
+              "caseName": "源赖光",
+              "type": "select"
+            },
+            "选择试炼目标": {
+              "type": "select",
+              "caseName": "技能经验"
+            },
+            "局内祝福选择": {
+              "type": "input",
+              "values": {
+                "目标祝福": "万刃|弥天"
+              }
+            },
+            "英杰试炼阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "英杰试炼",
+                "team_name": "源赖光"
+              }
+            }
+          }
+        },
+        {
+          "id": "6r1vaxm",
+          "taskName": "自动斗技",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "自动斗技-达到名仕停止": {
+              "type": "switch",
+              "value": true
+            },
+            "自动斗技-御魂预设应用方式": {
+              "type": "select",
+              "caseName": "斗技-去式神录切换"
+            },
+            "自动斗技预设": {
+              "type": "input",
+              "values": {
+                "group_name": "斗技",
+                "team_name": "冲浪"
+              }
+            },
+            "自动斗技-战斗结算界面皮肤": {
+              "type": "select",
+              "caseName": "默认"
+            }
+          }
+        },
+        {
+          "id": "c1el1cp",
+          "taskName": "__MXU_RANDOM_END__",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "4s55ud0",
+          "taskName": "__MXU_WEBHOOK__",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "__MXU_WEBHOOK_OPTION__": {
+              "type": "input",
+              "values": {
+                "url": ""
+              }
+            }
+          }
+        },
+        {
+          "id": "sb7b3i4",
+          "taskName": "契灵探查",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "探查目标": {
+              "type": "select",
+              "caseName": "逢魔之原"
+            },
+            "契灵探查次数": {
+              "type": "input",
+              "values": {
+                "挑战次数": "500"
+              }
+            },
+            "是否切换御魂": {
+              "type": "switch",
+              "value": true
+            },
+            "契灵探查阵容": {
+              "type": "input",
+              "values": {
+                "group_name": "契灵",
+                "team_name": "探查"
+              }
+            }
+          }
+        },
+        {
+          "id": "rp3mado",
+          "taskName": "自动御灵",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "御灵-设置目标": {
+              "type": "select",
+              "caseName": "暗神龙"
+            },
+            "御灵-设置挑战次数": {
+              "type": "input",
+              "values": {
+                "挑战次数": "999"
+              }
+            },
+            "御灵阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "默认分组",
+                "team_name": "默认队伍"
+              }
+            },
+            "自定义御灵点击策略设置": {
+              "type": "switch",
+              "value": true
+            },
+            "御灵点击策略设置": {
+              "type": "input",
+              "values": {
+                "double_w": "50",
+                "single_w": "50",
+                "short_w": "95",
+                "long_w": "5",
+                "short_min": "1",
+                "short_max": "20",
+                "long_min": "100",
+                "long_max": "200"
+              }
+            }
+          }
+        },
+        {
+          "id": "jpbys40",
+          "taskName": "寮商店购物",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "购买阴阳寮商店物品": {
+              "type": "checkbox",
+              "caseNames": []
+            }
+          }
+        },
+        {
+          "id": "ecn5p1o",
+          "taskName": "自动逢魔",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "逢魔-切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "逢魔首领阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "默认分组",
+                "team_name": "默认队伍"
+              }
+            },
+            "逢魔答题同步题目": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "x77nzf0",
+      "name": "配置 4",
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "MuMu安卓设备-MuMuPlayer v5+"
+      },
+      "tasks": [
+        {
+          "id": "ejsgcu3",
+          "taskName": "打开游戏",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "任务失败后重启游戏": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "16gxzd9",
+          "taskName": "真蛇",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "真蛇-是否切换御魂阵容": {
+              "type": "switch",
+              "value": true
+            },
+            "真蛇-御魂阵容预设": {
+              "type": "input",
+              "values": {
+                "group_name": "默认分组",
+                "team_name": "默认队伍"
+              }
+            }
+          }
+        }
+      ],
+      "schedulePolicies": [
+        {
+          "id": "yuh4sw0",
+          "name": "策略 1",
+          "enabled": false,
+          "weekdays": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "times": [
+            "02:00",
+            "08:00",
+            "14:00",
+            "20:00"
+          ],
+          "mode": "fixed"
+        }
+      ],
+      "preActions": [
+        {
+          "id": "12zloi7",
+          "enabled": false,
+          "program": "D:\\Program Files\\Netease\\MuMu\\nx_main\\MuMuNxMain.exe",
+          "args": "-v 0",
+          "waitForExit": true,
+          "skipIfRunning": false,
+          "useCmd": false
+        }
+      ]
+    },
+    {
+      "id": "bhnbubj",
+      "name": "配置 5",
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "MuMu安卓设备-MuMuPlayer v5+"
+      },
+      "tasks": [
+        {
+          "id": "e0f5blj",
+          "taskName": "__MXU_LAUNCH__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "__MXU_LAUNCH_OPTION__": {
+              "type": "input",
+              "values": {
+                "program": "D:\\Program Files\\Netease\\MuMu\\nx_main\\MuMuManager.exe",
+                "args": "control -v 0 shutdown"
+              }
+            },
+            "__MXU_LAUNCH_WAIT_OPTION__": {
+              "type": "switch",
+              "value": false
+            },
+            "__MXU_LAUNCH_SKIP_OPTION__": {
+              "type": "switch",
+              "value": false
+            },
+            "__MXU_LAUNCH_CMD_OPTION__": {
+              "type": "switch",
+              "value": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "theme": "light",
+    "accentColor": "emerald",
+    "language": "system",
+    "backgroundOpacity": 50,
+    "confirmBeforeDelete": false,
+    "maxLogsPerInstance": 2000,
+    "autoClearLogsOnLaunch": false,
+    "helpImproveSoftware": true,
+    "windowSize": {
+      "width": 837,
+      "height": 1093
+    },
+    "windowPosition": {
+      "x": 538,
+      "y": 0
+    },
+    "showOptionPreview": true,
+    "sidePanelExpanded": false,
+    "rightPanelWidth": 548,
+    "rightPanelCollapsed": false,
+    "addTaskPanelHeight": 593,
+    "connectionPanelExpanded": true,
+    "screenshotPanelExpanded": false,
+    "screenshotFrameRate": "1",
+    "mirrorChyan": {
+      "cdk": "",
+      "cdkEncrypted": "fWhlHCEifh99A1Q4bkAvPmZIdXUtGXhT",
+      "channel": "beta"
+    },
+    "welcomeShownHash": "83x59q",
+    "devMode": false,
+    "tcpCompatMode": false,
+    "allowLanAccess": true,
+    "webServerEnabled": true,
+    "webServerPort": 12701,
+    "autoRunOnLaunch": false,
+    "autoStartRemovedInstanceName": "配置 1",
+    "minimizeToTray": false,
+    "onboardingCompleted": true,
+    "preActionConnectDelaySec": 5,
+    "hotkeys": {
+      "startTasks": "F10",
+      "stopTasks": "F11"
+    }
+  },
+  "customAccents": [],
+  "globalOptionValues": {},
+  "recentlyClosed": [
+    {
+      "id": "f13p9zx",
+      "name": "配置 6",
+      "closedAt": 1787878042218,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "MuMu安卓设备-MuMuPlayer v5+"
+      },
+      "tasks": [
+        {
+          "id": "ea6kipy",
+          "taskName": "打开游戏",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "任务失败后重启游戏": {
+              "type": "switch",
+              "value": true
+            }
+          }
+        },
+        {
+          "id": "x09z36i",
+          "taskName": "__MXU_RANDOM_START__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        },
+        {
+          "id": "im6zucn",
+          "taskName": "寮三十捐材料",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "捐材料": {
+              "type": "select",
+              "caseName": "低级觉醒材料"
+            }
+          }
+        },
+        {
+          "id": "hr03xjq",
+          "taskName": "自动购物",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "特殊商店购买": {
+              "type": "switch",
+              "value": false
+            },
+            "荣誉商店购买": {
+              "type": "switch",
+              "value": false
+            },
+            "友情商店购买": {
+              "type": "switch",
+              "value": false
+            },
+            "勋章商店购买": {
+              "type": "switch",
+              "value": false
+            },
+            "魅力商店购买": {
+              "type": "switch",
+              "value": false
+            }
+          }
+        },
+        {
+          "id": "zbgledj",
+          "taskName": "式神委派",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "委派_弥助的画": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_寻找耳环": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_猫老大": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_捡到的宝石": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_以鱼为礼": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_帮忙搬运": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_樱饼配方": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_奇怪的痕迹": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_接送弥助": {
+              "type": "switch",
+              "value": false
+            },
+            "委派_伊吹的藤球": {
+              "type": "switch",
+              "value": false
+            }
+          }
+        },
+        {
+          "id": "5fv3f63",
+          "taskName": "活动爬塔-云华依言歌-活动大富翁",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "云华依言歌-是否切换大富翁御魂": {
+              "type": "switch",
+              "value": true
+            },
+            "云华依言歌-大富翁-设置爬塔御魂": {
+              "type": "input",
+              "values": {
+                "group_name": "默认分组",
+                "team_name": "默认队伍"
+              }
+            }
+          }
+        },
+        {
+          "id": "ggkwdza",
+          "taskName": "__MXU_RANDOM_END__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {}
+        }
+      ],
+      "schedulePolicies": [
+        {
+          "id": "tquweiy",
+          "name": "策略 1",
+          "enabled": true,
+          "weekdays": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "times": [
+            "08:00"
+          ],
+          "mode": "fixed"
+        }
+      ]
+    },
+    {
+      "id": "mjoi0rd",
+      "name": "配置 5（副本）",
+      "closedAt": 1787147288703,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "MuMu安卓设备-MuMuPlayer v5+"
+      },
+      "tasks": [
+        {
+          "id": "xvnng7y",
+          "taskName": "__MXU_LAUNCH__",
+          "enabled": true,
+          "enabledByController": {
+            "Android": true
+          },
+          "optionValues": {
+            "__MXU_LAUNCH_OPTION__": {
+              "type": "input",
+              "values": {
+                "program": "D:\\Program Files\\Netease\\MuMu\\nx_main\\MuMuManager.exe",
+                "args": "control -v 0 shutdown"
+              }
+            },
+            "__MXU_LAUNCH_WAIT_OPTION__": {
+              "type": "switch",
+              "value": false
+            },
+            "__MXU_LAUNCH_SKIP_OPTION__": {
+              "type": "switch",
+              "value": false
+            },
+            "__MXU_LAUNCH_CMD_OPTION__": {
+              "type": "switch",
+              "value": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "bd51ox9",
+      "name": "配置 5",
+      "closedAt": 1787145744758,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "emulator-5554-MuMuPlayer v5+"
+      },
+      "tasks": [
+        {
+          "id": "xhy09x2",
+          "taskName": "__MXU_KILLPROC__",
+          "enabled": false,
+          "enabledByController": {
+            "Android": false
+          },
+          "optionValues": {
+            "__MXU_KILLPROC_SELF_OPTION__": {
+              "type": "switch",
+              "value": false
+            },
+            "__MXU_KILLPROC_NAME_OPTION__": {
+              "type": "input",
+              "values": {
+                "process_name": ""
+              }
+            }
+          }
+        }
+      ],
+      "preActions": [
+        {
+          "id": "9cpeauz",
+          "enabled": true,
+          "program": "",
+          "args": "",
+          "waitForExit": false,
+          "skipIfRunning": false,
+          "useCmd": false
+        }
+      ]
+    },
+    {
+      "id": "la4khx1",
+      "name": "配置 6",
+      "closedAt": 1784859742769,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "43gl4ep",
+      "name": "配置 6",
+      "closedAt": 1783932513882,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "m03o9q2",
+      "name": "配置 6",
+      "closedAt": 1782801390870,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "ycouff6",
+      "name": "配置 8",
+      "closedAt": 1781242924042,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "zml1mvb",
+      "name": "配置 5",
+      "closedAt": 1781242922131,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": [
+        {
+          "id": "vr8fwr0",
+          "taskName": "自动购物",
+          "enabled": true,
+          "optionValues": {
+            "特殊商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "荣誉商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "友情商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "勋章商店购买": {
+              "type": "switch",
+              "value": true
+            },
+            "魅力商店购买": {
+              "type": "switch",
+              "value": false
+            },
+            "购买特殊商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "御灵之钥"
+              ]
+            },
+            "购买荣誉商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "神秘的符咒"
+              ]
+            },
+            "购买友情商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "奉为达摩"
+              ]
+            },
+            "购买勋章商店物品": {
+              "type": "checkbox",
+              "caseNames": [
+                "神秘的符咒",
+                "御行达摩",
+                "随机六星御魂"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "qvrejw4",
+      "name": "配置 7",
+      "closedAt": 1781242921198,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "obekl87",
+      "name": "配置 6",
+      "closedAt": 1781242917864,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "nvto3vw",
+      "name": "配置 6",
+      "closedAt": 1781225732313,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "hkx3ii5",
+      "name": "配置 7",
+      "closedAt": 1780535104628,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "he7tq6j",
+      "name": "配置 6",
+      "closedAt": 1780535102429,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "odx2u3z",
+      "name": "配置 8",
+      "closedAt": 1778578066884,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "vykadrl",
+      "name": "配置 7",
+      "closedAt": 1778578064895,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "id": "9h918u1",
+      "name": "配置 6",
+      "closedAt": 1778578061306,
+      "controllerName": "Android",
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "tasks": []
+    },
+    {
+      "closedAt": 1776818309714,
+      "controllerName": "Android",
+      "id": "67kfo0e",
+      "name": "配置 3",
+      "preActions": [
+        {
+          "args": "-v 0",
+          "enabled": true,
+          "id": "v2kix6z",
+          "program": "D:\\Program Files\\Netease\\MuMu\\nx_main\\MuMuNxMain.exe",
+          "skipIfRunning": true,
+          "waitForExit": false
+        }
+      ],
+      "resourceName": "官服(雷电,mumu下载的选这个)",
+      "savedDevice": {
+        "adbDeviceName": "MuMu安卓设备-MuMuPlayer12 v5"
+      },
+      "tasks": [
+        {
+          "enabled": true,
+          "id": "2igqgw4",
+          "optionValues": {
+            "任务失败后重启游戏": {
+              "type": "switch",
+              "value": true
+            }
+          },
+          "taskName": "打开游戏"
+        }
+      ]
+    }
+  ],
+  "interfaceTaskSnapshot": [
+    "打开游戏",
+    "活动爬塔-云华依言歌",
+    "活动爬塔-云华依言歌-活动大富翁",
+    "活动爬塔-武道大会",
+    "花车里程领取",
+    "式神委派",
+    "寮三十捐材料",
+    "自动地鬼",
+    "自动御魂",
+    "真蛇",
+    "自动麒麟",
+    "困28",
+    "英杰试炼",
+    "结界突破",
+    "自动逢魔",
+    "日常奖励领取",
+    "组队副本",
+    "自动秘闻",
+    "结界奖励领取",
+    "投喂宠物",
+    "自动御灵",
+    "自动道馆突破",
+    "自动寮突破",
+    "自动阴界之门",
+    "自动悬赏",
+    "自动斗技",
+    "自动购物",
+    "寮商店购物",
+    "珍旅居商店购物",
+    "肝绘卷",
+    "契灵探查",
+    "网易大神签到",
+    "式神图鉴分享(仅限mumu模拟器可用)",
+    "关闭游戏"
+  ],
+  "newTaskNames": [],
+  "lastActiveInstanceId": "ijod0rs"
+}
