@@ -473,79 +473,16 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent "$APP_NAME" "$app_archive"
           unzip -t "$app_archive" >/dev/null
 
-          python3 -m pip install --quiet pillow
-          python3 <<'PY'
-          from pathlib import Path
-          from PIL import Image, ImageDraw, ImageFont
-
-          width, height = 800, 400
-          image = Image.new("RGB", (width, height), "#f7f5ff")
-          draw = ImageDraw.Draw(image)
-
-          # 柔和的紫色背景和安装区域，Finder 图标会叠放在左右两侧。
-          for y in range(height):
-              ratio = y / max(height - 1, 1)
-              color = (
-                  int(250 - 12 * ratio),
-                  int(248 - 13 * ratio),
-                  int(255 - 4 * ratio),
-              )
-              draw.line((0, y, width, y), fill=color)
-
-          draw.rounded_rectangle(
-              (60, 75, 740, 340),
-              radius=28,
-              fill="#ffffff",
-              outline="#ded7f5",
-              width=2,
-          )
-
-          font_candidates = [
-              "/System/Library/Fonts/Supplemental/Arial.ttf",
-              "/System/Library/Fonts/Helvetica.ttc",
-          ]
-          font_path = next((path for path in font_candidates if Path(path).exists()), None)
-          title_font = ImageFont.truetype(font_path, 25) if font_path else ImageFont.load_default()
-          hint_font = ImageFont.truetype(font_path, 15) if font_path else ImageFont.load_default()
-
-          title = "Drag MaaYYs to Applications"
-          title_box = draw.textbbox((0, 0), title, font=title_font)
-          draw.text(
-              ((width - (title_box[2] - title_box[0])) / 2, 24),
-              title,
-              font=title_font,
-              fill="#382b62",
-          )
-
-          hint = "Drag the app icon on the left to the Applications folder"
-          hint_box = draw.textbbox((0, 0), hint, font=hint_font)
-          draw.text(
-              ((width - (hint_box[2] - hint_box[0])) / 2, 350),
-              hint,
-              font=hint_font,
-              fill="#71658f",
-          )
-
-          # 位于两个 Finder 图标之间的粗箭头。
-          arrow_color = "#7255c9"
-          draw.rounded_rectangle((325, 178, 445, 202), radius=12, fill=arrow_color)
-          draw.polygon([(445, 153), (493, 190), (445, 227)], fill=arrow_color)
-
-          image.save("dmg-background.png")
-          PY
-
           dmg="MaaYYs-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.dmg"
           create-dmg \
             --volname "MaaYYs Installer" \
             --volicon "$RESOURCES_DIR/MaaYYs.icns" \
-            --background "dmg-background.png" \
             --window-pos 200 120 \
             --window-size 800 400 \
-            --icon-size 128 \
+            --icon-size 100 \
             --icon "$APP_NAME" 200 190 \
             --hide-extension "$APP_NAME" \
-            --app-drop-link 600 190 \
-            --no-internet-enable \
+            --app-drop-link 600 185 \
             "$dmg" \
             "$APP_NAME"
           hdiutil verify "$dmg"
