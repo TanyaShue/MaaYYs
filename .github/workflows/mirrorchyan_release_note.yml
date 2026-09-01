@@ -36,4 +36,4 @@ jobs:
           owner: TanyaShue
           repo: MaaYYs
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          upload_token: ${{ secrets.MirrorChyanUploadTokenMac }}
+          upload_token: ${{ secrets.MIRRORCHYANUPLOADTOKENMAC }}
