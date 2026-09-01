@@ -261,7 +261,7 @@
   "地鬼-识别挑战位置": {
     "action": "Click",
     "focus": {
-      "Node.Recognition.Starting": "点击挑战"
+      "Node.Recognition.Succeeded": "点击挑战"
     },
     "index": 2,
     "order_by": "Vertical",
@@ -301,7 +301,8 @@
     "next": [
       "地鬼-挑战一次悬赏",
       "地鬼-确保处于可挑战界面",
-      "[JumpBack]地鬼-识别挑战位置"
+      "[JumpBack]地鬼-识别挑战位置",
+      "[JumpBack]自动地鬼-不开悬赏-识别挑战"
     ],
     "post_delay": 2000,
     "recognition": "OCR",
@@ -431,6 +432,29 @@
       "[JumpBack]导航-地域鬼王"
     ],
     "recognition": "DirectHit"
+  },
+  "自动地鬼-不开悬赏-识别挑战": {
+    "action": "Click",
+    "enabled": false,
+    "focus": {
+      "Node.Recognition.Succeeded": "点击挑战"
+    },
+    "index": 2,
+    "order_by": "Vertical",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1032,
+      190,
+      158,
+      530
+    ],
+    "template": [
+      "战斗/自动地鬼/地鬼-识别挑战位置_1.png",
+      "战斗/自动地鬼/地鬼-点击悬赏目标_1.png"
+    ],
+    "threshold": 0.8,
+    "timeout": 500
   },
   "自动地鬼-准备战斗": {
     "action": "Click",
