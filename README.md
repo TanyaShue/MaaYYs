@@ -59,7 +59,7 @@ MaaYYs 是一个面向《阴阳师》模拟器环境的自动化项目，项目�
 2. 启动游戏，在 MXU 中添加设备并选择 `PlayCover`，填写 MaaTools 的实际监听地址；`127.0.0.1:1718` 仅为示例，不应写死，`1717` 也可能已被 MAA 占用。
 3. 保持横屏即可。`controller` 的 `display_short_side: 720` 是截图与识别的内部缩放基准，不要求 PlayCover 游戏窗口实际设置为 1280×720；可参考 MAA 手册按需调整分辨率，若识别异常可尝试 1080P。然后选择资源并配置任务。
 
-更详细的图文教程见 [doc/使用指南.md](doc/使用指南.md)。
+更详细的图文教程见 [doc/使用指南.md](doc/使用指南.md)；macOS PlayCover 的完整配置流程见 [doc/macOS PlayCover 使用手册.md](doc/macOS%20PlayCover%20使用手册.md)。
 
 ## 支持的资源
 
