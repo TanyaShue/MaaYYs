@@ -13,27 +13,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - os: win
-            arch: x86_64
-            extension: zip
-          - os: win
-            arch: aarch64
-            extension: zip
-          - os: macos
-            arch: x86_64
-            extension: dmg
-          - os: macos
-            arch: aarch64
-            extension: dmg
+        os: [win, linux]
+        arch: [aarch64, x86_64]
+        exclude:
           - os: linux
-            arch: x86_64
-            extension: tar.gz
+            arch: aarch64
     steps:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: ${{ format('MaaYYs-{0}-{1}-*-MXU.{2}', matrix.os, matrix.arch, matrix.extension) }}
+          filename: ${{ format('MaaYYs-{0}-{1}-*-MXU*', matrix.os, matrix.arch) }}
           mirrorchyan_rid: MaaYYs
           tag: ${{ inputs.tag }}
 
@@ -44,3 +33,26 @@ jobs:
           repo: MaaYYs
           github_token: ${{ secrets.GITHUB_TOKEN }}
           upload_token: ${{ secrets.MirrorChyanUploadToken }}
+
+  mirrorchyan_exec:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos]
+        arch: [aarch64, x86_64]
+    steps:
+      - uses: MirrorChyan/uploading-action@v1
+        with:
+          filetype: latest-release
+          filename: ${{ format('MaaYYs-{0}-{1}-*-MXU.dmg', matrix.os, matrix.arch) }}
+          mirrorchyan_rid: MaaYYs_exec
+          tag: ${{ inputs.tag }}
+
+          os: ${{ matrix.os }}
+          arch: ${{ matrix.arch }}
+
+          owner: TanyaShue
+          repo: MaaYYs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          upload_token: ${{ secrets.MirrorChyanUploadTokenMac }}
