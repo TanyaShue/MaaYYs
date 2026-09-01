@@ -286,8 +286,195 @@ jobs:
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MaaYYs-${{ matrix.os }}-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU
+          name: MaaYYs-${{ matrix.os }}-${{ matrix.arch }}-intermediate
           path: package
+          retention-days: 7
+
+  package_windows:
+    name: Package Windows ${{ matrix.arch }}
+    needs: [meta, build]
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x86_64, aarch64]
+    steps:
+      - name: Download Windows package
+        uses: actions/download-artifact@v4
+        with:
+          name: MaaYYs-win-${{ matrix.arch }}-intermediate
+          path: package
+
+      - name: Create ZIP archive
+        shell: pwsh
+        run: |
+          $archive = "MaaYYs-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.zip"
+          Compress-Archive -Path "package/*" -DestinationPath $archive -Force
+          if (-not (Test-Path $archive)) {
+            throw "Windows archive was not created: $archive"
+          }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MaaYYs-win-${{ matrix.arch }}-release
+          path: MaaYYs-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.zip
+          if-no-files-found: error
+          retention-days: 7
+
+  package_linux:
+    name: Package Linux ${{ matrix.arch }}
+    needs: [meta, build]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x86_64]
+    steps:
+      - name: Download Linux package
+        uses: actions/download-artifact@v4
+        with:
+          name: MaaYYs-linux-${{ matrix.arch }}-intermediate
+          path: package
+
+      - name: Restore permissions and create tarball
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          chmod +x package/mxu package/agent/agent
+          find package/maafw -type f \( -name 'Maa*' -o -name 'adb' \) -exec chmod +x {} +
+
+          test -x package/mxu
+          test -x package/agent/agent
+          test -f package/interface.json
+
+          archive="MaaYYs-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.tar.gz"
+          tar --format=posix -czf "$archive" -C package .
+          tar -tzf "$archive" >/dev/null
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MaaYYs-linux-${{ matrix.arch }}-release
+          path: MaaYYs-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.tar.gz
+          if-no-files-found: error
+          retention-days: 7
+
+  package_macos:
+    name: Package macOS ${{ matrix.arch }}
+    needs: [meta, build]
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x86_64, aarch64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download macOS package
+        uses: actions/download-artifact@v4
+        with:
+          name: MaaYYs-macos-${{ matrix.arch }}-intermediate
+          path: package
+
+      - name: Create app bundle and DMG
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          APP_NAME="MaaYYs.app"
+          CONTENTS="$APP_NAME/Contents"
+          MACOS_DIR="$CONTENTS/MacOS"
+          RESOURCES_DIR="$CONTENTS/Resources"
+          FULL_VERSION="${{ needs.meta.outputs.tag }}"
+          SHORT_VERSION="${FULL_VERSION#v}"
+          SHORT_VERSION="${SHORT_VERSION%%-*}"
+
+          mkdir -p "$MACOS_DIR/app" "$RESOURCES_DIR"
+          cp -R package/. "$MACOS_DIR/app/"
+
+          chmod +x "$MACOS_DIR/app/mxu" "$MACOS_DIR/app/agent/agent"
+          find "$MACOS_DIR/app/maafw" -type f \( -name 'Maa*' -o -name 'adb' \) -exec chmod +x {} +
+
+          cat > "$MACOS_DIR/MaaYYs" <<'EOF'
+          #!/bin/bash
+          set -e
+          APP_DIR="$(cd "$(dirname "$0")/app" && pwd)"
+          cd "$APP_DIR"
+          exec "$APP_DIR/mxu" "$@"
+          EOF
+          chmod +x "$MACOS_DIR/MaaYYs"
+
+          mkdir MaaYYs.iconset
+          sips -Z 1024 assets/logo/logo.png --out icon-source.png >/dev/null
+          sips --padToHeightWidth 1024 1024 --padColor FFFFFF icon-source.png --out icon-square.png >/dev/null
+          sips -z 16 16 icon-square.png --out MaaYYs.iconset/icon_16x16.png >/dev/null
+          sips -z 32 32 icon-square.png --out MaaYYs.iconset/icon_16x16@2x.png >/dev/null
+          sips -z 32 32 icon-square.png --out MaaYYs.iconset/icon_32x32.png >/dev/null
+          sips -z 64 64 icon-square.png --out MaaYYs.iconset/icon_32x32@2x.png >/dev/null
+          sips -z 128 128 icon-square.png --out MaaYYs.iconset/icon_128x128.png >/dev/null
+          sips -z 256 256 icon-square.png --out MaaYYs.iconset/icon_128x128@2x.png >/dev/null
+          sips -z 256 256 icon-square.png --out MaaYYs.iconset/icon_256x256.png >/dev/null
+          sips -z 512 512 icon-square.png --out MaaYYs.iconset/icon_256x256@2x.png >/dev/null
+          sips -z 512 512 icon-square.png --out MaaYYs.iconset/icon_512x512.png >/dev/null
+          cp icon-square.png MaaYYs.iconset/icon_512x512@2x.png
+          iconutil -c icns MaaYYs.iconset -o "$RESOURCES_DIR/MaaYYs.icns"
+
+          cat > "$CONTENTS/Info.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>CFBundleDevelopmentRegion</key>
+            <string>zh_CN</string>
+            <key>CFBundleExecutable</key>
+            <string>MaaYYs</string>
+            <key>CFBundleIconFile</key>
+            <string>MaaYYs</string>
+            <key>CFBundleIdentifier</key>
+            <string>com.tanyashue.maayys</string>
+            <key>CFBundleInfoDictionaryVersion</key>
+            <string>6.0</string>
+            <key>CFBundleName</key>
+            <string>MaaYYs</string>
+            <key>CFBundleDisplayName</key>
+            <string>MaaYYs</string>
+            <key>CFBundlePackageType</key>
+            <string>APPL</string>
+            <key>CFBundleShortVersionString</key>
+            <string>$SHORT_VERSION</string>
+            <key>CFBundleVersion</key>
+            <string>$SHORT_VERSION</string>
+            <key>LSMinimumSystemVersion</key>
+            <string>11.0</string>
+            <key>NSHighResolutionCapable</key>
+            <true/>
+          </dict>
+          </plist>
+          EOF
+
+          plutil -lint "$CONTENTS/Info.plist"
+          codesign --force --deep --sign - "$APP_NAME"
+          codesign --verify --deep --strict --verbose=2 "$APP_NAME"
+
+          app_archive="MaaYYs-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.app.zip"
+          ditto -c -k --sequesterRsrc --keepParent "$APP_NAME" "$app_archive"
+          unzip -t "$app_archive" >/dev/null
+
+          mkdir dmg-root
+          ditto "$APP_NAME" "dmg-root/$APP_NAME"
+          ln -s /Applications dmg-root/Applications
+          dmg="MaaYYs-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.dmg"
+          hdiutil create -quiet -fs HFS+ -volname "MaaYYs" -srcfolder dmg-root -format UDZO "$dmg"
+          hdiutil verify "$dmg"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MaaYYs-macos-${{ matrix.arch }}-release
+          path: |
+            MaaYYs-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.app.zip
+            MaaYYs-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-MXU.dmg
+          if-no-files-found: error
           retention-days: 7
 
   changelog:
@@ -316,33 +503,29 @@ jobs:
 
   release:
     name: Create Release
-    needs: [meta, build, changelog]
-    if: ${{ needs.meta.outputs.is_release == 'true' && needs.build.result == 'success' }}
+    needs: [meta, package_windows, package_linux, package_macos, changelog]
+    if: ${{ needs.meta.outputs.is_release == 'true' && needs.package_windows.result == 'success' && needs.package_linux.result == 'success' && needs.package_macos.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
+          pattern: MaaYYs-*-release
           path: assets
+          merge-multiple: true
 
-      - name: Process and package artifacts
+      - name: Verify release artifacts
         shell: bash
         run: |
-          cd assets
-          for f in *; do
-            if [[ "$f" == *"win"* ]]; then
-              (cd "$f" && zip -r "../$f.zip" .)
-            else
-              find "$f" -type f \( -name "mxu" -o -name "agent" \) -exec chmod +x {} \; 2>/dev/null || true
-              tar -cpzf "$f.tar.gz" -C "$f" .
-            fi
-          done
-          find . -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+          set -euo pipefail
+          test "$(find assets -maxdepth 1 -type f | wc -l)" -eq 7
+          ls -lah assets
 
       - uses: softprops/action-gh-release@v2.2.2
         with:
           files: |
             assets/*.zip
             assets/*.tar.gz
+            assets/*.dmg
           tag_name: ${{ needs.meta.outputs.tag }}
           body: ${{ needs.changelog.outputs.release_body }}
           draft: false

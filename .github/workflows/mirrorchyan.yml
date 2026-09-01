@@ -16,19 +16,24 @@ jobs:
         include:
           - os: win
             arch: x86_64
+            extension: zip
           - os: win
             arch: aarch64
+            extension: zip
           - os: macos
             arch: x86_64
+            extension: dmg
           - os: macos
             arch: aarch64
+            extension: dmg
           - os: linux
             arch: x86_64
+            extension: tar.gz
     steps:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: ${{ format('MaaYYs-{0}-{1}-*-MXU*', matrix.os, matrix.arch) }}
+          filename: ${{ format('MaaYYs-{0}-{1}-*-MXU.{2}', matrix.os, matrix.arch, matrix.extension) }}
           mirrorchyan_rid: MaaYYs
           tag: ${{ inputs.tag }}
 
