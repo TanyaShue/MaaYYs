@@ -73,7 +73,7 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	}
 
 	// 解析ROI参数
-	xMin, yMin, xMax, yMax := 400, 520, 800, 600
+	xMin, yMin, xMax, yMax := 148, 517, 930, 197
 	if len(params.ROI1) == 4 {
 		xMin = toInt(params.ROI1[0])
 		yMin = toInt(params.ROI1[1])
@@ -81,10 +81,7 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		h := toInt(params.ROI1[3])
 		xMax = xMin + w
 		yMax = yMin + h
-	} else {
-		fmt.Printf("使用默认点击区域: x范围(%d, %d), y范围(%d, %d)\n", xMin, xMax, yMin, yMax)
 	}
-
 	// 安全检查
 	if xMin > xMax {
 		xMin, xMax = xMax, xMin
@@ -101,11 +98,9 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	if waitRandNum < float64(params.LongWaitWeight) {
 		waitTime = float64(params.LongWaitMin) + rand.Float64()*(float64(params.LongWaitMax)-float64(params.LongWaitMin))
 		fmt.Printf("开始长等待: %.2f秒\n", waitTime)
-		printToUI(ctx, fmt.Sprintf("即将开始较长等待: %.2f 秒", waitTime))
 	} else {
 		waitTime = float64(params.ShortWaitMin) + rand.Float64()*(float64(params.ShortWaitMax)-float64(params.ShortWaitMin))
 		fmt.Printf("开始短等待: %.2f秒\n", waitTime)
-		printToUI(ctx, fmt.Sprintf("即将开始等待: %.2f 秒", waitTime))
 	}
 
 	time.Sleep(time.Duration(waitTime * float64(time.Second)))
@@ -125,25 +120,11 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 
 	if clickRandNum < float64(params.DoubleClickWeight) {
 		// 双击
-		fmt.Printf("执行双击，位置: (%d, %d)\n", x, y)
 		controller.PostClick(int32(x), int32(y)).Wait()
-		time.Sleep(time.Duration(rand.Float64()*0.3+0.1) * time.Second)
 		controller.PostClick(int32(x), int32(y)).Wait()
 	} else {
 		// 单击
-		fmt.Printf("执行单击，位置: (%d, %d)\n", x, y)
 		controller.PostClick(int32(x), int32(y)).Wait()
-	}
-
-	// 计数
-	a.mu.Lock()
-	a.count++
-	count := a.count
-	a.mu.Unlock()
-
-	if count%10 == 0 {
-		printToUI(ctx, fmt.Sprintf("已经执行了 %d 次", count))
-		fmt.Printf("HumanTouch 已执行 %d 次\n", count)
 	}
 
 	return true
@@ -162,15 +143,4 @@ func toInt(value interface{}) int {
 	default:
 		return 0
 	}
-}
-
-// printToUI 向UI输出消息
-func printToUI(ctx *maa.Context, message string) {
-	_, _ = ctx.RunTask("随机等待", map[string]any{
-		"随机等待": map[string]any{
-			"focus": map[string]any{
-				"start": message,
-			},
-		},
-	})
 }

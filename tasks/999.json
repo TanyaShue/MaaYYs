@@ -1,0 +1,280 @@
+{
+    "task": [
+        {
+            "name": "自动999",
+            "label": "自动999",
+            "entry": "999-开始",
+            "group": ["promotion"],
+            "option": [
+                "999-设置目标",
+                "999-设置挑战方式",
+                "自定义999点击策略设置"
+            ],
+            "description": "在活动界面开始,手动装备御魂并锁定阵容"
+        }
+    ],
+    "option": {
+        "999-设置目标":{
+            "type": "select",
+            "default_case": "刷光体力票",
+            "cases": [
+                {
+                    "name": "刷光体力票",
+                    "label": "刷光体力票",
+                    "pipeline_override": {
+                        "999-体力票刷光":{
+                            "enable": true
+                        },
+                        "999-活动票刷光":{
+                            "enable": false
+                        },
+                        "999-识别指定次数":{
+                            "enable": false
+                        }
+                    }
+                },
+                {
+                    "name": "刷光活动票",
+                    "label": "刷光活动票",
+                    "pipeline_override": {
+                        "999-体力票刷光":{
+                            "enable": false
+                        },
+                        "999-活动票刷光":{
+                            "enable": true
+                        },
+                        "999-识别指定次数":{
+                            "enable": false
+                        }
+                    }
+                },
+                {
+                    "name": "刷指定次数",
+                    "label": "刷指定次数",
+                    "pipeline_override": {
+                        "999-体力票刷光":{
+                            "enable": false
+                        },
+                        "999-活动票刷光":{
+                            "enable": false
+                        },
+                        "999-识别指定次数":{
+                            "enable": true
+                        }
+                    },
+                    "option": ["999-设置挑战次数"]
+                }
+            ]
+        },
+        "999-设置挑战方式":{
+            "type": "select",
+            "default_case": "自动点击穿插挂樱饼",
+            "cases": [
+                {
+                    "name": "全程自动点击",
+                    "label": "全程自动点击",
+                    "pipeline_override": {
+                        "手动999":{
+                            "enable": true
+                        },
+                        "9995":{
+                            "enable": false
+                        }
+                    }
+                },
+                {
+                    "name": "自动点击穿插挂樱饼",
+                    "label": "自动点击穿插挂樱饼",
+                    "pipeline_override": {
+                        "手动999":{
+                            "enable": false
+                        },
+                        "9995":{
+                            "enable": true
+                        }
+                    },
+                    "option": ["999-自定义樱饼和挂机权重"]
+                }
+            ]
+        },
+        "999-自定义樱饼和挂机权重": {
+            "type": "input",
+            "label": "999-自定义樱饼和挂机权重",
+            "description": "自定义挂机点击与挂樱饼的权重,如默认樱饼权重为1,挂机权重为50,则表示大约50次后(1/51的概率)会触发一次挂樱饼,挂樱饼的次数为30次,表示等这30次樱饼挂完后又会接着挂机,这个值是随机的也可能连续两次都是挂樱饼",
+            "inputs": [
+                {
+                    "name": "樱饼权重",
+                    "label": "樱饼权重",
+                    "description": "樱饼占随机中的比重",
+                    "default": "1",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "挂机权重",
+                    "label": "挂机权重",
+                    "description": "樱饼占随机中的比重",
+                    "default": "50",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "每次挂樱饼的次数",
+                    "label": "每次挂樱饼的次数",
+                    "description": "每次开始自动挂樱饼的次数",
+                    "default": "30",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "9995": {
+                    "custom_action_param": {
+                        "9996_随机挂樱饼": "{樱饼权重}",
+                        "999-开始挂机": "{挂机权重}"
+                    }
+                },
+                "9996":{
+                    "custom_action_param": {
+                        "expected_number": "{每次挂樱饼的次数}",
+                        "start_repeat": true
+                    }
+                }
+            }
+        },
+        "999-设置挑战次数": {
+            "type": "input",
+            "label": "挑战次数",
+            "description": "设置999的挑战次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "description": "填写挑战999的次数",
+                    "default": "999",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "999-识别指定次数": {
+                    "custom_recognition_param": {
+                        "target_count": "{挑战次数}"
+                    }
+                }
+            }
+        },
+        "999阵容预设": {
+            "type": "input",
+            "label": "999阵容预设",
+            "description": "填写自动999时需要使用的分组和队伍名称",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+
+            }
+        },
+        "自定义999点击策略设置": {
+            "type": "switch",
+            "label": "是否自定义点击策略",
+            "description": "是否自定义点击策略",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "option": [
+                        "999点击策略设置"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ]
+        },
+        "999点击策略设置": {
+            "type": "input",
+            "label": "999点击策略设置",
+            "description": "自定义999副本中的点击权重分布与随机等待时间范围,权重表示当前事件触发概率占所有可能触发事件权重之和的比值,如双击触发的概率为50/(50+50),也就是1/2,短时间等待的概率为95/(95+5),也就是95%触发短时间等待,权重可以自行设置,必须大于0",
+            "inputs": [
+                {
+                    "name": "double_w",
+                    "label": "双击权重",
+                    "description": "执行双击动作的权重",
+                    "default": "50",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "single_w",
+                    "label": "单击权重",
+                    "description": "执行单击动作的权重",
+                    "default": "50",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "short_w",
+                    "label": "短等待权重",
+                    "description": "执行短时间等待的权重",
+                    "default": "95",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "long_w",
+                    "label": "长等待权重",
+                    "description": "执行长时间等待的权重",
+                    "default": "5",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "short_min",
+                    "label": "短等待最少(秒)",
+                    "default": "1",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "short_max",
+                    "label": "短等待最多(秒)",
+                    "default": "10",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "long_min",
+                    "label": "长等待最少(秒)",
+                    "default": "100",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "long_max",
+                    "label": "长等待最多(秒)",
+                    "default": "200",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "999_奖励_点击一下": {
+                    "custom_action_param": {
+                        "double_click_weight": "{double_w}",
+                        "single_click_weight": "{single_w}",
+                        "short_wait_weight": "{short_w}",
+                        "long_wait_weight": "{long_w}",
+                        "short_wait_min": "{short_min}",
+                        "short_wait_max": "{short_max}",
+                        "long_wait_min": "{long_min}",
+                        "long_wait_max": "{long_max}"
+                    }
+                }
+            }
+        }
+    }
+}

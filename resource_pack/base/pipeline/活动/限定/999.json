@@ -2,9 +2,10 @@
   "999": {
     "action": "Click",
     "next": [
-      "999_奖励_点击一下"
+      "999-手动战斗-识别是否返回爬塔界面",
+      "[JumpBack]999_奖励_点击一下"
     ],
-    "post_delay": 8000,
+    "post_delay": 3000,
     "recognition": "FeatureMatch",
     "roi": [
       1081,
@@ -21,33 +22,23 @@
     "template": [
       "通用图标/999_战斗.png",
       "999/999.png"
-    ]
-  },
-  "9991": {
-    "action": "Click",
-    "next": [
-      "9992"
     ],
-    "recognition": "TemplateMatch",
-    "template": [
-      "999/9991.png"
-    ]
+    "timeout": 200000
   },
-  "99910": {
-    "action": "Click",
-    "expected": "取消",
+  "999-体力票刷光": {
+    "expected": "^[0OoОо]$",
     "next": [
-      "99911"
+      "导航-庭院"
     ],
     "recognition": "OCR",
     "roi": [
-      415,
-      392,
-      198,
-      80
+      541,
+      10,
+      138,
+      41
     ]
   },
-  "99911": {
+  "999-关闭自动计数": {
     "action": "Click",
     "next": [
       "99912"
@@ -69,6 +60,146 @@
       "999/9996_随机挂樱饼.png"
     ]
   },
+  "999-开始": {
+    "expected": "虚无精锐",
+    "next": [
+      "999-识别指定次数",
+      "999-活动票刷光",
+      "999-体力票刷光",
+      "[JumpBack]9995",
+      "[JumpBack]手动999"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      65,
+      9,
+      243,
+      66
+    ]
+  },
+  "999-开始挂机": {
+    "expected": "虚无精锐",
+    "next": [
+      "999"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      92,
+      0,
+      239,
+      85
+    ]
+  },
+  "999-开始自动": {
+    "next": [
+      "99913",
+      "[JumpBack]9998",
+      "[JumpBack]999-点击自动"
+    ],
+    "recognition": "DirectHit"
+  },
+  "999-手动战斗-识别是否返回爬塔界面": {
+    "expected": "虚无精锐",
+    "recognition": "OCR",
+    "roi": [
+      65,
+      9,
+      243,
+      66
+    ]
+  },
+  "999-活动票刷光": {
+    "expected": "^[0OoОо]$",
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      744,
+      9,
+      103,
+      52
+    ]
+  },
+  "999-点击自动": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      899,
+      631,
+      114,
+      89
+    ],
+    "template": [
+      "活动/限定/999/999-134456_1.png"
+    ]
+  },
+  "999-确定关闭自动弹窗-识别是否存在弹窗": {
+    "expected": "取消",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      415,
+      392,
+      198,
+      80
+    ]
+  },
+  "999-识别挂樱饼是否在战斗中": {
+    "expected": "自动",
+    "recognition": "OCR",
+    "roi": [
+      0,
+      615,
+      122,
+      105
+    ]
+  },
+  "999-识别指定次数": {
+    "custom_recognition": "TaskCounterRecognition",
+    "custom_recognition_param": {
+      "target_count": 10
+    },
+    "enabled": false,
+    "inverse": true,
+    "next": [
+      "导航-庭院"
+    ],
+    "recognition": "Custom"
+  },
+  "999-识别是否关闭小纸人界面": {
+    "expected": "喂食小纸人",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      529,
+      95,
+      208,
+      63
+    ]
+  },
+  "999-识别是否在进度中": {
+    "expected": "当前进度",
+    "recognition": "OCR",
+    "roi": [
+      850,
+      514,
+      410,
+      125
+    ]
+  },
+  "99910": {
+    "action": "Click",
+    "expected": "取消",
+    "recognition": "OCR",
+    "roi": [
+      415,
+      392,
+      198,
+      80
+    ]
+  },
   "99912": {
     "action": "Custom",
     "custom_action": "RepeatChallengeNTimes",
@@ -83,73 +214,26 @@
   },
   "99913": {
     "expected": "当前进度",
-    "recognition": "OCR",
-    "roi": [
-      880,
-      503,
-      212,
-      48
-    ]
-  },
-  "99914": {
-    "expected": "荒骨巨兽",
     "next": [
-      "9994",
-      "[JumpBack]9995"
+      "9999",
+      "[JumpBack]999-识别是否在进度中",
+      "[JumpBack]999-识别挂樱饼是否在战斗中"
     ],
     "recognition": "OCR",
     "roi": [
-      65,
-      9,
-      243,
-      66
-    ]
-  },
-  "9992": {
-    "action": "Click",
-    "expected": "霜火寂境",
-    "next": [
-      "99914",
-      "[JumpBack]9993"
+      850,
+      514,
+      410,
+      125
     ],
-    "recognition": "OCR",
-    "roi": [
-      363,
-      120,
-      330,
-      332
-    ]
-  },
-  "9993": {
-    "action": "Click",
-    "expected": "(?:战斗\\s*)?驻守平安",
-    "recognition": "OCR",
-    "roi": [
-      18,
-      94,
-      188,
-      50
-    ]
-  },
-  "9994": {
-    "expected": "^0/5000$",
-    "next": [
-      "导航-庭院"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      911,
-      12,
-      145,
-      42
-    ]
+    "timeout": 200000
   },
   "9995": {
     "action": "Custom",
     "custom_action": "RandomTask",
     "custom_action_param": {
-      "9996_随机挂樱饼": 1,
-      "自动999": 50
+      "999-开始挂机": 50,
+      "9996_随机挂樱饼": 1
     },
     "recognition": "DirectHit"
   },
@@ -160,16 +244,28 @@
       "expected_number": 2,
       "start_repeat": true
     },
+    "expected": "喂食小纸人",
     "next": [
-      "9997"
+      "999-识别是否关闭小纸人界面",
+      "[JumpBack]9997"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      529,
+      95,
+      208,
+      63
+    ]
+  },
+  "9996_随机挂樱饼": {
+    "next": [
+      "[JumpBack]9996_随机挂樱饼-设置自动次数-开始",
+      "999-开始自动"
     ],
     "recognition": "DirectHit"
   },
-  "9996_随机挂樱饼": {
+  "9996_随机挂樱饼-设置自动次数": {
     "action": "Click",
-    "next": [
-      "9996"
-    ],
     "recognition": "TemplateMatch",
     "roi": [
       1013,
@@ -187,12 +283,17 @@
       "999/9996_随机挂樱饼.png"
     ]
   },
+  "9996_随机挂樱饼-设置自动次数-开始": {
+    "max_hit": 1,
+    "next": [
+      "9996",
+      "[JumpBack]9996_随机挂樱饼-设置自动次数"
+    ],
+    "recognition": "DirectHit"
+  },
   "9997": {
     "action": "Click",
     "expected": "喂食小纸人",
-    "next": [
-      "9998"
-    ],
     "recognition": "OCR",
     "roi": [
       529,
@@ -226,24 +327,22 @@
   },
   "9998": {
     "action": "Click",
-    "expected": "自动",
-    "next": [
-      "9999",
-      "[JumpBack]99913"
-    ],
+    "expected": "自动|动",
+    "post_delay": 2000,
     "recognition": "OCR",
     "roi": [
-      962,
-      635,
-      66,
-      77
+      904,
+      671,
+      96,
+      31
     ],
     "timeout": 2000000
   },
   "9999": {
     "expected": "已完成\\d+次挑战",
     "next": [
-      "99910"
+      "999-确定关闭自动弹窗-识别是否存在弹窗",
+      "[JumpBack]99910"
     ],
     "recognition": "OCR",
     "roi": [
@@ -256,31 +355,26 @@
   "999_奖励_点击一下": {
     "action": "Custom",
     "custom_action": "HumanTouch",
-    "expected": "获得奖励",
-    "recognition": "OCR",
-    "roi": [
-      470,
-      163,
-      343,
-      123
-    ]
-  },
-  "999_点击屏幕继续": {
-    "action": "Click",
     "expected": "点击屏幕继续",
     "recognition": "OCR",
-    "target": [
-      429,
-      502,
-      521,
-      177
+    "roi": [
+      406,
+      587,
+      484,
+      133
     ]
   },
-  "自动999": {
+  "手动999": {
+    "expected": "虚无精锐",
     "next": [
-      "999",
-      "[JumpBack]999_点击屏幕继续"
+      "999-开始挂机"
     ],
-    "recognition": "DirectHit"
+    "recognition": "OCR",
+    "roi": [
+      92,
+      0,
+      239,
+      85
+    ]
   }
 }
