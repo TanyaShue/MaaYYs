@@ -90,6 +90,7 @@
     },
     "next": [
       "启动游戏2",
+      "[JumpBack]启动游戏-图片匹配",
       "[JumpBack]启动游戏1",
       "[JumpBack]启动任务1",
       "[JumpBack]关闭广告-模板匹配",
@@ -102,6 +103,20 @@
     "rate_limit": 3000,
     "recognition": "DirectHit",
     "timeout": 60000
+  },
+  "启动游戏-图片匹配": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      397,
+      503,
+      507,
+      173
+    ],
+    "template": [
+      "启动游戏/启动游戏-图片匹配_1.png"
+    ]
   },
   "启动游戏1": {
     "action": "Click",
