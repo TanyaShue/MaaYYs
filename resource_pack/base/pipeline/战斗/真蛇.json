@@ -8,6 +8,23 @@
     ],
     "recognition": "DirectHit"
   },
+  "真蛇-关闭真蛇头像框弹窗": {
+    "action": "Click",
+    "expected": "噬剑之蛇头像框|100个勾玉",
+    "recognition": "OCR",
+    "roi": [
+      451,
+      215,
+      376,
+      99
+    ],
+    "target": [
+      584,
+      453,
+      113,
+      42
+    ]
+  },
   "真蛇-创建队伍": {
     "expected": "创建队伍",
     "next": [
@@ -260,6 +277,7 @@
     "expected": "协战队伍",
     "next": [
       "真蛇-识别是否位探索",
+      "[JumpBack]真蛇-关闭真蛇头像框弹窗",
       "[JumpBack]真蛇-识别战斗结束",
       "[JumpBack]真蛇-点击开始挑战",
       "[JumpBack]真蛇-点击自动准备",
