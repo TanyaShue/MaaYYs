@@ -121,6 +121,17 @@
       52
     ]
   },
+  "999-点击屏幕继续": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "recognition": "OCR",
+    "target": [
+      372,
+      636,
+      539,
+      84
+    ]
+  },
   "999-点击自动": {
     "action": "Click",
     "post_delay": 2000,
@@ -356,6 +367,10 @@
     "action": "Custom",
     "custom_action": "HumanTouch",
     "expected": "点击屏幕继续",
+    "next": [
+      "999-手动战斗-识别是否返回爬塔界面",
+      "[JumpBack]999-点击屏幕继续"
+    ],
     "recognition": "OCR",
     "roi": [
       406,

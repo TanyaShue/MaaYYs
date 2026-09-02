@@ -73,7 +73,7 @@ func (a *HumanTouch) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	}
 
 	// 解析ROI参数
-	xMin, yMin, xMax, yMax := 148, 517, 930, 197
+	xMin, yMin, xMax, yMax := 290,411,767,309
 	if len(params.ROI1) == 4 {
 		xMin = toInt(params.ROI1[0])
 		yMin = toInt(params.ROI1[1])

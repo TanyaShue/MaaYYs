@@ -264,6 +264,7 @@
             "pipeline_override": {
                 "999_奖励_点击一下": {
                     "custom_action_param": {
+                        "ROI_1":[141,524,997,196],
                         "double_click_weight": "{double_w}",
                         "single_click_weight": "{single_w}",
                         "short_wait_weight": "{short_w}",
