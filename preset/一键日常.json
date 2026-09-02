@@ -12,6 +12,10 @@
           }
         },
         {
+          "name": "__MXU_RANDOM_START__",
+          "enabled": true
+        },
+        {
           "name": "自动地鬼",
           "enabled": true,
           "option": {
@@ -180,6 +184,14 @@
           }
         },
         {
+          "name": "__MXU_RANDOM_END__",
+          "enabled": true
+        },
+        {
+          "name": "__MXU_RANDOM_START__",
+          "enabled": true
+        },
+        {
           "name": "式神委派",
           "enabled": true,
           "option": {
@@ -272,6 +284,10 @@
             "自动挂卡类型设置": "太鼓",
             "挂卡星级设置": "5星及以下"
           }
+        },
+        {
+          "name": "__MXU_RANDOM_END__",
+          "enabled": true
         },
         {
           "name": "关闭游戏",

@@ -36,7 +36,7 @@ permissions:
   actions: write
 
 env:
-  MXU_VERSION: v1.3.5
+  MXU_VERSION: v1.3.6
   MAAFW_VERSION: v5.13.0-beta.2
 
 jobs:
