@@ -366,6 +366,14 @@
   "999_奖励_点击一下": {
     "action": "Custom",
     "custom_action": "HumanTouch",
+    "custom_action_param": {
+      "ROI_1": [
+        141,
+        524,
+        997,
+        196
+      ]
+    },
     "expected": "点击屏幕继续",
     "next": [
       "999-手动战斗-识别是否返回爬塔界面",
