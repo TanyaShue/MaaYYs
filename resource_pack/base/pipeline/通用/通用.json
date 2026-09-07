@@ -798,7 +798,7 @@
       "町中",
       "神龛"
     ],
-    "model": "Courtyard-v6.0.onnx",
+    "model": "Courtyard-v8.4.onnx",
     "post_delay": 3000,
     "recognition": "NeuralNetworkDetect",
     "threshold": 0.7

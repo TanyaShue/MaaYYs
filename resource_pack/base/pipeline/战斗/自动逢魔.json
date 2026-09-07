@@ -96,7 +96,7 @@
       "町中",
       "神龛"
     ],
-    "model": "Courtyard-v6.0.onnx",
+    "model": "Courtyard-v8.4.onnx",
     "recognition": "NeuralNetworkDetect"
   },
   "点击逢魔": {
@@ -393,7 +393,7 @@
       "町中",
       "神龛"
     ],
-    "model": "Courtyard-v6.0.onnx",
+    "model": "Courtyard-v8.4.onnx",
     "recognition": "NeuralNetworkDetect"
   },
   "自动逢魔-开始装备御魂": {

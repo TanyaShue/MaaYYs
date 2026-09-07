@@ -35,7 +35,7 @@
         "recognition": "NeuralNetworkDetect"
     },
     "test-284164": {
-        "model": "tt-Courtyard-v6.0.onnx",
+        "model": "tt-Courtyard-v8.4.onnx",
         "recognition": "NeuralNetworkDetect"
     },
     "test-490627": {

@@ -226,7 +226,7 @@
     "action": "Click",
     "expected": [0, 1, 2, 3, 4, 5],
     "labels": ["召唤", "宠物小屋", "悬赏封印", "探索", "町中", "神龛"],
-    "model": "Courtyard-v6.0.onnx",
+    "model": "Courtyard-v8.4.onnx",
     "post_delay": 1000,
     "recognition": "NeuralNetworkDetect",
     "target": [1205, 618, 49, 64],
@@ -285,7 +285,7 @@
   "导航-庭院-识别是否位于庭院-模型识别": {
     "expected": [0, 2, 3, 4, 5],
     "labels": ["召唤", "宠物小屋", "悬赏封印", "探索", "町中", "神龛"],
-    "model": "Courtyard-v6.0.onnx",
+    "model": "Courtyard-v8.4.onnx",
     "post_delay": 2000,
     "recognition": "NeuralNetworkDetect",
     "threshold": 0.8
@@ -438,7 +438,7 @@
     "action": "Click",
     "expected": [2],
     "labels": ["召唤", "宠物小屋", "悬赏封印", "探索", "町中", "神龛"],
-    "model": "Courtyard-v6.0.onnx",
+    "model": "Courtyard-v8.4.onnx",
     "post_delay": 2000,
     "recognition": "NeuralNetworkDetect",
     "threshold": 0.7
@@ -507,7 +507,7 @@
     "action": "Click",
     "expected": 3,
     "labels": ["召唤", "宠物小屋", "悬赏封印", "探索", "町中", "神龛"],
-    "model": "Courtyard-v6.0.onnx",
+    "model": "Courtyard-v8.4.onnx",
     "post_delay": 5000,
     "recognition": "NeuralNetworkDetect",
     "threshold": 0.7
