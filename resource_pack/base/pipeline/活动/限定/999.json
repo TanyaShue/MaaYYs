@@ -99,7 +99,7 @@
     "recognition": "DirectHit"
   },
   "999-手动战斗-识别是否返回爬塔界面": {
-    "expected": "虚无精锐",
+    "expected": "虚无精锐|虚无精銳",
     "recognition": "OCR",
     "roi": [
       65,
