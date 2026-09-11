@@ -1,0 +1,56 @@
+{
+  "自动斗技-段位达标-返回庭院": {
+    "expected": "名仕|名士",
+    "focus": {
+      "Node.Recognition.Succeeded": "段位达标!!!"
+    },
+    "next": ["导航-庭院"],
+    "recognition": "OCR",
+    "roi": [524, 409, 264, 106]
+  },
+  "自动斗技-滑到屏幕最左侧": {
+    "action": "Swipe",
+    "begin": [226, 294, 124, 190],
+    "end": [1045, 326, 100, 169],
+    "max_hit": 4,
+    "post_delay": 2000,
+    "recognition": "DirectHit"
+  },
+  "自动斗技-点击斗技": {
+    "action": "Click",
+    "expected": "斗技",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [235, 131, 837, 473],
+    "target_offset": [166, -3, -9, 15]
+  },
+  "自动斗技-点击日常": {
+    "action": "Click",
+    "expected": "日常",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [1075, 132, 81, 459]
+  },
+  "自动斗技-点击神龛": {
+    "action": "Click",
+    "expected": 5,
+    "labels": ["召唤", "宠物小屋", "悬赏封印", "探索", "町中", "神龛"],
+    "model": "Courtyard-v8.4.onnx",
+    "post_delay": 2000,
+    "recognition": "NeuralNetworkDetect"
+  },
+  "自动斗技-确保位于日常": {
+    "expected": "日常",
+    "next": ["自动斗技-确保位于斗技界面", "[JumpBack]自动斗技-点击斗技"],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [529, 53, 223, 64]
+  },
+  "自动斗技-确保位于神龛": {
+    "expected": "活动|日常|通知",
+    "next": ["自动斗技-确保位于日常", "[JumpBack]自动斗技-点击日常"],
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [522, 48, 219, 68]
+  }
+}
