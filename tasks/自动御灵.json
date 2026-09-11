@@ -186,6 +186,7 @@
             "pipeline_override": {
                 "御灵_点击屏幕继续": {
                     "custom_action_param": {
+                        "ROI_1":[409, 642, 424, 78],
                         "double_click_weight": "{double_w}",
                         "single_click_weight": "{single_w}",
                         "short_wait_weight": "{short_w}",
