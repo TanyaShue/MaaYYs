@@ -154,7 +154,6 @@
         "template": ["斗技/斗技段位赛通知.png"]
     },
     "自动斗技-已处于斗技段位界面": {
-        "enabled": false,
         "next": ["[JumpBack]自动斗技-低段位点击准备", "[JumpBack]自动斗技-定级赛通知处理", "[JumpBack]自动斗技-点击匹配-模板匹配", "[JumpBack]自动斗技-点击自动上阵", "[JumpBack]自动斗技-点击匹配", "自动斗技-等待战斗结束", "自动斗技-识别战斗结束", "[JumpBack]通用-误触了左边聊天框", "[JumpBack]自动斗技-匹配中", "[JumpBack]空任务"],
         "recognition": "TemplateMatch",
         "roi": [115, 0, 144, 97],
