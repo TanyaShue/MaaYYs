@@ -1,8 +1,8 @@
 {
   "task": [
     {
-      "name": "自动斗技",
-      "label": "自动斗技",
+      "name": "斗技",
+      "label": "斗技",
       "entry": "自动斗技-开始时间检查",
       "group": ["standalone"],
       "option": [

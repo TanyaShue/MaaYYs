@@ -1,8 +1,8 @@
 {
     "task": [
         {
-            "name": "自动御灵",
-            "label": "自动御灵",
+            "name": "御灵",
+            "label": "御灵",
             "entry": "自动御灵1",
             "group": ["standalone"],
             "option": [

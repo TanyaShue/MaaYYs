@@ -1,8 +1,8 @@
 {
     "task": [
         {
-            "name": "自动悬赏",
-            "label": "自动悬赏",
+            "name": "悬赏",
+            "label": "悬赏",
             "entry": "自动悬赏封印",
             "group": ["standalone"],
             "option": [

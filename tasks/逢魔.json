@@ -1,8 +1,8 @@
 {
     "task": [
         {
-            "name": "自动逢魔",
-            "label": "自动逢魔",
+            "name": "逢魔",
+            "label": "逢魔",
             "entry": "开始逢魔-检查时间",
             "group": ["standalone"],
             "option": [

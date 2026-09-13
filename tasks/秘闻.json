@@ -1,8 +1,8 @@
 {
     "task": [
         {
-            "name": "自动每周秘闻",
-            "label": "自动每周秘闻",
+            "name": "秘闻",
+            "label": "秘闻",
             "description": "自动挑战每周轮换秘闻",
             "entry": "自动秘闻",
             "group": ["standalone"],

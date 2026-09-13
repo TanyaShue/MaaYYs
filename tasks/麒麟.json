@@ -1,20 +1,20 @@
 {
     "task": [
         {
-            "name": "自动道馆突破",
-            "label": "自动道馆突破",
-            "entry": "自动道馆",
+            "name": "麒麟",
+            "label": "麒麟",
+            "entry": "麒麟-开始时间检查",
             "group": ["standalone"],
             "option": [
-                "道馆阵容预设"
+                "麒麟阵容预设"
             ]
         }
     ],
     "option": {
-        "道馆阵容预设": {
+        "麒麟阵容预设": {
             "type": "input",
-            "label": "道馆阵容预设",
-            "description": "填写道馆需要使用的分组和队伍预设名称",
+            "label": "麒麟阵容预设",
+            "description": "填写狩猎站攻打麒麟时需要使用的分组和队伍名称",
             "inputs": [
                 {
                     "name": "group_name",
@@ -32,7 +32,7 @@
                 }
             ],
             "pipeline_override": {
-                "自动道馆10": {
+                "麒麟6": {
                     "custom_action_param": {
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"

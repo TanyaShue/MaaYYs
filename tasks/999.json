@@ -1,8 +1,8 @@
 {
     "task": [
         {
-            "name": "自动999",
-            "label": "自动999",
+            "name": "999",
+            "label": "999",
             "entry": "999-开始",
             "group": ["promotion"],
             "option": [

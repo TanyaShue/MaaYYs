@@ -1,8 +1,8 @@
 {
     "task": [
         {
-            "name": "自动御魂",
-            "label": "自动御魂",
+            "name": "御魂",
+            "label": "御魂",
             "entry": "自动御魂",
             "group": ["standalone"],
             "option": [

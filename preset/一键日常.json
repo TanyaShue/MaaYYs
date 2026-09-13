@@ -16,7 +16,7 @@
           "enabled": true
         },
         {
-          "name": "自动地鬼",
+          "name": "地鬼",
           "enabled": true,
           "option": {
             "地鬼_是否挑战悬赏": "Yes",
@@ -29,7 +29,7 @@
           }
         },
         {
-          "name": "自动御魂",
+          "name": "御魂",
           "enabled": true,
           "option": {
             "御魂挑战目标": "八岐大蛇",
@@ -75,7 +75,7 @@
           }
         },
         {
-          "name": "自动麒麟",
+          "name": "麒麟",
           "enabled": true,
           "option": {
             "麒麟阵容预设": {
@@ -89,7 +89,7 @@
           "enabled": true
         },
         {
-          "name": "自动道馆突破",
+          "name": "道馆突破",
           "enabled": true,
           "option": {
             "道馆阵容预设": {
@@ -110,7 +110,7 @@
           }
         },
         {
-          "name": "自动秘闻",
+          "name": "秘闻",
           "enabled": true,
           "option": {
             "秘闻阵容预设": {
@@ -121,7 +121,7 @@
           }
         },
         {
-          "name": "自动阴界之门",
+          "name": "阴界之门",
           "enabled": true,
           "option": {
             "阴界之门-是否切换御魂阵容": "Yes",
@@ -132,7 +132,7 @@
           }
         },
         {
-          "name": "自动悬赏",
+          "name": "悬赏",
           "enabled": true,
           "option": {
             "悬赏目标": "挑战优先",
@@ -162,7 +162,7 @@
           }
         },
         {
-          "name": "自动寮突破",
+          "name": "寮突破",
           "enabled": true,
           "option": {
             "寮突-是否切换御魂阵容": "Yes",
@@ -173,7 +173,7 @@
           }
         },
         {
-          "name": "自动逢魔",
+          "name": "逢魔",
           "enabled": true,
           "option": {
             "逢魔-切换御魂阵容": "Yes",
@@ -208,7 +208,7 @@
           }
         },
         {
-          "name": "自动购物",
+          "name": "购物",
           "enabled": true,
           "option": {
             "特殊商店购买": "Yes",
