@@ -5,7 +5,7 @@
             "label": "一键周常",
             "task": [
                 {
-                    "name": "购物",
+                    "name": "自动购物",
                     "enabled": true,
                     "option": {
                         "特殊商店购买":"Yes",
@@ -22,7 +22,7 @@
                 },
                 {
                     "enabled": true,
-                    "name": "秘闻"
+                    "name": "自动秘闻"
                 },
                 {
                     "enabled": true,

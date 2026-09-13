@@ -35,7 +35,7 @@
         },
         {
           "id": "xak9rz5",
-          "taskName": "地鬼",
+          "taskName": "自动地鬼",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -64,7 +64,7 @@
         },
         {
           "id": "1fggz3y",
-          "taskName": "御魂",
+          "taskName": "自动御魂",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -167,7 +167,7 @@
         },
         {
           "id": "pjy9ri2",
-          "taskName": "麒麟",
+          "taskName": "自动麒麟",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -193,7 +193,7 @@
         },
         {
           "id": "7lqy4vj",
-          "taskName": "道馆突破",
+          "taskName": "自动道馆突破",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -231,7 +231,7 @@
         },
         {
           "id": "jumdx44",
-          "taskName": "秘闻",
+          "taskName": "自动秘闻",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -259,7 +259,7 @@
         },
         {
           "id": "j71cx0m",
-          "taskName": "阴界之门",
+          "taskName": "自动阴界之门",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -280,7 +280,7 @@
         },
         {
           "id": "f805kcu",
-          "taskName": "悬赏",
+          "taskName": "自动悬赏",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -345,7 +345,7 @@
         },
         {
           "id": "5nzat2f",
-          "taskName": "寮突破",
+          "taskName": "自动寮突破",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -366,7 +366,7 @@
         },
         {
           "id": "sw1g00z",
-          "taskName": "逢魔",
+          "taskName": "自动逢魔",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -455,7 +455,7 @@
         },
         {
           "id": "uw70elw",
-          "taskName": "购物",
+          "taskName": "自动购物",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -729,7 +729,7 @@
         },
         {
           "id": "nypr68m",
-          "taskName": "道馆突破",
+          "taskName": "自动道馆突破",
           "enabled": false,
           "enabledByController": {
             "Android": false
@@ -836,7 +836,7 @@
         },
         {
           "id": "6r1vaxm",
-          "taskName": "斗技",
+          "taskName": "自动斗技",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -921,7 +921,7 @@
         },
         {
           "id": "rp3mado",
-          "taskName": "御灵",
+          "taskName": "自动御灵",
           "enabled": false,
           "enabledByController": {
             "Android": false
@@ -979,7 +979,7 @@
         },
         {
           "id": "ecn5p1o",
-          "taskName": "逢魔",
+          "taskName": "自动逢魔",
           "enabled": false,
           "enabledByController": {
             "Android": false
@@ -1223,7 +1223,7 @@
         },
         {
           "id": "hr03xjq",
-          "taskName": "购物",
+          "taskName": "自动购物",
           "enabled": true,
           "enabledByController": {
             "Android": true
@@ -1476,7 +1476,7 @@
       "tasks": [
         {
           "id": "vr8fwr0",
-          "taskName": "购物",
+          "taskName": "自动购物",
           "enabled": true,
           "optionValues": {
             "特殊商店购买": {
@@ -1635,26 +1635,26 @@
     "花车里程领取",
     "式神委派",
     "寮三十捐材料",
-    "地鬼",
-    "御魂",
+    "自动地鬼",
+    "自动御魂",
     "真蛇",
-    "麒麟",
+    "自动麒麟",
     "困28",
     "英杰试炼",
     "结界突破",
-    "逢魔",
+    "自动逢魔",
     "日常奖励领取",
     "组队副本",
-    "秘闻",
+    "自动秘闻",
     "结界奖励领取",
     "投喂宠物",
-    "御灵",
-    "道馆突破",
-    "寮突破",
-    "阴界之门",
-    "悬赏",
-    "斗技",
-    "购物",
+    "自动御灵",
+    "自动道馆突破",
+    "自动寮突破",
+    "自动阴界之门",
+    "自动悬赏",
+    "自动斗技",
+    "自动购物",
     "寮商店购物",
     "珍旅居商店购物",
     "肝绘卷",

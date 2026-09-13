@@ -1,7 +1,7 @@
 {
     "task": [
         {
-            "name": "御魂",
+            "name": "自动御魂",
             "label": "御魂",
             "entry": "自动御魂",
             "group": ["standalone"],

@@ -1,7 +1,7 @@
 {
     "task": [
         {
-            "name": "业原火",
+            "name": "自动业原火",
             "label": "业原火",
             "entry": "业原火-开始业原火",
             "group": ["standalone"],
