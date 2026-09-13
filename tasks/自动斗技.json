@@ -7,8 +7,8 @@
       "group": ["standalone"],
       "option": [
         "自动斗技-达到名仕停止",
+        "自动斗技-自定义挑战次数",
         "自动斗技-御魂预设应用方式",
-        "自动斗技预设",
         "自动斗技-战斗结算界面皮肤"
       ]
     }
@@ -40,6 +40,51 @@
             }
         ]
     },
+    "自动斗技-自定义挑战次数": {
+        "type": "switch",
+        "label": "自定义挑战次数",
+        "description": "自动斗技-自定义挑战次数",
+        "default_case": "Yes",
+        "cases": [
+            {
+                "name": "Yes",
+                "label": "是",
+                "option": ["自动斗技-设置指定挑战次数"]
+            },
+            {
+                "name": "No",
+                "label": "否",
+                "pipeline_override": {
+                    "斗技-判断战斗次数是否达标": {
+                        "enable":false
+                    }
+                }
+            }
+        ]
+    },
+    "自动斗技-设置指定挑战次数": {
+        "type": "input",
+        "label": "设置指定挑战次数",
+        "description": "设置自动斗技执行的次数",
+        "inputs": [
+            {
+                "name": "挑战次数",
+                "label": "挑战次数",
+                "description": "填设置自动斗技执行的次数",
+                "default": "325",
+                "pipeline_type": "int"
+            }
+        ],
+        "pipeline_override": {
+            "斗技-判断战斗次数是否达标": {
+              "enable":true,
+              "custom_recognition": "TaskCounterRecognition",
+              "custom_recognition_param": {
+                "target_count": "{挑战次数}"
+              }
+            }
+        }
+    },
     "自动斗技-御魂预设应用方式": {
       "type": "select",
       "label": "御魂预设应用方式",
@@ -56,7 +101,8 @@
             "斗技-应用预设-启动层": {
               "enabled": false
             }
-          }
+          },
+          "option": ["自动斗技预设"]
         },
         {
           "name": "斗技-在斗技界面应用斗技御魂切换",

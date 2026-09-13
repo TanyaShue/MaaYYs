@@ -12,7 +12,11 @@
     "斗技-判断战斗次数是否达标": {
         "custom_recognition": "TaskCounterRecognition",
         "custom_recognition_param": {
-            "target_count": 5
+            "target_count": 20
+        },
+        "enabled": false,
+        "focus": {
+            "Node.Recognition.Failed": "战斗,我还需要战斗!!!"
         },
         "inverse": true,
         "next": ["导航-庭院"],
@@ -150,7 +154,8 @@
         "template": ["斗技/斗技段位赛通知.png"]
     },
     "自动斗技-已处于斗技段位界面": {
-        "next": ["[JumpBack]自动斗技-低段位点击准备", "[JumpBack]自动斗技-定级赛通知处理", "[JumpBack]自动斗技-点击匹配-模板匹配", "[JumpBack]自动斗技-点击自动上阵", "[JumpBack]自动斗技-点击匹配", "[JumpBack]自动斗技-等待战斗结束", "[JumpBack]自动斗技-识别战斗结束", "[JumpBack]通用-误触了左边聊天框", "[JumpBack]自动斗技-匹配中", "[JumpBack]空任务"],
+        "enabled": false,
+        "next": ["[JumpBack]自动斗技-低段位点击准备", "[JumpBack]自动斗技-定级赛通知处理", "[JumpBack]自动斗技-点击匹配-模板匹配", "[JumpBack]自动斗技-点击自动上阵", "[JumpBack]自动斗技-点击匹配", "自动斗技-等待战斗结束", "自动斗技-识别战斗结束", "[JumpBack]通用-误触了左边聊天框", "[JumpBack]自动斗技-匹配中", "[JumpBack]空任务"],
         "recognition": "TemplateMatch",
         "roi": [115, 0, 144, 97],
         "template": ["斗技/正处于斗技界面.png"],
@@ -200,6 +205,7 @@
         "template": ["斗技/晋升.png"]
     },
     "自动斗技-段位达标-返回庭院": {
+        "enabled": false,
         "expected": "名仕|名士",
         "focus": {
             "Node.Recognition.Succeeded": "段位达标!!!"
