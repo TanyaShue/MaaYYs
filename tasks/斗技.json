@@ -59,7 +59,7 @@
         {
           "name": "斗技段位目标_名仕",
           "label": "名仕",
-          "description": "恭喜你啊(咬牙切齿)",
+          "description": "你好,阵容码发一下",
           "pipeline_override": {
             "自动斗技-段位达标-返回庭院": {
               "expected": "名仕|名士"
