@@ -16,7 +16,7 @@
         },
         "enabled": false,
         "focus": {
-            "Node.Recognition.Failed": "战斗,我还需要战斗!!!"
+            "Node.Recognition.Failed": "次数不达标,接着战斗!"
         },
         "inverse": true,
         "next": ["导航-庭院"],
