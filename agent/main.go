@@ -31,7 +31,7 @@ func main() {
 		Msg("Starting agent server")
 
 	// 初始化MAA框架
-	libDir := filepath.Join(getCwd(), "maafw")
+	libDir := maafwLibDir()
 	log.Info().
 		Str("libDir", libDir).
 		Msg("Initializing MAA framework")
@@ -103,6 +103,18 @@ func getCwd() string {
 		return "."
 	}
 	return cwd
+}
+
+// maafwLibDir 决定去哪里加载 MaaFramework 动态库。
+//
+// 桌面端发行包的布局是 <cwd>/maafw/*，保持默认即可。
+// Android 上库位于 APK 的 nativeLibraryDir，cwd 不由我们掌控，所以用
+// MAAFW_LIB_DIR 覆盖；显式设为空字符串时只传库名，交给 LD_LIBRARY_PATH 解析。
+func maafwLibDir() string {
+	if override, ok := os.LookupEnv("MAAFW_LIB_DIR"); ok {
+		return strings.TrimSpace(override)
+	}
+	return filepath.Join(getCwd(), "maafw")
 }
 
 func agentIdentifier(args []string) (string, error) {

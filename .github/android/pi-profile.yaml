@@ -1,0 +1,52 @@
+# MaaFwApp 的 Project Interface 打包配方。
+# 所有相对路径均以本文件所在目录（.github/android）为基准。
+#
+# assets 指向 CI 中组装好的扁平 PI 目录（interface.json 与 resource_pack/ 同级）。
+# MaaYYs 仓库里 interface.json 在根目录、资源在 resource_pack/，所以先 staging 再打包。
+assets: ../../build-android/pi-assets
+
+# 注意：写了 include 就会整体替换 MaaFwApp 的默认白名单，需要的东西必须全部列出，
+# 漏了不会报错——运行时会静默少资源/不显示图标。
+include:
+  - interface.json
+  - tasks/**
+  - preset/**
+  - resource_pack/**
+  - assets/**
+  - LICENSE
+
+exclude:
+  # 开发用的资源包，interface.json 的 resource 列表里没有它，装了也选不到（省 ~32MB）
+  - resource_pack/test/**
+  - "**/__pycache__/**"
+  - "**/*.pyc"
+
+# MaaYYs 的 agent 是 Go 编译产物（单文件静态 ELF），走 nativeLibs：
+# 随 APK 装进 nativeLibraryDir，零解包、可直接执行。
+# 文件名必须是 lib*.so，否则 Android 装机时不会把它解压出来。
+agent:
+  sourceDir: ../../build-android/agent-dist
+  abi:
+    - arm64-v8a
+    - x86_64
+  runtimes:
+    # 只保留一条 runtime：PI 的 agent[] 里只有 1 个条目，数量必须对得上。
+    # 不要写 args —— MaaFwApp 的最终 argv 是 executable + args + <identifier>，
+    # 而 agent 从 os.Args[1] 读 identifier，加了 args 就会读到别的东西。
+    - location: nativeLibs
+      executable: libmaayys_agent.so
+      env:
+        # agent 默认在 <cwd>/maafw 下找 MaaFramework 动态库；设备上没有这个目录，
+        # 所以显式指到 nativeLibraryDir（库里四个 .so 都在这里）。
+        MAAFW_LIB_DIR: "{nativeLibs}"
+        # 供 libMaaFramework.so 解析它自己的依赖（libMaaUtils.so 等）
+        LD_LIBRARY_PATH: "{nativeLibs}"
+
+app:
+  # 最终 applicationId = BASE_APPLICATION_ID(com.maafw.ts) + "." + app.id
+  # => com.maafw.ts.kusa
+  # 必须匹配 [a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)*：全小写，不能有大写或连字符。
+  id: kusa
+  label: MaaYYs
+  # 只能是 png / webp
+  icon: ../../assets/logo/logo.png
