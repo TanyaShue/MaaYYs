@@ -14,76 +14,104 @@
     }
   ],
   "option": {
-    "自动斗技-达到名仕停止": {
-        "type": "switch",
-        "label": "达到名仕停止",
-        "description": "自动斗技-达到名仕停止",
-        "default_case": "Yes",
-        "cases": [
-            {
-                "name": "Yes",
-                "label": "是",
-                "pipeline_override": {
-                    "自动斗技-段位达标-返回庭院": {
-                        "enable":true
-                    }
-                }
-            },
-            {
-                "name": "No",
-                "label": "否",
-                "pipeline_override": {
-                    "自动斗技-段位达标-返回庭院": {
-                        "enable":false
-                    }
-                }
+    "自动斗技-达到指定段位停止": {
+      "type": "switch",
+      "label": "达到指定段位停止",
+      "description": "应该不会有除了八段和名仕以外的段位目标吧",
+      "default_case": "Yes",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "pipeline_override": {
+            "自动斗技-段位达标-返回庭院": {
+              "enable": true
             }
-        ]
+          },
+          "option": ["斗技段位目标"]
+        },
+        {
+          "name": "No",
+          "label": "否",
+          "pipeline_override": {
+            "自动斗技-段位达标-返回庭院": {
+              "enable": false
+            }
+          }
+        }
+      ]
+    },
+    "斗技段位目标": {
+      "label": "段位目标",
+      "type": "select",
+      "default_case": "斗技段位目标_名仕",
+      "cases": [
+        {
+          "name": "斗技段位目标_八段",
+          "label": "八段",
+          "description": "可以一直投降了",
+          "pipeline_override": {
+            "自动斗技-段位达标-返回庭院": {
+              "expected": "八段"
+            }
+          }
+        },
+        {
+          "name": "斗技段位目标_名仕",
+          "label": "名仕",
+          "description": "恭喜你啊(咬牙切齿)",
+          "pipeline_override": {
+            "自动斗技-段位达标-返回庭院": {
+              "expected": "名仕|名士"
+            }
+          }
+        }
+      ]
     },
     "自动斗技-自定义挑战次数": {
-        "type": "switch",
-        "label": "自定义挑战次数",
-        "description": "自动斗技-自定义挑战次数",
-        "default_case": "Yes",
-        "cases": [
-            {
-                "name": "Yes",
-                "label": "是",
-                "option": ["自动斗技-设置指定挑战次数"]
-            },
-            {
-                "name": "No",
-                "label": "否",
-                "pipeline_override": {
-                    "斗技-判断战斗次数是否达标": {
-                        "enable":false
-                    }
-                }
+      "type": "switch",
+      "label": "自定义挑战次数",
+      "description": "自动斗技-自定义挑战次数",
+      "default_case": "Yes",
+      "cases": [
+        {
+          "name": "Yes",
+          "label": "是",
+          "option": ["自动斗技-设置指定挑战次数"]
+        },
+        {
+          "name": "No",
+          "label": "否",
+          "pipeline_override": {
+            "斗技-判断战斗次数是否达标": {
+              "enable": false
             }
-        ]
+          }
+        }
+      ]
     },
     "自动斗技-设置指定挑战次数": {
-        "type": "input",
-        "label": "设置指定挑战次数",
-        "description": "设置自动斗技执行的次数",
-        "inputs": [
-            {
-                "name": "挑战次数",
-                "label": "挑战次数",
-                "description": "填设置自动斗技执行的次数",
-                "default": "325",
-                "pipeline_type": "int"
-            }
-        ],
-        "pipeline_override": {
-            "斗技-判断战斗次数是否达标": {
-              "enable":true,
-              "custom_recognition": "TaskCounterRecognition",
-              "custom_recognition_param": {
-                "target_count": "{挑战次数}"
-              }
-            }
+      "type": "input",
+      "label": "设置指定挑战次数",
+      "description": "设置自动斗技执行的次数",
+      "inputs": [
+        {
+          "name": "挑战次数",
+          "label": "挑战次数",
+          "description": "填设置自动斗技执行的次数",
+          "default": "325",
+          "pipeline_type": "int"
         }
+      ],
+      "pipeline_override": {
+        "斗技-判断战斗次数是否达标": {
+          "enable": true,
+          "custom_recognition": "TaskCounterRecognition",
+          "custom_recognition_param": {
+            "target_count": "{挑战次数}"
+          }
+        }
+      }
     },
     "自动斗技-御魂预设应用方式": {
       "type": "select",
