@@ -57,6 +57,16 @@
           }
         },
         {
+          "name": "斗技段位目标_九段",
+          "label": "九段",
+          "description": "想自己手打上名仕,对吧",
+          "pipeline_override": {
+            "自动斗技-段位达标-返回庭院": {
+              "expected": "九段"
+            }
+          }
+        },
+        {
           "name": "斗技段位目标_名仕",
           "label": "名仕",
           "description": "你好,阵容码发一下",
