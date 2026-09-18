@@ -136,6 +136,9 @@ CI 在编译后立刻用 `readelf` 自检：出现 `libc.so.6` / `libdl.so.2` �
 | `本包未带 agent 运行时` | PI 声明了 `agent`，但配方里没有对应 `runtimes` |
 | `agent 可执行体不可执行` | agent 没按 `lib*.so` 命名，或没走 `nativeLibs` |
 | `agent 运行时数量不足` | `runtimes` 条数与 PI 的 `agent[]` 数量不一致 |
+| `找不到可用的 NDK clang`（但 `ls` 里明明有） | NDK wrapper 的文件名是 **`<triple><api>-clang`，`android` 与 API 号之间没有连字符**：`aarch64-linux-android23-clang`。拼成 `...android-23-clang` 就永远找不到 |
+| `agent 依赖 glibc soname` | CGO/CC 没真正指向 NDK（编成了 glibc 目标），Android 上装载必失败 |
+| `agent 的 interpreter 不是 Android linker` | 同上，产物不是 Android ELF |
 
 ## 改 workflow 后记得
 

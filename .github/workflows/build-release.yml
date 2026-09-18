@@ -650,14 +650,21 @@ jobs:
           echo "NDK: $ndk"
           echo "toolchain: $ndk_bin"
 
-          # MaaFramework 的 Android 产物是 android-23 编的，尽量对齐；找不到就退到附近的 API
+          # 挑 NDK 的 clang wrapper。注意真实文件名是 <triple><api>-clang，
+          # android 与 API 号之间**没有**连字符：aarch64-linux-android23-clang。
+          # MaaFramework 的 Android 产物是 android-23 编的，优先对齐；没有就退到
+          # 可用的最低 API，免得 NDK 换了 API 集合就整个挂掉。
           pick_cc() {
-            for api in 23 21 24 26; do
-              if [ -x "$ndk_bin/${1}${api}-clang" ]; then
-                echo "$ndk_bin/${1}${api}-clang"
-                return 0
-              fi
-            done
+            preferred=23
+            if [ -x "$ndk_bin/${1}${preferred}-clang" ]; then
+              echo "$ndk_bin/${1}${preferred}-clang"
+              return 0
+            fi
+            found="$(find "$ndk_bin" -maxdepth 1 -name "${1}[0-9]*-clang" -print 2>/dev/null | sort -V | head -n1)"
+            if [ -n "$found" ]; then
+              echo "$found"
+              return 0
+            fi
             return 1
           }
 
@@ -670,6 +677,7 @@ jobs:
               ls "$ndk_bin" | head -50
               exit 1
             }
+            echo "$abi -> GOARCH=$goarch CC=$cc"
 
             # 必须以 lib 开头、.so 结尾，否则 Android 装机时不会解压到 nativeLibraryDir
             # （module 根是 agent/，所以构建必须在 agent/ 里跑；$so 用绝对路径）
@@ -710,8 +718,8 @@ jobs:
 
             ls -lh "$so"
           done <<'ABI_MAP'
-          arm64-v8a:arm64:aarch64-linux-android-
-          x86_64:amd64:x86_64-linux-android-
+          arm64-v8a:arm64:aarch64-linux-android
+          x86_64:amd64:x86_64-linux-android
           ABI_MAP
 
           test -f "$agent_dist/arm64-v8a/jniLibs/libmaayys_agent.so"
