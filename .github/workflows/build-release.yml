@@ -9,6 +9,8 @@ on:
     paths:
       - ".github/workflows/build-release.yml"
       - ".github/cliff.toml"
+      - ".github/android/**"
+      - "tools/ci/**"
       - "agent/**"
       - "assets/**"
       - "preset/**"
@@ -22,6 +24,8 @@ on:
     paths:
       - ".github/workflows/build-release.yml"
       - ".github/cliff.toml"
+      - ".github/android/**"
+      - "tools/ci/**"
       - "agent/**"
       - "assets/**"
       - "preset/**"
@@ -496,6 +500,325 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  android:
+    name: Build Android APK
+    needs: [meta, update-version]
+    if: ${{ always() && !cancelled() && (needs.update-version.result == 'success' || needs.update-version.result == 'skipped') }}
+    runs-on: ubuntu-latest
+    outputs:
+      variant: ${{ steps.signing.outputs.variant }}
+    env:
+      MAAFWAPP_REF: f20ff4ba0b53e83132da1015c7635ef16e8b5736
+      # 与桌面端的 MAAFW_VERSION 相互独立：MaaFwApp 这一版只验证过 5.12.3
+      # （MaaFwVersion.MIN_CONTACT_FILL=5.12.3，其 Python agent core 也是 maafw5.12.3）
+      MAAFRAMEWORK_TAG: v5.12.3
+      PI_PROFILE: ${{ github.workspace }}/.github/android/pi-profile.yaml
+      ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.update-version.outputs.commit_sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Checkout MaaFwApp
+        uses: actions/checkout@v4
+        with:
+          repository: Aliothmoon/MaaFwApp
+          ref: ${{ env.MAAFWAPP_REF }}
+          path: build-android/MaaFwApp
+          fetch-depth: 1
+
+      - name: Use MaaYYs version for the APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          # MaaFwApp 从当前 Git 仓库生成 versionCode/versionName。移除嵌套 checkout 的
+          # Git 元数据后，它会向上使用 MaaYYs 的提交数与标签。
+          rm -rf build-android/MaaFwApp/.git
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Configure Android package name
+        shell: bash
+        run: python .github/android/patch_maafwapp.py build-android/MaaFwApp
+
+      - name: Stage Project Interface assets
+        shell: bash
+        env:
+          TAG: ${{ needs.meta.outputs.tag }}
+        run: |
+          set -euo pipefail
+          pi_root="$GITHUB_WORKSPACE/build-android/pi-assets"
+          rm -rf "$pi_root"
+          mkdir -p "$pi_root"
+          cp "$GITHUB_WORKSPACE/interface.json" "$pi_root/interface.json"
+          for item in resource_pack preset tasks assets; do
+            cp -a "$GITHUB_WORKSPACE/$item" "$pi_root/$item"
+          done
+          cp "$GITHUB_WORKSPACE/LICENSE" "$pi_root/LICENSE"
+
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          pi_root = Path(os.environ["GITHUB_WORKSPACE"]) / "build-android" / "pi-assets"
+          path = pi_root / "interface.json"
+          data = json.loads(path.read_text(encoding="utf-8"))
+
+          tag = os.environ["TAG"]
+          data["version"] = tag
+          # APK 传到 MirrorChyan 的 4f6403c3-72e6-4327-b37a-23cbf0dc30f9；而 app 的更新检查读的是
+          # PI 里的 rid，不改的话它会去查桌面那个 MaaYYs，拿不到 android 资源（只影响 Android 包）
+          data["mirrorchyan_rid"] = "4f6403c3-72e6-4327-b37a-23cbf0dc30f9"
+          # PI 的 agent[].child_exec 在设备上不参与拼命令行（MaaFwApp 只用它数 agent
+          # 个数、拼错误信息），这里改成 APK 里真正的可执行体，让报错可读
+          agent = data.get("agent")
+          if isinstance(agent, dict) and "child_exec" in agent:
+              agent["child_exec"] = "libmaayys_agent.so"
+
+          path.write_text(
+              json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(f"staged interface.json: version={tag}, rid={data.get('mirrorchyan_rid')}")
+          PY
+
+      - name: Generate resource hashes
+        shell: bash
+        run: |
+          # 可选字段：装不上 maafw / 算不出来都不该让发版链路挂掉
+          # （Docker 那条路径就是这么被一个可选字段带崩的）
+          set -uo pipefail
+          pi_root="$GITHUB_WORKSPACE/build-android/pi-assets"
+          if python3 -m pip install --quiet json-with-comments maafw \
+             && python3 tools/ci/gen_resource_hash.py "$pi_root/interface.json" --root "$pi_root"; then
+            echo "::notice::resource.hash 已写入 Android 包的 interface.json"
+          else
+            echo "::warning::跳过 resource.hash 生成；本 APK 不带 hash 校验（不中断构建）"
+          fi
+
+      - name: Build Go agent for Android
+        shell: bash
+        env:
+          TAG: ${{ needs.meta.outputs.tag }}
+        run: |
+          set -euo pipefail
+          agent_dist="$GITHUB_WORKSPACE/build-android/agent-dist"
+          rm -rf "$agent_dist"
+
+          # maa-framework-go 用 purego 加载动态库。Android 上：
+          #  - purego 的 Dlopen 在 Android 是 cgo 实现，且 dlfcn_nocgo_linux.go 会用
+          #    //go:cgo_import_dynamic 依赖 glibc 的 libdl.so.2 —— 所以 CGO_ENABLED=0
+          #    编出来的不是静态 ELF，在 Android 上根本装载不了；必须 CGO_ENABLED=1 + NDK。
+          #  - runtime.GOOS 在 GOOS=android 下是 "android"，会落进
+          #    maa-framework-go 四个 getMaaXxxLibrary() 的 default: panic。
+          #    Android 的库名与 Linux 相同（libXxx.so），所以先 vendor 再补 android 分支。
+          (
+            cd agent
+            go mod vendor
+            cd ..
+            python3 .github/android/patch_maafwgo_android.py agent
+          )
+
+          ndk="${ANDROID_NDK_LATEST_HOME:-${ANDROID_NDK_ROOT:-}}"
+          if [ -z "$ndk" ] || [ ! -d "$ndk" ]; then
+            ndk="$(find "${ANDROID_HOME:-/usr/local/lib/android/sdk}/ndk" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | sort -V | tail -n1)"
+          fi
+          if [ -z "$ndk" ] || [ ! -d "$ndk" ]; then
+            echo "::error::找不到 Android NDK（ANDROID_NDK_LATEST_HOME / ANDROID_NDK_ROOT / \$ANDROID_HOME/ndk 都没有）"
+            exit 1
+          fi
+          ndk_bin="$(find "$ndk/toolchains/llvm/prebuilt" -maxdepth 2 -type d -name bin -print -quit)"
+          if [ -z "$ndk_bin" ]; then
+            echo "::error::NDK 里找不到 llvm toolchain：$ndk"
+            exit 1
+          fi
+          echo "NDK: $ndk"
+          echo "toolchain: $ndk_bin"
+
+          # MaaFramework 的 Android 产物是 android-23 编的，尽量对齐；找不到就退到附近的 API
+          pick_cc() {
+            for api in 23 21 24 26; do
+              if [ -x "$ndk_bin/${1}${api}-clang" ]; then
+                echo "$ndk_bin/${1}${api}-clang"
+                return 0
+              fi
+            done
+            return 1
+          }
+
+          while IFS=: read -r abi goarch triple; do
+            out="$agent_dist/$abi/jniLibs"
+            mkdir -p "$out"
+            so="$out/libmaayys_agent.so"
+            cc="$(pick_cc "$triple")" || {
+              echo "::error::$abi 找不到可用的 NDK clang（triple=$triple）"
+              ls "$ndk_bin" | head -50
+              exit 1
+            }
+
+            # 必须以 lib 开头、.so 结尾，否则 Android 装机时不会解压到 nativeLibraryDir
+            # （module 根是 agent/，所以构建必须在 agent/ 里跑；$so 用绝对路径）
+            (
+              cd agent
+              CGO_ENABLED=1 GOOS=android GOARCH="$goarch" CC="$cc" \
+                go build -trimpath -buildvcs=false \
+                -ldflags "-s -w -X main.Version=$TAG" \
+                -o "$so" .
+            )
+
+            magic="$(head -c4 "$so" | od -An -tx1 | tr -d ' \n')"
+            if [ "$magic" != "7f454c46" ]; then
+              echo "::error::$abi agent 不是 ELF（magic=$magic）"
+              exit 1
+            fi
+
+            # 把「装机后装载失败」提前到构建期：
+            # 出现 glibc soname 说明编成了 glibc 目标（Android 上必然起不来），
+            # interpreter 不是 Android linker 同理。
+            echo "--- $abi readelf ---"
+            readelf -d "$so" | grep -E 'NEEDED|SONAME|RUNPATH|RPATH' || true
+            interp="$(readelf -l "$so" | sed -n 's/.*interpreter: \(.*\)\]/\1/p')"
+            echo "interpreter: ${interp:-<none>}"
+
+            if readelf -d "$so" | grep -Eq 'NEEDED.*(libc\.so\.6|libdl\.so\.2|libpthread\.so\.0|libm\.so\.6|librt\.so\.1)'; then
+              echo "::error::$abi agent 依赖 glibc soname，在 Android 上装载会失败（检查 CGO/CC 是否真的指向 NDK）"
+              exit 1
+            fi
+            case "$interp" in
+              */system/bin/linker*) ;;
+              "")
+                echo "::warning::$abi agent 没有 interpreter，请真机确认能否执行" ;;
+              *)
+                echo "::error::$abi agent 的 interpreter 不是 Android linker：$interp"
+                exit 1 ;;
+            esac
+
+            ls -lh "$so"
+          done <<'ABI_MAP'
+          arm64-v8a:arm64:aarch64-linux-android-
+          x86_64:amd64:x86_64-linux-android-
+          ABI_MAP
+
+          test -f "$agent_dist/arm64-v8a/jniLibs/libmaayys_agent.so"
+          test -f "$agent_dist/x86_64/jniLibs/libmaayys_agent.so"
+
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Cache Android runtimes
+        uses: actions/cache@v4
+        with:
+          path: |
+            build-android/MaaFwApp/.maa-cache
+            build-android/MaaFwApp/.maafw
+          key: android-runtime-${{ runner.os }}-${{ env.MAAFRAMEWORK_TAG }}-${{ env.MAAFWAPP_REF }}
+
+      - name: Prepare MaaFramework
+        working-directory: build-android/MaaFwApp
+        shell: bash
+        run: python scripts/setup_maa_framework.py --tag "$MAAFRAMEWORK_TAG"
+
+      - name: Configure Android signing
+        id: signing
+        shell: bash
+        run: |
+          set -euo pipefail
+          values=(
+            "$ANDROID_KEYSTORE_BASE64"
+            "$ANDROID_KEYSTORE_PASSWORD"
+            "$ANDROID_KEY_ALIAS"
+            "$ANDROID_KEY_PASSWORD"
+          )
+          configured=0
+          for value in "${values[@]}"; do
+            [[ -n "$value" ]] && configured=$((configured + 1))
+          done
+
+          if [[ "$configured" -eq 0 ]]; then
+            echo "No release keystore configured; building a debug-signed APK."
+            echo "gradle_task=assembleDebug" >> "$GITHUB_OUTPUT"
+            echo "variant=debug" >> "$GITHUB_OUTPUT"
+            echo "suffix=-debug" >> "$GITHUB_OUTPUT"
+          elif [[ "$configured" -ne 4 ]]; then
+            # 故意直接失败：只配一部分几乎必然是漏配，静默降级成 debug 会让人以为 release 成功了
+            echo "❌ Android 签名 secret 只配了一部分。" >&2
+            echo "ANDROID_KEYSTORE_BASE64 / ANDROID_KEYSTORE_PASSWORD / ANDROID_KEY_ALIAS / ANDROID_KEY_PASSWORD 必须同时配置。" >&2
+            exit 1
+          else
+            keystore="$RUNNER_TEMP/android-release.jks"
+            printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$keystore"
+            test -s "$keystore"
+
+            # 解码后立刻自检：keystore 读不出来时，失败会晚到 :app:packageRelease 才爆，
+            # 那里只抛 KeytoolException + EOFException，分不清是 base64 截断、二次编码
+            # 还是密码/别名不对。secret 的值读不回来，所以只打长度和 sha256——
+            # 和本地 Get-FileHash 对一下就能证明「secret 里的字节 == 本地文件」
+            echo "keystore: $(stat -c%s "$keystore") bytes | base64: ${#ANDROID_KEYSTORE_BASE64} chars | sha256: $(sha256sum "$keystore" | cut -d' ' -f1)"
+            echo "store password: ${#ANDROID_KEYSTORE_PASSWORD} chars | key password: ${#ANDROID_KEY_PASSWORD} chars | same: $([[ "$ANDROID_KEY_PASSWORD" == "$ANDROID_KEYSTORE_PASSWORD" ]] && echo yes || echo no)"
+
+            if ! keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" >/dev/null 2>&1; then
+              echo "❌ 密钥库打不开：ANDROID_KEYSTORE_PASSWORD 与 keystore 不匹配（长度见上一行）" >&2
+              exit 1
+            fi
+
+            aliases="$(keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" 2>/dev/null | awk -F',' '/PrivateKeyEntry/ {print $1}' | tr '\n' ' ')"
+            if ! keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias "$ANDROID_KEY_ALIAS" >/dev/null 2>&1; then
+              echo "❌ 密钥库能打开，但没有 ANDROID_KEY_ALIAS 指定的那个别名；keystore 里实际是：${aliases:-<无>}" >&2
+              exit 1
+            fi
+            echo "keystore aliases: ${aliases:-<无>}"
+
+            echo "KEYSTORE_PATH=$keystore" >> "$GITHUB_ENV"
+            echo "KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD" >> "$GITHUB_ENV"
+            echo "KEY_ALIAS=$ANDROID_KEY_ALIAS" >> "$GITHUB_ENV"
+            echo "KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> "$GITHUB_ENV"
+            echo "gradle_task=assembleRelease" >> "$GITHUB_OUTPUT"
+            echo "variant=release" >> "$GITHUB_OUTPUT"
+            echo "suffix=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build APK
+        working-directory: build-android/MaaFwApp
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x ./gradlew
+          ./gradlew ":app:${{ steps.signing.outputs.gradle_task }}" --stacktrace
+
+          variant="${{ steps.signing.outputs.variant }}"
+          apk="$(find "app/build/outputs/apk/$variant" -maxdepth 1 -type f -name '*.apk' -print -quit)"
+          test -n "$apk"
+          mkdir -p "$GITHUB_WORKSPACE/android-dist"
+          cp "$apk" "$GITHUB_WORKSPACE/android-dist/MaaYYs-android-${{ needs.meta.outputs.tag }}${{ steps.signing.outputs.suffix }}.apk"
+          ls -lh "$GITHUB_WORKSPACE/android-dist"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MaaYYs-android
+          path: android-dist/*.apk
+          if-no-files-found: error
+          retention-days: 7
+
   changelog:
     name: Generate changelog
     needs: meta
@@ -522,8 +845,8 @@ jobs:
 
   release:
     name: Create Release
-    needs: [meta, package_windows, package_linux, package_macos, changelog]
-    if: ${{ needs.meta.outputs.is_release == 'true' && needs.package_windows.result == 'success' && needs.package_linux.result == 'success' && needs.package_macos.result == 'success' }}
+    needs: [meta, package_windows, package_linux, package_macos, android, changelog]
+    if: ${{ needs.meta.outputs.is_release == 'true' && needs.package_windows.result == 'success' && needs.package_linux.result == 'success' && needs.package_macos.result == 'success' && needs.android.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -532,11 +855,42 @@ jobs:
           path: assets
           merge-multiple: true
 
+      - name: Download Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: MaaYYs-android
+          path: assets
+
+      - name: Decide whether the APK is published
+        shell: bash
+        run: |
+          # Android 产物默认只作为 CI artifact 保留，不进 GitHub Release、也不传 MirrorChyan：
+          # agent 的 Android 装载方式（GOOS=android + NDK + vendor 补丁）还没在真机上验证过。
+          # 真机验证通过后，在仓库 Settings → Variables 里加 ANDROID_PUBLISH=true 即放开。
+          #
+          # debug 变体永远不发布：它与 release 同 applicationId、只有签名不同，
+          # 用户先装了 debug 包，之后正式包会因签名冲突装不上，必须卸载重装。
+          variant="${{ needs.android.outputs.variant }}"
+          publish="${{ vars.ANDROID_PUBLISH }}"
+          if [ "$variant" != "release" ]; then
+            echo "::warning::Android 产物是 debug 变体（未配置签名 secret），不随 Release 发布"
+          elif [ "$publish" != "true" ]; then
+            echo "::notice::ANDROID_PUBLISH 未设为 true，APK 只保留为 CI artifact，不随 Release 发布"
+          else
+            echo "Android APK 将随 Release 发布，并上传 MirrorChyan"
+            exit 0
+          fi
+          rm -f assets/*.apk
+
       - name: Verify release artifacts
         shell: bash
         run: |
           set -euo pipefail
-          test "$(find assets -maxdepth 1 -type f | wc -l)" -eq 7
+          expected=7
+          if ls assets/*.apk >/dev/null 2>&1; then
+            expected=8
+          fi
+          test "$(find assets -maxdepth 1 -type f | wc -l)" -eq "$expected"
           ls -lah assets
 
       - uses: softprops/action-gh-release@v2.2.2
@@ -545,6 +899,7 @@ jobs:
             assets/*.zip
             assets/*.tar.gz
             assets/*.dmg
+            assets/*.apk
           tag_name: ${{ needs.meta.outputs.tag }}
           body: ${{ needs.changelog.outputs.release_body }}
           draft: false
@@ -557,3 +912,40 @@ jobs:
           gh workflow run --repo "$GITHUB_REPOSITORY" mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  android_mirrorchyan:
+    name: Upload Android APK to MirrorChyan
+    needs: [meta, android, release]
+    if: ${{ needs.meta.outputs.is_release == 'true' && needs.android.outputs.variant == 'release' && vars.ANDROID_PUBLISH == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: MaaYYs-android
+          path: android-dist
+
+      - name: Locate Android APK
+        id: apk
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="$(find android-dist -type f -name '*.apk' -print -quit)"
+          test -n "$apk"
+          echo "path=$apk" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Android APK
+        uses: MirrorChyan/uploading-action@v1
+        with:
+          filetype: local
+          filename: ${{ steps.apk.outputs.path }}
+          # 后台给的真实 rid。android 与桌面（MaaYYs）/macOS（MaaYYs_exec）分开，
+          # 客户端更新检查读的是包内 interface.json 的 mirrorchyan_rid（已在打包时改成这个值，
+          # 两处必须逐字一致，否则 app 查不到 android 产物、会回退 GitHub 源）
+          mirrorchyan_rid: 4f6403c3-72e6-4327-b37a-23cbf0dc30f9
+          version_name: ${{ needs.meta.outputs.tag }}
+          os: android
+
+          owner: TanyaShue
+          repo: MaaYYs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          upload_token: ${{ secrets.MIRRORCHYANUPLOADTOKENANDROID }}
