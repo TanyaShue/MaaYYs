@@ -257,14 +257,6 @@
           }
         },
         {
-          "name": "花车里程领取",
-          "enabled": true,
-          "option": {
-            "花车挂机里程领取": "Yes",
-            "花车任务里程领取": "Yes"
-          }
-        },
-        {
           "name": "日常奖励领取",
           "enabled": true,
           "option": {
