@@ -124,7 +124,6 @@
   "import": [
     "preset/一键日常.json",
     "tasks/打开游戏.json",
-    "tasks/花车.json",
     "tasks/999.json",
     "tasks/式神委派.json",
     "tasks/寮三十捐材料.json",
