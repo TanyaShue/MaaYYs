@@ -313,7 +313,7 @@ ci: 调整发布流程
 - 涉及 Go agent 的改动可以通过 `go build`。
 - README、使用指南或任务说明与实际行为一致。
 
-[点我加入QQ交流群](<点击链接加入群聊【MAAYYS交流群】：https://qm.qq.com/q/h2tbvsgzxS>)
+[点我加入QQ交流群](<https://qm.qq.com/q/h2tbvsgzxS>)
 <span style="color:red"><b>群内提问最好带截图和问题描述<b></span>
 
 ## 鸣谢
