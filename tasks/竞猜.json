@@ -1,0 +1,26 @@
+{
+    "task": [
+        {
+            "name": "对弈竞猜",
+            "label": "对弈竞猜",
+            "entry": "竞猜",
+            "group": ["promotion"],
+            "option": [
+                "竞猜方案"
+            ]
+        }
+    ],
+    "option": {
+        "竞猜方案": {
+            "type": "select",
+            "label": "竞猜方案",
+            "default_case": "跟随人多的",
+            "cases": [
+                {
+                    "name": "跟随人多的",
+                    "label": "跟随人多的"
+                }
+            ]
+        }
+    }
+}
