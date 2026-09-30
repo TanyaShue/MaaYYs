@@ -77,12 +77,6 @@
         "roi": [626, 524, 249, 75]
     },
     "竞猜-识别时间小于30分钟": {
-        "action": "Custom",
-        "custom_action": "RandomWait",
-        "custom_action_param": {
-            "max": 180,
-            "min": 20
-        },
         "expected": "^(?:[0Oo]|[1-2][0-9Oo])[:：][0-5][0-9Oo]$",
         "next": ["竞猜6"],
         "recognition": "OCR",
