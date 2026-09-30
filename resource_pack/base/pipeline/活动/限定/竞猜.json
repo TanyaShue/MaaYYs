@@ -1,14 +1,57 @@
 {
     "竞猜": {
-        "next": ["竞猜1"],
+        "next": ["竞猜-判断当前时间", "[JumpBack]竞猜1", "[JumpBack]竞猜-开始挂机"],
         "recognition": "DirectHit"
     },
     "竞猜-下一局-图片匹配": {
         "action": "Click",
-        "next": ["竞猜6"],
+        "next": ["竞猜-判断剩余时间是否少于30分钟", "竞猜6"],
         "recognition": "TemplateMatch",
         "roi": [745, 469, 128, 79],
         "template": ["活动/限定/竞猜/竞猜-下一局-图片匹配_1.png"]
+    },
+    "竞猜-判断剩余时间是否少于30分钟": {
+        "expected": "剩余时间",
+        "next": ["竞猜-识别时间小于30分钟", "[JumpBack]竞猜-识别时间大于30分钟"],
+        "recognition": "OCR",
+        "roi": [636, 472, 260, 69]
+    },
+    "竞猜-判断当前时间": {
+        "custom_recognition": "TimeCheckRecognition",
+        "custom_recognition_param": {
+            "end": "22:00",
+            "mode": "in",
+            "start": "10:00"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "不处于竞猜时间,任务结束"
+        },
+        "inverse": true,
+        "next": ["导航-庭院"],
+        "recognition": "Custom"
+    },
+    "竞猜-开始挂机": {
+        "action": "Custom",
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "max": 5400,
+            "min": 5000
+        },
+        "focus": {
+            "Node.Action.Starting": "开始挂机!!!",
+            "Node.Action.Succeeded": "挂机结束!!!"
+        },
+        "next": ["竞猜-清除节点计数"],
+        "recognition": "DirectHit"
+    },
+    "竞猜-清除节点计数": {
+        "action": "Custom",
+        "custom_action": "ClearHitCount",
+        "custom_action_param": {
+            "node_name": "竞猜1"
+        },
+        "next": ["启动游戏"],
+        "recognition": "DirectHit"
     },
     "竞猜-识别失败,返回庭院": {
         "focus": {
@@ -16,6 +59,27 @@
         },
         "next": ["导航-庭院"],
         "recognition": "DirectHit"
+    },
+    "竞猜-识别时间大于30分钟": {
+        "expected": "^(?:30[:：][0-5][1-9Oo]|3[1-9][:：][0-5][0-9Oo]|[4-9][0-9][:：][0-5][0-9Oo]|1[0-1][0-9][:：][0-5][0-9Oo]|120[:：]00)$",
+        "focus": {
+            "Node.Action.Succeeded": "等到时间小于30分钟开始预测"
+        },
+        "post_delay": 60000,
+        "recognition": "OCR",
+        "roi": [626, 524, 249, 75]
+    },
+    "竞猜-识别时间小于30分钟": {
+        "action": "Custom",
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "max": 180,
+            "min": 20
+        },
+        "expected": "^(?:[0Oo]|[1-2][0-9Oo])[:：][0-5][0-9Oo]$",
+        "next": ["竞猜6"],
+        "recognition": "OCR",
+        "roi": [626, 524, 249, 75]
     },
     "竞猜-识别是否不处于竞猜时间": {
         "expected": "休息中",
@@ -36,6 +100,7 @@
         "roi": [247, 299, 1000, 81]
     },
     "竞猜1": {
+        "max_hit": 1,
         "next": ["竞猜2", "[JumpBack]竞猜3", "[JumpBack]竞猜4"],
         "recognition": "DirectHit"
     },
@@ -70,7 +135,7 @@
     },
     "竞猜2": {
         "expected": "对弈竞猜",
-        "next": ["竞猜-识别是否已猜过", "竞猜5", "竞猜-下一局-图片匹配", "竞猜6", "竞猜12", "竞猜-识别是否不处于竞猜时间"],
+        "next": ["竞猜-识别是否已猜过", "竞猜5", "竞猜-下一局-图片匹配", "竞猜-判断剩余时间是否少于30分钟", "竞猜6", "竞猜12", "竞猜-识别是否不处于竞猜时间"],
         "recognition": "OCR",
         "roi": [630, 26, 230, 81]
     },
@@ -89,7 +154,7 @@
     "竞猜5": {
         "action": "Click",
         "expected": "下一局",
-        "next": ["竞猜6"],
+        "next": ["竞猜-判断剩余时间是否少于30分钟", "竞猜6"],
         "recognition": "OCR",
         "roi": [591, 457, 316, 128]
     },
@@ -97,6 +162,7 @@
         "action": "Custom",
         "custom_action": "Guess",
         "expected": "剩余时间",
+        "next": ["关闭阴阳师"],
         "recognition": "OCR",
         "roi": [636, 472, 260, 69]
     },
