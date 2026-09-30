@@ -3,13 +3,30 @@
         "next": ["竞猜1"],
         "recognition": "DirectHit"
     },
+    "竞猜-识别失败,返回庭院": {
+        "focus": {
+            "Node.Recognition.Succeeded": "识别失败,返回庭院"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "DirectHit"
+    },
     "竞猜-识别是否不处于竞猜时间": {
         "expected": "休息中",
         "focus": {
             "Node.Recognition.Succeeded": "不处于竞猜时间,任务结束"
         },
+        "next": ["导航-庭院"],
         "recognition": "OCR",
         "roi": [578, 266, 294, 100]
+    },
+    "竞猜-识别是否已猜过": {
+        "expected": "已竞猜",
+        "focus": {
+            "Node.Recognition.Succeeded": "当前轮次已猜过,返回庭院"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "OCR",
+        "roi": [247, 299, 1000, 81]
     },
     "竞猜1": {
         "next": ["竞猜2", "[JumpBack]竞猜3", "[JumpBack]竞猜4"],
@@ -25,6 +42,7 @@
         "action": "Click",
         "expected": "竞猜|竞精",
         "next": ["竞猜7"],
+        "on_error": ["竞猜-识别失败,返回庭院"],
         "recognition": "OCR",
         "roi": [1041, 291, 202, 134],
         "target": [1097, 311, 118, 100]
@@ -45,7 +63,7 @@
     },
     "竞猜2": {
         "expected": "对弈竞猜",
-        "next": ["竞猜5", "竞猜6", "竞猜12", "竞猜-识别是否不处于竞猜时间"],
+        "next": ["竞猜-识别是否已猜过", "竞猜5", "竞猜6", "竞猜12", "竞猜-识别是否不处于竞猜时间"],
         "recognition": "OCR",
         "roi": [630, 26, 230, 81]
     },
@@ -86,6 +104,7 @@
         "action": "Click",
         "expected": "竞猜|竞精",
         "next": ["竞猜7"],
+        "on_error": ["竞猜-识别失败,返回庭院"],
         "recognition": "OCR",
         "roi": [221, 273, 260, 176],
         "target": [277, 303, 140, 92]

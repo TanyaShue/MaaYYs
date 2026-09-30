@@ -18,7 +18,67 @@
             "cases": [
                 {
                     "name": "跟随人多的",
-                    "label": "跟随人多的"
+                    "label": "跟随人多的",
+                    "description": "识别双方人数，押人数多的一边",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "majority"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "随机选择",
+                    "label": "随机选择",
+                    "description": "不看人数，随机押左或右",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "random"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "跟随订阅作者",
+                    "label": "跟随订阅作者",
+                    "description": "读订阅消息里该作者的选择押注；作者没发布、消息过期或读不到时，回退到跟随人多的",
+                    "option": [
+                        "竞猜-订阅作者"
+                    ]
+                }
+            ]
+        },
+        "竞猜-订阅作者": {
+            "type": "select",
+            "label": "订阅作者",
+            "description": "订阅消息 values 里的作者名（key）。取值为 1 押左、2 押右、0 表示还没发布；作者不存在或为 0 时跟着人多的选。",
+            "default_case": "在下小贱",
+            "cases": [
+                {
+                    "name": "在下小贱",
+                    "label": "在下小贱",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "author",
+                                "author": "在下小贱"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "姝酱",
+                    "label": "姝酱",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "author",
+                                "author": "姝酱"
+                            }
+                        }
+                    }
                 }
             ]
         }

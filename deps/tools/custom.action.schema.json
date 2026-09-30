@@ -471,8 +471,32 @@
     },
     "Guess": {
       "title": "竞猜",
-      "description": "识别双方人数并选择一侧，不读取 custom_action_param。",
-      "properties": { "custom_action": { "const": "Guess" } },
+      "description": "按策略押注一侧：跟着人多的选、随机选一边，或跟随订阅作者（读 MQTT 主题 test/maayys 上最后一条保留消息里该作者的取值）。跟随订阅作者拿不到有效选择时，回退到跟着人多的选。",
+      "properties": {
+        "custom_action": { "const": "Guess" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "strategy": {
+              "type": "string",
+              "enum": ["majority", "random", "author"],
+              "default": "majority",
+              "description": "押注策略：majority 跟着人多的选（默认，也是兜底策略）；random 随机选左或右；author 跟随订阅作者"
+            },
+            "author": {
+              "type": "string",
+              "description": "strategy 为 author 时填写跟随的作者名，对应订阅消息 values 里的 key；取值 1 押左、2 押右、0 表示还没发布（走兜底策略）"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": { "properties": { "strategy": { "const": "author" } }, "required": ["strategy"] },
+              "then": { "required": ["author"] }
+            }
+          ]
+        }
+      },
       "required": ["custom_action"]
     },
     "TimeCheck": {
