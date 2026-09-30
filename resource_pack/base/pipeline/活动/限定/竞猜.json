@@ -10,6 +10,13 @@
         "roi": [745, 469, 128, 79],
         "template": ["活动/限定/竞猜/竞猜-下一局-图片匹配_1.png"]
     },
+    "竞猜-关闭游戏": {
+        "focus": {
+            "Node.Recognition.Succeeded": "竞猜完成,关闭游戏,等待下一轮"
+        },
+        "next": ["关闭阴阳师"],
+        "recognition": "DirectHit"
+    },
     "竞猜-判断剩余时间是否少于30分钟": {
         "expected": "剩余时间",
         "next": ["竞猜-识别时间小于30分钟", "[JumpBack]竞猜-识别时间大于30分钟"],
@@ -162,7 +169,7 @@
         "action": "Custom",
         "custom_action": "Guess",
         "expected": "剩余时间",
-        "next": ["关闭阴阳师"],
+        "next": ["竞猜-关闭游戏"],
         "recognition": "OCR",
         "roi": [636, 472, 260, 69]
     },
