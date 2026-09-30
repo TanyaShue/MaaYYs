@@ -53,7 +53,7 @@
         "next": ["竞猜5", "[JumpBack]竞猜13"],
         "recognition": "OCR",
         "roi": [417, 232, 597, 170],
-        "target": [577, 387, 140, 80]
+        "target": [715, 391, 75, 55]
     },
     "竞猜13": {
         "action": "Click",
