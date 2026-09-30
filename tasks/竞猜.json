@@ -39,6 +39,18 @@
                             }
                         }
                     }
+                },
+                {
+                    "name": "跟随网站预测",
+                    "label": "跟随网站预测",
+                    "description": "读 yysrank 实时风向的博主预测统计，红方=左、蓝方=右，押预测票多的一边；取不到数据时跟着人多的选",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "predict"
+                            }
+                        }
+                    }
                 }
             ]
         },

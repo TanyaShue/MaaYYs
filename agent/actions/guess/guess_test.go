@@ -90,6 +90,11 @@ func TestNormalizeStrategy(t *testing.T) {
 		{raw: "author", want: strategyAuthor},
 		{raw: "subscribe", want: strategyAuthor},
 		{raw: "跟随订阅作者", want: strategyAuthor},
+		{raw: "predict", want: strategyPredict},
+		{raw: "yysrank", want: strategyPredict},
+		{raw: "网站预测", want: strategyPredict},
+		{raw: "跟随网站预测", want: strategyPredict},
+		{raw: "风向", want: strategyPredict},
 	}
 
 	for _, tt := range tests {
@@ -133,6 +138,23 @@ func TestParseParams(t *testing.T) {
 	}
 	if params.Strategy != strategyAuthor {
 		t.Errorf("parseParams(中文策略).Strategy = %q", params.Strategy)
+	}
+
+	params, err = parseParams(`{"strategy": "predict", "url": " https://example.com/api "}`)
+	if err != nil {
+		t.Fatalf("parseParams(predict) 返回错误: %v", err)
+	}
+	if params.Strategy != strategyPredict || params.URL != "https://example.com/api" {
+		t.Errorf("parseParams(predict) = %+v, want strategy=predict, url=https://example.com/api", params)
+	}
+
+	// 不填 url 时留空，运行时用默认地址
+	params, err = parseParams(`{"strategy": "网站预测"}`)
+	if err != nil {
+		t.Fatalf("parseParams(网站预测) 返回错误: %v", err)
+	}
+	if params.Strategy != strategyPredict || params.URL != "" {
+		t.Errorf("parseParams(网站预测) = %+v, want strategy=predict, url 为空", params)
 	}
 
 	if _, err := parseParams(`{"strategy": "author"`); err == nil {
@@ -388,6 +410,269 @@ func TestPickByAuthor(t *testing.T) {
 			}
 			if tt.author == "" && *calls != 0 {
 				t.Errorf("作者名为空时不应该去取消息, 实际取了 %d 次", *calls)
+			}
+		})
+	}
+}
+
+// TestPredictCutoff 网站的统计口径是"当前时间之前最近的偶数整点"。
+func TestPredictCutoff(t *testing.T) {
+	loc := time.FixedZone("CST", 8*3600)
+
+	tests := []struct {
+		name string
+		now  time.Time
+		want string
+	}{
+		{name: "偶数整点就是自己", now: time.Date(2026, 9, 30, 14, 0, 0, 0, loc), want: "2026-09-30 14:00"},
+		{name: "偶数整点后十分钟", now: time.Date(2026, 9, 30, 14, 10, 0, 0, loc), want: "2026-09-30 14:00"},
+		{name: "奇数整点回退一小时", now: time.Date(2026, 9, 30, 13, 45, 0, 0, loc), want: "2026-09-30 12:00"},
+		{name: "奇数整点整点回退一小时", now: time.Date(2026, 9, 30, 15, 0, 0, 0, loc), want: "2026-09-30 14:00"},
+		{name: "凌晨一点回退到零点", now: time.Date(2026, 9, 30, 1, 30, 0, 0, loc), want: "2026-09-30 00:00"},
+		{name: "零点保持零点", now: time.Date(2026, 9, 30, 0, 30, 0, 0, loc), want: "2026-09-30 00:00"},
+		{name: "二十三点回退到二十二点", now: time.Date(2026, 9, 30, 23, 59, 0, 0, loc), want: "2026-09-30 22:00"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := predictCutoff(tt.now)
+			if got.Format("2006-01-02 15:04") != tt.want {
+				t.Errorf("predictCutoff(%s) = %s, want %s",
+					tt.now.Format("2006-01-02 15:04"), got.Format("2006-01-02 15:04"), tt.want)
+			}
+		})
+	}
+}
+
+// TestCountPredictVotes 只统计截断时间之后的记录，红方蓝方分开数。
+func TestCountPredictVotes(t *testing.T) {
+	loc := time.FixedZone("CST", 8*3600)
+	cutoff := time.Date(2026, 9, 30, 14, 0, 0, 0, loc)
+
+	records := []PredictRecord{
+		{Name: "甲", PredictWinner: "red", PostedAt: "2026-09-30T15:29:25+08:00"},  // 本轮, 红
+		{Name: "乙", PredictWinner: "blue", PostedAt: "2026-09-30T15:15:53+08:00"}, // 本轮, 蓝
+		{Name: "丙", PredictWinner: "blue", PostedAt: "2026-09-30T14:35:16+08:00"}, // 本轮, 蓝
+		{Name: "丁", PredictWinner: "red", PostedAt: "2026-09-30T14:00:00+08:00"},  // 刚好是截断时间, 不算本轮
+		{Name: "戊", PredictWinner: "red", PostedAt: "2026-09-30T10:00:55+08:00"},  // 往期
+		{Name: "己", PredictWinner: "", PostedAt: "2026-09-30T15:30:00+08:00"},     // 没给方向
+		{Name: "庚", PredictWinner: "none", PostedAt: "2026-09-30T15:31:00+08:00"}, // 方向不认识
+		{Name: "辛", PredictWinner: "red", PostedAt: "昨晚八点"},                       // 时间读不出来
+		{Name: "壬", PredictWinner: "RED", PostedAt: "2026-09-30T15:32:00+08:00"},  // 大小写不影响
+	}
+
+	red, blue, skipped := countPredictVotes(records, cutoff)
+	if red != 2 || blue != 2 {
+		t.Errorf("countPredictVotes() = (%d, %d), want (2, 2)", red, blue)
+	}
+	if skipped != 1 {
+		t.Errorf("countPredictVotes() skipped = %d, want 1", skipped)
+	}
+
+	// 时间换成 UTC 写法也要能正确比较
+	red, blue, skipped = countPredictVotes([]PredictRecord{
+		{PredictWinner: "red", PostedAt: "2026-09-30T07:30:00Z"}, // 北京时间 15:30, 本轮
+		{PredictWinner: "red", PostedAt: "2026-09-30T05:00:00Z"}, // 北京时间 13:00, 往期
+	}, cutoff)
+	if red != 1 || blue != 0 || skipped != 0 {
+		t.Errorf("countPredictVotes(UTC 写法) = (%d, %d, %d), want (1, 0, 0)", red, blue, skipped)
+	}
+}
+
+func TestPredictShare(t *testing.T) {
+	tests := []struct {
+		red, blue                     int
+		wantRedPercent, wantBlueShare int
+	}{
+		{red: 3, blue: 1, wantRedPercent: 75, wantBlueShare: 25},
+		{red: 1, blue: 3, wantRedPercent: 25, wantBlueShare: 75},
+		{red: 2, blue: 2, wantRedPercent: 50, wantBlueShare: 50},
+		{red: 0, blue: 0, wantRedPercent: 50, wantBlueShare: 50},
+		{red: 7, blue: 6, wantRedPercent: 54, wantBlueShare: 46}, // 四舍五入
+	}
+
+	for _, tt := range tests {
+		gotRed, gotBlue := predictShare(tt.red, tt.blue)
+		if gotRed != tt.wantRedPercent || gotBlue != tt.wantBlueShare {
+			t.Errorf("predictShare(%d, %d) = (%d, %d), want (%d, %d)",
+				tt.red, tt.blue, gotRed, gotBlue, tt.wantRedPercent, tt.wantBlueShare)
+		}
+	}
+}
+
+// TestPickByPredictVotes 红方在左、蓝方在右，票数一样时按人数策略的习惯押左边。
+func TestPickByPredictVotes(t *testing.T) {
+	tests := []struct {
+		red, blue            int
+		wantTask, wantWinner string
+	}{
+		{red: 12, blue: 3, wantTask: taskBetLeft, wantWinner: "左边"},
+		{red: 3, blue: 12, wantTask: taskBetRight, wantWinner: "右边"},
+		{red: 5, blue: 5, wantTask: taskBetLeft, wantWinner: "左边"},
+		{red: 0, blue: 1, wantTask: taskBetRight, wantWinner: "右边"},
+		{red: 1, blue: 0, wantTask: taskBetLeft, wantWinner: "左边"},
+	}
+
+	for _, tt := range tests {
+		task, winner := pickByPredictVotes(tt.red, tt.blue)
+		if task != tt.wantTask || winner != tt.wantWinner {
+			t.Errorf("pickByPredictVotes(%d, %d) = (%q, %q), want (%q, %q)",
+				tt.red, tt.blue, task, winner, tt.wantTask, tt.wantWinner)
+		}
+	}
+}
+
+func TestParsePredictPayload(t *testing.T) {
+	payload := []byte(`{"success":true,"data":[{"url":"https://weibo.com/1","name":"奉天城公子奉天",` +
+		`"match":"9月30日，14:00场","predict_winner":"blue","post":"压蓝",` +
+		`"posted_at":"2026-09-30T15:15:53+08:00"}]}`)
+
+	parsed, err := parsePredictPayload(payload)
+	if err != nil {
+		t.Fatalf("parsePredictPayload() 返回错误: %v", err)
+	}
+	if !parsed.Success || len(parsed.Data) != 1 {
+		t.Fatalf("parsePredictPayload() = %+v, want 1 条记录", parsed)
+	}
+	record := parsed.Data[0]
+	if record.Name != "奉天城公子奉天" || record.PredictWinner != sideBlue ||
+		record.PostedAt != "2026-09-30T15:15:53+08:00" {
+		t.Errorf("记录解析结果不对: %+v", record)
+	}
+
+	if _, err := parsePredictPayload(nil); err == nil {
+		t.Error("空 payload 应该报错")
+	}
+	if _, err := parsePredictPayload([]byte("hello")); err == nil {
+		t.Error("非 JSON payload 应该报错")
+	}
+	if _, err := parsePredictPayload([]byte(`{"success":false,"data":[]}`)); err == nil {
+		t.Error("success=false 应该报错")
+	}
+}
+
+// stubPredict 替换请求网站预测的实现，测试里不请求真的站点，并记录请求过的地址。
+func stubPredict(t *testing.T, payload string, err error) *[]string {
+	t.Helper()
+	var urls []string
+	original := predictFetcher
+	predictFetcher = func(url string) ([]byte, error) {
+		urls = append(urls, url)
+		return []byte(payload), err
+	}
+	t.Cleanup(func() { predictFetcher = original })
+	return &urls
+}
+
+// buildPredictPayload 按网站接口的返回格式拼一条响应。
+func buildPredictPayload(t *testing.T, records ...PredictRecord) string {
+	t.Helper()
+	raw, err := json.Marshal(PredictResponse{Success: true, Data: records})
+	if err != nil {
+		t.Fatalf("拼测试 payload 失败: %v", err)
+	}
+	return string(raw)
+}
+
+func TestPickByPredictAt(t *testing.T) {
+	// 15:45 的截断时间是 14:00，下面按这个口径准备数据
+	now := time.Date(2026, 9, 30, 15, 45, 0, 0, time.Local)
+	at := func(hour, minute int) string {
+		return time.Date(2026, 9, 30, hour, minute, 0, 0, time.Local).Format(time.RFC3339)
+	}
+
+	tests := []struct {
+		name       string
+		url        string
+		payload    string
+		fetchErr   error
+		wantTask   string
+		wantWinner string
+		wantOK     bool
+		wantURL    string
+	}{
+		{
+			name:       "红的票多押左边",
+			payload:    buildPredictPayload(t, PredictRecord{PredictWinner: sideRed, PostedAt: at(15, 29)}, PredictRecord{PredictWinner: sideRed, PostedAt: at(15, 20)}, PredictRecord{PredictWinner: sideBlue, PostedAt: at(15, 15)}),
+			wantTask:   taskBetLeft,
+			wantWinner: "左边",
+			wantOK:     true,
+			wantURL:    predictAPIURL,
+		},
+		{
+			name:       "蓝的票多押右边",
+			payload:    buildPredictPayload(t, PredictRecord{PredictWinner: sideBlue, PostedAt: at(15, 29)}, PredictRecord{PredictWinner: sideBlue, PostedAt: at(15, 20)}, PredictRecord{PredictWinner: sideRed, PostedAt: at(15, 15)}),
+			wantTask:   taskBetRight,
+			wantWinner: "右边",
+			wantOK:     true,
+			wantURL:    predictAPIURL,
+		},
+		{
+			name:       "票数一样押左边",
+			payload:    buildPredictPayload(t, PredictRecord{PredictWinner: sideRed, PostedAt: at(15, 29)}, PredictRecord{PredictWinner: sideBlue, PostedAt: at(15, 20)}),
+			wantTask:   taskBetLeft,
+			wantWinner: "左边",
+			wantOK:     true,
+			wantURL:    predictAPIURL,
+		},
+		{
+			name:    "本轮还没有数据",
+			payload: buildPredictPayload(t, PredictRecord{PredictWinner: sideRed, PostedAt: at(13, 50)}, PredictRecord{PredictWinner: sideBlue, PostedAt: at(10, 0)}),
+			wantOK:  false,
+			wantURL: predictAPIURL,
+		},
+		{
+			name:    "一条记录都没有",
+			payload: buildPredictPayload(t),
+			wantOK:  false,
+			wantURL: predictAPIURL,
+		},
+		{
+			name:    "都是没给方向的记录",
+			payload: buildPredictPayload(t, PredictRecord{PredictWinner: "", PostedAt: at(15, 29)}, PredictRecord{PredictWinner: "none", PostedAt: at(15, 20)}),
+			wantOK:  false,
+			wantURL: predictAPIURL,
+		},
+		{
+			name:     "请求失败",
+			fetchErr: errors.New("连不上站点"),
+			wantOK:   false,
+			wantURL:  predictAPIURL,
+		},
+		{
+			name:    "返回的不是 JSON",
+			payload: "<html>502 Bad Gateway</html>",
+			wantOK:  false,
+			wantURL: predictAPIURL,
+		},
+		{
+			name:    "接口返回失败",
+			payload: `{"success":false,"data":[]}`,
+			wantOK:  false,
+			wantURL: predictAPIURL,
+		},
+		{
+			name:       "自定义地址时用自定义的",
+			url:        " https://example.com/api/dyjc ",
+			payload:    buildPredictPayload(t, PredictRecord{PredictWinner: sideBlue, PostedAt: at(15, 29)}),
+			wantTask:   taskBetRight,
+			wantWinner: "右边",
+			wantOK:     true,
+			wantURL:    "https://example.com/api/dyjc",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			urls := stubPredict(t, tt.payload, tt.fetchErr)
+
+			task, winner, ok := pickByPredictAt(tt.url, now)
+			if ok != tt.wantOK || task != tt.wantTask || winner != tt.wantWinner {
+				t.Errorf("pickByPredictAt() = (%q, %q, %v), want (%q, %q, %v)",
+					task, winner, ok, tt.wantTask, tt.wantWinner, tt.wantOK)
+			}
+			if len(*urls) != 1 || (*urls)[0] != tt.wantURL {
+				t.Errorf("请求地址 = %v, want [%q]", *urls, tt.wantURL)
 			}
 		})
 	}

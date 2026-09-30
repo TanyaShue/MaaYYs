@@ -471,7 +471,7 @@
     },
     "Guess": {
       "title": "竞猜",
-      "description": "按策略押注一侧：跟着人多的选、随机选一边，或跟随订阅作者（读 MQTT 主题 test/maayys 上最后一条保留消息里该作者的取值）。跟随订阅作者拿不到有效选择时，回退到跟着人多的选。",
+      "description": "按策略押注一侧：跟着人多的选、随机选一边、跟随订阅作者（读 MQTT 主题 test/maayys 上最后一条保留消息里该作者的取值），或跟随网站预测（读 https://yysrank.com/dyjc.html 的博主预测统计，红方=左、蓝方=右，押预测票多的一边）。跟随订阅作者或跟随网站预测拿不到有效结果时，回退到跟着人多的选。",
       "properties": {
         "custom_action": { "const": "Guess" },
         "custom_action_param": {
@@ -479,13 +479,17 @@
           "properties": {
             "strategy": {
               "type": "string",
-              "enum": ["majority", "random", "author"],
+              "enum": ["majority", "random", "author", "predict"],
               "default": "majority",
-              "description": "押注策略：majority 跟着人多的选（默认，也是兜底策略）；random 随机选左或右；author 跟随订阅作者"
+              "description": "押注策略：majority 跟着人多的选（默认，也是兜底策略）；random 随机选左或右；author 跟随订阅作者；predict 跟随网站预测（红方=左、蓝方=右，押票多的一边）"
             },
             "author": {
               "type": "string",
               "description": "strategy 为 author 时填写跟随的作者名，对应订阅消息 values 里的 key；取值 1 押左、2 押右、0 表示还没发布（走兜底策略）"
+            },
+            "url": {
+              "type": "string",
+              "description": "strategy 为 predict 时使用的预测接口地址，默认 https://yysrank.com/api/dyjc/get；留空用默认地址"
             }
           },
           "additionalProperties": false,
