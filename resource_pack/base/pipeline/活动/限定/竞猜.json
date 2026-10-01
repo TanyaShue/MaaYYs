@@ -12,9 +12,8 @@
     },
     "竞猜-关闭游戏": {
         "focus": {
-            "Node.Recognition.Succeeded": "竞猜完成,关闭游戏,等待下一轮"
+            "Node.Recognition.Succeeded": "竞猜完成,等待下一轮"
         },
-        "next": ["关闭阴阳师"],
         "recognition": "DirectHit"
     },
     "竞猜-判断剩余时间是否少于30分钟": {
