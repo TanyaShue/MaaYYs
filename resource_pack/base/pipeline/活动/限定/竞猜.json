@@ -25,7 +25,7 @@
     "竞猜-判断当前时间": {
         "custom_recognition": "TimeCheckRecognition",
         "custom_recognition_param": {
-            "end": "22:00",
+            "end": "23:59",
             "mode": "in",
             "start": "10:00"
         },
@@ -142,8 +142,8 @@
     "竞猜3": {
         "action": "Click",
         "recognition": "TemplateMatch",
-        "roi": [1176, 212, 64, 53],
-        "template": ["活动/限定/竞猜/竞猜3_1.png", "竞猜/竞猜3.png"]
+        "roi": [1147, 126, 133, 444],
+        "template": ["活动/限定/竞猜/竞猜3_1.png", "活动/限定/竞猜/竞猜3_1.png", "竞猜/竞猜3.png"]
     },
     "竞猜4": {
         "action": "Click",
