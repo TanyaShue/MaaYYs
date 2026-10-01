@@ -36,6 +36,12 @@
         "next": ["导航-庭院"],
         "recognition": "Custom"
     },
+    "竞猜-处于闲庭时返回": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [0, 0, 101, 107],
+        "template": ["活动/限定/竞猜/竞猜-处于闲庭时返回_1.png"]
+    },
     "竞猜-开始挂机": {
         "action": "Custom",
         "custom_action": "RandomWait",
@@ -101,7 +107,7 @@
     },
     "竞猜1": {
         "max_hit": 1,
-        "next": ["竞猜2", "[JumpBack]竞猜3", "[JumpBack]竞猜4"],
+        "next": ["竞猜2", "[JumpBack]竞猜3", "[JumpBack]竞猜4", "[JumpBack]竞猜-处于闲庭时返回"],
         "recognition": "DirectHit"
     },
     "竞猜10": {
