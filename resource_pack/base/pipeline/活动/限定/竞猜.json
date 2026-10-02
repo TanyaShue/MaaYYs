@@ -62,7 +62,7 @@
         "custom_action_param": {
             "node_name": "竞猜1"
         },
-        "next": ["启动游戏"],
+        "next": ["导航-庭院"],
         "recognition": "DirectHit"
     },
     "竞猜-识别失败,返回庭院": {
