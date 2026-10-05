@@ -13,7 +13,8 @@
         "CoBattleTargetRecognition",
         "MyRecognizer",
         "OCRResultCounterRecognition",
-        "TaskCounterRecognition"
+        "TaskCounterRecognition",
+        "TimeCheckRecognition"
       ]
     }
   },
@@ -25,7 +26,8 @@
       { "$ref": "#/$defs/CoBattleTargetRecognition" },
       { "$ref": "#/$defs/MyRecognizer" },
       { "$ref": "#/$defs/OCRResultCounterRecognition" },
-      { "$ref": "#/$defs/TaskCounterRecognition" }
+      { "$ref": "#/$defs/TaskCounterRecognition" },
+      { "$ref": "#/$defs/TimeCheckRecognition" }
     ]
   },
   "$defs": {
@@ -177,6 +179,53 @@
         }
       },
       "required": ["custom_recognition"]
+    },
+    "TimeCheckRecognition": {
+      "title": "日期时间检查",
+      "description": "检查当前日期和时间是否满足指定范围：满足时识别成功，否则识别失败；参数与 TimeCheck 自定义动作一致。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "TimeCheckRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "start": { "type": "string", "pattern": "^(?:[0-9]|[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$", "description": "开始时间，H:mm、HH:mm、H:mm:ss 或 HH:mm:ss" },
+            "end": { "type": "string", "pattern": "^(?:[0-9]|[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$", "description": "结束时间，H:mm、HH:mm、H:mm:ss 或 HH:mm:ss；允许跨天" },
+            "mode": { "type": "string", "enum": ["in", "out"], "default": "in", "description": "判断当前时间在范围内或范围外" },
+            "date_rule": { "$ref": "#/$defs/DateRule" }
+          },
+          "required": ["start", "end"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_recognition"]
+    },
+    "DateRule": {
+      "type": "object",
+      "description": "可选日期过滤规则；省略或 type=none 时不过滤日期。",
+      "properties": {
+        "type": { "type": "string", "enum": ["none", "date", "dates", "month_day", "week"], "default": "none" },
+        "value": {}
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "date" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "string", "format": "date" } }, "required": ["value"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "dates" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "array", "items": { "type": "string", "format": "date" }, "minItems": 1 } }, "required": ["value"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "month_day" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 31 }, "minItems": 1, "uniqueItems": true } }, "required": ["value"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "week" } }, "required": ["type"] },
+          "then": { "properties": { "value": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 7 }, "minItems": 1, "uniqueItems": true } }, "required": ["value"] }
+        }
+      ],
+      "additionalProperties": false
     }
   }
 }

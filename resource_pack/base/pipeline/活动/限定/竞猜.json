@@ -1,218 +1,215 @@
 {
     "竞猜": {
-        "next": [
-            "竞猜1"
-        ]
+        "next": ["竞猜-判断当前时间", "[JumpBack]竞猜1", "[JumpBack]竞猜-开始挂机"],
+        "recognition": "DirectHit"
+    },
+    "竞猜-下一局-图片匹配": {
+        "action": "Click",
+        "next": ["竞猜-判断剩余时间是否少于30分钟", "竞猜6"],
+        "recognition": "TemplateMatch",
+        "roi": [745, 469, 128, 79],
+        "template": ["活动/限定/竞猜/竞猜-下一局-图片匹配_1.png"]
+    },
+    "竞猜-关闭游戏": {
+        "focus": {
+            "Node.Recognition.Succeeded": "竞猜完成,等待下一轮"
+        },
+        "recognition": "DirectHit"
+    },
+    "竞猜-判断剩余时间是否少于30分钟": {
+        "expected": "剩余时间",
+        "next": ["[JumpBack]竞猜13", "竞猜-识别时间小于30分钟", "[JumpBack]竞猜-识别时间大于30分钟"],
+        "recognition": "OCR",
+        "roi": [636, 472, 260, 69]
+    },
+    "竞猜-判断当前时间": {
+        "custom_recognition": "TimeCheckRecognition",
+        "custom_recognition_param": {
+            "end": "23:59",
+            "mode": "in",
+            "start": "10:00"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "不处于竞猜时间,任务结束"
+        },
+        "inverse": true,
+        "next": ["导航-庭院"],
+        "recognition": "Custom"
+    },
+    "竞猜-处于闲庭时返回": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [0, 0, 101, 107],
+        "template": ["活动/限定/竞猜/竞猜-处于闲庭时返回_1.png"]
+    },
+    "竞猜-开始挂机": {
+        "action": "Custom",
+        "custom_action": "RandomWait",
+        "custom_action_param": {
+            "max": 5400,
+            "min": 5000
+        },
+        "focus": {
+            "Node.Action.Starting": "开始挂机!!!",
+            "Node.Action.Succeeded": "挂机结束!!!"
+        },
+        "next": ["竞猜-清除节点计数"],
+        "recognition": "DirectHit"
+    },
+    "竞猜-清除节点计数": {
+        "action": "Custom",
+        "custom_action": "ClearHitCount",
+        "custom_action_param": {
+            "node_name": "竞猜1"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "DirectHit"
+    },
+    "竞猜-识别失败,返回庭院": {
+        "focus": {
+            "Node.Recognition.Succeeded": "识别失败,返回庭院"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "DirectHit"
+    },
+    "竞猜-识别时间大于30分钟": {
+        "expected": "^(?:30[:：][0-5][1-9Oo]|3[1-9][:：][0-5][0-9Oo]|[4-9][0-9][:：][0-5][0-9Oo]|1[0-1][0-9][:：][0-5][0-9Oo]|120[:：]00)$",
+        "focus": {
+            "Node.Action.Succeeded": "等到时间小于30分钟开始预测"
+        },
+        "post_delay": 60000,
+        "recognition": "OCR",
+        "roi": [626, 524, 249, 75]
+    },
+    "竞猜-识别时间小于30分钟": {
+        "expected": "^(?:[0Oo]|[1-2][0-9Oo])[:：][0-5][0-9Oo]$",
+        "next": ["竞猜6"],
+        "recognition": "OCR",
+        "roi": [626, 524, 249, 75]
+    },
+    "竞猜-识别是否不处于竞猜时间": {
+        "expected": "休息中",
+        "focus": {
+            "Node.Recognition.Succeeded": "不处于竞猜时间,任务结束"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "OCR",
+        "roi": [578, 266, 294, 100]
+    },
+    "竞猜-识别是否已猜过": {
+        "expected": "已竞猜",
+        "focus": {
+            "Node.Recognition.Succeeded": "当前轮次已猜过,返回庭院"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "OCR",
+        "roi": [247, 299, 1000, 81]
     },
     "竞猜1": {
-        "next": [
-            "竞猜2",
-            "[JumpBack]竞猜3",
-            "[JumpBack]竞猜4"
-        ]
-    },
-    "竞猜2": {
-        "recognition": "OCR",
-        "next": [
-            "竞猜5",
-            "竞猜6",
-            "竞猜12"
-        ],
-        "roi": [
-            489,
-            0,
-            274,
-            62
-        ],
-        "expected": "对弈竞猜"
-    },
-    "竞猜3": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "roi": [
-            1151,
-            118,
-            114,
-            433
-        ],
-        "template": [
-            "竞猜/竞猜3.png"
-        ]
-    },
-    "竞猜4": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "roi": [
-            1151,
-            117,
-            102,
-            443
-        ],
-        "template": [
-            "竞猜/竞猜4.png"
-        ]
-    },
-    "识别左侧人数": {
-        "recognition": "OCR",
-        "roi": [
-            102,
-            472,
-            182,
-            67
-        ],
-        "expected": "^\\d+$"
-    },
-    "识别右侧人数": {
-        "recognition": "OCR",
-        "roi": [
-            1077,
-            489,
-            169,
-            51
-        ],
-        "expected": "^\\d+$"
-    },
-    "竞猜5": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "竞猜6"
-        ],
-        "roi": [
-            647,
-            503,
-            107,
-            91
-        ],
-        "expected": "下一局"
-    },
-    "竞猜6": {
-        "recognition": "OCR",
-        "action": "Custom",
-        "roi": [
-            552,
-            485,
-            161,
-            79
-        ],
-        "expected": "剩余时间",
-        "custom_action": "Guess"
-    },
-    "竞猜7_左边": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "竞猜7"
-        ],
-        "roi": [
-            84,
-            274,
-            184,
-            160
-        ],
-        "expected": "竞猜|竞精"
-    },
-    "竞猜7": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "竞猜8"
-        ],
-        "roi": [
-            218,
-            577,
-            788,
-            64
-        ],
-        "expected": "30万"
-    },
-    "竞猜8": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "竞猜9"
-        ],
-        "roi": [
-            956,
-            385,
-            216,
-            158
-        ],
-        "expected": "竞猜"
-    },
-    "竞猜9": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "竞猜10"
-        ],
-        "roi": [
-            675,
-            399,
-            172,
-            66
-        ],
-        "expected": "确定"
-    },
-    "竞猜10_右边": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "竞猜7"
-        ],
-        "roi": [
-            1029,
-            296,
-            162,
-            118
-        ],
-        "expected": "竞猜|竞精"
+        "max_hit": 1,
+        "next": ["竞猜2", "[JumpBack]竞猜3", "[JumpBack]竞猜4", "[JumpBack]竞猜-处于闲庭时返回"],
+        "recognition": "DirectHit"
     },
     "竞猜10": {
+        "expected": "已竞猜",
+        "next": ["导航-庭院"],
         "recognition": "OCR",
-        "next": [
-            "导航-庭院"
-        ],
-        "roi": [
-            30,
-            246,
-            1185,
-            254
-        ],
-        "expected": "已竞猜"
+        "roi": [30, 246, 1185, 254]
     },
-    "竞猜11": {},
-    "竞猜12": {
-        "recognition": "OCR",
+    "竞猜10_右边": {
         "action": "Click",
-        "next": [
-            "竞猜5",
-            "[JumpBack]竞猜13"
-        ],
-        "roi": [
-            461,
-            240,
-            379,
-            124
-        ],
+        "expected": "竞猜|竞精",
+        "next": ["竞猜7"],
+        "on_error": ["竞猜-识别失败,返回庭院"],
+        "recognition": "OCR",
+        "roi": [1041, 291, 202, 134],
+        "target": [1097, 311, 118, 100]
+    },
+    "竞猜12": {
+        "action": "Click",
         "expected": "竞猜成功",
-        "target": [
-            577,
-            387,
-            140,
-            80
-        ]
+        "next": ["[JumpBack]竞猜13", "竞猜5", "竞猜-下一局-图片匹配"],
+        "recognition": "OCR",
+        "roi": [417, 232, 597, 170],
+        "target": [715, 391, 75, 55]
     },
     "竞猜13": {
-        "recognition": "OCR",
         "action": "Click",
-        "next": [],
-        "roi": [
-            497,
-            662,
-            285,
-            57
-        ],
-        "expected": "点击屏幕继续"
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [497, 662, 285, 57]
+    },
+    "竞猜2": {
+        "expected": "对弈竞猜",
+        "next": ["竞猜-识别是否已猜过", "竞猜5", "竞猜-下一局-图片匹配", "竞猜-判断剩余时间是否少于30分钟", "竞猜6", "竞猜12", "竞猜-识别是否不处于竞猜时间"],
+        "recognition": "OCR",
+        "roi": [630, 26, 230, 81]
+    },
+    "竞猜3": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [1147, 126, 133, 444],
+        "template": ["活动/限定/竞猜/竞猜3_1.png", "活动/限定/竞猜/竞猜3_1.png", "竞猜/竞猜3.png"]
+    },
+    "竞猜4": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "roi": [1151, 117, 102, 443],
+        "template": ["竞猜/竞猜4.png"]
+    },
+    "竞猜5": {
+        "action": "Click",
+        "expected": "下一局",
+        "next": ["竞猜-判断剩余时间是否少于30分钟", "竞猜6"],
+        "recognition": "OCR",
+        "roi": [591, 457, 316, 128]
+    },
+    "竞猜6": {
+        "action": "Custom",
+        "custom_action": "Guess",
+        "expected": "剩余时间",
+        "next": ["竞猜-关闭游戏"],
+        "recognition": "OCR",
+        "roi": [636, 472, 260, 69]
+    },
+    "竞猜7": {
+        "action": "Click",
+        "expected": "30万",
+        "next": ["竞猜8"],
+        "recognition": "OCR",
+        "roi": [218, 577, 788, 64]
+    },
+    "竞猜7_左边": {
+        "action": "Click",
+        "expected": "竞猜|竞精",
+        "next": ["竞猜7"],
+        "on_error": ["竞猜-识别失败,返回庭院"],
+        "recognition": "OCR",
+        "roi": [221, 273, 260, 176],
+        "target": [277, 303, 140, 92]
+    },
+    "竞猜8": {
+        "action": "Click",
+        "expected": "竞猜",
+        "next": ["竞猜9"],
+        "recognition": "OCR",
+        "roi": [956, 385, 216, 158]
+    },
+    "竞猜9": {
+        "action": "Click",
+        "expected": "确定",
+        "next": ["竞猜10"],
+        "recognition": "OCR",
+        "roi": [675, 399, 172, 66]
+    },
+    "识别右侧人数": {
+        "expected": "^\\d+$",
+        "recognition": "OCR",
+        "roi": [1119, 467, 124, 42]
+    },
+    "识别左侧人数": {
+        "expected": "^\\d+$",
+        "recognition": "OCR",
+        "roi": [298, 465, 134, 38]
     }
 }

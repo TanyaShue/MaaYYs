@@ -1,0 +1,175 @@
+{
+    "task": [
+        {
+            "name": "对弈竞猜",
+            "label": "对弈竞猜",
+            "entry": "竞猜",
+            "group": ["promotion"],
+            "option": [
+                "竞猜次数",
+                "竞猜策略",
+                "竞猜时间"
+            ]
+        }
+    ],
+    "option": {
+        "竞猜次数":{
+            "type": "select",
+            "label": "竞猜-猜一次",
+            "default_case": "竞猜-挂机",
+            "cases": [
+                {
+                    "name": "竞猜-猜一次",
+                    "label": "竞猜-猜一次",
+                    "description": "只猜一次,猜完任务结束",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "next":[]
+                        },
+                        "竞猜":{
+                            "next": [
+                                "竞猜-判断当前时间",
+                                "竞猜1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "竞猜-挂机",
+                    "label": "竞猜-挂机",
+                    "description": "挂机一直猜,猜完关闭游戏,等待一个半小时后再打开游戏进行竞猜",
+                    "pipeline_override": {
+                    }
+                }
+            ]
+        },
+        "竞猜时间":{
+            "type": "select",
+            "label": "是否等待到剩余30分钟才下注",
+            "default_case": "竞猜-等到剩30分钟下注",
+            "cases": [
+                {
+                    "name": "竞猜-等到剩30分钟下注",
+                    "label": "竞猜-等到剩30分钟下注",
+                    "description": "等到剩余30分钟才下注",
+                    "pipeline_override": {
+                        "竞猜5": {
+                            "next":["竞猜-判断剩余时间是否少于30分钟"]
+                        },
+                        "竞猜2": {
+                              "next": [
+                                "竞猜-识别是否已猜过",
+                                "竞猜5",
+                                "竞猜-下一局-图片匹配",
+                                "竞猜-判断剩余时间是否少于30分钟",
+                                "竞猜12",
+                                "竞猜-识别是否不处于竞猜时间"
+                            ]
+                        },
+                        "竞猜-下一局-图片匹配":{
+                            "next":["竞猜-判断剩余时间是否少于30分钟"]
+                        }
+                    }
+                },
+                {
+                    "name": "竞猜-立即下注",
+                    "label": "立即下注",
+                    "description": "进入活动界面立即下注",
+                    "pipeline_override": {
+                        "竞猜5": {
+                            "next":["竞猜6"]
+                        },
+                        "竞猜2": {
+                              "next": [
+                                "竞猜-识别是否已猜过",
+                                "竞猜5",
+                                "竞猜-下一局-图片匹配",
+                                "竞猜6",
+                                "竞猜12",
+                                "竞猜-识别是否不处于竞猜时间"
+                            ]
+                        },
+                        "竞猜-下一局-图片匹配":{
+                            "next":["竞猜6"]
+                        }
+                    }
+                }
+            ]
+        },
+        "竞猜策略": {
+            "type": "select",
+            "label": "竞猜方案",
+            "default_case": "跟随网站预测",
+            "cases": [
+                {
+                    "name": "跟随人多的",
+                    "label": "跟随人多的",
+                    "description": "识别双方人数，押人数多的一边",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "majority"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "随机选择",
+                    "label": "随机选择",
+                    "description": "不看人数，随机押左或右",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "random"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "跟随网站预测",
+                    "label": "跟随网站预测",
+                    "description": "读 yysrank 实时风向的博主预测统计，红方=左、蓝方=右，押预测票多的一边；取不到数据时跟着人多的选",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "predict"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "竞猜-订阅作者": {
+            "type": "select",
+            "label": "订阅作者",
+            "description": "订阅消息 values 里的作者名（key）。取值为 1 押左、2 押右、0 表示还没发布；作者不存在或为 0 时跟着人多的选。",
+            "default_case": "在下小贱",
+            "cases": [
+                {
+                    "name": "在下小贱",
+                    "label": "在下小贱",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "author",
+                                "author": "在下小贱"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "姝酱",
+                    "label": "姝酱",
+                    "pipeline_override": {
+                        "竞猜6": {
+                            "custom_action_param": {
+                                "strategy": "author",
+                                "author": "姝酱"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
