@@ -190,8 +190,9 @@
         "action": "Click",
         "post_delay": 2000,
         "recognition": "TemplateMatch",
-        "roi": [1088, 6, 192, 191],
-        "template": ["非战斗/商店购买/商店购买-点击特殊商店_1.png"]
+        "roi": [1083, 100, 194, 88],
+        "target": [1182, 100, 57, 63],
+        "template": ["日常/商店购买/商店购买-点击特殊商店_1.png", "非战斗/商店购买/商店购买-点击特殊商店_1.png"]
     },
     "商店购买-点击荣誉商店": {
         "action": "Click",
