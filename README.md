@@ -148,6 +148,25 @@ MuMu 可在设置或设备诊断中查看端口；雷电多开端口通常随实
 
 </details>
 
+## 进阶功能
+
+<details>
+<summary>如何让脚本自行启动模拟器</summary>
+
+1. 在脚本中添加自定义任务：前置程序
+   - 关闭“已运行时跳过”选项的开关
+   ![添加自定义任务](https://cdn3.easylink.cc/3c536907-2bb7-4928-81ec-abbd2f5657db_%E7%82%B9%E5%87%BB%E6%B7%BB%E5%8A%A0%E4%BB%BB%E5%8A%A1.png?e=1791624803&token=J_WyMIdhZtwb0E0QHWRqEfQrd5lVSWLffl9QxaxP:9inF4hwLWDmSwmepTawQeqwq6CQ=)
+2. 在“程序路径”中选择模拟器的 exe 文件，并在“程序参数”中填写对应的启动参数
+   - 常见模拟器参数：
+     - MuMu：`-v <模拟器序号 - 1>`，即第一台为 `-v 0`、第二台为 `-v 1`，依次类推
+     - 雷电：默认实例可不带参数；需要指定多开实例时，用 `ldconsole.exe` 配合参数 `launch --index <序号>`
+     - PlayCover（macOS）：通常无需参数，若要启动应用可填 `open -a PlayCover`
+   - 以 MuMu 为例：
+   ![前置程序配置](https://cdn3.easylink.cc/0e497302-1947-4567-83d6-baa706906520_%E5%89%8D%E7%BD%AE%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE.png?e=1791625372&token=J_WyMIdhZtwb0E0QHWRqEfQrd5lVSWLffl9QxaxP:9e3T6sW0peOdMqo2_OY6IvcbMcc=)
+3. 在“前置程序”之后添加“倒计时”任务，等待模拟器完全启动（常见 30 秒以上，视机器速度调整）
+
+</details>
+
 ## 开发说明
 
 <details>
