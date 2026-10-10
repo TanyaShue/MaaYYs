@@ -322,4 +322,4 @@ ci: 调整发布流程
 
 ## 许可
 
-本项目使用 [MIT License](LICENSE) 发布。
+本项目使用 [MIT License](LICENSE) 发布
