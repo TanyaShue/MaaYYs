@@ -165,7 +165,7 @@
   },
   "日常-满结界经验领取-确认领取": {
     "action": "Click",
-    "expected": "确认",
+    "expected": "确认|确定",
     "post_delay": 2000,
     "recognition": "OCR",
     "roi": [

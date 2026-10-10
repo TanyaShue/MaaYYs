@@ -547,7 +547,7 @@
   },
   "寮3033": {
     "action": "Click",
-    "expected": "确认",
+    "expected": "确认|确定",
     "recognition": "OCR",
     "roi": [
       647,
