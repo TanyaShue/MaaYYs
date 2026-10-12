@@ -539,13 +539,20 @@
         "roi": [537, 52, 200, 94]
     },
     "导航-花合战": {
-        "next": ["导航-花合战-识别是否位于花合战", "[JumpBack]导航-花合战-点击花合战", "[JumpBack]导航-识别是否位于加载过渡界面", "[JumpBack]导航-庭院-底部菜单栏"],
+        "next": ["导航-花合战-识别是否位于花合战", "[JumpBack]导航-花合战-点击花合战", "[JumpBack]导航-花合战-点击花合战-特征", "[JumpBack]导航-识别是否位于加载过渡界面", "[JumpBack]导航-庭院-底部菜单栏"],
         "recognition": "DirectHit"
     },
     "导航-花合战-点击花合战": {
         "action": "Click",
         "post_delay": 2000,
         "recognition": "TemplateMatch",
+        "roi": [744, 580, 148, 140],
+        "template": ["导航/导航-花合战-点击花合战_1.png", "通用/导航/导航-花合战-点击花合战_1.png"]
+    },
+    "导航-花合战-点击花合战-特征": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
         "roi": [744, 580, 148, 140],
         "template": ["导航/导航-花合战-点击花合战_1.png", "通用/导航/导航-花合战-点击花合战_1.png"]
     },
