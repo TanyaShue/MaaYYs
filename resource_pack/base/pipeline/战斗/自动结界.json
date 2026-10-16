@@ -251,12 +251,7 @@
         "timeout": 5000
     },
     "突破_准备重新挑战四次": {
-        "action": "Custom",
-        "custom_action": "ClearHitCount",
-        "custom_action_param": {
-            "node_names": ["突破-将手动改为自动-3"]
-        },
-        "next": ["[JumpBack]突破_开始重新挑战", "突破-进入战斗"],
+        "next": ["[JumpBack]突破_开始重新挑战", "自动结界-清空计数并进入战斗"],
         "recognition": "DirectHit",
         "timeout": 2000000
     },
@@ -403,6 +398,18 @@
         "next": ["导航-庭院"],
         "recognition": "OCR",
         "roi": [144, 3, 114, 81]
+    },
+    "自动结界-清空计数并进入战斗": {
+        "action": "Custom",
+        "custom_action": "ClearHitCount",
+        "custom_action_param": {
+            "node_names": ["突破-将手动改为自动-3"]
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "退四结束,进入战斗"
+        },
+        "next": ["突破-进入战斗"],
+        "recognition": "DirectHit"
     },
     "自动结界-点击进攻2": {
         "action": "Click",
