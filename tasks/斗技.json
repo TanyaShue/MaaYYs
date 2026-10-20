@@ -97,12 +97,12 @@
           }
         },
         {
-          "name": "斗技段位目标_八段",
-          "label": "八段",
+          "name": "斗技段位目标_七段",
+          "label": "七段",
           "description": "不再努力一下吗",
           "pipeline_override": {
             "自动斗技-段位达标-返回庭院": {
-              "expected": "八段"
+              "expected": "七段"
             }
           }
         },
