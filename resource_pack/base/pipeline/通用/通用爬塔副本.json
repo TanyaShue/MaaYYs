@@ -4,14 +4,14 @@
         "custom_action": "HumanTouch",
         "custom_action_param": {
             "ROI_1": [372, 639, 401, 81],
-            "short_wait_min": 2,
-            "short_wait_max": 10,
-            "long_wait_min": 100,
+            "double_click_weight": 50,
             "long_wait_max": 200,
-            "short_wait_weight": 5,
+            "long_wait_min": 100,
             "long_wait_weight": 95,
-            "single_click_weight": 50,
-            "double_click_weight": 50
+            "short_wait_max": 10,
+            "short_wait_min": 2,
+            "short_wait_weight": 5,
+            "single_click_weight": 50
         },
         "expected": "点击屏幕继续",
         "max_hit": 1,
@@ -20,7 +20,7 @@
     },
     "通用爬塔副本-卡住了": {
         "focus": {
-            "Node.Recognition.Succeeded": "救命!!! 卡住了"
+            "Node.Recognition.Succeeded": "救命!!! 好像卡住了"
         },
         "recognition": "DirectHit"
     },
@@ -68,7 +68,8 @@
         "next": ["通用爬塔副本-识别是否返回挑战界面", "[JumpBack]通用爬塔副本-先等待", "[JumpBack]通用爬塔副本-退出战斗界面"],
         "on_error": ["通用爬塔副本-卡住了"],
         "recognition": "OCR",
-        "roi": [344, 570, 636, 150]
+        "roi": [344, 570, 636, 150],
+        "timeout": 600000
     },
     "通用爬塔副本-退出战斗界面": {
         "action": "Click",
