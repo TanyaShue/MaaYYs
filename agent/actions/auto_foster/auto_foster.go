@@ -18,7 +18,8 @@ type AutoFoster struct {
 }
 
 type FosterParams struct {
-	FosterTarget int `json:"FosterTarget"` // 1: 勾玉, 2: 体力
+	FosterTarget          int `json:"FosterTarget"`          // 1: 勾玉, 2: 体力
+	DirectSelectThreshold int `json:"DirectSelectThreshold"` // 可选，覆盖默认直选阈值
 }
 
 // RewardInfo 奖励信息
@@ -50,7 +51,14 @@ const (
 	WaitMedium      = 2 * time.Second
 	MaxPagesScan    = 5
 	MaxPagesSearch  = 10
+
+	// 6 星太鼓/斗鱼的寄养收益通常分别从 67 勾玉、130 体力起，
+	// 达到该收益时无需继续扫描，直接选中当前目标即可。
+	DefaultMagatamaDirectThreshold = 67
+	DefaultStaminaDirectThreshold  = 130
 )
+
+var rewardTextPattern = regexp.MustCompile(`^\s*([^\d+]+?)\s*\+?\s*(\d+)\s*$`)
 
 // Run 执行自动寄养
 func (a *AutoFoster) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
@@ -69,6 +77,10 @@ func (a *AutoFoster) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		prioritizedType = "体力"
 	}
 	fmt.Printf("设置优先级为: %s\n", prioritizedType)
+	directThreshold := getDirectSelectThreshold(prioritizedType, params.DirectSelectThreshold)
+	if directThreshold > 0 {
+		fmt.Printf("优先奖励达到 %s+%d 时将直接选择，不再扫描其他目标。\n", prioritizedType, directThreshold)
+	}
 
 	var allRewards []RewardInfo
 
@@ -77,21 +89,33 @@ func (a *AutoFoster) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	fmt.Println("切换到好友标签页...")
 	_, _ = ctx.RunTask(TaskClickFriend, nil)
 	time.Sleep(WaitShort)
-	friendRewards := a.collectAllRewardsFromTab(ctx)
+	friendRewards, friendSelected := a.collectAllRewardsFromTab(ctx, prioritizedType, directThreshold)
 	allRewards = append(allRewards, friendRewards...)
 	fmt.Printf("从好友标签页收集到 %d 个奖励信息。\n", len(friendRewards))
 
 	if !a.isRunning() {
 		return false
 	}
+	if friendSelected {
+		fmt.Println("已直接选择好友标签页中达到阈值的优先奖励，脚本执行成功。")
+		return true
+	}
 
 	// 收集跨区好友标签页
 	fmt.Println("切换到跨区好友标签页...")
 	_, _ = ctx.RunTask(TaskClickCross, nil)
 	time.Sleep(WaitShort)
-	crossRewards := a.collectAllRewardsFromTab(ctx)
+	crossRewards, crossSelected := a.collectAllRewardsFromTab(ctx, prioritizedType, directThreshold)
 	allRewards = append(allRewards, crossRewards...)
 	fmt.Printf("从跨区好友标签页收集到 %d 个奖励信息。\n", len(crossRewards))
+
+	if !a.isRunning() {
+		return false
+	}
+	if crossSelected {
+		fmt.Println("已直接选择跨区好友标签页中达到阈值的优先奖励，脚本执行成功。")
+		return true
+	}
 
 	fmt.Printf("总共收集到 %d 个奖励信息。\n", len(allRewards))
 
@@ -154,8 +178,8 @@ func (a *AutoFoster) parseRewardText(text string) (string, int) {
 	}
 
 	// 使用正则表达式匹配 "类型+数值" 格式
-	re := regexp.MustCompile(`^(.+?)\+?(\d+)$`)
-	matches := re.FindStringSubmatch(text)
+	text = strings.ReplaceAll(strings.TrimSpace(text), "＋", "+")
+	matches := rewardTextPattern.FindStringSubmatch(text)
 	if len(matches) == 3 {
 		rewardType := strings.TrimSpace(matches[1])
 		rewardValue := 0
@@ -237,18 +261,19 @@ func (a *AutoFoster) clickTargetByDetail(ctx *maa.Context, detail *maa.Recogniti
 	return "", 0
 }
 
-// collectRewardsFromCurrentPage 收集当前页面上所有目标的奖励信息
-func (a *AutoFoster) collectRewardsFromCurrentPage(ctx *maa.Context) []RewardInfo {
+// collectRewardsFromCurrentPage 收集当前页面上目标的奖励信息。
+// 发现达到直选阈值的优先奖励时，会立即返回 selected=true。
+func (a *AutoFoster) collectRewardsFromCurrentPage(ctx *maa.Context, prioritizedType string, directThreshold int) ([]RewardInfo, bool) {
 	var pageResults []RewardInfo
 	controller := ctx.GetTasker().GetController()
 	if controller == nil {
-		return pageResults
+		return pageResults, false
 	}
 
 	controller.PostScreencap().Wait()
 	img, err := controller.CacheImage()
 	if err != nil {
-		return pageResults
+		return pageResults, false
 	}
 
 	detail, _ := ctx.RunRecognition(TaskRecogTarget, img, nil)
@@ -262,10 +287,15 @@ func (a *AutoFoster) collectRewardsFromCurrentPage(ctx *maa.Context) []RewardInf
 					if len(target.Box) >= 4 {
 						rewardType, rewardValue := a.clickTargetAndGetReward(ctx, target.Box)
 						if rewardType != "" && rewardValue > 0 {
-							pageResults = append(pageResults, RewardInfo{
+							reward := RewardInfo{
 								YieldType:  rewardType,
 								YieldValue: rewardValue,
-							})
+							}
+							pageResults = append(pageResults, reward)
+							if shouldDirectSelect(reward, prioritizedType, directThreshold) {
+								fmt.Printf("发现达到直选阈值的优先奖励: %s +%d，直接选择并停止扫描。\n", rewardType, rewardValue)
+								return pageResults, true
+							}
 						}
 					}
 				}
@@ -273,10 +303,15 @@ func (a *AutoFoster) collectRewardsFromCurrentPage(ctx *maa.Context) []RewardInf
 				// 只有一个目标
 				rewardType, rewardValue := a.clickTargetAndGetReward(ctx, recogDetail.Best.Box)
 				if rewardType != "" && rewardValue > 0 {
-					pageResults = append(pageResults, RewardInfo{
+					reward := RewardInfo{
 						YieldType:  rewardType,
 						YieldValue: rewardValue,
-					})
+					}
+					pageResults = append(pageResults, reward)
+					if shouldDirectSelect(reward, prioritizedType, directThreshold) {
+						fmt.Printf("发现达到直选阈值的优先奖励: %s +%d，直接选择并停止扫描。\n", rewardType, rewardValue)
+						return pageResults, true
+					}
 				}
 			}
 		}
@@ -284,11 +319,12 @@ func (a *AutoFoster) collectRewardsFromCurrentPage(ctx *maa.Context) []RewardInf
 		fmt.Println("当前页未找到目标。")
 	}
 
-	return pageResults
+	return pageResults, false
 }
 
-// collectAllRewardsFromTab 遍历当前标签页的所有页面，收集奖励信息
-func (a *AutoFoster) collectAllRewardsFromTab(ctx *maa.Context) []RewardInfo {
+// collectAllRewardsFromTab 遍历当前标签页的所有页面，收集奖励信息。
+// 找到达到直选阈值的优先奖励后立即停止扫描。
+func (a *AutoFoster) collectAllRewardsFromTab(ctx *maa.Context, prioritizedType string, directThreshold int) ([]RewardInfo, bool) {
 	var allTabRewards []RewardInfo
 	pageCount := 0
 
@@ -297,18 +333,20 @@ func (a *AutoFoster) collectAllRewardsFromTab(ctx *maa.Context) []RewardInfo {
 		fmt.Printf("扫描当前标签页的第 %d 页...\n", pageCount)
 
 		if !a.isRunning() {
-			return allTabRewards
+			return allTabRewards, false
 		}
 
-		pageRewards := a.collectRewardsFromCurrentPage(ctx)
+		pageRewards, selected := a.collectRewardsFromCurrentPage(ctx, prioritizedType, directThreshold)
+		allTabRewards = append(allTabRewards, pageRewards...)
+		if selected {
+			return allTabRewards, true
+		}
 
 		// 如果某页（非第一页）没收到奖励，就认为结束了
 		if len(pageRewards) == 0 && pageCount > 1 {
 			fmt.Println("此页未找到奖励，假设是当前标签页末尾。")
 			break
 		}
-
-		allTabRewards = append(allTabRewards, pageRewards...)
 
 		// 检查是否有下一页
 		nextResult, _ := ctx.RunTask(TaskNextPage, nil)
@@ -325,7 +363,28 @@ func (a *AutoFoster) collectAllRewardsFromTab(ctx *maa.Context) []RewardInfo {
 		}
 	}
 
-	return allTabRewards
+	return allTabRewards, false
+}
+
+// getDirectSelectThreshold 返回优先奖励的直选阈值。
+// 参数中传入正数时可覆盖默认值；返回 0 表示不启用直选。
+func getDirectSelectThreshold(prioritizedType string, override int) int {
+	if override > 0 {
+		return override
+	}
+
+	switch prioritizedType {
+	case "勾玉":
+		return DefaultMagatamaDirectThreshold
+	case "体力":
+		return DefaultStaminaDirectThreshold
+	default:
+		return 0
+	}
+}
+
+func shouldDirectSelect(reward RewardInfo, prioritizedType string, threshold int) bool {
+	return threshold > 0 && reward.YieldType == prioritizedType && reward.YieldValue >= threshold
 }
 
 // getSortedRewards 对收集到的所有奖励进行去重和排序
