@@ -1,0 +1,180 @@
+{
+    "task": [
+        {
+            "name": "通用爬塔副本",
+            "label": "通用爬塔副本",
+            "description": "在爬塔副本的挑战界面开始，指定次数；可配置是否启用等待时间及点击策略",
+            "entry": "通用爬塔副本-开始",
+            "group": ["standalone"],
+            "option": [
+                "通用爬塔副本-设置挑战次数",
+                "通用爬塔副本-设置爬塔开始的按钮",
+                "通用爬塔副本-启用等待时间"
+            ]
+        }
+    ],
+    "option": {
+        "通用爬塔副本-设置挑战次数": {
+            "type": "input",
+            "label": "挑战次数",
+            "description": "设置本次通用爬塔副本的挑战次数",
+            "inputs": [
+                {
+                    "name": "挑战次数",
+                    "label": "挑战次数",
+                    "description": "填写需要挑战的次数",
+                    "default": "5",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "通用爬塔副本-计数": {
+                    "custom_recognition_param": {
+                        "target_count": "{挑战次数}"
+                    }
+                }
+            }
+        },
+        "通用爬塔副本-设置爬塔开始的按钮": {
+            "type": "input",
+            "label": "开始的文字",
+            "description": "设置本次通用爬塔副本的开始按钮的文字,一般是挑战",
+            "inputs": [
+                {
+                    "name": "开始的文字",
+                    "label": "开始的文字",
+                    "description": "填写需要挑战的次数",
+                    "default": "挑战|准备",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "通用爬塔副本-开始战斗": {
+                    "expected": "挑战|准备"
+                },
+                "通用爬塔副本-点击挑战": {
+                    "expected": "挑战|准备"
+                },
+                "通用爬塔副本-识别是否返回挑战界面": {
+                    "expected": "挑战|准备"
+                }
+            }
+        },
+        "通用爬塔副本-启用等待时间": {
+            "type": "switch",
+            "label": "启用等待时间",
+            "description": "是否在战斗结束点击屏幕继续前进行等待",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "option": [
+                        "通用爬塔副本-自定义点击策略设置"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ]
+        },
+        "通用爬塔副本-自定义点击策略设置": {
+            "type": "switch",
+            "label": "自定义点击策略",
+            "description": "是否自定义通用爬塔副本的点击权重、等待权重与随机等待时间",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "option": [
+                        "通用爬塔副本-点击策略设置"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "否"
+                }
+            ]
+        },
+        "通用爬塔副本-点击策略设置": {
+            "type": "input",
+            "label": "通用爬塔副本点击策略设置",
+            "description": "自定义通用爬塔副本中的点击权重分布与随机等待时间范围；权重必须大于 0",
+            "inputs": [
+                {
+                    "name": "double_w",
+                    "label": "双击权重",
+                    "description": "执行双击动作的权重",
+                    "default": "50",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "single_w",
+                    "label": "单击权重",
+                    "description": "执行单击动作的权重",
+                    "default": "50",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "short_w",
+                    "label": "短等待权重",
+                    "description": "执行短时间等待的权重",
+                    "default": "95",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "long_w",
+                    "label": "长等待权重",
+                    "description": "执行长时间等待的权重",
+                    "default": "5",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "short_min",
+                    "label": "短等待最少(秒)",
+                    "description": "短时间等待的最少秒数",
+                    "default": "1",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "short_max",
+                    "label": "短等待最多(秒)",
+                    "description": "短时间等待的最多秒数",
+                    "default": "20",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "long_min",
+                    "label": "长等待最少(秒)",
+                    "description": "长时间等待的最少秒数",
+                    "default": "100",
+                    "pipeline_type": "int"
+                },
+                {
+                    "name": "long_max",
+                    "label": "长等待最多(秒)",
+                    "description": "长时间等待的最多秒数",
+                    "default": "200",
+                    "pipeline_type": "int"
+                }
+            ],
+            "pipeline_override": {
+                "通用爬塔副本-先等待": {
+                    "custom_action_param": {
+                        "ROI_1": [372, 639, 401, 81],
+                        "short_wait_min": "{short_min}",
+                        "short_wait_max": "{short_max}",
+                        "long_wait_min": "{long_min}",
+                        "long_wait_max": "{long_max}",
+                        "short_wait_weight": "{short_w}",
+                        "long_wait_weight": "{long_w}",
+                        "single_click_weight": "{single_w}",
+                        "double_click_weight": "{double_w}"
+                    }
+                }
+            }
+        }
+    }
+}

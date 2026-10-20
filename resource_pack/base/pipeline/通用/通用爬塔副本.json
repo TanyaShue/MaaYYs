@@ -1,0 +1,79 @@
+{
+    "通用爬塔副本-先等待": {
+        "action": "Custom",
+        "custom_action": "HumanTouch",
+        "custom_action_param": {
+            "ROI_1": [372, 639, 401, 81],
+            "short_wait_min": 2,
+            "short_wait_max": 10,
+            "long_wait_min": 100,
+            "long_wait_max": 200,
+            "short_wait_weight": 5,
+            "long_wait_weight": 95,
+            "single_click_weight": 50,
+            "double_click_weight": 50
+        },
+        "expected": "点击屏幕继续",
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [344, 570, 636, 150]
+    },
+    "通用爬塔副本-卡住了": {
+        "focus": {
+            "Node.Recognition.Succeeded": "救命!!! 卡住了"
+        },
+        "recognition": "DirectHit"
+    },
+    "通用爬塔副本-开始": {
+        "next": ["通用爬塔副本-计数", "[JumpBack]通用爬塔副本-开始战斗"],
+        "recognition": "DirectHit",
+        "timeout": -1
+    },
+    "通用爬塔副本-开始战斗": {
+        "expected": "挑战|准备",
+        "next": ["[JumpBack]通用爬塔副本-点击挑战", "通用爬塔副本-识别点击屏幕继续后随机等待"],
+        "recognition": "OCR",
+        "roi": [963, 509, 317, 194]
+    },
+    "通用爬塔副本-点击挑战": {
+        "action": "Click",
+        "expected": "挑战|准备",
+        "recognition": "OCR",
+        "roi": [963, 509, 317, 194]
+    },
+    "通用爬塔副本-计数": {
+        "custom_recognition": "TaskCounterRecognition",
+        "custom_recognition_param": {
+            "target_count": 5
+        },
+        "focus": {
+            "Node.Action.Succeeded": "次数达标!!!",
+            "Node.Recognition.Failed": "次数不达标,继续"
+        },
+        "inverse": true,
+        "recognition": "Custom"
+    },
+    "通用爬塔副本-识别是否返回挑战界面": {
+        "expected": "挑战|准备",
+        "recognition": "OCR",
+        "roi": [963, 509, 317, 194]
+    },
+    "通用爬塔副本-识别点击屏幕继续后随机等待": {
+        "action": "Custom",
+        "custom_action": "ClearHitCount",
+        "custom_action_param": {
+            "node_name": "通用爬塔副本-先等待"
+        },
+        "expected": "点击屏幕继续",
+        "next": ["通用爬塔副本-识别是否返回挑战界面", "[JumpBack]通用爬塔副本-先等待", "[JumpBack]通用爬塔副本-退出战斗界面"],
+        "on_error": ["通用爬塔副本-卡住了"],
+        "recognition": "OCR",
+        "roi": [344, 570, 636, 150]
+    },
+    "通用爬塔副本-退出战斗界面": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [344, 570, 636, 150]
+    }
+}
