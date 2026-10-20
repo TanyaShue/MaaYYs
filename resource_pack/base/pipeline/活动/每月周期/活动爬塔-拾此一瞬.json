@@ -6,15 +6,6 @@
         "roi": [136, 9, 158, 67],
         "timeout": 200000
     },
-    "活动爬塔-拾此一瞬-659786": {
-        "action": "Click",
-        "expected": "点击屏幕继续",
-        "recognition": "OCR",
-        "roi": [353, 584, 597, 136]
-    },
-    "活动爬塔-拾此一瞬-758016": {
-        "recognition": "DirectHit"
-    },
     "活动爬塔-拾此一瞬-872160": {
         "action": "Click",
         "recognition": "TemplateMatch",
@@ -39,67 +30,17 @@
         "recognition": "OCR",
         "roi": [3, 81, 209, 639]
     },
-    "活动爬塔-拾此一瞬-回到式神录": {
-        "max_hit": 1,
-        "next": ["导航-式神录"],
-        "recognition": "DirectHit"
-    },
     "活动爬塔-拾此一瞬-多扫几次": {
         "max_hit": 5,
-        "recognition": "DirectHit"
-    },
-    "活动爬塔-拾此一瞬-大富翁-判断是否自动开始": {
-        "expected": "自动开始",
-        "inverse": true,
-        "max_hit": 1,
-        "next": ["活动爬塔-拾此一瞬-大富翁-点击自动"],
-        "pre_delay": 1000,
-        "recognition": "OCR",
-        "roi": [854, 572, 209, 75]
-    },
-    "活动爬塔-拾此一瞬-大富翁-判断是否该结束任务": {
-        "expected": "限购|70次",
-        "next": ["导航-庭院"],
-        "recognition": "OCR",
-        "roi": [685, 188, 361, 48]
-    },
-    "活动爬塔-拾此一瞬-大富翁-点击自动": {
-        "action": "Click",
-        "expected": "自动",
-        "recognition": "OCR",
-        "roi": [928, 647, 71, 59]
-    },
-    "活动爬塔-拾此一瞬-大富翁-识别次数": {
-        "next": ["导航-庭院"],
-        "recognition": "TemplateMatch",
-        "roi": [1079, 523, 201, 197]
-    },
-    "活动爬塔-拾此一瞬-大富翁-锁定阵容": {
-        "max_hit": 1,
-        "next": ["通用-锁定阵容"],
         "recognition": "DirectHit"
     },
     "活动爬塔-拾此一瞬-导航-拾此一瞬": {
         "next": ["活动爬塔-拾此一瞬-识别是否位于活动界面", "[JumpBack]活动爬塔-拾此一瞬-判断是否存在版本活动", "[JumpBack]活动爬塔-拾此一瞬-仅第一次直接进活动总览", "[JumpBack]活动爬塔-拾此一瞬-多扫几次", "[JumpBack]导航-活动总览"],
         "recognition": "DirectHit"
     },
-    "活动爬塔-拾此一瞬-开始活动大富翁": {
-        "next": ["[JumpBack]活动爬塔-拾此一瞬-开始装备大富翁御魂", "活动爬塔-拾此一瞬-识别是否位于大富翁界面", "[JumpBack]活动爬塔-拾此一瞬-点击大富翁", "[JumpBack]活动爬塔-拾此一瞬-导航-拾此一瞬"],
-        "recognition": "DirectHit"
-    },
     "活动爬塔-拾此一瞬-开始活动爬塔任务": {
         "next": ["活动爬塔-拾此一瞬-识别是否进入活动界面", "[JumpBack]活动爬塔-拾此一瞬-点击进入爬塔活动", "[JumpBack]活动爬塔-拾此一瞬-第一次直接进", "[JumpBack]活动爬塔-拾此一瞬-进入活动多扫几次", "[JumpBack]活动爬塔-拾此一瞬-导航-拾此一瞬"],
         "recognition": "DirectHit"
-    },
-    "活动爬塔-拾此一瞬-开始装备大富翁御魂": {
-        "max_hit": 1,
-        "next": ["[JumpBack]活动爬塔-拾此一瞬-回到式神录", "活动爬塔-拾此一瞬-装备大富翁御魂"],
-        "recognition": "DirectHit"
-    },
-    "活动爬塔-拾此一瞬-点击大富翁": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [882, 91, 398, 355]
     },
     "活动爬塔-拾此一瞬-点击屏幕继续": {
         "action": "Custom",
@@ -133,12 +74,6 @@
         "roi": [1117, 591, 136, 72],
         "timeout": 200000
     },
-    "活动爬塔-拾此一瞬-点击活动收益": {
-        "action": "Click",
-        "recognition": "TemplateMatch",
-        "roi": [362, 79, 579, 413],
-        "target": [327, 569, 473, 149]
-    },
     "活动爬塔-拾此一瞬-点击进入爬塔活动": {
         "action": "Click",
         "post_delay": 2000,
@@ -165,19 +100,6 @@
         "post_delay": 1000,
         "recognition": "OCR"
     },
-    "活动爬塔-拾此一瞬-装备大富翁御魂": {
-        "action": "Custom",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "默认分组",
-            "team_name": "默认队伍"
-        },
-        "expected": "式神录",
-        "max_hit": 1,
-        "next": ["导航-庭院"],
-        "recognition": "OCR",
-        "roi": [0, 0, 296, 78]
-    },
     "活动爬塔-拾此一瞬-装备御魂": {
         "max_hit": 1,
         "next": ["活动爬塔-拾此一瞬-识别是否位于式神录", "[JumpBack]活动爬塔-拾此一瞬-点击式神录", "[JumpBack]活动爬塔-拾此一瞬-点击式神录-ocr"],
@@ -201,13 +123,6 @@
         "roi": [1085, 584, 173, 79],
         "timeout": 200000
     },
-    "活动爬塔-拾此一瞬-识别是否位于大富翁界面": {
-        "expected": "出巡仪式",
-        "next": ["[JumpBack]活动爬塔-拾此一瞬-点击活动收益", "[JumpBack]活动爬塔-拾此一瞬-大富翁-锁定阵容", "[JumpBack]活动爬塔-拾此一瞬-大富翁-判断是否自动开始", "[JumpBack]活动爬塔-拾此一瞬-识别自动开始", "活动爬塔-拾此一瞬-大富翁-判断是否该结束任务", "活动爬塔-拾此一瞬-识别是否只剩0张票", "[JumpBack]活动爬塔-拾此一瞬-识别是否在战斗后结束"],
-        "recognition": "OCR",
-        "roi": [0, 0, 323, 75],
-        "timeout": 600000
-    },
     "活动爬塔-拾此一瞬-识别是否位于式神录": {
         "action": "Custom",
         "custom_action": "SwitchSoul",
@@ -226,19 +141,6 @@
         "post_delay": 2000,
         "recognition": "OCR",
         "roi": [130, 0, 246, 99]
-    },
-    "活动爬塔-拾此一瞬-识别是否只剩0张票": {
-        "expected": "^[0Oo]$",
-        "next": ["活动爬塔-拾此一瞬-大富翁-识别次数"],
-        "recognition": "OCR",
-        "roi": [1125, 671, 77, 33]
-    },
-    "活动爬塔-拾此一瞬-识别是否在战斗后结束": {
-        "expected": "点击屏幕继续",
-        "next": ["活动爬塔-拾此一瞬-659786", "活动爬塔-拾此一瞬-758016"],
-        "post_delay": 5000,
-        "recognition": "OCR",
-        "roi": [353, 584, 597, 136]
     },
     "活动爬塔-拾此一瞬-识别是否返回活动界面": {
         "expected": "古跡演武|古迹演武",
@@ -266,11 +168,6 @@
         "recognition": "OCR",
         "roi": [136, 9, 158, 67],
         "timeout": 200000
-    },
-    "活动爬塔-拾此一瞬-识别自动开始": {
-        "expected": "自动开始",
-        "recognition": "OCR",
-        "roi": [854, 572, 209, 75]
     },
     "活动爬塔-拾此一瞬-返回活动界面": {
         "action": "Click",
