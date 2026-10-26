@@ -1,125 +1,98 @@
 {
-  "装备御魂": {
-    "expected": "预设",
-    "next": [
-      "装备御魂-识别是否打开预设",
-      "[JumpBack]装备御魂-点击按钮打开预设面板"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      236,
-      42,
-      264,
-      110
-    ]
-  },
-  "装备御魂-分组识别错误": {
-    "recognition": "DirectHit"
-  },
-  "装备御魂-向下滑动": {
-    "action": "Swipe",
-    "begin": [
-      1090,
-      572,
-      161,
-      64
-    ],
-    "duration": 2000,
-    "end": [
-      1099,
-      88,
-      145,
-      58
-    ],
-    "expected": "新建预设队伍|管理分组",
-    "max_hit": 3,
-    "recognition": "OCR",
-    "roi": [
-      518,
-      635,
-      743,
-      66
-    ]
-  },
-  "装备御魂-滑动分组到上方": {
-    "action": "Swipe",
-    "begin": [
-      1099,
-      88,
-      145,
-      58
-    ],
-    "duration": 2000,
-    "end": [
-      1090,
-      572,
-      161,
-      64
-    ],
-    "expected": "新建预设队伍|管理分组",
-    "max_hit": 3,
-    "recognition": "OCR",
-    "roi": [
-      518,
-      635,
-      743,
-      66
-    ]
-  },
-  "装备御魂-点击按钮打开预设面板": {
-    "action": "Click",
-    "expected": "预设",
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      236,
-      42,
-      264,
-      110
-    ]
-  },
-  "装备御魂-识别是否打开预设": {
-    "expected": "新建预设队伍|管理分组",
-    "next": [
-      "装备御魂-识别目标分组",
-      "[JumpBack]装备御魂-滑动分组到上方",
-      "[JumpBack]装备御魂-向下滑动"
-    ],
-    "on_error": [
-      "装备御魂-分组识别错误"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      518,
-      635,
-      743,
-      66
-    ],
-    "timeout": 10000
-  },
-  "装备御魂-识别目标分组": {
-    "action": "Click",
-    "expected": "英杰试炼",
-    "recognition": "OCR",
-    "roi": [
-      1068,
-      51,
-      193,
-      655
-    ]
-  },
-  "装备御魂-识别装备御魂图标": {
-    "expected": 0,
-    "model": "special-icon-v0.1.2.onnx",
-    "recognition": "NeuralNetworkDetect"
-  },
-  "装备御魂-识别队伍名称": {
-    "recognition": "OCR",
-    "roi": [
-      562,
-      130,
-      343,
-      536
-    ]
-  }
+    "装备御魂": {
+        "expected": "预设",
+        "next": ["装备御魂-识别是否打开预设", "[JumpBack]装备御魂-点击按钮打开预设面板"],
+        "recognition": "OCR",
+        "roi": [236, 42, 264, 110]
+    },
+    "装备御魂-分组识别错误": {
+        "recognition": "DirectHit"
+    },
+    "装备御魂-向下滑动": {
+        "action": "Swipe",
+        "begin": [565, 557, 467, 61],
+        "duration": 2000,
+        "end": [573, 200, 458, 70],
+        "expected": "新建预设队伍|管理分组",
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [518, 635, 743, 66]
+    },
+    "装备御魂-向下滑动分组": {
+        "action": "Swipe",
+        "begin": [1090, 572, 161, 64],
+        "duration": 2000,
+        "end": [1099, 88, 145, 58],
+        "expected": "新建预设队伍|管理分组",
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [518, 635, 743, 66]
+    },
+    "装备御魂-滑动分组到上方": {
+        "action": "Swipe",
+        "begin": [1099, 88, 145, 58],
+        "duration": 2000,
+        "end": [1090, 572, 161, 64],
+        "expected": "新建预设队伍|管理分组",
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [518, 635, 743, 66]
+    },
+    "装备御魂-点击按钮打开预设面板": {
+        "action": "Click",
+        "expected": "预设",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [236, 42, 264, 110]
+    },
+    "装备御魂-点击确定": {
+        "action": "Click",
+        "expected": "确定",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [401, 354, 467, 135],
+        "timeout": 2000
+    },
+    "装备御魂-确保没有确定": {
+        "expected": "确定",
+        "inverse": true,
+        "pre_delay": 1000,
+        "recognition": "OCR",
+        "roi": [404, 354, 476, 149],
+        "timeout": 2000
+    },
+    "装备御魂-识别是否打开预设": {
+        "expected": "新建预设队伍|管理分组",
+        "next": ["装备御魂-识别目标分组", "[JumpBack]装备御魂-滑动分组到上方", "[JumpBack]装备御魂-向下滑动分组"],
+        "on_error": ["装备御魂-分组识别错误"],
+        "recognition": "OCR",
+        "roi": [518, 635, 743, 66],
+        "timeout": 10000
+    },
+    "装备御魂-识别目标分组": {
+        "action": "Click",
+        "expected": "英杰试炼",
+        "next": ["装备御魂-识别队伍名称", "[JumpBack]装备御魂-向下滑动"],
+        "on_error": ["装备御魂-识别队伍错误"],
+        "recognition": "OCR",
+        "roi": [1068, 51, 193, 655]
+    },
+    "装备御魂-识别装备御魂图标": {
+        "action": "Click",
+        "expected": 0,
+        "model": "special-icon-v0.1.2.onnx",
+        "next": ["装备御魂-确保没有确定", "[JumpBack]装备御魂-点击确定"],
+        "recognition": "NeuralNetworkDetect",
+        "roi": "装备御魂-识别队伍名称",
+        "roi_offset": [90, -27, 390, 50]
+    },
+    "装备御魂-识别队伍名称": {
+        "expected": "源赖光",
+        "next": ["装备御魂-识别装备御魂图标"],
+        "recognition": "OCR",
+        "roi": [562, 130, 343, 536]
+    },
+    "装备御魂-识别队伍错误": {
+        "recognition": "DirectHit"
+    }
 }
