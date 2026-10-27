@@ -1,7 +1,18 @@
 {
     "商店购买": {
-        "next": ["[JumpBack]通用-拒绝下载-识别到下载二字", "[JumpBack]商店购买-导航到商店界面", "[JumpBack]商店购买-购买特殊商店物品", "[JumpBack]商店购买-购买荣誉商店物品", "[JumpBack]商店购买-购买友情商店物品", "[JumpBack]商店购买-购买勋章商店物品", "[JumpBack]商店购买-购买魅力商店物品", "导航-庭院"],
+        "next": ["商店购买-检查本周是否已完成", "[JumpBack]通用-拒绝下载-识别到下载二字", "[JumpBack]商店购买-导航到商店界面", "[JumpBack]商店购买-购买特殊商店物品", "[JumpBack]商店购买-购买荣誉商店物品", "[JumpBack]商店购买-购买友情商店物品", "[JumpBack]商店购买-购买勋章商店物品", "[JumpBack]商店购买-购买魅力商店物品", "商店购买-写入本周购物完成"],
         "recognition": "DirectHit"
+    },
+    "商店购买-写入本周购物完成": {
+        "custom_recognition": "WeekStatusWriteRecognition",
+        "custom_recognition_param": {
+            "key": "商店购物"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "本周已经买过了!!!"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "Custom"
     },
     "商店购买-勋章商店购买-100体力": {
         "enabled": false,
@@ -171,6 +182,19 @@
         "max_hit": 1,
         "next": ["导航-杂货铺"],
         "recognition": "DirectHit"
+    },
+    "商店购买-检查本周是否已完成": {
+        "custom_recognition": "WeekStatusCheckRecognition",
+        "custom_recognition_param": {
+            "comparison": "week",
+            "key": "商店购物",
+            "match": "same"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "本周已经执行过了"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "Custom"
     },
     "商店购买-点击勋章商店": {
         "action": "Click",

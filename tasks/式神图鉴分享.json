@@ -5,7 +5,35 @@
             "label": "式神图鉴分享(仅限mumu模拟器可用)",
             "entry": "式神图鉴分享",
             "group": ["standalone"],
-            "description": "仅限mumu模拟器可用"
+            "description": "仅限mumu模拟器可用",
+            "option": ["图鉴分享-每周仅执行一次"]
         }
-    ]
+    ],
+    "option": {
+        "图鉴分享-每周仅执行一次":{
+            "type": "switch",
+            "label": "每周仅执行一次",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "式神图鉴分享-检查本周是否已经分享": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "式神图鉴分享-检查本周是否已经分享": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        }
+    }
 }

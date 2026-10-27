@@ -6,11 +6,37 @@
             "entry": "珍旅居商店购买",
             "group": ["daily"],
             "option": [
+                "珍旅居购物-每周仅执行一次",
                 "购买珍旅居商店物品"
             ]
         }
     ],
     "option": {
+        "珍旅居购物-每周仅执行一次":{
+            "type": "switch",
+            "label": "每周仅执行一次",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "珍旅居商店购买-检查本周是否完成购买": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "珍旅居商店购买-检查本周是否完成购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "购买珍旅居商店物品":{
             "type": "checkbox",
             "cases": [

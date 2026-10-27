@@ -6,6 +6,7 @@
             "entry": "商店购买",
             "group": ["daily"],
             "option": [
+                "商店购物-每周仅执行一次",
                 "特殊商店购买",
                 "荣誉商店购买",
                 "友情商店购买",
@@ -15,6 +16,31 @@
         }
     ],
     "option": {
+        "商店购物-每周仅执行一次":{
+            "type": "switch",
+            "label": "每周仅执行一次",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "商店购买-检查本周是否已完成": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "商店购买-检查本周是否已完成": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "特殊商店购买":{
             "type": "switch",
             "default_case": "No",

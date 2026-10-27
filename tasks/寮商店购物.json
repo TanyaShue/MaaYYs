@@ -6,11 +6,37 @@
             "entry": "阴阳寮商店购物",
             "group": ["daily"],
             "option": [
+                "阴阳寮商店购物-每周仅执行一次",
                 "购买阴阳寮商店物品"
             ]
         }
     ],
     "option": {
+        "阴阳寮商店购物-每周仅执行一次":{
+            "type": "switch",
+            "label": "每周仅执行一次",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-本周是否执行的检查": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "阴阳寮商店购买-本周是否执行的检查": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "购买阴阳寮商店物品":{
             "type": "checkbox",
             "cases": [

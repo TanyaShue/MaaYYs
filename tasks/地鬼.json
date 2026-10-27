@@ -6,6 +6,7 @@
             "entry": "开始地鬼-检查时间",
             "group": ["standalone"],
             "option": [
+                "地鬼-每天仅执行一次",
                 "地鬼_是否挑战悬赏",
                 "地鬼挑战次数",
                 "地鬼阵容预设",
@@ -14,6 +15,31 @@
         }
     ],
     "option": {
+        "地鬼-每天仅执行一次":{
+            "type": "switch",
+            "label": "每天仅执行一次",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动地鬼-检查今天是否已经执行过买": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动地鬼-检查今天是否已经执行过": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "地鬼挑战次数": {
             "type": "select",
             "label": "地鬼挑战次数",

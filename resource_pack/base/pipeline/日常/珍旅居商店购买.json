@@ -1,6 +1,6 @@
 {
     "珍旅居商店购买": {
-        "next": ["珍旅居商店购买-识别是否位于珍旅居", "[JumpBack]导航-珍旅居"],
+        "next": ["珍旅居商店购买-检查本周是否完成购买", "珍旅居商店购买-识别是否位于珍旅居", "[JumpBack]导航-珍旅居"],
         "recognition": "DirectHit"
     },
     "珍旅居商店购买-关闭商店": {
@@ -20,6 +20,27 @@
         "roi": [147, 14, 278, 104],
         "template": ["日常/珍旅居商店购买/珍旅居商店购买-识别是否打开千物宝库_1.png"]
     },
+    "珍旅居商店购买-本周购物完成状态写入": {
+        "custom_recognition": "WeekStatusWriteRecognition",
+        "custom_recognition_param": {
+            "key": "珍旅居购物"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "Custom"
+    },
+    "珍旅居商店购买-检查本周是否完成购买": {
+        "custom_recognition": "WeekStatusCheckRecognition",
+        "custom_recognition_param": {
+            "comparison": "week",
+            "key": "珍旅居购物",
+            "match": "same"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "本周已经买过了!!!"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "Custom"
+    },
     "珍旅居商店购买-点击千物宝库": {
         "action": "Click",
         "recognition": "TemplateMatch",
@@ -28,7 +49,7 @@
     },
     "珍旅居商店购买-确保关闭商店": {
         "inverse": true,
-        "next": ["导航-庭院"],
+        "next": ["珍旅居商店购买-本周购物完成状态写入"],
         "recognition": "TemplateMatch",
         "roi": [147, 14, 278, 104],
         "template": ["日常/珍旅居商店购买/珍旅居商店购买-识别是否打开千物宝库_1.png"]
