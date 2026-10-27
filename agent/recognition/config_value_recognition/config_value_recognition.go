@@ -13,7 +13,10 @@ import (
 	"github.com/MaaXYZ/maa-framework-go/v4"
 )
 
-const storeFileName = "recognition_state.json"
+const (
+	storeFileName        = "recognition_state.json"
+	unknownControllerKey = "未知控制器"
+)
 
 var storeMu sync.Mutex
 
@@ -32,6 +35,9 @@ type configValueParams struct {
 	Mode       string          `json:"mode"`
 }
 
+// configStore 以控制器地址为主键，存放该控制器实例下的全部配置。
+type configStore map[string]map[string]string
+
 var _ maa.CustomRecognitionRunner = &ConfigValueWriteRecognition{}
 var _ maa.CustomRecognitionRunner = &ConfigValueCheckRecognition{}
 
@@ -46,29 +52,41 @@ func (r *ConfigValueWriteRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 		return nil, false
 	}
 
+	controllerAddress, err := resolveControllerAddress(ctx)
+	if err != nil {
+		fmt.Printf("ConfigValueWriteRecognition: 获取控制器地址失败: %v\n", err)
+		return nil, false
+	}
+
 	storeMu.Lock()
 	defer storeMu.Unlock()
 
-	store, err := loadStore()
+	store, err := loadStore(controllerAddress)
 	if err != nil {
 		fmt.Printf("ConfigValueWriteRecognition: 读取存储失败: %v\n", err)
 		return nil, false
 	}
 
-	currentValue := store[params.Key]
+	entries := store[controllerAddress]
+	if entries == nil {
+		entries = make(map[string]string)
+		store[controllerAddress] = entries
+	}
+
+	currentValue := entries[params.Key]
 	newValue, err := resolveWriteValue(currentValue, params.Value)
 	if err != nil {
 		fmt.Printf("ConfigValueWriteRecognition: 计算写入值失败: %v\n", err)
 		return nil, false
 	}
 
-	store[params.Key] = newValue
+	entries[params.Key] = newValue
 	if err := saveStore(store); err != nil {
 		fmt.Printf("ConfigValueWriteRecognition: 保存存储失败: %v\n", err)
 		return nil, false
 	}
 
-	fmt.Printf("ConfigValueWriteRecognition: %s => %s\n", params.Key, newValue)
+	fmt.Printf("ConfigValueWriteRecognition: [%s] %s => %s\n", controllerAddress, params.Key, newValue)
 	return &maa.CustomRecognitionResult{Box: maa.Rect{0, 0, 0, 0}}, true
 }
 
@@ -83,29 +101,35 @@ func (r *ConfigValueCheckRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 		return nil, false
 	}
 
+	controllerAddress, err := resolveControllerAddress(ctx)
+	if err != nil {
+		fmt.Printf("ConfigValueCheckRecognition: 获取控制器地址失败: %v\n", err)
+		return nil, false
+	}
+
 	storeMu.Lock()
 	defer storeMu.Unlock()
 
-	store, err := loadStore()
+	store, err := loadStore(controllerAddress)
 	if err != nil {
 		fmt.Printf("ConfigValueCheckRecognition: 读取存储失败: %v\n", err)
 		return nil, false
 	}
 
-	currentValue := store[params.Key]
+	currentValue := store[controllerAddress][params.Key]
 	if currentValue == "" {
 		currentValue = "0"
 	}
 
 	currentNum, err := parseNumber(currentValue)
 	if err != nil {
-		fmt.Printf("ConfigValueCheckRecognition: 当前值不是数字: key=%s value=%s\n", params.Key, currentValue)
+		fmt.Printf("ConfigValueCheckRecognition: 当前值不是数字: controller=%s key=%s value=%s\n", controllerAddress, params.Key, currentValue)
 		return nil, false
 	}
 
 	targetNum, err := parseNumberFromRaw(params.Value)
 	if err != nil {
-		fmt.Printf("ConfigValueCheckRecognition: 阈值不是数字: key=%s\n", params.Key)
+		fmt.Printf("ConfigValueCheckRecognition: 阈值不是数字: controller=%s key=%s\n", controllerAddress, params.Key)
 		return nil, false
 	}
 
@@ -116,11 +140,11 @@ func (r *ConfigValueCheckRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 	}
 
 	if compareNumbers(currentNum, targetNum, comparison) {
-		fmt.Printf("ConfigValueCheckRecognition: %s 当前值 %s %s %s, 返回 true\n", params.Key, currentValue, comparison, formatNumber(targetNum))
+		fmt.Printf("ConfigValueCheckRecognition: [%s] %s 当前值 %s %s %s, 返回 true\n", controllerAddress, params.Key, currentValue, comparison, formatNumber(targetNum))
 		return &maa.CustomRecognitionResult{Box: maa.Rect{0, 0, 0, 0}}, true
 	}
 
-	fmt.Printf("ConfigValueCheckRecognition: %s 当前值 %s 不满足 %s %s, 返回 false\n", params.Key, currentValue, comparison, formatNumber(targetNum))
+	fmt.Printf("ConfigValueCheckRecognition: [%s] %s 当前值 %s 不满足 %s %s, 返回 false\n", controllerAddress, params.Key, currentValue, comparison, formatNumber(targetNum))
 	return nil, false
 }
 
@@ -149,6 +173,66 @@ func parseParams(arg *maa.CustomRecognitionArg) (*configValueParams, error) {
 	return &params, nil
 }
 
+// resolveControllerAddress 从当前 Tasker 绑定的 Controller 信息中获取实例地址。
+func resolveControllerAddress(ctx *maa.Context) (string, error) {
+	if ctx == nil {
+		return unknownControllerKey, nil
+	}
+
+	tasker := ctx.GetTasker()
+	if tasker == nil {
+		return unknownControllerKey, nil
+	}
+
+	controller := tasker.GetController()
+	if controller == nil {
+		return unknownControllerKey, nil
+	}
+
+	infoJSON, err := controller.GetInfo()
+	if err != nil {
+		fmt.Printf("ConfigValueRecognition: 获取控制器信息失败，使用默认控制器: %v\n", err)
+		return unknownControllerKey, nil
+	}
+
+	info := make(map[string]any)
+	if err := json.Unmarshal([]byte(infoJSON), &info); err != nil {
+		fmt.Printf("ConfigValueRecognition: 解析控制器信息失败，使用默认控制器: %v\n", err)
+		return unknownControllerKey, nil
+	}
+
+	address := firstControllerAddress(info, "address", "adb_serial")
+	if address != "" {
+		return address, nil
+	}
+
+	for _, nestedKey := range []string{"adb", "controller"} {
+		nested, ok := info[nestedKey].(map[string]any)
+		if !ok {
+			continue
+		}
+		address = firstControllerAddress(nested, "address", "adb_serial")
+		if address != "" {
+			return address, nil
+		}
+	}
+
+	return unknownControllerKey, nil
+}
+
+func firstControllerAddress(info map[string]any, keys ...string) string {
+	for _, key := range keys {
+		value, ok := info[key].(string)
+		if !ok {
+			continue
+		}
+		if address := strings.TrimSpace(value); address != "" {
+			return address
+		}
+	}
+	return ""
+}
+
 func projectRoot() string {
 	if cwd, err := os.Getwd(); err == nil {
 		if _, err := os.Stat(filepath.Join(cwd, "assets")); err == nil {
@@ -168,28 +252,68 @@ func storePath() string {
 	return filepath.Join(projectRoot(), "assets", storeFileName)
 }
 
-func loadStore() (map[string]string, error) {
+func loadStore(controllerAddress string) (configStore, error) {
 	path := storePath()
 	data, err := os.ReadFile(path)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return map[string]string{}, nil
+			return make(configStore), nil
 		}
 		return nil, err
 	}
 
 	if len(bytes.TrimSpace(data)) == 0 {
-		return map[string]string{}, nil
+		return make(configStore), nil
 	}
 
-	store := make(map[string]string)
-	if err := json.Unmarshal(data, &store); err != nil {
+	var rawStore map[string]json.RawMessage
+	if err := json.Unmarshal(data, &rawStore); err != nil {
 		return nil, err
 	}
+
+	store := make(configStore)
+	legacyEntries := make(map[string]string)
+
+	for key, rawValue := range rawStore {
+		rawValue = bytes.TrimSpace(rawValue)
+		if len(rawValue) == 0 || bytes.Equal(rawValue, []byte("null")) {
+			continue
+		}
+
+		// 旧版存储是扁平的 string map，读取时迁移到当前控制器地址下。
+		if rawValue[0] != '{' {
+			var value string
+			if err := json.Unmarshal(rawValue, &value); err != nil {
+				return nil, fmt.Errorf("解析旧版配置项 %q 失败: %w", key, err)
+			}
+			legacyEntries[key] = value
+			continue
+		}
+
+		entries := make(map[string]string)
+		if err := json.Unmarshal(rawValue, &entries); err != nil {
+			return nil, fmt.Errorf("解析控制器 %q 的配置失败: %w", key, err)
+		}
+		store[key] = entries
+	}
+
+	if len(legacyEntries) > 0 {
+		entries := store[controllerAddress]
+		if entries == nil {
+			entries = make(map[string]string)
+			store[controllerAddress] = entries
+		}
+		for key, value := range legacyEntries {
+			if _, exists := entries[key]; !exists {
+				entries[key] = value
+			}
+		}
+	}
+
 	return store, nil
 }
 
-func saveStore(store map[string]string) error {
+func saveStore(store configStore) error {
 	path := storePath()
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 		return err

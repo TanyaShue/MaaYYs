@@ -18,16 +18,6 @@
         "end": [278, 397, 196, 106],
         "recognition": "OCR"
     },
-    "N-1781237774424": {
-        "action": "Custom",
-        "custom_action": "BattleTeam",
-        "custom_action_param": {
-            "位置": "御魂",
-            "分组名称": "英杰试炼",
-            "队伍名称": "源赖光"
-        },
-        "recognition": "DirectHit"
-    },
     "test": {
         "expected": 2,
         "labels": ["式神育成", "结界卡", "结界防守"],
@@ -38,53 +28,35 @@
         "model": "tt-Courtyard-v8.6.onnx",
         "recognition": "NeuralNetworkDetect"
     },
+    "test-297099": {
+        "custom_recognition": "ConfigValueCheckRecognition",
+        "custom_recognition_param": {
+            "comparison": "<",
+            "key": "test",
+            "value": 1
+        },
+        "recognition": "Custom"
+    },
     "test-490627": {
         "model": "special-icon-v0.1.2.onnx",
         "recognition": "NeuralNetworkDetect"
     },
-    "test-908425": {
-        "recognition": "DirectHit"
-    },
-    "testAction": {
-        "action": "Custom",
-        "custom_action": "SwitchSoul",
-        "custom_action_param": {
-            "group_name": "御魂",
-            "team_name": "队伍3"
+    "test-950221": {
+        "custom_recognition": "ConfigValueWriteRecognition",
+        "custom_recognition_param": {
+            "key": "test",
+            "value": 5
         },
-        "focus": {
-            "failed": "3333333333333",
-            "level": {
-                "failed": "warning",
-                "start": "info",
-                "succeeded": "debug"
-            },
-            "start": "11111111",
-            "succeeded": "22222222"
-        },
-        "recognition": "DirectHit"
-    },
-    "testOCR": {
-        "expected": "AAACCC",
-        "recognition": "OCR"
+        "recognition": "Custom"
     },
     "test_OCR_1": {
         "expected": ".*",
         "recognition": "OCR",
         "roi": [1053, 535, 190, 153]
     },
-    "test_model_BarrierCard": {
-        "expected": 0,
-        "labels": ["1start", "2start", "3start", "4start", "5start", "6start"],
-        "model": "BarrierCard.onnx",
-        "recognition": "NeuralNetworkDetect"
-    },
     "打开阴阳师_key": {
         "action": "StartApp",
         "package": "com.netease.onmyoji/.tag0",
-        "recognition": "DirectHit"
-    },
-    "测试": {
         "recognition": "DirectHit"
     },
     "测试-停止任务": {
