@@ -30,9 +30,6 @@ type configValueParams struct {
 	Key        string          `json:"key"`
 	Value      json.RawMessage `json:"value"`
 	Comparison string          `json:"comparison"`
-	Compare    string          `json:"compare"`
-	Operator   string          `json:"operator"`
-	Mode       string          `json:"mode"`
 }
 
 // configStore 以控制器地址为主键，存放该控制器实例下的全部配置。
@@ -133,9 +130,9 @@ func (r *ConfigValueCheckRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 		return nil, false
 	}
 
-	comparison := normalizeComparison(params.comparison())
+	comparison := normalizeComparison(params.Comparison)
 	if comparison == "" {
-		fmt.Printf("ConfigValueCheckRecognition: 不支持的比较方式: %s\n", params.comparison())
+		fmt.Printf("ConfigValueCheckRecognition: 不支持的比较符号: %s\n", params.Comparison)
 		return nil, false
 	}
 
@@ -146,21 +143,6 @@ func (r *ConfigValueCheckRecognition) Run(ctx *maa.Context, arg *maa.CustomRecog
 
 	fmt.Printf("ConfigValueCheckRecognition: [%s] %s 当前值 %s 不满足 %s %s, 返回 false\n", controllerAddress, params.Key, currentValue, comparison, formatNumber(targetNum))
 	return nil, false
-}
-
-func (p *configValueParams) comparison() string {
-	switch {
-	case p.Comparison != "":
-		return p.Comparison
-	case p.Compare != "":
-		return p.Compare
-	case p.Operator != "":
-		return p.Operator
-	case p.Mode != "":
-		return p.Mode
-	default:
-		return "<"
-	}
 }
 
 func parseParams(arg *maa.CustomRecognitionArg) (*configValueParams, error) {
@@ -398,18 +380,18 @@ func formatNumber(value float64) string {
 }
 
 func normalizeComparison(comparison string) string {
-	switch strings.ToLower(strings.TrimSpace(comparison)) {
-	case "", "<", "lt", "less", "小于":
+	switch strings.TrimSpace(comparison) {
+	case "", "<":
 		return "<"
-	case ">", "gt", "greater", "大于":
+	case ">":
 		return ">"
-	case "=", "==", "eq", "equal", "equals", "等于":
+	case "==":
 		return "=="
-	case "<=", "=<", "le", "lte", "less_equal", "less than or equal", "小于等于", "不大于":
+	case "<=":
 		return "<="
-	case ">=", "=>", "ge", "gte", "greater_equal", "greater than or equal", "大于等于", "不小于":
+	case ">=":
 		return ">="
-	case "!=", "<>", "ne", "neq", "not_equal", "not equal", "不等于":
+	case "!=":
 		return "!="
 	default:
 		return ""

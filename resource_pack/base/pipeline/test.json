@@ -24,6 +24,14 @@
         "model": "Barrier_v1.onnx",
         "recognition": "NeuralNetworkDetect"
     },
+    "test-203923": {
+        "custom_recognition": "WeekStatusCheckRecognition",
+        "custom_recognition_param": {
+            "comparison": "week",
+            "key": "踩踩踩踩踩踩"
+        },
+        "recognition": "Custom"
+    },
     "test-284164": {
         "model": "tt-Courtyard-v8.6.onnx",
         "recognition": "NeuralNetworkDetect"
@@ -42,10 +50,9 @@
         "recognition": "NeuralNetworkDetect"
     },
     "test-950221": {
-        "custom_recognition": "ConfigValueWriteRecognition",
+        "custom_recognition": "WeekStatusWriteRecognition",
         "custom_recognition_param": {
-            "key": "test",
-            "value": 5
+            "key": "踩踩踩踩踩踩"
         },
         "recognition": "Custom"
     },

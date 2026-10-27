@@ -10,6 +10,8 @@
       "enum": [
         "ConfigValueWriteRecognition",
         "ConfigValueCheckRecognition",
+        "WeekStatusWriteRecognition",
+        "WeekStatusCheckRecognition",
         "CoBattleTargetRecognition",
         "MyRecognizer",
         "OCRResultCounterRecognition",
@@ -23,6 +25,8 @@
     "oneOf": [
       { "$ref": "#/$defs/ConfigValueWriteRecognition" },
       { "$ref": "#/$defs/ConfigValueCheckRecognition" },
+      { "$ref": "#/$defs/WeekStatusWriteRecognition" },
+      { "$ref": "#/$defs/WeekStatusCheckRecognition" },
       { "$ref": "#/$defs/CoBattleTargetRecognition" },
       { "$ref": "#/$defs/MyRecognizer" },
       { "$ref": "#/$defs/OCRResultCounterRecognition" },
@@ -80,10 +84,7 @@
               ],
               "description": "用于比较的数字阈值"
             },
-            "comparison": { "$ref": "#/$defs/Comparison", "description": "首选比较参数名" },
-            "compare": { "$ref": "#/$defs/Comparison", "description": "comparison 的兼容别名" },
-            "operator": { "$ref": "#/$defs/Comparison", "description": "comparison 的兼容别名" },
-            "mode": { "$ref": "#/$defs/Comparison", "description": "comparison 的兼容别名" }
+            "comparison": { "$ref": "#/$defs/Comparison", "description": "比较符号" }
           },
           "required": ["key", "value"],
           "additionalProperties": false
@@ -91,17 +92,56 @@
       },
       "required": ["custom_recognition"]
     },
+    "WeekStatusWriteRecognition": {
+      "title": "写入本周状态时间",
+      "description": "将当前时间写入 assets/recognition_state.json 的指定状态键。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "WeekStatusWriteRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "key": { "$ref": "#/$defs/NonEmptyString", "description": "状态存储键" }
+          },
+          "required": ["key"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_recognition"]
+    },
+    "WeekStatusCheckRecognition": {
+      "title": "检查本周状态时间",
+      "description": "将指定状态键中存储的时间与当前时间比较，默认要求位于同一周，也可要求不位于同一周期。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_recognition": { "const": "WeekStatusCheckRecognition" },
+        "custom_recognition_param": {
+          "type": "object",
+          "properties": {
+            "key": { "$ref": "#/$defs/NonEmptyString", "description": "状态存储键" },
+            "comparison": { "$ref": "#/$defs/WeekStatusComparison", "description": "比较两个时间是否位于同一周、同一月或同一天" },
+            "match": { "$ref": "#/$defs/WeekStatusMatch", "description": "same：要求位于同一周期；different：要求不位于同一周期" }
+          },
+          "required": ["key"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["custom_recognition"]
+    },
+    "WeekStatusComparison": {
+      "type": "string",
+      "default": "week",
+      "enum": ["week", "month", "day"]
+    },
+    "WeekStatusMatch": {
+      "type": "string",
+      "default": "same",
+      "enum": ["same", "different"]
+    },
     "Comparison": {
       "type": "string",
       "default": "<",
-      "enum": [
-        "<", "lt", "less", "小于",
-        ">", "gt", "greater", "大于",
-        "=", "==", "eq", "equal", "equals", "等于",
-        "<=", "=<", "le", "lte", "less_equal", "less than or equal", "小于等于", "不大于",
-        ">=", "=>", "ge", "gte", "greater_equal", "greater than or equal", "大于等于", "不小于",
-        "!=", "<>", "ne", "neq", "not_equal", "not equal", "不等于"
-      ]
+      "enum": ["<", ">", "==", "<=", ">=", "!="]
     },
     "CoBattleTargetRecognition": {
       "title": "协战目标识别",

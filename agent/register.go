@@ -76,6 +76,8 @@ var customRecognitions = []struct {
 }{
 	{"ConfigValueWriteRecognition", &config_value_recognition.ConfigValueWriteRecognition{}},
 	{"ConfigValueCheckRecognition", &config_value_recognition.ConfigValueCheckRecognition{}},
+	{"WeekStatusWriteRecognition", &config_value_recognition.WeekStatusWriteRecognition{}},
+	{"WeekStatusCheckRecognition", &config_value_recognition.WeekStatusCheckRecognition{}},
 	{"CoBattleTargetRecognition", &co_battle_target_recognition.CoBattleTargetRecognition{}},
 	{"MyRecognizer", &my_recognizer.MyRecognizer{}},
 	{"OCRResultCounterRecognition", &ocr_result_counter_recognition.OCRResultCounterRecognition{}},
