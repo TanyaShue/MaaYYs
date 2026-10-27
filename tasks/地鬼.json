@@ -24,7 +24,7 @@
                     "name": "Yes",
                     "label": "是",
                     "pipeline_override": {
-                        "自动地鬼-检查今天是否已经执行过买": {
+                        "自动地鬼-检查今天是否已经执行过": {
                             "enabled": true
                         }
                     }
