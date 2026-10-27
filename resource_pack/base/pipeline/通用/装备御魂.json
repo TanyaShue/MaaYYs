@@ -15,6 +15,7 @@
         "end": [573, 200, 458, 70],
         "expected": "新建预设队伍|管理分组",
         "max_hit": 3,
+        "post_delay": 1000,
         "recognition": "OCR",
         "roi": [518, 635, 743, 66]
     },
@@ -25,6 +26,7 @@
         "end": [1099, 88, 145, 58],
         "expected": "新建预设队伍|管理分组",
         "max_hit": 3,
+        "post_delay": 1000,
         "recognition": "OCR",
         "roi": [518, 635, 743, 66]
     },
@@ -80,12 +82,12 @@
     "装备御魂-识别装备御魂图标": {
         "action": "Click",
         "expected": 0,
-        "model": "special-icon-v0.1.2.onnx",
+        "model": "special-icon-v1.0.2.onnx",
         "next": ["装备御魂-确保没有确定", "[JumpBack]装备御魂-点击确定"],
         "post_delay": 2000,
         "recognition": "NeuralNetworkDetect",
         "roi": "装备御魂-识别队伍名称",
-        "roi_offset": [90, -27, 390, 50]
+        "roi_offset": [92, -38, 400, 91]
     },
     "装备御魂-识别队伍名称": {
         "expected": "源赖光",

@@ -343,13 +343,13 @@
     "通用-解锁阵容-点击解锁图标": {
         "action": "Click",
         "expected": 3,
-        "model": "special-icon-v0.1.2.onnx",
+        "model": "special-icon-v1.0.2.onnx",
         "post_delay": 1000,
         "recognition": "NeuralNetworkDetect"
     },
     "通用-解锁阵容-识别是否解锁图标": {
         "expected": 2,
-        "model": "special-icon-v0.1.2.onnx",
+        "model": "special-icon-v1.0.2.onnx",
         "post_delay": 1000,
         "recognition": "NeuralNetworkDetect"
     },
@@ -357,7 +357,7 @@
         "action": "Click",
         "expected": 0,
         "max_hit": 2,
-        "model": "special-icon-v0.1.2.onnx",
+        "model": "special-icon-v1.0.2.onnx",
         "recognition": "NeuralNetworkDetect",
         "roi": [774, 150, 168, 30],
         "roi_offset": [-24, -12, 298, 37]
@@ -378,13 +378,13 @@
     "通用-锁定阵容-点击解锁图标": {
         "action": "Click",
         "expected": 2,
-        "model": "special-icon-v0.1.2.onnx",
+        "model": "special-icon-v1.0.2.onnx",
         "post_delay": 1000,
         "recognition": "NeuralNetworkDetect"
     },
     "通用-锁定阵容-识别是否锁定阵容": {
         "expected": 3,
-        "model": "special-icon-v0.1.2.onnx",
+        "model": "special-icon-v1.0.2.onnx",
         "recognition": "NeuralNetworkDetect"
     },
     "通用-阵容解锁失败": {

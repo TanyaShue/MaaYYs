@@ -46,7 +46,7 @@
         "recognition": "Custom"
     },
     "test-490627": {
-        "model": "special-icon-v0.1.2.onnx",
+        "model": "special-icon-v1.0.2.onnx",
         "recognition": "NeuralNetworkDetect"
     },
     "test-950221": {
