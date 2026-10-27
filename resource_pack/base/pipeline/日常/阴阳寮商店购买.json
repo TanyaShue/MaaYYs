@@ -6,6 +6,7 @@
         "end": [333, 172, 646, 67],
         "expected": "功勋商店",
         "max_hit": 3,
+        "post_delay": 2000,
         "recognition": "OCR",
         "roi": [369, 9, 458, 148],
         "threshold": 0.4
@@ -13,6 +14,19 @@
     "阴阳寮商店购买-导航-功勋商店": {
         "next": ["阴阳寮商店购买-识别是否位于阴阳寮商店", "[JumpBack]阴阳寮商店购买-点击功勋商店", "[JumpBack]导航-阴阳寮神社"],
         "recognition": "DirectHit"
+    },
+    "阴阳寮商店购买-本周是否执行的检查": {
+        "custom_recognition": "WeekStatusCheckRecognition",
+        "custom_recognition_param": {
+            "comparison": "week",
+            "key": "阴阳寮商店购物",
+            "match": "same"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "本周已经执行过了"
+        },
+        "next": ["导航-庭院"],
+        "recognition": "Custom"
     },
     "阴阳寮商店购买-点击功勋商店": {
         "action": "Click",
@@ -195,19 +209,23 @@
     },
     "阴阳寮商店购买-购买完毕": {
         "action": "Click",
+        "custom_recognition": "WeekStatusWriteRecognition",
+        "custom_recognition_param": {
+            "key": "阴阳寮商店购物"
+        },
         "focus": {
             "Node.Recognition.Succeeded": "阴阳寮商店购物完毕"
         },
         "next": ["导航-庭院"],
         "pre_delay": 1000,
-        "recognition": "DirectHit",
+        "recognition": "Custom",
         "target": [1142, 473, 87, 122]
     },
     "阴阳寮商店购买-跳过": {
         "recognition": "DirectHit"
     },
     "阴阳寮商店购物": {
-        "next": ["阴阳寮商店购买-确保位于阴阳寮商店", "[JumpBack]阴阳寮商店购买-导航-功勋商店"],
+        "next": ["阴阳寮商店购买-本周是否执行的检查", "阴阳寮商店购买-确保位于阴阳寮商店", "[JumpBack]阴阳寮商店购买-导航-功勋商店"],
         "recognition": "DirectHit"
     }
 }
