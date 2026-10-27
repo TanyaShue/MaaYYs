@@ -16,7 +16,7 @@
         "探查目标": {
             "type": "select",
             "label": "探查目标",
-            "description": "探查目标",
+            "description": "探查目标,契灵结契请在结契界面使用通用爬塔副本",
             "default_case": "逢魔之原",
             "cases": [
                 {

@@ -39,6 +39,7 @@
     "通用爬塔副本-点击挑战": {
         "action": "Click",
         "expected": "挑战|准备",
+        "post_delay": 1001,
         "recognition": "OCR",
         "roi": [963, 509, 317, 194]
     },
