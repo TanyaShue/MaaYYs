@@ -306,7 +306,8 @@
         "action": "Custom",
         "custom_action": "AutoFoster",
         "custom_action_param": {
-            "FosterTarget": 1
+            "FosterTarget": 1,
+            "DirectSelectThreshold": 76
         },
         "expected": "好友|跨区",
         "next": ["阴阳寮奖励领取_结界奖励领取_寄养式神_点击进入寄养结界"],

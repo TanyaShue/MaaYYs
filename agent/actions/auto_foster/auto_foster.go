@@ -19,7 +19,7 @@ type AutoFoster struct {
 
 type FosterParams struct {
 	FosterTarget          int `json:"FosterTarget"`          // 1: 勾玉, 2: 体力
-	DirectSelectThreshold int `json:"DirectSelectThreshold"` // 可选，覆盖默认直选阈值
+	DirectSelectThreshold int `json:"DirectSelectThreshold"` // 勾玉直选阈值，由 pipeline 参数传入
 }
 
 // RewardInfo 奖励信息
@@ -52,10 +52,8 @@ const (
 	MaxPagesScan    = 5
 	MaxPagesSearch  = 10
 
-	// 6 星太鼓/斗鱼的寄养收益通常分别从 67 勾玉、130 体力起，
-	// 达到该收益时无需继续扫描，直接选中当前目标即可。
-	DefaultMagatamaDirectThreshold = 76
-	DefaultStaminaDirectThreshold  = 130
+	// 体力直选阈值保持固定；勾玉阈值由 DirectSelectThreshold 参数传入。
+	DefaultStaminaDirectThreshold = 130
 )
 
 var rewardTextPattern = regexp.MustCompile(`^\s*([^\d+]+?)\s*\+?\s*(\d+)\s*$`)
@@ -367,15 +365,14 @@ func (a *AutoFoster) collectAllRewardsFromTab(ctx *maa.Context, prioritizedType 
 }
 
 // getDirectSelectThreshold 返回优先奖励的直选阈值。
-// 参数中传入正数时可覆盖默认值；返回 0 表示不启用直选。
+// 勾玉阈值由 pipeline 参数传入，体力阈值保持固定；返回 0 表示不启用直选。
 func getDirectSelectThreshold(prioritizedType string, override int) int {
-	if override > 0 {
-		return override
-	}
-
 	switch prioritizedType {
 	case "勾玉":
-		return DefaultMagatamaDirectThreshold
+		if override > 0 {
+			return override
+		}
+		return 0
 	case "体力":
 		return DefaultStaminaDirectThreshold
 	default:

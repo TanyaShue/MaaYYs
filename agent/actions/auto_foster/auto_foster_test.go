@@ -35,10 +35,11 @@ func TestGetDirectSelectThreshold(t *testing.T) {
 		override        int
 		want            int
 	}{
-		{name: "magatama default", prioritizedType: "勾玉", want: DefaultMagatamaDirectThreshold},
+		{name: "magatama requires parameter", prioritizedType: "勾玉", want: 0},
 		{name: "stamina default", prioritizedType: "体力", want: DefaultStaminaDirectThreshold},
-		{name: "override", prioritizedType: "勾玉", override: 70, want: 70},
-		{name: "invalid override", prioritizedType: "勾玉", override: -1, want: DefaultMagatamaDirectThreshold},
+		{name: "magatama override", prioritizedType: "勾玉", override: 67, want: 67},
+		{name: "stamina ignores override", prioritizedType: "体力", override: 67, want: DefaultStaminaDirectThreshold},
+		{name: "invalid magatama override", prioritizedType: "勾玉", override: -1, want: 0},
 		{name: "unknown type", prioritizedType: "金币", want: 0},
 	}
 

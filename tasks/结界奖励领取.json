@@ -27,10 +27,12 @@
                     "pipeline_override": {
                         "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
                             "custom_action_param": {
-                                "FosterTarget": 1
+                                "FosterTarget": 1,
+                                "DirectSelectThreshold": 76
                             }
                         }
-                    }
+                    },
+                    "option": ["勾玉直选阈值设置"]
                 },
                 {
                     "name": "体力优先",
@@ -39,6 +41,50 @@
                         "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
                             "custom_action_param": {
                                 "FosterTarget": 2
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "勾玉直选阈值设置": {
+            "type": "select",
+            "label": "勾玉直选阈值设置",
+            "description": "设置勾玉收益达到多少时直接选择；仅在勾玉优先时生效，体力优先固定使用 130。",
+            "default_case": "76",
+            "cases": [
+                {
+                    "name": "76",
+                    "label": "76勾玉",
+                    "pipeline_override": {
+                        "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+                            "custom_action_param": {
+                                "FosterTarget": 1,
+                                "DirectSelectThreshold": 76
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "67",
+                    "label": "67勾玉",
+                    "pipeline_override": {
+                        "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+                            "custom_action_param": {
+                                "FosterTarget": 1,
+                                "DirectSelectThreshold": 67
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "59",
+                    "label": "59勾玉",
+                    "pipeline_override": {
+                        "阴阳寮奖励领取_结界奖励领取_寄养式神_选择最优寄养": {
+                            "custom_action_param": {
+                                "FosterTarget": 1,
+                                "DirectSelectThreshold": 59
                             }
                         }
                     }
