@@ -37,6 +37,7 @@
         "end": [1090, 572, 161, 64],
         "expected": "新建预设队伍|管理分组",
         "max_hit": 3,
+        "post_delay": 1000,
         "recognition": "OCR",
         "roi": [518, 635, 743, 66]
     },
