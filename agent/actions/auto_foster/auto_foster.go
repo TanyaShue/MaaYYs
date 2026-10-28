@@ -54,7 +54,7 @@ const (
 
 	// 6 星太鼓/斗鱼的寄养收益通常分别从 67 勾玉、130 体力起，
 	// 达到该收益时无需继续扫描，直接选中当前目标即可。
-	DefaultMagatamaDirectThreshold = 67
+	DefaultMagatamaDirectThreshold = 76
 	DefaultStaminaDirectThreshold  = 130
 )
 
