@@ -1,211 +1,110 @@
 {
-  "关闭公告": {
-    "action": "Click",
-    "count": 12,
-    "post_delay": 2000,
-    "recognition": "FeatureMatch",
-    "roi": [
-      1116,
-      7,
-      163,
-      89
-    ],
-    "template": "通用图标/踏雪寻踪_公告_关闭.png"
-  },
-  "关闭广告-模板匹配": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      808,
-      0,
-      472,
-      307
-    ],
-    "template": [
-      "启动游戏/关闭广告_1.png",
-      "通用图标/广告_关闭.png"
-    ],
-    "threshold": 0.8
-  },
-  "关闭阴阳师": {
-    "action": "StopApp",
-    "package": "com.netease.onmyoji.wyzymnqsd_cps",
-    "post_delay": 2000,
-    "recognition": "DirectHit"
-  },
-  "启动任务1": {
-    "expected": "下载插画",
-    "next": [
-      "启动任务2"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      351,
-      199,
-      587,
-      328
-    ]
-  },
-  "启动任务2": {
-    "action": "Click",
-    "expected": "^下载$",
-    "recognition": "OCR",
-    "roi": [
-      315,
-      166,
-      618,
-      449
-    ]
-  },
-  "启动任务5": {
-    "expected": "是否打开|加成",
-    "next": [
-      "启动任务6"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      329,
-      167,
-      601,
-      216
-    ]
-  },
-  "启动任务6": {
-    "action": "Click",
-    "expected": "取消",
-    "post_delay": 1000,
-    "recognition": "OCR",
-    "roi": [
-      438,
-      347,
-      445,
-      133
-    ]
-  },
-  "启动游戏": {
-    "action": "StartApp",
-    "focus": {
-      "Node.Action.Failed": "[error]启动失败,检查游戏区服是否正确"
+    "关闭公告": {
+        "action": "Click",
+        "count": 12,
+        "post_delay": 2000,
+        "recognition": "FeatureMatch",
+        "roi": [1116, 7, 163, 89],
+        "template": "通用图标/踏雪寻踪_公告_关闭.png"
     },
-    "next": [
-      "启动游戏2",
-      "[JumpBack]启动游戏-图片匹配",
-      "[JumpBack]启动游戏1",
-      "[JumpBack]启动任务1",
-      "[JumpBack]关闭广告-模板匹配",
-      "[JumpBack]客户端更新提示处理",
-      "[JumpBack]关闭公告",
-      "[JumpBack]启动任务5",
-      "[JumpBack]启动游戏3"
-    ],
-    "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2",
-    "rate_limit": 3000,
-    "recognition": "DirectHit",
-    "timeout": 60000
-  },
-  "启动游戏-图片匹配": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      397,
-      503,
-      507,
-      173
-    ],
-    "template": [
-      "启动游戏/启动游戏-图片匹配_1.png"
-    ]
-  },
-  "启动游戏1": {
-    "action": "Click",
-    "expected": "进入游戏|点击屏幕进入游戏",
-    "post_delay": 2000,
-    "recognition": "OCR",
-    "roi": [
-      397,
-      503,
-      507,
-      173
-    ]
-  },
-  "启动游戏2": {
-    "expected": "设置",
-    "next": [
-      "启动游戏7",
-      "[JumpBack]启动游戏4"
-    ],
-    "recognition": "OCR",
-    "roi": [
-      517,
-      7,
-      231,
-      169
-    ]
-  },
-  "启动游戏3": {
-    "action": "Click",
-    "inverse": true,
-    "post_delay": 2000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      0,
-      0,
-      255,
-      189
-    ],
-    "target": [
-      22,
-      21,
-      42,
-      45
-    ],
-    "template": [
-      "启动游戏/启动游戏3_1.png"
-    ]
-  },
-  "启动游戏4": {
-    "action": "Click",
-    "post_delay": 2000,
-    "recognition": "TemplateMatch",
-    "roi": [
-      1048,
-      50,
-      143,
-      111
-    ],
-    "template": [
-      "启动游戏/启动游戏4.png"
-    ]
-  },
-  "启动游戏7": {
-    "expected": "音画|交互|权限|安全|游戏",
-    "inverse": true,
-    "recognition": "OCR",
-    "roi": [
-      1090,
-      107,
-      136,
-      523
-    ]
-  },
-  "客户端更新提示处理": {
-    "action": "Click",
-    "expected": "客.*端更新",
-    "post_delay": 500,
-    "recognition": "OCR",
-    "roi": [
-      493,
-      100,
-      314,
-      98
-    ],
-    "target": [
-      896,
-      127,
-      43,
-      41
-    ]
-  }
+    "关闭广告-模板匹配": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [808, 0, 472, 307],
+        "template": ["启动游戏/关闭广告_1.png", "通用图标/广告_关闭.png"],
+        "threshold": 0.8
+    },
+    "关闭阴阳师": {
+        "action": "StopApp",
+        "package": "com.netease.onmyoji.wyzymnqsd_cps",
+        "post_delay": 2000,
+        "recognition": "DirectHit"
+    },
+    "启动任务1": {
+        "expected": "下载插画",
+        "next": ["启动任务2"],
+        "recognition": "OCR",
+        "roi": [351, 199, 587, 328]
+    },
+    "启动任务2": {
+        "action": "Click",
+        "expected": "^下载$",
+        "recognition": "OCR",
+        "roi": [315, 166, 618, 449]
+    },
+    "启动任务5": {
+        "expected": "是否打开|加成",
+        "next": ["启动任务6"],
+        "recognition": "OCR",
+        "roi": [329, 167, 601, 216]
+    },
+    "启动任务6": {
+        "action": "Click",
+        "expected": "取消",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [438, 347, 445, 133]
+    },
+    "启动游戏": {
+        "action": "StartApp",
+        "focus": {
+            "Node.Action.Failed": "[error]启动失败,检查游戏区服是否正确"
+        },
+        "next": ["启动游戏2", "[JumpBack]启动游戏-图片匹配", "[JumpBack]启动游戏1", "[JumpBack]启动任务1", "[JumpBack]关闭广告-模板匹配", "[JumpBack]客户端更新提示处理", "[JumpBack]关闭公告", "[JumpBack]启动任务5", "[JumpBack]启动游戏3"],
+        "package": "com.netease.onmyoji.wyzymnqsd_cps/com.netease.onmyoji.tag2",
+        "rate_limit": 3000,
+        "recognition": "DirectHit",
+        "timeout": 60000
+    },
+    "启动游戏-图片匹配": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [397, 503, 507, 173],
+        "template": ["启动游戏/启动游戏-图片匹配_1.png", "启动游戏/启动游戏-图片匹配_2.png"]
+    },
+    "启动游戏1": {
+        "action": "Click",
+        "expected": "进入游戏|点击屏幕进入游戏",
+        "post_delay": 2000,
+        "recognition": "OCR",
+        "roi": [406, 548, 487, 97]
+    },
+    "启动游戏2": {
+        "expected": "设置",
+        "next": ["启动游戏7", "[JumpBack]启动游戏4"],
+        "recognition": "OCR",
+        "roi": [517, 7, 231, 169]
+    },
+    "启动游戏3": {
+        "action": "Click",
+        "inverse": true,
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [0, 0, 255, 189],
+        "target": [22, 21, 42, 45],
+        "template": ["启动游戏/启动游戏3_1.png"]
+    },
+    "启动游戏4": {
+        "action": "Click",
+        "post_delay": 2000,
+        "recognition": "TemplateMatch",
+        "roi": [1048, 50, 143, 111],
+        "template": ["启动游戏/启动游戏4.png"]
+    },
+    "启动游戏7": {
+        "expected": "音画|交互|权限|安全|游戏",
+        "inverse": true,
+        "recognition": "OCR",
+        "roi": [1090, 107, 136, 523]
+    },
+    "客户端更新提示处理": {
+        "action": "Click",
+        "expected": "客.*端更新",
+        "post_delay": 500,
+        "recognition": "OCR",
+        "roi": [493, 100, 314, 98],
+        "target": [896, 127, 43, 41]
+    }
 }
