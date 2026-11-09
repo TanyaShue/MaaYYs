@@ -471,7 +471,7 @@
     },
     "悬赏封印_点击一键追踪": {
         "action": "Click",
-        "expected": "一键",
+        "expected": "一键|键",
         "recognition": "OCR",
         "roi": [1147, 571, 117, 81]
     },
