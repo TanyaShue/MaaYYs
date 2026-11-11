@@ -1,0 +1,15 @@
+{
+    "task": [
+        {
+            "name": "超鬼王低星清票",
+            "label": "超鬼王低星清票",
+            "description": "在超鬼王的挑战界面开始启动任务，手动装备好御魂",
+            "entry": "超鬼王",
+            "group": ["promotion"],
+            "option": [
+            ]
+        }
+    ],
+    "option": {
+    }
+}

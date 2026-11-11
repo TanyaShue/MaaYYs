@@ -1,244 +1,245 @@
 {
-    "超鬼王": {
-        "recognition": "OCR",
-        "rate_limit": 2000,
-        "timeout": 200000,
-        "next": [
-            "超鬼王1",
-            "[JumpBack]超鬼王2",
-            "[JumpBack]超鬼王3",
-            "[JumpBack]超鬼王4",
-            "[JumpBack]超鬼王5"
-        ],
-        "roi": [
-            0,
-            0,
-            265,
-            78
-        ],
-        "expected": "蝶引迷津"
-    },
-    "超鬼王1": {
-        "recognition": "OCR",
-        "roi": [
-            1096,
-            16,
-            182,
-            55
-        ],
-        "expected": "\\b\\d{3}/100\\b"
-    },
-    "超鬼王2": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            1107,
-            558,
-            143,
-            126
-        ],
-        "expected": "挑战"
-    },
-    "超鬼王3": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            1089,
-            505,
-            150,
-            159
-        ],
-        "expected": "准备"
-    },
-    "超鬼王4": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            389,
-            226,
-            514,
-            240
-        ],
-        "expected": "本次伤害",
-        "target": [
-            459,
-            641,
-            85,
-            76
-        ]
-    },
-    "超鬼王5": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            1126,
-            574,
-            103,
-            53
-        ],
-        "expected": "召唤|鬼王"
-    },
-    "超鬼王_copy1": {
-        "recognition": "OCR",
-        "rate_limit": 10000,
-        "timeout": 9900000,
-        "next": [
-            "超鬼王6",
-            "[JumpBack]超鬼王7",
-            "[JumpBack]超鬼王8"
-        ],
-        "roi": [
-            0,
-            0,
-            265,
-            78
-        ],
-        "expected": "蝶引迷津"
-    },
-    "超鬼王6": {
-        "inverse": true
-    },
-    "超鬼王7": {
-        "recognition": "OCR",
-        "roi": [
-            1107,
-            558,
-            143,
-            126
-        ],
-        "expected": "挑战"
-    },
-    "超鬼王8": {
-        "recognition": "OCR",
-        "action": "Click",
-        "timeout": 60000,
-        "next": [
-            "超鬼王9"
-        ],
-        "roi": [
-            1126,
-            574,
-            103,
-            53
-        ],
-        "expected": "召唤|鬼王"
-    },
-    "超鬼王9": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "超鬼王11",
-            "[JumpBack]超鬼王12"
-        ],
-        "roi": [
-            142,
-            159,
-            96,
-            38
-        ],
-        "expected": "剩余时间"
-    },
-    "超鬼王10": {
-        "recognition": "OCR",
-        "roi": [
-            1111,
-            572,
-            133,
-            129
-        ]
-    },
-    "超鬼王11": {
-        "recognition": "OCR",
-        "next": [
-            "超鬼王13",
-            "[JumpBack]超鬼王14"
-        ],
-        "roi": [
-            354,
-            76,
-            592,
-            85
-        ],
-        "expected": "好友"
-    },
-    "超鬼王12": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            142,
-            159,
-            96,
-            38
-        ],
-        "expected": "剩余时间",
-        "target": [
-            259,
-            151,
-            36,
-            47
-        ]
-    },
-    "超鬼王13": {
-        "recognition": "OCR",
-        "action": "Click",
-        "next": [
-            "超鬼王15",
-            "[JumpBack]超鬼王16"
-        ],
-        "pre_delay": 1000,
-        "post_delay": 1000,
-        "roi": [
-            340,
-            155,
-            594,
-            380
-        ],
-        "expected": "好友名称"
-    },
-    "超鬼王14": {
-        "recognition": "OCR",
-        "action": "Swipe",
-        "roi": [
-            354,
-            76,
-            592,
-            85
-        ],
-        "expected": "好友",
-        "begin": [
-            557,
-            482,
-            115,
-            51
-        ],
-        "end": [
-            566,
-            179,
-            106,
-            45
-        ],
-        "duration": 2000
-    },
-    "超鬼王15": {
-        "recognition": "OCR",
-        "inverse": true,
-        "roi": [
-            380,
-            544,
-            522,
-            64
-        ],
-        "expected": "公开|邀请"
-    },
-    "超鬼王16": {
-        "recognition": "OCR",
-        "action": "Click",
-        "roi": [
-            698,
-            539,
-            159,
-            73
-        ],
-        "expected": "邀请"
-    }
+  "超鬼王": {
+    "expected": "祸主降临",
+    "next": [
+      "超鬼王1",
+      "[JumpBack]超鬼王2",
+      "[JumpBack]超鬼王3",
+      "[JumpBack]超鬼王4",
+      "[JumpBack]超鬼王5"
+    ],
+    "rate_limit": 2000,
+    "recognition": "OCR",
+    "roi": [
+      109,
+      10,
+      215,
+      68
+    ],
+    "timeout": 200000
+  },
+  "超鬼王1": {
+    "expected": "\\b\\d{3}/100\\b",
+    "recognition": "OCR",
+    "roi": [
+      1096,
+      16,
+      182,
+      55
+    ]
+  },
+  "超鬼王10": {
+    "recognition": "OCR",
+    "roi": [
+      1111,
+      572,
+      133,
+      129
+    ]
+  },
+  "超鬼王11": {
+    "expected": "好友",
+    "next": [
+      "超鬼王13",
+      "[JumpBack]超鬼王14"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      354,
+      76,
+      592,
+      85
+    ]
+  },
+  "超鬼王12": {
+    "action": "Click",
+    "expected": "剩余时间",
+    "recognition": "OCR",
+    "roi": [
+      142,
+      159,
+      96,
+      38
+    ],
+    "target": [
+      259,
+      151,
+      36,
+      47
+    ]
+  },
+  "超鬼王13": {
+    "action": "Click",
+    "expected": "好友名称",
+    "next": [
+      "超鬼王15",
+      "[JumpBack]超鬼王16"
+    ],
+    "post_delay": 1000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      340,
+      155,
+      594,
+      380
+    ]
+  },
+  "超鬼王14": {
+    "action": "Swipe",
+    "begin": [
+      557,
+      482,
+      115,
+      51
+    ],
+    "duration": 2000,
+    "end": [
+      566,
+      179,
+      106,
+      45
+    ],
+    "expected": "好友",
+    "recognition": "OCR",
+    "roi": [
+      354,
+      76,
+      592,
+      85
+    ]
+  },
+  "超鬼王15": {
+    "expected": "公开|邀请",
+    "inverse": true,
+    "recognition": "OCR",
+    "roi": [
+      380,
+      544,
+      522,
+      64
+    ]
+  },
+  "超鬼王16": {
+    "action": "Click",
+    "expected": "邀请",
+    "recognition": "OCR",
+    "roi": [
+      698,
+      539,
+      159,
+      73
+    ]
+  },
+  "超鬼王2": {
+    "action": "Click",
+    "expected": "挑战",
+    "recognition": "OCR",
+    "roi": [
+      1107,
+      558,
+      143,
+      126
+    ]
+  },
+  "超鬼王3": {
+    "action": "Click",
+    "expected": "准备",
+    "recognition": "OCR",
+    "roi": [
+      1089,
+      505,
+      150,
+      159
+    ]
+  },
+  "超鬼王4": {
+    "action": "Click",
+    "expected": "本次伤害",
+    "recognition": "OCR",
+    "roi": [
+      389,
+      226,
+      514,
+      240
+    ],
+    "target": [
+      459,
+      641,
+      85,
+      76
+    ]
+  },
+  "超鬼王5": {
+    "action": "Click",
+    "expected": "召唤|鬼王",
+    "recognition": "OCR",
+    "roi": [
+      1126,
+      574,
+      103,
+      53
+    ]
+  },
+  "超鬼王6": {
+    "inverse": true,
+    "recognition": "DirectHit"
+  },
+  "超鬼王7": {
+    "expected": "挑战",
+    "recognition": "OCR",
+    "roi": [
+      1107,
+      558,
+      143,
+      126
+    ]
+  },
+  "超鬼王8": {
+    "action": "Click",
+    "expected": "召唤|鬼王",
+    "next": [
+      "超鬼王9"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      1126,
+      574,
+      103,
+      53
+    ],
+    "timeout": 60000
+  },
+  "超鬼王9": {
+    "action": "Click",
+    "expected": "剩余时间",
+    "next": [
+      "超鬼王11",
+      "[JumpBack]超鬼王12"
+    ],
+    "recognition": "OCR",
+    "roi": [
+      142,
+      159,
+      96,
+      38
+    ]
+  },
+  "超鬼王_copy1": {
+    "expected": "祸主降临",
+    "next": [
+      "超鬼王6",
+      "[JumpBack]超鬼王7",
+      "[JumpBack]超鬼王8"
+    ],
+    "rate_limit": 10000,
+    "recognition": "OCR",
+    "roi": [
+      0,
+      0,
+      265,
+      78
+    ],
+    "timeout": 9900000
+  }
 }
