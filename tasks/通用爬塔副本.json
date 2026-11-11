@@ -75,7 +75,12 @@
                 },
                 {
                     "name": "No",
-                    "label": "否"
+                    "label": "否",
+                    "pipeline_override": {
+                        "通用爬塔副本-先等待": {
+                            "enabled": false
+                        }
+                    }
                 }
             ]
         },
