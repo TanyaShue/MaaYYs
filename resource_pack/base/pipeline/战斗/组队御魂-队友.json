@@ -1,0 +1,118 @@
+{
+  "组队御魂-队友": {
+    "next": [
+      "组队御魂-队友-循环"
+    ],
+    "recognition": "DirectHit"
+  },
+  "组队御魂-队友-循环": {
+    "next": [
+      "[JumpBack]组队御魂-队友-点击空白区域继续",
+      "[JumpBack]组队御魂-队友-点击屏幕继续",
+      "[JumpBack]组队御魂-队友-领取奖励",
+      "[JumpBack]组队御魂-队友-获得宝藏",
+      "[JumpBack]组队御魂-队友-点击本次通关时间",
+      "[JumpBack]组队御魂-队友-点击确认",
+      "组队御魂-队友-循环-等待"
+    ],
+    "recognition": "DirectHit"
+  },
+  "组队御魂-队友-循环-等待": {
+    "next": [
+      "组队御魂-队友-循环"
+    ],
+    "post_delay": 1000,
+    "recognition": "DirectHit"
+  },
+  "组队御魂-队友-点击空白区域继续": {
+    "action": "Click",
+    "expected": "点击空白区域继续",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      441,
+      668,
+      366,
+      51
+    ]
+  },
+  "组队御魂-队友-点击屏幕继续": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      517,
+      634,
+      268,
+      86
+    ]
+  },
+  "组队御魂-队友-领取奖励": {
+    "action": "Click",
+    "expected": "获得奖励",
+    "post_delay": 2000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      420,
+      160,
+      496,
+      150
+    ],
+    "target": [
+      651,
+      498,
+      107,
+      46
+    ]
+  },
+  "组队御魂-队友-获得宝藏": {
+    "action": "Click",
+    "expected": "获得宝藏|发现宝藏",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      420,
+      160,
+      496,
+      150
+    ],
+    "target": [
+      367,
+      611,
+      175,
+      109
+    ]
+  },
+  "组队御魂-队友-点击本次通关时间": {
+    "action": "Click",
+    "expected": "本次通关时间",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      518,
+      543,
+      186,
+      114
+    ],
+    "target": [
+      608,
+      641,
+      201,
+      79
+    ]
+  },
+  "组队御魂-队友-点击确认": {
+    "action": "Click",
+    "expected": "确定|确认",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      560,
+      360,
+      400,
+      160
+    ]
+  }
+}
