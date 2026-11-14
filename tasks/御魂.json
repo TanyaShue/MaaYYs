@@ -317,7 +317,7 @@
                     "label": "挂樱饼",
                     "pipeline_override": {
                         "自动御魂-开始挂樱饼挑战": {
-                            "enable": true
+                            "enabled": true
                         }
                     }
                 },
@@ -326,7 +326,7 @@
                     "label": "全自动",
                     "pipeline_override": {
                         "自动御魂-开始全自动挑战": {
-                            "enable": true
+                            "enabled": true
                         }
                     }
                 }
