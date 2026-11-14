@@ -1,0 +1,11 @@
+{
+    "task": [
+        {
+            "name": "组队御魂-队友",
+            "label": "组队御魂(队友)",
+            "entry": "组队御魂-队友",
+            "group": ["standalone"]
+        }
+    ],
+    "option": {}
+}

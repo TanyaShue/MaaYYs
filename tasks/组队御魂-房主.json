@@ -1,0 +1,74 @@
+{
+    "task": [
+        {
+            "name": "组队御魂-房主",
+            "label": "组队御魂(房主)",
+            "entry": "组队御魂-房主",
+            "group": ["standalone"],
+            "option": [
+                "开局随机等待时间",
+                "循环随机等待时间"
+            ]
+        }
+    ],
+    "option": {
+        "开局随机等待时间": {
+            "type": "input",
+            "label": "开局随机等待时间",
+            "description": "启动任务后随机等待一段时间再开始点挑战，给队友进房留出时间（建议三秒以内）",
+            "inputs": [
+                {
+                    "name": "最短时间",
+                    "label": "最短时间（秒）",
+                    "description": "填写随机等待最短时间（秒）",
+                    "default": "1",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "最长时间",
+                    "label": "最长时间（秒）",
+                    "description": "填写随机等待最长时间（秒）",
+                    "default": "3",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "组队御魂-房主-开局等待": {
+                    "custom_action_param": {
+                        "min": "{最短时间}",
+                        "max": "{最长时间}"
+                    }
+                }
+            }
+        },
+        "循环随机等待时间": {
+            "type": "input",
+            "label": "循环随机等待时间",
+            "description": "每次轮询之间的随机等待时间，模拟真人操作节奏（建议 1~3 秒）",
+            "inputs": [
+                {
+                    "name": "最短时间",
+                    "label": "最短时间（秒）",
+                    "description": "填写随机等待最短时间（秒）",
+                    "default": "1",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "最长时间",
+                    "label": "最长时间（秒）",
+                    "description": "填写随机等待最长时间（秒）",
+                    "default": "2",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "组队御魂-房主-循环-等待": {
+                    "custom_action_param": {
+                        "min": "{最短时间}",
+                        "max": "{最长时间}"
+                    }
+                }
+            }
+        }
+    }
+}

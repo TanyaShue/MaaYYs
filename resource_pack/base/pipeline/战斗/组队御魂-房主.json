@@ -1,0 +1,164 @@
+{
+  "组队御魂-房主": {
+    "next": [
+      "组队御魂-房主-开局等待"
+    ],
+    "recognition": "DirectHit"
+  },
+  "组队御魂-房主-开局等待": {
+    "action": "Custom",
+    "custom_action": "RandomWait",
+    "custom_action_param": {
+      "max": 3,
+      "min": 1
+    },
+    "next": [
+      "组队御魂-房主-循环"
+    ],
+    "recognition": "DirectHit"
+  },
+  "组队御魂-房主-循环": {
+    "next": [
+      "[JumpBack]组队御魂-房主-点击空白区域继续",
+      "[JumpBack]组队御魂-房主-点击屏幕继续",
+      "[JumpBack]组队御魂-房主-领取奖励",
+      "[JumpBack]组队御魂-房主-获得宝藏",
+      "[JumpBack]组队御魂-房主-点击本次通关时间",
+      "[JumpBack]组队御魂-房主-点击确认",
+      "[JumpBack]组队御魂-房主-点击挑战",
+      "[JumpBack]组队御魂-房主-OCR点击挑战",
+      "组队御魂-房主-循环-等待"
+    ],
+    "recognition": "DirectHit"
+  },
+  "组队御魂-房主-循环-等待": {
+    "action": "Custom",
+    "custom_action": "RandomWait",
+    "custom_action_param": {
+      "max": 2,
+      "min": 1
+    },
+    "next": [
+      "组队御魂-房主-循环"
+    ],
+    "recognition": "DirectHit"
+  },
+  "组队御魂-房主-点击挑战": {
+    "action": "Click",
+    "post_delay": 2000,
+    "recognition": "TemplateMatch",
+    "roi": [
+      1054,
+      518,
+      226,
+      202
+    ],
+    "template": [
+      "战斗/组队副本/组队副本-点击挑战_1.png",
+      "战斗/真蛇/真蛇-点击开始挑战_1.png"
+    ]
+  },
+  "组队御魂-房主-OCR点击挑战": {
+    "action": "Click",
+    "expected": "挑战",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      925,
+      552,
+      355,
+      168
+    ]
+  },
+  "组队御魂-房主-点击空白区域继续": {
+    "action": "Click",
+    "expected": "点击空白区域继续",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      441,
+      668,
+      366,
+      51
+    ]
+  },
+  "组队御魂-房主-点击屏幕继续": {
+    "action": "Click",
+    "expected": "点击屏幕继续",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      517,
+      634,
+      268,
+      86
+    ]
+  },
+  "组队御魂-房主-领取奖励": {
+    "action": "Click",
+    "expected": "获得奖励",
+    "post_delay": 2000,
+    "pre_delay": 1000,
+    "recognition": "OCR",
+    "roi": [
+      420,
+      160,
+      496,
+      150
+    ],
+    "target": [
+      651,
+      498,
+      107,
+      46
+    ]
+  },
+  "组队御魂-房主-获得宝藏": {
+    "action": "Click",
+    "expected": "获得宝藏|发现宝藏",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      420,
+      160,
+      496,
+      150
+    ],
+    "target": [
+      367,
+      611,
+      175,
+      109
+    ]
+  },
+  "组队御魂-房主-点击本次通关时间": {
+    "action": "Click",
+    "expected": "本次通关时间",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      518,
+      543,
+      186,
+      114
+    ],
+    "target": [
+      608,
+      641,
+      201,
+      79
+    ]
+  },
+  "组队御魂-房主-点击确认": {
+    "action": "Click",
+    "expected": "确定|确认",
+    "post_delay": 2000,
+    "recognition": "OCR",
+    "roi": [
+      560,
+      360,
+      400,
+      160
+    ]
+  }
+}
