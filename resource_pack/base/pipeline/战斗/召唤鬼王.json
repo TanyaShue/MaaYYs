@@ -1,0 +1,120 @@
+{
+    "召唤鬼王":  {
+                 "next":  [
+                              "召唤鬼王-点击召唤"
+                          ],
+                 "recognition":  "DirectHit",
+                 "timeout":  3600000
+             },
+    "召唤鬼王-点击召唤":  {
+                      "action":  "Click",
+                      "expected":  "召唤|鬼王",
+                      "recognition":  "OCR",
+                      "roi":  [
+                                  1126,
+                                  574,
+                                  103,
+                                  53
+                              ],
+                      "next":  [
+                                   "召唤鬼王-点击集结"
+                               ],
+                      "post_delay":  2000
+                  },
+    "召唤鬼王-点击集结":  {
+                      "action":  "Click",
+                      "next":  [
+                                   "召唤鬼王-点击目标"
+                               ],
+                      "on_error":  [
+                                       "召唤鬼王-下滑列表"
+                                   ],
+                      "post_delay":  1500,
+                      "pre_wait_freezes":  200,
+                      "recognition":  "TemplateMatch",
+                      "target":  [
+                                     262,
+                                     165,
+                                     19,
+                                     19
+                                 ],
+                      "template":  [
+                                       "召唤鬼王/集结_1.png"
+                                   ],
+                      "threshold":  0.65,
+                      "timeout":  8000
+                  },
+    "召唤鬼王-点击目标":  {
+                      "action":  "Click",
+                      "expected":  "cytus",
+                      "next":  [
+                                   "召唤鬼王-点击邀请"
+                               ],
+                      "on_error":  [
+                                       "召唤鬼王-下滑列表"
+                                   ],
+                      "post_delay":  1500,
+                      "pre_wait_freezes":  200,
+                      "recognition":  "OCR",
+                      "roi":  [
+                                  340,
+                                  180,
+                                  620,
+                                  470
+                              ]
+                  },
+    "召唤鬼王-下滑列表":  {
+                      "action":  "Swipe",
+                      "begin":  [
+                                    770,
+                                    440,
+                                    20,
+                                    20
+                                ],
+                      "duration":  500,
+                      "end":  [
+                                  770,
+                                  260,
+                                  20,
+                                  20
+                              ],
+                      "max_hit":  5,
+                      "next":  [
+                                   "召唤鬼王-点击目标"
+                               ],
+                      "on_error":  [
+                                       "召唤鬼王-下滑列表"
+                                   ],
+                      "post_delay":  1000,
+                      "pre_wait_freezes":  300,
+                      "recognition":  "DirectHit",
+                      "timeout":  8000
+                  },
+    "召唤鬼王-点击邀请":  {
+                      "action":  "Click",
+                      "expected":  "邀请",
+                      "next":  [
+                                   "召唤鬼王-重置滑动次数"
+                               ],
+                      "post_delay":  10000,
+                      "pre_wait_freezes":  200,
+                      "recognition":  "OCR",
+                      "roi":  [
+                                  640,
+                                  500,
+                                  400,
+                                  200
+                              ]
+                  },
+    "召唤鬼王-重置滑动次数":  {
+                        "action":  "Custom",
+                        "custom_action":  "ClearHitCount",
+                        "custom_action_param":  {
+                                                    "node_name":  "召唤鬼王-下滑列表"
+                                                },
+                        "next":  [
+                                     "召唤鬼王"
+                                 ],
+                        "recognition":  "DirectHit"
+                    }
+}
