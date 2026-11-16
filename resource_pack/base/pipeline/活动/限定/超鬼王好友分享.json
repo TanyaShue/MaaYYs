@@ -1,0 +1,81 @@
+{
+  "超鬼王好友分享": {
+    "expected": "祸主降临",
+    "next": [
+      "[JumpBack]超鬼王好友分享-点击挑战",
+      "[JumpBack]超鬼王好友分享-准备",
+      "[JumpBack]超鬼王好友分享-本次伤害",
+      "超鬼王好友分享-点击好友鬼王"
+    ],
+    "rate_limit": 2000,
+    "recognition": "OCR",
+    "roi": [
+      109,
+      10,
+      215,
+      68
+    ],
+    "timeout": 200000
+  },
+  "超鬼王好友分享-点击好友鬼王": {
+    "action": "Click",
+    "expected": "剩余时间",
+    "next": [
+      "超鬼王好友分享"
+    ],
+    "post_delay": 1500,
+    "pre_wait_freezes": 200,
+    "recognition": "OCR",
+    "roi": [
+      20,
+      335,
+      340,
+      325
+    ]
+  },
+  "超鬼王好友分享-点击挑战": {
+    "action": "Click",
+    "expected": "挑战",
+    "post_delay": 2000,
+    "pre_wait_freezes": 200,
+    "recognition": "OCR",
+    "roi": [
+      1107,
+      558,
+      143,
+      126
+    ]
+  },
+  "超鬼王好友分享-准备": {
+    "action": "Click",
+    "expected": "准备",
+    "post_delay": 2000,
+    "pre_wait_freezes": 200,
+    "recognition": "OCR",
+    "roi": [
+      1089,
+      505,
+      150,
+      159
+    ]
+  },
+  "超鬼王好友分享-本次伤害": {
+    "action": "Click",
+    "expected": "本次伤害",
+    "post_delay": 2000,
+    "pre_wait_freezes": 200,
+    "recognition": "OCR",
+    "roi": [
+      389,
+      226,
+      514,
+      240
+    ],
+    "target": [
+      459,
+      641,
+      85,
+      76
+    ]
+  }
+}
