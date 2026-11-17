@@ -1,0 +1,289 @@
+{
+    "组队御魂-房主":  {
+                    "next":  [
+                                 "组队御魂-房主-开局等待"
+                             ],
+                    "recognition":  "DirectHit"
+                },
+    "组队御魂-房主-开局等待":  {
+                         "action":  "Custom",
+                         "custom_action":  "RandomWait",
+                         "custom_action_param":  {
+                                                     "max":  3,
+                                                     "min":  1
+                                                 },
+                         "next":  [
+                                      "组队御魂-房主-循环"
+                                  ],
+                         "recognition":  "DirectHit"
+                     },
+    "组队御魂-房主-循环":  {
+                       "next":  [
+                                    "组队御魂-房主-点击空白区域继续",
+                                    "组队御魂-房主-点击屏幕继续",
+                                    "[JumpBack]组队御魂-房主-领取奖励",
+                                    "[JumpBack]组队御魂-房主-获得宝藏",
+                                    "[JumpBack]组队御魂-房主-点击本次通关时间",
+                                    "组队御魂-房主-默认邀请-勾选",
+                                    "组队御魂-房主-默认邀请-确定",
+                                    "组队御魂-房主-点击确认",
+                                    "组队御魂-房主-点击挑战",
+                                    "组队御魂-房主-OCR点击挑战",
+                                    "组队御魂-房主-循环-等待"
+                                ],
+                       "recognition":  "DirectHit"
+                   },
+    "组队御魂-房主-循环-等待":  {
+                          "action":  "Custom",
+                          "custom_action":  "RandomWait",
+                          "custom_action_param":  {
+                                                      "max":  2,
+                                                      "min":  1
+                                                  },
+                          "next":  [
+                                       "组队御魂-房主-循环"
+                                   ],
+                          "recognition":  "DirectHit"
+                      },
+    "组队御魂-房主-点击挑战":  {
+                         "action":  "Click",
+                         "next":  [
+                                      "组队御魂-房主-计数"
+                                  ],
+                         "post_delay":  3000,
+                         "pre_wait_freezes":  200,
+                         "recognition":  "TemplateMatch",
+                         "roi":  [
+                                     1054,
+                                     518,
+                                     226,
+                                     202
+                                 ],
+                         "template":  [
+                                          "战斗/组队副本/组队副本-点击挑战_1.png",
+                                          "战斗/真蛇/真蛇-点击开始挑战_1.png"
+                                      ]
+                     },
+    "组队御魂-房主-OCR点击挑战":  {
+                            "action":  "Click",
+                            "expected":  "挑战",
+                            "next":  [
+                                         "组队御魂-房主-计数"
+                                     ],
+                            "post_delay":  3000,
+                            "pre_wait_freezes":  200,
+                            "recognition":  "OCR",
+                            "roi":  [
+                                        925,
+                                        552,
+                                        355,
+                                        168
+                                    ]
+                        },
+    "组队御魂-房主-点击空白区域继续":  {
+                             "action":  "Click",
+                             "expected":  "点击空白区域继续",
+                             "next":  [
+                                          "组队御魂-房主-循环"
+                                      ],
+                             "post_delay":  2000,
+                             "recognition":  "OCR",
+                             "roi":  [
+                                         441,
+                                         668,
+                                         366,
+                                         51
+                                     ]
+                         },
+    "组队御魂-房主-点击屏幕继续":  {
+                           "action":  "Click",
+                           "expected":  "点击屏幕继续",
+                           "next":  [
+                                        "组队御魂-房主-循环"
+                                    ],
+                           "post_delay":  2000,
+                           "recognition":  "OCR",
+                           "roi":  [
+                                       517,
+                                       634,
+                                       268,
+                                       86
+                                   ]
+                       },
+    "组队御魂-房主-领取奖励":  {
+                         "action":  "Click",
+                         "expected":  "获得奖励",
+                         "post_delay":  1500,
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     420,
+                                     160,
+                                     496,
+                                     150
+                                 ],
+                         "target":  [
+                                        651,
+                                        498,
+                                        107,
+                                        46
+                                    ]
+                     },
+    "组队御魂-房主-获得宝藏":  {
+                         "action":  "Click",
+                         "expected":  "获得宝藏|发现宝藏",
+                         "post_delay":  1500,
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     420,
+                                     160,
+                                     496,
+                                     150
+                                 ],
+                         "target":  [
+                                        367,
+                                        611,
+                                        175,
+                                        109
+                                    ]
+                     },
+    "组队御魂-房主-点击本次通关时间":  {
+                             "action":  "Click",
+                             "expected":  "本次通关时间",
+                             "post_delay":  1500,
+                             "recognition":  "OCR",
+                             "roi":  [
+                                         518,
+                                         543,
+                                         186,
+                                         114
+                                     ],
+                             "target":  [
+                                            608,
+                                            641,
+                                            201,
+                                            79
+                                        ]
+                         },
+    "组队御魂-房主-默认邀请-勾选":  {
+                            "action":  "Click",
+                            "expected":  "确定",
+                            "next":  [
+                                         "组队御魂-房主-默认邀请-确定"
+                                     ],
+                            "post_delay":  1000,
+                            "pre_wait_freezes":  200,
+                            "recognition":  "OCR",
+                            "roi":  [
+                                        640,
+                                        380,
+                                        240,
+                                        100
+                                    ],
+                            "target":  [
+                                           552,
+                                           351,
+                                           20,
+                                           20
+                                       ]
+                        },
+    "组队御魂-房主-默认邀请-确定":  {
+                            "action":  "Click",
+                            "expected":  "确定",
+                            "next":  [
+                                         "组队御魂-房主-循环"
+                                     ],
+                            "post_delay":  1500,
+                            "pre_wait_freezes":  200,
+                            "recognition":  "OCR",
+                            "roi":  [
+                                        640,
+                                        380,
+                                        240,
+                                        100
+                                    ]
+                        },
+    "组队御魂-房主-计数":  {
+                       "action":  "Custom",
+                       "custom_action":  "TaskCounter",
+                       "custom_action_param":  {
+                                                   "target_count":  10
+                                               },
+                       "next":  [
+                                    "组队御魂-房主-循环"
+                                ],
+                       "on_error":  [
+                                        "组队御魂-房主-开始关闭加成"
+                                    ],
+                       "recognition":  "DirectHit"
+                   },
+    "组队御魂-房主-开始关闭加成":  {
+                           "next":  [
+                                        "组队御魂-房主-关闭加成",
+                                        "[JumpBack]组队御魂-房主-点击加成"
+                                    ],
+                           "on_error":  [
+                                            "导航-庭院"
+                                        ],
+                           "recognition":  "DirectHit"
+                       },
+    "组队御魂-房主-关闭加成":  {
+                         "action":  "Custom",
+                         "custom_action":  "BonusToggleAction",
+                         "custom_action_param":  {
+                                                     "drop_soul":  false
+                                                 },
+                         "expected":  "觉醒材料|八岐大蛇|御魂材料|战斗胜利",
+                         "next":  [
+                                      "组队御魂-房主-关闭加成界面"
+                                  ],
+                         "on_error":  [
+                                          "导航-庭院"
+                                      ],
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     414,
+                                     109,
+                                     357,
+                                     361
+                                 ]
+                     },
+    "组队御魂-房主-点击加成":  {
+                         "action":  "Click",
+                         "expected":  "加成",
+                         "post_delay":  1000,
+                         "pre_wait_freezes":  200,
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     1120,
+                                     15,
+                                     130,
+                                     95
+                                 ]
+                     },
+    "组队御魂-房主-关闭加成界面":  {
+                           "action":  "Click",
+                           "next":  [
+                                        "导航-庭院"
+                                    ],
+                           "post_delay":  2000,
+                           "recognition":  "DirectHit",
+                           "target":  [
+                                          1032,
+                                          239,
+                                          78,
+                                          255
+                                      ]
+                       },
+    "组队御魂-房主-点击确认":  {
+                         "action":  "Click",
+                         "expected":  "确定|确认",
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     560,
+                                     360,
+                                     400,
+                                     160
+                                 ],
+                         "post_delay":  2000
+                     }
+}

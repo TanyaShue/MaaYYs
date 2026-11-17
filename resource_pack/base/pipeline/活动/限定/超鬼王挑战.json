@@ -1,0 +1,2578 @@
+{
+    "超鬼王挑战":  {
+                "recognition":  "DirectHit",
+                "next":  [
+                             "[JumpBack]超鬼王-挑战",
+                             "[JumpBack]超鬼王-准备",
+                             "[JumpBack]超鬼王-本次伤害",
+                             "超鬼王-点击好友鬼王",
+                             "超鬼王-点击召唤鬼王"
+                         ],
+                "timeout":  3600000,
+                "rate_limit":  2000
+            },
+    "超鬼王-点击好友鬼王":  {
+                       "action":  "Click",
+                       "expected":  "剩余时间",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   20,
+                                   335,
+                                   340,
+                                   325
+                               ],
+                       "next":  [
+                                    "超鬼王-选择预设"
+                                ],
+                       "post_delay":  4000
+                   },
+    "超鬼王-点击召唤鬼王":  {
+                       "action":  "Click",
+                       "expected":  "召唤|鬼王",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   1126,
+                                   574,
+                                   103,
+                                   53
+                               ],
+                       "enabled":  false,
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】点击召唤鬼王"
+                                 },
+                       "next":  [
+                                    "超鬼王-选择预设"
+                                ],
+                       "post_delay":  4000
+                   },
+    "超鬼王-选择预设":  {
+                     "recognition":  "DirectHit",
+                     "next":  [
+                                  "超鬼王-预设1-识别名称",
+                                  "超鬼王-预设2-识别名称",
+                                  "超鬼王-预设5-识别名称",
+                                  "超鬼王-预设6-识别名称",
+                                  "超鬼王-名字-鬼王酒吞童子",
+                                  "超鬼王-名字-蚀月吸血姬",
+                                  "超鬼王-名字-纺愿缘结神",
+                                  "超鬼王-名字-修罗鬼童丸",
+                                  "超鬼王-名字-梦山白藏主",
+                                  "超鬼王-名字-禅心云外镜",
+                                  "超鬼王-名字-毗沙门天",
+                                  "超鬼王-名字-酒吞童子",
+                                  "超鬼王-名字-孔雀明王",
+                                  "超鬼王-名字-八岐大蛇",
+                                  "超鬼王-名字-雪御前",
+                                  "超鬼王-名字-鬼童丸",
+                                  "超鬼王-名字-市加美",
+                                  "超鬼王-名字-寻香行",
+                                  "超鬼王-名字-祸津神",
+                                  "超鬼王-名字-卑弥呼",
+                                  "超鬼王-名字-缘结神",
+                                  "超鬼王-名字-鬼金羊",
+                                  "超鬼王-名字-夜刀神",
+                                  "超鬼王-名字-月读",
+                                  "超鬼王-预设3-识别名称",
+                                  "超鬼王-预设4-识别名称"
+                              ]
+                 },
+    "超鬼王-挑战":  {
+                   "action":  "Click",
+                   "expected":  "挑战",
+                   "recognition":  "OCR",
+                   "roi":  [
+                               1107,
+                               558,
+                               143,
+                               126
+                           ],
+                   "post_delay":  2500
+               },
+    "超鬼王-准备":  {
+                   "action":  "Click",
+                   "expected":  "准备",
+                   "recognition":  "OCR",
+                   "roi":  [
+                               1089,
+                               505,
+                               150,
+                               159
+                           ],
+                   "post_delay":  2500
+               },
+    "超鬼王-本次伤害":  {
+                     "action":  "Click",
+                     "expected":  "本次伤害",
+                     "recognition":  "OCR",
+                     "roi":  [
+                                 389,
+                                 226,
+                                 514,
+                                 240
+                             ],
+                     "target":  [
+                                    459,
+                                    641,
+                                    85,
+                                    76
+                                ],
+                     "post_delay":  2000
+                 },
+    "超鬼王-预设1-识别名称":  {
+                         "recognition":  "OCR",
+                         "expected":  "{名单1}",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别为 普攻鬼王（酒吞童子/鬼王酒吞童子）"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设1-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-预设1-分组回顶":  {
+                         "action":  "Swipe",
+                         "begin":  [
+                                       555,
+                                       300,
+                                       20,
+                                       20
+                                   ],
+                         "end":  [
+                                     555,
+                                     560,
+                                     20,
+                                     20
+                                 ],
+                         "duration":  500,
+                         "post_delay":  800,
+                         "recognition":  "DirectHit",
+                         "next":  [
+                                      "超鬼王-预设1-分组识别1"
+                                  ]
+                     },
+    "超鬼王-预设1-分组识别1":  {
+                          "action":  "Click",
+                          "expected":  "{分组1}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设1-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设1-分组下滑1"
+                                       ]
+                      },
+    "超鬼王-预设1-分组下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设1-分组识别2"
+                                   ]
+                      },
+    "超鬼王-预设1-分组识别2":  {
+                          "action":  "Click",
+                          "expected":  "{分组1}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设1-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设1-分组下滑2"
+                                       ]
+                      },
+    "超鬼王-预设1-分组下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设1-分组识别3"
+                                   ]
+                      },
+    "超鬼王-预设1-分组识别3":  {
+                          "action":  "Click",
+                          "expected":  "{分组1}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设1-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设1-队伍识别1"
+                                       ]
+                      },
+    "超鬼王-预设1-队伍识别1":  {
+                          "action":  "Click",
+                          "expected":  "{队伍1}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设1-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设1-队伍下滑1"
+                                       ]
+                      },
+    "超鬼王-预设1-队伍下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设1-队伍识别2"
+                                   ]
+                      },
+    "超鬼王-预设1-队伍识别2":  {
+                          "action":  "Click",
+                          "expected":  "{队伍1}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设1-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设1-队伍下滑2"
+                                       ]
+                      },
+    "超鬼王-预设1-队伍下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设1-队伍识别3"
+                                   ]
+                      },
+    "超鬼王-预设1-队伍识别3":  {
+                          "action":  "Click",
+                          "expected":  "{队伍1}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设1-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设1-出战"
+                                       ]
+                      },
+    "超鬼王-预设1-出战":  {
+                       "action":  "Click",
+                       "expected":  "出战",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   720,
+                                   535,
+                                   260,
+                                   90
+                               ],
+                       "post_delay":  1500,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设1-确定"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设1-开关"
+                                    ],
+                       "timeout":  3000
+                   },
+    "超鬼王-预设1-确定":  {
+                       "action":  "Click",
+                       "expected":  "确定",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   640,
+                                   395,
+                                   260,
+                                   100
+                               ],
+                       "post_delay":  1200,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设1-开关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设1-开关"
+                                    ]
+                   },
+    "超鬼王-预设1-开关":  {
+                       "recognition":  "DirectHit",
+                       "next":  [
+                                    "超鬼王-预设1-开关开",
+                                    "超鬼王-预设1-开关关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王挑战"
+                                    ],
+                       "timeout":  2000
+                   },
+    "超鬼王-预设1-开关开":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-未选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  false,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设1-开关关":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  true,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设2-识别名称":  {
+                         "recognition":  "OCR",
+                         "expected":  "{名单2}",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别为 单体鬼王（雪御前/月读）"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设2-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-预设2-分组回顶":  {
+                         "action":  "Swipe",
+                         "begin":  [
+                                       555,
+                                       300,
+                                       20,
+                                       20
+                                   ],
+                         "end":  [
+                                     555,
+                                     560,
+                                     20,
+                                     20
+                                 ],
+                         "duration":  500,
+                         "post_delay":  800,
+                         "recognition":  "DirectHit",
+                         "next":  [
+                                      "超鬼王-预设2-分组识别1"
+                                  ]
+                     },
+    "超鬼王-预设2-分组识别1":  {
+                          "action":  "Click",
+                          "expected":  "{分组2}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设2-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设2-分组下滑1"
+                                       ]
+                      },
+    "超鬼王-预设2-分组下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设2-分组识别2"
+                                   ]
+                      },
+    "超鬼王-预设2-分组识别2":  {
+                          "action":  "Click",
+                          "expected":  "{分组2}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设2-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设2-分组下滑2"
+                                       ]
+                      },
+    "超鬼王-预设2-分组下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设2-分组识别3"
+                                   ]
+                      },
+    "超鬼王-预设2-分组识别3":  {
+                          "action":  "Click",
+                          "expected":  "{分组2}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设2-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设2-队伍识别1"
+                                       ]
+                      },
+    "超鬼王-预设2-队伍识别1":  {
+                          "action":  "Click",
+                          "expected":  "{队伍2}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设2-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设2-队伍下滑1"
+                                       ]
+                      },
+    "超鬼王-预设2-队伍下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设2-队伍识别2"
+                                   ]
+                      },
+    "超鬼王-预设2-队伍识别2":  {
+                          "action":  "Click",
+                          "expected":  "{队伍2}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设2-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设2-队伍下滑2"
+                                       ]
+                      },
+    "超鬼王-预设2-队伍下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设2-队伍识别3"
+                                   ]
+                      },
+    "超鬼王-预设2-队伍识别3":  {
+                          "action":  "Click",
+                          "expected":  "{队伍2}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设2-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设2-出战"
+                                       ]
+                      },
+    "超鬼王-预设2-出战":  {
+                       "action":  "Click",
+                       "expected":  "出战",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   720,
+                                   535,
+                                   260,
+                                   90
+                               ],
+                       "post_delay":  1500,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设2-确定"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设2-开关"
+                                    ],
+                       "timeout":  3000
+                   },
+    "超鬼王-预设2-确定":  {
+                       "action":  "Click",
+                       "expected":  "确定",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   640,
+                                   395,
+                                   260,
+                                   100
+                               ],
+                       "post_delay":  1200,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设2-开关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设2-开关"
+                                    ]
+                   },
+    "超鬼王-预设2-开关":  {
+                       "recognition":  "DirectHit",
+                       "next":  [
+                                    "超鬼王-预设2-开关开",
+                                    "超鬼王-预设2-开关关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王挑战"
+                                    ],
+                       "timeout":  2000
+                   },
+    "超鬼王-预设2-开关开":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-未选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  false,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设2-开关关":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  true,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设3-识别名称":  {
+                         "recognition":  "OCR",
+                         "expected":  "鬼童丸|缘结神|禅心云外镜|八岐大蛇|梦山白藏主|卑弥呼|鬼金羊|酒吞童子|月读|夜刀神|纺愿缘结神|修罗鬼童丸|毗沙门天|孔雀明王|蚀月吸血姬|祸津神|寻香行|市加美|雪御前|鬼王酒吞童子",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别为 其他五六星鬼王"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设3-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-预设3-分组回顶":  {
+                         "action":  "Swipe",
+                         "begin":  [
+                                       555,
+                                       300,
+                                       20,
+                                       20
+                                   ],
+                         "end":  [
+                                     555,
+                                     560,
+                                     20,
+                                     20
+                                 ],
+                         "duration":  500,
+                         "post_delay":  800,
+                         "recognition":  "DirectHit",
+                         "next":  [
+                                      "超鬼王-预设3-分组识别1"
+                                  ]
+                     },
+    "超鬼王-预设3-分组识别1":  {
+                          "action":  "Click",
+                          "expected":  "{分组3}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设3-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设3-分组下滑1"
+                                       ]
+                      },
+    "超鬼王-预设3-分组下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设3-分组识别2"
+                                   ]
+                      },
+    "超鬼王-预设3-分组识别2":  {
+                          "action":  "Click",
+                          "expected":  "{分组3}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设3-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设3-分组下滑2"
+                                       ]
+                      },
+    "超鬼王-预设3-分组下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设3-分组识别3"
+                                   ]
+                      },
+    "超鬼王-预设3-分组识别3":  {
+                          "action":  "Click",
+                          "expected":  "{分组3}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设3-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设3-队伍识别1"
+                                       ]
+                      },
+    "超鬼王-预设3-队伍识别1":  {
+                          "action":  "Click",
+                          "expected":  "{队伍3}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设3-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设3-队伍下滑1"
+                                       ]
+                      },
+    "超鬼王-预设3-队伍下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设3-队伍识别2"
+                                   ]
+                      },
+    "超鬼王-预设3-队伍识别2":  {
+                          "action":  "Click",
+                          "expected":  "{队伍3}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设3-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设3-队伍下滑2"
+                                       ]
+                      },
+    "超鬼王-预设3-队伍下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设3-队伍识别3"
+                                   ]
+                      },
+    "超鬼王-预设3-队伍识别3":  {
+                          "action":  "Click",
+                          "expected":  "{队伍3}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设3-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设3-出战"
+                                       ]
+                      },
+    "超鬼王-预设3-出战":  {
+                       "action":  "Click",
+                       "expected":  "出战",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   720,
+                                   535,
+                                   260,
+                                   90
+                               ],
+                       "post_delay":  1500,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设3-确定"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设3-开关"
+                                    ],
+                       "timeout":  3000
+                   },
+    "超鬼王-预设3-确定":  {
+                       "action":  "Click",
+                       "expected":  "确定",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   640,
+                                   395,
+                                   260,
+                                   100
+                               ],
+                       "post_delay":  1200,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设3-开关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设3-开关"
+                                    ]
+                   },
+    "超鬼王-预设3-开关":  {
+                       "recognition":  "DirectHit",
+                       "next":  [
+                                    "超鬼王-预设3-开关开",
+                                    "超鬼王-预设3-开关关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王挑战"
+                                    ],
+                       "timeout":  2000
+                   },
+    "超鬼王-预设3-开关开":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-未选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  false,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设3-开关关":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  true,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设4-识别名称":  {
+                         "recognition":  "DirectHit",
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】名字未匹配任何名单 → 按四星及以下处理"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设4-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-预设4-分组回顶":  {
+                         "action":  "Swipe",
+                         "begin":  [
+                                       555,
+                                       300,
+                                       20,
+                                       20
+                                   ],
+                         "end":  [
+                                     555,
+                                     560,
+                                     20,
+                                     20
+                                 ],
+                         "duration":  500,
+                         "post_delay":  800,
+                         "recognition":  "DirectHit",
+                         "next":  [
+                                      "超鬼王-预设4-分组识别1"
+                                  ]
+                     },
+    "超鬼王-预设4-分组识别1":  {
+                          "action":  "Click",
+                          "expected":  "{分组4}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设4-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设4-分组下滑1"
+                                       ]
+                      },
+    "超鬼王-预设4-分组下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设4-分组识别2"
+                                   ]
+                      },
+    "超鬼王-预设4-分组识别2":  {
+                          "action":  "Click",
+                          "expected":  "{分组4}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设4-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设4-分组下滑2"
+                                       ]
+                      },
+    "超鬼王-预设4-分组下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设4-分组识别3"
+                                   ]
+                      },
+    "超鬼王-预设4-分组识别3":  {
+                          "action":  "Click",
+                          "expected":  "{分组4}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设4-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设4-队伍识别1"
+                                       ]
+                      },
+    "超鬼王-预设4-队伍识别1":  {
+                          "action":  "Click",
+                          "expected":  "{队伍4}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设4-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设4-队伍下滑1"
+                                       ]
+                      },
+    "超鬼王-预设4-队伍下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设4-队伍识别2"
+                                   ]
+                      },
+    "超鬼王-预设4-队伍识别2":  {
+                          "action":  "Click",
+                          "expected":  "{队伍4}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设4-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设4-队伍下滑2"
+                                       ]
+                      },
+    "超鬼王-预设4-队伍下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设4-队伍识别3"
+                                   ]
+                      },
+    "超鬼王-预设4-队伍识别3":  {
+                          "action":  "Click",
+                          "expected":  "{队伍4}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设4-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设4-出战"
+                                       ]
+                      },
+    "超鬼王-预设4-出战":  {
+                       "action":  "Click",
+                       "expected":  "出战",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   720,
+                                   535,
+                                   260,
+                                   90
+                               ],
+                       "post_delay":  1500,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设4-确定"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设4-开关"
+                                    ],
+                       "timeout":  3000
+                   },
+    "超鬼王-预设4-确定":  {
+                       "action":  "Click",
+                       "expected":  "确定",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   640,
+                                   395,
+                                   260,
+                                   100
+                               ],
+                       "post_delay":  1200,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设4-开关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设4-开关"
+                                    ]
+                   },
+    "超鬼王-预设4-开关":  {
+                       "recognition":  "DirectHit",
+                       "next":  [
+                                    "超鬼王-预设4-开关开",
+                                    "超鬼王-预设4-开关关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王挑战"
+                                    ],
+                       "timeout":  2000
+                   },
+    "超鬼王-预设4-开关开":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-未选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  false,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设4-开关关":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  true,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设5-识别名称":  {
+                         "recognition":  "OCR",
+                         "expected":  "{名单5}",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别为 自定义名单1"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设5-打开队伍预设"
+                                  ],
+                         "enabled":  false
+                     },
+    "超鬼王-预设5-分组回顶":  {
+                         "action":  "Swipe",
+                         "begin":  [
+                                       555,
+                                       300,
+                                       20,
+                                       20
+                                   ],
+                         "end":  [
+                                     555,
+                                     560,
+                                     20,
+                                     20
+                                 ],
+                         "duration":  500,
+                         "post_delay":  800,
+                         "recognition":  "DirectHit",
+                         "next":  [
+                                      "超鬼王-预设5-分组识别1"
+                                  ]
+                     },
+    "超鬼王-预设5-分组识别1":  {
+                          "action":  "Click",
+                          "expected":  "{分组5}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设5-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设5-分组下滑1"
+                                       ]
+                      },
+    "超鬼王-预设5-分组下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设5-分组识别2"
+                                   ]
+                      },
+    "超鬼王-预设5-分组识别2":  {
+                          "action":  "Click",
+                          "expected":  "{分组5}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设5-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设5-分组下滑2"
+                                       ]
+                      },
+    "超鬼王-预设5-分组下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设5-分组识别3"
+                                   ]
+                      },
+    "超鬼王-预设5-分组识别3":  {
+                          "action":  "Click",
+                          "expected":  "{分组5}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设5-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设5-队伍识别1"
+                                       ]
+                      },
+    "超鬼王-预设5-队伍识别1":  {
+                          "action":  "Click",
+                          "expected":  "{队伍5}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设5-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设5-队伍下滑1"
+                                       ]
+                      },
+    "超鬼王-预设5-队伍下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设5-队伍识别2"
+                                   ]
+                      },
+    "超鬼王-预设5-队伍识别2":  {
+                          "action":  "Click",
+                          "expected":  "{队伍5}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设5-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设5-队伍下滑2"
+                                       ]
+                      },
+    "超鬼王-预设5-队伍下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设5-队伍识别3"
+                                   ]
+                      },
+    "超鬼王-预设5-队伍识别3":  {
+                          "action":  "Click",
+                          "expected":  "{队伍5}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设5-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设5-出战"
+                                       ]
+                      },
+    "超鬼王-预设5-出战":  {
+                       "action":  "Click",
+                       "expected":  "出战",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   720,
+                                   535,
+                                   260,
+                                   90
+                               ],
+                       "post_delay":  1500,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设5-确定"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设5-开关"
+                                    ],
+                       "timeout":  3000
+                   },
+    "超鬼王-预设5-确定":  {
+                       "action":  "Click",
+                       "expected":  "确定",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   640,
+                                   395,
+                                   260,
+                                   100
+                               ],
+                       "post_delay":  1200,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设5-开关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设5-开关"
+                                    ]
+                   },
+    "超鬼王-预设5-开关":  {
+                       "recognition":  "DirectHit",
+                       "next":  [
+                                    "超鬼王-预设5-开关开",
+                                    "超鬼王-预设5-开关关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王挑战"
+                                    ],
+                       "timeout":  2000
+                   },
+    "超鬼王-预设5-开关开":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-未选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  false,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设5-开关关":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  true,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设6-识别名称":  {
+                         "recognition":  "OCR",
+                         "expected":  "{名单6}",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别为 自定义名单2"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设6-打开队伍预设"
+                                  ],
+                         "enabled":  false
+                     },
+    "超鬼王-预设6-分组回顶":  {
+                         "action":  "Swipe",
+                         "begin":  [
+                                       555,
+                                       300,
+                                       20,
+                                       20
+                                   ],
+                         "end":  [
+                                     555,
+                                     560,
+                                     20,
+                                     20
+                                 ],
+                         "duration":  500,
+                         "post_delay":  800,
+                         "recognition":  "DirectHit",
+                         "next":  [
+                                      "超鬼王-预设6-分组识别1"
+                                  ]
+                     },
+    "超鬼王-预设6-分组识别1":  {
+                          "action":  "Click",
+                          "expected":  "{分组6}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设6-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设6-分组下滑1"
+                                       ]
+                      },
+    "超鬼王-预设6-分组下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设6-分组识别2"
+                                   ]
+                      },
+    "超鬼王-预设6-分组识别2":  {
+                          "action":  "Click",
+                          "expected":  "{分组6}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设6-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设6-分组下滑2"
+                                       ]
+                      },
+    "超鬼王-预设6-分组下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        555,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      555,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设6-分组识别3"
+                                   ]
+                      },
+    "超鬼王-预设6-分组识别3":  {
+                          "action":  "Click",
+                          "expected":  "{分组6}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      495,
+                                      228,
+                                      120,
+                                      377
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设6-队伍识别1"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设6-队伍识别1"
+                                       ]
+                      },
+    "超鬼王-预设6-队伍识别1":  {
+                          "action":  "Click",
+                          "expected":  "{队伍6}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设6-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设6-队伍下滑1"
+                                       ]
+                      },
+    "超鬼王-预设6-队伍下滑1":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设6-队伍识别2"
+                                   ]
+                      },
+    "超鬼王-预设6-队伍识别2":  {
+                          "action":  "Click",
+                          "expected":  "{队伍6}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设6-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设6-队伍下滑2"
+                                       ]
+                      },
+    "超鬼王-预设6-队伍下滑2":  {
+                          "action":  "Swipe",
+                          "begin":  [
+                                        835,
+                                        560,
+                                        20,
+                                        20
+                                    ],
+                          "end":  [
+                                      835,
+                                      300,
+                                      20,
+                                      20
+                                  ],
+                          "duration":  500,
+                          "post_delay":  800,
+                          "recognition":  "DirectHit",
+                          "next":  [
+                                       "超鬼王-预设6-队伍识别3"
+                                   ]
+                      },
+    "超鬼王-预设6-队伍识别3":  {
+                          "action":  "Click",
+                          "expected":  "{队伍6}",
+                          "recognition":  "OCR",
+                          "roi":  [
+                                      624,
+                                      228,
+                                      422,
+                                      381
+                                  ],
+                          "post_delay":  1200,
+                          "pre_wait_freezes":  300,
+                          "next":  [
+                                       "超鬼王-预设6-出战"
+                                   ],
+                          "on_error":  [
+                                           "超鬼王-预设6-出战"
+                                       ]
+                      },
+    "超鬼王-预设6-出战":  {
+                       "action":  "Click",
+                       "expected":  "出战",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   720,
+                                   535,
+                                   260,
+                                   90
+                               ],
+                       "post_delay":  1500,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设6-确定"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设6-开关"
+                                    ],
+                       "timeout":  3000
+                   },
+    "超鬼王-预设6-确定":  {
+                       "action":  "Click",
+                       "expected":  "确定",
+                       "recognition":  "OCR",
+                       "roi":  [
+                                   640,
+                                   395,
+                                   260,
+                                   100
+                               ],
+                       "post_delay":  1200,
+                       "pre_wait_freezes":  300,
+                       "next":  [
+                                    "超鬼王-预设6-开关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王-预设6-开关"
+                                    ]
+                   },
+    "超鬼王-预设6-开关":  {
+                       "recognition":  "DirectHit",
+                       "next":  [
+                                    "超鬼王-预设6-开关开",
+                                    "超鬼王-预设6-开关关"
+                                ],
+                       "on_error":  [
+                                        "超鬼王挑战"
+                                    ],
+                       "timeout":  2000
+                   },
+    "超鬼王-预设6-开关开":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-未选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  false,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设6-开关关":  {
+                        "action":  "Click",
+                        "recognition":  "TemplateMatch",
+                        "template":  [
+                                         "超鬼王/伤害开关-选中_1.png"
+                                     ],
+                        "threshold":  0.7,
+                        "enabled":  true,
+                        "next":  [
+                                     "超鬼王挑战"
+                                 ],
+                        "on_error":  [
+                                         "超鬼王挑战"
+                                     ],
+                        "post_delay":  1000,
+                        "pre_wait_freezes":  300
+                    },
+    "超鬼王-预设1-打开队伍预设":  {
+                           "action":  "Click",
+                           "recognition":  "TemplateMatch",
+                           "template":  [
+                                            "超鬼王/队伍预设图标_1.png"
+                                        ],
+                           "threshold":  0.7,
+                           "next":  [
+                                        "超鬼王-预设1-分组回顶"
+                                    ],
+                           "post_delay":  1500,
+                           "pre_wait_freezes":  300
+                       },
+    "超鬼王-预设2-打开队伍预设":  {
+                           "action":  "Click",
+                           "recognition":  "TemplateMatch",
+                           "template":  [
+                                            "超鬼王/队伍预设图标_1.png"
+                                        ],
+                           "threshold":  0.7,
+                           "next":  [
+                                        "超鬼王-预设2-分组回顶"
+                                    ],
+                           "post_delay":  1500,
+                           "pre_wait_freezes":  300
+                       },
+    "超鬼王-预设3-打开队伍预设":  {
+                           "action":  "Click",
+                           "recognition":  "TemplateMatch",
+                           "template":  [
+                                            "超鬼王/队伍预设图标_1.png"
+                                        ],
+                           "threshold":  0.7,
+                           "next":  [
+                                        "超鬼王-预设3-分组回顶"
+                                    ],
+                           "post_delay":  1500,
+                           "pre_wait_freezes":  300
+                       },
+    "超鬼王-预设4-打开队伍预设":  {
+                           "action":  "Click",
+                           "recognition":  "TemplateMatch",
+                           "template":  [
+                                            "超鬼王/队伍预设图标_1.png"
+                                        ],
+                           "threshold":  0.7,
+                           "next":  [
+                                        "超鬼王-预设4-分组回顶"
+                                    ],
+                           "post_delay":  1500,
+                           "pre_wait_freezes":  300
+                       },
+    "超鬼王-预设5-打开队伍预设":  {
+                           "action":  "Click",
+                           "recognition":  "TemplateMatch",
+                           "template":  [
+                                            "超鬼王/队伍预设图标_1.png"
+                                        ],
+                           "threshold":  0.7,
+                           "next":  [
+                                        "超鬼王-预设5-分组回顶"
+                                    ],
+                           "post_delay":  1500,
+                           "pre_wait_freezes":  300
+                       },
+    "超鬼王-预设6-打开队伍预设":  {
+                           "action":  "Click",
+                           "recognition":  "TemplateMatch",
+                           "template":  [
+                                            "超鬼王/队伍预设图标_1.png"
+                                        ],
+                           "threshold":  0.7,
+                           "next":  [
+                                        "超鬼王-预设6-分组回顶"
+                                    ],
+                           "post_delay":  1500,
+                           "pre_wait_freezes":  300
+                       },
+    "超鬼王-名字-鬼王酒吞童子":  {
+                          "recognition":  "OCR",
+                          "expected":  "鬼王酒吞童子",
+                          "roi":  [
+                                      470,
+                                      110,
+                                      130,
+                                      280
+                                  ],
+                          "replace":  [
+                                          [
+                                              "\\d+",
+                                              ""
+                                          ]
+                                      ],
+                          "focus":  {
+                                        "Node.Recognition.Succeeded":  "【超鬼王】识别到：鬼王酒吞童子"
+                                    },
+                          "next":  [
+                                       "超鬼王-预设3-打开队伍预设"
+                                   ]
+                      },
+    "超鬼王-名字-蚀月吸血姬":  {
+                         "recognition":  "OCR",
+                         "expected":  "蚀月吸血姬",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别到：蚀月吸血姬"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设3-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-名字-纺愿缘结神":  {
+                         "recognition":  "OCR",
+                         "expected":  "纺愿缘结神",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别到：纺愿缘结神"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设3-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-名字-修罗鬼童丸":  {
+                         "recognition":  "OCR",
+                         "expected":  "修罗鬼童丸",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别到：修罗鬼童丸"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设3-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-名字-梦山白藏主":  {
+                         "recognition":  "OCR",
+                         "expected":  "梦山白藏主",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别到：梦山白藏主"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设3-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-名字-禅心云外镜":  {
+                         "recognition":  "OCR",
+                         "expected":  "禅心云外镜",
+                         "roi":  [
+                                     470,
+                                     110,
+                                     130,
+                                     280
+                                 ],
+                         "replace":  [
+                                         [
+                                             "\\d+",
+                                             ""
+                                         ]
+                                     ],
+                         "focus":  {
+                                       "Node.Recognition.Succeeded":  "【超鬼王】识别到：禅心云外镜"
+                                   },
+                         "next":  [
+                                      "超鬼王-预设3-打开队伍预设"
+                                  ]
+                     },
+    "超鬼王-名字-毗沙门天":  {
+                        "recognition":  "OCR",
+                        "expected":  "毗沙门天",
+                        "roi":  [
+                                    470,
+                                    110,
+                                    130,
+                                    280
+                                ],
+                        "replace":  [
+                                        [
+                                            "\\d+",
+                                            ""
+                                        ]
+                                    ],
+                        "focus":  {
+                                      "Node.Recognition.Succeeded":  "【超鬼王】识别到：毗沙门天"
+                                  },
+                        "next":  [
+                                     "超鬼王-预设3-打开队伍预设"
+                                 ]
+                    },
+    "超鬼王-名字-酒吞童子":  {
+                        "recognition":  "OCR",
+                        "expected":  "酒吞童子",
+                        "roi":  [
+                                    470,
+                                    110,
+                                    130,
+                                    280
+                                ],
+                        "replace":  [
+                                        [
+                                            "\\d+",
+                                            ""
+                                        ]
+                                    ],
+                        "focus":  {
+                                      "Node.Recognition.Succeeded":  "【超鬼王】识别到：酒吞童子"
+                                  },
+                        "next":  [
+                                     "超鬼王-预设3-打开队伍预设"
+                                 ]
+                    },
+    "超鬼王-名字-孔雀明王":  {
+                        "recognition":  "OCR",
+                        "expected":  "孔雀明王",
+                        "roi":  [
+                                    470,
+                                    110,
+                                    130,
+                                    280
+                                ],
+                        "replace":  [
+                                        [
+                                            "\\d+",
+                                            ""
+                                        ]
+                                    ],
+                        "focus":  {
+                                      "Node.Recognition.Succeeded":  "【超鬼王】识别到：孔雀明王"
+                                  },
+                        "next":  [
+                                     "超鬼王-预设3-打开队伍预设"
+                                 ]
+                    },
+    "超鬼王-名字-八岐大蛇":  {
+                        "recognition":  "OCR",
+                        "expected":  "八岐大蛇",
+                        "roi":  [
+                                    470,
+                                    110,
+                                    130,
+                                    280
+                                ],
+                        "replace":  [
+                                        [
+                                            "\\d+",
+                                            ""
+                                        ]
+                                    ],
+                        "focus":  {
+                                      "Node.Recognition.Succeeded":  "【超鬼王】识别到：八岐大蛇"
+                                  },
+                        "next":  [
+                                     "超鬼王-预设3-打开队伍预设"
+                                 ]
+                    },
+    "超鬼王-名字-雪御前":  {
+                       "recognition":  "OCR",
+                       "expected":  "雪御前",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：雪御前"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-鬼童丸":  {
+                       "recognition":  "OCR",
+                       "expected":  "鬼童丸",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：鬼童丸"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-市加美":  {
+                       "recognition":  "OCR",
+                       "expected":  "市加美",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：市加美"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-寻香行":  {
+                       "recognition":  "OCR",
+                       "expected":  "寻香行",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：寻香行"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-祸津神":  {
+                       "recognition":  "OCR",
+                       "expected":  "祸津神",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：祸津神"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-卑弥呼":  {
+                       "recognition":  "OCR",
+                       "expected":  "卑弥呼",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：卑弥呼"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-缘结神":  {
+                       "recognition":  "OCR",
+                       "expected":  "缘结神",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：缘结神"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-鬼金羊":  {
+                       "recognition":  "OCR",
+                       "expected":  "鬼金羊",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：鬼金羊"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-夜刀神":  {
+                       "recognition":  "OCR",
+                       "expected":  "夜刀神",
+                       "roi":  [
+                                   470,
+                                   110,
+                                   130,
+                                   280
+                               ],
+                       "replace":  [
+                                       [
+                                           "\\d+",
+                                           ""
+                                       ]
+                                   ],
+                       "focus":  {
+                                     "Node.Recognition.Succeeded":  "【超鬼王】识别到：夜刀神"
+                                 },
+                       "next":  [
+                                    "超鬼王-预设3-打开队伍预设"
+                                ]
+                   },
+    "超鬼王-名字-月读":  {
+                      "recognition":  "OCR",
+                      "expected":  "月读",
+                      "roi":  [
+                                  470,
+                                  110,
+                                  130,
+                                  280
+                              ],
+                      "replace":  [
+                                      [
+                                          "\\d+",
+                                          ""
+                                      ]
+                                  ],
+                      "focus":  {
+                                    "Node.Recognition.Succeeded":  "【超鬼王】识别到：月读"
+                                },
+                      "next":  [
+                                   "超鬼王-预设3-打开队伍预设"
+                               ]
+                  }
+}

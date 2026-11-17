@@ -1,0 +1,35 @@
+{
+    "task": [
+        {
+            "name": "召唤鬼王",
+            "label": "召唤鬼王",
+            "entry": "召唤鬼王",
+            "group": ["promotion"],
+            "description": "在「祸主降临」界面启动。脚本会自动循环：点召唤鬼王 → 点集结 → 按名称选中要邀请的好友（OCR 识别）→ 点邀请 → 等待 10 秒 → 等右下角重新出现「召唤鬼王」继续。",
+            "option": [
+                "邀请目标名称"
+            ]
+        }
+    ],
+    "option": {
+        "邀请目标名称": {
+            "type": "input",
+            "label": "邀请目标名称",
+            "description": "填写要邀请的好友名称（与游戏内好友列表显示一致，按文字识别）",
+            "inputs": [
+                {
+                    "name": "目标名称",
+                    "label": "目标名称",
+                    "description": "好友列表里的显示名称",
+                    "default": "cytus",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "召唤鬼王-点击目标": {
+                    "expected": "{目标名称}"
+                }
+            }
+        }
+    }
+}

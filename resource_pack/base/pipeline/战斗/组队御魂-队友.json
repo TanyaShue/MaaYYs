@@ -1,0 +1,143 @@
+{
+    "组队御魂-队友":  {
+                    "next":  [
+                                 "组队御魂-队友-点击空白区域继续",
+                                 "组队御魂-队友-点击屏幕继续",
+                                 "组队御魂-队友-领取奖励",
+                                 "组队御魂-队友-获得宝藏",
+                                 "组队御魂-队友-点击本次通关时间",
+                                 "组队御魂-队友-接受邀请",
+                                 "组队御魂-队友-点击确认"
+                             ],
+                    "recognition":  "DirectHit",
+                    "timeout":  120000,
+                    "on_error":  [
+                                     "组队御魂-队友-结束"
+                                 ]
+                },
+    "组队御魂-队友-结束":  {
+                       "action":  "StopTask",
+                       "recognition":  "DirectHit"
+                   },
+    "组队御魂-队友-点击空白区域继续":  {
+                             "action":  "Click",
+                             "expected":  "点击空白区域继续",
+                             "next":  [
+                                          "组队御魂-队友"
+                                      ],
+                             "post_delay":  2000,
+                             "recognition":  "OCR",
+                             "roi":  [
+                                         441,
+                                         668,
+                                         366,
+                                         51
+                                     ]
+                         },
+    "组队御魂-队友-点击屏幕继续":  {
+                           "action":  "Click",
+                           "expected":  "点击屏幕继续",
+                           "next":  [
+                                        "组队御魂-队友"
+                                    ],
+                           "post_delay":  2000,
+                           "recognition":  "OCR",
+                           "roi":  [
+                                       517,
+                                       634,
+                                       268,
+                                       86
+                                   ]
+                       },
+    "组队御魂-队友-领取奖励":  {
+                         "action":  "Click",
+                         "expected":  "获得奖励",
+                         "next":  [
+                                      "组队御魂-队友"
+                                  ],
+                         "post_delay":  1500,
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     420,
+                                     160,
+                                     496,
+                                     150
+                                 ],
+                         "target":  [
+                                        651,
+                                        498,
+                                        107,
+                                        46
+                                    ]
+                     },
+    "组队御魂-队友-获得宝藏":  {
+                         "action":  "Click",
+                         "expected":  "获得宝藏|发现宝藏",
+                         "next":  [
+                                      "组队御魂-队友"
+                                  ],
+                         "post_delay":  1500,
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     420,
+                                     160,
+                                     496,
+                                     150
+                                 ],
+                         "target":  [
+                                        367,
+                                        611,
+                                        175,
+                                        109
+                                    ]
+                     },
+    "组队御魂-队友-点击本次通关时间":  {
+                             "action":  "Click",
+                             "expected":  "本次通关时间",
+                             "next":  [
+                                          "组队御魂-队友"
+                                      ],
+                             "post_delay":  1500,
+                             "recognition":  "OCR",
+                             "roi":  [
+                                         518,
+                                         543,
+                                         186,
+                                         114
+                                     ],
+                             "target":  [
+                                            608,
+                                            641,
+                                            201,
+                                            79
+                                        ]
+                         },
+    "组队御魂-队友-接受邀请":  {
+                         "action":  "Click",
+                         "next":  [
+                                      "组队御魂-队友"
+                                  ],
+                         "post_delay":  1500,
+                         "pre_wait_freezes":  200,
+                         "recognition":  "TemplateMatch",
+                         "threshold":  0.8,
+                         "template":  [
+                                          "组队御魂/邀请-接受_1.png"
+                                      ]
+                     },
+    "组队御魂-队友-点击确认":  {
+                         "action":  "Click",
+                         "expected":  "确定|确认",
+                         "recognition":  "OCR",
+                         "roi":  [
+                                     560,
+                                     360,
+                                     400,
+                                     160
+                                 ],
+                         "next":  [
+                                      "组队御魂-队友"
+                                  ],
+                         "post_delay":  2000
+                     }
+}
