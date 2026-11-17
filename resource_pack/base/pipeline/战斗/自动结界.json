@@ -221,7 +221,7 @@
         "action": "Custom",
         "custom_action": "ClearHitCount",
         "custom_action_param": {
-            "node_names": ["突破_挑战失败"]
+            "node_names": ["突破_挑战失败", "挑战第九个结界-进入退四流程"]
         },
         "next": ["识别突破界面", "[JumpBack]自动结界2_战斗准备", "[JumpBack]突破_挑战失败", "[JumpBack]突破_再次挑战失败,准备刷新", "[JumpBack]突破-将手动改为自动", "[JumpBack]突破-将手动改为自动-2", "[JumpBack]突破-将手动改为自动-3", "[JumpBack]突破_结束战斗"],
         "on_error": ["[JumpBack]突破-尝试点击自动", "突破-空节点"],
@@ -436,7 +436,7 @@
         "action": "Custom",
         "custom_action": "ClearHitCount",
         "custom_action_param": {
-            "node_names": ["突破-将手动改为自动-3", "挑战第九个结界-进入退四流程"]
+            "node_names": ["突破-将手动改为自动-3"]
         },
         "focus": {
             "Node.Recognition.Succeeded": "退四结束,进入战斗"
