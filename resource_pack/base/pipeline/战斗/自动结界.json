@@ -10,7 +10,7 @@
     },
     "开始自动结界": {
         "expected": "结界突破",
-        "next": ["结束突破", "[JumpBack]结界-关闭意外打开的奖励预览", "[JumpBack]结界-关闭意外打开的好友面板", "[JumpBack]结界-关闭意外打开的名片", "[JumpBack]突破_领取奖励", "[JumpBack]突破_点击进攻", "[JumpBack]自动结界-点击进攻2", "[JumpBack]自动结界-先不打最后一个进攻", "[JumpBack]挑战第一个结界", "[JumpBack]挑战第二个结界", "[JumpBack]挑战第三个结界", "[JumpBack]挑战第四个结界", "[JumpBack]挑战第五个结界", "[JumpBack]挑战第六个结界", "[JumpBack]挑战第七个结界", "[JumpBack]挑战第八个结界", "[JumpBack]挑战第九个结界"],
+        "next": ["结束突破", "[JumpBack]结界-关闭意外打开的奖励预览", "[JumpBack]结界-关闭意外打开的好友面板", "[JumpBack]结界-关闭意外打开的名片", "[JumpBack]突破_领取奖励", "[JumpBack]突破_点击进攻", "[JumpBack]自动结界-点击进攻2", "[JumpBack]自动结界-先不打最后一个进攻", "[JumpBack]挑战第一个结界", "[JumpBack]挑战第二个结界", "[JumpBack]挑战第三个结界", "[JumpBack]挑战第四个结界", "[JumpBack]挑战第五个结界", "[JumpBack]挑战第六个结界", "[JumpBack]挑战第七个结界", "[JumpBack]挑战第八个结界", "[JumpBack]挑战第九个结界-进入退四流程", "[JumpBack]挑战第九个结界-直接挑战"],
         "post_delay": 1000,
         "recognition": "OCR",
         "roi": [526, 54, 200, 86],
@@ -46,9 +46,21 @@
         "template": "自动结界/突破_击破.png",
         "timeout": 5000
     },
-    "挑战第九个结界": {
+    "挑战第九个结界-直接挑战": {
         "action": "Click",
         "inverse": true,
+        "next": ["自动结界-清空第九个节点退四计数并进入战斗"],
+        "post_delay": 1000,
+        "recognition": "FeatureMatch",
+        "roi": [910, 403, 241, 148],
+        "target": [901, 423, 218, 109],
+        "template": "自动结界/突破_击破.png",
+        "timeout": 5000
+    },
+    "挑战第九个结界-进入退四流程": {
+        "action": "Click",
+        "inverse": true,
+        "max_hit": 1,
         "next": ["突破_最后一个进攻", "自动结界5"],
         "on_error": ["跳过"],
         "post_delay": 1000,
@@ -195,7 +207,7 @@
     },
     "突破-确保进入失败页面": {
         "next": ["突破-退出了失败界面-ocr", "[JumpBack]确认再次挑战", "[JumpBack]突破_再次挑战-ocr", "[JumpBack]突破_再次挑战"],
-        "post_delay": 500,
+        "post_delay": 1000,
         "recognition": "TemplateMatch",
         "roi": [785, 428, 151, 165],
         "template": ["战斗/自动结界/突破-取保进入失败页面_1.png", "自动结界/突破_再次挑战.png"],
@@ -384,6 +396,16 @@
         "on_error": ["[JumpBack]自动结界-判断是否位于御魂界面"],
         "recognition": "DirectHit"
     },
+    "自动结界-969459": {
+        "action": "Click",
+        "inverse": true,
+        "post_delay": 1000,
+        "recognition": "FeatureMatch",
+        "roi": [910, 403, 241, 148],
+        "target": [901, 423, 218, 109],
+        "template": "自动结界/突破_击破.png",
+        "timeout": 5000
+    },
     "自动结界-先不打最后一个进攻": {
         "action": "Click",
         "post_delay": 2000,
@@ -399,11 +421,22 @@
         "recognition": "OCR",
         "roi": [144, 3, 114, 81]
     },
+    "自动结界-清空第九个节点退四计数并进入战斗": {
+        "action": "Custom",
+        "custom_action": "ClearHitCount",
+        "custom_action_param": {
+            "node_names": ["突破-将手动改为自动-3", "挑战第九个结界-进入退四流程"]
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "退四结束,进入战斗"
+        },
+        "recognition": "DirectHit"
+    },
     "自动结界-清空计数并进入战斗": {
         "action": "Custom",
         "custom_action": "ClearHitCount",
         "custom_action_param": {
-            "node_names": ["突破-将手动改为自动-3"]
+            "node_names": ["突破-将手动改为自动-3", "挑战第九个结界-进入退四流程"]
         },
         "focus": {
             "Node.Recognition.Succeeded": "退四结束,进入战斗"
@@ -427,7 +460,7 @@
     },
     "自动结界-装备御魂": {
         "max_hit": 1,
-        "next": ["[JumpBack]通用-拒绝下载-识别到下载二字", "结界突破_确保位于式神录界面", "[JumpBack]自动结界2", "[JumpBack]结界突破_点击式神录"],
+        "next": ["[JumpBack]通用-拒绝下载-识别到下载二字", "结界突破_确保位于式神录界面", "[JumpBack]自动结界2", "[JumpBack]结界突破_点击式神录", "[JumpBack]通用_切换御魂_识别是否位于攻略界面"],
         "recognition": "DirectHit"
     },
     "自动结界-锁定阵容": {
