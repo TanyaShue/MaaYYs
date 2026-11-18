@@ -138,38 +138,6 @@
                     }
                 }
             ]
-        },
-        "竞猜-订阅作者": {
-            "type": "select",
-            "label": "订阅作者",
-            "description": "订阅消息 values 里的作者名（key）。取值为 1 押左、2 押右、0 表示还没发布；作者不存在或为 0 时跟着人多的选。",
-            "default_case": "在下小贱",
-            "cases": [
-                {
-                    "name": "在下小贱",
-                    "label": "在下小贱",
-                    "pipeline_override": {
-                        "竞猜6": {
-                            "custom_action_param": {
-                                "strategy": "author",
-                                "author": "在下小贱"
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "姝酱",
-                    "label": "姝酱",
-                    "pipeline_override": {
-                        "竞猜6": {
-                            "custom_action_param": {
-                                "strategy": "author",
-                                "author": "姝酱"
-                            }
-                        }
-                    }
-                }
-            ]
         }
     }
 }
