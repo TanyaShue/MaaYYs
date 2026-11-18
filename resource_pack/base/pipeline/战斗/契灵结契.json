@@ -1,0 +1,96 @@
+{
+    "契灵结契-先等待": {
+        "action": "Custom",
+        "custom_action": "HumanTouch",
+        "custom_action_param": {
+            "ROI_1": [372, 639, 401, 81],
+            "double_click_weight": 50,
+            "long_wait_max": 200,
+            "long_wait_min": 100,
+            "long_wait_weight": 95,
+            "short_wait_max": 10,
+            "short_wait_min": 2,
+            "short_wait_weight": 5,
+            "single_click_weight": 50
+        },
+        "expected": "点击屏幕继续",
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [344, 570, 636, 150]
+    },
+    "契灵结契-卡住了": {
+        "focus": {
+            "Node.Recognition.Succeeded": "救命!!! 好像卡住了"
+        },
+        "recognition": "DirectHit"
+    },
+    "契灵结契-开始": {
+        "next": ["契灵结契-计数", "[JumpBack]契灵结契-开始战斗"],
+        "recognition": "DirectHit",
+        "timeout": -1
+    },
+    "契灵结契-开始战斗": {
+        "expected": "挑战|准备",
+        "next": ["[JumpBack]契灵结契-点击挑战", "契灵结契-识别点击屏幕继续后随机等待", "[JumpBack]契灵结契-放弃结契", "[JumpBack]契灵结契-结契成功"],
+        "recognition": "OCR",
+        "roi": [963, 509, 317, 194],
+        "timeout": 600000
+    },
+    "契灵结契-放弃结契": {
+        "action": "Click",
+        "expected": "放弃结契",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [400, 599, 184, 54]
+    },
+    "契灵结契-点击挑战": {
+        "action": "Click",
+        "expected": "挑战|准备",
+        "post_delay": 1001,
+        "recognition": "OCR",
+        "roi": [963, 509, 317, 194]
+    },
+    "契灵结契-结契成功": {
+        "action": "Click",
+        "expected": "升至10级解锁",
+        "recognition": "OCR",
+        "roi": [803, 487, 467, 218],
+        "target": [257, 509, 275, 167]
+    },
+    "契灵结契-计数": {
+        "custom_recognition": "TaskCounterRecognition",
+        "custom_recognition_param": {
+            "target_count": 5
+        },
+        "focus": {
+            "Node.Action.Succeeded": "次数达标!!!",
+            "Node.Recognition.Failed": "次数不达标,继续"
+        },
+        "inverse": true,
+        "recognition": "Custom"
+    },
+    "契灵结契-识别是否返回挑战界面": {
+        "expected": "挑战|准备",
+        "recognition": "OCR",
+        "roi": [963, 509, 317, 194]
+    },
+    "契灵结契-识别点击屏幕继续后随机等待": {
+        "action": "Custom",
+        "custom_action": "ClearHitCount",
+        "custom_action_param": {
+            "node_name": "契灵结契-先等待"
+        },
+        "expected": "点击屏幕继续",
+        "next": ["契灵结契-识别是否返回挑战界面", "[JumpBack]契灵结契-先等待", "[JumpBack]契灵结契-退出战斗界面", "[JumpBack]契灵结契-放弃结契", "[JumpBack]契灵结契-结契成功"],
+        "on_error": ["契灵结契-卡住了"],
+        "recognition": "OCR",
+        "roi": [344, 570, 636, 150],
+        "timeout": 600000
+    },
+    "契灵结契-退出战斗界面": {
+        "action": "Click",
+        "expected": "点击屏幕继续",
+        "recognition": "OCR",
+        "roi": [344, 570, 636, 150]
+    }
+}

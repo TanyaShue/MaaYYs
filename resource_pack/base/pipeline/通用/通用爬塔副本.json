@@ -7,10 +7,10 @@
             "double_click_weight": 50,
             "long_wait_max": 200,
             "long_wait_min": 100,
-            "long_wait_weight": 95,
+            "long_wait_weight": 5,
             "short_wait_max": 10,
             "short_wait_min": 2,
-            "short_wait_weight": 5,
+            "short_wait_weight": 95,
             "single_click_weight": 50
         },
         "expected": "点击屏幕继续",
