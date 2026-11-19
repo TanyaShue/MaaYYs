@@ -129,7 +129,7 @@
         "逢魔-每周御魂配置": {
             "type": "input",
             "label": "每周御魂配置",
-            "description": "分别填写默认配置和周一至周日的分组、队伍预设名称。某天留空或只填了一项时，按 当天 → 默认 → 周一 → … → 周日 的顺序补全",
+            "description": "分别填写默认配置和每天逢魔首领的分组、队伍预设名称。某天留空或只填了一项时，按 当天 → 默认 → 周一 → … → 周日 的顺序补全",
             "inputs": [
                 {
                     "name": "default_group",
@@ -147,86 +147,86 @@
                 },
                 {
                     "name": "monday_group",
-                    "label": "周一-分组预设名称",
-                    "description": "周一使用的分组预设名称，留空则使用默认配置",
+                    "label": "鬼灵歌伎-分组预设名称",
+                    "description": "周一鬼灵歌伎使用的分组预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "monday_team",
-                    "label": "周一-队伍预设名称",
-                    "description": "周一使用的队伍预设名称，留空则使用默认配置",
+                    "label": "鬼灵歌伎-队伍预设名称",
+                    "description": "周一鬼灵歌伎使用的队伍预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "tuesday_group",
-                    "label": "周二-分组预设名称",
-                    "description": "周二使用的分组预设名称，留空则使用默认配置",
+                    "label": "蜃气楼-分组预设名称",
+                    "description": "周二蜃气楼使用的分组预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "tuesday_team",
-                    "label": "周二-队伍预设名称",
-                    "description": "周二使用的队伍预设名称，留空则使用默认配置",
+                    "label": "蜃气楼-队伍预设名称",
+                    "description": "周二蜃气楼使用的队伍预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "wednesday_group",
-                    "label": "周三-分组预设名称",
-                    "description": "周三使用的分组预设名称，留空则使用默认配置",
+                    "label": "土蜘蛛-分组预设名称",
+                    "description": "周三土蜘蛛使用的分组预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "wednesday_team",
-                    "label": "周三-队伍预设名称",
-                    "description": "周三使用的队伍预设名称，留空则使用默认配置",
+                    "label": "土蜘蛛-队伍预设名称",
+                    "description": "周三土蜘蛛使用的队伍预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "thursday_group",
-                    "label": "周四-分组预设名称",
-                    "description": "周四使用的分组预设名称，留空则使用默认配置",
+                    "label": "荒骷髅-分组预设名称",
+                    "description": "周四荒骷髅使用的分组预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "thursday_team",
-                    "label": "周四-队伍预设名称",
-                    "description": "周四使用的队伍预设名称，留空则使用默认配置",
+                    "label": "荒骷髅-队伍预设名称",
+                    "description": "周四荒骷髅使用的队伍预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "friday_group",
-                    "label": "周五-分组预设名称",
-                    "description": "周五使用的分组预设名称，留空则使用默认配置",
+                    "label": "地震鲶-分组预设名称",
+                    "description": "周五地震鲶使用的分组预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "friday_team",
-                    "label": "周五-队伍预设名称",
-                    "description": "周五使用的队伍预设名称，留空则使用默认配置",
+                    "label": "地震鲶-队伍预设名称",
+                    "description": "周五地震鲶使用的队伍预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "saturday_group",
-                    "label": "周六-分组预设名称",
-                    "description": "周六使用的分组预设名称，留空则使用默认配置",
+                    "label": "胧车-分组预设名称",
+                    "description": "周六胧车使用的分组预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "saturday_team",
-                    "label": "周六-队伍预设名称",
-                    "description": "周六使用的队伍预设名称，留空则使用默认配置",
+                    "label": "胧车-队伍预设名称",
+                    "description": "周六胧车使用的队伍预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "sunday_group",
-                    "label": "周日-分组预设名称",
-                    "description": "周日使用的分组预设名称，留空则使用默认配置",
+                    "label": "夜荒魂-分组预设名称",
+                    "description": "周日夜荒魂使用的分组预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 },
                 {
                     "name": "sunday_team",
-                    "label": "周日-队伍预设名称",
-                    "description": "周日使用的队伍预设名称，留空则使用默认配置",
+                    "label": "夜荒魂-队伍预设名称",
+                    "description": "周日夜荒魂使用的队伍预设名称，留空则使用默认配置",
                     "pipeline_type": "string"
                 }
             ],
