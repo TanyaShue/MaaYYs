@@ -55,7 +55,7 @@
                             "enabled": true
                         }
                     },
-                    "option": ["逢魔首领阵容预设"]
+                    "option": ["逢魔-每日不同分组"]
                 },
                 {
                     "name": "No",
@@ -65,6 +65,34 @@
                             "enabled": false
                         }
                     }
+                }
+            ]
+        },
+        "逢魔-每日不同分组": {
+            "type": "switch",
+            "label": "是否开启每日不同分组",
+            "description": "开启后按当前星期选择御魂分组和队伍；关闭时使用一套固定的逢魔阵容预设",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "现世逢魔_装备式神预设": {
+                            "custom_action": "SwitchSoulByWeek"
+                        }
+                    },
+                    "option": ["逢魔-每周御魂配置"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "现世逢魔_装备式神预设": {
+                            "custom_action": "SwitchSoul"
+                        }
+                    },
+                    "option": ["逢魔首领阵容预设"]
                 }
             ]
         },
@@ -90,9 +118,154 @@
             ],
             "pipeline_override": {
                 "现世逢魔_装备式神预设": {
+                    "custom_action": "SwitchSoul",
                     "custom_action_param": {
                         "group_name": "{group_name}",
                         "team_name": "{team_name}"
+                    }
+                }
+            }
+        },
+        "逢魔-每周御魂配置": {
+            "type": "input",
+            "label": "每周御魂配置",
+            "description": "分别填写默认配置和周一至周日的分组、队伍预设名称。某天留空或只填了一项时，按 当天 → 默认 → 周一 → … → 周日 的顺序补全",
+            "inputs": [
+                {
+                    "name": "default_group",
+                    "label": "默认-分组预设名称",
+                    "description": "没有填写当天配置时使用的分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "default_team",
+                    "label": "默认-队伍预设名称",
+                    "description": "没有填写当天配置时使用的队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "monday_group",
+                    "label": "周一-分组预设名称",
+                    "description": "周一使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "monday_team",
+                    "label": "周一-队伍预设名称",
+                    "description": "周一使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "tuesday_group",
+                    "label": "周二-分组预设名称",
+                    "description": "周二使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "tuesday_team",
+                    "label": "周二-队伍预设名称",
+                    "description": "周二使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "wednesday_group",
+                    "label": "周三-分组预设名称",
+                    "description": "周三使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "wednesday_team",
+                    "label": "周三-队伍预设名称",
+                    "description": "周三使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "thursday_group",
+                    "label": "周四-分组预设名称",
+                    "description": "周四使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "thursday_team",
+                    "label": "周四-队伍预设名称",
+                    "description": "周四使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "friday_group",
+                    "label": "周五-分组预设名称",
+                    "description": "周五使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "friday_team",
+                    "label": "周五-队伍预设名称",
+                    "description": "周五使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "saturday_group",
+                    "label": "周六-分组预设名称",
+                    "description": "周六使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "saturday_team",
+                    "label": "周六-队伍预设名称",
+                    "description": "周六使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "sunday_group",
+                    "label": "周日-分组预设名称",
+                    "description": "周日使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "sunday_team",
+                    "label": "周日-队伍预设名称",
+                    "description": "周日使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "现世逢魔_装备式神预设": {
+                    "custom_action": "SwitchSoulByWeek",
+                    "custom_action_param": {
+                        "default": {
+                            "group_name": "{default_group}",
+                            "team_name": "{default_team}"
+                        },
+                        "monday": {
+                            "group_name": "{monday_group}",
+                            "team_name": "{monday_team}"
+                        },
+                        "tuesday": {
+                            "group_name": "{tuesday_group}",
+                            "team_name": "{tuesday_team}"
+                        },
+                        "wednesday": {
+                            "group_name": "{wednesday_group}",
+                            "team_name": "{wednesday_team}"
+                        },
+                        "thursday": {
+                            "group_name": "{thursday_group}",
+                            "team_name": "{thursday_team}"
+                        },
+                        "friday": {
+                            "group_name": "{friday_group}",
+                            "team_name": "{friday_team}"
+                        },
+                        "saturday": {
+                            "group_name": "{saturday_group}",
+                            "team_name": "{saturday_team}"
+                        },
+                        "sunday": {
+                            "group_name": "{sunday_group}",
+                            "team_name": "{sunday_team}"
+                        }
                     }
                 }
             }
