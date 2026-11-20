@@ -1,4 +1,10 @@
 {
+    "组队刷本-任务结束": {
+        "focus": {
+            "Node.Recognition.Succeeded": "次数达标任务结束！！！"
+        },
+        "recognition": "DirectHit"
+    },
     "组队刷本-开局": {
         "next": ["组队刷本-房主", "组队刷本-队友"],
         "recognition": "DirectHit"
@@ -19,7 +25,7 @@
     },
     "组队刷本-房主-OCR识别挑战": {
         "expected": "挑战",
-        "next": ["组队刷本-房主-计数"],
+        "next": ["组队刷本-房主-计数", "组队刷本-任务结束"],
         "post_delay": 3000,
         "pre_wait_freezes": 200,
         "recognition": "OCR",
@@ -137,7 +143,7 @@
         "recognition": "DirectHit"
     },
     "组队刷本-房主-识别挑战": {
-        "next": ["组队刷本-房主-计数"],
+        "next": ["组队刷本-房主-计数", "组队刷本-任务结束"],
         "post_delay": 3000,
         "pre_wait_freezes": 200,
         "recognition": "TemplateMatch",
