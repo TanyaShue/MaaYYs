@@ -137,6 +137,9 @@
         "custom_recognition_param": {
             "target_count": 10
         },
+        "focus": {
+            "Node.Recognition.Succeeded": "次数未达标，继续战斗"
+        },
         "next": ["组队刷本-房主-循环-等待"],
         "on_error": ["组队刷本-房主-开始关闭加成"],
         "recognition": "Custom"
