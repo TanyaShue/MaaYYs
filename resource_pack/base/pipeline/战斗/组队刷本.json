@@ -133,14 +133,13 @@
         "target": [367, 611, 175, 109]
     },
     "组队刷本-房主-计数": {
-        "action": "Custom",
-        "custom_action": "TaskCounter",
-        "custom_action_param": {
+        "custom_recognition": "TaskCounterRecognition",
+        "custom_recognition_param": {
             "target_count": 10
         },
         "next": ["组队刷本-房主-循环-等待"],
         "on_error": ["组队刷本-房主-开始关闭加成"],
-        "recognition": "DirectHit"
+        "recognition": "Custom"
     },
     "组队刷本-房主-识别挑战": {
         "next": ["组队刷本-房主-计数", "组队刷本-任务结束"],
