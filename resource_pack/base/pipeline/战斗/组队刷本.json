@@ -113,6 +113,7 @@
     },
     "组队刷本-房主-点赞": {
         "action": "Click",
+        "max_hit": 2,
         "recognition": "TemplateMatch",
         "roi": [685, 181, 584, 370],
         "template": ["战斗/组队刷本/组队刷本-房主-点赞_1.png"]
