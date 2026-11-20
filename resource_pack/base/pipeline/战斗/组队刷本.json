@@ -62,7 +62,6 @@
             "max": 2,
             "min": 1
         },
-        "next": [],
         "recognition": "DirectHit"
     },
     "组队刷本-房主-点击加成": {
@@ -76,7 +75,6 @@
     "组队刷本-房主-点击屏幕继续": {
         "action": "Click",
         "expected": "点击屏幕继续",
-        "next": [],
         "post_delay": 2000,
         "recognition": "OCR",
         "roi": [517, 634, 268, 86]
@@ -108,7 +106,6 @@
     "组队刷本-房主-点击空白区域继续": {
         "action": "Click",
         "expected": "点击空白区域继续",
-        "next": [],
         "post_delay": 2000,
         "recognition": "OCR",
         "roi": [441, 668, 366, 51]
@@ -152,7 +149,6 @@
     "组队刷本-房主-默认邀请-确定": {
         "action": "Click",
         "expected": "确定",
-        "next": [],
         "post_delay": 1500,
         "pre_wait_freezes": 200,
         "recognition": "OCR",
@@ -203,7 +199,12 @@
         "roi": [441, 668, 366, 51]
     },
     "组队刷本-队友-特殊结算界面点击": {
-        "recognition": "OCR"
+        "action": "Click",
+        "expected": "额外加成",
+        "post_delay": 1000,
+        "recognition": "OCR",
+        "roi": [220, 575, 699, 145],
+        "target": [633, 656, 373, 64]
     },
     "组队刷本-队友-结束": {
         "action": "StopTask",
