@@ -251,30 +251,30 @@
   },
   "悬赏封印-判断第一个是不是协战封印": {
     "action": "Click",
-    "expected": "邀请|级以上好友",
+    "expected": "邀请.*级以上好友",
     "max_hit": 1,
     "next": ["悬赏封印-看看是否打卡追踪列表"],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [136, 339, 282, 76],
+    "roi": [136, 339, 282, 241],
     "target": [230, 227, 155, 113]
   },
   "悬赏封印-判断第三个是不是协战封印": {
     "action": "Click",
-    "expected": "邀请|级以上好友",
+    "expected": "邀请.*级以上好友",
     "next": ["悬赏封印-看看是否打卡追踪列表"],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [720, 345, 330, 81],
+    "roi": [690, 345, 360, 235],
     "target": [784, 226, 201, 99]
   },
   "悬赏封印-判断第二个是不是协战封印": {
     "action": "Click",
-    "expected": "邀请|级以上好友",
+    "expected": "邀请.*级以上好友",
     "next": ["悬赏封印-看看是否打卡追踪列表"],
     "post_delay": 1000,
     "recognition": "OCR",
-    "roi": [427, 341, 304, 78],
+    "roi": [427, 341, 304, 239],
     "target": [560, 239, 131, 118]
   },
   "悬赏封印-前往式神碎片副本": {
@@ -442,36 +442,63 @@
     "expected": "悬赏封印",
     "max_hit": 10,
     "next": ["悬赏封印-判断是否在追踪列表"],
-    "on_error": ["悬赏封印-空节点"],
+    "on_error": ["悬赏封印-识别最下方第一个是不是妖怪-仅识别"],
     "post_delay": 2000,
     "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [0, 386, 127, 125],
-    "timeout": 10000
+    "timeout": 5000
+  },
+  "悬赏封印-识别最下方第一个是不是妖怪-仅识别": {
+    "expected": "悬赏封印",
+    "next": ["悬赏封印-判断是否在追踪列表"],
+    "on_error": ["悬赏封印-空节点"],
+    "only_rec": true,
+    "recognition": "OCR",
+    "roi": [0, 428, 127, 42],
+    "timeout": 3000
   },
   "悬赏封印-识别最下方第三个是不是妖怪": {
     "action": "Click",
     "expected": "悬赏封印",
     "max_hit": 10,
     "next": ["悬赏封印-判断是否在追踪列表"],
-    "on_error": ["悬赏封印-空节点"],
+    "on_error": ["悬赏封印-识别最下方第三个是不是妖怪-仅识别"],
     "post_delay": 2000,
     "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [0, 121, 137, 146],
-    "timeout": 10000
+    "timeout": 5000
+  },
+  "悬赏封印-识别最下方第三个是不是妖怪-仅识别": {
+    "expected": "悬赏封印",
+    "next": ["悬赏封印-判断是否在追踪列表"],
+    "on_error": ["悬赏封印-空节点"],
+    "only_rec": true,
+    "recognition": "OCR",
+    "roi": [0, 160, 137, 42],
+    "timeout": 3000
   },
   "悬赏封印-识别最下方第二个是不是妖怪": {
     "action": "Click",
     "expected": "悬赏封印",
     "max_hit": 10,
     "next": ["悬赏封印-判断是否在追踪列表"],
-    "on_error": ["悬赏封印-空节点"],
+    "on_error": ["悬赏封印-识别最下方第二个是不是妖怪-仅识别"],
     "post_delay": 2000,
     "pre_delay": 1000,
     "recognition": "OCR",
     "roi": [0, 248, 121, 168],
-    "timeout": 10000
+    "timeout": 5000
+  },
+  "悬赏封印-识别最下方第二个是不是妖怪-仅识别": {
+    "expected": "悬赏封印",
+    "next": ["悬赏封印-判断是否在追踪列表"],
+    "on_error": ["悬赏封印-空节点"],
+    "only_rec": true,
+    "recognition": "OCR",
+    "roi": [0, 308, 121, 42],
+    "timeout": 3000
   },
   "悬赏封印1": {
     "action": "Click",
