@@ -1,0 +1,274 @@
+{
+    "task": [
+        {
+            "name": "自动逢魔",
+            "label": "逢魔",
+            "entry": "开始逢魔-检查时间",
+            "group": ["standalone"],
+            "option": [
+                "逢魔-切换御魂阵容"
+            ]
+        }
+    ],
+    "option": {
+        "逢魔答题同步题目": {
+            "type": "switch",
+            "label": "逢魔答题同步题目",
+            "description": "执行逢魔任务时，是否自动从网络获取最新的题目和答案库",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动逢魔2": {
+                            "custom_action_param": {
+                                "upload": true,
+                                "sync": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动逢魔2": {
+                            "custom_action_param": {
+                                "upload": false,
+                                "sync": false
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "逢魔-切换御魂阵容": {
+            "type": "switch",
+            "label": "是否切换御魂阵容",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "自动逢魔-开始装备御魂": {
+                            "enabled": true
+                        }
+                    },
+                    "option": ["逢魔-每日不同分组"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "自动逢魔-开始装备御魂": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "逢魔-每日不同分组": {
+            "type": "switch",
+            "label": "是否开启每日不同分组",
+            "description": "开启后按当前星期选择御魂分组和队伍；关闭时使用一套固定的逢魔阵容预设",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "现世逢魔_装备式神预设": {
+                            "custom_action": "SwitchSoulByWeek"
+                        }
+                    },
+                    "option": ["逢魔-每周御魂配置"]
+                },
+                {
+                    "name": "No",
+                    "label": "否",
+                    "pipeline_override": {
+                        "现世逢魔_装备式神预设": {
+                            "custom_action": "SwitchSoul"
+                        }
+                    },
+                    "option": ["逢魔首领阵容预设"]
+                }
+            ]
+        },
+        "逢魔首领阵容预设": {
+            "type": "input",
+            "label": "逢魔首领阵容预设",
+            "description": "填写挑战逢魔首领需要的分组和队伍预设名称",
+            "inputs": [
+                {
+                    "name": "group_name",
+                    "label": "分组预设名称",
+                    "description": "填写分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "team_name",
+                    "label": "队伍预设名称",
+                    "description": "填写队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "现世逢魔_装备式神预设": {
+                    "custom_action": "SwitchSoul",
+                    "custom_action_param": {
+                        "group_name": "{group_name}",
+                        "team_name": "{team_name}"
+                    }
+                }
+            }
+        },
+        "逢魔-每周御魂配置": {
+            "type": "input",
+            "label": "每周御魂配置",
+            "description": "分别填写默认配置和每天逢魔首领的分组、队伍预设名称。某天留空或只填了一项时，按 当天 → 默认 → 周一 → … → 周日 的顺序补全",
+            "inputs": [
+                {
+                    "name": "default_group",
+                    "label": "默认-分组预设名称",
+                    "description": "没有填写当天配置时使用的分组预设名称",
+                    "default": "默认分组",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "default_team",
+                    "label": "默认-队伍预设名称",
+                    "description": "没有填写当天配置时使用的队伍预设名称",
+                    "default": "默认队伍",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "monday_group",
+                    "label": "鬼灵歌伎-分组预设名称",
+                    "description": "周一鬼灵歌伎使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "monday_team",
+                    "label": "鬼灵歌伎-队伍预设名称",
+                    "description": "周一鬼灵歌伎使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "tuesday_group",
+                    "label": "蜃气楼-分组预设名称",
+                    "description": "周二蜃气楼使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "tuesday_team",
+                    "label": "蜃气楼-队伍预设名称",
+                    "description": "周二蜃气楼使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "wednesday_group",
+                    "label": "土蜘蛛-分组预设名称",
+                    "description": "周三土蜘蛛使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "wednesday_team",
+                    "label": "土蜘蛛-队伍预设名称",
+                    "description": "周三土蜘蛛使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "thursday_group",
+                    "label": "荒骷髅-分组预设名称",
+                    "description": "周四荒骷髅使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "thursday_team",
+                    "label": "荒骷髅-队伍预设名称",
+                    "description": "周四荒骷髅使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "friday_group",
+                    "label": "地震鲶-分组预设名称",
+                    "description": "周五地震鲶使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "friday_team",
+                    "label": "地震鲶-队伍预设名称",
+                    "description": "周五地震鲶使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "saturday_group",
+                    "label": "胧车-分组预设名称",
+                    "description": "周六胧车使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "saturday_team",
+                    "label": "胧车-队伍预设名称",
+                    "description": "周六胧车使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "sunday_group",
+                    "label": "夜荒魂-分组预设名称",
+                    "description": "周日夜荒魂使用的分组预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                },
+                {
+                    "name": "sunday_team",
+                    "label": "夜荒魂-队伍预设名称",
+                    "description": "周日夜荒魂使用的队伍预设名称，留空则使用默认配置",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "现世逢魔_装备式神预设": {
+                    "custom_action": "SwitchSoulByWeek",
+                    "custom_action_param": {
+                        "default": {
+                            "group_name": "{default_group}",
+                            "team_name": "{default_team}"
+                        },
+                        "monday": {
+                            "group_name": "{monday_group}",
+                            "team_name": "{monday_team}"
+                        },
+                        "tuesday": {
+                            "group_name": "{tuesday_group}",
+                            "team_name": "{tuesday_team}"
+                        },
+                        "wednesday": {
+                            "group_name": "{wednesday_group}",
+                            "team_name": "{wednesday_team}"
+                        },
+                        "thursday": {
+                            "group_name": "{thursday_group}",
+                            "team_name": "{thursday_team}"
+                        },
+                        "friday": {
+                            "group_name": "{friday_group}",
+                            "team_name": "{friday_team}"
+                        },
+                        "saturday": {
+                            "group_name": "{saturday_group}",
+                            "team_name": "{saturday_team}"
+                        },
+                        "sunday": {
+                            "group_name": "{sunday_group}",
+                            "team_name": "{sunday_team}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

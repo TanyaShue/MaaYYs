@@ -24,6 +24,7 @@ import (
 	"maa-yys-agent/actions/restart"
 	"maa-yys-agent/actions/restartgame"
 	"maa-yys-agent/actions/switch_soul"
+	"maa-yys-agent/actions/switch_soul_by_week"
 	"maa-yys-agent/actions/task_counter"
 	"maa-yys-agent/actions/task_list"
 	"maa-yys-agent/actions/team_builder"
@@ -59,6 +60,7 @@ var customActions = []struct {
 	{"AutoFoster", &auto_foster.AutoFoster{}},
 	{"BattleTeam", &battle_team.BattleTeam{}},
 	{"SwitchSoul", &switch_soul.SwitchSoul{}},
+	{"SwitchSoulByWeek", &switch_soul_by_week.SwitchSoulByWeek{}},
 	{"TeamBuilder", &team_builder.TeamBuilder{}},
 	{"BountyMonsterRecognition", &bounty_monster_recognition.BountyMonsterRecognition{}},
 	{"ChallengeDungeonBoss", &challenge_dungeon_boss.ChallengeDungeonBoss{}},

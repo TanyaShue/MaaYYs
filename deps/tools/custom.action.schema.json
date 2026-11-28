@@ -24,6 +24,7 @@
         "AutoFoster",
         "BattleTeam",
         "SwitchSoul",
+        "SwitchSoulByWeek",
         "TeamBuilder",
         "BountyMonsterRecognition",
         "ChallengeDungeonBoss",
@@ -55,6 +56,7 @@
       { "$ref": "#/$defs/AutoFoster" },
       { "$ref": "#/$defs/BattleTeam" },
       { "$ref": "#/$defs/SwitchSoul" },
+      { "$ref": "#/$defs/SwitchSoulByWeek" },
       { "$ref": "#/$defs/TeamBuilder" },
       { "$ref": "#/$defs/BountyMonsterRecognition" },
       { "$ref": "#/$defs/ChallengeDungeonBoss" },
@@ -360,6 +362,40 @@
         }
       },
       "required": ["custom_action"]
+    },
+    "SwitchSoulByWeek": {
+      "title": "按周切换御魂",
+      "description": "按当前星期选择御魂分组和队伍并装备御魂。取值顺序：当天配置 → default → 周一 → 周二 … → 周日；分组与队伍分别按该顺序补全。",
+      "allOf": [{ "$ref": "#/$defs/RequiredParam" }],
+      "properties": {
+        "custom_action": { "const": "SwitchSoulByWeek" },
+        "custom_action_param": {
+          "type": "object",
+          "properties": {
+            "default": { "$ref": "#/$defs/SoulPreset", "description": "默认御魂配置" },
+            "monday": { "$ref": "#/$defs/SoulPreset", "description": "周一御魂配置" },
+            "tuesday": { "$ref": "#/$defs/SoulPreset", "description": "周二御魂配置" },
+            "wednesday": { "$ref": "#/$defs/SoulPreset", "description": "周三御魂配置" },
+            "thursday": { "$ref": "#/$defs/SoulPreset", "description": "周四御魂配置" },
+            "friday": { "$ref": "#/$defs/SoulPreset", "description": "周五御魂配置" },
+            "saturday": { "$ref": "#/$defs/SoulPreset", "description": "周六御魂配置" },
+            "sunday": { "$ref": "#/$defs/SoulPreset", "description": "周日御魂配置" }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        }
+      },
+      "required": ["custom_action"]
+    },
+    "SoulPreset": {
+      "title": "御魂预设",
+      "description": "一组御魂预设；分组名或队伍名为空时按回退顺序补全。",
+      "type": "object",
+      "properties": {
+        "group_name": { "type": "string", "description": "御魂预设分组名" },
+        "team_name": { "type": "string", "description": "御魂预设队伍名" }
+      },
+      "additionalProperties": false
     },
     "TeamBuilder": {
       "title": "组队通信",

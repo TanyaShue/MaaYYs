@@ -109,7 +109,7 @@ MaaYYs 是一个面向《阴阳师》模拟器环境的自动化项目，项目�
 - 副本与挑战：自动御魂、自动御灵、自动业原火、自动秘闻、自动麒麟、困28、组队副本、英杰试炼、契灵探查。
 - PVP / 突破 / 活动：结界突破、自动寮突破、自动道馆突破、自动斗技、自动地鬼、自动逢魔、自动阴界之门、自动悬赏、活动爬塔、限时活动。
 
-任务能力以仓库中的 `tasks/*.json` 与 `resource_pack/*/pipeline` 为准
+任务能力以仓库中的 `tasks/<daily|promotion|standalone>/*.json` 与 `resource_pack/*/pipeline` 为准
 
 ## 常见问题
 
@@ -188,6 +188,9 @@ MaaYYs/
 ├── assets/
 ├── resource_pack/
 ├── tasks/
+│   ├── daily/              # group = daily 的任务配置
+│   ├── promotion/          # group = promotion 的任务配置
+│   └── standalone/         # group = standalone 的任务配置
 ├── interface.json
 └── README.md
 ```
@@ -208,7 +211,7 @@ MaaYYs/
 ├── assets/                # 图标、答案表等通用资源
 ├── doc/                   # 使用文档与截图
 ├── resource_pack/         # MaaFramework pipeline、image、model 等资源包
-├── tasks/                 # MXU / interface 导入的任务配置
+├── tasks/                 # MXU / interface 导入的任务配置，按 group 分为 daily / promotion / standalone 子目录
 ├── interface.json         # Maa 项目入口、资源、agent、任务导入配置
 └── .github/workflows/     # 构建、发布、Mirror 酱同步工作流
 ```
@@ -273,7 +276,7 @@ Test-Path .\agent\agent.exe
 
 ### 修改资源后的验证方式
 
-- 改 `tasks/*.json`：通常需要在 MXU 里重新加载资源，必要时重启 MXU。
+- 改 `tasks/<daily|promotion|standalone>/*.json`：通常需要在 MXU 里重新加载资源，必要时重启 MXU。
 - 改 `resource_pack/*/pipeline/*.json`：重新启动对应任务验证；如果界面仍使用旧配置，重启 MXU。
 - 改 `resource_pack/*/image/*`：重新启动任务验证识别效果。
 - 改 `agent/**/*.go`：必须重新 `go build -o agent.exe .`，并重启 MXU 或重新启动任务，让新的 agent 子进程生效。

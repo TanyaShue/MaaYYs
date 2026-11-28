@@ -92,7 +92,7 @@
       ],
       "pipeline_override": {
         "组队刷本-房主-计数": {
-          "custom_action_param": {
+          "custom_recognition_param": {
             "target_count": "{挑战次数}"
           }
         }

@@ -20,7 +20,7 @@
         },
         {
             "fileMatch": [
-                "/tasks/*.json",
+                "/tasks/**/*.json",
                 "/preset/*.json"
             ],
             "url": "/deps/tools/interface_import.schema.json"
